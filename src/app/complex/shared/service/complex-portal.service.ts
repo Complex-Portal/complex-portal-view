@@ -21,6 +21,15 @@ export class ComplexPortalService {
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
+  /**
+   * Get a specif complex from the WS
+   * @param ac
+   * @returns {Observable<R>}
+   */
+  getComplexMIJSON(ac: string) {
+    return this.http.get(baseURL + '/export/' + ac)
+      .map((res: Response) => res.json()).catch(this.handleError);
+  }
 
   /**
    * Find a complex based on indexed term
