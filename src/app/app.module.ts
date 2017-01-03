@@ -8,11 +8,13 @@ import {RouterModule} from "@angular/router";
 import {rootRouterConfig} from './app.routes';
 import {ComplexPortalService} from "./complex/shared/service/complex-portal.service";
 import { SearchComponent } from './search/search.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
