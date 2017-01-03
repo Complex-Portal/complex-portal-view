@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="columns medium-12">
+    <!-- local-search -->
+    <!-- if you do not have a local-search, delete the following form -->
+    <form id="local-search" name="local-search" action="[search-action]" method="post">
+      <h4>Search in Complex Portal</h4>
+      <fieldset>
+        <div class="input-group">
+          <input type="text" name="first" rows="2" #query id="local-searchbox"
+                 placeholder="GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC">
+          <div class="input-group-button">
+            <input type="button" name="submit" value="1" (click)="search(query.value)"
+                   class="button icon icon-functional">
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
