@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {RouterModule} from "@angular/router";
 import {rootRouterConfig} from './app.routes';
+import {ComplexPortalService} from "./complex/shared/complex-portal.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {rootRouterConfig} from './app.routes';
     RouterModule.forRoot(rootRouterConfig),
 
   ],
-  providers: [],
+  providers: [ComplexPortalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
