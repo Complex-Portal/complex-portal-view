@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -6,11 +6,7 @@ declare var $: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works!';
-
+export class AppComponent implements OnInit {
   ngOnInit(): void {
-    $(document).foundation();
-    $(document).foundationExtendEBI();
   }
 }
