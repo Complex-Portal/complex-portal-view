@@ -20,17 +20,7 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [
-        "../node_modules/jquery/dist/jquery",
-        "../node_modules/ebi_framework/libraries/modernizr/modernizr.custom.49274",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation",
-        "../node_modules/ebi_framework/js/foundationExtendEBI",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation.util.keyboard",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation.util.box",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation.util.triggers",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation.util.mediaQuery",
-        "../node_modules/ebi_framework/libraries/foundation-6/js/foundation.util.motion"
-      ],
+      "scripts": [],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
