@@ -1,0 +1,14 @@
+.tile {
+  height: 140px;
+  min-width: 180px;
+  margin-bottom: 1em;
+  border-radius: 15px
+}
+
+.menu-blue {
+  background-color: #005c82;
+}
+
+.menu-gold {
+  background-color: #bca04d;
+}
