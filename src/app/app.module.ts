@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { NewsletterSubscriptionComponent } from './home/newsletter-subscription/newsletter-subscription/newsletter-subscription.component';
 import { ContributorsDisplayComponent } from './home/contributors-display/contributors-display/contributors-display.component';
+import { TwitterDisplayComponent } from './home/twitter-display/twitter-display/twitter-display.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { ContributorsDisplayComponent } from './home/contributors-display/contri
     NewsletterSubscriptionComponent
     HomeComponent,
     ContributorsDisplayComponent
+    HomeComponent,
+    TwitterDisplayComponent
   ],
   imports: [
     BrowserModule,
