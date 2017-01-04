@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { NewsletterSubscriptionComponent } from './home/newsletter-subscription/newsletter-subscription/newsletter-subscription.component';
 import { ContributorsDisplayComponent } from './home/contributors-display/contributors-display/contributors-display.component';
 import { TwitterDisplayComponent } from './home/twitter-display/twitter-display/twitter-display.component';
+import { TileMenuComponent } from './home/tile-menu/tile-menu/tile-menu.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { TwitterDisplayComponent } from './home/twitter-display/twitter-display/
     ContributorsDisplayComponent
     HomeComponent,
     TwitterDisplayComponent
+    HomeComponent,
+    TileMenuComponent
   ],
   imports: [
     BrowserModule,
