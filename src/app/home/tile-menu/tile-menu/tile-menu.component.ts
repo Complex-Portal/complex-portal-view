@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 
 declare var $: any;
 
@@ -7,14 +7,13 @@ declare var $: any;
   templateUrl: './tile-menu.component.html',
   styleUrls: ['./tile-menu.component.css']
 })
-export class TileMenuComponent implements OnInit {
+export class TileMenuComponent implements AfterViewInit {
 
   constructor() {
   }
 
-  ngOnInit(): void {
-    $(document).foundation();
-    $(document).foundationExtendEBI();
+  ngAfterViewInit(): void {
+      $('app-tile-menu').foundation();
   }
 
 }
