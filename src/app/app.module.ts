@@ -9,12 +9,14 @@ import {rootRouterConfig} from './app.routes';
 import {ComplexPortalService} from "./complex/shared/service/complex-portal.service";
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
+import { ContributorsDisplayComponent } from './home/contributors-display/contributors-display/contributors-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
+    ContributorsDisplayComponent
   ],
   imports: [
     BrowserModule,
