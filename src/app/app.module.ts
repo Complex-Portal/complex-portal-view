@@ -10,6 +10,7 @@ import {ComplexPortalService} from "./complex/shared/service/complex-portal.serv
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { NewsletterSubscriptionComponent } from './home/newsletter-subscription/newsletter-subscription/newsletter-subscription.component';
+import { ContributorsDisplayComponent } from './home/contributors-display/contributors-display/contributors-display.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { NewsletterSubscriptionComponent } from './home/newsletter-subscription/
     SearchComponent,
     HomeComponent,
     NewsletterSubscriptionComponent
+    HomeComponent,
+    ContributorsDisplayComponent
   ],
   imports: [
     BrowserModule,
