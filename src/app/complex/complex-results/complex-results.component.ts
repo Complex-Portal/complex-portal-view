@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ComplexSearch} from "../../shared/model/complex-results/complex-search.model";
-import {ComplexPortalService} from "../../shared/service/complex-portal.service";
+import {ComplexSearch} from "../shared/model/complex-results/complex-search.model";
+import {ComplexPortalService} from "../shared/service/complex-portal.service";
 
 
 @Component({
@@ -9,7 +9,7 @@ import {ComplexPortalService} from "../../shared/service/complex-portal.service"
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ComplexResultsComponent implements OnInit {
 
   private query;
   private _complexSearch: ComplexSearch;

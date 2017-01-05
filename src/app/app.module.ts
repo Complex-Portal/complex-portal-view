@@ -13,7 +13,8 @@ import {NewsletterSubscriptionComponent} from './home/newsletter-subscription/ne
 import {ContributorsDisplayComponent} from './home/contributors-display/contributors-display/contributors-display.component';
 import {TwitterDisplayComponent} from './home/twitter-display/twitter-display/twitter-display.component';
 import {TileMenuComponent} from './home/tile-menu/tile-menu/tile-menu.component';
-import { ComplexResultsComponent } from './complex/complex-results/complex-results/complex-results.component';
+import { ComplexResultsComponent } from './complex/complex-results/complex-results.component';
+import { ComplexListComponent } from './complex/complex-results/complex-list/complex-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ComplexResultsComponent } from './complex/complex-results/complex-resul
     ContributorsDisplayComponent,
     TwitterDisplayComponent,
     TileMenuComponent,
-    ComplexResultsComponent
+    ComplexResultsComponent,
+    ComplexListComponent
   ],
   imports: [
     BrowserModule,
