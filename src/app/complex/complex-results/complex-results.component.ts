@@ -50,7 +50,7 @@ export class ComplexResultsComponent implements OnInit {
         end = 5;
       }
       else if (this.page == this.lastPage || this.page == this.lastPage - 1) {
-        start = this.lastPage - 5;
+        start = this.lastPage - 4;
         end = this.lastPage;
       }
       else {
