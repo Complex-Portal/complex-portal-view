@@ -16,6 +16,7 @@ import {TileMenuComponent} from './home/tile-menu/tile-menu.component';
 import {ComplexResultsComponent} from './complex/complex-results/complex-results.component';
 import {ComplexListComponent} from './complex/complex-results/complex-list/complex-list.component';
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
+import { ComplexPaginatorComponent } from './complex/complex-results/complex-paginator/complex-paginator.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {ComplexFilterComponent} from './complex/complex-results/complex-filter/c
     TileMenuComponent,
     ComplexResultsComponent,
     ComplexListComponent,
-    ComplexFilterComponent
+    ComplexFilterComponent,
+    ComplexPaginatorComponent
   ],
   imports: [
     BrowserModule,
