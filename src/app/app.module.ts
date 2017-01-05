@@ -15,6 +15,7 @@ import {TwitterDisplayComponent} from './home/twitter-display/twitter-display/tw
 import {TileMenuComponent} from './home/tile-menu/tile-menu/tile-menu.component';
 import { ComplexResultsComponent } from './complex/complex-results/complex-results.component';
 import { ComplexListComponent } from './complex/complex-results/complex-list/complex-list.component';
+import { ComplexFilterComponent } from './complex/complex-results/complex-filter/complex-filter.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ComplexListComponent } from './complex/complex-results/complex-list/com
     TwitterDisplayComponent,
     TileMenuComponent,
     ComplexResultsComponent,
-    ComplexListComponent
+    ComplexListComponent,
+    ComplexFilterComponent
   ],
   imports: [
     BrowserModule,
