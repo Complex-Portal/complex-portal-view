@@ -1,3 +1,9 @@
-<div id="main-content-area">
- <
+<div class="row" *ngIf="complexSearch">
+  <h3>Total number of results: {{complexSearch.totalNumberOfResults}} </h3>
+  <!--<div class="columns medium-4">-->
+    <!--<app-complex-filter [facets]="complexSearch.facets">Loading ...</app-complex-filter>-->
+  <!--</div>-->
+  <div class="columns medium-8">
+    <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
+  </div>
 </div>

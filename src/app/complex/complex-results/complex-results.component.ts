@@ -6,8 +6,8 @@ import {ComplexPortalService} from "../shared/service/complex-portal.service";
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './complex-results.component.html',
+  styleUrls: ['./complex-results.component.css']
 })
 export class ComplexResultsComponent implements OnInit {
 

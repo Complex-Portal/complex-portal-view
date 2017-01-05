@@ -4,8 +4,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-tile-menu',
-  templateUrl: 'tile-menu.component.html',
-  styleUrls: ['tile-menu.component.css']
+  templateUrl: './tile-menu.component.html',
+  styleUrls: ['./tile-menu.component.css']
 })
 export class TileMenuComponent implements AfterViewInit {
 

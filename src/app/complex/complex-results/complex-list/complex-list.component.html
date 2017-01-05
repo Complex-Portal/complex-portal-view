@@ -1,3 +1,10 @@
-<p>
-  complex-list works!
-</p>
+<ul class="no-bullet">
+  <li *ngFor="let complex of complexSearch.elements">
+    <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
+    <div class="description" style="background-color: white">
+      <p><b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>
+        <b>Description:</b>
+        {{complex.description.substr(0,250)}}<a [routerLink]="['/complex', complex.complexAC]">...</a></p>
+    </div>
+  </li>
+</ul>

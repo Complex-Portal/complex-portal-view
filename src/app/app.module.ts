@@ -13,9 +13,9 @@ import {NewsletterSubscriptionComponent} from './home/newsletter-subscription/ne
 import {ContributorsDisplayComponent} from './home/contributors-display/contributors-display.component';
 import {TwitterDisplayComponent} from './home/twitter-display/twitter-display.component';
 import {TileMenuComponent} from './home/tile-menu/tile-menu.component';
-import { ComplexResultsComponent } from './complex/complex-results/complex-results.component';
-import { ComplexListComponent } from './complex/complex-results/complex-list/complex-list.component';
-import { ComplexFilterComponent } from './complex/complex-results/complex-filter/complex-filter.component';
+import {ComplexResultsComponent} from './complex/complex-results/complex-results.component';
+import {ComplexListComponent} from './complex/complex-results/complex-list/complex-list.component';
+import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 
 @NgModule({
   declarations: [

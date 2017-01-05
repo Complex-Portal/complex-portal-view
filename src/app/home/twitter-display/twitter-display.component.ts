@@ -4,8 +4,8 @@ const twitterURL = 'platform.twitter.com/widgets.js';
 
 @Component({
   selector: 'app-twitter-display',
-  templateUrl: 'twitter-display.component.html',
-  styleUrls: ['twitter-display.component.css']
+  templateUrl: './twitter-display.component.html',
+  styleUrls: ['./twitter-display.component.css']
 })
 export class TwitterDisplayComponent implements OnInit, AfterViewInit {
 
