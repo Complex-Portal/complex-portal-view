@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import * as Logger from 'js-logger';
+
 declare var $: any;
 
 @Component({
@@ -8,5 +10,13 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
+  }
+
+
+  constructor() {
+    Logger.useDefaults();
+    Logger.setLevel(Logger.WARN);
+    Logger.debug("Donut machine is out of pink ones");  // Not a peep.
+    Logger.warn("Asteroid detected!");
   }
 }
