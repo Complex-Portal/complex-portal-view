@@ -1,4 +1,4 @@
-<div class="">
+<div>
   <ul class="pagination text-center" role="navigation" aria-label="Pagination" (click)="updatePaginatior()">
     <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a [routerLink]="['/search']" [queryParams]="{query: query, page: 1}">&laquo; First</a></li>
     <ng-container *ngFor="let index of pagination">
