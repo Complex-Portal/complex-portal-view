@@ -1,7 +1,7 @@
 import {Element} from './element.model';
 import {Facets} from './facets.model';
 
-export class ComplexSearch {
+export class ComplexSearchResult {
   private _size: number;
   private _totalNumberOfResults: number;
   private _elements: Element[];

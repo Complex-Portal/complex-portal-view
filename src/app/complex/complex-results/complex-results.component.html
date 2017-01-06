@@ -1,32 +1,11 @@
 <div class="row" *ngIf="complexSearch">
   <h3>Total number of results: {{complexSearch.totalNumberOfResults}} </h3>
   <!--<div class="columns medium-4">-->
-    <!--<app-complex-filter [facets]="complexSearch.facets">Loading ...</app-complex-filter>-->
+  <!--<app-complex-filter [facets]="complexSearch.facets">Loading ...</app-complex-filter>-->
   <!--</div>-->
-
-
-  <app-complex-paginator></app-complex-paginator>
   <div class="columns medium-8">
-    <div class="">
-      <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-        <li class="arrow unavailable" *ngIf="page != 1" aria-disabled="true"><a [routerLink]="['/search']" [queryParams]="{query: query, page: 1}">&laquo; First</a></li>
-        <ng-container *ngFor="let page of pagination">
-          <li *ngIf="page[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{page[0]}}</li>
-          <li *ngIf="page[1] == 'false'"><a [routerLink]="['/search']" [queryParams]="{query: query, page: page[0]}">{{page[0]}}</a></li>
-        </ng-container>
-        <li class="arrow" *ngIf="page != lastPage"><a [routerLink]="['/search']" [queryParams]="{query: query, page: lastPage}">Last &raquo;</a></li>
-      </ul>
-    </div>
+    <app-complex-paginator [query]="query" [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
     <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-    <div class="">
-      <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-        <li class="arrow unavailable" *ngIf="page != 1" aria-disabled="true"><a [routerLink]="['/search']" [queryParams]="{query: query, page: 1}">&laquo; First</a></li>
-        <ng-container *ngFor="let page of pagination">
-          <li *ngIf="page[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{page[0]}}</li>
-          <li *ngIf="page[1] == 'false'"><a [routerLink]="['/search']" [queryParams]="{query: query, page: page[0]}">{{page[0]}}</a></li>
-        </ng-container>
-        <li class="arrow" *ngIf="page != lastPage"><a [routerLink]="['/search']" [queryParams]="{query: query, page: lastPage}">Last &raquo;</a></li>
-      </ul>
-    </div>
+    <app-complex-paginator [query]="query" [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
   </div>
 </div>

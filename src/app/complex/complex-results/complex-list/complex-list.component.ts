@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {ComplexSearch} from "../../shared/model/complex-results/complex-search.model";
+import {ComplexSearchResult} from "../../shared/model/complex-results/complex-search.model";
 
 @Component({
   selector: 'app-complex-list',
@@ -7,7 +7,7 @@ import {ComplexSearch} from "../../shared/model/complex-results/complex-search.m
   styleUrls: ['./complex-list.component.css']
 })
 export class ComplexListComponent implements OnInit {
-  @Input() complexSearch: ComplexSearch;
+  @Input() complexSearch: ComplexSearchResult;
 
   constructor() { }
 
