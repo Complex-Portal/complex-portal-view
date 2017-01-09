@@ -1,10 +1,11 @@
 <div>
-  <ul class="pagination text-center" role="navigation" aria-label="Pagination" (click)="updatePaginatior()">
-    <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a [routerLink]="['/search']" [queryParams]="{query: query, page: 1}">&laquo; First</a></li>
+  <h5>Page {{currentPageIndex}} of {{lastPageIndex}}</h5>
+  <ul class="pagination text-center" role="navigation" (click)="updatePaginatior()" aria-label="Pagination">
+    <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a (click)="getPreviousPage()">&laquo; Previous</a></li>
     <ng-container *ngFor="let index of pagination">
       <li *ngIf="index[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{index[0]}}</li>
-      <li *ngIf="index[1] == 'false'"><a [routerLink]="['/search']" [queryParams]="{query: query, page: index[0]}">{{index[0]}}</a></li>
+      <li *ngIf="index[1] == 'false'"><a (click)="getPage(index[0])">{{index[0]}}</a></li>
     </ng-container>
-    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a [routerLink]="['/search']" [queryParams]="{query: query, page: lastPageIndex}">Last &raquo;</a></li>
+    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getNextPage()">Next &raquo;</a></li>
   </ul>
 </div>

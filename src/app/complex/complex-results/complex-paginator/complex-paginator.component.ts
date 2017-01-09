@@ -1,4 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {
+  Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-complex-paginator',
@@ -6,10 +7,12 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./complex-paginator.component.css']
 })
 export class ComplexPaginatorComponent implements OnInit {
-  private _query: string;
   private _lastPageIndex: number;
   private _currentPageIndex: number;
   private _pagination: any;
+  
+  @Output() onPageChange: EventEmitter<number> = new EventEmitter<number>();
+
 
   constructor() {
   }
@@ -18,7 +21,7 @@ export class ComplexPaginatorComponent implements OnInit {
     this.updatePaginatior();
   }
 
-  private updatePaginatior(): void {
+  public updatePaginatior(): void {
     let start: number;
     let end: number;
     this.pagination = [];
@@ -49,13 +52,24 @@ export class ComplexPaginatorComponent implements OnInit {
     }
   }
 
-  @Input()
-  get query() {
-    return this._query;
+  public getFirstPage(): void {
+    this.onPageChange.emit(1);
   }
 
-  set query(value) {
-    this._query = value;
+  public getLastPage(): void {
+    this.onPageChange.emit(this.lastPageIndex);
+  }
+
+  public getPage(pageIndex: number) {
+    this.onPageChange.emit(pageIndex);
+  }
+
+  public getPreviousPage(): void {
+    this.onPageChange.emit(this.currentPageIndex - 1);
+  }
+
+  public getNextPage(): void {
+    this.onPageChange.emit(this.currentPageIndex + 1);
   }
 
   get lastPageIndex() {

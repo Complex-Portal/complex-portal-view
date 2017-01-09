@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ComplexSearchResult} from "../shared/model/complex-results/complex-search.model";
 import {ComplexPortalService} from "../shared/service/complex-portal.service";
 
@@ -20,7 +20,7 @@ export class ComplexResultsComponent implements OnInit {
   private _bioRoleFilter: string[] = [];
   private _interactorTypeFilter: string[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService) {
   }
 
@@ -39,6 +39,10 @@ export class ComplexResultsComponent implements OnInit {
           this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / complexSearch.size);
         });
       });
+  }
+
+  public onPageChange(pageIndex : number): void {
+    this.router.navigate(['search'], { queryParams: { query: this.query, page: pageIndex }});
   }
 
   get query() {

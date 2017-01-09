@@ -4,8 +4,8 @@
     <app-complex-filter [facets]="complexSearch.facets">Loading ...</app-complex-filter>
   </div>
   <div class="columns medium-8">
-    <app-complex-paginator [query]="query" [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
+    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex" (onPageChange)="onPageChange($event)"></app-complex-paginator>
     <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-    <app-complex-paginator [query]="query" [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
+    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
   </div>
 </div>
