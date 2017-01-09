@@ -15,19 +15,26 @@ export class ComplexResultsComponent implements OnInit {
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
+  private _pageSize: number = 10;
+  private _spicesFilter: string[] = [];
+  private _bioRoleFilter: string[] = [];
+  private _interactorTypeFilter: string[] = [];
 
   constructor(private route: ActivatedRoute,
               private complexPortalService: ComplexPortalService) {
   }
 
-
   ngOnInit() {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this._query = queryParams['query'];
-        this._currentPageIndex = Number(queryParams['page']);
-        this.complexPortalService.findComplex(this._query, this._currentPageIndex).subscribe(complexSearch => {
+        this.query = queryParams['query'];
+        this.spicesFilter = queryParams['species'] ? queryParams['species'].split(';') : null;
+        this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(';') : null;
+        this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(';') : null;
+        this.currentPageIndex = Number(queryParams['page']);
+        this.pageSize = Number(queryParams['size']);
+        this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
           this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / complexSearch.size);
         });
@@ -64,5 +71,37 @@ export class ComplexResultsComponent implements OnInit {
 
   set lastPageIndex(value: number) {
     this._lastPageIndex = value;
+  }
+
+  get pageSize(): number {
+    return this._pageSize;
+  }
+
+  set pageSize(value: number) {
+    this._pageSize = value;
+  }
+
+  get spicesFilter(): string[] {
+    return this._spicesFilter;
+  }
+
+  set spicesFilter(value: string[]) {
+    this._spicesFilter = value;
+  }
+
+  get bioRoleFilter(): string[] {
+    return this._bioRoleFilter;
+  }
+
+  set bioRoleFilter(value: string[]) {
+    this._bioRoleFilter = value;
+  }
+
+  get interactorTypeFilter(): string[] {
+    return this._interactorTypeFilter;
+  }
+
+  set interactorTypeFilter(value: string[]) {
+    this._interactorTypeFilter = value;
   }
 }

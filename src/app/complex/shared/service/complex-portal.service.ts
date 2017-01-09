@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 
@@ -35,20 +35,33 @@ export class ComplexPortalService {
    * Find a complex based on indexed term
    * @returns {Observable<R>}
    * @param query
+   * @param speciesFilter
+   * @param bioRoleFilter
+   * @param interactorTypeFilter
+   * @param currentPageIndex
+   * @param pageSize
    * @param format
    * @param facets
-   * @param offset
-   * @param pageLength
-   * @param filters
    */
-  findComplex(query: string, offset = 0, pageLength = 10, format = 'json', facets = 'species_f,ptype_f,pbiorole_f', filters?) {
+
+  findComplex(query: string, speciesFilter: string[], bioRoleFilter: string[], interactorTypeFilter: string[], currentPageIndex = 0, pageSize = 10, format = 'json', facets = 'species_f,ptype_f,pbiorole_f') {
     let params = new URLSearchParams();
-    params.set('first', offset.toString());
-    params.set('number', pageLength.toString());
+    let filters: string = "";
+    params.set('first', (currentPageIndex-1).toString());
+    params.set('number', '10');
     params.set('format', format);
     params.set('facets', facets);
-    // params.set('filters', filters);
-    return this.http.get(baseURL + '/search/' + query, { search: params })
+    if (speciesFilter) {
+      filters += 'species_f:(' + '"' + speciesFilter.join('" "') + '"' + '),';
+    }
+    if (bioRoleFilter) {
+      filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('" "') + '"' + '),';
+    }
+    if (interactorTypeFilter) {
+      filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('" "') + '"' + '),';
+    }
+    params.set('filters', filters);
+    return this.http.get(baseURL + '/search/' + query, {search: params})
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
