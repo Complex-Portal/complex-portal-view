@@ -1,3 +1,36 @@
-<p>
-  complex-filter works!
-</p>
+<script src="complex-filter.component.ts"></script>
+<div class="navigation">
+  <h3>Filters</h3>
+  <div *ngIf="facets.species_f">
+    <b>Species</b>
+    <ul class="no-bullet">
+      <li *ngFor="let facet of facets.species_f">
+        <input type="checkbox" #filter value="{{facet.name}}" (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="facets.pbiorole_f">
+    <b>Biological Role</b>
+    <ul class="no-bullet">
+      <li *ngFor="let facet of facets.pbiorole_f">
+        <input type="checkbox" #filter class="" value="{{facet.name}}" (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+      </li>
+
+    </ul>
+  </div>
+
+
+  <div *ngIf="facets.ptype_f">
+    <b>Interactor Type</b>
+    <ul class="no-bullet">
+      <li *ngFor="let facet of facets.ptype_f">
+        <input type="checkbox" #filter class="" value="{{facet.name}}" (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f">
+    <h6>No filters available</h6>
+  </div>
+</div>
