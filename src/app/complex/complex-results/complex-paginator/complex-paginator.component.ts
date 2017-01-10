@@ -10,7 +10,7 @@ export class ComplexPaginatorComponent implements OnInit {
   private _lastPageIndex: number;
   private _currentPageIndex: number;
   private _pagination: any;
-  
+
   @Output() onPageChange: EventEmitter<number> = new EventEmitter<number>();
 
 
@@ -26,8 +26,9 @@ export class ComplexPaginatorComponent implements OnInit {
     let end: number;
     this.pagination = [];
     if (this._lastPageIndex < 5) {
-      start = 1;
-      end = this._lastPageIndex + 1;
+        start = 1;
+        end = this._lastPageIndex;
+
     } else {
       if (this._currentPageIndex === 1 || this._currentPageIndex === 2) {
         start = 1;
