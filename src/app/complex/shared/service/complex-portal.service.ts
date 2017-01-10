@@ -53,13 +53,13 @@ export class ComplexPortalService {
     params.set('format', format);
     params.set('facets', facets);
     if (speciesFilter) {
-      filters += 'species_f:(' + '"' + speciesFilter.join('" "') + '"' + '),';
+      filters += 'species_f:(' + '"' + speciesFilter.join('"AND"') + '"' + '),';
     }
     if (bioRoleFilter) {
-      filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('" "') + '"' + '),';
+      filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('"AND"') + '"' + '),';
     }
     if (interactorTypeFilter) {
-      filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('" "') + '"' + '),';
+      filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
     }
     params.set('filters', filters);
     return this.http.get(baseURL + '/search/' + query, {search: params})
