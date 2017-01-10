@@ -1,11 +1,19 @@
 <div class="row" *ngIf="complexSearch">
   <h3>Total number of results: {{complexSearch.totalNumberOfResults}} </h3>
   <div class="columns medium-4">
-    <app-complex-filter [facets]="complexSearch.facets">Loading ...</app-complex-filter>
+    <app-complex-filter [spicesFilter]="spicesFilter" [bioRoleFilter]="bioRoleFilter"
+                        [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
+                        (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
+                        (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
+                        (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
+      Loading ...
+    </app-complex-filter>
   </div>
   <div class="columns medium-8">
-    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex" (onPageChange)="onPageChange($event)"></app-complex-paginator>
+    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
+                           (onPageChange)="onPageChange($event)"></app-complex-paginator>
     <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"></app-complex-paginator>
+    <app-complex-paginator [currentPageIndex]="currentPageIndex"
+                           [lastPageIndex]="lastPageIndex"></app-complex-paginator>
   </div>
 </div>

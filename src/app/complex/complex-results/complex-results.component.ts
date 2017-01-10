@@ -16,9 +16,9 @@ export class ComplexResultsComponent implements OnInit {
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
   private _pageSize: number = 10;
-  private _spicesFilter: string[] = [];
-  private _bioRoleFilter: string[] = [];
-  private _interactorTypeFilter: string[] = [];
+  private _spicesFilter: string[];
+  private _bioRoleFilter: string[];
+  private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService) {
@@ -28,21 +28,55 @@ export class ComplexResultsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this.query = queryParams['query'];
-        this.spicesFilter = queryParams['species'] ? queryParams['species'].split(';') : null;
-        this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(';') : null;
-        this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(';') : null;
-        this.currentPageIndex = Number(queryParams['page']);
-        this.pageSize = Number(queryParams['size']);
+        this.query = queryParams['query'] ? queryParams['query'] : console.log("Error");
+        this.spicesFilter = queryParams['species'] ? queryParams['species'].split(';') : undefined;
+        this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(';') : undefined;
+        this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(';') : undefined;
+        this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+        //TODO This is out for now, but CP-84 should fix that!!
+        // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
-          this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / complexSearch.size);
+          console.log(Math.ceil(complexSearch.totalNumberOfResults / complexSearch.size));
+          this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         });
       });
   }
 
-  public onPageChange(pageIndex : number): void {
-    this.router.navigate(['search'], { queryParams: { query: this.query, page: pageIndex }});
+  private reloadPage():void {
+    this.router.navigate(['search'], {
+      queryParams: {
+        query: this.query,
+        species: this.spicesFilter,
+        bioRole: this.bioRoleFilter,
+        interactorType: this.interactorTypeFilter,
+        page: this.currentPageIndex,
+        size: this.pageSize
+      }
+    });
+  }
+
+  public onPageChange(pageIndex: number): void {
+    this.currentPageIndex = pageIndex;
+    this.reloadPage();
+  }
+
+  public onSpicesFilterChanged (filter : string[]): void {
+    this.spicesFilter = filter;
+    this.currentPageIndex = 1;
+    this.reloadPage();
+  }
+
+  public onBiologicalRoleFilterChanged (filter : string[]): void {
+    this.bioRoleFilter = filter;
+    this.currentPageIndex = 1;
+    this.reloadPage();
+  }
+
+  public onInteractorTyoeFilterChanged (filter : string[]): void {
+    this.interactorTypeFilter = filter;
+    this.currentPageIndex = 1;
+    this.reloadPage();
   }
 
   get query() {
