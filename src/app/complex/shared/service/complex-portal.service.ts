@@ -44,11 +44,12 @@ export class ComplexPortalService {
    * @param facets
    */
 
-  findComplex(query: string, speciesFilter: string[], bioRoleFilter: string[], interactorTypeFilter: string[], currentPageIndex = 0, pageSize = 10, format = 'json', facets = 'species_f,ptype_f,pbiorole_f') {
+  findComplex(query: string, speciesFilter: string[] = null, bioRoleFilter: string[] = null, interactorTypeFilter: string[] = null, currentPageIndex: number, pageSize: number, format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
     let params = new URLSearchParams();
-    let filters: string = "";
-    params.set('first', (currentPageIndex-1).toString());
-    params.set('number', '10');
+    let filters: string = '';
+    params.set('first', ((currentPageIndex * pageSize)-pageSize).toString());
+    //TODO This is out for now, but CP-84 should fix that!!
+    // params.set('number', pageSize.toString());
     params.set('format', format);
     params.set('facets', facets);
     if (speciesFilter) {
