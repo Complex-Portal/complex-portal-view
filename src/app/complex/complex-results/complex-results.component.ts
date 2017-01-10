@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, NavigationExtras} from "@angular/router";
 import {ComplexSearchResult} from "../shared/model/complex-results/complex-search.model";
 import {ComplexPortalService} from "../shared/service/complex-portal.service";
 
@@ -28,31 +28,41 @@ export class ComplexResultsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this.query = queryParams['query'] ? queryParams['query'] : console.log("Error");
-        this.spicesFilter = queryParams['species'] ? queryParams['species'].split(';') : undefined;
-        this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(';') : undefined;
-        this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(';') : undefined;
-        this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+        console.log(queryParams['species']);
+        this._query = queryParams['query'] ? queryParams['query'] : console.log("Error");
+        this._spicesFilter = queryParams['species'] ? queryParams['species'].split(',') : undefined;
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : undefined;
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : undefined;
+        this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         //TODO This is out for now, but CP-84 should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
-          console.log(Math.ceil(complexSearch.totalNumberOfResults / complexSearch.size));
           this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         });
       });
   }
 
-  private reloadPage():void {
+  private reloadPage(): void {
+    var queryParams: NavigationExtras = {};
+    queryParams['query'] = this._query;
+    queryParams['page'] = this._currentPageIndex;
+    this.prepareFiltersForParams(queryParams);
     this.router.navigate(['search'], {
-      queryParams: {
-        query: this.query,
-        species: this.spicesFilter,
-        bioRole: this.bioRoleFilter,
-        interactorType: this.interactorTypeFilter,
-        page: this.currentPageIndex,
-      }
+      queryParams
     });
+  }
+
+  private prepareFiltersForParams(queryParams: NavigationExtras): void {
+    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
+      queryParams['species'] = this._spicesFilter;
+    }
+    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
+      queryParams['bioRole'] = this._bioRoleFilter;
+    }
+    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
+      queryParams['interactorType'] = this._interactorTypeFilter;
+    }
   }
 
   public onPageChange(pageIndex: number): void {
@@ -60,19 +70,19 @@ export class ComplexResultsComponent implements OnInit {
     this.reloadPage();
   }
 
-  public onSpicesFilterChanged (filter : string[]): void {
+  public onSpicesFilterChanged(filter: string[]): void {
     this.spicesFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
-  public onBiologicalRoleFilterChanged (filter : string[]): void {
+  public onBiologicalRoleFilterChanged(filter: string[]): void {
     this.bioRoleFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
-  public onInteractorTyoeFilterChanged (filter : string[]): void {
+  public onInteractorTyoeFilterChanged(filter: string[]): void {
     this.interactorTypeFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
