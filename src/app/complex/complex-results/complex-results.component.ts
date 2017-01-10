@@ -51,7 +51,6 @@ export class ComplexResultsComponent implements OnInit {
         bioRole: this.bioRoleFilter,
         interactorType: this.interactorTypeFilter,
         page: this.currentPageIndex,
-        size: this.pageSize
       }
     });
   }
