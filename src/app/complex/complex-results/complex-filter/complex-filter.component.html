@@ -5,7 +5,14 @@
     <b>Species</b>
     <ul class="no-bullet">
       <li *ngFor="let facet of facets.species_f">
-        <input type="checkbox" #filter value="{{facet.name}}" (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        <ng-container *ngIf="spicesFilter.indexOf(facet.name) !== -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{facet.name}} ({{facet.count}})
+        </ng-container>
+        <ng-container *ngIf="spicesFilter.indexOf(facet.name) === -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        </ng-container>
       </li>
     </ul>
   </div>
@@ -14,7 +21,15 @@
     <b>Biological Role</b>
     <ul class="no-bullet">
       <li *ngFor="let facet of facets.pbiorole_f">
-        <input type="checkbox" #filter value="{{facet.name}}" (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        <ng-container *ngIf="bioRoleFilter.indexOf(facet.name) !== -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{facet.name}}
+          ({{facet.count}})
+        </ng-container>
+        <ng-container *ngIf="bioRoleFilter.indexOf(facet.name) === -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        </ng-container>
       </li>
 
     </ul>
@@ -25,7 +40,16 @@
     <b>Interactor Type</b>
     <ul class="no-bullet">
       <li *ngFor="let facet of facets.ptype_f">
-        <input type="checkbox" #filter value="{{facet.name}}" (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        <ng-container *ngIf="interactorTypeFilter.indexOf(facet.name) !== -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeInteractorTyoeFilter(filter.value, filter.checked)" checked> {{facet.name}}
+          ({{facet.count}})
+        </ng-container>
+        <ng-container *ngIf="interactorTypeFilter.indexOf(facet.name) === -1">
+          <input type="checkbox" #filter value="{{facet.name}}"
+                 (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+        </ng-container>
+
       </li>
     </ul>
   </div>
