@@ -1,12 +1,13 @@
 import {
-  Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
+  Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges
+} from '@angular/core';
 
 @Component({
   selector: 'app-complex-paginator',
   templateUrl: './complex-paginator.component.html',
   styleUrls: ['./complex-paginator.component.css']
 })
-export class ComplexPaginatorComponent implements OnInit {
+export class ComplexPaginatorComponent implements OnInit, OnChanges {
   private _lastPageIndex: number;
   private _currentPageIndex: number;
   private _pagination: any;
@@ -21,10 +22,17 @@ export class ComplexPaginatorComponent implements OnInit {
     this.updatePaginatior();
   }
 
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updatePaginatior();
+    console.log(changes);
+  }
+
   public updatePaginatior(): void {
     let start: number;
     let end: number;
     this.pagination = [];
+    console.log("test");
     if (this._lastPageIndex < 5) {
         start = 1;
         end = this._lastPageIndex;

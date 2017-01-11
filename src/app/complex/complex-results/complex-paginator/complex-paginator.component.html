@@ -1,6 +1,6 @@
 <div>
   <h5>Page {{currentPageIndex}} of {{lastPageIndex}}</h5>
-  <ul class="pagination text-center" role="navigation" (click)="updatePaginatior()" aria-label="Pagination">
+  <ul class="pagination text-center" role="navigation" aria-label="Pagination">
     <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a (click)="getPreviousPage()">&laquo; Previous</a></li>
     <ng-container *ngFor="let index of pagination">
       <li *ngIf="index[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{index[0]}}</li>
