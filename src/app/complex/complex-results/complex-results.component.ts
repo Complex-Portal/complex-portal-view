@@ -28,11 +28,10 @@ export class ComplexResultsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        console.log(queryParams['species']);
         this._query = queryParams['query'] ? queryParams['query'] : console.log("Error");
-        this._spicesFilter = queryParams['species'] ? queryParams['species'].split(',') : undefined;
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : undefined;
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : undefined;
+        this._spicesFilter = queryParams['species'] ? queryParams['species'].split(',') : [];
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : [];
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         //TODO This is out for now, but CP-84 should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -67,6 +66,14 @@ export class ComplexResultsComponent implements OnInit {
 
   public onPageChange(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
+    this.reloadPage();
+  }
+
+  public onResetAllFilters() : void {
+    this.spicesFilter = [];
+    this.bioRoleFilter = [];
+    this.interactorTypeFilter = [];
+    this.currentPageIndex = 1;
     this.reloadPage();
   }
 
