@@ -1,5 +1,5 @@
 <div>
-  <h5>Page {{currentPageIndex}} of {{lastPageIndex}}</h5>
+  <h5 class="text-center">{{currentPageIndex}} of {{lastPageIndex}}</h5>
   <ul class="pagination text-center" role="navigation" aria-label="Pagination">
     <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a (click)="getPreviousPage()">&laquo; Previous</a></li>
     <ng-container *ngFor="let index of pagination">
