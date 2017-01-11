@@ -1,60 +1,72 @@
-<script src="complex-filter.component.ts"></script>
-<div class="navigation">
-  <h3>Filters</h3>
-  <div *ngIf="facets.species_f">
-    <b>Species</b>
-    <ul class="no-bullet">
-      <li *ngFor="let facet of facets.species_f">
-        <ng-container *ngIf="spicesFilter.indexOf(facet.name) !== -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{facet.name}} ({{facet.count}})
-        </ng-container>
-        <ng-container *ngIf="spicesFilter.indexOf(facet.name) === -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
-        </ng-container>
-      </li>
-    </ul>
+<div class="filters row">
+  <div class="columns medium-6"><h3>Filters</h3></div>
+  <div class="columns medium-6">
+    <div *ngIf="anyFiltersSelected()">
+      <a class="button" (click)="resetAllFilters()"><i class="icon icon-functional" data-icon="d"></i> Reset filters</a>
+    </div>
   </div>
+  <div class="columns medium-12">
+    <div *ngIf="facets.species_f">
+      <b>Species</b>
+      <ul class="no-bullet">
+        <li *ngFor="let facet of facets.species_f">
+          <div [ngSwitch]="isSelected(facet.name, spicesFilter)">
+            <div *ngSwitchCase="true">
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{facet.name}}
+              ({{facet.count}})
+            </div>
+            <div *ngSwitchDefault>
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-  <div *ngIf="facets.pbiorole_f">
-    <b>Biological Role</b>
-    <ul class="no-bullet">
-      <li *ngFor="let facet of facets.pbiorole_f">
-        <ng-container *ngIf="bioRoleFilter.indexOf(facet.name) !== -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{facet.name}}
-          ({{facet.count}})
-        </ng-container>
-        <ng-container *ngIf="bioRoleFilter.indexOf(facet.name) === -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
-        </ng-container>
-      </li>
+    <div *ngIf="facets.pbiorole_f">
+      <b>Biological Role</b>
+      <ul class="no-bullet">
+        <li *ngFor="let facet of facets.pbiorole_f">
+          <div [ngSwitch]="isSelected(facet.name, bioRoleFilter)">
+            <div *ngSwitchCase="true">
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{facet.name}}
+              ({{facet.count}})
+            </div>
+            <div *ngSwitchDefault>
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}}
+              ({{facet.count}})
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-    </ul>
-  </div>
 
-
-  <div *ngIf="facets.ptype_f">
-    <b>Interactor Type</b>
-    <ul class="no-bullet">
-      <li *ngFor="let facet of facets.ptype_f">
-        <ng-container *ngIf="interactorTypeFilter.indexOf(facet.name) !== -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeInteractorTyoeFilter(filter.value, filter.checked)" checked> {{facet.name}}
-          ({{facet.count}})
-        </ng-container>
-        <ng-container *ngIf="interactorTypeFilter.indexOf(facet.name) === -1">
-          <input type="checkbox" #filter value="{{facet.name}}"
-                 (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
-        </ng-container>
-
-      </li>
-    </ul>
-  </div>
-
-  <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f">
-    <h6>No filters available</h6>
+    <div *ngIf="facets.ptype_f">
+      <b>Interactor Type</b>
+      <ul class="no-bullet">
+        <li *ngFor="let facet of facets.ptype_f">
+          <div [ngSwitch]="isSelected(facet.name, interactorTypeFilter)">
+            <div *ngSwitchCase="true">
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeInteractorTyoeFilter(filter.value, filter.checked)" checked> {{facet.name}}
+              ({{facet.count}})
+            </div>
+            <div *ngSwitchDefault>
+              <input type="checkbox" #filter value="{{facet.name}}"
+                     (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}}
+              ({{facet.count}})
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f">
+      <h6>No filters available</h6>
+    </div>
   </div>
 </div>

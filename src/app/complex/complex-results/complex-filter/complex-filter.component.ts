@@ -16,15 +16,13 @@ export class ComplexFilterComponent implements OnInit {
   @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
   constructor() {
   }
 
   ngOnInit() {
-    this.spicesFilter = [];
-    this.bioRoleFilter = [];
-    this.interactorTypeFilter = [];
   }
 
   public changeSpeciesFilter(filter: string, status: boolean) {
@@ -34,7 +32,6 @@ export class ComplexFilterComponent implements OnInit {
       this.spicesFilter.splice(this.spicesFilter.indexOf(filter), 1);
     }
     this.onSpicesFilterChanged.emit(this.spicesFilter);
-    console.log(this.spicesFilter);
   }
 
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
@@ -44,7 +41,6 @@ export class ComplexFilterComponent implements OnInit {
       this.bioRoleFilter.splice(this.bioRoleFilter.indexOf(filter), 1);
     }
     this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter);
-    console.log(this.bioRoleFilter);
   }
 
   public changeInteractorTyoeFilter(filter: string, status: boolean) {
@@ -54,7 +50,18 @@ export class ComplexFilterComponent implements OnInit {
       this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
     }
     this.onInteractorTyoeFilterChanged.emit(this.interactorTypeFilter);
-    console.log(this.interactorTypeFilter);
+  }
+
+  public resetAllFilters() {
+    this.onResetAllFilters.emit(true);
+  }
+
+  public anyFiltersSelected() {
+    return !!(this._spicesFilter.length !== 0 || this._bioRoleFilter.length !== 0 || this._interactorTypeFilter.length !== 0);
+  }
+
+  public isSelected(elmement: string, filter: string[]): boolean {
+    return filter.indexOf(elmement) !== -1;
   }
 
   get facets(): Facets {
