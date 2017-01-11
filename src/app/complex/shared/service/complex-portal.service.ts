@@ -44,21 +44,20 @@ export class ComplexPortalService {
    * @param facets
    */
 
-  findComplex(query: string, speciesFilter: string[] = null, bioRoleFilter: string[] = null, interactorTypeFilter: string[] = null, currentPageIndex: number, pageSize: number, format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
+  findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [], interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize: number = 10, format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
     let params = new URLSearchParams();
     let filters: string = '';
-    params.set('first', ((currentPageIndex * pageSize)-pageSize).toString());
-    //TODO This is out for now, but CP-84 should fix that!!
-    // params.set('number', pageSize.toString());
+    params.set('first', ((currentPageIndex * pageSize) - pageSize).toString());
+    params.set('number', pageSize.toString());
     params.set('format', format);
     params.set('facets', facets);
-    if (speciesFilter) {
+    if (speciesFilter.length !== 0) {
       filters += 'species_f:(' + '"' + speciesFilter.join('"AND"') + '"' + '),';
     }
-    if (bioRoleFilter) {
+    if (bioRoleFilter.length !== 0) {
       filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('"AND"') + '"' + '),';
     }
-    if (interactorTypeFilter) {
+    if (interactorTypeFilter.length !== 0) {
       filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
     }
     params.set('filters', filters);
