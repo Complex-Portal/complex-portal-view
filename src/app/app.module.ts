@@ -17,6 +17,7 @@ import {ComplexResultsComponent} from './complex/complex-results/complex-results
 import {ComplexListComponent} from './complex/complex-results/complex-list/complex-list.component';
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
+import {ErrorNotificationComponent} from './shared/notifications/error-notification/error-notification.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {ComplexPaginatorComponent} from './complex/complex-results/complex-pagin
     ComplexResultsComponent,
     ComplexListComponent,
     ComplexFilterComponent,
-    ComplexPaginatorComponent
+    ComplexPaginatorComponent,
+    ErrorNotificationComponent
   ],
   imports: [
     BrowserModule,
