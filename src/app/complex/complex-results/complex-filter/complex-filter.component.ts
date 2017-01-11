@@ -18,7 +18,6 @@ export class ComplexFilterComponent implements OnInit {
   @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-
   constructor() {
   }
 
