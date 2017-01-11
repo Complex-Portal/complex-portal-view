@@ -69,7 +69,7 @@ export class ComplexResultsComponent implements OnInit {
     this.reloadPage();
   }
 
-  public onResetAllFilters() : void {
+  public onResetAllFilters(): void {
     this.spicesFilter = [];
     this.bioRoleFilter = [];
     this.interactorTypeFilter = [];
