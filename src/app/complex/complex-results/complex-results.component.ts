@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, NavigationExtras} from "@angular/router";
-import {ComplexSearchResult} from "../shared/model/complex-results/complex-search.model";
-import {ComplexPortalService} from "../shared/service/complex-portal.service";
+import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
+import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
+import {ComplexPortalService} from '../shared/service/complex-portal.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class ComplexResultsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this._query = queryParams['query'] ? queryParams['query'] : console.log("Error");
+        this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
         this._spicesFilter = queryParams['species'] ? queryParams['species'].split(',') : [];
         this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : [];
         this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : [];

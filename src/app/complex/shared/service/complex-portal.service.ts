@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from "@angular/http";
-import {Observable} from "rxjs";
+import {Http, Response, URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs';
 
 const baseURL = 'https://wwwdev.ebi.ac.uk/intact/complex-ws';
 

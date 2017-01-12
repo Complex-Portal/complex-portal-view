@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Facets} from "../../shared/model/complex-results/facets.model";
+import {Facets} from '../../shared/model/complex-results/facets.model';
 
 @Component({
   selector: 'app-complex-filter',

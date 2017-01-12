@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NotificationService} from "./service/notification.service";
+import {NotificationService} from './service/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -17,7 +17,6 @@ export class NotificationComponent implements OnInit {
     notificationService.successNotification$.subscribe(
       notification => {
         this.successNotifications.push(notification);
-        console.log("success")
       });
     notificationService.errorNotification$.subscribe(
       notification => {
@@ -33,13 +32,11 @@ export class NotificationComponent implements OnInit {
       });
     notificationService.staticNotification$.subscribe(
       notification => {
-        console.log("success")
         this.staticNotifications.push(notification);
       });
   }
 
   public removeNotification(notification: string, notifications: string[]) : void{
-    console.log("delete");
     notifications.splice(notifications.indexOf(notification), 1);
   }
 

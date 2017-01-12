@@ -4,9 +4,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app.routes';
-import {ComplexPortalService} from "./complex/shared/service/complex-portal.service";
+import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
 import {SearchComponent} from './search/search.component';
 import {HomeComponent} from './home/home.component';
 import {NewsletterSubscriptionComponent} from './home/newsletter-subscription/newsletter-subscription.component';
@@ -17,7 +17,7 @@ import {ComplexResultsComponent} from './complex/complex-results/complex-results
 import {ComplexListComponent} from './complex/complex-results/complex-list/complex-list.component';
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
-import {NotificationService} from "./shared/notification/service/notification.service";
+import {NotificationService} from './shared/notification/service/notification.service';
 import { NotificationComponent } from './shared/notification/notification.component';
 
 @NgModule({

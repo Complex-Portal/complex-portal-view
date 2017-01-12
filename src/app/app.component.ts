@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NotificationService} from "./shared/notification/service/notification.service";
-import {environment} from "../environments/environment";
+import {NotificationService} from './shared/notification/service/notification.service';
+import {environment} from '../environments/environment';
 declare var $: any;
 
 @Component({
@@ -17,8 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if(environment.production === false){
-      console.log("fire");
-      this.notificationService.addStaticNotification("Please be aware the you're currently looking a DEV version of the Complex Portal!")
+      this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!')
     }
   }
 }
