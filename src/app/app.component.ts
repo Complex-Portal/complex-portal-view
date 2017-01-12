@@ -10,7 +10,6 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
 
-
   constructor(private notificationService: NotificationService) {
 
   }
