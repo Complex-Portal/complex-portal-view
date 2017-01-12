@@ -26,7 +26,7 @@ export class ComplexFilterComponent implements OnInit {
 
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
-      this.spicesFilter.push(filter)
+      this.spicesFilter.push(filter);
     } else {
       this.spicesFilter.splice(this.spicesFilter.indexOf(filter), 1);
     }
@@ -35,7 +35,7 @@ export class ComplexFilterComponent implements OnInit {
 
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
     if (status) {
-      this.bioRoleFilter.push(filter)
+      this.bioRoleFilter.push(filter);
     } else {
       this.bioRoleFilter.splice(this.bioRoleFilter.indexOf(filter), 1);
     }
@@ -44,7 +44,7 @@ export class ComplexFilterComponent implements OnInit {
 
   public changeInteractorTyoeFilter(filter: string, status: boolean) {
     if (status) {
-      this.interactorTypeFilter.push(filter)
+      this.interactorTypeFilter.push(filter);
     } else {
       this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
     }
