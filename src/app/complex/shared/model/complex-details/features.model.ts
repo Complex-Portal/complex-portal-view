@@ -2,21 +2,19 @@
  * Created by mkoch on 19/07/2016.
  */
 export class Features {
-  private _participantId:string;
-  private _featureType:string;
-  private _featureTypeMI:string;
-  private _featureTypeDefinition:string;
-  private _ranges:string[];
+  private _participantId: string;
+  private _featureType: string;
+  private _featureTypeMI: string;
+  private _featureTypeDefinition: string;
+  private _ranges: string[];
 
-
-  constructor(participantId:string, featureType:string, featureTypeMI:string, featureTypeDefinition:string, ranges:string[]) {
-      this._participantId = participantId;
-      this._featureType = featureType;
-      this._featureTypeMI = featureTypeMI;
-      this._featureTypeDefinition = featureTypeDefinition;
-          this._ranges = ranges;
-      }
-
+  constructor(participantId: string, featureType: string, featureTypeMI: string, featureTypeDefinition: string, ranges: string[]) {
+    this._participantId = participantId;
+    this._featureType = featureType;
+    this._featureTypeMI = featureTypeMI;
+    this._featureTypeDefinition = featureTypeDefinition;
+    this._ranges = ranges;
+  }
 
   get participantId(): string {
     return this._participantId;

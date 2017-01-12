@@ -7,14 +7,12 @@ export class ComplexSearchResult {
   private _elements: Element[];
   private _facets: Facets[];
 
-
   constructor(size: number, totalNumberOfResults: number, elements: Element[], facets: Facets[]) {
     this._size = size;
     this._totalNumberOfResults = totalNumberOfResults;
     this._elements = elements;
     this._facets = facets;
   }
-
 
   get size(): number {
     return this._size;

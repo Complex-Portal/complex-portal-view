@@ -2,35 +2,33 @@
  * Created by mkoch on 19/07/2016.
  */
 export class Participant {
-  private _interactorAC:string;
-  private _identifier:string;
-  private _identifierLink:string;
-  private _name:string;
-  private _description:string;
-  private _stochiometry:string;
-  private _bioRole:string;
-  private _bioRoleMI:string;
-  private _bioRoleDefinition:string;
-  private _interactorType:string;
-  private _interactorTypeMI:string;
-  private _interactorTypeDefinition:string;
+  private _interactorAC: string;
+  private _identifier: string;
+  private _identifierLink: string;
+  private _name: string;
+  private _description: string;
+  private _stochiometry: string;
+  private _bioRole: string;
+  private _bioRoleMI: string;
+  private _bioRoleDefinition: string;
+  private _interactorType: string;
+  private _interactorTypeMI: string;
+  private _interactorTypeDefinition: string;
 
-
-    constructor(interactorAC:string, identifier:string, identifierLink:string, name:string, description:string, stochiometry:string, bioRole:string, bioRoleMI:string, bioRoleDefinition:string, interactorType:string, interactorTypeMI:string, interactorTypeDefinition:string) {
-      this._interactorAC = interactorAC;
-      this._identifier = identifier;
-      this._identifierLink = identifierLink;
-      this._name = name;
-      this._description = description;
-      this._stochiometry = stochiometry;
-      this._bioRole = bioRole;
-      this._bioRoleMI = bioRoleMI;
-      this._bioRoleDefinition = bioRoleDefinition;
-      this._interactorType = interactorType;
-      this._interactorTypeMI = interactorTypeMI;
-      this._interactorTypeDefinition = interactorTypeDefinition;
-    }
-
+  constructor(interactorAC: string, identifier: string, identifierLink: string, name: string, description: string, stochiometry: string, bioRole: string, bioRoleMI: string, bioRoleDefinition: string, interactorType: string, interactorTypeMI: string, interactorTypeDefinition: string) {
+    this._interactorAC = interactorAC;
+    this._identifier = identifier;
+    this._identifierLink = identifierLink;
+    this._name = name;
+    this._description = description;
+    this._stochiometry = stochiometry;
+    this._bioRole = bioRole;
+    this._bioRoleMI = bioRoleMI;
+    this._bioRoleDefinition = bioRoleDefinition;
+    this._interactorType = interactorType;
+    this._interactorTypeMI = interactorTypeMI;
+    this._interactorTypeDefinition = interactorTypeDefinition;
+  }
 
   get interactorAC(): string {
     return this._interactorAC;

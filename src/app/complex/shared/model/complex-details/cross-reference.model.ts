@@ -3,33 +3,31 @@ import {Features} from './features.model';
  * Created by mkoch on 19/07/2016.
  */
 export class CrossReference {
-  private _database:string;
-  private _qualifier:string;
-  private _identifier:string;
-  private _description:string;
-  private _searchURL:string;
-  private _dbMI:string;
-  private _qualifierMI:string;
-  private _dbdefinition:string;
-  private _qualifierDefinition:string;
-  private _linkedFeatures:Features[];
-  private _otherFeatures:Features[];
+  private _database: string;
+  private _qualifier: string;
+  private _identifier: string;
+  private _description: string;
+  private _searchURL: string;
+  private _dbMI: string;
+  private _qualifierMI: string;
+  private _dbdefinition: string;
+  private _qualifierDefinition: string;
+  private _linkedFeatures: Features[];
+  private _otherFeatures: Features[];
 
-
-  constructor(database:string, qualifier:string, identifier:string, description:string, searchURL:string, dbMI:string, qualifierMI:string, dbdefinition:string, qualifierDefinition:string, linkedFeatures:Features[], otherFeatures:Features[]) {
-      this._database = database;
-      this._qualifier = qualifier;
-      this._identifier = identifier;
-      this._description = description;
-      this._searchURL = searchURL;
-      this._dbMI = dbMI;
-      this._qualifierMI = qualifierMI;
-      this._dbdefinition = dbdefinition;
-      this._qualifierDefinition = qualifierDefinition;
-      this._linkedFeatures = linkedFeatures;
-          this._otherFeatures = otherFeatures;
-      }
-
+  constructor(database: string, qualifier: string, identifier: string, description: string, searchURL: string, dbMI: string, qualifierMI: string, dbdefinition: string, qualifierDefinition: string, linkedFeatures: Features[], otherFeatures: Features[]) {
+    this._database = database;
+    this._qualifier = qualifier;
+    this._identifier = identifier;
+    this._description = description;
+    this._searchURL = searchURL;
+    this._dbMI = dbMI;
+    this._qualifierMI = qualifierMI;
+    this._dbdefinition = dbdefinition;
+    this._qualifierDefinition = qualifierDefinition;
+    this._linkedFeatures = linkedFeatures;
+    this._otherFeatures = otherFeatures;
+  }
 
   get database(): string {
     return this._database;

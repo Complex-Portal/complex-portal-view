@@ -7,13 +7,11 @@ export class Facets {
   private _species_f: Facet;
   private _pbiorole_f: Facet;
 
-
   constructor(ptype_f: Facet, species_f: Facet, pbiorole_f: Facet) {
     this._ptype_f = ptype_f;
     this._species_f = species_f;
     this._pbiorole_f = pbiorole_f;
   }
-
 
   get ptype_f(): Facet {
     return this._ptype_f;
