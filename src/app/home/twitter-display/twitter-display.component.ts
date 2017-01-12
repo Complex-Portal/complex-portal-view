@@ -27,6 +27,7 @@ export class TwitterDisplayComponent implements OnInit, AfterViewInit {
         fjs.parentNode.insertBefore(js, fjs);
       }
     }(document, 'script', 'twitter-wjs');
+    /* tslint:enable */
   }
 
 }
