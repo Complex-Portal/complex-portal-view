@@ -43,7 +43,7 @@ export class ComplexResultsComponent implements OnInit {
   }
 
   private reloadPage(): void {
-    var queryParams: NavigationExtras = {};
+    let queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
     this.prepareFiltersForParams(queryParams);

@@ -16,7 +16,7 @@ export class TwitterDisplayComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     !function (d, s, id) {
-      var js: any,
+      let js: any,
         fjs = d.getElementsByTagName(s)[0],
         p = 'https';
       if (!d.getElementById(id)) {
