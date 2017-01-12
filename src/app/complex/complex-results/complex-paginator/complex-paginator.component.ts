@@ -39,12 +39,10 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
       if (this._currentPageIndex === 1 || this._currentPageIndex === 2) {
         start = 1;
         end = 5;
-      }
-      else if (this._currentPageIndex == this._lastPageIndex || this._currentPageIndex == this._lastPageIndex - 1) {
+      } else if (this._currentPageIndex == this._lastPageIndex || this._currentPageIndex == this._lastPageIndex - 1) {
         start = this._lastPageIndex - 4;
         end = this._lastPageIndex;
-      }
-      else {
+      } else {
         start = this._currentPageIndex - 2;
         end = this._currentPageIndex + 2;
       }
