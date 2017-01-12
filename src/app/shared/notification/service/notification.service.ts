@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Subject, Observable} from 'rxjs';
 
 @Injectable()
 export class NotificationService {
@@ -14,12 +14,25 @@ export class NotificationService {
   constructor() {
   }
 
-  successNotification$ = this.successNotifications.asObservable();
-  errorNotification$ = this.errorNotifications.asObservable();
-  announcementNotification$ = this.announcementNotifications.asObservable();
-  hintNotification$ = this.hintNotifications.asObservable();
-  staticNotification$ = this.staticNotifications.asObservable();
+  getSuccessNotifications(): Observable<string> {
+    return this.successNotifications.asObservable();
+  }
 
+  getErrorNotification(): Observable<string> {
+    return this.errorNotifications.asObservable();
+  }
+
+  getAnnouncementNotifications(): Observable<string> {
+    return this.announcementNotifications.asObservable();
+  }
+
+  getHintNotifications(): Observable<string> {
+    return this.hintNotifications.asObservable();
+  }
+
+  getStaticNotifications(): Observable<string> {
+    return this.staticNotifications.asObservable();
+  }
 
   public addSuccessNotification(successNotification: string): void {
     this.successNotifications.next(successNotification);

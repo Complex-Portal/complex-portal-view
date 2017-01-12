@@ -14,23 +14,23 @@ export class NotificationComponent implements OnInit {
   private staticNotifications: string[] = [];
 
   constructor(private notificationService: NotificationService) {
-    notificationService.successNotification$.subscribe(
+    notificationService.getSuccessNotifications().subscribe(
       notification => {
         this.successNotifications.push(notification);
       });
-    notificationService.errorNotification$.subscribe(
+    notificationService.getErrorNotification().subscribe(
       notification => {
         console.log(notification);
       });
-    notificationService.announcementNotification$.subscribe(
+    notificationService.getAnnouncementNotifications().subscribe(
       notification => {
         console.log(notification);
       });
-    notificationService.hintNotification$.subscribe(
+    notificationService.getHintNotifications().subscribe(
       notification => {
         console.log(notification);
       });
-    notificationService.staticNotification$.subscribe(
+    notificationService.getStaticNotifications().subscribe(
       notification => {
         this.staticNotifications.push(notification);
       });
