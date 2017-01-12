@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from "./shared/notification/service/notification.service";
+import {environment} from "../environments/environment";
 declare var $: any;
 
 @Component({
@@ -11,28 +12,13 @@ export class AppComponent implements OnInit {
 
 
   constructor(private notificationService : NotificationService) {
-    notificationService.successNotification$.subscribe(
-      notification => {
-        console.log(notification);
-      });
-    notificationService.errorNotification$.subscribe(
-      notification => {
-        console.log(notification);
-      });
-    notificationService.announcementNotification$.subscribe(
-      notification => {
-        console.log(notification);
-      });
-    notificationService.hintNotification$.subscribe(
-      notification => {
-        console.log(notification);
-      });
-    notificationService.staticNotification$.subscribe(
-      notification => {
-        console.log(notification);
-      });
+
   }
 
   ngOnInit(): void {
+    if(environment.production === false){
+      console.log("fire");
+      this.notificationService.addStaticNotification("Please be aware the you're currently looking a DEV version of the Complex Portal!")
+    }
   }
 }
