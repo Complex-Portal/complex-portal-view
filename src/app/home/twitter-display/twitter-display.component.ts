@@ -15,6 +15,7 @@ export class TwitterDisplayComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    /* tslint:disable */
     !function (d, s, id) {
       let js: any,
         fjs = d.getElementsByTagName(s)[0],
