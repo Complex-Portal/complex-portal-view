@@ -18,6 +18,7 @@ import {ComplexListComponent} from './complex/complex-results/complex-list/compl
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
 import {ErrorNotificationComponent} from './shared/notifications/error-notification/error-notification.component';
+import {NotificationService} from "./shared/notifications/notification.service";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import {ErrorNotificationComponent} from './shared/notifications/error-notificat
     RouterModule.forRoot(rootRouterConfig),
 
   ],
-  providers: [ComplexPortalService],
+  providers: [ComplexPortalService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
