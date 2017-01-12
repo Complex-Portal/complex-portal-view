@@ -25,14 +25,12 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updatePaginatior();
-    console.log(changes);
   }
 
   public updatePaginatior(): void {
     let start: number;
     let end: number;
     this.pagination = [];
-    console.log("test");
     if (this._lastPageIndex < 5) {
         start = 1;
         end = this._lastPageIndex;
