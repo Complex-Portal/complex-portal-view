@@ -15,7 +15,9 @@ export class Participant {
   private _interactorTypeMI: string;
   private _interactorTypeDefinition: string;
 
-  constructor(interactorAC: string, identifier: string, identifierLink: string, name: string, description: string, stochiometry: string, bioRole: string, bioRoleMI: string, bioRoleDefinition: string, interactorType: string, interactorTypeMI: string, interactorTypeDefinition: string) {
+  constructor(interactorAC: string, identifier: string, identifierLink: string, name: string, description: string,
+              stochiometry: string, bioRole: string, bioRoleMI: string, bioRoleDefinition: string,
+              interactorType: string, interactorTypeMI: string, interactorTypeDefinition: string) {
     this._interactorAC = interactorAC;
     this._identifier = identifier;
     this._identifierLink = identifierLink;

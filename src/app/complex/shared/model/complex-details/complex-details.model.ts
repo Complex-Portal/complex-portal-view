@@ -19,7 +19,10 @@ export class ComplexDetails {
   private _participants: Participant[];
   private _crossReferences: CrossReference[];
 
-  constructor(ac: string, name: string, systematicName: string, species: string, institution: string, synonyms: string[], functions: string[], properties: string[], ligands: string[], complexAssemblies: string[], diseases: string[], agonists: string[], antagonists: string[], comments: string[], participants: Participant[], crossReferences: CrossReference[]) {
+  constructor(ac: string, name: string, systematicName: string, species: string, institution: string,
+              synonyms: string[], functions: string[], properties: string[], ligands: string[],
+              complexAssemblies: string[], diseases: string[], agonists: string[], antagonists: string[],
+              comments: string[], participants: Participant[], crossReferences: CrossReference[]) {
     this._ac = ac;
     this._name = name;
     this._systematicName = systematicName;

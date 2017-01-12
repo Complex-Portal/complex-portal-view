@@ -15,7 +15,9 @@ export class CrossReference {
   private _linkedFeatures: Features[];
   private _otherFeatures: Features[];
 
-  constructor(database: string, qualifier: string, identifier: string, description: string, searchURL: string, dbMI: string, qualifierMI: string, dbdefinition: string, qualifierDefinition: string, linkedFeatures: Features[], otherFeatures: Features[]) {
+  constructor(database: string, qualifier: string, identifier: string, description: string, searchURL: string,
+              dbMI: string, qualifierMI: string, dbdefinition: string, qualifierDefinition: string,
+              linkedFeatures: Features[], otherFeatures: Features[]) {
     this._database = database;
     this._qualifier = qualifier;
     this._identifier = identifier;

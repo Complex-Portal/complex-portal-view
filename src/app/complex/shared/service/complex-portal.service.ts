@@ -44,7 +44,9 @@ export class ComplexPortalService {
    * @param facets
    */
 
-  findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [], interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize: number = 10, format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
+  findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
+              interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize: number = 10,
+              format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
     let params = new URLSearchParams();
     let filters: string = '';
     params.set('first', ((currentPageIndex * pageSize) - pageSize).toString());
