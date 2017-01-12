@@ -11,12 +11,12 @@ declare var $: any;
 export class AppComponent implements OnInit {
 
 
-  constructor(private notificationService : NotificationService) {
+  constructor(private notificationService: NotificationService) {
 
   }
 
   ngOnInit(): void {
-    if(environment.production === false){
+    if (environment.production === false) {
       this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!')
     }
   }
