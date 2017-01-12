@@ -32,8 +32,8 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
     let end: number;
     this.pagination = [];
     if (this._lastPageIndex < 5) {
-        start = 1;
-        end = this._lastPageIndex;
+      start = 1;
+      end = this._lastPageIndex;
 
     } else {
       if (this._currentPageIndex === 1 || this._currentPageIndex === 2) {
