@@ -33,7 +33,7 @@ export class ComplexResultsComponent implements OnInit {
         this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : [];
         this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        //TODO This is out for now, but CP-84 should fix that!!
+        // TODO This is out for now, but CP-84 should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
