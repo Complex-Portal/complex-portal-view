@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (environment.production === false) {
-      this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!')
+      this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!');
     }
   }
 }
