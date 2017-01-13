@@ -19,6 +19,7 @@ import {ComplexFilterComponent} from './complex/complex-results/complex-filter/c
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
 import {NotificationService} from './shared/notification/service/notification.service';
 import { NotificationComponent } from './shared/notification/notification.component';
+import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NotificationComponent } from './shared/notification/notification.compon
     ComplexFilterComponent,
     ComplexPaginatorComponent,
     NotificationComponent,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,
