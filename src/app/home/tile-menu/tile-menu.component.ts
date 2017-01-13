@@ -1,4 +1,5 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {NotificationService} from "../../shared/notification/service/notification.service";
 
 declare var $: any;
 
@@ -9,11 +10,15 @@ declare var $: any;
 })
 export class TileMenuComponent implements AfterViewInit {
 
-  constructor() {
+  constructor(private notificationService : NotificationService) {
   }
 
   ngAfterViewInit(): void {
       $('app-tile-menu').foundation();
+  }
+
+  featureNotAvailableYet(){
+    this.notificationService.addHintNotification("This feature is not available yet. But it is coming soon! :-)")
   }
 
 }

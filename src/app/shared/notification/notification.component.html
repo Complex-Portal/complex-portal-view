@@ -4,8 +4,17 @@
     <p>{{notification}}</p>
     <!--<p>I'm using the default <code>data-closable</code> parameters, and simply fade out.</p>-->
     <!--<button class="close-button" aria-label="Dismiss alert" type="button" data-close>-->
-      <!--<span aria-hidden="true">&times;</span>-->
+    <!--<span aria-hidden="true">&times;</span>-->
     <!--</button>-->
+  </div>
+</ng-container>
+<ng-container *ngFor="let notification of hintNotifications">
+  <div class="primary callout" data-closable>
+    <h5>Hint!</h5>
+    <p>{{notification}}</p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" (click)="removeNotification(item, successNotifications)" data-close>
+    <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 </ng-container>
 <!--<div class="alert callout" data-closable>-->

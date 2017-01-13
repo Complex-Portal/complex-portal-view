@@ -28,7 +28,7 @@ export class NotificationComponent implements OnInit {
       });
     notificationService.getHintNotifications().subscribe(
       notification => {
-        console.log(notification);
+        this.hintNotifications.push(notification)
       });
     notificationService.getStaticNotifications().subscribe(
       notification => {
