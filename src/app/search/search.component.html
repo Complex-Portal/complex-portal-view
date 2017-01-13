@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="columns medium-12">
+  <div class="columns medium-12 no-pad-left">
     <!-- local-search -->
     <!-- if you do not have a local-search, delete the following form -->
     <form id="local-search" name="local-search" action="[search-action]" method="post">
@@ -15,23 +15,21 @@
         </div>
       </fieldset>
     </form>
-    <div class="columns callout medium-12">
+    <div class="columns callout medium-12 margin-bottom-none">
       <h5><i class="icon icon-generic padding-right-medium" data-icon="?"></i>Examples:</h5>
       <div class="columns medium-6">
         <ul>
-          <li>GO term(s): GO:0016491</li>
-          <li>GO term(s): GO:0016491</li>
-          <li>GO term(s): GO:0016491</li>
+          <li>GO term(s): <a [routerLink]="['/search']" [queryParams]="{query: 'GO:0016491'}" >GO:0016491</a></li>
+          <li>Gene name(s): <a [routerLink]="['/search']" [queryParams]="{query: 'Ndc80'}">Ndc80</a></li>
+          <li>UniProt AC(s): <a [routerLink]="['/search']" [queryParams]="{query: 'Q05471'}">Q05471</a></li>
         </ul>
       </div>
       <div class="columns medium-6">
         <ul>
-          <li>GO term(s): GO:0016491</li>
-          <li>GO term(s): GO:0016491</li>
-          <li>GO term(s): GO:0016491</li>
+          <li>Protein name(s): <a [routerLink]="['/search']" [queryParams]="{query: 'PCNA'}">PCNA</a></li>
+          <li>Complex AC: <a [routerLink]="['/search']" [queryParams]="{query: 'EBI-9008420'}">EBI-9008420</a></li>
         </ul>
       </div>
-      <h6><i class="icon icon-generic padding-right-medium" data-icon="i"></i>You can also search with multiple values!</h6>
     </div>
   </div>
 </div>
