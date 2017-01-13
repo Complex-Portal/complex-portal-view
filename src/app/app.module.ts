@@ -20,6 +20,7 @@ import {ComplexPaginatorComponent} from './complex/complex-results/complex-pagin
 import {NotificationService} from './shared/notification/service/notification.service';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { DownloadComponent } from './download/download.component';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { DownloadComponent } from './download/download.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
-
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],
   providers: [ComplexPortalService, NotificationService],
   bootstrap: [AppComponent]
