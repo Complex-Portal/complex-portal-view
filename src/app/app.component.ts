@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
-import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { Angulartics2 } from 'angulartics2';
 import {environment} from '../environments/environment';
 declare var $: any;
 
@@ -11,8 +11,8 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
-
+  constructor(private notificationService: NotificationService, angulartics2: Angulartics2) {
+    this.angulartics2.eventTrack.next({ action: 'myAction', properties: { category: 'myCategory' }});
   }
 
   ngOnInit(): void {
