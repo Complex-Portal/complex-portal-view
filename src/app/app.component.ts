@@ -11,7 +11,7 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService, angulartics2: Angulartics2) {
+  constructor(private notificationService: NotificationService,private angulartics2: Angulartics2) {
     this.angulartics2.eventTrack.next({ action: 'myAction', properties: { category: 'myCategory' }});
   }
 
