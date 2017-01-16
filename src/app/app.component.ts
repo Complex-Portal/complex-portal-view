@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (environment.production === false) {
       this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!');
     } else {
-      ga('create', 'UA-672146-11', 'none');
+      ga('create', environment.analytics_id, 'none');
     }
   }
 
