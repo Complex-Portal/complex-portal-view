@@ -26,5 +26,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
 
   ngAfterContentInit(): void {
+    $(document).foundation();
+    $(document).foundationExtendEBI();
   }
 }
