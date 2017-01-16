@@ -12,7 +12,6 @@ declare var $: any;
 export class AppComponent implements OnInit {
 
   constructor(private notificationService: NotificationService,private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
-    this.angulartics2.eventTrack.next({ action: 'myAction', properties: { category: 'myCategory' }});
   }
 
   ngOnInit(): void {
