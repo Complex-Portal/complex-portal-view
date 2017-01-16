@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs';
+import {environment} from "../../../../environments/environment";
 
-const baseURL = 'https://wwwdev.ebi.ac.uk/intact/complex-ws';
+const baseURL = environment.complex_ws;
 
 @Injectable()
 export class ComplexPortalService {

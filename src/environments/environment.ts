@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  analytics_id: 'UA-672146-11'
+  analytics_id: 'UA-672146-11',
+
+  complex_ws: 'https://wwwdev.ebi.ac.uk/intact/complex-ws'
 };
