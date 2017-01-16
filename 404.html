@@ -90,10 +90,17 @@
   <script
     src="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/libraries/modernizr/modernizr.custom.49274.js"></script>
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
   </script>
 <link href="styles.e427ef3439dc5a366a23.bundle.css" rel="stylesheet"></head>
 
@@ -107,130 +114,11 @@
   </ul>
 </div>
 
-<div data-sticky-container>
-  <div id="local-masthead" data-sticky data-sticky-on="large" data-top-anchor="180" data-btm-anchor="300000">
-    <header>
 
-      <div id="global-masthead" class="clearfix">
-        <!--This has to be one line and no newline characters-->
-        <a href="//www.ebi.ac.uk/" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
+<!-- Suggested layout containers -->
+<app-root>Loading...</app-root>
+<!-- End suggested layout containers -->
 
-        <nav>
-          <div class="row">
-            <ul id="global-nav" class="menu">
-              <!-- set active class as appropriate -->
-              <li id="home-mobile" class=""><a href="//www.ebi.ac.uk"></a></li>
-              <li id="home" class="active"><a href="//www.ebi.ac.uk"><i class="icon icon-generic" data-icon="H"></i>
-                EMBL-EBI</a></li>
-              <li id="services"><a href="//www.ebi.ac.uk/services"><i class="icon icon-generic" data-icon="("></i>
-                Services</a></li>
-              <li id="research"><a href="//www.ebi.ac.uk/research"><i class="icon icon-generic" data-icon=")"></i>
-                Research</a></li>
-              <li id="training"><a href="//www.ebi.ac.uk/training"><i class="icon icon-generic" data-icon="t"></i>
-                Training</a></li>
-              <li id="about"><a href="//www.ebi.ac.uk/about"><i class="icon icon-generic" data-icon="i"></i> About
-                us</a></li>
-              <li id="search">
-                <a data-toggle="search-global-dropdown"><i class="icon icon-functional" data-icon="1"></i>
-                  <span class="show-for-small-only">Search</span></a>
-                <div id="search-global-dropdown" class="dropdown-pane" data-dropdown data-options="closeOnClick:true;">
-                  <form id="global-search" name="global-search" action="/ebisearch/search.ebi" method="GET">
-                    <fieldset>
-                      <div class="input-group">
-                        <input type="text" name="query" id="global-searchbox" class="input-group-field"
-                               placeholder="Search all of EMBL-EBI">
-                        <div class="input-group-button">
-                          <input type="submit" name="submit" value="Search" class="button">
-                          <input type="hidden" name="db" value="allebi" checked="checked">
-                          <input type="hidden" name="requestFrom" value="global-masthead" checked="checked">
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-                </div>
-              </li>
-              <li class="float-right show-for-medium embl-selector">
-                <button class="button float-right" type="button" data-toggle="embl-dropdown">Hinxton</button>
-                <!-- The dropdown menu will be programatically added by script.js -->
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-      </div>
-
-      <div class="masthead row">
-
-        <!-- local-title -->
-        <div class="columns medium-12" id="local-title">
-          <h1>
-            <a routerLink="/home" title="Back to [service-name] homepage">
-              <img src="assets/images/logo.png" style="width: 43px; height: 63px;">
-              Complex Portal
-            </a>
-            <i style="float: right; color: red" class="icon icon-generic" data-icon="&gt;"></i>
-          </h1>
-
-        </div>
-        <!-- /local-title -->
-
-        <!-- local-nav -->
-        <nav>
-          <ul class="dropdown menu float-left" data-description="navigational">
-            <li class=""><a routerLink="/home">Home</a></li>
-            <li><a data-open="modal-download">Help</a></li>
-            <li><a data-open="modal-download">About</a></li>
-            <li><a data-open="modal-download">Favorites</a></li>
-            <li><a href="https://github.com/tschaka1904/complex-portal-view/issues" target="_blank">Issue</a></li>
-          </ul>
-        </nav>
-        <!-- /local-nav -->
-
-      </div>
-
-    </header>
-
-  </div>
-</div>
-
-
-<div id="content" role="main" class="row">
-
-  <!-- Suggested layout containers -->
-  <section>
-    <app-root>Loading...</app-root>
-    <!--&lt;!&ndash; Your menu structure should make a breadcrumb redundant, but if a breadcrump is needed uncomment the below &ndash;&gt;-->
-    <!--<nav aria-label="You are here:" role="navigation">-->
-      <!--<ul class="breadcrumbs">-->
-        <!--<li><a href="../../">EBI Framework</a></li>-->
-        <!--<li><a href="../">Sample pages</a></li>-->
-        <!--<li>-->
-          <!--<span class="show-for-sr">Current: </span> Blank boilerplate-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</nav>-->
-
-    <!--<div id="main-content-area" class="row">-->
-      <!--<div class="columns">-->
-        <!--<section>-->
-          <!--<h2>[page-title]</h2>-->
-          <!--<p>Your content</p>-->
-        <!--</section>-->
-
-        <!--<section>-->
-          <!--<h3>Level 3 heading</h3>-->
-          <!--<p>More content in a full-width container.</p>-->
-
-          <!--<h4>Level 4 heading</h4>-->
-          <!--<p>More content in a full-width container.</p>-->
-        <!--</section>-->
-      <!--</div>-->
-    <!--</div>-->
-
-  </section>
-  <!-- End suggested layout containers -->
-
-</div>
 <footer>
   <!-- Optional local footer (insert citation / project-specific copyright / etc here -->
   <!--
@@ -280,5 +168,5 @@
 
 <script type="text/JavaScript">$(document).foundation();</script>
 <script type="text/JavaScript">$(document).foundationExtendEBI();</script>
-<script type="text/javascript" src="inline.51e1bfaea37d264e574d.bundle.js"></script><script type="text/javascript" src="main.6e53971ec6a20803da98.bundle.js"></script></body>
+<script type="text/javascript" src="inline.b7409f8b38d793b757bb.bundle.js"></script><script type="text/javascript" src="main.eeb67291e1455726240b.bundle.js"></script></body>
 </html>
