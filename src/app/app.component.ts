@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ngOnInit(): void {
     if (environment.production === false) {
       this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!');
+      ga('create', environment.analytics_id, 'none');
     } else {
       ga('create', environment.analytics_id, 'none');
     }
