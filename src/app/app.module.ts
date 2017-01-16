@@ -44,7 +44,6 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
-    Angulartics2Module.forChild()
   ],
   providers: [ComplexPortalService, NotificationService],
   bootstrap: [AppComponent]
