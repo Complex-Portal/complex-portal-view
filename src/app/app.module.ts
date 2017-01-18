@@ -23,6 +23,10 @@ import { DownloadComponent } from './download/download.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { ComplexDetailsComponent } from './complex/complex-details/complex-details.component';
 import { ComplexHeaderComponent } from './complex/complex-details/complex-header/complex-header.component';
+import { ComplexFunctionComponent } from './complex/complex-details/complex-function/complex-function.component';
+import { ComplexPropertiesComponent } from './complex/complex-details/complex-properties/complex-properties.component';
+import { ComplexExpressionComponent } from './complex/complex-details/complex-expression/complex-expression.component';
+import { ComplexDiseaseComponent } from './complex/complex-details/complex-disease/complex-disease.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { ComplexHeaderComponent } from './complex/complex-details/complex-header
     DownloadComponent,
     ComplexDetailsComponent,
     ComplexHeaderComponent,
+    ComplexFunctionComponent,
+    ComplexPropertiesComponent,
+    ComplexExpressionComponent,
+    ComplexDiseaseComponent,
   ],
   imports: [
     BrowserModule,
