@@ -21,6 +21,8 @@ import {NotificationService} from './shared/notification/service/notification.se
 import { NotificationComponent } from './shared/notification/notification.component';
 import { DownloadComponent } from './download/download.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { ComplexDetailsComponent } from './complex/complex-details/complex-details.component';
+import { ComplexHeaderComponent } from './complex/complex-details/complex-header/complex-header.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
     ComplexPaginatorComponent,
     NotificationComponent,
     DownloadComponent,
+    ComplexDetailsComponent,
+    ComplexHeaderComponent,
   ],
   imports: [
     BrowserModule,
