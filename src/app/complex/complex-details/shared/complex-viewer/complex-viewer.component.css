@@ -1,0 +1,23 @@
+div#networkContainer{
+  /*clear: both;*/
+  /*!*position:absolute;*!*/
+  /*!*bottom:0px;*!*/
+  /*!*top:0px;*!*/
+  height: 300px;
+  /*width: 150%;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*overflow: hidden;*/
+  /*!*margin: 8px;*!*/
+  /*!*margin-right:35%;*!*/
+  /*!*width: 150px;*!*/
+  /*background: #ddd;*/
+  /*!*padding: 10px;*!*/
+  /*display: table-cell;*/
+  /*vertical-align: top;*/
+}
+/*div#networkControls {*/
+/*clear: both;*/
+/*float: left;*/
+/*margin-left: 5%;*/
+/*}*/
