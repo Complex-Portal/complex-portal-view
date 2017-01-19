@@ -28,7 +28,8 @@
     "jquery": "^3.1.1",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.7.2",
+    "complexviewer": "/Users/maximiliankoch/interaction-viewer"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
