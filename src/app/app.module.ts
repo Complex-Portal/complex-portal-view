@@ -18,7 +18,9 @@ import {ComplexListComponent} from './complex/complex-results/complex-list/compl
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
 import {NotificationService} from './shared/notification/service/notification.service';
-import { NotificationComponent } from './shared/notification/notification.component';
+import {DownloadComponent} from './download/download.component';
+import {Angulartics2Module, Angulartics2GoogleAnalytics} from 'angulartics2';
+import {ToastrModule} from 'toastr-ng2';
 import { DownloadComponent } from './download/download.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { ComplexDetailsComponent } from './complex/complex-details/complex-details.component';
@@ -41,7 +43,6 @@ import { ComplexDiseaseComponent } from './complex/complex-details/complex-disea
     ComplexListComponent,
     ComplexFilterComponent,
     ComplexPaginatorComponent,
-    NotificationComponent,
     DownloadComponent,
     ComplexDetailsComponent,
     ComplexHeaderComponent,
@@ -55,7 +56,8 @@ import { ComplexDiseaseComponent } from './complex/complex-details/complex-disea
     FormsModule,
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
-    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
+    ToastrModule.forRoot(),
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
   providers: [ComplexPortalService, NotificationService],
   bootstrap: [AppComponent]

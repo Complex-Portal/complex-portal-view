@@ -12,12 +12,11 @@ declare var ga: any;
 })
 export class AppComponent implements OnInit, AfterContentInit {
 
-  constructor(private notificationService: NotificationService, private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
   }
 
   ngOnInit(): void {
     if (environment.production === false) {
-      this.notificationService.addStaticNotification('Please be aware the you\'re currently looking a DEV version of the Complex Portal!');
       ga('create', environment.analytics_id, 'none');
     } else {
       ga('create', environment.analytics_id, 'none');
