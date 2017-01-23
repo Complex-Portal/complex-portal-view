@@ -18,9 +18,10 @@ import {ComplexListComponent} from './complex/complex-results/complex-list/compl
 import {ComplexFilterComponent} from './complex/complex-results/complex-filter/complex-filter.component';
 import {ComplexPaginatorComponent} from './complex/complex-results/complex-paginator/complex-paginator.component';
 import {NotificationService} from './shared/notification/service/notification.service';
-import { NotificationComponent } from './shared/notification/notification.component';
-import { DownloadComponent } from './download/download.component';
-import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import {DownloadComponent} from './download/download.component';
+import {Angulartics2Module, Angulartics2GoogleAnalytics} from 'angulartics2';
+import {ToastrModule} from 'toastr-ng2';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
     ComplexListComponent,
     ComplexFilterComponent,
     ComplexPaginatorComponent,
-    NotificationComponent,
     DownloadComponent,
   ],
   imports: [
@@ -43,7 +43,8 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
-    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
+    ToastrModule.forRoot(),
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
   providers: [ComplexPortalService, NotificationService],
   bootstrap: [AppComponent]

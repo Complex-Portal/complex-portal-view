@@ -27,6 +27,7 @@
     "ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.0",
     "jquery": "^3.1.1",
     "rxjs": "^5.0.1",
+    "toastr-ng2": "^4.1.1",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
   },
