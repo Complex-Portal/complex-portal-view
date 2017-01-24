@@ -5,9 +5,15 @@
         <div class="columns medium-12">
           <app-complex-header [complexName]="complexDetails.name" [complexSpecies]="complexDetails.species"></app-complex-header>
         </div>
-        <div class="columns medium-3"></div>
+        <div class="columns medium-3">
+        </div>
         <div class="columns medium-9">
-
+          <div class="columns medium-6">
+            <app-complex-viewer [complexAC]="complexDetails.ac" [complexMIJSON]="complexMIJSON"></app-complex-viewer>
+          </div>
+          <div class="columns medium-6">
+            <app-complex-participants [participants]="complexDetails.participants"></app-complex-participants>
+          </div>
         </div>
       </div>
     </div>
