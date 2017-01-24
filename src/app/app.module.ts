@@ -21,14 +21,17 @@ import {NotificationService} from './shared/notification/service/notification.se
 import {DownloadComponent} from './download/download.component';
 import {Angulartics2Module, Angulartics2GoogleAnalytics} from 'angulartics2';
 import {ToastrModule} from 'toastr-ng2';
-import { DownloadComponent } from './download/download.component';
-import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
-import { ComplexDetailsComponent } from './complex/complex-details/complex-details.component';
-import { ComplexHeaderComponent } from './complex/complex-details/complex-header/complex-header.component';
-import { ComplexFunctionComponent } from './complex/complex-details/complex-function/complex-function.component';
-import { ComplexPropertiesComponent } from './complex/complex-details/complex-properties/complex-properties.component';
-import { ComplexExpressionComponent } from './complex/complex-details/complex-expression/complex-expression.component';
-import { ComplexDiseaseComponent } from './complex/complex-details/complex-disease/complex-disease.component';
+import {ComplexDetailsComponent} from './complex/complex-details/complex-details.component';
+import {ComplexHeaderComponent} from './complex/complex-details/complex-header/complex-header.component';
+import {ComplexFunctionComponent} from './complex/complex-details/complex-function/complex-function.component';
+import {ComplexPropertiesComponent} from './complex/complex-details/complex-properties/complex-properties.component';
+import {ComplexExpressionComponent} from './complex/complex-details/complex-expression/complex-expression.component';
+import {ComplexDiseaseComponent} from './complex/complex-details/complex-disease/complex-disease.component';
+import {ComplexViewerComponent} from './complex/complex-details/shared/complex-viewer/complex-viewer.component';
+import { ComplexParticipantsComponent } from './complex/complex-details/complex-participants/complex-participants.component';
+import { ParticipantDescriptionComponent } from './complex/complex-details/complex-participants/participant-description/participant-description.component';
+import { ParticipantLegendComponent } from './complex/complex-details/complex-participants/participant-legend/participant-legend.component';
+import { ParticipantStochiometryComponent } from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,11 @@ import { ComplexDiseaseComponent } from './complex/complex-details/complex-disea
     ComplexPropertiesComponent,
     ComplexExpressionComponent,
     ComplexDiseaseComponent,
+    ComplexViewerComponent,
+    ComplexParticipantsComponent,
+    ParticipantDescriptionComponent,
+    ParticipantLegendComponent,
+    ParticipantStochiometryComponent
   ],
   imports: [
     BrowserModule,
