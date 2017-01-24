@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Participant} from "../../../shared/model/complex-details/participant.model";
 
 @Component({
   selector: 'app-participant-description',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipantDescriptionComponent implements OnInit {
 
+  private _participant: Participant;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  get participant(): Participant {
+    return this._participant;
+  }
+
+  @Input()
+  set participant(value: Participant) {
+    this._participant = value;
+  }
 }

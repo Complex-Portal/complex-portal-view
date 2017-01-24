@@ -6,12 +6,10 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./participant-legend.component.css']
 })
 export class ParticipantLegendComponent implements OnInit {
-
-  @Input() interactorType: string;
+  private _interactorType: string;
   private _legendElementURL: string;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
     switch (this.interactorType.toLocaleLowerCase()) {
@@ -26,6 +24,17 @@ export class ParticipantLegendComponent implements OnInit {
         break;
     }
   }
+
+
+  get interactorType(): string {
+    return this._interactorType;
+  }
+
+  @Input()
+  set interactorType(value: string) {
+    this._interactorType = value;
+  }
+
   get legendElementURL(): string {
     return this._legendElementURL;
   }

@@ -8,10 +8,8 @@ import {Participant} from "../../shared/model/complex-details/participant.model"
 })
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
-  private _complexMIJSON: string;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -23,14 +21,5 @@ export class ComplexParticipantsComponent implements OnInit {
   @Input()
   set participants(value: Participant[]) {
     this._participants = value;
-  }
-
-  get complexMIJSON(): string {
-    return this._complexMIJSON;
-  }
-
-  @Input()
-  set complexMIJSON(value: string) {
-    this._complexMIJSON = value;
   }
 }

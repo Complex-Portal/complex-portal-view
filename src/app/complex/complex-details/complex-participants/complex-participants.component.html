@@ -1,27 +1,20 @@
-<div class="row">
-  <div class="columns medium-12">
-    <div class="columns medium-6">
-      <app-complex-viewer [complexMIJSON]="complexMIJSON"></app-complex-viewer>
-    </div>
-    <div class="columns medium-6">
-      <div class="columns medium-6 no-pad-left">
-        <h4>Participants ({{participants.length}})</h4>
-        <table class="hover" >
-          <tbody style="max-height: 370px; overflow-y: scroll; display: block;">
-          <tr *ngFor="let participant of participants">
-            <td>
-              <app-participant-legend [interactorType]="participant.interactorType"></app-participant-legend>
-            </td>
-            <td>
-              <app-participant-description [participant]="participant"></app-participant-description>
-            </td>
-            <td>
-              <app-participant-stochiometry [stochiometry]="participant.stochiometry"></app-participant-stochiometry>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="row" *ngIf="participants">
+  <div class="columns medium-12 no-pad-left">
+    <h4>Participants ({{participants.length}})</h4>
+    <table class="hover" >
+      <tbody style="max-height: 370px; overflow-y: scroll; display: block;">
+      <tr *ngFor="let participant of participants">
+        <td>
+          <app-participant-legend [interactorType]="participant.interactorType"></app-participant-legend>
+        </td>
+        <td>
+          <app-participant-description [participant]="participant"></app-participant-description>
+        </td>
+        <td>
+          <app-participant-stochiometry [stochiometry]="participant.stochiometry"></app-participant-stochiometry>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
