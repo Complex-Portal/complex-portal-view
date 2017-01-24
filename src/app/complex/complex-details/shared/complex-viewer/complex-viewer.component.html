@@ -1,7 +1,7 @@
 <a class="button">Legend</a>
-<a class="button">Expand All</a>
-<a class="button">Export SVG</a>
-<a class="button">Reset</a>
+<a class="button" (click)="onExpandAll()">Expand All</a>
+<a class="button" (click)="downloadAsSVG()">Export SVG</a>
+<a class="button" (click)="onReset()">Reset</a>
 <select (change)="onChangeAnnotation($event.target.value)">
   <option value="MI features" selected='selected'>MI features</option>
   <option value="UniprotKB">UniprotKB</option>
