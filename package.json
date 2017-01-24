@@ -23,14 +23,16 @@
     "@angular/router": "^3.3.1",
     "EBI-Icon-fonts": "https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1",
     "angulartics2": "^1.6.3",
+    "complexviewer": "/Users/maximiliankoch/interaction-viewer",
     "core-js": "^2.4.1",
     "ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.0",
+    "expose-loader": "^0.7.1",
     "jquery": "^3.1.1",
     "rxjs": "^5.0.1",
+    "svgsaver": "^0.6.2",
     "toastr-ng2": "^4.1.1",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.7.2",
-    "complexviewer": "/Users/maximiliankoch/interaction-viewer"
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
