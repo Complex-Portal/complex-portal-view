@@ -1,5 +1,9 @@
 <div class="row">
-  <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs">
+  <h4>Function</h4>
+  <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
+    <app-function-description [functionDescription]="functionDescription"></app-function-description>
+  </div>
+  <div id="reactomeXRefs" class="columns medium-12 no-pad-left" *ngIf="reactomeXRefs">
     <app-reactome-crossreferences [crossReferences]="reactomeXRefs"></app-reactome-crossreferences>
   </div>
 </div>

@@ -35,6 +35,7 @@ import { ParticipantStochiometryComponent } from './complex/complex-details/comp
 import { ReactomeDiagramComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
 import { ReactomeCrossreferencesComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
 import {ReactomeService} from "./complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service";
+import { FunctionDescriptionComponent } from './complex/complex-details/complex-function/function-description/function-description.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {ReactomeService} from "./complex/complex-details/complex-function/reacto
     ParticipantLegendComponent,
     ParticipantStochiometryComponent,
     ReactomeDiagramComponent,
-    ReactomeCrossreferencesComponent
+    ReactomeCrossreferencesComponent,
+    FunctionDescriptionComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@
             <app-complex-participants [participants]="complexDetails.participants"></app-complex-participants>
           </div>
           <div class="columns medium-12 ">
-            <app-complex-function *ngIf="complexDetails"
+            <app-complex-function *ngIf="complexDetails.functions && complexDetails.crossReferences"
                               [functionDescription]="complexDetails.functions"
                               [crossReferences]="complexDetails.crossReferences"></app-complex-function>
           </div>
