@@ -32,6 +32,9 @@ import { ComplexParticipantsComponent } from './complex/complex-details/complex-
 import { ParticipantDescriptionComponent } from './complex/complex-details/complex-participants/participant-description/participant-description.component';
 import { ParticipantLegendComponent } from './complex/complex-details/complex-participants/participant-legend/participant-legend.component';
 import { ParticipantStochiometryComponent } from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
+import { ReactomeDiagramComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
+import { ReactomeCrossreferencesComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
+import {ReactomeService} from "./complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { ParticipantStochiometryComponent } from './complex/complex-details/comp
     ComplexParticipantsComponent,
     ParticipantDescriptionComponent,
     ParticipantLegendComponent,
-    ParticipantStochiometryComponent
+    ParticipantStochiometryComponent,
+    ReactomeDiagramComponent,
+    ReactomeCrossreferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,7 @@ import { ParticipantStochiometryComponent } from './complex/complex-details/comp
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
-  providers: [ComplexPortalService, NotificationService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,3 +1,5 @@
-<p>
-  complex-function works!
-</p>
+<div class="row">
+  <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs">
+    <app-reactome-crossreferences [crossReferences]="reactomeXRefs"></app-reactome-crossreferences>
+  </div>
+</div>
