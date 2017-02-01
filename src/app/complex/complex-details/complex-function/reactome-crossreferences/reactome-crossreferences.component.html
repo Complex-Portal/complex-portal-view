@@ -1,33 +1,35 @@
-<h5>Reactome Cross References</h5>
-<div *ngIf="isDataLoaded">
-  <table class="hover">
-    <thead>
-    <th>Complex Identifier</th>
-    <th>Complex Name</th>
-    <th>Pathway Identifier</th>
-    </thead>
-    <tbody>
-    <tr *ngFor="let reactomeComplex of getSortedKeys(reactomeComplexes)">
-      <td><a (click)="selectComplexWithFirstPathway(reactomeComplex)">{{reactomeComplex}}</a></td>
-      <td>{{reactomeComplexes[reactomeComplex].name}}</td>
-      <td>
-        <ul>
-          <li *ngFor="let reactomePathway of reactomeComplexes[reactomeComplex].pathways">
-            <a (click)="selectComplexByPathway(reactomeComplex, reactomePathway)">{{reactomePathway}}</a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="columns medium-12 callout" *ngIf="!selectedComplex && !selectedPathway">
-    <h5>Please select a complex or pathway identifier from the Reactome rross references table, to be able to see the
-      diagram!</h5>
-  </div>
-  <div class="columns medium-12" *ngIf="selectedComplex && selectedPathway">
-    <app-reactome-diagram [reactomeComplexe]="reactomeComplexes" [reactomePathways]="reactomePathways"
-                          [selectedComplex]="selectedComplex"
-                          [selectedPathway]="selectedPathway"></app-reactome-diagram>
+<div class="row" *ngIf="isDataLoaded">
+  <div class="cloumns medium-12">
+    <h5>Reactome Cross References</h5>
+    <table class="hover">
+      <thead>
+      <th>Complex Identifier</th>
+      <th>Complex Name</th>
+      <th>Pathway Identifier</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reactomeComplex of getSortedKeys(reactomeComplexes)">
+        <td><a (click)="selectComplexWithFirstPathway(reactomeComplex)">{{reactomeComplex}}</a></td>
+        <td>{{reactomeComplexes[reactomeComplex].name}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let reactomePathway of reactomeComplexes[reactomeComplex].pathways">
+              <a (click)="selectComplexByPathway(reactomeComplex, reactomePathway)">{{reactomePathway}}</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="columns medium-12 callout" *ngIf="!selectedComplex && !selectedPathway">
+      <h5>Please select a complex or pathway identifier from the Reactome rross references table, to be able to see the
+        diagram!</h5>
+    </div>
+    <div class="columns medium-12" *ngIf="selectedComplex && selectedPathway">
+      <app-reactome-diagram [reactomeComplexe]="reactomeComplexes" [reactomePathways]="reactomePathways"
+                            [selectedComplex]="selectedComplex"
+                            [selectedPathway]="selectedPathway"></app-reactome-diagram>
+    </div>
   </div>
 </div>
 

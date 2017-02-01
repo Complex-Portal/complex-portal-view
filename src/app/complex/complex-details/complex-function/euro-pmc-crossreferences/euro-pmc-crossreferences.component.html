@@ -1,0 +1,19 @@
+<div class="row" *ngIf="isDataLoaded">
+  <div class="columns medium-12">
+    <h5>PubMed Cross References</h5>
+    <table class="hover">
+      <thead>
+      <th>Identifier</th>
+      <th>Title</th>
+      <th>Author(s)</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let publication of publications">
+        <td><a href="{{publication.searchURL}}" target="_blank">{{publication.id}} <i class="icon icon-generic small" data-icon="x"></i></a></td>
+        <td>{{publication.title}}</td>
+        <td>{{publication.authors}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

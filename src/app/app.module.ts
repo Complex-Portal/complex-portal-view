@@ -28,16 +28,18 @@ import {ComplexPropertiesComponent} from './complex/complex-details/complex-prop
 import {ComplexExpressionComponent} from './complex/complex-details/complex-expression/complex-expression.component';
 import {ComplexDiseaseComponent} from './complex/complex-details/complex-disease/complex-disease.component';
 import {ComplexViewerComponent} from './complex/complex-details/shared/complex-viewer/complex-viewer.component';
-import { ComplexParticipantsComponent } from './complex/complex-details/complex-participants/complex-participants.component';
-import { ParticipantDescriptionComponent } from './complex/complex-details/complex-participants/participant-description/participant-description.component';
-import { ParticipantLegendComponent } from './complex/complex-details/complex-participants/participant-legend/participant-legend.component';
-import { ParticipantStochiometryComponent } from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
-import { ReactomeDiagramComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
-import { ReactomeCrossreferencesComponent } from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
+import {ComplexParticipantsComponent} from './complex/complex-details/complex-participants/complex-participants.component';
+import {ParticipantDescriptionComponent} from './complex/complex-details/complex-participants/participant-description/participant-description.component';
+import {ParticipantLegendComponent} from './complex/complex-details/complex-participants/participant-legend/participant-legend.component';
+import {ParticipantStochiometryComponent} from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
+import {ReactomeDiagramComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
+import {ReactomeCrossreferencesComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
 import {ReactomeService} from "./complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service";
-import { FunctionDescriptionComponent } from './complex/complex-details/complex-function/function-description/function-description.component';
-import { GoCrossreferencesComponent } from './complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component';
-import { IntenzCrossreferencesComponent } from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
+import {FunctionDescriptionComponent} from './complex/complex-details/complex-function/function-description/function-description.component';
+import {GoCrossreferencesComponent} from './complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component';
+import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
+import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
+import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service";
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { IntenzCrossreferencesComponent } from './complex/complex-details/comple
     ReactomeCrossreferencesComponent,
     FunctionDescriptionComponent,
     GoCrossreferencesComponent,
-    IntenzCrossreferencesComponent
+    IntenzCrossreferencesComponent,
+    EuroPmcCrossreferencesComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,7 @@ import { IntenzCrossreferencesComponent } from './complex/complex-details/comple
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
