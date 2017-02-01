@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="columns medium-12">
+    <h5>GO Cross References</h5>
+    <table class="hover">
+      <thead>
+      <th>Type</th>
+      <th>Identifier</th>
+      <th>Description</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let crossReference of crossReferences">
+        <td>{{crossReference.qualifier}}</td>
+        <td>
+          <a href="http://www.ebi.ac.uk/QuickGO-Beta/term/{{crossReference.identifier}}" target="_blank">{{crossReference.identifier}}
+            <i class="icon icon-generic small" data-icon="x"></i></a>
+        </td>
+        <td>{{crossReference.description}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -7,19 +7,24 @@
       <div class="columns medium-12">
         <h5>Selected Complex:</h5>
         <p>
-          <b>Stable Identifier: </b>{{reactomeComplexe[selectedComplex].id}} <br>
+          <b>Stable Identifier: </b><a
+          href="http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}" target="_blank">{{reactomeComplexe[selectedComplex].id}}
+          <i class="icon icon-generic small" data-icon="x"></i></a><br>
           <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}
         </p>
       </div>
       <div class="columns medium-12">
         <h5>Selected Pathway:</h5>
         <p>
-          <b>Stable Identifier: </b>{{reactomePathways[selectedPathway].id}} <br>
+          <b>Stable Identifier: </b><a
+          href="http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}" target="_blank">{{reactomePathways[selectedPathway].id}}
+          <i class="icon icon-generic small" data-icon="x"></i></a><br>
           <b>Name: </b>{{reactomePathways[selectedPathway].name}}
         </p>
       </div>
       <div class="columns medium-12">
-        <a href="{{getReactomeURL()}}" target="_blank">Open in Reactome</a>
+        <a href="{{getReactomeURL()}}" target="_blank">Open in Reactome <i class="icon icon-generic small"
+                                                                           data-icon="x"></i></a>
       </div>
     </div>
   </div>
