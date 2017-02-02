@@ -36,12 +36,12 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
     }
   }
 
-  private publicationFactory(crossReferences: CrossReference, euroPmcResponse: any): void {
+  private publicationFactory(crossReference: CrossReference, euroPmcResponse: any): void {
     this.publications.push({
-      id: crossReferences.identifier,
+      id: crossReference.identifier,
       title: euroPmcResponse.resultList.result[0].title,
       authors: euroPmcResponse.resultList.result[0].authorString,
-      url: crossReferences.searchURL
+      url: crossReference.searchURL
     });
   }
 
