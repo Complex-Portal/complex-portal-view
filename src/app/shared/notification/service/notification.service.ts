@@ -32,7 +32,7 @@ export class NotificationService {
   }
 
   public addErrorNotification(errorNotification: string): void {
-    // this.errorNotifications.next(errorNotification);
+    this.toastrService.error('Something went wrong :(', errorNotification);
   }
 
   public addAnnouncementNotification(announcementNotification: string): void {
