@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 
 import * as LiteMol from 'litemol'
 
@@ -7,10 +7,19 @@ import * as LiteMol from 'litemol'
   templateUrl: './litmol-viewer.component.html',
   styleUrls: ['./litmol-viewer.component.css']
 })
-export class LitmolViewerComponent implements OnInit {
+export class LitmolViewerComponent implements OnInit, OnChanges {
   private _plugin : any;
+  private _selectedXRef: string;
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this._plugin) {
+      if (changes['selectedXRef']) {
+        this.loadMolecule();
+      }
+    }
+  }
 
   ngOnInit() {
     this._plugin = LiteMol.default.Plugin.create({
@@ -30,9 +39,10 @@ export class LitmolViewerComponent implements OnInit {
   }
 
   loadMolecule(): void {
+    this.plugin.clear();
     this._plugin.loadMolecule({
-      id: '1cbs',
-      url: 'https://www.ebi.ac.uk/pdbe/static/entry/' + '1cbs' + '_updated.cif',
+      id: this._selectedXRef,
+      url: 'https://www.ebi.ac.uk/pdbe/static/entry/' + this._selectedXRef + '_updated.cif',
       format: 'cif' // default
     });
   }
@@ -43,5 +53,14 @@ export class LitmolViewerComponent implements OnInit {
 
   set plugin(value: any) {
     this._plugin = value;
+  }
+
+  get selectedXRef(): string {
+    return this._selectedXRef;
+  }
+
+  @Input()
+  set selectedXRef(value: string) {
+    this._selectedXRef = value;
   }
 }

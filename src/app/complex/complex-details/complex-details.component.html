@@ -17,11 +17,11 @@
           </div>
           <div class="columns medium-12 ">
             <app-complex-function *ngIf="complexDetails.functions && complexDetails.crossReferences"
-                              [functionDescription]="complexDetails.functions"
-                              [crossReferences]="complexDetails.crossReferences"></app-complex-function>
+                                  [functionDescription]="complexDetails.functions"
+                                  [crossReferences]="complexDetails.crossReferences"></app-complex-function>
           </div>
-          <div class="columns medium-12 ">
-            <app-complex-properties></app-complex-properties>
+          <div class="columns medium-12" *ngIf="complexDetails.crossReferences">
+            <app-complex-properties [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
           </div>
         </div>
       </div>

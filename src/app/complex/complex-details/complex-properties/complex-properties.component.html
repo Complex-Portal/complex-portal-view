@@ -1,1 +1,6 @@
-<app-pdb-crossreferences></app-pdb-crossreferences>
+<div class="row">
+  <div id="pdbXRefs" class="columns medium-12" *ngIf="pdbXRefs">
+    <app-pdb-crossreferences [crossReferences]="pdbXRefs"></app-pdb-crossreferences>
+  </div>
+</div>
+

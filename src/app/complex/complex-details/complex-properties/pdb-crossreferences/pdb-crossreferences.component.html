@@ -1,10 +1,21 @@
 <div class="row">
   <div class="columns medium-12 no-pad-left">
-    <div class="columns medium-6 no-pad-left">
-      <app-litmol-viewer></app-litmol-viewer>
+    <div class="columns medium-8">
+      <app-litmol-viewer *ngIf="selectedXRef" [selectedXRef]="selectedXRef"></app-litmol-viewer>
     </div>
-    <div class="columns medium-6">
-
+    <div class="columns medium-4">
+      <table class="hover">
+        <thead>
+        <th>Identifier</th>
+        </thead>
+        <tbody style="height: 400px; overflow-y: scroll; display: block;">
+        <tr *ngFor="let crossReference of crossReferences">
+          <td>
+            <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
