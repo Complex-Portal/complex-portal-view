@@ -40,6 +40,8 @@ import {GoCrossreferencesComponent} from './complex/complex-details/complex-func
 import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
 import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
 import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service";
+import { PdbCrossreferencesComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
+import { LitmolViewerComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pm
     GoCrossreferencesComponent,
     IntenzCrossreferencesComponent,
     EuroPmcCrossreferencesComponent,
+    PdbCrossreferencesComponent,
+    LitmolViewerComponent,
   ],
   imports: [
     BrowserModule,

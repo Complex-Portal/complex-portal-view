@@ -19,8 +19,7 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../node_modules/toastr-ng2/toastr.css"
-      ],
+        "../node_modules/toastr-ng2/toastr.css"],
       "scripts": [],
       "environments": {
         "source": "environments/environment.ts",
