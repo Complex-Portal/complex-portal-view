@@ -168,5 +168,10 @@
 
 <script type="text/JavaScript">$(document).foundation();</script>
 <script type="text/JavaScript">$(document).foundationExtendEBI();</script>
+<script>
+  function onReactomeDiagramReady() {
+    window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
+  }
+</script>
 <script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>
