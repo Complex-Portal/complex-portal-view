@@ -9,12 +9,16 @@ import {CrossReference} from "../../../shared/model/complex-details/cross-refere
 export class PdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _selectedXRef: string;
+  private _isDataLoaded: boolean = false;
 
   constructor() {
   }
 
   ngOnInit() {
     this._selectedXRef = this._crossReferences[0].identifier;
+    if(this._selectedXRef){
+      this._isDataLoaded = true;
+    }
   }
 
   get crossReferences(): CrossReference[] {
@@ -36,5 +40,13 @@ export class PdbCrossreferencesComponent implements OnInit {
 
   set selectedXRef(value: string) {
     this._selectedXRef = value;
+  }
+
+  get isDataLoaded(): boolean {
+    return this._isDataLoaded;
+  }
+
+  set isDataLoaded(value: boolean) {
+    this._isDataLoaded = value;
   }
 }
