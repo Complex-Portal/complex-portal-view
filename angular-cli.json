@@ -20,7 +20,14 @@
       "styles": [
         "styles.css",
         "../node_modules/toastr-ng2/toastr.css"],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery",
+        "../node_modules/ebi_framework/js/cookiebanner",
+        "../node_modules/ebi_framework/js/foot",
+        "../node_modules/ebi_framework/js/script",
+        "../node_modules/ebi_framework/libraries/foundation-6/dist/foundation",
+        "../node_modules/ebi_framework/js/foundationExtendEBI"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
