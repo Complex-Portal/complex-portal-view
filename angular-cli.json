@@ -13,13 +13,15 @@
       ],
       "index": "index.html",
       "main": "main.ts",
+      "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
       "styles": [
         "styles.css",
-        "../node_modules/toastr-ng2/toastr.css"],
+        "../node_modules/toastr-ng2/toastr.css"
+      ],
       "scripts": [
         "../node_modules/jquery/dist/jquery",
         "../node_modules/ebi_framework/js/cookiebanner",
@@ -40,6 +42,16 @@
       "config": "./protractor.conf.js"
     }
   },
+  "lint": [
+    {
+      "files": "src/**/*.ts",
+      "project": "src/tsconfig.json"
+    },
+    {
+      "files": "e2e/**/*.ts",
+      "project": "e2e/tsconfig.json"
+    }
+  ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"
