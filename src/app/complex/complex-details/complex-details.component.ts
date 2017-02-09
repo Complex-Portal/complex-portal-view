@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ComplexDetails} from "../shared/model/complex-details/complex-details.model";
 import {ActivatedRoute} from "@angular/router";
 import {ComplexPortalService} from "../shared/service/complex-portal.service";
+declare let expressionAtlasHeatmapHighcharts : any;
 
 @Component({
   selector: 'app-complex-details',
@@ -28,6 +29,11 @@ export class ComplexDetailsComponent implements OnInit {
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,);
       });
+    expressionAtlasHeatmapHighcharts.render({
+      params: "geneQuery=ASPM&species=mus%20musculus",
+      isMultiExperiment: true,
+      target: "heatmapContainer"
+    });
   }
 
   get complexDetails(): ComplexDetails {
