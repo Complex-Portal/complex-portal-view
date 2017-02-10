@@ -42,6 +42,7 @@ import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex
 import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service";
 import { PdbCrossreferencesComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
 import { LitmolViewerComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
+import { ExamplesLargeComponent } from './search/examples/examples-large/examples-large.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { LitmolViewerComponent } from './complex/complex-details/complex-propert
     EuroPmcCrossreferencesComponent,
     PdbCrossreferencesComponent,
     LitmolViewerComponent,
+    ExamplesLargeComponent,
   ],
   imports: [
     BrowserModule,
