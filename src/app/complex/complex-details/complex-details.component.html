@@ -23,9 +23,12 @@
           <div class="columns medium-12" *ngIf="complexDetails.crossReferences">
             <app-complex-properties [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
           </div>
+          <div class="columns medium-12" *ngIf="gxa && complexDetails">
+            <app-complex-disease [gxa]="gxa" [participants]="complexDetails.participants" [complexSpecies]="complexDetails.species"></app-complex-disease>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
-  <div id="heatmapContainer"></div>
 </section>

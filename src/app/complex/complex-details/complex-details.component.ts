@@ -14,9 +14,11 @@ export class ComplexDetailsComponent implements OnInit {
   private _complexDetails: ComplexDetails;
   private _complexMIJSON: any;
   private _query: string;
+  private _gxa;
 
   constructor(private route: ActivatedRoute,
               private complexPortalService: ComplexPortalService) {
+    this._gxa = expressionAtlasHeatmapHighcharts;
   }
 
   ngOnInit(): void {
@@ -29,11 +31,6 @@ export class ComplexDetailsComponent implements OnInit {
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,);
       });
-    expressionAtlasHeatmapHighcharts.render({
-      params: "geneQuery=ASPM&species=mus%20musculus",
-      isMultiExperiment: true,
-      target: "heatmapContainer"
-    });
   }
 
   get complexDetails(): ComplexDetails {
@@ -58,5 +55,13 @@ export class ComplexDetailsComponent implements OnInit {
 
   set query(value: string) {
     this._query = value;
+  }
+
+  get gxa() {
+    return this._gxa;
+  }
+
+  set gxa(value) {
+    this._gxa = value;
   }
 }

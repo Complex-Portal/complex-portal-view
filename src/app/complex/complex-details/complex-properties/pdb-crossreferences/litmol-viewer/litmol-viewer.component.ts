@@ -42,7 +42,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
     this.plugin.clear();
     this._plugin.loadMolecule({
       id: this._selectedXRef,
-      url: 'https://www.ebi.ac.uk/pdbe/static/entry/' + this._selectedXRef + '_updated.cif',
+      url: 'https://www.ebi.ac.uk/pdbe/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
       format: 'cif' // default
     });
   }
