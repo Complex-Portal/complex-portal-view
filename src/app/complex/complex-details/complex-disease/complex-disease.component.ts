@@ -1,10 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Participant} from "../../shared/model/complex-details/participant.model";
+import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
 
-interface ParamsQuery {
-  value: string,
-  category: string
-}
+
 
 @Component({
   selector: 'app-complex-disease',
@@ -13,75 +10,68 @@ interface ParamsQuery {
 })
 
 export class ComplexDiseaseComponent implements OnInit {
-  private _gxa;
-  private _participants: Participant[];
-  private _complexSpecies: string;
-  private _paramsQueries: ParamsQuery[] = [];
-  private _isLoaded: boolean = true;
+  private _diseaseDescriptions: string[];
+  private _crossReferences: CrossReference[];
+  private _efoXRefs: CrossReference[];
+  private _chemblXRefs: CrossReference[];
 
   constructor() {
   }
 
   ngOnInit() {
-    for (let participant: Participant in this._participants) {
-      if (this._participants[participant].interactorType === 'protein') {
-        this._paramsQueries.push({
-          value: this._participants[participant].identifier,
-          category: 'uniprot'
-        });
+    console.log(this._crossReferences);
+    for (let pos in this._crossReferences) {
+      let crossRef = this._crossReferences[pos];
+      let database = this._crossReferences[pos].database;
+      console.log(database);
+
+      if (database === 'efo') {
+        if (this._efoXRefs === undefined) {
+          this._efoXRefs = [];
+        }
+        this._efoXRefs.push(crossRef);
+      }
+      if (database === 'ChEMBL target') {
+        if (this._chemblXRefs === undefined) {
+          this._chemblXRefs = [];
+        }
+        this._chemblXRefs.push(crossRef);
       }
     }
-    let context = this;
-    this.gxa.render({
-      params: 'geneQuery=' + JSON.stringify(this._paramsQueries) + '&species=' + this._complexSpecies.split(";")[0].toLowerCase(),
-      isMultiExperiment: false,
-      target: 'heatmapContainer',
-      fail: function () {
-        context._isLoaded = false;
-      }
-    });
   }
 
-  get gxa() {
-    return this._gxa;
+  get diseaseDescriptions(): string[] {
+    return this._diseaseDescriptions;
   }
 
   @Input()
-  set gxa(value) {
-    this._gxa = value;
+  set diseaseDescriptions(value: string[]) {
+    this._diseaseDescriptions = value;
   }
 
-  get participants(): Participant[] {
-    return this._participants;
-  }
 
-  @Input()
-  set participants(value: Participant[]) {
-    this._participants = value;
-  }
-
-  get complexSpecies(): string {
-    return this._complexSpecies;
+  get crossReferences(): CrossReference[] {
+    return this._crossReferences;
   }
 
   @Input()
-  set complexSpecies(value: string) {
-    this._complexSpecies = value;
+  set crossReferences(value: CrossReference[]) {
+    this._crossReferences = value;
   }
 
-  get paramsQueries(): ParamsQuery[] {
-    return this._paramsQueries;
+  get efoXRefs(): CrossReference[] {
+    return this._efoXRefs;
   }
 
-  set paramsQueries(value: Array) {
-    this._paramsQueries = value;
+  set efoXRefs(value: CrossReference[]) {
+    this._efoXRefs = value;
   }
 
-  get isLoaded(): boolean {
-    return this._isLoaded;
+  get chemblXRefs(): CrossReference[] {
+    return this._chemblXRefs;
   }
 
-  set isLoaded(value: boolean) {
-    this._isLoaded = value;
+  set chemblXRefs(value: CrossReference[]) {
+    this._chemblXRefs = value;
   }
 }

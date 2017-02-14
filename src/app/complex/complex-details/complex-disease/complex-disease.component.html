@@ -1,1 +1,14 @@
-<div [hidden]="!isLoaded" id="heatmapContainer"></div>
+<div class="row">
+  <div class="columns medium-12 no-pad-left">
+    <h4>Diseases and Pathologyls</h4>
+    <div id="description" class="columns medium-12 no-pad-left" *ngIf="diseaseDescriptions">
+      <app-disease-description [diseaseDescriptions]="diseaseDescriptions"></app-disease-description>
+    </div>
+    <div id="efoXRefs" class="columns medium-6 no-pad-left" *ngIf="efoXRefs">
+      <app-efo-crossreferences [crossReferences]="efoXRefs"></app-efo-crossreferences>
+    </div>
+    <div id="chemblXRefs" class="columns medium-6 no-pad-left" *ngIf="chemblXRefs">
+      <app-chembl-crossreference [crossReferences]="chemblXRefs"></app-chembl-crossreference>
+    </div>
+  </div>
+</div>
