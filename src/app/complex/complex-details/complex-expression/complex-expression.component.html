@@ -1,3 +1,11 @@
-<p>
-  complex-expression works!
-</p>
+<div class="row">
+  <h4>Expression</h4>
+  <div class="columns medium-12">
+    <app-gxa-heatmap *ngIf="gxa && gxaParamsQueries" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
+                     [complexSpecies]="complexSpecies"></app-gxa-heatmap>
+  </div>
+  <div class="columns medium-12">
+    <app-go-celluar-crossreference *ngIf="goCellularXRefs"
+                                   [crossReferences]="goCellularXRefs"></app-go-celluar-crossreference>
+  </div>
+</div>
