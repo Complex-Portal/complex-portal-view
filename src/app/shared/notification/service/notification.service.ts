@@ -20,7 +20,7 @@ export class NotificationService {
   }
 
   public addHintNotification(hintNotification: string): void {
-    this.toastrService.warning('Hello world!', hintNotification);
+    this.toastrService.warning('Just to let you know!', hintNotification);
   }
 
   public addStaticNotification(staticNotification: string): void {
