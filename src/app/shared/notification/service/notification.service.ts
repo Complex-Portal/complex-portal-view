@@ -7,26 +7,6 @@ export class NotificationService {
   constructor(private toastrService: ToastrService) {
   }
 
-  // getSuccessNotifications(): Observable<string> {
-  //   return this.successNotifications.asObservable();
-  // }
-  //
-  // getErrorNotification(): Observable<string> {
-  //   return this.errorNotifications.asObservable();
-  // }
-  //
-  // getAnnouncementNotifications(): Observable<string> {
-  //   return this.announcementNotifications.asObservable();
-  // }
-  //
-  // getHintNotifications(): Observable<string> {
-  //   return this.hintNotifications.asObservable();
-  // }
-  //
-  // getStaticNotifications(): Observable<string> {
-  //   return this.staticNotifications.asObservable();
-  // }
-
   public addSuccessNotification(successNotification: string): void {
     // this.successNotifications.next(successNotification);
   }

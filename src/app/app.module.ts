@@ -40,9 +40,17 @@ import {GoCrossreferencesComponent} from './complex/complex-details/complex-func
 import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
 import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
 import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service";
-import { PdbCrossreferencesComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
-import { LitmolViewerComponent } from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
-import { ExamplesLargeComponent } from './search/examples/examples-large/examples-large.component';
+import {PdbCrossreferencesComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
+import {LitmolViewerComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
+import {ExamplesLargeComponent} from './search/examples/examples-large/examples-large.component';
+import {PropertiesDescriptionComponent} from './complex/complex-details/complex-properties/properties-description/properties-description.component';
+import {GxaHeatmapComponent} from './complex/complex-details/complex-expression/gxa-heatmap/gxa-heatmap.component';
+import {GoCelluarCrossreferenceComponent} from './complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component';
+import {DiseaseDescriptionComponent} from './complex/complex-details/complex-disease/disease-description/disease-description.component';
+import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component';
+import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
+import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
+import {SystematicNameComponent} from "./complex/complex-details/complex-function/systematic-name/systematic-name.component";
 
 @NgModule({
   declarations: [
@@ -78,6 +86,14 @@ import { ExamplesLargeComponent } from './search/examples/examples-large/example
     PdbCrossreferencesComponent,
     LitmolViewerComponent,
     ExamplesLargeComponent,
+    PropertiesDescriptionComponent,
+    GxaHeatmapComponent,
+    GoCelluarCrossreferenceComponent,
+    DiseaseDescriptionComponent,
+    ChemblCrossreferenceComponent,
+    EfoCrossreferencesComponent,
+    SystematicNameComponent,
+    SynonymsComponent,
   ],
   imports: [
     BrowserModule,
