@@ -38,7 +38,10 @@ export class ComplexResultsComponent implements OnInit {
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
-          this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+          console.log(this.complexSearch.totalNumberOfResults);
+          if(this.complexSearch.totalNumberOfResults !== 0){
+            this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+          }
         });
       });
   }
