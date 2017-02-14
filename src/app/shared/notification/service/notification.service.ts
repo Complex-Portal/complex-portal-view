@@ -15,8 +15,8 @@ export class NotificationService {
     this.toastrService.error('Something went wrong :(', errorNotification);
   }
 
-  public addAnnouncementNotification(announcementNotification: string): void {
-    // this.announcementNotifications.next(announcementNotification);
+  public addAnnouncementNotification(announcementNotification: string, options): void {
+    this.toastrService.info('Just to let you know!', announcementNotification, options);
   }
 
   public addHintNotification(hintNotification: string): void {

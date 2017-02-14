@@ -2,6 +2,7 @@ import {Component, OnInit, AfterContentInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
+import {ToastrConfig} from "toastr-ng2";
 declare var $: any;
 declare var ga: any;
 
@@ -12,8 +13,11 @@ declare var ga: any;
 })
 export class AppComponent implements OnInit, AfterContentInit {
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
-
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
+    toastrConfig.closeButton = true; // show close button
+    toastrConfig.timeOut = 0; // time to live
+    this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the \'Issues\'-button in the top bar.', this.toastrConfig);
+    this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
   }
 
   ngOnInit(): void {
