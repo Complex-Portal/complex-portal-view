@@ -7,6 +7,7 @@ import {CrossReference} from "../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-properties.component.css']
 })
 export class ComplexPropertiesComponent implements OnInit {
+  private _propertiesDescription : string;
   private _crossReferences: CrossReference[];
   private _pdbXRefs: CrossReference[];
 
@@ -25,6 +26,15 @@ export class ComplexPropertiesComponent implements OnInit {
         this._pdbXRefs.push(crossRef);
       }
     }
+  }
+
+  get propertiesDescription(): string {
+    return this._propertiesDescription;
+  }
+
+  @Input()
+  set propertiesDescription(value: string) {
+    this._propertiesDescription = value;
   }
 
   get crossReferences(): CrossReference[] {
