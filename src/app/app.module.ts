@@ -51,6 +51,7 @@ import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-d
 import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
 import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
 import {SystematicNameComponent} from "./complex/complex-details/complex-function/systematic-name/systematic-name.component";
+import {OlsService} from "./shared/service/ols/ols.service";
 
 @NgModule({
   declarations: [
@@ -103,7 +104,7 @@ import {SystematicNameComponent} from "./complex/complex-details/complex-functio
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

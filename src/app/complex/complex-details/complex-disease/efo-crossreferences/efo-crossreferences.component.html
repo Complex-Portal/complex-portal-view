@@ -4,12 +4,16 @@
     <table class="hover">
       <thead>
       <th>Identifier</th>
+      <th>Name</th>
       </thead>
       <tbody>
       <tr *ngFor="let crossReference of crossReferences">
         <td>
           <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}}
             <i class="icon icon-generic small" data-icon="x"></i></a>
+        </td>
+        <td>
+          {{crossReference.description}}
         </td>
       </tr>
       </tbody>
