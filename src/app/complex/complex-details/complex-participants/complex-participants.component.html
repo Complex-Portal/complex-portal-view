@@ -1,8 +1,14 @@
 <div class="row" *ngIf="participants">
   <div class="columns medium-12 no-pad-right">
     <h4>Participants ({{participants.length}})</h4>
-    <table class="hover" >
-      <tbody style="max-height: 370px; overflow-y: scroll; display: block;">
+
+    <table class="hover" style="max-height: 370px; overflow-y: scroll; display: block;">
+      <thead>
+      <th>Legend</th>
+      <th>Description</th>
+      <th>Stoichiometry</th>
+      </thead>
+      <tbody>
       <tr *ngFor="let participant of participants">
         <td>
           <app-participant-legend [interactorType]="participant.interactorType"></app-participant-legend>
