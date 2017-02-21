@@ -1,13 +1,16 @@
 <div class="row padding-top-small">
   <div class="columns medium-12 no-pad-left">
-    <div class="columns small-4 medium-4 no-pad-left">
+    <div class="columns small-3 medium-3 no-pad-left">
       <a class="button expanded" (click)="onExpandAll()">Expand All</a>
     </div>
-    <div class="columns small-4 medium-4 no-pad-left">
+    <div class="columns small-3 medium-3 no-pad-left">
       <a class="button expanded" (click)="downloadAsSVG()">Export SVG</a>
     </div>
-    <div class="columns small-4 medium-4 no-pad-left no-pad-right">
+    <div class="columns small-3 medium-3 no-pad-left">
       <a class="button expanded" (click)="onReset()">Reset</a>
+    </div>
+    <div class="columns small-3 medium-3 no-pad-left no-pad-right">
+      <a class="button expanded">Enlarge</a>
     </div>
     <select (change)="onChangeAnnotation($event.target.value)">
       <option value="MI features" selected='selected'>MI features</option>
