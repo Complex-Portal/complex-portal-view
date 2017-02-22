@@ -15,13 +15,15 @@ export class ComplexFunctionComponent implements OnInit {
   private _pubmedXRefs: CrossReference[];
   private _synonyms: string[];
   private _systematicName: string[];
+  private _ligands: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    for (let pos in this.crossReferences) {
-      let crossRef = this.crossReferences[pos];
-      let database = this.crossReferences[pos].database;
+    for (let i = 0; i < this.crossReferences.length; i++) {
+      let crossRef = this.crossReferences[i];
+      let database = this.crossReferences[i].database;
 
       if (database === 'gene ontology') {
         if (this.goXRefs === undefined) {
@@ -117,5 +119,14 @@ export class ComplexFunctionComponent implements OnInit {
   @Input()
   set systematicName(value: string[]) {
     this._systematicName = value;
+  }
+
+  get ligands(): string[] {
+    return this._ligands;
+  }
+
+  @Input()
+  set ligands(value: string[]) {
+    this._ligands = value;
   }
 }
