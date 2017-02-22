@@ -72,7 +72,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   };
 
   public getReactomeURL(): string {
-    return 'http://www.reactome.org/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
+    return '//reactomedev.oicr.on.ca/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
   }
 
   get reactomePathways(): any {
