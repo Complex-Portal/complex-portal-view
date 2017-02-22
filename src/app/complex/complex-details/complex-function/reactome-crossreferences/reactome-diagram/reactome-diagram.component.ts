@@ -1,7 +1,7 @@
 import {Component, OnInit, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ReactomeService} from "../service/reactome.service";
 
-const url = 'http://www.reactome.org/DiagramJs/diagram/diagram.nocache.js';
+const url = '//reactomedev.oicr.on.ca/DiagramJs/diagram/diagram.nocache.js';
 
 @Component({
   selector: 'app-reactome-diagram',
