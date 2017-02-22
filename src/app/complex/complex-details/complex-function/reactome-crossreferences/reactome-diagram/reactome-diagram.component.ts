@@ -51,7 +51,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   public initReactomeDiagram(): void {
     this.globelDiagram = this.diagramContext.Diagram.create({
-      'proxyPrefix': '//www.reactome.org',
+      'proxyPrefix': '//reactomedev.oicr.on.ca',
       'placeHolder': 'diagramHolder',
     });
     this.loadDiagram();
