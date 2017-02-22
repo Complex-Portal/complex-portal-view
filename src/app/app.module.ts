@@ -52,6 +52,7 @@ import {EfoCrossreferencesComponent} from './complex/complex-details/complex-dis
 import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
 import {SystematicNameComponent} from "./complex/complex-details/complex-function/systematic-name/systematic-name.component";
 import {OlsService} from "./shared/service/ols/ols.service";
+import { LigandsComponent } from './complex/complex-details/complex-function/ligands/ligands.component';
 
 @NgModule({
   declarations: [
@@ -95,12 +96,13 @@ import {OlsService} from "./shared/service/ols/ols.service";
     EfoCrossreferencesComponent,
     SystematicNameComponent,
     SynonymsComponent,
+    LigandsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: true }),
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
