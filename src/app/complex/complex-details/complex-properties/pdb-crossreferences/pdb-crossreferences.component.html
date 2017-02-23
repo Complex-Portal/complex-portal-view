@@ -6,10 +6,10 @@
     </div>
     <div class="columns medium-4">
       <table class="hover">
-        <thead>
-        <th>Identifier</th>
-        </thead>
-        <tbody style="height: 400px; overflow-y: scroll; display: block;">
+        <!--<thead>-->
+        <!--<th>Identifier</th>-->
+        <!--</thead>-->
+        <tbody style="height: 400px; overflow-y: scroll;">
         <tr *ngFor="let crossReference of crossReferences">
           <td>
             <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
