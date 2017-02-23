@@ -23,8 +23,9 @@ export class GxaHeatmapComponent implements OnInit {
 
   ngOnInit() {
     let context = this;
+    let query: string = JSON.stringify(this._gxaParamsQueries) + '&species=' + this._complexSpecies.split(";")[0].toLowerCase();
     this.gxa.render({
-      params: 'geneQuery=' + JSON.stringify(this._gxaParamsQueries) + '&species=' + this._complexSpecies.split(";")[0].toLowerCase(),
+      params: 'geneQuery=' + query,
       isMultiExperiment: false,
       target: 'heatmapContainer',
       fail: function () {
