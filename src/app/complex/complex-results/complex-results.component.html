@@ -1,26 +1,28 @@
 <div class="row" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
-  <h3>Total number of results: {{complexSearch.totalNumberOfResults}} </h3>
-  <div class="columns medium-4">
-    <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter" [spicesFilter]="spicesFilter"
-                        [bioRoleFilter]="bioRoleFilter"
-                        [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
-                        (onResetAllFilters)="onResetAllFilters($event)"
-                        (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
-                        (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                        (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
-      Loading ...
-    </app-complex-filter>
+  <div class="columns medium-12">
+    <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
+    <div class="columns medium-4">
+      <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter" [spicesFilter]="spicesFilter"
+                          [bioRoleFilter]="bioRoleFilter"
+                          [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
+                          (onResetAllFilters)="onResetAllFilters($event)"
+                          (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
+                          (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
+                          (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
+        Loading ...
+      </app-complex-filter>
+    </div>
+    <div class="columns medium-8">
+      <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
+                             (onPageChange)="onPageChange($event)"></app-complex-paginator>
+      <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
+      <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
+                             (onPageChange)="onPageChange($event)"></app-complex-paginator>
+    </div>
   </div>
-  <div class="columns medium-8">
-    <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
-                           (onPageChange)="onPageChange($event)"></app-complex-paginator>
-    <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-    <app-complex-paginator [currentPageIndex]="currentPageIndex"
-                           [lastPageIndex]="lastPageIndex"></app-complex-paginator>
-  </div>
-</div>
-<div class="row" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">
-  <div class="columns medium-12 callout alert">
-    <h3>We couldn't find anything matching you search query: <b>{{query}}</b></h3>
+  <div class="row" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">
+    <div class="columns medium-12 callout alert">
+      <h3>We couldn't find anything matching you search query: <b>{{query}}</b></h3>
+    </div>
   </div>
 </div>
