@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../../../../environments/environment";
 
-const baseURL = '//www.ebi.ac.uk/europepmc/webservices/rest/search?query=';
+const baseURL = environment.europepmc_ws;
 
 @Injectable()
 export class EuroPmcService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   getPublicationInformation(id: string) {
-    return this.http.get(baseURL + 'ext_id:' + id + '%20src:med&format=json')
+    return this.http.get(baseURL + '/webservices/rest/search?query=ext_id:' + id + '%20src:med&format=json')
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 

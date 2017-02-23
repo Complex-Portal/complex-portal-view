@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   analytics_id: 'UA-672146-11',
 
-  complex_ws: 'https://wwwdev.ebi.ac.uk/intact/complex-ws'
+  complex_ws: '//wwwdev.ebi.ac.uk/intact/complex-ws',
+  europepmc_ws: '//www.ebi.ac.uk/europepmc'
 };
