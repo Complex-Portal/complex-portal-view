@@ -9,7 +9,8 @@ import {CrossReference} from "../../../../shared/model/complex-details/cross-ref
 export class GoBiologicalProcessComponent implements OnInit {
   private _crossReferences: CrossReference[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

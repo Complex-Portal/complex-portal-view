@@ -8,10 +8,11 @@ import {CrossReference} from "../../../shared/model/complex-details/cross-refere
 })
 export class GoCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
-  private _molecularFunctions : CrossReference[];
-  private _biologicalProcess : CrossReference[];
+  private _molecularFunctions: CrossReference[];
+  private _biologicalProcess: CrossReference[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     for (let i = 0; i < this.crossReferences.length; i++) {
