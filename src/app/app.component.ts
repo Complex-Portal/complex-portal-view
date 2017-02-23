@@ -5,6 +5,8 @@ import {environment} from '../environments/environment';
 import {ToastrConfig} from "toastr-ng2";
 declare var $: any;
 declare var ga: any;
+const { version: version } = require('../../package.json');
+
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,10 @@ declare var ga: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterContentInit {
+  private version : string;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
+    this.version = version;
     toastrConfig.closeButton = true; // show close button
     toastrConfig.timeOut = 0; // time to live
     this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the \'Issues\'-button in the top bar.', this.toastrConfig);
