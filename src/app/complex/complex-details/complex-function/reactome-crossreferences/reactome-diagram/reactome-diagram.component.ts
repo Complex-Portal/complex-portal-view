@@ -1,7 +1,8 @@
 import {Component, OnInit, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ReactomeService} from "../service/reactome.service";
+import {environment} from "../../../../../../environments/environment";
 
-const url = '//reactomedev.oicr.on.ca/DiagramJs/diagram/diagram.nocache.js';
+const baseURL = environment.reactome_base_url;
 
 @Component({
   selector: 'app-reactome-diagram',
@@ -36,7 +37,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   private loadScript(): void {
     let node = document.createElement('script');
-    node.src = url;
+    node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
     node.type = 'text/javascript';
     node.async = true;
     node.charset = 'utf-8';
@@ -51,7 +52,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   public initReactomeDiagram(): void {
     this.globelDiagram = this.diagramContext.Diagram.create({
-      'proxyPrefix': '//reactomedev.oicr.on.ca',
+      'proxyPrefix': baseURL,
       'placeHolder': 'diagramHolder',
     });
     this.loadDiagram();
@@ -72,7 +73,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   };
 
   public getReactomeURL(): string {
-    return '//reactomedev.oicr.on.ca/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
+    return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
   }
 
   get reactomePathways(): any {

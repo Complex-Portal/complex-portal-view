@@ -1,21 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../../../../environments/environment";
 
-const baseURL = '//reactomedev.oicr.on.ca/ContentService/data';
+const baseURL = environment.reactome_base_url;
 
 @Injectable()
 export class ReactomeService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   findRelatedPathways(id: string) {
-    return this.http.get(baseURL + '/pathways/low/entity/' + id)
+    return this.http.get(baseURL + '/ContentService/data/pathways/low/entity/' + id)
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
   getComplexName(id: string) {
-    return this.http.get(baseURL + '/query/' + id + '/displayName')
+    return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName')
       .map((res: Response) => res.text()).catch(this.handleError);
   }
 

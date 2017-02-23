@@ -3,7 +3,7 @@ import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs';
 import {environment} from "../../../../environments/environment";
 
-const baseURL = environment.complex_ws;
+const baseURL = environment.complex_ws_base_url;
 
 @Injectable()
 export class ComplexPortalService {

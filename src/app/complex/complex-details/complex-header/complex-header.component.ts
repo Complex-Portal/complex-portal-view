@@ -7,10 +7,11 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class ComplexHeaderComponent implements OnInit {
 
-  private _complexName : string;
-  private _complexSpecies : string;
+  private _complexName: string;
+  private _complexSpecies: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

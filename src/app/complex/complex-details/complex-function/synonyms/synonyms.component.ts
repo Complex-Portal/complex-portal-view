@@ -6,9 +6,10 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./synonyms.component.css']
 })
 export class SynonymsComponent implements OnInit {
-  private _synonyms : string[];
+  private _synonyms: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

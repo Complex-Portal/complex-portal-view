@@ -7,7 +7,7 @@ import {CrossReference} from "../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-properties.component.css']
 })
 export class ComplexPropertiesComponent implements OnInit {
-  private _propertiesDescription : string;
+  private _propertiesDescription: string;
   private _crossReferences: CrossReference[];
   private _pdbXRefs: CrossReference[];
 

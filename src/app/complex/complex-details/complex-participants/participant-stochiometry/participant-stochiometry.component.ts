@@ -9,7 +9,8 @@ export class ParticipantStochiometryComponent implements OnInit {
   private _stochiometry: string;
   private _customizedStochiometry: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     if (this._stochiometry) {

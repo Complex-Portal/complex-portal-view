@@ -1,6 +1,9 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 
 import * as LiteMol from 'litemol'
+import {environment} from "../../../../../../environments/environment";
+
+const baseURL = environment.pdb_base_url;
 
 @Component({
   selector: 'app-litmol-viewer',
@@ -8,10 +11,11 @@ import * as LiteMol from 'litemol'
   styleUrls: ['./litmol-viewer.component.css']
 })
 export class LitmolViewerComponent implements OnInit, OnChanges {
-  private _plugin : any;
+  private _plugin: any;
   private _selectedXRef: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this._plugin) {
@@ -42,7 +46,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
     this.plugin.clear();
     this._plugin.loadMolecule({
       id: this._selectedXRef,
-      url: 'https://www.ebi.ac.uk/pdbe/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
+      url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
       format: 'cif' // default
     });
   }

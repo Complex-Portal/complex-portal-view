@@ -3,7 +3,7 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../../../environments/environment";
 
-const baseURL = environment.europepmc_ws;
+const baseURL = environment.europepmc_base_url;
 
 @Injectable()
 export class EuroPmcService {

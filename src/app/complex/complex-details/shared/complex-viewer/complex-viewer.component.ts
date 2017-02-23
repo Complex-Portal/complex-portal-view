@@ -14,7 +14,7 @@ export class ComplexViewerComponent implements OnInit {
   private _complexMIJSON: string;
   private _svgsaver: any;
 
-  constructor(private notificationService : NotificationService) {
+  constructor(private notificationService: NotificationService) {
     this._svgsaver = new SvgSaver();
   }
 
@@ -27,7 +27,7 @@ export class ComplexViewerComponent implements OnInit {
     xlv.autoLayout();
   }
 
-  featureNotAvailableYet(){
+  featureNotAvailableYet() {
     this.notificationService.addHintNotification("This feature is not available yet. But it is coming soon! :-)")
   }
 

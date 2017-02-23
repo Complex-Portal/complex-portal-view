@@ -6,9 +6,10 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./ligands.component.css']
 })
 export class LigandsComponent implements OnInit {
-  private _ligands : string[];
+  private _ligands: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

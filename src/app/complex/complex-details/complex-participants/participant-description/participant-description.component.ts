@@ -10,11 +10,11 @@ export class ParticipantDescriptionComponent implements OnInit {
 
   private _participant: Participant;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 
   get participant(): Participant {
     return this._participant;

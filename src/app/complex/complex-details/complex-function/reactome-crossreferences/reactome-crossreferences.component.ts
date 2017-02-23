@@ -62,9 +62,10 @@ export class ReactomeCrossreferencesComponent implements OnInit {
     this.selectedPathway = this._reactomeComplexes[complexId].pathways.sort()[0];
   }
 
-  public getSortedKeys(object : any) {
+  public getSortedKeys(object: any) {
     return Object.keys(object).sort();
   }
+
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;

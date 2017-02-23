@@ -25,7 +25,6 @@ export class ParticipantLegendComponent implements OnInit {
     }
   }
 
-
   get interactorType(): string {
     return this._interactorType;
   }

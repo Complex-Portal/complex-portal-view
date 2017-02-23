@@ -9,7 +9,8 @@ import {Participant} from "../../shared/model/complex-details/participant.model"
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

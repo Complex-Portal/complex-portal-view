@@ -1,7 +1,7 @@
 export class ReactomePathway {
-  private _id : string;
-  private _name : string;
-  private _complexes : string[] = [];
+  private _id: string;
+  private _name: string;
+  private _complexes: string[] = [];
 
   constructor(id: string) {
     this._id = id;
