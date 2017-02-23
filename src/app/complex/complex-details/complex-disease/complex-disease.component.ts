@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 
 @Component({
@@ -18,9 +18,9 @@ export class ComplexDiseaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (let pos in this._crossReferences) {
-      let crossRef = this._crossReferences[pos];
-      let database = this._crossReferences[pos].database;
+    for (let i = 0; i < this._crossReferences; i++) {
+      const crossRef = this._crossReferences[i];
+      const database = this._crossReferences[i].database;
       if (database === 'efo') {
         if (this._efoXRefs === undefined) {
           this._efoXRefs = [];

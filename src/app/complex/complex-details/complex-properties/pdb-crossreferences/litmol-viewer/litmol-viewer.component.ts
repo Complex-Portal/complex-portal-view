@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 
-import * as LiteMol from 'litemol'
-import {environment} from "../../../../../../environments/environment";
+import * as LiteMol from 'litemol';
+import {environment} from '../../../../../../environments/environment';
 
 const baseURL = environment.pdb_base_url;
 

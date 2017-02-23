@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ComplexDetails} from "../shared/model/complex-details/complex-details.model";
-import {ActivatedRoute} from "@angular/router";
-import {ComplexPortalService} from "../shared/service/complex-portal.service";
-declare let expressionAtlasHeatmapHighcharts : any;
+import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
+import {ActivatedRoute} from '@angular/router';
+import {ComplexPortalService} from '../shared/service/complex-portal.service';
+declare const expressionAtlasHeatmapHighcharts: any;
 
 @Component({
   selector: 'app-complex-details',
@@ -29,7 +29,7 @@ export class ComplexDetailsComponent implements OnInit {
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails);
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
-          complexMIJSON => this.complexMIJSON = complexMIJSON,);
+          complexMIJSON => this.complexMIJSON = complexMIJSON);
       });
   }
 

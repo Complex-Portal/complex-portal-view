@@ -1,9 +1,9 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Participant} from "../../../shared/model/complex-details/participant.model";
+import {Participant} from '../../../shared/model/complex-details/participant.model';
 
 interface GXAQueryParams {
-  value: string,
-  category: string
+  value: string;
+  category: string;
 }
 
 @Component({
@@ -16,14 +16,14 @@ export class GxaHeatmapComponent implements OnInit {
   private _participants: Participant[];
   private _complexSpecies: string;
   private _gxaParamsQueries: GXAQueryParams[];
-  private _isLoaded: boolean = true;
+  private _isLoaded = true;
 
   constructor() {
   }
 
   ngOnInit() {
-    let context = this;
-    let query: string = JSON.stringify(this._gxaParamsQueries) + '&species=' + this._complexSpecies.split(";")[0].toLowerCase();
+    const context = this;
+    const query: string = JSON.stringify(this._gxaParamsQueries) + '&species=' + this._complexSpecies.split(';')[0].toLowerCase();
     this.gxa.render({
       params: 'geneQuery=' + query,
       isMultiExperiment: false,

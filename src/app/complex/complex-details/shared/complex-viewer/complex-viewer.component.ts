@@ -1,8 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {NotificationService} from "../../../../shared/notification/service/notification.service";
+import {NotificationService} from '../../../../shared/notification/service/notification.service';
 let xlv: any;
-let SvgSaver = require('svgsaver');
-let xiNET = require('expose-loader?xiNET!complexviewer');
+const SvgSaver = require('svgsaver');
+const xiNET = require('expose-loader?xiNET!complexviewer');
 
 @Component({
   selector: 'app-complex-viewer',
@@ -21,14 +21,14 @@ export class ComplexViewerComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     xlv = new xiNET('networkContainer');
     xlv.readMIJSON(this._complexMIJSON, true);
     xlv.autoLayout();
   }
 
   featureNotAvailableYet() {
-    this.notificationService.addHintNotification("This feature is not available yet. But it is coming soon! :-)")
+    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
   }
 
   onChangeAnnotation(value: string): void {
@@ -62,7 +62,7 @@ export class ComplexViewerComponent implements OnInit {
   }
 
   public downloadAsSVG(): void {
-    let svg = document.querySelector('#networkContainer');
-    this._svgsaver.asSvg(svg, this._complexAC + ".svg");
+    const svg = document.querySelector('#networkContainer');
+    this._svgsaver.asSvg(svg, this._complexAC + '.svg');
   }
 }

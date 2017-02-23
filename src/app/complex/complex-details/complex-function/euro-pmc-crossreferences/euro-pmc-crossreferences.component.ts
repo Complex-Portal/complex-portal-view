@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../../shared/model/complex-details/cross-reference.model";
-import {EuroPmcService} from "./service/euro-pmc.service";
-import {NotificationService} from "../../../../shared/notification/service/notification.service";
+import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
+import {EuroPmcService} from './service/euro-pmc.service';
+import {NotificationService} from '../../../../shared/notification/service/notification.service';
 
 
 interface Publication {
@@ -21,7 +21,7 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
 
   private _crossReferences: CrossReference[];
   private _publications: Publication[] = [];
-  private _isDataLoaded: boolean = false;
+  private _isDataLoaded = false;
 
 
   constructor(private euroPmcService: EuroPmcService, private notificationService: NotificationService) {
@@ -38,7 +38,7 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
       }
     } catch (error) {
       this._isDataLoaded = false;
-      this.notificationService.addErrorNotification("Error whilst retrieving data from Euro PMC. Please let us know if error persists.");
+      this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
     }
   }
 
@@ -52,7 +52,7 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
       });
     } catch (error) {
       this._isDataLoaded = false;
-      this.notificationService.addErrorNotification("Error whilst retrieving data from Euro PMC. Please let us know if error persists.");
+      this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
     }
   }
 

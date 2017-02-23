@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {Observable} from "rxjs";
-import {environment} from "../../../../../../environments/environment";
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../../../../../../environments/environment';
 
 const baseURL = environment.europepmc_base_url;
 
@@ -19,7 +19,7 @@ export class EuroPmcService {
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
-    let errMsg = (error.message) ? error.message :
+    const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);

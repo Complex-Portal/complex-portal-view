@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'app-pdb-crossreferences',
@@ -9,14 +9,14 @@ import {CrossReference} from "../../../shared/model/complex-details/cross-refere
 export class PdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _selectedXRef: string;
-  private _isDataLoaded: boolean = false;
+  private _isDataLoaded = false;
 
   constructor() {
   }
 
   ngOnInit() {
     this._selectedXRef = this._crossReferences[0].identifier;
-    if(this._selectedXRef){
+    if (this._selectedXRef) {
       this._isDataLoaded = true;
     }
   }

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'app-complex-properties',
@@ -15,9 +15,9 @@ export class ComplexPropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (let pos in this.crossReferences) {
-      let crossRef = this.crossReferences[pos];
-      let database = this.crossReferences[pos].database;
+    for (let i = 0; i < this.crossReferences.length; i++) {
+      const crossRef = this.crossReferences[i];
+      const database = this.crossReferences[i].database;
 
       if (database === 'wwpdb') {
         if (this._pdbXRefs === undefined) {

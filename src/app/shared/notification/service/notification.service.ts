@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ToastrService} from "toastr-ng2";
+import {ToastrService} from 'toastr-ng2';
 
 @Injectable()
 export class NotificationService {

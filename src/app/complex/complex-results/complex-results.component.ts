@@ -15,7 +15,7 @@ export class ComplexResultsComponent implements OnInit {
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
-  private _pageSize: number = 10;
+  private _pageSize = 10;
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
@@ -39,7 +39,7 @@ export class ComplexResultsComponent implements OnInit {
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
           console.log(this.complexSearch.totalNumberOfResults);
-          if(this.complexSearch.totalNumberOfResults !== 0){
+          if (this.complexSearch.totalNumberOfResults !== 0) {
             this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
           }
         });
@@ -47,7 +47,7 @@ export class ComplexResultsComponent implements OnInit {
   }
 
   private reloadPage(): void {
-    let queryParams: NavigationExtras = {};
+    const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
     this.prepareFiltersForParams(queryParams);

@@ -6,9 +6,10 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./systematic-name.component.css']
 })
 export class SystematicNameComponent implements OnInit {
-  private _systematicName : string[];
+  private _systematicName: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

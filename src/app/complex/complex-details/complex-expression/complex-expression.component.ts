@@ -1,10 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Participant} from "../../shared/model/complex-details/participant.model";
-import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
+import {Participant} from '../../shared/model/complex-details/participant.model';
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 interface GXAQueryParams {
-  value: string,
-  category: string
+  value: string;
+  category: string;
 }
 
 @Component({
@@ -24,21 +24,21 @@ export class ComplexExpressionComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (let participant in this._participants) {
-      if (this._participants[participant].interactorType === 'protein') {
+    for (let i = 0; i < this._participants.length; i++) {
+      if (this._participants[i].interactorType === 'protein') {
         if (this._gxaParamsQueries === undefined) {
           this._gxaParamsQueries = [];
         }
         this._gxaParamsQueries.push({
-          value: this._participants[participant].identifier,
+          value: this._participants[i].identifier,
           category: 'uniprot'
         });
       }
     }
-    for (let pos in this._crossReferences) {
-      let crossRef = this._crossReferences[pos];
-      let database = this._crossReferences[pos].database;
-      let qualifier = this._crossReferences[pos].qualifier;
+    for (let i = 0; i < this._crossReferences; i++) {
+      const crossRef = this._crossReferences[i];
+      const database = this._crossReferences[i].database;
+      const qualifier = this._crossReferences[i].qualifier;
 
       if (database === 'gene ontology' && qualifier === 'cellular component') {
         if (this.goCellularXRefs === undefined) {

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'app-go-crossreferences',
@@ -16,8 +16,8 @@ export class GoCrossreferencesComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < this.crossReferences.length; i++) {
-      let crossRef = this.crossReferences[i];
-      let qualifier = this.crossReferences[i].qualifier;
+      const crossRef = this.crossReferences[i];
+      const qualifier = this.crossReferences[i].qualifier;
 
       if (qualifier === 'biological process') {
         if (this._biologicalProcess === undefined) {

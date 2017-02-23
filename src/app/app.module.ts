@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -34,12 +35,12 @@ import {ParticipantLegendComponent} from './complex/complex-details/complex-part
 import {ParticipantStochiometryComponent} from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
 import {ReactomeDiagramComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
 import {ReactomeCrossreferencesComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
-import {ReactomeService} from "./complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service";
+import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
 import {FunctionDescriptionComponent} from './complex/complex-details/complex-function/function-description/function-description.component';
 import {GoCrossreferencesComponent} from './complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component';
 import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
 import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
-import {EuroPmcService} from "./complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service";
+import {EuroPmcService} from './complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service';
 import {PdbCrossreferencesComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
 import {LitmolViewerComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
 import {ExamplesLargeComponent} from './search/examples/examples-large/examples-large.component';
@@ -50,12 +51,12 @@ import {DiseaseDescriptionComponent} from './complex/complex-details/complex-dis
 import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component';
 import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
 import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
-import {SystematicNameComponent} from "./complex/complex-details/complex-function/systematic-name/systematic-name.component";
-import {OlsService} from "./shared/service/ols/ols.service";
-import { LigandsComponent } from './complex/complex-details/complex-function/ligands/ligands.component';
-import { GoMolecularFunctionComponent } from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
-import { GoBiologicalProcessComponent } from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
-import { ComplexFooterComponent } from './complex/complex-details/complex-footer/complex-footer.component';
+import {SystematicNameComponent} from './complex/complex-details/complex-function/systematic-name/systematic-name.component';
+import {OlsService} from './shared/service/ols/ols.service';
+import {LigandsComponent} from './complex/complex-details/complex-function/ligands/ligands.component';
+import {GoMolecularFunctionComponent} from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
+import {GoBiologicalProcessComponent} from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
+import {ComplexFooterComponent} from './complex/complex-details/complex-footer/complex-footer.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,7 @@ import { ComplexFooterComponent } from './complex/complex-details/complex-footer
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
+    RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],

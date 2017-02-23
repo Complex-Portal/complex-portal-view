@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'app-complex-function',
@@ -22,8 +22,8 @@ export class ComplexFunctionComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < this.crossReferences.length; i++) {
-      let crossRef = this.crossReferences[i];
-      let database = this.crossReferences[i].database;
+      const crossRef = this.crossReferences[i];
+      const database = this.crossReferences[i].database;
 
       if (database === 'gene ontology') {
         if (this.goXRefs === undefined) {

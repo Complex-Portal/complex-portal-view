@@ -1,6 +1,6 @@
 import {Component, OnInit, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ReactomeService} from "../service/reactome.service";
-import {environment} from "../../../../../../environments/environment";
+import {ReactomeService} from '../service/reactome.service';
+import {environment} from '../../../../../../environments/environment';
 
 const baseURL = environment.reactome_base_url;
 
@@ -36,7 +36,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   }
 
   private loadScript(): void {
-    let node = document.createElement('script');
+    const node = document.createElement('script');
     node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
     node.type = 'text/javascript';
     node.async = true;
@@ -60,7 +60,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   }
 
   private loadDiagram(): void {
-    let context = this;
+    const context = this;
     this.globelDiagram.loadDiagram(this.selectedPathway);
     this.globelDiagram.onDiagramLoaded(function (loaded) {
       context.selectComplex(context.selectedComplex);

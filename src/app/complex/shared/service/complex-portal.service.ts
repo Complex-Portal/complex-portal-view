@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, URLSearchParams} from '@angular/http';
-import {Observable} from 'rxjs';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
 
 const baseURL = environment.complex_ws_base_url;
 
@@ -46,10 +46,10 @@ export class ComplexPortalService {
    */
 
   findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
-              interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize: number = 10,
-              format: string = 'json', facets: string = 'species_f,ptype_f,pbiorole_f') {
-    let params = new URLSearchParams();
-    let filters: string = '';
+              interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize = 10,
+              format = 'json', facets = 'species_f,ptype_f,pbiorole_f') {
+    const params = new URLSearchParams();
+    let filters = '';
     params.set('first', ((currentPageIndex * pageSize) - pageSize).toString());
     params.set('number', pageSize.toString());
     params.set('format', format);
@@ -71,7 +71,7 @@ export class ComplexPortalService {
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
-    let errMsg = (error.message) ? error.message :
+    const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);

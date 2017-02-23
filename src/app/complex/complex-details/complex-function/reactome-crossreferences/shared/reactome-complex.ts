@@ -1,8 +1,7 @@
-import {ReactomePathway} from "./reactome-pathway";
 export class ReactomeComplex {
-  private _id : string;
-  private _name : string;
-  private _pathways : string[] = [];
+  private _id: string;
+  private _name: string;
+  private _pathways: string[] = [];
 
   constructor(id: string) {
     this._id = id;

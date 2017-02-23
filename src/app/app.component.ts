@@ -1,11 +1,12 @@
-import {Component, OnInit, AfterContentInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
-import {ToastrConfig} from "toastr-ng2";
+import {ToastrConfig} from 'toastr-ng2';
 declare var $: any;
 declare var ga: any;
-const { version: version } = require('../../package.json');
+
+const {version: version} = require('../../package.json');
 
 
 @Component({
@@ -13,14 +14,16 @@ const { version: version } = require('../../package.json');
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterContentInit {
-  private version : string;
+export class AppComponent implements OnInit {
+  private _version: string;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
-    this.version = version;
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+              private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
+    this._version = version;
     toastrConfig.closeButton = true; // show close button
     toastrConfig.timeOut = 0; // time to live
-    this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the \'Issues\'-button in the top bar.', this.toastrConfig);
+    this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
+      '\'Issues\'-button in the top bar.', this.toastrConfig);
     this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
   }
 
@@ -32,13 +35,16 @@ export class AppComponent implements OnInit, AfterContentInit {
     } else {
       ga('create', environment.analytics_id, 'none');
     }
-    //copied from script.js (ebi framework)
+    // copied from script.js (ebi framework)
     // Assign global nav background images through meta tags
     (function assignImageByMetaTags() {
-      var localMasthead = document.getElementById('local-masthead');
+      const localMasthead = document.getElementById('local-masthead');
       // check for both ebi: and ebi- formatted meta tags
-      var localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']") || document.querySelector("meta[name='ebi-localmasthead-color']");
-      var localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']") || document.querySelector("meta[name='ebi-localmasthead-image']");
+      // tslint:disable
+      let localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']")
+        || document.querySelector("meta[name='ebi-localmasthead-color']");
+      let localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']")
+        || document.querySelector("meta[name='ebi-localmasthead-image']");
       if (localMastheadColor != null) {
         localMasthead.style.backgroundColor = localMastheadColor.getAttribute("content");
         localMasthead.className += ' meta-background-color';
@@ -47,11 +53,15 @@ export class AppComponent implements OnInit, AfterContentInit {
         localMasthead.style.backgroundImage = 'baseURL(' + localMastheadImage.getAttribute("content") + ')';
         localMasthead.className += ' meta-background-image';
       }
+      // tslint:enable
     })();
   }
 
+  get version(): string {
+    return this._version;
+  }
 
-  ngAfterContentInit(): void {
-
+  set version(value: string) {
+    this._version = value;
   }
 }
