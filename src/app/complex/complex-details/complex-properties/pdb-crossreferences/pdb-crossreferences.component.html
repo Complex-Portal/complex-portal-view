@@ -1,15 +1,15 @@
 <div class="row" *ngIf="isDataLoaded">
   <div class="cloumns medium-12 no-pad-left">
-    <h5>PDBe Cross References</h5>
+    <h3>3D Structure</h3>
     <div class="columns medium-8 no-pad-left">
       <app-litmol-viewer *ngIf="selectedXRef" [selectedXRef]="selectedXRef"></app-litmol-viewer>
     </div>
     <div class="columns medium-4">
       <table class="hover">
-        <thead>
-        <th>Identifier</th>
-        </thead>
-        <tbody style="height: 400px; overflow-y: scroll; display: block;">
+        <!--<thead>-->
+        <!--<th>Identifier</th>-->
+        <!--</thead>-->
+        <tbody style="height: 400px; overflow-y: scroll;">
         <tr *ngFor="let crossReference of crossReferences">
           <td>
             <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>

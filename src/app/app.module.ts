@@ -51,6 +51,11 @@ import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-d
 import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
 import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
 import {SystematicNameComponent} from "./complex/complex-details/complex-function/systematic-name/systematic-name.component";
+import {OlsService} from "./shared/service/ols/ols.service";
+import { LigandsComponent } from './complex/complex-details/complex-function/ligands/ligands.component';
+import { GoMolecularFunctionComponent } from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
+import { GoBiologicalProcessComponent } from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
+import { ComplexFooterComponent } from './complex/complex-details/complex-footer/complex-footer.component';
 
 @NgModule({
   declarations: [
@@ -94,16 +99,20 @@ import {SystematicNameComponent} from "./complex/complex-details/complex-functio
     EfoCrossreferencesComponent,
     SystematicNameComponent,
     SynonymsComponent,
+    LigandsComponent,
+    GoMolecularFunctionComponent,
+    GoBiologicalProcessComponent,
+    ComplexFooterComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: true }),
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

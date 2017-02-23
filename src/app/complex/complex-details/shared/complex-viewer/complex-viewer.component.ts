@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {NotificationService} from "../../../../shared/notification/service/notification.service";
 let xlv: any;
 let SvgSaver = require('svgsaver');
 let xiNET = require('expose-loader?xiNET!complexviewer');
@@ -13,7 +14,7 @@ export class ComplexViewerComponent implements OnInit {
   private _complexMIJSON: string;
   private _svgsaver: any;
 
-  constructor() {
+  constructor(private notificationService : NotificationService) {
     this._svgsaver = new SvgSaver();
   }
 
@@ -24,6 +25,10 @@ export class ComplexViewerComponent implements OnInit {
     xlv = new xiNET('networkContainer');
     xlv.readMIJSON(this._complexMIJSON, true);
     xlv.autoLayout();
+  }
+
+  featureNotAvailableYet(){
+    this.notificationService.addHintNotification("This feature is not available yet. But it is coming soon! :-)")
   }
 
   onChangeAnnotation(value: string): void {

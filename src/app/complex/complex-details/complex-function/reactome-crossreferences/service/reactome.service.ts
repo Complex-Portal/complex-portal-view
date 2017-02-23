@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 
-const baseURL = 'http://www.reactome.org/ContentService/data';
+const baseURL = '//reactomedev.oicr.on.ca/ContentService/data';
 
 @Injectable()
 export class ReactomeService {

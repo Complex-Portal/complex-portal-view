@@ -44,6 +44,7 @@ export class ReactomeCrossreferencesComponent implements OnInit {
           currentPathway.complexes.push(this._crossReferences[i].identifier);
           currentComplex.pathways.push(pathway.stId);
           if (i === this._crossReferences.length - 1 && count === relatedPathways.length - 1) {
+            this.selectComplexWithFirstPathway(Object.keys(this._reactomeComplexes).sort()[0]);
             this._isDataLoaded = true;
           }
         }

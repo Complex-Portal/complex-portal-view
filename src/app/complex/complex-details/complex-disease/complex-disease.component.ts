@@ -19,12 +19,9 @@ export class ComplexDiseaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._crossReferences);
     for (let pos in this._crossReferences) {
       let crossRef = this._crossReferences[pos];
       let database = this._crossReferences[pos].database;
-      console.log(database);
-
       if (database === 'efo') {
         if (this._efoXRefs === undefined) {
           this._efoXRefs = [];

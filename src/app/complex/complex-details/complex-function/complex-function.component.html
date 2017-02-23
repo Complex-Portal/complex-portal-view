@@ -1,7 +1,10 @@
 <div class="row">
-  <h4>Function</h4>
+  <h2>Function</h2>
   <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
     <app-function-description [functionDescription]="functionDescription"></app-function-description>
+  </div>
+  <div id="ligands" class="columns medium-12 no-pad-left" *ngIf="ligands && ligands.length !== 0">
+    <app-ligands [ligands]="ligands"></app-ligands>
   </div>
   <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs">
     <app-go-crossreferences [crossReferences]="goXRefs"></app-go-crossreferences>

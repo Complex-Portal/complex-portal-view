@@ -1,18 +1,13 @@
 <div class="row">
   <div class="columns medium-12 no-pad-left">
-    <h5>GO Cellular Cross References</h5>
+    <h3>GO - Component Terms</h3>
     <table class="hover">
-      <thead>
-      <th>Identifier</th>
-      <th>Description</th>
-      </thead>
       <tbody>
       <tr *ngFor="let crossReference of crossReferences">
         <td>
-          <a href="http://www.ebi.ac.uk/QuickGO-Beta/term/{{crossReference.identifier}}" target="_blank">{{crossReference.identifier}}
+          <a href="{crossReference.searchURL}}" target="_blank">{{crossReference.description}}
             <i class="icon icon-generic small" data-icon="x"></i></a>
         </td>
-        <td>{{crossReference.description}}</td>
       </tr>
       </tbody>
     </table>
