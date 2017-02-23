@@ -55,6 +55,7 @@ import {OlsService} from "./shared/service/ols/ols.service";
 import { LigandsComponent } from './complex/complex-details/complex-function/ligands/ligands.component';
 import { GoMolecularFunctionComponent } from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
 import { GoBiologicalProcessComponent } from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
+import { ComplexFooterComponent } from './complex/complex-details/complex-footer/complex-footer.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { GoBiologicalProcessComponent } from './complex/complex-details/complex-
     LigandsComponent,
     GoMolecularFunctionComponent,
     GoBiologicalProcessComponent,
+    ComplexFooterComponent,
   ],
   imports: [
     BrowserModule,
