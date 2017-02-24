@@ -1,10 +1,7 @@
 <div class="row">
-  <div class="columns medium-12">
-    <div class="columns medium-7">
-      <div id="diagramHolder"></div>
-    </div>
-    <div class="columns medium-5">
-      <div class="columns medium-12">
+  <div class="columns medium-12 no-pad-right">
+    <div class="columns medium-12 callout">
+      <div class="columns medium-6">
         <h5>Selected Complex:</h5>
         <p>
           <b>Stable Identifier: </b><a
@@ -13,7 +10,7 @@
           <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}
         </p>
       </div>
-      <div class="columns medium-12">
+      <div class="columns medium-6">
         <h5>Selected Pathway:</h5>
         <p>
           <b>Stable Identifier: </b><a
@@ -22,10 +19,13 @@
           <b>Name: </b>{{reactomePathways[selectedPathway].name}}
         </p>
       </div>
-      <div class="columns medium-12">
-        <a href="{{getReactomeURL()}}" target="_blank">Open in Reactome <i class="icon icon-generic small"
-                                                                           data-icon="x"></i></a>
-      </div>
+    </div>
+    <div class="columns medium-12 no-pad-left">
+      <a href="{{getReactomeURL()}}" target="_blank">Open in Reactome <i class="icon icon-generic small"
+                                                                         data-icon="x"></i></a>
+    </div>
+    <div #diagramHolder class="columns medium-12">
+      <div id="diagramHolder"></div>
     </div>
   </div>
 </div>

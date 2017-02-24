@@ -1,6 +1,10 @@
-import {Component, OnInit, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {
+  Component, OnInit, HostListener, Input, OnChanges, SimpleChanges, ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import {ReactomeService} from '../service/reactome.service';
 import {environment} from '../../../../../../environments/environment';
+import {Observable} from "rxjs";
 
 const baseURL = environment.reactome_base_url;
 
@@ -17,6 +21,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _reactomePathways = {};
   private _selectedComplex: string;
   private _selectedPathway: string;
+  @ViewChild('diagramHolder') diagramHolder;
 
   constructor(private reactomeService: ReactomeService) {
   }
@@ -54,6 +59,8 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.globelDiagram = this.diagramContext.Diagram.create({
       'proxyPrefix': baseURL,
       'placeHolder': 'diagramHolder',
+      'width': this.diagramHolder.nativeElement.clientWidth,
+      'height': this.diagramHolder.nativeElement.clientHeight
     });
     this.loadDiagram();
 
