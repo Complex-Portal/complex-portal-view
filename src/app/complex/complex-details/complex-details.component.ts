@@ -30,6 +30,7 @@ export class ComplexDetailsComponent implements OnInit {
           complexDetails => this.complexDetails = complexDetails);
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON);
+        document.body.scrollTop = 0;
       });
   }
 

@@ -43,6 +43,7 @@ export class ComplexResultsComponent implements OnInit {
             this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
           }
         });
+        document.body.scrollTop = 0;
       });
   }
 
