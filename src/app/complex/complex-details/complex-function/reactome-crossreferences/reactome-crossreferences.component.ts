@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 import {ReactomeService} from './service/reactome.service';
 import {ReactomeComplex} from './shared/reactome-complex';
 import {ReactomePathway} from './shared/reactome-pathway';
@@ -27,7 +28,7 @@ export class ReactomeCrossreferencesComponent implements OnInit {
     for (let i = 0; i < this._crossReferences.length; i++) {
       Observable.forkJoin(this.reactomeService.findRelatedPathways(this._crossReferences[i].identifier),
         this.reactomeService.getComplexName(this._crossReferences[i].identifier)).subscribe(response => {
-        const relatedPathways: any[] = response[0];
+        const relatedPathways: any = response[0];
         const complexName = response[1];
         for (let count = 0; count < relatedPathways.length; count++) {
           const pathway: any = relatedPathways[count];

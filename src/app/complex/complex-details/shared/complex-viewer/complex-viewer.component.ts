@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, AfterViewInit} from '@angular/core';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
 let xlv: any;
 const SvgSaver = require('svgsaver');
@@ -9,7 +9,7 @@ const xiNET = require('expose-loader?xiNET!complexviewer');
   templateUrl: './complex-viewer.component.html',
   styleUrls: ['./complex-viewer.component.css']
 })
-export class ComplexViewerComponent implements OnInit {
+export class ComplexViewerComponent implements AfterViewInit {
   private _complexAC: string;
   private _complexMIJSON: string;
   private _svgsaver: any;
@@ -18,10 +18,7 @@ export class ComplexViewerComponent implements OnInit {
     this._svgsaver = new SvgSaver();
   }
 
-  ngOnInit() {
-  }
-
-  ngOnInit() {
+  ngAfterViewInit() {
     xlv = new xiNET('networkContainer');
     xlv.readMIJSON(this._complexMIJSON, true);
     xlv.autoLayout();
