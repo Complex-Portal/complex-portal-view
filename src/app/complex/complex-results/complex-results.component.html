@@ -1,5 +1,5 @@
-<div class="row" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
-  <div class="columns medium-12">
+<div class="row">
+  <div class="columns medium-12" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
     <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
     <div class="columns medium-4">
       <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter" [spicesFilter]="spicesFilter"
@@ -20,9 +20,17 @@
                              (onPageChange)="onPageChange($event)"></app-complex-paginator>
     </div>
   </div>
-  <div class="row" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">
-    <div class="columns medium-12 callout alert">
-      <h3>We couldn't find anything matching you search query: <b>{{query}}</b></h3>
-    </div>
+  <div class="columns medium-12 callout alert" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">
+    <h2>No Complex Portal results found</h2>
+    <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>
+    <h4>Please consider refining your terms:</h4>
+    <ul>
+      <li>Make sure all words are spelled correctly</li>
+      <li>Try different keywords</li>
+      <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>
+      <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results than
+        "bike shed"
+      </li>
+    </ul>
   </div>
 </div>
