@@ -35,7 +35,7 @@ export class ComplexExpressionComponent implements OnInit {
         });
       }
     }
-    for (let i = 0; i < this._crossReferences; i++) {
+    for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;
       const qualifier = this._crossReferences[i].qualifier;
