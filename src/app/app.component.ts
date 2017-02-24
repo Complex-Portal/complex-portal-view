@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
         localMasthead.className += ' meta-background-color';
       }
       if (localMastheadImage != null) {
-        localMasthead.style.backgroundImage = 'baseURL(' + localMastheadImage.getAttribute("content") + ')';
+        localMasthead.style.backgroundImage = 'url(' + localMastheadImage.getAttribute("content") + ')';
         localMasthead.className += ' meta-background-image';
       }
       // tslint:enable
