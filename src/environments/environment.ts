@@ -11,4 +11,5 @@ export const environment = {
   europepmc_base_url: '//www.ebi.ac.uk/europepmc',
   reactome_base_url: '//reactomedev.oicr.on.ca',
   pdb_base_url: '//www.ebi.ac.uk/pdbe',
+  ols_base_url: '//www.ebi.ac.uk/ols/api/ontologies',
 };

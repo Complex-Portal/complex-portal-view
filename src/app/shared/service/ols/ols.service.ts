@@ -3,8 +3,9 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {environment} from "../../../../environments/environment";
 
-const baseURL = 'https://www.ebi.ac.uk/ols/api/ontologies';
+const baseURL = environment.ols_base_url;
 
 @Injectable()
 export class OlsService {
