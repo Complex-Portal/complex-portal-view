@@ -58,11 +58,18 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
       'proxyPrefix': baseURL,
       'placeHolder': 'diagramHolder',
       'width': this.diagramHolder.nativeElement.clientWidth,
-      'height': this.diagramHolder.nativeElement.clientWidth*0.8,
+      'height': this.diagramHolder.nativeElement.clientWidth * 0.8,
     });
     this.loadDiagram();
 
   }
+
+  @HostListener('window:resize', ['$event.target'])
+  onResize() {
+    this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+    this.selectComplex(this.selectedComplex);
+  }
+
 
   private loadDiagram(): void {
     const context = this;
@@ -74,6 +81,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   public selectComplex(reactomeComplexId: string) {
     this.selectedComplex = reactomeComplexId;
+    this.globelDiagram.resetSelection();
     this.globelDiagram.selectItem(reactomeComplexId);
   };
 
