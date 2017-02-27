@@ -75,7 +75,10 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     const context = this;
     this.globelDiagram.loadDiagram(this.selectedPathway);
     this.globelDiagram.onDiagramLoaded(function (loaded) {
-      context.selectComplex(context.selectedComplex);
+      //Work around for now. GitHub issue #31
+      setTimeout(function () {
+        context.selectComplex(context.selectedComplex);
+      }, 1)
     });
   }
 
