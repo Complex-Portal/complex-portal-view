@@ -21,13 +21,13 @@
   <div id="pubmedXRefs" class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs">
     <app-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></app-euro-pmc-crossreferences>
   </div>
-  <div id="intenzXRefs" class="columns medium-4 no-pad-left" *ngIf="intenzXRefs">
+  <div id="intenzXRefs" class="columns medium-12 no-pad-left" *ngIf="intenzXRefs">
     <app-intenz-crossreferences [crossReferences]="intenzXRefs"></app-intenz-crossreferences>
   </div>
-  <div id="synonyms" class="columns medium-4 no-pad-left" *ngIf="synonyms">
+  <div id="synonyms" class="columns medium-6 no-pad-left" *ngIf="synonyms">
     <app-synonyms [synonyms]="synonyms"></app-synonyms>
   </div>
-  <div id="systematicName" class="columns medium-4 no-pad-left" *ngIf="systematicName">
+  <div id="systematicName" class="columns medium-6 no-pad-left" *ngIf="systematicName">
     <app-systematic-name [systematicName]="systematicName"></app-systematic-name>
   </div>
 </div>
