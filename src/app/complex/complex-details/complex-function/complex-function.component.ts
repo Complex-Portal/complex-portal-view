@@ -16,6 +16,8 @@ export class ComplexFunctionComponent implements OnInit {
   private _synonyms: string[];
   private _systematicName: string[];
   private _ligands: string[];
+  private _agonists: string[];
+  private _antagonists: string[];
 
   constructor() {
   }
@@ -128,5 +130,23 @@ export class ComplexFunctionComponent implements OnInit {
   @Input()
   set ligands(value: string[]) {
     this._ligands = value;
+  }
+
+  get agonists(): string[] {
+    return this._agonists;
+  }
+
+  @Input()
+  set agonists(value: string[]) {
+    this._agonists = value;
+  }
+
+  get antagonists(): string[] {
+    return this._antagonists;
+  }
+
+  @Input()
+  set antagonists(value: string[]) {
+    this._antagonists = value;
   }
 }

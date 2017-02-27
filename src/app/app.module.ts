@@ -57,6 +57,8 @@ import {LigandsComponent} from './complex/complex-details/complex-function/ligan
 import {GoMolecularFunctionComponent} from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
 import {GoBiologicalProcessComponent} from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
 import {ComplexFooterComponent} from './complex/complex-details/complex-footer/complex-footer.component';
+import { AgonistsComponent } from './complex/complex-details/complex-function/agonists/agonists.component';
+import { AntagonistsComponent } from './complex/complex-details/complex-function/antagonists/antagonists.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import {ComplexFooterComponent} from './complex/complex-details/complex-footer/c
     GoMolecularFunctionComponent,
     GoBiologicalProcessComponent,
     ComplexFooterComponent,
+    AgonistsComponent,
+    AntagonistsComponent,
   ],
   imports: [
     BrowserModule,

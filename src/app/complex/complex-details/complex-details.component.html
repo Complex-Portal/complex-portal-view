@@ -1,43 +1,45 @@
 <section>
   <div id="main-content-area">
-      <div class="columns medium-12" *ngIf="complexDetails && complexMIJSON">
-        <div class="columns medium-12">
-          <app-complex-header [complexName]="complexDetails.name"
-                              [complexSpecies]="complexDetails.species"></app-complex-header>
+    <div class="columns medium-12" *ngIf="complexDetails && complexMIJSON">
+      <div class="columns medium-12">
+        <app-complex-header [complexName]="complexDetails.name"
+                            [complexSpecies]="complexDetails.species"></app-complex-header>
+      </div>
+      <div class="columns medium-12">
+        <div class="columns medium-6 no-pad-left no-pad-right">
+          <app-complex-viewer [complexAC]="complexDetails.ac" [complexMIJSON]="complexMIJSON"></app-complex-viewer>
         </div>
-        <div class="columns medium-12">
-          <div class="columns medium-6 no-pad-left no-pad-right">
-            <app-complex-viewer [complexAC]="complexDetails.ac" [complexMIJSON]="complexMIJSON"></app-complex-viewer>
-          </div>
-          <div class="columns medium-6">
-            <app-complex-participants [participants]="complexDetails.participants"></app-complex-participants>
-          </div>
-          <div class="columns medium-12 ">
-            <app-complex-function *ngIf="complexDetails.functions && complexDetails.crossReferences"
-                                  [functionDescription]="complexDetails.functions"
-                                  [crossReferences]="complexDetails.crossReferences"
-                                  [synonyms]="complexDetails.synonyms"
-                                  [systematicName]="complexDetails.systematicName"
-                                  [ligands]="complexDetails.ligands"></app-complex-function>
-          </div>
-          <div class="columns medium-12" *ngIf="complexDetails.crossReferences">
-            <app-complex-properties [propertiesDescription]="complexDetails.properties"
-                                    [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
-          </div>
-          <div class="columns medium-12"
-               *ngIf="complexDetails.crossReferences && complexDetails.participants && complexDetails.species">
-            <app-complex-expression [gxa]="gxa" [participants]="complexDetails.participants"
-                                    [complexSpecies]="complexDetails.species"
-                                    [crossReferences]="complexDetails.crossReferences"></app-complex-expression>
-          </div>
-          <div class="columns medium-12" *ngIf="complexDetails.diseases && complexDetails.diseases.length !== 0">
-            <app-complex-disease [diseaseDescriptions]="complexDetails.diseases"
-                                 [crossReferences]="complexDetails.crossReferences"></app-complex-disease>
-          </div>
+        <div class="columns medium-6">
+          <app-complex-participants [participants]="complexDetails.participants"></app-complex-participants>
         </div>
-        <div class="columns medium-12">
-          <app-complex-footer [institute]="complexDetails.institution"></app-complex-footer>
+        <div class="columns medium-12 ">
+          <app-complex-function *ngIf="complexDetails.functions && complexDetails.crossReferences"
+                                [functionDescription]="complexDetails.functions"
+                                [crossReferences]="complexDetails.crossReferences"
+                                [synonyms]="complexDetails.synonyms"
+                                [systematicName]="complexDetails.systematicName"
+                                [ligands]="complexDetails.ligands"
+                                [agonists]="complexDetails.agonists"
+                                [antagonists]="complexDetails.antagonists"></app-complex-function>
+        </div>
+        <div class="columns medium-12" *ngIf="complexDetails.crossReferences">
+          <app-complex-properties [propertiesDescription]="complexDetails.properties"
+                                  [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
+        </div>
+        <div class="columns medium-12"
+             *ngIf="complexDetails.crossReferences && complexDetails.participants && complexDetails.species">
+          <app-complex-expression [gxa]="gxa" [participants]="complexDetails.participants"
+                                  [complexSpecies]="complexDetails.species"
+                                  [crossReferences]="complexDetails.crossReferences"></app-complex-expression>
+        </div>
+        <div class="columns medium-12" *ngIf="complexDetails.diseases && complexDetails.diseases.length !== 0">
+          <app-complex-disease [diseaseDescriptions]="complexDetails.diseases"
+                               [crossReferences]="complexDetails.crossReferences"></app-complex-disease>
         </div>
       </div>
+      <div class="columns medium-12">
+        <app-complex-footer [institute]="complexDetails.institution"></app-complex-footer>
+      </div>
     </div>
+  </div>
 </section>
