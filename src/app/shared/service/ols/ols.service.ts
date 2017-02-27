@@ -19,10 +19,16 @@ export class OlsService {
    * @param id
    * @returns {Observable<R>}
    */
-  getEfoName(id: string) {
+  getOrphaNetName(id: string) {
     return this.http.get(baseURL + '/ordo/terms?iri=http://www.orpha.net/ORDO/' + id.replace(':', '_'))
       .map((response: Response) => response).catch(this.handleError);
   }
+
+  getEfoName(id: string) {
+    return this.http.get(baseURL + '/efo/terms?iri=http://www.ebi.ac.uk/efo/' + id.replace(':', '_'))
+      .map((response: Response) => response).catch(this.handleError);
+  }
+
 
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
