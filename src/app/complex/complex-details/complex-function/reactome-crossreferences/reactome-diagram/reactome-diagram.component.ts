@@ -85,7 +85,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   public selectComplex(reactomeComplexId: string) {
     this.selectedComplex = reactomeComplexId;
     this.globelDiagram.resetSelection();
-    this.globelDiagram.selectItem(reactomeComplexId);
+    this.globelDiagram.flagItems(reactomeComplexId);
   };
 
   public getReactomeURL(): string {
