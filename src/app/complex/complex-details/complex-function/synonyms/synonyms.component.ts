@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class SynonymsComponent implements OnInit {
   private _synonyms: string[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -21,5 +22,13 @@ export class SynonymsComponent implements OnInit {
   @Input()
   set synonyms(value: string[]) {
     this._synonyms = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

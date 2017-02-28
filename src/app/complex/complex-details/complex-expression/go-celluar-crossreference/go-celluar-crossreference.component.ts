@@ -8,6 +8,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 })
 export class GoCelluarCrossreferenceComponent implements OnInit {
   private _crossReferences: CrossReference[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -22,5 +23,13 @@ export class GoCelluarCrossreferenceComponent implements OnInit {
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

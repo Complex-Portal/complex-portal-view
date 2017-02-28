@@ -10,9 +10,14 @@
         <!--<th>Identifier</th>-->
         <!--</thead>-->
         <tbody style="height: 400px; overflow-y: scroll;">
-        <tr *ngFor="let crossReference of crossReferences">
+        <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
           <td>
             <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
+          </td>
+        </tr>
+        <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
+          <td>
+            <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
           </td>
         </tr>
         </tbody>

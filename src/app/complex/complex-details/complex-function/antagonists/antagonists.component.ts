@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class AntagonistsComponent implements OnInit {
   private _antagonists: string[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -21,5 +22,13 @@ export class AntagonistsComponent implements OnInit {
   @Input()
   set antagonists(value: string[]) {
     this._antagonists = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

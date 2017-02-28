@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class AgonistsComponent implements OnInit {
   private _agonists: string[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -21,5 +22,13 @@ export class AgonistsComponent implements OnInit {
   @Input()
   set agonists(value: string[]) {
     this._agonists = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

@@ -8,6 +8,7 @@ import {Participant} from '../../shared/model/complex-details/participant.model'
 })
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -22,5 +23,13 @@ export class ComplexParticipantsComponent implements OnInit {
   @Input()
   set participants(value: Participant[]) {
     this._participants = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

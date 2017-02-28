@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
     this._version = version;
-    toastrConfig.closeButton = true; // show close button
+    toastrConfig.closeButton = true; // displayedElements close button
     toastrConfig.timeOut = 0; // time to live
     this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
       '\'Issues\'-button in the top bar.', this.toastrConfig);

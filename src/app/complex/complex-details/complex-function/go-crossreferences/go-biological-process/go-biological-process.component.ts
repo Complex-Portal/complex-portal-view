@@ -8,6 +8,7 @@ import {CrossReference} from '../../../../shared/model/complex-details/cross-ref
 })
 export class GoBiologicalProcessComponent implements OnInit {
   private _crossReferences: CrossReference[];
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -23,5 +24,13 @@ export class GoBiologicalProcessComponent implements OnInit {
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

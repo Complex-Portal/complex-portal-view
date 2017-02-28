@@ -10,6 +10,7 @@ export class PdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _selectedXRef: string;
   private _isDataLoaded = false;
+  private _displayedElements = 5;
 
   constructor() {
   }
@@ -48,5 +49,13 @@ export class PdbCrossreferencesComponent implements OnInit {
 
   set isDataLoaded(value: boolean) {
     this._isDataLoaded = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }

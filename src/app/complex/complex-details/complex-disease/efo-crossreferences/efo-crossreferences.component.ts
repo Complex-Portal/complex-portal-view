@@ -9,6 +9,7 @@ import {OlsService} from '../../../../shared/service/ols/ols.service';
 })
 export class EfoCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
+  private _displayedElements = 5;
 
   constructor(private olsService: OlsService) {
   }
@@ -32,5 +33,13 @@ export class EfoCrossreferencesComponent implements OnInit {
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }
