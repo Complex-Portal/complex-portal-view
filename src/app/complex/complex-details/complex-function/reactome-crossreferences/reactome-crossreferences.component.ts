@@ -20,6 +20,7 @@ export class ReactomeCrossreferencesComponent implements OnInit {
   private _selectedComplex: string;
   private _selectedPathway: string;
   private _isDataLoaded = false;
+  private _displayedElements = 5;
 
   constructor(private reactomeService: ReactomeService) {
   }
@@ -111,5 +112,13 @@ export class ReactomeCrossreferencesComponent implements OnInit {
 
   set isDataLoaded(value: boolean) {
     this._isDataLoaded = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 }
