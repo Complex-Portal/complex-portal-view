@@ -2,7 +2,7 @@
   <div id="main-content-area">
     <div class="columns medium-12" *ngIf="complexDetails && complexMIJSON">
       <div class="columns medium-12">
-        <app-complex-header [complexName]="complexDetails.name"
+        <app-complex-header [complexAC]="complexDetails.ac" [complexName]="complexDetails.name"
                             [complexSpecies]="complexDetails.species"></app-complex-header>
       </div>
       <div class="columns medium-12">
