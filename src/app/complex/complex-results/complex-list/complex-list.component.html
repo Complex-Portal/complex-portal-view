@@ -3,7 +3,7 @@
     <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
     <div class="description" style="background-color: white">
       <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>
-        <b>Description:</b>
+      <b>Description:</b>
       <div *ngIf="complex.description.length <= 250">
         {{complex.description}}<a [routerLink]="['/complex', complex.complexAC]">...</a>
       </div>

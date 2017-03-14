@@ -2,7 +2,8 @@
   <div class="columns medium-12" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
     <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
     <div class="columns medium-4">
-      <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter" [spicesFilter]="spicesFilter"
+      <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
+                          [spicesFilter]="spicesFilter"
                           [bioRoleFilter]="bioRoleFilter"
                           [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
                           (onResetAllFilters)="onResetAllFilters($event)"
@@ -13,10 +14,12 @@
       </app-complex-filter>
     </div>
     <div class="columns medium-8">
-      <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
+      <app-complex-paginator [currentPageIndex]="currentPageIndex"
+                             [lastPageIndex]="lastPageIndex"
                              (onPageChange)="onPageChange($event)"></app-complex-paginator>
       <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-      <app-complex-paginator [currentPageIndex]="currentPageIndex" [lastPageIndex]="lastPageIndex"
+      <app-complex-paginator [currentPageIndex]="currentPageIndex"
+                             [lastPageIndex]="lastPageIndex"
                              (onPageChange)="onPageChange($event)"></app-complex-paginator>
     </div>
   </div>
