@@ -18,7 +18,12 @@ export class ComplexDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private complexPortalService: ComplexPortalService) {
-    this._gxa = expressionAtlasHeatmapHighcharts;
+
+    if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+      this._gxa = expressionAtlasHeatmapHighcharts;
+    } else {
+      this._gxa = null;
+    }
   }
 
   ngOnInit(): void {
