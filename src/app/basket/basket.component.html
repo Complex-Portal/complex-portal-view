@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="columns medium-12">
+    <table *ngIf="complexBasket" class="hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Organism</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let key of getKeys(complexBasket)">
+        <td>
+          <a [routerLink]="['/complex', complexBasket[key].id]">{{complexBasket[key].name}}</a>
+        </td>
+        <td>
+          {{complexBasket[key].id}}
+        </td>
+        <td>
+          {{complexBasket[key].organism}}
+        </td>
+        <td>
+          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span
+            class="icon icon-functional" data-icon="d"></span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
