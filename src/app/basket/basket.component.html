@@ -1,6 +1,9 @@
 <div class="row">
-  <div class="columns medium-12">
-    <table *ngIf="complexBasket" class="hover">
+  <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
+    <div class="callout">
+      <h3>Personal complex collection</h3>
+    </div>
+    <table class="hover">
       <thead>
       <tr>
         <th>Name</th>
@@ -27,5 +30,11 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">
+    <div class="callout">
+      <h3>Your basket is currently empty.</h3>
+      <p>Search for a complex and click on "Basket"-symbol to create your own collection of favorite complexes.</p>
+    </div>
   </div>
 </div>

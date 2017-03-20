@@ -8,17 +8,18 @@ import {BasketItem} from "../shared/service/basket/model/basketItem";
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit {
-  private _complexBasket: { [name: string]: BasketItem} = {};
-  //
+  private _complexBasket: {[name: string]: BasketItem};
+
   constructor(private _basketService: BasketService) {
 
   }
-  //
+
   ngOnInit() {
     this._complexBasket = this._basketService.complexBasket;
+    console.log(this._complexBasket);
   }
 
-  deleteFromBasket(key : string) : void {
+  deleteFromBasket(key: string): void {
     this._basketService.deleteFromBasket(key);
   }
 
@@ -26,19 +27,20 @@ export class BasketComponent implements OnInit {
     return this._basketService;
   }
 
-  set basketService(value: BasketService) {
-    this._basketService = value;
-  }
-
-  get complexBasket(): {} {
+  get complexBasket(): {[name: string]: BasketItem} {
     return this._complexBasket;
   }
 
-  set complexBasket(value: {}) {
+  set complexBasket(value: {[name: string]: BasketItem}) {
     this._complexBasket = value;
   }
 
-  public getKeys(object : any){
+  public isComplexBasketEmpty(): boolean {
+    return this.getKeys(this._complexBasket).length === 0;
+
+  }
+
+  public getKeys(object: any) {
     return Object.keys(object);
   }
 }
