@@ -59,6 +59,9 @@ import {GoBiologicalProcessComponent} from './complex/complex-details/complex-fu
 import {ComplexFooterComponent} from './complex/complex-details/complex-footer/complex-footer.component';
 import { AgonistsComponent } from './complex/complex-details/complex-function/agonists/agonists.component';
 import { AntagonistsComponent } from './complex/complex-details/complex-function/antagonists/antagonists.component';
+import { BasketComponent } from './basket/basket.component';
+import {BasketService} from "./shared/service/basket/basket.service";
+import {Md5} from "ts-md5/dist/md5";
 
 @NgModule({
   declarations: [
@@ -108,6 +111,7 @@ import { AntagonistsComponent } from './complex/complex-details/complex-function
     ComplexFooterComponent,
     AgonistsComponent,
     AntagonistsComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +121,7 @@ import { AntagonistsComponent } from './complex/complex-details/complex-function
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
   bootstrap: [AppComponent]
 })
 export class AppModule {
