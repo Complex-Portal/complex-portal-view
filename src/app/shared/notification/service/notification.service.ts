@@ -8,7 +8,7 @@ export class NotificationService {
   }
 
   public addSuccessNotification(successNotification: string): void {
-    // this.successNotifications.next(successNotification);
+    this.toastrService.success(successNotification);
   }
 
   public addErrorNotification(errorNotification: string): void {

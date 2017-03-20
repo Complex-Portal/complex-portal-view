@@ -1,5 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {environment} from "../../../../environments/environment";
+import {BasketService} from "../../../shared/service/basket/basket.service";
+import {NotificationService} from "../../../shared/notification/service/notification.service";
 
 @Component({
   selector: 'app-complex-header',
@@ -13,11 +15,15 @@ export class ComplexHeaderComponent implements OnInit {
   private _complexSpecies: string;
   private _jsonURL: string;
 
-  constructor() {
+  constructor(private basketService: BasketService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
     this._jsonURL = environment.complex_ws_base_url + '/details/' + this._complexAC;
+  }
+
+  saveComplex() {
+    this.basketService.saveInBasket(this._complexName, this._complexAC, this._complexSpecies);
   }
 
   get complexAC(): string {
