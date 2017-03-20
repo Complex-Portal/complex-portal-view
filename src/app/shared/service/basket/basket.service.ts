@@ -22,7 +22,7 @@ export class BasketService {
       for (let key in complexStore) {
         let complex = complexStore[key];
         if (complex) {
-          this._complexBasket[key] = new BasketItem(complex._name, complex._query, complex._date, complex._organism);
+          this._complexBasket[key] = new BasketItem(complex._name, complex._id, complex._date, complex._organism);
         }
       }
     }
