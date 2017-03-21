@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BasketService} from "../shared/service/basket/basket.service";
-import {BasketItem} from "../shared/service/basket/model/basketItem";
+import {BasketService} from "../shared/basket/basket.service";
+import {BasketItem} from "../shared/basket/model/basketItem";
 
 @Component({
   selector: 'app-basket',
