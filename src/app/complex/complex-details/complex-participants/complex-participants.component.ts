@@ -16,6 +16,21 @@ export class ComplexParticipantsComponent implements OnInit {
   ngOnInit() {
   }
 
+  getLegendURL(interactorType: string): string {
+    switch (interactorType) {
+      case 'small molecule':
+        return 'assets/images/legend/small-mol.png';
+      case 'protein':
+        return 'assets/images/legend/protein-blob.png';
+      case 'single stranded deoxyribonucleic acid':
+        return 'assets/images/legend/dna.png';
+    }
+  }
+
+  getConvertedStochiometry(stochiometry : string) : string {
+     return stochiometry.split(',')[0].split(':')[1].trim();
+  }
+
   get participants(): Participant[] {
     return this._participants;
   }
