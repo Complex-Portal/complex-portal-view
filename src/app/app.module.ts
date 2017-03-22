@@ -50,14 +50,14 @@ import {LigandsComponent} from './complex/complex-details/complex-function/ligan
 import {GoMolecularFunctionComponent} from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
 import {GoBiologicalProcessComponent} from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
 import {ComplexFooterComponent} from './complex/complex-details/complex-footer/complex-footer.component';
-import { AgonistsComponent } from './complex/complex-details/complex-function/agonists/agonists.component';
-import { AntagonistsComponent } from './complex/complex-details/complex-function/antagonists/antagonists.component';
-import { BasketComponent } from './basket/basket.component';
-import {BasketService} from "./shared/basket/service/basket.service";
-import {Md5} from "ts-md5/dist/md5";
-import {MaterialModule} from "@angular/material";
-import { ProgressBarComponent } from './shared/loading-indicators/progress-bar/progress-bar.component';
-import { ProgressSpinnerComponent } from './shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {AgonistsComponent} from './complex/complex-details/complex-function/agonists/agonists.component';
+import {AntagonistsComponent} from './complex/complex-details/complex-function/antagonists/antagonists.component';
+import {BasketComponent} from './basket/basket.component';
+import {BasketService} from './shared/basket/service/basket.service';
+import {Md5} from 'ts-md5/dist/md5';
+import {MaterialModule} from '@angular/material';
+import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
+import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   declarations: [

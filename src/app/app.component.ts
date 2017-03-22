@@ -3,8 +3,8 @@ import {NotificationService} from './shared/notification/service/notification.se
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
 import {ToastrConfig} from 'toastr-ng2';
-import {ProgressBarComponent} from "./shared/loading-indicators/progress-bar/progress-bar.component";
-import {NavigationEnd, Router} from "@angular/router";
+import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
+import {NavigationEnd, Router} from '@angular/router';
 declare const $: any;
 declare const ga: any;
 

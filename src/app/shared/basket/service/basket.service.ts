@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BasketItem} from "../model/basketItem";
+import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5'
-import {NotificationService} from "../../notification/service/notification.service";
+import {NotificationService} from '../../notification/service/notification.service';
 
 const COMPLEX_STORE = 'cp_complex_store';
 
@@ -33,7 +33,7 @@ export class BasketService {
     if (!this.isInBasket(id)) {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
       this.saveInLocalStorage();
-      this.notificationService.addSuccessNotification("Stored " + id + " in you basket!");
+      this.notificationService.addSuccessNotification('Stored ' + id + ' in you basket!');
     }
   }
 
@@ -41,7 +41,7 @@ export class BasketService {
     const id = this._complexBasket[key].id;
     delete this._complexBasket[key];
     this.saveInLocalStorage();
-    this.notificationService.addSuccessNotification("Removed " + id + " in you basket!");
+    this.notificationService.addSuccessNotification('Removed ' + id + ' in you basket!');
   }
 
   private saveInLocalStorage(): void {
@@ -55,7 +55,7 @@ export class BasketService {
   private isInBasket(id: string): boolean {
     let key: string = this.toMd5(id);
     if (this._complexBasket[key]) {
-      this.notificationService.addErrorNotification(id + " is already stored in you basket!");
+      this.notificationService.addErrorNotification(id + ' is already stored in you basket!');
       return true;
     }
     return false;
