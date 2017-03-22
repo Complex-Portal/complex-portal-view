@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BasketItem} from "./model/basketItem";
+import {BasketItem} from "../model/basketItem";
 import {Md5} from 'ts-md5/dist/md5'
 import {NotificationService} from "../../notification/service/notification.service";
 
