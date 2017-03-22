@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Participant} from "../../../../shared/model/complex-details/participant.model";
+import {Participant} from '../../../../shared/model/complex-details/participant.model';
 
 interface GXAQueryParams {
   value: string;

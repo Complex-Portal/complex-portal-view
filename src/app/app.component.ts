@@ -19,7 +19,7 @@ const {version: version} = require('../../package.json');
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router : Router,
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
     this._version = version;
     toastrConfig.closeButton = true; // displayedElements close button
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     });
   }
 
@@ -71,8 +71,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     ProgressBarComponent.hide();
   }
 
-  //Candidate for utils.
-  private initialiseFoundation () : void {
+  // Candidate for utils.
+  private initialiseFoundation(): void {
     $(document).foundation();
     $(document).foundationExtendEBI();
   }

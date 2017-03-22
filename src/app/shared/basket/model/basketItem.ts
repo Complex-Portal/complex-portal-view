@@ -2,7 +2,7 @@ export class BasketItem {
   private _name: string;
   private _id: string;
   private _date: Date;
-  private _organism : string;
+  private _organism: string;
 
   constructor(name: string, id: string, date: Date, organism: string) {
     this._name = name;
