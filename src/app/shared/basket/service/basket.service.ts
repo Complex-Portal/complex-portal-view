@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
-import {Md5} from 'ts-md5/dist/md5'
+import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
 
 const COMPLEX_STORE = 'cp_complex_store';
@@ -14,22 +14,23 @@ export class BasketService {
   }
 
   private initialiseBasket() {
-    let complexStore = this.getLocalStorage();
+    const complexStore = this.getLocalStorage();
     if (!complexStore) {
       this.saveInLocalStorage();
       this.initialiseBasket();
     } else {
-      for (let key in complexStore) {
-        let complex = complexStore[key];
+      const keys = complexStore.getKeys();
+      for (let i = 0; i < keys.length; i++) {
+        const complex = complexStore[keys[i]];
         if (complex) {
-          this._complexBasket[key] = new BasketItem(complex._name, complex._id, complex._date, complex._organism);
+          this._complexBasket[keys[i]] = new BasketItem(complex._name, complex._id, complex._date, complex._organism);
         }
       }
     }
   }
 
   public saveInBasket(name: string, id: string, organism: string): void {
-    let newBasketItem = new BasketItem(name, id, new Date(), organism);
+    const newBasketItem = new BasketItem(name, id, new Date(), organism);
     if (!this.isInBasket(id)) {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
       this.saveInLocalStorage();
@@ -48,12 +49,12 @@ export class BasketService {
     localStorage.setItem(COMPLEX_STORE, JSON.stringify(this._complexBasket));
   }
 
-  private getLocalStorage(){
+  private getLocalStorage() {
     return JSON.parse(localStorage.getItem(COMPLEX_STORE));
   }
 
   private isInBasket(id: string): boolean {
-    let key: string = this.toMd5(id);
+    const key: string = this.toMd5(id);
     if (this._complexBasket[key]) {
       this.notificationService.addErrorNotification(id + ' is already stored in you basket!');
       return true;
