@@ -1,5 +1,5 @@
 import {Component, Input, AfterViewInit} from '@angular/core';
-import {NotificationService} from "../../../../../shared/notification/service/notification.service";
+import {NotificationService} from '../../../../../shared/notification/service/notification.service';
 let xlv: any;
 const SvgSaver = require('svgsaver');
 const xiNET = require('expose-loader?xiNET!complexviewer');

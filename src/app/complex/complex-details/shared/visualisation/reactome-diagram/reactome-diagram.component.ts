@@ -2,7 +2,7 @@ import {
   Component, OnInit, HostListener, Input, OnChanges, SimpleChanges, ViewChild, EventEmitter, Output
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
-import {ReactomeService} from "../../../complex-function/reactome-crossreferences/shared/service/reactome.service";
+import {ReactomeService} from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
 
 const baseURL = environment.reactome_base_url;
 
