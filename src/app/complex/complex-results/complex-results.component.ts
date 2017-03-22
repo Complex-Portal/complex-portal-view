@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
-import {ComplexPortalService} from "../shared/service/complex-portal.service";
+import {ComplexPortalService} from '../shared/service/complex-portal.service';
 
 
 @Component({

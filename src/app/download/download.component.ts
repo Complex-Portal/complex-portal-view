@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/progress-bar.component";
+import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-download',
