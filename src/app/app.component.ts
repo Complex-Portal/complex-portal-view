@@ -2,9 +2,10 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
-import {ToastrConfig} from 'toastr-ng2';
+
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
+import {ToastrConfig} from "ngx-toastr";
 declare const $: any;
 declare const ga: any;
 

@@ -20,7 +20,6 @@ import {ComplexPaginatorComponent} from './complex/complex-results/complex-pagin
 import {NotificationService} from './shared/notification/service/notification.service';
 import {DownloadComponent} from './download/download.component';
 import {Angulartics2Module, Angulartics2GoogleAnalytics} from 'angulartics2';
-import {ToastrModule} from 'toastr-ng2';
 import {ComplexDetailsComponent} from './complex/complex-details/complex-details.component';
 import {ComplexHeaderComponent} from './complex/complex-details/complex-header/complex-header.component';
 import {ComplexFunctionComponent} from './complex/complex-details/complex-function/complex-function.component';
@@ -58,6 +57,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import {MaterialModule} from '@angular/material';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [

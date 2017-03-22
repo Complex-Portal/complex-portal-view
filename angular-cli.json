@@ -20,7 +20,7 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../node_modules/toastr-ng2/toastr.css",
+        "../node_modules/ngx-toastr/toastr.css",
         "../src/assets/styles/scss/material.scss"
       ],
       "scripts": [
@@ -31,8 +31,8 @@
         "../node_modules/ebi_framework/libraries/foundation-6/dist/foundation",
         "../node_modules/ebi_framework/js/foundationExtendEBI"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
