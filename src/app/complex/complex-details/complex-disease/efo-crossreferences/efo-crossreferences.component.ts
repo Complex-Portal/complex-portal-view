@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
-import {OlsService} from '../../../../shared/service/ols/ols.service';
+import {OlsService} from '../../../../shared/ols/service/ols.service';
 
 @Component({
   selector: 'app-efo-crossreferences',
