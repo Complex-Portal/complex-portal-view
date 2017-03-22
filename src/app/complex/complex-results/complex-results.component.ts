@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
+import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
 
 
 @Component({
@@ -9,7 +10,7 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
   templateUrl: './complex-results.component.html',
   styleUrls: ['./complex-results.component.css']
 })
-export class ComplexResultsComponent implements OnInit {
+export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   private _query;
   private _currentPageIndex: number;
@@ -45,6 +46,11 @@ export class ComplexResultsComponent implements OnInit {
         });
         document.body.scrollTop = 0;
       });
+  }
+
+
+  ngAfterViewInit(): void {
+    ProgressBarComponent.hide();
   }
 
   private reloadPage(): void {

@@ -32,7 +32,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initialiseFoundation();
-    ProgressBarComponent.display();
     if (environment.production === false) {
       ga('create', environment.analytics_id, 'none');
     } else {
@@ -61,6 +60,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
+        ProgressBarComponent.display();
         return;
       }
       window.scrollTo(0, 0);

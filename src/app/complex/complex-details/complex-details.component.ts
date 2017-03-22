@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
 import {ActivatedRoute} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
+import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
 declare const expressionAtlasHeatmapHighcharts: any;
 
 @Component({
@@ -9,7 +10,7 @@ declare const expressionAtlasHeatmapHighcharts: any;
   templateUrl: './complex-details.component.html',
   styleUrls: ['./complex-details.component.css']
 })
-export class ComplexDetailsComponent implements OnInit {
+export class ComplexDetailsComponent implements OnInit, AfterViewInit {
 
   private _complexDetails: ComplexDetails;
   private _complexMIJSON: any;
@@ -37,6 +38,11 @@ export class ComplexDetailsComponent implements OnInit {
           complexMIJSON => this.complexMIJSON = complexMIJSON);
         document.body.scrollTop = 0;
       });
+  }
+
+
+  ngAfterViewInit(): void {
+    ProgressBarComponent.hide();
   }
 
   get complexDetails(): ComplexDetails {

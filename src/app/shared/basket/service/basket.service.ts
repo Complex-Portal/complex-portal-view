@@ -19,7 +19,7 @@ export class BasketService {
       this.saveInLocalStorage();
       this.initialiseBasket();
     } else {
-      const keys = complexStore.getKeys();
+      const keys = Object.keys(complexStore);
       for (let i = 0; i < keys.length; i++) {
         const complex = complexStore[keys[i]];
         if (complex) {
