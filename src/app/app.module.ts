@@ -11,7 +11,6 @@ import {ComplexPortalService} from './complex/shared/service/complex-portal.serv
 import {SearchComponent} from './search/search.component';
 import {HomeComponent} from './home/home.component';
 import {NewsletterSubscriptionComponent} from './home/newsletter-subscription/newsletter-subscription.component';
-import {ContributorsDisplayComponent} from './home/contributors-display/contributors-display.component';
 import {TwitterDisplayComponent} from './home/twitter-display/twitter-display.component';
 import {TileMenuComponent} from './home/tile-menu/tile-menu.component';
 import {ComplexResultsComponent} from './complex/complex-results/complex-results.component';
@@ -28,31 +27,25 @@ import {ComplexFunctionComponent} from './complex/complex-details/complex-functi
 import {ComplexPropertiesComponent} from './complex/complex-details/complex-properties/complex-properties.component';
 import {ComplexExpressionComponent} from './complex/complex-details/complex-expression/complex-expression.component';
 import {ComplexDiseaseComponent} from './complex/complex-details/complex-disease/complex-disease.component';
-import {ComplexViewerComponent} from './complex/complex-details/shared/complex-viewer/complex-viewer.component';
+import {ComplexViewerComponent} from './complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component';
 import {ComplexParticipantsComponent} from './complex/complex-details/complex-participants/complex-participants.component';
-import {ParticipantDescriptionComponent} from './complex/complex-details/complex-participants/participant-description/participant-description.component';
-import {ParticipantLegendComponent} from './complex/complex-details/complex-participants/participant-legend/participant-legend.component';
-import {ParticipantStochiometryComponent} from './complex/complex-details/complex-participants/participant-stochiometry/participant-stochiometry.component';
-import {ReactomeDiagramComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-diagram/reactome-diagram.component';
+import {ReactomeDiagramComponent} from './complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component';
 import {ReactomeCrossreferencesComponent} from './complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component';
-import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
-import {FunctionDescriptionComponent} from './complex/complex-details/complex-function/function-description/function-description.component';
+import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {GoCrossreferencesComponent} from './complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component';
 import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
 import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
 import {EuroPmcService} from './complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service';
 import {PdbCrossreferencesComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
-import {LitmolViewerComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/litmol-viewer/litmol-viewer.component';
+import {LitmolViewerComponent} from './complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component';
 import {ExamplesLargeComponent} from './search/examples/examples-large/examples-large.component';
-import {PropertiesDescriptionComponent} from './complex/complex-details/complex-properties/properties-description/properties-description.component';
-import {GxaHeatmapComponent} from './complex/complex-details/complex-expression/gxa-heatmap/gxa-heatmap.component';
+import {GxaHeatmapComponent} from './complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component';
 import {GoCelluarCrossreferenceComponent} from './complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component';
-import {DiseaseDescriptionComponent} from './complex/complex-details/complex-disease/disease-description/disease-description.component';
 import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component';
 import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
 import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
 import {SystematicNameComponent} from './complex/complex-details/complex-function/systematic-name/systematic-name.component';
-import {OlsService} from './shared/service/ols/ols.service';
+import {OlsService} from './shared/ols/service/ols.service';
 import {LigandsComponent} from './complex/complex-details/complex-function/ligands/ligands.component';
 import {GoMolecularFunctionComponent} from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';
 import {GoBiologicalProcessComponent} from './complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component';
@@ -60,8 +53,11 @@ import {ComplexFooterComponent} from './complex/complex-details/complex-footer/c
 import { AgonistsComponent } from './complex/complex-details/complex-function/agonists/agonists.component';
 import { AntagonistsComponent } from './complex/complex-details/complex-function/antagonists/antagonists.component';
 import { BasketComponent } from './basket/basket.component';
-import {BasketService} from "./shared/service/basket/basket.service";
+import {BasketService} from "./shared/basket/service/basket.service";
 import {Md5} from "ts-md5/dist/md5";
+import {MaterialModule} from "@angular/material";
+import { ProgressBarComponent } from './shared/loading-indicators/progress-bar/progress-bar.component';
+import { ProgressSpinnerComponent } from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +65,6 @@ import {Md5} from "ts-md5/dist/md5";
     SearchComponent,
     HomeComponent,
     NewsletterSubscriptionComponent,
-    ContributorsDisplayComponent,
     TwitterDisplayComponent,
     TileMenuComponent,
     ComplexResultsComponent,
@@ -85,22 +80,16 @@ import {Md5} from "ts-md5/dist/md5";
     ComplexDiseaseComponent,
     ComplexViewerComponent,
     ComplexParticipantsComponent,
-    ParticipantDescriptionComponent,
-    ParticipantLegendComponent,
-    ParticipantStochiometryComponent,
     ReactomeDiagramComponent,
     ReactomeCrossreferencesComponent,
-    FunctionDescriptionComponent,
     GoCrossreferencesComponent,
     IntenzCrossreferencesComponent,
     EuroPmcCrossreferencesComponent,
     PdbCrossreferencesComponent,
     LitmolViewerComponent,
     ExamplesLargeComponent,
-    PropertiesDescriptionComponent,
     GxaHeatmapComponent,
     GoCelluarCrossreferenceComponent,
-    DiseaseDescriptionComponent,
     ChemblCrossreferenceComponent,
     EfoCrossreferencesComponent,
     SystematicNameComponent,
@@ -112,6 +101,8 @@ import {Md5} from "ts-md5/dist/md5";
     AgonistsComponent,
     AntagonistsComponent,
     BasketComponent,
+    ProgressBarComponent,
+    ProgressSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +111,7 @@ import {Md5} from "ts-md5/dist/md5";
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    MaterialModule,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
   bootstrap: [AppComponent]
