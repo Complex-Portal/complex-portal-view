@@ -1,6 +1,6 @@
 {
   "name": "complex-portal-view",
-  "version": "0.0.4-beta",
+  "version": "0.0.5-beta",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -54,6 +54,6 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3"
+    "typescript": "^2.0.10"
   }
 }
