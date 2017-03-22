@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BasketService} from "../shared/basket/basket.service";
+import {BasketService} from "../shared/basket/service/basket.service";
 import {BasketItem} from "../shared/basket/model/basketItem";
 
 @Component({
