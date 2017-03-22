@@ -2,7 +2,9 @@
   <div class="columns medium-12 no-pad-left">
     <h2>Diseases and Pathologies</h2>
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="diseaseDescriptions">
-      <app-disease-description [diseaseDescriptions]="diseaseDescriptions"></app-disease-description>
+      <ul class="no-bullet" *ngFor="let diseaseDescription of diseaseDescriptions">
+        <li>{{diseaseDescription}}</li>
+      </ul>
     </div>
     <div class="columns medium-12 no-pad-left">
       <div id="efoXRefs" class="columns medium-6 no-pad-left" *ngIf="efoXRefs">

@@ -1,7 +1,7 @@
 <div class="row">
   <h2>Function</h2>
   <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
-    <app-function-description [functionDescription]="functionDescription"></app-function-description>
+    <p>{{functionDescription}}</p>
   </div>
   <div id="ligands" class="columns medium-12 no-pad-left" *ngIf="ligands && ligands.length !== 0">
     <app-ligands [ligands]="ligands"></app-ligands>
