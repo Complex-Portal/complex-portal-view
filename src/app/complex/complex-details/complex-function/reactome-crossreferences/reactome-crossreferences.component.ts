@@ -2,9 +2,9 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
-import {ReactomeService} from './service/reactome.service';
-import {ReactomeComplex} from './shared/reactome-complex';
-import {ReactomePathway} from './shared/reactome-pathway';
+import {ReactomeService} from './shared/service/reactome.service';
+import {ReactomeComplex} from './shared/model/reactome-complex';
+import {ReactomePathway} from './shared/model/reactome-pathway';
 
 @Component({
   selector: 'app-reactome-crossreferences',
@@ -21,6 +21,7 @@ export class ReactomeCrossreferencesComponent implements OnInit {
   private _selectedPathway: string;
   private _isDataLoaded = false;
   private _displayedElements = 5;
+  private diagramLoaded = false;
 
   constructor(private reactomeService: ReactomeService) {
   }
@@ -53,6 +54,10 @@ export class ReactomeCrossreferencesComponent implements OnInit {
         }
       });
     }
+  }
+
+  onChildLoaded() {
+    this.diagramLoaded = true;
   }
 
   public selectComplexByPathway(complexId: string, pathwayId: string): void {
