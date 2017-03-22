@@ -1,8 +1,8 @@
 import {
-  Component, OnInit, HostListener, Input, OnChanges, SimpleChanges, ViewChild,
+  Component, OnInit, HostListener, Input, OnChanges, SimpleChanges, ViewChild, EventEmitter, Output
 } from '@angular/core';
-import {ReactomeService} from '../service/reactome.service';
 import {environment} from '../../../../../../environments/environment';
+import {ReactomeService} from "../../../complex-function/reactome-crossreferences/shared/service/reactome.service";
 
 const baseURL = environment.reactome_base_url;
 
@@ -20,6 +20,8 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _selectedComplex: string;
   private _selectedPathway: string;
   @ViewChild('diagramHolder') diagramHolder;
+  @Output() onLoaded = new EventEmitter<boolean>();
+
 
   constructor(private reactomeService: ReactomeService) {
   }
@@ -54,6 +56,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   }
 
   public initReactomeDiagram(): void {
+    // this.onLoaded.emit();
     this.globelDiagram = this.diagramContext.Diagram.create({
       'proxyPrefix': baseURL,
       'placeHolder': 'diagramHolder',
@@ -77,7 +80,8 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.globelDiagram.onDiagramLoaded(function (loaded) {
       //Work around for now. GitHub issue #31
       // setTimeout(function () {
-        context.selectComplex(context.selectedComplex);
+      context.selectComplex(context.selectedComplex);
+
       // }, 1)
     });
   }

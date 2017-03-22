@@ -1,13 +1,13 @@
 import {Component, Input, AfterViewInit} from '@angular/core';
-import {NotificationService} from '../../../../shared/notification/service/notification.service';
+import {NotificationService} from "../../../../../shared/notification/service/notification.service";
 let xlv: any;
 const SvgSaver = require('svgsaver');
 const xiNET = require('expose-loader?xiNET!complexviewer');
 
 @Component({
   selector: 'app-complex-viewer',
-  templateUrl: './complex-viewer.component.html',
-  styleUrls: ['./complex-viewer.component.css']
+  templateUrl: 'complex-viewer.component.html',
+  styleUrls: ['complex-viewer.component.css']
 })
 export class ComplexViewerComponent implements AfterViewInit {
   private _complexAC: string;

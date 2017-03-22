@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Participant} from '../../../shared/model/complex-details/participant.model';
+import {Participant} from "../../../../shared/model/complex-details/participant.model";
 
 interface GXAQueryParams {
   value: string;
@@ -8,8 +8,8 @@ interface GXAQueryParams {
 
 @Component({
   selector: 'app-gxa-heatmap',
-  templateUrl: './gxa-heatmap.component.html',
-  styleUrls: ['./gxa-heatmap.component.css']
+  templateUrl: 'gxa-heatmap.component.html',
+  styleUrls: ['gxa-heatmap.component.css']
 })
 export class GxaHeatmapComponent implements OnInit {
   private _gxa;
