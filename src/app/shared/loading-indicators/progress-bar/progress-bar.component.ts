@@ -7,15 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProgressBarComponent implements OnInit {
   private static show: boolean;
-  private _color: string = 'primary';
-  private _mode: string = 'indeterminate';
-
-  constructor() {
-    ProgressBarComponent.show = false;
-  }
-
-  ngOnInit() {
-  }
+  private _color = 'primary';
+  private _mode = 'indeterminate';
 
   public static display(): void {
     ProgressBarComponent.show = true;
@@ -25,6 +18,13 @@ export class ProgressBarComponent implements OnInit {
     setTimeout(function () {
       ProgressBarComponent.show = false;
     }, 1000);
+  }
+
+  constructor() {
+    ProgressBarComponent.show = false;
+  }
+
+  ngOnInit() {
   }
 
   get isDisplayed(): boolean {

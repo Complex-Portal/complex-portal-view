@@ -7,15 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProgressSpinnerComponent implements OnInit {
   private static show: boolean;
-  private _color: string = 'primary';
-  private _mode: string = 'indeterminate';
-
-  constructor() {
-    ProgressSpinnerComponent.show = false;
-  }
-
-  ngOnInit() {
-  }
+  private _color = 'primary';
+  private _mode = 'indeterminate';
 
   public static display(): void {
     ProgressSpinnerComponent.show = true;
@@ -25,6 +18,13 @@ export class ProgressSpinnerComponent implements OnInit {
     setTimeout(function () {
       ProgressSpinnerComponent.show = false;
     }, 1000);
+  }
+
+  constructor() {
+    ProgressSpinnerComponent.show = false;
+  }
+
+  ngOnInit() {
   }
 
   get isDisplayed(): boolean {
