@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
 import {ToastrConfig} from 'toastr-ng2';
-declare var $: any;
-declare var ga: any;
+import {ProgressBarComponent} from "./shared/loading-indicators/progress-bar/progress-bar.component";
+import {NavigationEnd, Router} from "@angular/router";
+declare const $: any;
+declare const ga: any;
 
 const {version: version} = require('../../package.json');
 
@@ -14,10 +16,10 @@ const {version: version} = require('../../package.json');
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router : Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
     this._version = version;
     toastrConfig.closeButton = true; // displayedElements close button
@@ -28,8 +30,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $(document).foundation();
-    $(document).foundationExtendEBI();
+    this.initialiseFoundation();
+    ProgressBarComponent.display();
     if (environment.production === false) {
       ga('create', environment.analytics_id, 'none');
     } else {
@@ -55,6 +57,24 @@ export class AppComponent implements OnInit {
       }
       // tslint:enable
     })();
+
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+  }
+
+
+  ngAfterViewInit(): void {
+    ProgressBarComponent.hide();
+  }
+
+  //Candidate for utils.
+  private initialiseFoundation () : void {
+    $(document).foundation();
+    $(document).foundationExtendEBI();
   }
 
   get version(): string {
