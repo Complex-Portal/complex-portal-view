@@ -58,6 +58,7 @@ import {MaterialModule} from '@angular/material';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 import {ToastrModule} from "ngx-toastr";
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import {ToastrModule} from "ngx-toastr";
     BasketComponent,
     ProgressBarComponent,
     ProgressSpinnerComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
