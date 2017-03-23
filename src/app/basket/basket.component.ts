@@ -17,7 +17,6 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._complexBasket = this._basketService.complexBasket;
-    console.log(this._complexBasket);
   }
 
   ngAfterViewInit(): void {
