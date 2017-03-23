@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    ProgressBarComponent.hide();
+    // ProgressBarComponent.hide();
   }
 
   // Candidate for utils.
