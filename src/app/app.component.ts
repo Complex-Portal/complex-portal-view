@@ -33,12 +33,42 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Init some libs.
     this.initialiseFoundation();
+    this.initialiseGoogleAnalytics();
+    this.initialiseFoundationHacks();
+
+
+    // For every router change, we load the ProgressBar by default.
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        ProgressBarComponent.display();
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+  }
+
+
+  ngAfterViewInit(): void {
+    ProgressBarComponent.hide();
+  }
+
+  // Candidate for utils.
+  private initialiseFoundation(): void {
+    $(document).foundation();
+    $(document).foundationExtendEBI();
+  }
+
+  private initialiseGoogleAnalytics(): void {
     if (environment.production === false) {
       ga('create', environment.analytics_id, 'none');
     } else {
       ga('create', environment.analytics_id, 'none');
     }
+  }
+
+  private initialiseFoundationHacks(): void {
     // copied from script.js (ebi framework)
     // Assign global nav background images through meta tags
     (function assignImageByMetaTags() {
@@ -59,25 +89,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
       // tslint:enable
     })();
-
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        ProgressBarComponent.display();
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
-  }
-
-
-  ngAfterViewInit(): void {
-    ProgressBarComponent.hide();
-  }
-
-  // Candidate for utils.
-  private initialiseFoundation(): void {
-    $(document).foundation();
-    $(document).foundationExtendEBI();
   }
 
   get version(): string {
