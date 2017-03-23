@@ -27,10 +27,6 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this._basketService.deleteFromBasket(key);
   }
 
-  get basketService(): BasketService {
-    return this._basketService;
-  }
-
   get complexBasket(): {[name: string]: BasketItem} {
     return this._complexBasket;
   }
@@ -44,6 +40,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Candidate for Util
   public getKeys(object: any) {
     return Object.keys(object);
   }
