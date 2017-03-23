@@ -10,7 +10,7 @@ declare const $: any;
 declare const ga: any;
 
 const {version: version} = require('../../package.json');
-
+const environmentName : string = environment.evn;
 
 @Component({
   selector: 'app-root',
@@ -19,10 +19,12 @@ const {version: version} = require('../../package.json');
 })
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
+  private _environmentName : string;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
     this._version = version;
+    this._environmentName = environmentName;
     toastrConfig.closeButton = true; // displayedElements close button
     toastrConfig.timeOut = 0; // time to live
     this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
@@ -84,5 +86,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   set version(value: string) {
     this._version = value;
+  }
+
+  get environmentName(): string {
+    return this._environmentName;
+  }
+
+  set environmentName(value: string) {
+    this._environmentName = value;
   }
 }
