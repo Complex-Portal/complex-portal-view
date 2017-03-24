@@ -1,0 +1,19 @@
+<div class="row" *ngIf="symbol" style="text-align: center; padding-top: 20px">
+  <div class="columns medium-12" style="height: 60px">
+    <h5>{{name}}</h5>
+    <!--<br>-->
+  </div>
+  <div class="columns medium-12" style="text-align: center">
+    <ng-container *ngIf="symbol !== 'x'">
+      <a><span class="icon icon-species" attr.data-icon="{{symbol}}"></span><br>{{count}}</a>
+    </ng-container>
+    <ng-container *ngIf="symbol === 'x'">
+      <a><span class="icon icon-functional" attr.data-icon="{{symbol}}"></span><br>{{count}}</a>
+    </ng-container>
+  </div>
+  <div class="" style="text-align: center">
+    <a class="tag">ComplexTab</a>
+    <a class="tag">PSI-XML2.5</a>
+    <a class="tag">PSI-XML3.0</a>
+  </div>
+</div>

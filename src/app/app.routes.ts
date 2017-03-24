@@ -5,6 +5,7 @@ import {DownloadComponent} from './download/download.component';
 import {ComplexDetailsComponent} from './complex/complex-details/complex-details.component';
 import {BasketComponent} from './basket/basket.component';
 import {AboutComponent} from "./about/about.component";
+import {ComplexOrganismsComponent} from "./complex/complex-organisms/complex-organisms.component";
 
 export const rootRouterConfig: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -13,5 +14,6 @@ export const rootRouterConfig: Routes = [
   {path: 'search', component: ComplexResultsComponent},
   {path: 'complex/:id', component: ComplexDetailsComponent},
   {path: 'basket', component: BasketComponent},
-  {path: 'about', component: AboutComponent}
+  {path: 'about', component: AboutComponent},
+  {path: 'organisms', component: ComplexOrganismsComponent}
 ];

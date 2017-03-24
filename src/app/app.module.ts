@@ -59,6 +59,8 @@ import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/pro
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 import {ToastrModule} from "ngx-toastr";
 import { AboutComponent } from './about/about.component';
+import { ComplexOrganismsComponent } from './complex/complex-organisms/complex-organisms.component';
+import { ComplexOrganismComponent } from './complex/complex-organisms/complex-organism/complex-organism.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +107,8 @@ import { AboutComponent } from './about/about.component';
     ProgressBarComponent,
     ProgressSpinnerComponent,
     AboutComponent,
+    ComplexOrganismsComponent,
+    ComplexOrganismComponent,
   ],
   imports: [
     BrowserModule,

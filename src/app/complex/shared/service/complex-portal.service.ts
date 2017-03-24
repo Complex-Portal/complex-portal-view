@@ -24,6 +24,11 @@ export class ComplexPortalService {
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
+
+  getComplexOrganisms(){
+    return this.findComplex('*').map(res => res.facets.species_f);
+  }
+
   /**
    * Get a specif complex from the WS
    * @param ac
@@ -48,7 +53,7 @@ export class ComplexPortalService {
    */
 
   findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
-              interactorTypeFilter: string[] = [], currentPageIndex: number, pageSize = 10,
+              interactorTypeFilter: string[] = [], currentPageIndex: number = 1, pageSize = 10,
               format = 'json', facets = 'species_f,ptype_f,pbiorole_f') {
     const params = new URLSearchParams();
     let filters = '';
@@ -66,6 +71,7 @@ export class ComplexPortalService {
       filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
     }
     params.set('filters', filters);
+    // console.log(baseURL + '/search/' + query, {search: params});
     return this.http.get(baseURL + '/search/' + query, {search: params})
       .map((res: Response) => res.json()).catch(this.handleError);
   }
