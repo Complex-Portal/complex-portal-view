@@ -6060,7 +6060,7 @@ module.exports = module.exports.toString();
 
 module.exports = {
 	"name": "complex-portal-view",
-	"version": "0.0.5-beta",
+	"version": "0.0.6-beta",
 	"license": "MIT",
 	"angular-cli": {},
 	"scripts": {
