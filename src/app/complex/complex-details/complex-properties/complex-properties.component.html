@@ -3,13 +3,13 @@
   <div id="description" class="columns medium-12 no-pad-left" *ngIf="propertiesDescription">
     {{propertiesDescription}}
   </div>
-  <div id="comment" class="columns medium-12 no-pad-left" *ngIf="comments">
+  <div id="comment" class="columns medium-12 no-pad-left" *ngIf="comments  && comments.length !== 0">
     <h3>Comments</h3>
     <ul class="no-bullet" *ngFor="let comment of comments">
       <li>{{comment}}</li>
     </ul>
   </div>
-  <div id="pdbXRefs" class="columns medium-12 no-pad-left" *ngIf="pdbXRefs">
+  <div id="pdbXRefs" class="columns medium-12" *ngIf="pdbXRefs">
     <app-pdb-crossreferences [crossReferences]="pdbXRefs"></app-pdb-crossreferences>
   </div>
 </div>
