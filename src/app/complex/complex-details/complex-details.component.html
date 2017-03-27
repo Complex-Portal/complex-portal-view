@@ -34,6 +34,7 @@
         <div class="columns medium-12">
           <app-complex-properties *ngIf="complexDetails"
                                   [propertiesDescription]="complexDetails.properties"
+                                  [comments]="complexDetails.comments"
                                   [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
         </div>
         <div class="columns medium-12">

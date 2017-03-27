@@ -10,6 +10,7 @@ export class ComplexPropertiesComponent implements OnInit {
   private _propertiesDescription: string;
   private _crossReferences: CrossReference[];
   private _pdbXRefs: CrossReference[];
+  private _comments: string[];
 
   constructor() {
   }
@@ -52,5 +53,14 @@ export class ComplexPropertiesComponent implements OnInit {
 
   set pdbXRefs(value: CrossReference[]) {
     this._pdbXRefs = value;
+  }
+
+  get comments(): string[] {
+    return this._comments;
+  }
+
+  @Input()
+  set comments(value: string[]) {
+    this._comments = value;
   }
 }
