@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="columns medium-12 no-pad-left">
+  <div class="columns medium-12 no-pad-left" *ngIf="diseaseDescriptions || efoXRefs || chemblXRefs">
     <h2>Diseases and Pathologies</h2>
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="diseaseDescriptions">
       <ul class="no-bullet" *ngFor="let diseaseDescription of diseaseDescriptions">
