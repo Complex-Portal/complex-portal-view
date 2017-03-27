@@ -1,0 +1,9 @@
+<div class="row no-pad-left">
+  <h2>Evidences</h2>
+  <div id="ecoXrefs" class="columns medium-6">
+    <app-eco-crossreferences *ngIf="ecoXRefs" [crossReferences]="ecoXRefs"></app-eco-crossreferences>
+  </div>
+  <div id="intactXrefs" class="columns medium-6">
+    <app-intact-crossreferences *ngIf="ecoXRefs" [crossReferences]="intactXRefs"></app-intact-crossreferences>
+  </div>
+</div>

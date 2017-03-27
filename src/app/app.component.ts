@@ -10,7 +10,7 @@ declare const $: any;
 declare const ga: any;
 
 const {version: version} = require('../../package.json');
-const environmentName : string = environment.evn;
+const environmentName: string = environment.evn;
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ const environmentName : string = environment.evn;
 })
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
-  private _environmentName : string;
+  private _environmentName: string;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig) {

@@ -33,8 +33,8 @@ import {ReactomeCrossreferencesComponent} from './complex/complex-details/comple
 import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {GoCrossreferencesComponent} from './complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component';
 import {IntenzCrossreferencesComponent} from './complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component';
-import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-function/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
-import {EuroPmcService} from './complex/complex-details/complex-function/euro-pmc-crossreferences/service/euro-pmc.service';
+import {EuroPmcCrossreferencesComponent} from './complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
+import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {PdbCrossreferencesComponent} from './complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component';
 import {LitmolViewerComponent} from './complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component';
 import {ExamplesLargeComponent} from './search/examples/examples-large/examples-large.component';
@@ -61,6 +61,10 @@ import {ToastrModule} from "ngx-toastr";
 import { AboutComponent } from './about/about.component';
 import { ComplexOrganismsComponent } from './complex/complex-organisms/complex-organisms.component';
 import { ComplexOrganismComponent } from './complex/complex-organisms/complex-organism/complex-organism.component';
+import { ComplexReferencesComponent } from './complex/complex-details/complex-references/complex-references.component';
+import { ComplexEvidenceComponent } from './complex/complex-details/complex-evidence/complex-evidence.component';
+import { EcoCrossreferencesComponent } from './complex/complex-details/complex-evidence/eco-crossreferences/eco-crossreferences.component';
+import { IntactCrossreferencesComponent } from './complex/complex-details/complex-evidence/intact-crossreferences/intact-crossreferences.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +113,10 @@ import { ComplexOrganismComponent } from './complex/complex-organisms/complex-or
     AboutComponent,
     ComplexOrganismsComponent,
     ComplexOrganismComponent,
+    ComplexReferencesComponent,
+    ComplexEvidenceComponent,
+    EcoCrossreferencesComponent,
+    IntactCrossreferencesComponent,
   ],
   imports: [
     BrowserModule,

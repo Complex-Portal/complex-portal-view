@@ -13,8 +13,8 @@ interface Publication {
 
 @Component({
   selector: 'app-euro-pmc-crossreferences',
-  templateUrl: './euro-pmc-crossreferences.component.html',
-  styleUrls: ['./euro-pmc-crossreferences.component.css']
+  templateUrl: 'euro-pmc-crossreferences.component.html',
+  styleUrls: ['euro-pmc-crossreferences.component.css']
 })
 
 export class EuroPmcCrossreferencesComponent implements OnInit {

@@ -1,9 +1,9 @@
-<div class="row">
+<div class="row no-pad-left">
   <h2>Properties</h2>
-  <div id="description" class="columns medium-12" *ngIf="propertiesDescription">
+  <div id="description" class="columns medium-12 no-pad-left" *ngIf="propertiesDescription">
     {{propertiesDescription}}
   </div>
-  <div id="pdbXRefs" class="columns medium-12" *ngIf="pdbXRefs">
+  <div id="pdbXRefs" class="columns medium-12 no-pad-left" *ngIf="pdbXRefs">
     <app-pdb-crossreferences [crossReferences]="pdbXRefs"></app-pdb-crossreferences>
   </div>
 </div>

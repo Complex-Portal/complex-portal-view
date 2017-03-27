@@ -7,15 +7,21 @@
                             [complexName]="complexDetails.name"
                             [complexSpecies]="complexDetails.species"></app-complex-header>
       </div>
-      <div class="columns medium-12">
-        <div class="columns medium-6 no-pad-left no-pad-right">
-          <app-complex-viewer *ngIf="complexDetails && complexMIJSON"
-                              [complexAC]="complexDetails.ac"
-                              [complexMIJSON]="complexMIJSON"></app-complex-viewer>
+      <div class="columns medium-12 no-pad-left">
+        <div class="columns medium-12">
+          <div class="columns medium-6 no-pad-left no-pad-right">
+            <app-complex-viewer *ngIf="complexDetails && complexMIJSON"
+                                [complexAC]="complexDetails.ac"
+                                [complexMIJSON]="complexMIJSON"></app-complex-viewer>
+          </div>
+          <div class="columns medium-6">
+            <app-complex-participants *ngIf="complexDetails"
+                                      [participants]="complexDetails.participants"></app-complex-participants>
+          </div>
         </div>
-        <div class="columns medium-6">
-          <app-complex-participants *ngIf="complexDetails"
-                                    [participants]="complexDetails.participants"></app-complex-participants>
+        <div class="columns medium-12">
+          <app-complex-evidence *ngIf="complexDetails"
+                                [crossReferences]="complexDetails.crossReferences"></app-complex-evidence>
         </div>
         <div class="columns medium-12 ">
           <app-complex-function *ngIf="complexDetails"
@@ -43,6 +49,10 @@
           <app-complex-disease *ngIf="complexDetails"
                                [diseaseDescriptions]="complexDetails.diseases"
                                [crossReferences]="complexDetails.crossReferences"></app-complex-disease>
+        </div>
+        <div class="columns medium-12">
+          <app-complex-references *ngIf="complexDetails"
+                                  [crossReferences]="complexDetails.crossReferences"></app-complex-references>
         </div>
       </div>
       <div class="columns medium-12">

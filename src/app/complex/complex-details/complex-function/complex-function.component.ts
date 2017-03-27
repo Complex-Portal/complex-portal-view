@@ -12,7 +12,7 @@ export class ComplexFunctionComponent implements OnInit {
   private _goXRefs: CrossReference[];
   private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
-  private _pubmedXRefs: CrossReference[];
+  // private _pubmedXRefs: CrossReference[];
   private _synonyms: string[];
   private _systematicName: string[];
   private _ligands: string[];
@@ -45,12 +45,12 @@ export class ComplexFunctionComponent implements OnInit {
         }
         this.reactomeXRefs.push(crossRef);
       }
-      if (database === 'pubmed') {
-        if (this.pubmedXRefs === undefined) {
-          this.pubmedXRefs = [];
-        }
-        this.pubmedXRefs.push(crossRef);
-      }
+      // if (database === 'pubmed') {
+      //   if (this.pubmedXRefs === undefined) {
+      //     this.pubmedXRefs = [];
+      //   }
+      //   this.pubmedXRefs.push(crossRef);
+      // }
     }
   }
 
@@ -97,13 +97,13 @@ export class ComplexFunctionComponent implements OnInit {
     this._reactomeXRefs = value;
   }
 
-  get pubmedXRefs(): CrossReference[] {
-    return this._pubmedXRefs;
-  }
-
-  set pubmedXRefs(value: CrossReference[]) {
-    this._pubmedXRefs = value;
-  }
+  // get pubmedXRefs(): CrossReference[] {
+  //   return this._pubmedXRefs;
+  // }
+  //
+  // set pubmedXRefs(value: CrossReference[]) {
+  //   this._pubmedXRefs = value;
+  // }
 
   get synonyms(): string[] {
     return this._synonyms;

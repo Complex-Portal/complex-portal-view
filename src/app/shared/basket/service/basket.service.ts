@@ -19,7 +19,7 @@ export class BasketService {
       this.saveInLocalStorage();
       this.initialiseBasket();
     } else {
-      const keys = Object.keys(complexStore);
+      const keys = this.getKeys(complexStore);
       for (let i = 0; i < keys.length; i++) {
         const complex = complexStore[keys[i]];
         if (complex) {
@@ -27,6 +27,10 @@ export class BasketService {
         }
       }
     }
+  }
+
+  public getKeys(object:Object) : string[]{
+    return Object.keys(object);
   }
 
   public saveInBasket(name: string, id: string, organism: string): void {
