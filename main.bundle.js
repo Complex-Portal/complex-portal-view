@@ -1,321 +1,414 @@
 webpackJsonp([1,5],{
 
-/***/ 1005:
+/***/ 1001:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h5>The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number of\n      key\n      model organisms, entered into the IntAct molecular interaction database. Data includes protein-only complexes as\n      well as protein-small molecule and protein-nucleic acid complexes. All complexes are derived from physical\n      molecular\n      interaction evidences extracted from the literature, and cross-referenced in the entry, or by curator inference\n      from\n      information on orthologues in closely related species. Any complex which currently lacks direct experimental\n      evidence is tagged as such, using controlled vocabulary terms from the Evidence Code Ontology.</h5>\n\n    <p>The number of complexes available is currently limited, but will be added to over time. If you wish to request\n      the\n      curation of one or more complexes, or to amend or contribute to an existing entry, please contact us on\n      intact-help.</p>\n    To read more on complex curation, go to Documentation.\n\n    <p>To find out more about the search algorithms, go to Help.</p>\n\n    <p>To retrieve our data programmatically, please use our API: Complex Portal Web-Service</p>\n\n    <p>Complexes can be downloaded in PSI-MI XML 2.5.4 format from our ftp site. Individual complex files are grouped by\n      species.</p>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ 1006:
-/***/ (function(module, exports) {
-
-module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"180\" data-btm-anchor=\"300000\">\n    <header>\n\n      <div id=\"global-masthead\" class=\"clearfix\">\n        <!--This has to be one line and no newline characters-->\n        <a href=\"//www.ebi.ac.uk/\" title=\"Go to the EMBL-EBI homepage\"><span class=\"ebi-logo\"></span></a>\n\n        <nav>\n          <div class=\"row\">\n            <ul id=\"global-nav\" class=\"menu\">\n              <!-- set active class as appropriate -->\n              <li id=\"home-mobile\" class=\"\"><a href=\"//www.ebi.ac.uk\"></a></li>\n              <li id=\"home\" class=\"active\"><a href=\"//www.ebi.ac.uk\"><i class=\"icon icon-generic\" data-icon=\"H\"></i>\n                EMBL-EBI</a></li>\n              <li id=\"services\"><a href=\"//www.ebi.ac.uk/services\"><i class=\"icon icon-generic\" data-icon=\"(\"></i>\n                Services</a></li>\n              <li id=\"research\"><a href=\"//www.ebi.ac.uk/research\"><i class=\"icon icon-generic\" data-icon=\")\"></i>\n                Research</a></li>\n              <li id=\"training\"><a href=\"//www.ebi.ac.uk/training\"><i class=\"icon icon-generic\" data-icon=\"t\"></i>\n                Training</a></li>\n              <li id=\"about\"><a href=\"//www.ebi.ac.uk/about\"><i class=\"icon icon-generic\" data-icon=\"i\"></i> About\n                us</a></li>\n              <li id=\"search\">\n                <a data-toggle=\"search-global-dropdown\"><i class=\"icon icon-functional\" data-icon=\"1\"></i>\n                  <span class=\"show-for-small-only\">Search</span></a>\n                <div id=\"search-global-dropdown\" class=\"dropdown-pane\" data-dropdown data-options=\"closeOnClick:true;\">\n                  <form id=\"global-search\" name=\"global-search\" action=\"/ebisearch/search.ebi\" method=\"GET\">\n                    <fieldset>\n                      <div class=\"input-group\">\n                        <input type=\"text\" name=\"query\" id=\"global-searchbox\" class=\"input-group-field\"\n                               placeholder=\"Search all of EMBL-EBI\">\n                        <div class=\"input-group-button\">\n                          <input type=\"submit\" name=\"submit\" value=\"Search\" class=\"button\">\n                          <input type=\"hidden\" name=\"db\" value=\"allebi\" checked=\"checked\">\n                          <input type=\"hidden\" name=\"requestFrom\" value=\"global-masthead\" checked=\"checked\">\n                        </div>\n                      </div>\n                    </fieldset>\n                  </form>\n                </div>\n              </li>\n              <li class=\"float-right show-for-medium embl-selector\">\n                <button class=\"button float-right\" type=\"button\" data-toggle=\"embl-dropdown\">Hinxton</button>\n                <!-- The dropdown menu will be programatically added by script.js -->\n              </li>\n            </ul>\n          </div>\n        </nav>\n\n      </div>\n\n      <div class=\"masthead row\">\n\n        <!-- local-title -->\n        <div class=\"columns medium-12\" id=\"local-title\">\n          <h1>\n            <a routerLink=\"/home\" title=\"Back to [service-name] homepage\">\n              <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">\n              Complex Portal\n            </a>\n            <i style=\"float: right; color: red\" class=\"icon icon-generic\" data-icon=\"&gt;\"></i>\n          </h1>\n\n        </div>\n        <!-- /local-title -->\n\n        <!-- local-nav -->\n        <nav>\n          <ul class=\"dropdown menu float-left\" data-description=\"navigational\">\n            <li><a routerLink=\"/home\">Home</a></li>\n            <li><a href=\"http://www.ebi.ac.uk/intact/complex/help/\" target=\"_blank\">Help</a></li>\n            <li><a href=\"http://www.ebi.ac.uk/intact/complex/about/\" target=\"_blank\">About</a></li>\n            <li><a routerLink=\"/basket\">Basket</a></li>\n            <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Issues</a></li>\n            <!--<li><a routerLink=\"/favorites\">Favorites</a></li>-->\n          </ul>\n        </nav>\n        <!-- /local-nav -->\n      </div>\n    </header>\n  </div>\n  <app-progress-bar></app-progress-bar>\n</div>\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n  </section>\n  <!-- End suggested layout containers -->\n\n</div>\n\n<footer>\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <!--\n        <div id=\"local-footer\">\n          <div class=\"row\">\n            <span class=\"reference\">How to reference this page: ...</span>\n          </div>\n        </div>\n   -->\n  <!-- End optional local footer -->\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <div id=\"local-footer\">\n    <div class=\"row padding-top-large padding-bottom-large\">\n      <div class=\"columns medium-12\">\n        <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n        <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n        <table>\n            <tbody>\n            <tr>\n              <td><img src=\"assets/images/contributors/imex_acg_s.png\"></td>\n              <td><img src=\"assets/images/contributors/Ceitec.png\"></td>\n              <td><img src=\"assets/images/contributors/matrixdb.png\"></td>\n              <td><img src=\"assets/images/contributors/Mint.png\"></td>\n              <td><img src=\"assets/images/contributors/SGD.png\"></td>\n              <td><img src=\"assets/images/contributors/uniprot.png\"></td>\n            </tr>\n            </tbody>\n          </table>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"global-footer\">\n\n    <nav id=\"global-nav-expanded\" class=\"row\">\n      <!-- Footer will be automatically inserted by footer.js -->\n    </nav>\n\n    <section id=\"ebi-footer-meta\" class=\"row\">\n      <!-- Footer meta will be automatically inserted by footer.js -->\n    </section>\n\n  </div>\n\n</footer>\n"
-
-/***/ }),
-
-/***/ 1007:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div *ngIf=\"!isComplexBasketEmpty()\" class=\"columns medium-12\">\n    <div class=\"callout\">\n      <h3>Personal complex collection</h3>\n    </div>\n    <table class=\"hover\">\n      <thead>\n      <tr>\n        <th>Name</th>\n        <th>ID</th>\n        <th>Organism</th>\n        <th></th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let key of getKeys(complexBasket)\">\n        <td>\n          <a [routerLink]=\"['/complex', complexBasket[key].id]\">{{complexBasket[key].name}}</a>\n        </td>\n        <td>\n          {{complexBasket[key].id}}\n        </td>\n        <td>\n          {{complexBasket[key].organism}}\n        </td>\n        <td>\n          <a class=\"button primary columns medium-12\" (click)=\"deleteFromBasket(key)\"> <span\n            class=\"icon icon-functional\" data-icon=\"d\"></span></a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <div *ngIf=\"isComplexBasketEmpty()\" class=\"columns medium-12\">\n    <div class=\"callout\">\n      <h3>Your basket is currently empty. :'-(</h3>\n      <h5>Search for a complex and click on <i class=\"icon icon-generic\" data-icon=\"b\"></i>-symbol to create your own collection of favorite complexes.</h5>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ 1008:
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\">\n        <app-complex-header *ngIf=\"complexDetails\"\n                            [complexAC]=\"complexDetails.ac\"\n                            [complexName]=\"complexDetails.name\"\n                            [complexSpecies]=\"complexDetails.species\"></app-complex-header>\n      </div>\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6 no-pad-left no-pad-right\">\n          <app-complex-viewer *ngIf=\"complexDetails && complexMIJSON\"\n                              [complexAC]=\"complexDetails.ac\"\n                              [complexMIJSON]=\"complexMIJSON\"></app-complex-viewer>\n        </div>\n        <div class=\"columns medium-6\">\n          <app-complex-participants *ngIf=\"complexDetails\"\n                                    [participants]=\"complexDetails.participants\"></app-complex-participants>\n        </div>\n        <div class=\"columns medium-12 \">\n          <app-complex-function *ngIf=\"complexDetails\"\n                                [functionDescription]=\"complexDetails.functions\"\n                                [crossReferences]=\"complexDetails.crossReferences\"\n                                [synonyms]=\"complexDetails.synonyms\"\n                                [systematicName]=\"complexDetails.systematicName\"\n                                [ligands]=\"complexDetails.ligands\"\n                                [agonists]=\"complexDetails.agonists\"\n                                [antagonists]=\"complexDetails.antagonists\"></app-complex-function>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-properties *ngIf=\"complexDetails\"\n                                  [propertiesDescription]=\"complexDetails.properties\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"></app-complex-properties>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-expression *ngIf=\"complexDetails && gxa\"\n                                  [gxa]=\"gxa\"\n                                  [participants]=\"complexDetails.participants\"\n                                  [complexSpecies]=\"complexDetails.species\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"></app-complex-expression>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-disease *ngIf=\"complexDetails\"\n                               [diseaseDescriptions]=\"complexDetails.diseases\"\n                               [crossReferences]=\"complexDetails.crossReferences\"></app-complex-disease>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <app-complex-footer *ngIf=\"complexDetails\"\n                            [institute]=\"complexDetails.institution\"></app-complex-footer>\n      </div>\n    </div>\n  </div>\n</section>\n"
-
-/***/ }),
-
-/***/ 1009:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>ChEMBL Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.url}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ 1010:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h2>Diseases and Pathologies</h2>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions\">\n      <ul class=\"no-bullet\" *ngFor=\"let diseaseDescription of diseaseDescriptions\">\n        <li>{{diseaseDescription}}</li>\n      </ul>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"efoXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"efoXRefs\">\n        <app-efo-crossreferences [crossReferences]=\"efoXRefs\"></app-efo-crossreferences>\n      </div>\n      <div id=\"chemblXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"chemblXRefs\">\n        <app-chembl-crossreference [crossReferences]=\"chemblXRefs\"></app-chembl-crossreference>\n      </div>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ 1011:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>EFO Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Name</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n        <td>\n          {{crossReference.description}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ 1012:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <h2>Expression</h2>\n  <div class=\"columns medium-12\">\n    <app-gxa-heatmap *ngIf=\"gxa && gxaParamsQueries\" [gxa]=\"gxa\" [gxaParamsQueries]=\"gxaParamsQueries\"\n                     [complexSpecies]=\"complexSpecies\"></app-gxa-heatmap>\n  </div>\n  <div class=\"columns medium-12\">\n    <app-go-celluar-crossreference *ngIf=\"goCellularXRefs\"\n                                   [crossReferences]=\"goCellularXRefs\"></app-go-celluar-crossreference>\n  </div>\n</div>\n"
+module.exports = {
+	"name": "complex-portal-view",
+	"version": "0.0.7-beta",
+	"license": "MIT",
+	"angular-cli": {},
+	"scripts": {
+		"ng": "ng",
+		"start": "ng serve",
+		"test": "ng test",
+		"pree2e": "webdriver-manager update --standalone false --gecko false",
+		"e2e": "protractor"
+	},
+	"private": true,
+	"dependencies": {
+		"@angular/common": "^2.3.1",
+		"@angular/compiler": "^2.3.1",
+		"@angular/core": "^2.3.1",
+		"@angular/forms": "^2.3.1",
+		"@angular/http": "^2.3.1",
+		"@angular/material": "^2.0.0-beta.2",
+		"@angular/platform-browser": "^2.3.1",
+		"@angular/platform-browser-dynamic": "^2.3.1",
+		"@angular/router": "^3.3.1",
+		"EBI-Icon-fonts": "https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1",
+		"angulartics2": "^1.6.3",
+		"complexviewer": "/Users/maximiliankoch/interaction-viewer",
+		"core-js": "^2.4.1",
+		"ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13",
+		"expose-loader": "^0.7.1",
+		"install": "^0.8.7",
+		"jquery": "^3.1.1",
+		"litemol": "https://github.com/dsehnal/LiteMol/tarball/v1.0",
+		"ngx-toastr": "^4.4.1",
+		"react": "^15.4.2",
+		"rxjs": "^5.0.1",
+		"svgsaver": "^0.6.2",
+		"ts-helpers": "^1.1.1",
+		"ts-md5": "^1.2.0",
+		"zone.js": "^0.7.2"
+	},
+	"devDependencies": {
+		"@angular/cli": "^1.0.0-rc.4",
+		"@angular/compiler-cli": "^2.3.1",
+		"@types/jasmine": "2.5.38",
+		"@types/node": "^6.0.42",
+		"codelyzer": "~2.0.0-beta.1",
+		"jasmine-core": "2.5.2",
+		"jasmine-spec-reporter": "2.5.0",
+		"karma": "1.2.0",
+		"karma-chrome-launcher": "^2.0.0",
+		"karma-cli": "^1.0.1",
+		"karma-jasmine": "^1.0.2",
+		"karma-remap-istanbul": "^0.2.1",
+		"protractor": "~4.0.13",
+		"ts-node": "1.2.1",
+		"tslint": "^4.3.0",
+		"typescript": "^2.0.10"
+	}
+};
 
 /***/ }),
 
 /***/ 1013:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Component Terms ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h5>The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number of\n      key\n      model organisms, entered into the IntAct molecular interaction database. Data includes protein-only complexes as\n      well as protein-small molecule and protein-nucleic acid complexes. All complexes are derived from physical\n      molecular\n      interaction evidences extracted from the literature, and cross-referenced in the entry, or by curator inference\n      from\n      information on orthologues in closely related species. Any complex which currently lacks direct experimental\n      evidence is tagged as such, using controlled vocabulary terms from the Evidence Code Ontology.</h5>\n\n    <p>The number of complexes available is currently limited, but will be added to over time. If you wish to request\n      the\n      curation of one or more complexes, or to amend or contribute to an existing entry, please contact us on\n      intact-help.</p>\n    To read more on complex curation, go to Documentation.\n\n    <p>To find out more about the search algorithms, go to Help.</p>\n\n    <p>To retrieve our data programmatically, please use our API: Complex Portal Web-Service</p>\n\n    <p>Complexes can be downloaded in PSI-MI XML 2.5.4 format from our ftp site. Individual complex files are grouped by\n      species.</p>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1014:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-7 no-pad-left\">\n    </div>\n    <div class=\"columns medium-4\">\n      <h3>Curated by:</h3> <h4>{{institute}}</h4>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"180\" data-btm-anchor=\"300000\">\n    <header>\n\n      <div id=\"global-masthead\" class=\"clearfix\">\n        <!--This has to be one line and no newline characters-->\n        <a href=\"//www.ebi.ac.uk/\" title=\"Go to the EMBL-EBI homepage\"><span class=\"ebi-logo\"></span></a>\n\n        <nav>\n          <div class=\"row\">\n            <ul id=\"global-nav\" class=\"menu\">\n              <!-- set active class as appropriate -->\n              <li id=\"home-mobile\" class=\"\"><a href=\"//www.ebi.ac.uk\"></a></li>\n              <li id=\"home\" class=\"active\"><a href=\"//www.ebi.ac.uk\"><i class=\"icon icon-generic\" data-icon=\"H\"></i>\n                EMBL-EBI</a></li>\n              <li id=\"services\"><a href=\"//www.ebi.ac.uk/services\"><i class=\"icon icon-generic\" data-icon=\"(\"></i>\n                Services</a></li>\n              <li id=\"research\"><a href=\"//www.ebi.ac.uk/research\"><i class=\"icon icon-generic\" data-icon=\")\"></i>\n                Research</a></li>\n              <li id=\"training\"><a href=\"//www.ebi.ac.uk/training\"><i class=\"icon icon-generic\" data-icon=\"t\"></i>\n                Training</a></li>\n              <li id=\"about\"><a href=\"//www.ebi.ac.uk/about\"><i class=\"icon icon-generic\" data-icon=\"i\"></i> About\n                us</a></li>\n              <li id=\"search\">\n                <a data-toggle=\"search-global-dropdown\"><i class=\"icon icon-functional\" data-icon=\"1\"></i>\n                  <span class=\"show-for-small-only\">Search</span></a>\n                <div id=\"search-global-dropdown\" class=\"dropdown-pane\" data-dropdown data-options=\"closeOnClick:true;\">\n                  <form id=\"global-search\" name=\"global-search\" action=\"/ebisearch/search.ebi\" method=\"GET\">\n                    <fieldset>\n                      <div class=\"input-group\">\n                        <input type=\"text\" name=\"query\" id=\"global-searchbox\" class=\"input-group-field\"\n                               placeholder=\"Search all of EMBL-EBI\">\n                        <div class=\"input-group-button\">\n                          <input type=\"submit\" name=\"submit\" value=\"Search\" class=\"button\">\n                          <input type=\"hidden\" name=\"db\" value=\"allebi\" checked=\"checked\">\n                          <input type=\"hidden\" name=\"requestFrom\" value=\"global-masthead\" checked=\"checked\">\n                        </div>\n                      </div>\n                    </fieldset>\n                  </form>\n                </div>\n              </li>\n              <li class=\"float-right show-for-medium embl-selector\">\n                <button class=\"button float-right\" type=\"button\" data-toggle=\"embl-dropdown\">Hinxton</button>\n                <!-- The dropdown menu will be programatically added by script.js -->\n              </li>\n            </ul>\n          </div>\n        </nav>\n\n      </div>\n\n      <div class=\"masthead row\">\n\n        <!-- local-title -->\n        <div class=\"columns medium-12\" id=\"local-title\">\n          <h1>\n            <a routerLink=\"/home\" title=\"Back to [service-name] homepage\">\n              <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">\n              Complex Portal\n            </a>\n            <i style=\"float: right; color: red\" class=\"icon icon-generic\" data-icon=\"&gt;\"></i>\n          </h1>\n\n        </div>\n        <!-- /local-title -->\n\n        <!-- local-nav -->\n        <nav>\n          <ul class=\"dropdown menu float-left\" data-description=\"navigational\">\n            <li><a routerLink=\"/home\">Home</a></li>\n            <li><a href=\"http://www.ebi.ac.uk/intact/complex/help/\" target=\"_blank\">Help</a></li>\n            <li><a href=\"http://www.ebi.ac.uk/intact/complex/about/\" target=\"_blank\">About</a></li>\n            <li><a routerLink=\"/basket\">Basket</a></li>\n            <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Issues</a></li>\n            <!--<li><a routerLink=\"/favorites\">Favorites</a></li>-->\n          </ul>\n        </nav>\n        <!-- /local-nav -->\n      </div>\n    </header>\n  </div>\n  <app-progress-bar></app-progress-bar>\n</div>\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n  </section>\n  <!-- End suggested layout containers -->\n\n</div>\n\n<footer>\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <!--\n        <div id=\"local-footer\">\n          <div class=\"row\">\n            <span class=\"reference\">How to reference this page: ...</span>\n          </div>\n        </div>\n   -->\n  <!-- End optional local footer -->\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <div id=\"local-footer\">\n    <div class=\"row padding-top-large padding-bottom-large\">\n      <div class=\"columns medium-12\">\n        <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n        <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n        <table>\n          <tbody>\n          <tr>\n            <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n              src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n            <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n            <td><a href=\"//matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n              src=\"assets/images/contributors/matrixdb.png\"></a></td>\n            <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n            </td>\n            <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a></td>\n            <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a></td>\n          </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"global-footer\">\n\n    <nav id=\"global-nav-expanded\" class=\"row\">\n      <!-- Footer will be automatically inserted by footer.js -->\n    </nav>\n\n    <section id=\"ebi-footer-meta\" class=\"row\">\n      <!-- Footer meta will be automatically inserted by footer.js -->\n    </section>\n\n  </div>\n\n</footer>\n"
 
 /***/ }),
 
 /***/ 1015:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Agonists ({{agonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let agonist of agonists | slice:0:displayedElements\">\n        <td>\n          {{agonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < agonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = agonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div *ngIf=\"!isComplexBasketEmpty()\" class=\"columns medium-12\">\n    <div class=\"callout\">\n      <h3>Personal complex collection</h3>\n    </div>\n    <table class=\"hover\">\n      <thead>\n      <tr>\n        <th>Name</th>\n        <th>ID</th>\n        <th>Organism</th>\n        <th></th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let key of getKeys(complexBasket)\">\n        <td>\n          <a [routerLink]=\"['/complex', complexBasket[key].id]\">{{complexBasket[key].name}}</a>\n        </td>\n        <td>\n          {{complexBasket[key].id}}\n        </td>\n        <td>\n          {{complexBasket[key].organism}}\n        </td>\n        <td>\n          <a class=\"button primary columns medium-12\" (click)=\"deleteFromBasket(key)\"> <span\n            class=\"icon icon-functional\" data-icon=\"d\"></span></a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <div *ngIf=\"isComplexBasketEmpty()\" class=\"columns medium-12\">\n    <div class=\"callout\">\n      <h3>Your basket is currently empty. :'-(</h3>\n      <h5>Search for a complex and click on <i class=\"icon icon-generic\" data-icon=\"b\"></i>-symbol to create your own collection of favorite complexes.</h5>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1016:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Antagonists ({{antagonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let antagonist of antagonists | slice:0:displayedElements\">\n        <td>\n          {{antagonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < antagonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = antagonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\">\n        <app-complex-header *ngIf=\"complexDetails\"\n                            [complexAC]=\"complexDetails.ac\"\n                            [complexName]=\"complexDetails.name\"\n                            [complexSpecies]=\"complexDetails.species\"></app-complex-header>\n      </div>\n      <div class=\"columns medium-12 no-pad-left\">\n        <div class=\"columns medium-12\">\n          <div class=\"columns medium-6 no-pad-left no-pad-right\">\n            <app-complex-viewer *ngIf=\"complexDetails && complexMIJSON\"\n                                [complexAC]=\"complexDetails.ac\"\n                                [complexMIJSON]=\"complexMIJSON\"></app-complex-viewer>\n          </div>\n          <div class=\"columns medium-6\">\n            <app-complex-participants *ngIf=\"complexDetails\"\n                                      [participants]=\"complexDetails.participants\"></app-complex-participants>\n          </div>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-evidence *ngIf=\"complexDetails\"\n                                [crossReferences]=\"complexDetails.crossReferences\"></app-complex-evidence>\n        </div>\n        <div class=\"columns medium-12 \">\n          <app-complex-function *ngIf=\"complexDetails\"\n                                [functionDescription]=\"complexDetails.functions\"\n                                [crossReferences]=\"complexDetails.crossReferences\"\n                                [ligands]=\"complexDetails.ligands\"\n                                [agonists]=\"complexDetails.agonists\"\n                                [antagonists]=\"complexDetails.antagonists\"></app-complex-function>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-properties *ngIf=\"complexDetails\"\n                                  [propertiesDescription]=\"complexDetails.properties\"\n                                  [comments]=\"complexDetails.comments\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"></app-complex-properties>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-expression *ngIf=\"complexDetails && gxa\"\n                                  [gxa]=\"gxa\"\n                                  [participants]=\"complexDetails.participants\"\n                                  [complexSpecies]=\"complexDetails.species\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"></app-complex-expression>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-disease *ngIf=\"complexDetails\"\n                               [diseaseDescriptions]=\"complexDetails.diseases\"\n                               [crossReferences]=\"complexDetails.crossReferences\"></app-complex-disease>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-complex-references *ngIf=\"complexDetails\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"\n                                  [synonyms]=\"complexDetails.synonyms\"\n                                  [systematicName]=\"complexDetails.systematicName\"></app-complex-references>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <app-complex-footer *ngIf=\"complexDetails\"\n                            [institute]=\"complexDetails.institution\"></app-complex-footer>\n      </div>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 
 /***/ 1017:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <h2>Function</h2>\n  <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"functionDescription\">\n    <p>{{functionDescription}}</p>\n  </div>\n  <div id=\"ligands\" class=\"columns medium-12 no-pad-left\" *ngIf=\"ligands && ligands.length !== 0\">\n    <app-ligands [ligands]=\"ligands\"></app-ligands>\n  </div>\n  <div id=\"goXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"goXRefs\">\n    <app-go-crossreferences [crossReferences]=\"goXRefs\"></app-go-crossreferences>\n  </div>\n  <div id=\"agonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"agonists && agonists.length !== 0\">\n    <app-agonists [agonists]=\"agonists\"></app-agonists>\n  </div>\n  <div id=\"antagonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"antagonists && antagonists.length !== 0\">\n    <app-antagonists [antagonists]=\"antagonists\"></app-antagonists>\n  </div>\n  <div id=\"reactomeXRefs\" class=\"columns medium-12\" *ngIf=\"reactomeXRefs\">\n    <app-reactome-crossreferences [crossReferences]=\"reactomeXRefs\"></app-reactome-crossreferences>\n  </div>\n  <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n    <app-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></app-euro-pmc-crossreferences>\n  </div>\n  <div id=\"intenzXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"intenzXRefs\">\n    <app-intenz-crossreferences [crossReferences]=\"intenzXRefs\"></app-intenz-crossreferences>\n  </div>\n  <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms\">\n    <app-synonyms [synonyms]=\"synonyms\"></app-synonyms>\n  </div>\n  <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName\">\n    <app-systematic-name [systematicName]=\"systematicName\"></app-systematic-name>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>ChEMBL Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1018:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Additional Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions || efoXRefs || chemblXRefs\">\n    <h2>Diseases and Pathologies</h2>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions\">\n      <ul class=\"no-bullet\" *ngFor=\"let diseaseDescription of diseaseDescriptions\">\n        <li>{{diseaseDescription}}</li>\n      </ul>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"efoXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"efoXRefs\">\n        <app-efo-crossreferences [crossReferences]=\"efoXRefs\"></app-efo-crossreferences>\n      </div>\n      <div id=\"chemblXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"chemblXRefs\">\n        <app-chembl-crossreference [crossReferences]=\"chemblXRefs\"></app-chembl-crossreference>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1019:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Biological Process ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>EFO Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Name</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n        <td>\n          {{crossReference.description}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1020:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"columns medium-6\">\n      <app-go-molecular-function *ngIf=\"molecularFunctions\"\n                                 [crossReferences]=\"molecularFunctions\"></app-go-molecular-function>\n    </div>\n    <div class=\"columns medium-6\">\n      <app-go-biological-process *ngIf=\"biologicalProcess\" [crossReferences]=\"biologicalProcess\"></app-go-biological-process>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row no-pad-left\">\n  <h2>Evidences</h2>\n  <div id=\"ecoXrefs\" class=\"columns medium-6\">\n    <app-eco-crossreferences *ngIf=\"ecoXRefs\" [crossReferences]=\"ecoXRefs\"></app-eco-crossreferences>\n  </div>\n  <div id=\"intactXrefs\" class=\"columns medium-6\">\n    <app-intact-crossreferences *ngIf=\"ecoXRefs\" [crossReferences]=\"intactXRefs\"></app-intact-crossreferences>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1021:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Molecular Function ({{crossReferences.length}})\n    </h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>Evidence and Conclusion Ontology</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1022:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>IntEnz Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"columns medium-12 no-pad-left\">\n  <h3>Interaction Evidence </h3>\n  <table class=\"hover\">\n    <tbody>\n    <tr *ngFor=\"let crossReference of crossReferences\">\n      <td>\n        <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
 /***/ 1023:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Ligands ({{ligands.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let ligand of ligands | slice:0:displayedElements\">\n        <td>\n          {{ligand}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < ligands.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = ligands.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <h2>Expression</h2>\n  <div class=\"columns medium-12\">\n    <app-gxa-heatmap *ngIf=\"gxa && gxaParamsQueries\" [gxa]=\"gxa\" [gxaParamsQueries]=\"gxaParamsQueries\"\n                     [complexSpecies]=\"complexSpecies\"></app-gxa-heatmap>\n  </div>\n  <div class=\"columns medium-12\">\n    <app-go-celluar-crossreference *ngIf=\"goCellularXRefs\"\n                                   [crossReferences]=\"goCellularXRefs\"></app-go-celluar-crossreference>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1024:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>Pathways</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Complex Identifier</th>\n      <th>Complex Name</th>\n      <th>Pathway Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements\">\n        <td><a (click)=\"selectComplexWithFirstPathway(reactomeComplex)\">{{reactomeComplex}}</a></td>\n        <td>{{reactomeComplexes[reactomeComplex].name}}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements\">\n              <a (click)=\"selectComplexByPathway(reactomeComplex, reactomePathway)\">{{reactomePathway}}</a>\n            </li>\n            <li class=\"text-center no-bullet\" *ngIf=\"displayedElements < reactomeComplexes[reactomeComplex].pathways.length\">\n              <a class=\"label\" (click)=\"displayedElements = reactomeComplexes[reactomeComplex].pathways.length\">Show\n                all</a>\n            </li>\n          </ul>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < reactomeComplexes.length\">\n        <td></td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = reactomeComplexes.length\">Show all</a>\n        </td>\n        <td></td>\n      </tr>\n      </tbody>\n    </table>\n    <div class=\"columns medium-12 no-pad-left\" *ngIf=\"selectedComplex && selectedPathway\">\n      <app-reactome-diagram [reactomeComplexe]=\"reactomeComplexes\" [reactomePathways]=\"reactomePathways\"\n                            [selectedComplex]=\"selectedComplex\"\n                            [selectedPathway]=\"selectedPathway\"></app-reactome-diagram>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Component Terms ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1025:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-7 no-pad-left\">\n    </div>\n    <div class=\"columns medium-4\">\n      <h3>Curated by:</h3> <h4>{{institute}}</h4>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1026:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Agonists ({{agonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let agonist of agonists | slice:0:displayedElements\">\n        <td>\n          {{agonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < agonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = agonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1027:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-9 no-pad-left\">\n      <h2>{{complexName}}</h2>\n      <h3><i>{{complexSpecies}}</i></h3>\n    </div>\n    <div class=\"columns medium-2\">\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n          <a href=\"{{jsonURL}}\" target=\"_blank\"><h3 class=\"icon icon-fileformats hover\" data-icon=\"J\"></h3></a>\n        </div>\n        <div class=\"columns medium-6\">\n          <a (click)=\"saveComplex()\"><h3 class=\"icon icon-generic hover\" style=\"color: black\" data-icon=\"b\"></h3></a>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n\n        </div>\n        <div class=\"columns medium-6\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Antagonists ({{antagonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let antagonist of antagonists | slice:0:displayedElements\">\n        <td>\n          {{antagonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < antagonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = antagonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1028:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <h3>Participants ({{participants.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Legend</th>\n      <th>Description</th>\n      <th>Stoichiometry</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n          </div>\n        </td>\n        <td>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n            {{participant.name}} ({{participant.bioRole}})</b></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                     target=\"_blank\">{{participant.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n        </td>\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <p class=\"badge\" *ngIf=\"participant.stochiometry\">{{getConvertedStochiometry(participant.stochiometry)}}</p>\n          </div>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n        <td>\n          <!--empty placeholder-->\n        </td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n        </td>\n        <td>\n          <!--empty placeholder-->\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row no-pad-left\">\n  <h2>Function</h2>\n  <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"functionDescription\">\n    <p>{{functionDescription}}</p>\n  </div>\n  <div id=\"ligands\" class=\"columns medium-12 no-pad-left\" *ngIf=\"ligands && ligands.length !== 0\">\n    <app-ligands [ligands]=\"ligands\"></app-ligands>\n  </div>\n  <div id=\"goXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"goXRefs\">\n    <app-go-crossreferences [crossReferences]=\"goXRefs\"></app-go-crossreferences>\n  </div>\n  <div id=\"agonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"agonists && agonists.length !== 0\">\n    <app-agonists [agonists]=\"agonists\"></app-agonists>\n  </div>\n  <div id=\"antagonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"antagonists && antagonists.length !== 0\">\n    <app-antagonists [antagonists]=\"antagonists\"></app-antagonists>\n  </div>\n  <div id=\"reactomeXRefs\" class=\"columns medium-12\" *ngIf=\"reactomeXRefs\">\n    <app-reactome-crossreferences [crossReferences]=\"reactomeXRefs\"></app-reactome-crossreferences>\n  </div>\n  <!--<div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">-->\n    <!--<app-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></app-euro-pmc-crossreferences>-->\n  <!--</div>-->\n  <div id=\"intenzXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"intenzXRefs\">\n    <app-intenz-crossreferences [crossReferences]=\"intenzXRefs\"></app-intenz-crossreferences>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1029:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <h2>Properties</h2>\n  <div id=\"description\" class=\"columns medium-12\" *ngIf=\"propertiesDescription\">\n    {{propertiesDescription}}\n  </div>\n  <div id=\"pdbXRefs\" class=\"columns medium-12\" *ngIf=\"pdbXRefs\">\n    <app-pdb-crossreferences [crossReferences]=\"pdbXRefs\"></app-pdb-crossreferences>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Biological Process ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1030:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <app-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></app-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <table class=\"hover\">\n        <!--<thead>-->\n        <!--<th>Identifier</th>-->\n        <!--</thead>-->\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"columns medium-6\">\n      <app-go-molecular-function *ngIf=\"molecularFunctions\"\n                                 [crossReferences]=\"molecularFunctions\"></app-go-molecular-function>\n    </div>\n    <div class=\"columns medium-6\">\n      <app-go-biological-process *ngIf=\"biologicalProcess\" [crossReferences]=\"biologicalProcess\"></app-go-biological-process>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1031:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row padding-top-small\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onExpandAll()\">Expand All</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"downloadAsSVG()\">Export SVG</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onReset()\">Reset</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left no-pad-right\">\n      <a class=\"button expanded\" (click)=\"featureNotAvailableYet()\">Enlarge</a>\n    </div>\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>MI features</option>\n      <option value=\"UniprotKB\">UniprotKB</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Interactor</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div id=\"networkContainer\"></div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Molecular Function ({{crossReferences.length}})\n    </h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1032:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12\">\n    <div id=\"heatmapContainer\"></div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>IntEnz Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1033:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Ligands ({{ligands.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let ligand of ligands | slice:0:displayedElements\">\n        <td>\n          {{ligand}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < ligands.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = ligands.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1034:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <a href=\"{{getReactomeURL()}}\" target=\"_blank\">Open in Reactome <i class=\"icon icon-generic small\"\n                                                                         data-icon=\"x\"></i></a>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>Pathways</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Complex Identifier</th>\n      <th>Complex Name</th>\n      <th>Pathway Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements\">\n        <td><a (click)=\"selectComplexWithFirstPathway(reactomeComplex)\">{{reactomeComplex}}</a></td>\n        <td>{{reactomeComplexes[reactomeComplex].name}}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements\">\n              <a (click)=\"selectComplexByPathway(reactomeComplex, reactomePathway)\">{{reactomePathway}}</a>\n            </li>\n            <li class=\"text-center no-bullet\" *ngIf=\"displayedElements < reactomeComplexes[reactomeComplex].pathways.length\">\n              <a class=\"label\" (click)=\"displayedElements = reactomeComplexes[reactomeComplex].pathways.length\">Show\n                all</a>\n            </li>\n          </ul>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < reactomeComplexes.length\">\n        <td></td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = reactomeComplexes.length\">Show all</a>\n        </td>\n        <td></td>\n      </tr>\n      </tbody>\n    </table>\n    <div class=\"columns medium-12 no-pad-left\" *ngIf=\"selectedComplex && selectedPathway\">\n      <app-reactome-diagram [reactomeComplexe]=\"reactomeComplexes\" [reactomePathways]=\"reactomePathways\"\n                            [selectedComplex]=\"selectedComplex\"\n                            [selectedPathway]=\"selectedPathway\"></app-reactome-diagram>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
 /***/ 1035:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{name}}</h5>\n    <!--<br>-->\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"symbol !== 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-species\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"symbol === 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-functional\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\">ComplexTab</a>\n    <a class=\"tag\">PSI-XML2.5</a>\n    <a class=\"tag\">PSI-XML3.0</a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-9 no-pad-left\">\n      <h2>{{complexName}}</h2>\n      <h3><i>{{complexSpecies}}</i></h3>\n    </div>\n    <div class=\"columns medium-2\">\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n          <a href=\"{{jsonURL}}\" target=\"_blank\"><h3 class=\"icon icon-fileformats hover\" data-icon=\"J\"></h3></a>\n        </div>\n        <div class=\"columns medium-6\">\n          <a (click)=\"saveComplex()\"><h3 class=\"icon icon-generic hover\" style=\"color: black\" data-icon=\"b\"></h3></a>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n\n        </div>\n        <div class=\"columns medium-6\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1036:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"column medium-12\">\n    <ng-container *ngIf=\"specieFacets\">\n      <div  class=\"column medium-3\" *ngFor=\"let specieFacet of specieFacets\">\n        <app-complex-organism [name]=\"specieFacet.name\" [symbol]=\"specieFacet.symbol\" [count]=\"specieFacet.count\"></app-complex-organism>\n      </div>\n    </ng-container>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <table class=\"hover\">\n      <thead>\n      <th>Legend</th>\n      <th>Description</th>\n      <th>Stoichiometry</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n          </div>\n        </td>\n        <td>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n            {{participant.name}} ({{participant.bioRole}})</b></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                     target=\"_blank\">{{participant.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n        </td>\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <p class=\"badge\" *ngIf=\"participant.stochiometry\">{{getConvertedStochiometry(participant.stochiometry)}}</p>\n          </div>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n        <td>\n          <!--empty placeholder-->\n        </td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n        </td>\n        <td>\n          <!--empty placeholder-->\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1037:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{facet.name}} ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row no-pad-left\">\n  <h2>Properties</h2>\n  <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription\">\n    {{propertiesDescription}}\n  </div>\n  <div id=\"comment\" class=\"columns medium-12 no-pad-left\" *ngIf=\"comments  && comments.length !== 0\">\n    <h3>Comments</h3>\n    <ul class=\"no-bullet\" *ngFor=\"let comment of comments\">\n      <li>{{comment}}</li>\n    </ul>\n  </div>\n  <div id=\"pdbXRefs\" class=\"columns medium-12\" *ngIf=\"pdbXRefs\">\n    <app-pdb-crossreferences [crossReferences]=\"pdbXRefs\"></app-pdb-crossreferences>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
 /***/ 1038:
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"no-bullet\">\n  <li *ngFor=\"let complex of complexSearch.elements\">\n    <h3><a [routerLink]=\"['/complex', complex.complexAC]\">{{complex.complexName}}</a></h3>\n    <div class=\"description\" style=\"background-color: white\">\n      <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>\n      <b>Description:</b>\n      <div *ngIf=\"complex.description.length <= 250\">\n        {{complex.description}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n      <div *ngIf=\"complex.description.length > 250\">\n        {{complex.description.substr(0,250)}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n    </div>\n  </li>\n</ul>\n"
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <app-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></app-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <table class=\"hover\">\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1039:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <h5 class=\"text-center\">{{currentPageIndex}} of {{lastPageIndex}}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{index[0]}}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{index[0]}}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <h2>Names and Publications</h2>\n  <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n    <app-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></app-euro-pmc-crossreferences>\n  </div>\n  <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms\">\n    <app-synonyms [synonyms]=\"synonyms\"></app-synonyms>\n  </div>\n  <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName\">\n    <app-systematic-name [systematicName]=\"systematicName\"></app-systematic-name>\n  </div>\n</div>\n\n\n"
 
 /***/ }),
 
 /***/ 1040:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\" *ngIf=\"complexSearch && (complexSearch.totalNumberOfResults !== 0)\">\n    <h2 class=\"padding-left-large\">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>\n    <div class=\"columns medium-4\">\n      <app-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                          [spicesFilter]=\"spicesFilter\"\n                          [bioRoleFilter]=\"bioRoleFilter\"\n                          [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                          (onResetAllFilters)=\"onResetAllFilters($event)\"\n                          (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                          (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                          (onInteractorTyoeFilterChanged)=\"onInteractorTyoeFilterChanged($event)\">\n        Loading ...\n      </app-complex-filter>\n    </div>\n    <div class=\"columns medium-8\">\n      <app-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                             [lastPageIndex]=\"lastPageIndex\"\n                             (onPageChange)=\"onPageChange($event)\"></app-complex-paginator>\n      <app-complex-list [complexSearch]=\"complexSearch\">Loading ...</app-complex-list>\n      <app-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                             [lastPageIndex]=\"lastPageIndex\"\n                             (onPageChange)=\"onPageChange($event)\"></app-complex-paginator>\n    </div>\n  </div>\n  <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch && complexSearch.totalNumberOfResults === 0\">\n    <h2>No Complex Portal results found</h2>\n    <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>\n    <h4>Please consider refining your terms:</h4>\n    <ul>\n      <li>Make sure all words are spelled correctly</li>\n      <li>Try different keywords</li>\n      <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n      <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results than\n        \"bike shed\"\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Additional Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1041:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Downloads</h2>\n    <h3>Complex Portal is released monthly and all data is in PSI-MI 2.5 and 3.0 format as well as in ComplexTAB format. See the PSI website for a detailed\n      format\n      description.</h3>\n    <ul>\n      <li class=\"icon-bullet\"><span class=\"icon icon-generic\" data-icon=\"*\"></span> All Complex Portal data and software\n        is freely available to all users, academic or commercial, under the terms of the Apache License, Version 2.0\n      </li>\n    </ul>\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest PSI-MI 2.5 format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/psi25/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest PSI-MI 3.0 format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/psi25/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest ComplexTAB format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/complextab/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1042:
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <app-search></app-search>\n          <app-examples-large></app-examples-large>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <app-tile-menu></app-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <app-newsletter-subscription></app-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-twitter-display></app-twitter-display>\n        </div>\n      </div>\n    </div>\n    <!--<div class=\"row\">-->\n      <!--<div class=\"columns medium-12\">-->\n      <!--</div>-->\n    <!--</div>-->\n  </div>\n</section>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1043:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"mc_embed_signup\">\n  <form ngNoForm action=\"//ebi.us9.list-manage.com/subscribe/post?u=d50725c1556266fd605025eaf&id=91a036cbb0\" method=\"post\"\n        id=\"mc-embedded-subscribe-form\" name=\"mc-embedded-subscribe-form\" class=\"validate\" target=\"_blank\" novalidate>\n    <div id=\"mc_embed_signup_scroll\">\n      <h3><i class=\"icon icon-generic\" data-icon=\"m\"></i>Newsletter</h3>\n      <input type=\"email\" value=\"\" name=\"EMAIL\" class=\"email\" id=\"mce-EMAIL\" placeholder=\"email address\" required>\n      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n      <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input type=\"text\"\n                                                                                name=\"b_d50725c1556266fd605025eaf_91a036cbb0\"\n                                                                                tabindex=\"-1\" value=\"\"></div>\n      <div class=\"clear\"><input type=\"submit\" value=\"Subscribe\" name=\"subscribe\" id=\"mc-embedded-subscribe\"\n                                class=\"button\"></div>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<div class=\"row padding-top-small\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onExpandAll()\">Expand All</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"downloadAsSVG()\">Export SVG</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onReset()\">Reset</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left no-pad-right\">\n      <a class=\"button expanded\" (click)=\"featureNotAvailableYet()\">Enlarge</a>\n    </div>\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>MI features</option>\n      <option value=\"UniprotKB\">UniprotKB</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Interactor</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div id=\"networkContainer\"></div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
 /***/ 1044:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/download']\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Download</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/basket']\">\n      <h3 class=\"icon icon-generic\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/organisms']\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisims</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/support/intact\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch\n      href=\"http://www.ebi.ac.uk/intact/resources/training\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/intact/complex/documentation/\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12\">\n    <div id=\"heatmapContainer\"></div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1045:
 /***/ (function(module, exports) {
 
-module.exports = "<h3><i class=\"icon icon-generic\" data-icon=\"N\"></i>News</h3>\n<a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"400\" data-theme=\"light\" data-tweet-limit=\"3\"\n   data-chrome=\"nofooter noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/intact_project\">Tweets\n  by IntAct</a>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1046:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <a href=\"{{getReactomeURL()}}\" target=\"_blank\">Open in Reactome <i class=\"icon icon-generic small\"\n                                                                         data-icon=\"x\"></i></a>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1047:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <form id=\"content-search\" name=\"content-search\" action=\"[search-action]\" method=\"post\">\n      <h2>Search in Complex Portal</h2>\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value)\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{name}}</h5>\n    <!--<br>-->\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"symbol !== 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-species\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"symbol === 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-functional\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\">ComplexTab</a>\n    <a class=\"tag\">PSI-XML2.5</a>\n    <a class=\"tag\">PSI-XML3.0</a>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1048:
 /***/ (function(module, exports) {
 
-module.exports = "<md-progress-bar *ngIf=\"isDisplayed\"\n                 [color]=\"color\"\n                 [mode]=\"mode\">\n</md-progress-bar>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"column medium-12\">\n    <ng-container *ngIf=\"specieFacets\">\n      <div  class=\"column medium-3\" *ngFor=\"let specieFacet of specieFacets\">\n        <app-complex-organism [name]=\"specieFacet.name\" [symbol]=\"specieFacet.symbol\" [count]=\"specieFacet.count\"></app-complex-organism>\n      </div>\n    </ng-container>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 1049:
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{facet.name}} ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 1050:
+/***/ (function(module, exports) {
+
+module.exports = "<ul class=\"no-bullet\">\n  <li *ngFor=\"let complex of complexSearch.elements\">\n    <h3><a [routerLink]=\"['/complex', complex.complexAC]\">{{complex.complexName}}</a></h3>\n    <div class=\"description\" style=\"background-color: white\">\n      <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>\n      <b>Description:</b>\n      <div *ngIf=\"complex.description.length <= 250\">\n        {{complex.description}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n      <div *ngIf=\"complex.description.length > 250\">\n        {{complex.description.substr(0,250)}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n    </div>\n  </li>\n</ul>\n"
+
+/***/ }),
+
+/***/ 1051:
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n  <h5 class=\"text-center\">{{currentPageIndex}} of {{lastPageIndex}}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{index[0]}}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{index[0]}}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n  </ul>\n</div>\n"
+
+/***/ }),
+
+/***/ 1052:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\" *ngIf=\"complexSearch && (complexSearch.totalNumberOfResults !== 0)\">\n    <h2 class=\"padding-left-large\">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>\n    <div class=\"columns medium-4\">\n      <app-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                          [spicesFilter]=\"spicesFilter\"\n                          [bioRoleFilter]=\"bioRoleFilter\"\n                          [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                          (onResetAllFilters)=\"onResetAllFilters($event)\"\n                          (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                          (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                          (onInteractorTyoeFilterChanged)=\"onInteractorTyoeFilterChanged($event)\">\n        Loading ...\n      </app-complex-filter>\n    </div>\n    <div class=\"columns medium-8\">\n      <app-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                             [lastPageIndex]=\"lastPageIndex\"\n                             (onPageChange)=\"onPageChange($event)\"></app-complex-paginator>\n      <app-complex-list [complexSearch]=\"complexSearch\">Loading ...</app-complex-list>\n      <app-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                             [lastPageIndex]=\"lastPageIndex\"\n                             (onPageChange)=\"onPageChange($event)\"></app-complex-paginator>\n    </div>\n  </div>\n  <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch && complexSearch.totalNumberOfResults === 0\">\n    <h2>No Complex Portal results found</h2>\n    <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>\n    <h4>Please consider refining your terms:</h4>\n    <ul>\n      <li>Make sure all words are spelled correctly</li>\n      <li>Try different keywords</li>\n      <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n      <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results than\n        \"bike shed\"\n      </li>\n    </ul>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 1053:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Downloads</h2>\n    <h3>Complex Portal is released monthly and all data is in PSI-MI 2.5 and 3.0 format as well as in ComplexTAB format. See the PSI website for a detailed\n      format\n      description.</h3>\n    <ul>\n      <li class=\"icon-bullet\"><span class=\"icon icon-generic\" data-icon=\"*\"></span> All Complex Portal data and software\n        is freely available to all users, academic or commercial, under the terms of the Apache License, Version 2.0\n      </li>\n    </ul>\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest PSI-MI 2.5 format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/psi25/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest PSI-MI 3.0 format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/psi30/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n    <div class=\"callout columns medium-4\">\n      <dl>\n        <h4>Latest ComplexTAB format</h4>\n        <dd><p>Available <a href=\"ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/current/complextab/\" target=\"_blank\"\n                            class=\"readmore\">here</a></p></dd>\n      </dl>\n    </div> <!-- /callout -->\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 1054:
+/***/ (function(module, exports) {
+
+module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <app-search></app-search>\n          <app-examples-large></app-examples-large>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <app-tile-menu></app-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <app-newsletter-subscription></app-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <app-twitter-display></app-twitter-display>\n        </div>\n      </div>\n    </div>\n    <!--<div class=\"row\">-->\n      <!--<div class=\"columns medium-12\">-->\n      <!--</div>-->\n    <!--</div>-->\n  </div>\n</section>\n"
+
+/***/ }),
+
+/***/ 1055:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"mc_embed_signup\">\n  <form ngNoForm action=\"//ebi.us9.list-manage.com/subscribe/post?u=d50725c1556266fd605025eaf&id=91a036cbb0\" method=\"post\"\n        id=\"mc-embedded-subscribe-form\" name=\"mc-embedded-subscribe-form\" class=\"validate\" target=\"_blank\" novalidate>\n    <div id=\"mc_embed_signup_scroll\">\n      <h3><i class=\"icon icon-generic\" data-icon=\"m\"></i>Newsletter</h3>\n      <input type=\"email\" value=\"\" name=\"EMAIL\" class=\"email\" id=\"mce-EMAIL\" placeholder=\"email address\" required>\n      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n      <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input type=\"text\"\n                                                                                name=\"b_d50725c1556266fd605025eaf_91a036cbb0\"\n                                                                                tabindex=\"-1\" value=\"\"></div>\n      <div class=\"clear\"><input type=\"submit\" value=\"Subscribe\" name=\"subscribe\" id=\"mc-embedded-subscribe\"\n                                class=\"button\"></div>\n    </div>\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ 1056:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/download']\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Download</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/basket']\">\n      <h3 class=\"icon icon-generic\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/organisms']\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/support/intact\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch\n      href=\"http://www.ebi.ac.uk/intact/resources/training\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/intact/complex/documentation/\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 1057:
+/***/ (function(module, exports) {
+
+module.exports = "<h3><i class=\"icon icon-generic\" data-icon=\"N\"></i>News</h3>\n<a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"400\" data-theme=\"light\" data-tweet-limit=\"3\"\n   data-chrome=\"nofooter noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/intact_project\">Tweets\n  by IntAct</a>\n"
+
+/***/ }),
+
+/***/ 1058:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ 1059:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <form id=\"content-search\" name=\"content-search\" action=\"[search-action]\" method=\"post\">\n      <h2>Search in Complex Portal</h2>\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value)\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </form>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 1060:
+/***/ (function(module, exports) {
+
+module.exports = "<md-progress-bar *ngIf=\"isDisplayed\"\n                 [color]=\"color\"\n                 [mode]=\"mode\">\n</md-progress-bar>\n\n"
+
+/***/ }),
+
+/***/ 1061:
+/***/ (function(module, exports) {
+
 module.exports = "<md-progress-circle *ngIf=\"isDisplayed\"\n                    [color]=\"color\"\n                    [mode]=\"mode\">\n</md-progress-circle>\n"
 
 /***/ }),
 
-/***/ 1109:
+/***/ 1121:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(558);
@@ -506,7 +599,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__(768);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__ = __webpack_require__(556);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__(88);
@@ -538,7 +631,7 @@ var BasketService = (function () {
             this.initialiseBasket();
         }
         else {
-            var keys = Object.keys(complexStore);
+            var keys = this.getKeys(complexStore);
             for (var i = 0; i < keys.length; i++) {
                 var complex = complexStore[keys[i]];
                 if (complex) {
@@ -546,6 +639,9 @@ var BasketService = (function () {
                 }
             }
         }
+    };
+    BasketService.prototype.getKeys = function (object) {
+        return Object.keys(object);
     };
     BasketService.prototype.saveInBasket = function (name, id, organism) {
         var newBasketItem = new __WEBPACK_IMPORTED_MODULE_1__model_basketItem__["a" /* BasketItem */](name, id, new Date(), organism);
@@ -628,8 +724,8 @@ var AboutComponent = (function () {
 AboutComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-about',
-        template: __webpack_require__(1005),
-        styles: [__webpack_require__(945)]
+        template: __webpack_require__(1013),
+        styles: [__webpack_require__(949)]
     }),
     __metadata("design:paramtypes", [])
 ], AboutComponent);
@@ -693,8 +789,8 @@ var BasketComponent = (function () {
 BasketComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-basket',
-        template: __webpack_require__(1007),
-        styles: [__webpack_require__(947)]
+        template: __webpack_require__(1015),
+        styles: [__webpack_require__(951)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object])
 ], BasketComponent);
@@ -796,8 +892,8 @@ var ComplexDetailsComponent = (function () {
 ComplexDetailsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-details',
-        template: __webpack_require__(1008),
-        styles: [__webpack_require__(948)]
+        template: __webpack_require__(1016),
+        styles: [__webpack_require__(952)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _b || Object])
 ], ComplexDetailsComponent);
@@ -970,8 +1066,8 @@ var ComplexOrganismsComponent = (function () {
 ComplexOrganismsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-organisms',
-        template: __webpack_require__(1036),
-        styles: [__webpack_require__(976)]
+        template: __webpack_require__(1048),
+        styles: [__webpack_require__(984)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _a || Object])
 ], ComplexOrganismsComponent);
@@ -1166,8 +1262,8 @@ var ComplexResultsComponent = (function () {
 ComplexResultsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-results',
-        template: __webpack_require__(1040),
-        styles: [__webpack_require__(980)]
+        template: __webpack_require__(1052),
+        styles: [__webpack_require__(988)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _c || Object])
 ], ComplexResultsComponent);
@@ -1209,8 +1305,8 @@ var DownloadComponent = (function () {
 DownloadComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-download',
-        template: __webpack_require__(1041),
-        styles: [__webpack_require__(981)]
+        template: __webpack_require__(1053),
+        styles: [__webpack_require__(989)]
     }),
     __metadata("design:paramtypes", [])
 ], DownloadComponent);
@@ -1252,8 +1348,8 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-home',
-        template: __webpack_require__(1042),
-        styles: [__webpack_require__(982)]
+        template: __webpack_require__(1054),
+        styles: [__webpack_require__(990)]
     }),
     __metadata("design:paramtypes", [])
 ], HomeComponent);
@@ -1393,8 +1489,8 @@ var ProgressBarComponent = ProgressBarComponent_1 = (function () {
 ProgressBarComponent = ProgressBarComponent_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-progress-bar',
-        template: __webpack_require__(1048),
-        styles: [__webpack_require__(988)]
+        template: __webpack_require__(1060),
+        styles: [__webpack_require__(996)]
     }),
     __metadata("design:paramtypes", [])
 ], ProgressBarComponent);
@@ -1492,7 +1588,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var version = __webpack_require__(993).version;
+var version = __webpack_require__(1001).version;
 var environmentName = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].evn;
 var AppComponent = (function () {
     function AppComponent(angulartics2GoogleAnalytics, router, notificationService, toastrConfig) {
@@ -1585,8 +1681,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(1006),
-        styles: [__webpack_require__(946)]
+        template: __webpack_require__(1014),
+        styles: [__webpack_require__(950)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["c" /* ToastrConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["c" /* ToastrConfig */]) === "function" && _d || Object])
 ], AppComponent);
@@ -1608,61 +1704,65 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(724);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_search_component__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_search_component__ = __webpack_require__(767);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__home_home_component__ = __webpack_require__(488);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__home_newsletter_subscription_newsletter_subscription_component__ = __webpack_require__(759);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__home_twitter_display_twitter_display_component__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__home_tile_menu_tile_menu_component__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__home_newsletter_subscription_newsletter_subscription_component__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__home_twitter_display_twitter_display_component__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__home_tile_menu_tile_menu_component__ = __webpack_require__(764);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__complex_complex_results_complex_results_component__ = __webpack_require__(486);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_complex_results_complex_list_complex_list_component__ = __webpack_require__(755);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__complex_complex_results_complex_filter_complex_filter_component__ = __webpack_require__(754);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_complex_results_complex_paginator_complex_paginator_component__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_complex_results_complex_list_complex_list_component__ = __webpack_require__(759);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__complex_complex_results_complex_filter_complex_filter_component__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_complex_results_complex_paginator_complex_paginator_component__ = __webpack_require__(760);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__shared_notification_service_notification_service__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__download_download_component__ = __webpack_require__(487);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angulartics2__ = __webpack_require__(491);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angulartics2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__complex_complex_details_complex_details_component__ = __webpack_require__(483);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__complex_complex_details_complex_header_complex_header_component__ = __webpack_require__(745);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_complex_details_complex_function_complex_function_component__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_complex_details_complex_function_complex_function_component__ = __webpack_require__(736);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__complex_complex_details_complex_properties_complex_properties_component__ = __webpack_require__(747);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_complex_details_complex_expression_complex_expression_component__ = __webpack_require__(728);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_complex_details_complex_expression_complex_expression_component__ = __webpack_require__(731);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__complex_complex_details_complex_disease_complex_disease_component__ = __webpack_require__(726);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_complex_details_shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_complex_details_shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__(753);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__complex_complex_details_complex_participants_complex_participants_component__ = __webpack_require__(746);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_complex_details_shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__(752);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_complex_details_complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_complex_details_shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_complex_details_complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__(742);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_complex_details_complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__(736);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_complex_details_complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__(738);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__complex_complex_details_complex_function_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__(734);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__complex_complex_details_complex_function_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_complex_details_complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__(738);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_complex_details_complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__complex_complex_details_complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__(750);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(484);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__complex_complex_details_complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__(748);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__complex_complex_details_shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__(751);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__search_examples_examples_large_examples_large_component__ = __webpack_require__(762);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__complex_complex_details_shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__(750);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_complex_details_complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__complex_complex_details_shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__search_examples_examples_large_examples_large_component__ = __webpack_require__(766);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__complex_complex_details_shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__(754);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_complex_details_complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__(732);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_complex_details_complex_disease_chembl_crossreference_chembl_crossreference_component__ = __webpack_require__(725);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__complex_complex_details_complex_disease_efo_crossreferences_efo_crossreferences_component__ = __webpack_require__(727);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__complex_complex_details_complex_function_synonyms_synonyms_component__ = __webpack_require__(743);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__complex_complex_details_complex_function_systematic_name_systematic_name_component__ = __webpack_require__(744);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__complex_complex_details_complex_references_synonyms_synonyms_component__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__complex_complex_details_complex_references_systematic_name_systematic_name_component__ = __webpack_require__(752);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__shared_ols_service_ols_service__ = __webpack_require__(489);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__complex_complex_details_complex_function_ligands_ligands_component__ = __webpack_require__(739);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__complex_complex_details_complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__(737);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__complex_complex_details_complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__(735);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__complex_complex_details_complex_footer_complex_footer_component__ = __webpack_require__(730);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__complex_complex_details_complex_function_agonists_agonists_component__ = __webpack_require__(731);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__complex_complex_details_complex_function_antagonists_antagonists_component__ = __webpack_require__(732);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__complex_complex_details_complex_function_ligands_ligands_component__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__complex_complex_details_complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__(739);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__complex_complex_details_complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__complex_complex_details_complex_footer_complex_footer_component__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__complex_complex_details_complex_function_agonists_agonists_component__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__complex_complex_details_complex_function_antagonists_antagonists_component__ = __webpack_require__(735);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__basket_basket_component__ = __webpack_require__(482);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__shared_basket_service_basket_service__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53_ts_md5_dist_md5__ = __webpack_require__(556);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_53_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__angular_material__ = __webpack_require__(676);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__shared_loading_indicators_progress_spinner_progress_spinner_component__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__shared_loading_indicators_progress_spinner_progress_spinner_component__ = __webpack_require__(769);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_57_ngx_toastr__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__about_about_component__ = __webpack_require__(481);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__complex_complex_organisms_complex_organisms_component__ = __webpack_require__(485);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__complex_complex_organisms_complex_organism_complex_organism_component__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__complex_complex_organisms_complex_organism_complex_organism_component__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__complex_complex_details_complex_references_complex_references_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__complex_complex_details_complex_evidence_complex_evidence_component__ = __webpack_require__(728);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__complex_complex_details_complex_evidence_eco_crossreferences_eco_crossreferences_component__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__complex_complex_details_complex_evidence_intact_crossreferences_intact_crossreferences_component__ = __webpack_require__(730);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1671,6 +1771,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /* tslint:disable:max-line-length */
+
+
+
+
 
 
 
@@ -1763,7 +1867,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_29__complex_complex_details_complex_function_reactome_crossreferences_reactome_crossreferences_component__["a" /* ReactomeCrossreferencesComponent */],
             __WEBPACK_IMPORTED_MODULE_31__complex_complex_details_complex_function_go_crossreferences_go_crossreferences_component__["a" /* GoCrossreferencesComponent */],
             __WEBPACK_IMPORTED_MODULE_32__complex_complex_details_complex_function_intenz_crossreferences_intenz_crossreferences_component__["a" /* IntenzCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_33__complex_complex_details_complex_function_euro_pmc_crossreferences_euro_pmc_crossreferences_component__["a" /* EuroPmcCrossreferencesComponent */],
+            __WEBPACK_IMPORTED_MODULE_33__complex_complex_details_complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__["a" /* EuroPmcCrossreferencesComponent */],
             __WEBPACK_IMPORTED_MODULE_35__complex_complex_details_complex_properties_pdb_crossreferences_pdb_crossreferences_component__["a" /* PdbCrossreferencesComponent */],
             __WEBPACK_IMPORTED_MODULE_36__complex_complex_details_shared_visualisation_litmol_viewer_litmol_viewer_component__["a" /* LitmolViewerComponent */],
             __WEBPACK_IMPORTED_MODULE_37__search_examples_examples_large_examples_large_component__["a" /* ExamplesLargeComponent */],
@@ -1771,8 +1875,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_39__complex_complex_details_complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__["a" /* GoCelluarCrossreferenceComponent */],
             __WEBPACK_IMPORTED_MODULE_40__complex_complex_details_complex_disease_chembl_crossreference_chembl_crossreference_component__["a" /* ChemblCrossreferenceComponent */],
             __WEBPACK_IMPORTED_MODULE_41__complex_complex_details_complex_disease_efo_crossreferences_efo_crossreferences_component__["a" /* EfoCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_43__complex_complex_details_complex_function_systematic_name_systematic_name_component__["a" /* SystematicNameComponent */],
-            __WEBPACK_IMPORTED_MODULE_42__complex_complex_details_complex_function_synonyms_synonyms_component__["a" /* SynonymsComponent */],
+            __WEBPACK_IMPORTED_MODULE_43__complex_complex_details_complex_references_systematic_name_systematic_name_component__["a" /* SystematicNameComponent */],
+            __WEBPACK_IMPORTED_MODULE_42__complex_complex_details_complex_references_synonyms_synonyms_component__["a" /* SynonymsComponent */],
             __WEBPACK_IMPORTED_MODULE_45__complex_complex_details_complex_function_ligands_ligands_component__["a" /* LigandsComponent */],
             __WEBPACK_IMPORTED_MODULE_46__complex_complex_details_complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__["a" /* GoMolecularFunctionComponent */],
             __WEBPACK_IMPORTED_MODULE_47__complex_complex_details_complex_function_go_crossreferences_go_biological_process_go_biological_process_component__["a" /* GoBiologicalProcessComponent */],
@@ -1785,6 +1889,10 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_58__about_about_component__["a" /* AboutComponent */],
             __WEBPACK_IMPORTED_MODULE_59__complex_complex_organisms_complex_organisms_component__["a" /* ComplexOrganismsComponent */],
             __WEBPACK_IMPORTED_MODULE_60__complex_complex_organisms_complex_organism_complex_organism_component__["a" /* ComplexOrganismComponent */],
+            __WEBPACK_IMPORTED_MODULE_61__complex_complex_details_complex_references_complex_references_component__["a" /* ComplexReferencesComponent */],
+            __WEBPACK_IMPORTED_MODULE_62__complex_complex_details_complex_evidence_complex_evidence_component__["a" /* ComplexEvidenceComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__complex_complex_details_complex_evidence_eco_crossreferences_eco_crossreferences_component__["a" /* EcoCrossreferencesComponent */],
+            __WEBPACK_IMPORTED_MODULE_64__complex_complex_details_complex_evidence_intact_crossreferences_intact_crossreferences_component__["a" /* IntactCrossreferencesComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -1795,7 +1903,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_19_angulartics2__["Angulartics2Module"].forRoot([__WEBPACK_IMPORTED_MODULE_19_angulartics2__["Angulartics2GoogleAnalytics"]]),
             __WEBPACK_IMPORTED_MODULE_54__angular_material__["a" /* MaterialModule */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_17__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_30__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_34__complex_complex_details_complex_function_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_44__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_52__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_53_ts_md5_dist_md5__["Md5"]],
+        providers: [__WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_17__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_30__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_34__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_44__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_52__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_53_ts_md5_dist_md5__["Md5"]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -1889,8 +1997,8 @@ __decorate([
 ChemblCrossreferenceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-chembl-crossreference',
-        template: __webpack_require__(1009),
-        styles: [__webpack_require__(949)]
+        template: __webpack_require__(1017),
+        styles: [__webpack_require__(953)]
     }),
     __metadata("design:paramtypes", [])
 ], ChemblCrossreferenceComponent);
@@ -1991,8 +2099,8 @@ __decorate([
 ComplexDiseaseComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-disease',
-        template: __webpack_require__(1010),
-        styles: [__webpack_require__(950)]
+        template: __webpack_require__(1018),
+        styles: [__webpack_require__(954)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexDiseaseComponent);
@@ -2069,8 +2177,8 @@ __decorate([
 EfoCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-efo-crossreferences',
-        template: __webpack_require__(1011),
-        styles: [__webpack_require__(951)]
+        template: __webpack_require__(1019),
+        styles: [__webpack_require__(955)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */]) === "function" && _a || Object])
 ], EfoCrossreferencesComponent);
@@ -2081,6 +2189,221 @@ var _a;
 /***/ }),
 
 /***/ 728:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexEvidenceComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexEvidenceComponent = (function () {
+    function ComplexEvidenceComponent() {
+    }
+    ComplexEvidenceComponent.prototype.ngOnInit = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            if (database === 'evidence ontology') {
+                if (this._ecoXRefs === undefined) {
+                    this._ecoXRefs = [];
+                }
+                this._ecoXRefs.push(crossRef);
+            }
+            if (database === 'intact') {
+                if (this._intactXRefs === undefined) {
+                    this._intactXRefs = [];
+                }
+                this._intactXRefs.push(crossRef);
+            }
+        }
+    };
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "ecoXRefs", {
+        get: function () {
+            return this._ecoXRefs;
+        },
+        set: function (value) {
+            this._ecoXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "intactXRefs", {
+        get: function () {
+            return this._intactXRefs;
+        },
+        set: function (value) {
+            this._intactXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ComplexEvidenceComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ComplexEvidenceComponent.prototype, "crossReferences", null);
+ComplexEvidenceComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-complex-evidence',
+        template: __webpack_require__(1020),
+        styles: [__webpack_require__(956)]
+    }),
+    __metadata("design:paramtypes", [])
+], ComplexEvidenceComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-evidence.component.js.map
+
+/***/ }),
+
+/***/ 729:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EcoCrossreferencesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var EcoCrossreferencesComponent = (function () {
+    function EcoCrossreferencesComponent() {
+    }
+    EcoCrossreferencesComponent.prototype.ngOnInit = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var identifier = this._crossReferences[i].identifier;
+            switch (identifier) {
+                case ('ECO:0000353'):
+                    this._crossReferences[i].description = 'physical interaction evidence';
+                    break;
+                case ('ECO:0005610'):
+                    this._crossReferences[i].description = 'inferred by homology';
+                    break;
+                case ('ECO:0005544'):
+                    this._crossReferences[i].description = 'inferred by orthology';
+                    break;
+                case ('ECO:0005546'):
+                    this._crossReferences[i].description = 'inferred by paralogy';
+                    break;
+                case ('ECO:0005547'):
+                    this._crossReferences[i].description = 'inferred by curator';
+                    break;
+                case ('ECO:0005543'):
+                    this._crossReferences[i].description = 'inferred from mixed species evidence';
+                    break;
+                case ('ECO:0005542'):
+                    this._crossReferences[i].description = 'inferred from single species evidence';
+                    break;
+            }
+        }
+    };
+    Object.defineProperty(EcoCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return EcoCrossreferencesComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], EcoCrossreferencesComponent.prototype, "crossReferences", null);
+EcoCrossreferencesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-eco-crossreferences',
+        template: __webpack_require__(1021),
+        styles: [__webpack_require__(957)]
+    }),
+    __metadata("design:paramtypes", [])
+], EcoCrossreferencesComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/eco-crossreferences.component.js.map
+
+/***/ }),
+
+/***/ 730:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntactCrossreferencesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var IntactCrossreferencesComponent = (function () {
+    function IntactCrossreferencesComponent() {
+    }
+    IntactCrossreferencesComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(IntactCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return IntactCrossreferencesComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], IntactCrossreferencesComponent.prototype, "crossReferences", null);
+IntactCrossreferencesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-intact-crossreferences',
+        template: __webpack_require__(1022),
+        styles: [__webpack_require__(958)]
+    }),
+    __metadata("design:paramtypes", [])
+], IntactCrossreferencesComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/intact-crossreferences.component.js.map
+
+/***/ }),
+
+/***/ 731:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2213,8 +2536,8 @@ __decorate([
 ComplexExpressionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-expression',
-        template: __webpack_require__(1012),
-        styles: [__webpack_require__(952)]
+        template: __webpack_require__(1023),
+        styles: [__webpack_require__(959)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexExpressionComponent);
@@ -2223,7 +2546,7 @@ ComplexExpressionComponent = __decorate([
 
 /***/ }),
 
-/***/ 729:
+/***/ 732:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2275,8 +2598,8 @@ __decorate([
 GoCelluarCrossreferenceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-go-celluar-crossreference',
-        template: __webpack_require__(1013),
-        styles: [__webpack_require__(953)]
+        template: __webpack_require__(1024),
+        styles: [__webpack_require__(960)]
     }),
     __metadata("design:paramtypes", [])
 ], GoCelluarCrossreferenceComponent);
@@ -2285,7 +2608,7 @@ GoCelluarCrossreferenceComponent = __decorate([
 
 /***/ }),
 
-/***/ 730:
+/***/ 733:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2341,8 +2664,8 @@ __decorate([
 ComplexFooterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-footer',
-        template: __webpack_require__(1014),
-        styles: [__webpack_require__(954)]
+        template: __webpack_require__(1025),
+        styles: [__webpack_require__(961)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFooterComponent);
@@ -2351,7 +2674,7 @@ ComplexFooterComponent = __decorate([
 
 /***/ }),
 
-/***/ 731:
+/***/ 734:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2403,8 +2726,8 @@ __decorate([
 AgonistsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-agonists',
-        template: __webpack_require__(1015),
-        styles: [__webpack_require__(955)]
+        template: __webpack_require__(1026),
+        styles: [__webpack_require__(962)]
     }),
     __metadata("design:paramtypes", [])
 ], AgonistsComponent);
@@ -2413,7 +2736,7 @@ AgonistsComponent = __decorate([
 
 /***/ }),
 
-/***/ 732:
+/***/ 735:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2465,8 +2788,8 @@ __decorate([
 AntagonistsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-antagonists',
-        template: __webpack_require__(1016),
-        styles: [__webpack_require__(956)]
+        template: __webpack_require__(1027),
+        styles: [__webpack_require__(963)]
     }),
     __metadata("design:paramtypes", [])
 ], AntagonistsComponent);
@@ -2475,7 +2798,7 @@ AntagonistsComponent = __decorate([
 
 /***/ }),
 
-/***/ 733:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2516,12 +2839,12 @@ var ComplexFunctionComponent = (function () {
                 }
                 this.reactomeXRefs.push(crossRef);
             }
-            if (database === 'pubmed') {
-                if (this.pubmedXRefs === undefined) {
-                    this.pubmedXRefs = [];
-                }
-                this.pubmedXRefs.push(crossRef);
-            }
+            // if (database === 'pubmed') {
+            //   if (this.pubmedXRefs === undefined) {
+            //     this.pubmedXRefs = [];
+            //   }
+            //   this.pubmedXRefs.push(crossRef);
+            // }
         }
     };
     Object.defineProperty(ComplexFunctionComponent.prototype, "crossReferences", {
@@ -2574,37 +2897,32 @@ var ComplexFunctionComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "pubmedXRefs", {
-        get: function () {
-            return this._pubmedXRefs;
-        },
-        set: function (value) {
-            this._pubmedXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "synonyms", {
-        get: function () {
-            return this._synonyms;
-        },
-        set: function (value) {
-            this._synonyms = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "systematicName", {
-        get: function () {
-            return this._systematicName;
-        },
-        set: function (value) {
-            this._systematicName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(ComplexFunctionComponent.prototype, "ligands", {
+        // get pubmedXRefs(): CrossReference[] {
+        //   return this._pubmedXRefs;
+        // }
+        //
+        // set pubmedXRefs(value: CrossReference[]) {
+        //   this._pubmedXRefs = value;
+        // }
+        //
+        // get synonyms(): string[] {
+        //   return this._synonyms;
+        // }
+        //
+        // @Input()
+        // set synonyms(value: string[]) {
+        //   this._synonyms = value;
+        // }
+        //
+        // get systematicName(): string[] {
+        //   return this._systematicName;
+        // }
+        //
+        // @Input()
+        // set systematicName(value: string[]) {
+        //   this._systematicName = value;
+        // }
         get: function () {
             return this._ligands;
         },
@@ -2650,16 +2968,6 @@ __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
     __metadata("design:type", Array),
     __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "synonyms", null);
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "systematicName", null);
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
 ], ComplexFunctionComponent.prototype, "ligands", null);
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -2674,8 +2982,8 @@ __decorate([
 ComplexFunctionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-function',
-        template: __webpack_require__(1017),
-        styles: [__webpack_require__(957)]
+        template: __webpack_require__(1028),
+        styles: [__webpack_require__(964)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFunctionComponent);
@@ -2684,118 +2992,7 @@ ComplexFunctionComponent = __decorate([
 
 /***/ }),
 
-/***/ 734:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__(484);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__(88);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var EuroPmcCrossreferencesComponent = (function () {
-    function EuroPmcCrossreferencesComponent(euroPmcService, notificationService) {
-        this.euroPmcService = euroPmcService;
-        this.notificationService = notificationService;
-        this._publications = [];
-        this._isDataLoaded = false;
-    }
-    EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        try {
-            var _loop_1 = function (i) {
-                this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (euroPmcResponse) { return _this.publicationFactory(_this.crossReferences[i], euroPmcResponse); });
-                if (i === this_1.crossReferences.length - 1) {
-                    this_1._isDataLoaded = true;
-                }
-            };
-            var this_1 = this;
-            for (var i = 0; i < this.crossReferences.length; i++) {
-                _loop_1(i);
-            }
-        }
-        catch (error) {
-            this._isDataLoaded = false;
-            this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
-        }
-    };
-    EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
-        try {
-            this.publications.push({
-                id: crossReference.identifier,
-                title: euroPmcResponse.resultList.result[0].title,
-                authors: euroPmcResponse.resultList.result[0].authorString,
-                url: crossReference.searchURL
-            });
-        }
-        catch (error) {
-            this._isDataLoaded = false;
-            this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
-        }
-    };
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "publications", {
-        get: function () {
-            return this._publications;
-        },
-        set: function (value) {
-            this._publications = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "isDataLoaded", {
-        get: function () {
-            return this._isDataLoaded;
-        },
-        set: function (value) {
-            this._isDataLoaded = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return EuroPmcCrossreferencesComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], EuroPmcCrossreferencesComponent.prototype, "crossReferences", null);
-EuroPmcCrossreferencesComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-euro-pmc-crossreferences',
-        template: __webpack_require__(1018),
-        styles: [__webpack_require__(958)]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
-], EuroPmcCrossreferencesComponent);
-
-var _a, _b;
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/euro-pmc-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ 735:
+/***/ 737:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2847,8 +3044,8 @@ __decorate([
 GoBiologicalProcessComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-go-biological-process',
-        template: __webpack_require__(1019),
-        styles: [__webpack_require__(959)]
+        template: __webpack_require__(1029),
+        styles: [__webpack_require__(965)]
     }),
     __metadata("design:paramtypes", [])
 ], GoBiologicalProcessComponent);
@@ -2857,7 +3054,7 @@ GoBiologicalProcessComponent = __decorate([
 
 /***/ }),
 
-/***/ 736:
+/***/ 738:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2934,8 +3131,8 @@ __decorate([
 GoCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-go-crossreferences',
-        template: __webpack_require__(1020),
-        styles: [__webpack_require__(960)]
+        template: __webpack_require__(1030),
+        styles: [__webpack_require__(966)]
     }),
     __metadata("design:paramtypes", [])
 ], GoCrossreferencesComponent);
@@ -2944,7 +3141,7 @@ GoCrossreferencesComponent = __decorate([
 
 /***/ }),
 
-/***/ 737:
+/***/ 739:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2996,8 +3193,8 @@ __decorate([
 GoMolecularFunctionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-go-molecular-function',
-        template: __webpack_require__(1021),
-        styles: [__webpack_require__(961)]
+        template: __webpack_require__(1031),
+        styles: [__webpack_require__(967)]
     }),
     __metadata("design:paramtypes", [])
 ], GoMolecularFunctionComponent);
@@ -3006,7 +3203,7 @@ GoMolecularFunctionComponent = __decorate([
 
 /***/ }),
 
-/***/ 738:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3058,8 +3255,8 @@ __decorate([
 IntenzCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-intenz-crossreferences',
-        template: __webpack_require__(1022),
-        styles: [__webpack_require__(962)]
+        template: __webpack_require__(1032),
+        styles: [__webpack_require__(968)]
     }),
     __metadata("design:paramtypes", [])
 ], IntenzCrossreferencesComponent);
@@ -3068,7 +3265,7 @@ IntenzCrossreferencesComponent = __decorate([
 
 /***/ }),
 
-/***/ 739:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3120,8 +3317,8 @@ __decorate([
 LigandsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-ligands',
-        template: __webpack_require__(1023),
-        styles: [__webpack_require__(963)]
+        template: __webpack_require__(1033),
+        styles: [__webpack_require__(969)]
     }),
     __metadata("design:paramtypes", [])
 ], LigandsComponent);
@@ -3130,7 +3327,7 @@ LigandsComponent = __decorate([
 
 /***/ }),
 
-/***/ 740:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3140,8 +3337,8 @@ LigandsComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__(540);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__ = __webpack_require__(741);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__ = __webpack_require__(743);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__ = __webpack_require__(744);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3291,8 +3488,8 @@ __decorate([
 ReactomeCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-reactome-crossreferences',
-        template: __webpack_require__(1024),
-        styles: [__webpack_require__(964)]
+        template: __webpack_require__(1034),
+        styles: [__webpack_require__(970)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
 ], ReactomeCrossreferencesComponent);
@@ -3302,7 +3499,7 @@ var _a;
 
 /***/ }),
 
-/***/ 741:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3349,7 +3546,7 @@ var ReactomeComplex = (function () {
 
 /***/ }),
 
-/***/ 742:
+/***/ 744:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3393,119 +3590,6 @@ var ReactomePathway = (function () {
 }());
 
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-pathway.js.map
-
-/***/ }),
-
-/***/ 743:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynonymsComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SynonymsComponent = (function () {
-    function SynonymsComponent() {
-        this._displayedElements = 5;
-    }
-    SynonymsComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(SynonymsComponent.prototype, "synonyms", {
-        get: function () {
-            return this._synonyms;
-        },
-        set: function (value) {
-            this._synonyms = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SynonymsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return SynonymsComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], SynonymsComponent.prototype, "synonyms", null);
-SynonymsComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-synonyms',
-        template: __webpack_require__(1025),
-        styles: [__webpack_require__(965)]
-    }),
-    __metadata("design:paramtypes", [])
-], SynonymsComponent);
-
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/synonyms.component.js.map
-
-/***/ }),
-
-/***/ 744:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystematicNameComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SystematicNameComponent = (function () {
-    function SystematicNameComponent() {
-    }
-    SystematicNameComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(SystematicNameComponent.prototype, "systematicName", {
-        get: function () {
-            return this._systematicName;
-        },
-        set: function (value) {
-            this._systematicName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return SystematicNameComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], SystematicNameComponent.prototype, "systematicName", null);
-SystematicNameComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-systematic-name',
-        template: __webpack_require__(1026),
-        styles: [__webpack_require__(966)]
-    }),
-    __metadata("design:paramtypes", [])
-], SystematicNameComponent);
-
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/systematic-name.component.js.map
 
 /***/ }),
 
@@ -3602,8 +3686,8 @@ __decorate([
 ComplexHeaderComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-header',
-        template: __webpack_require__(1027),
-        styles: [__webpack_require__(967)]
+        template: __webpack_require__(1035),
+        styles: [__webpack_require__(971)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
 ], ComplexHeaderComponent);
@@ -3678,8 +3762,8 @@ __decorate([
 ComplexParticipantsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-participants',
-        template: __webpack_require__(1028),
-        styles: [__webpack_require__(968)]
+        template: __webpack_require__(1036),
+        styles: [__webpack_require__(972)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexParticipantsComponent);
@@ -3749,6 +3833,16 @@ var ComplexPropertiesComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "comments", {
+        get: function () {
+            return this._comments;
+        },
+        set: function (value) {
+            this._comments = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ComplexPropertiesComponent;
 }());
 __decorate([
@@ -3761,11 +3855,16 @@ __decorate([
     __metadata("design:type", Array),
     __metadata("design:paramtypes", [Array])
 ], ComplexPropertiesComponent.prototype, "crossReferences", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ComplexPropertiesComponent.prototype, "comments", null);
 ComplexPropertiesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-properties',
-        template: __webpack_require__(1029),
-        styles: [__webpack_require__(969)]
+        template: __webpack_require__(1037),
+        styles: [__webpack_require__(973)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexPropertiesComponent);
@@ -3854,8 +3953,8 @@ __decorate([
 PdbCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-pdb-crossreferences',
-        template: __webpack_require__(1030),
-        styles: [__webpack_require__(970)]
+        template: __webpack_require__(1038),
+        styles: [__webpack_require__(974)]
     }),
     __metadata("design:paramtypes", [])
 ], PdbCrossreferencesComponent);
@@ -3865,6 +3964,332 @@ PdbCrossreferencesComponent = __decorate([
 /***/ }),
 
 /***/ 749:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexReferencesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexReferencesComponent = (function () {
+    function ComplexReferencesComponent() {
+    }
+    ComplexReferencesComponent.prototype.ngOnInit = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            if (database === 'pubmed') {
+                if (this._pubmedXRefs === undefined) {
+                    this._pubmedXRefs = [];
+                }
+                this._pubmedXRefs.push(crossRef);
+                console.log(this.pubmedXRefs);
+            }
+        }
+    };
+    Object.defineProperty(ComplexReferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "pubmedXRefs", {
+        get: function () {
+            return this._pubmedXRefs;
+        },
+        set: function (value) {
+            this._pubmedXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "synonyms", {
+        get: function () {
+            return this._synonyms;
+        },
+        set: function (value) {
+            this._synonyms = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "systematicName", {
+        get: function () {
+            return this._systematicName;
+        },
+        set: function (value) {
+            this._systematicName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ComplexReferencesComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ComplexReferencesComponent.prototype, "crossReferences", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ComplexReferencesComponent.prototype, "synonyms", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], ComplexReferencesComponent.prototype, "systematicName", null);
+ComplexReferencesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-complex-references',
+        template: __webpack_require__(1039),
+        styles: [__webpack_require__(975)]
+    }),
+    __metadata("design:paramtypes", [])
+], ComplexReferencesComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-references.component.js.map
+
+/***/ }),
+
+/***/ 750:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__(88);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var EuroPmcCrossreferencesComponent = (function () {
+    function EuroPmcCrossreferencesComponent(euroPmcService, notificationService) {
+        this.euroPmcService = euroPmcService;
+        this.notificationService = notificationService;
+        this._publications = [];
+        this._isDataLoaded = false;
+    }
+    EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        try {
+            var _loop_1 = function (i) {
+                this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (euroPmcResponse) { return _this.publicationFactory(_this.crossReferences[i], euroPmcResponse); });
+                if (i === this_1.crossReferences.length - 1) {
+                    this_1._isDataLoaded = true;
+                }
+            };
+            var this_1 = this;
+            for (var i = 0; i < this.crossReferences.length; i++) {
+                _loop_1(i);
+            }
+        }
+        catch (error) {
+            this._isDataLoaded = false;
+            this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
+        }
+    };
+    EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
+        try {
+            this.publications.push({
+                id: crossReference.identifier,
+                title: euroPmcResponse.resultList.result[0].title,
+                authors: euroPmcResponse.resultList.result[0].authorString,
+                url: crossReference.searchURL
+            });
+        }
+        catch (error) {
+            this._isDataLoaded = false;
+            this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. Please let us know if error persists.');
+        }
+    };
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "publications", {
+        get: function () {
+            return this._publications;
+        },
+        set: function (value) {
+            this._publications = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "isDataLoaded", {
+        get: function () {
+            return this._isDataLoaded;
+        },
+        set: function (value) {
+            this._isDataLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return EuroPmcCrossreferencesComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], EuroPmcCrossreferencesComponent.prototype, "crossReferences", null);
+EuroPmcCrossreferencesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-euro-pmc-crossreferences',
+        template: __webpack_require__(1040),
+        styles: [__webpack_require__(976)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
+], EuroPmcCrossreferencesComponent);
+
+var _a, _b;
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/euro-pmc-crossreferences.component.js.map
+
+/***/ }),
+
+/***/ 751:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynonymsComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SynonymsComponent = (function () {
+    function SynonymsComponent() {
+        this._displayedElements = 5;
+    }
+    SynonymsComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(SynonymsComponent.prototype, "synonyms", {
+        get: function () {
+            return this._synonyms;
+        },
+        set: function (value) {
+            this._synonyms = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SynonymsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SynonymsComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], SynonymsComponent.prototype, "synonyms", null);
+SynonymsComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-synonyms',
+        template: __webpack_require__(1041),
+        styles: [__webpack_require__(977)]
+    }),
+    __metadata("design:paramtypes", [])
+], SynonymsComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/synonyms.component.js.map
+
+/***/ }),
+
+/***/ 752:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystematicNameComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SystematicNameComponent = (function () {
+    function SystematicNameComponent() {
+    }
+    SystematicNameComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(SystematicNameComponent.prototype, "systematicName", {
+        get: function () {
+            return this._systematicName;
+        },
+        set: function (value) {
+            this._systematicName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SystematicNameComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [Array])
+], SystematicNameComponent.prototype, "systematicName", null);
+SystematicNameComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-systematic-name',
+        template: __webpack_require__(1042),
+        styles: [__webpack_require__(978)]
+    }),
+    __metadata("design:paramtypes", [])
+], SystematicNameComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/systematic-name.component.js.map
+
+/***/ }),
+
+/***/ 753:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3883,8 +4308,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var xlv;
-var SvgSaver = __webpack_require__(1103);
-var xiNET = __webpack_require__(990);
+var SvgSaver = __webpack_require__(1115);
+var xiNET = __webpack_require__(998);
 var ComplexViewerComponent = (function () {
     function ComplexViewerComponent(notificationService) {
         this.notificationService = notificationService;
@@ -3946,8 +4371,8 @@ __decorate([
 ComplexViewerComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-viewer',
-        template: __webpack_require__(1031),
-        styles: [__webpack_require__(971)]
+        template: __webpack_require__(1043),
+        styles: [__webpack_require__(979)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object])
 ], ComplexViewerComponent);
@@ -3957,7 +4382,7 @@ var _a;
 
 /***/ }),
 
-/***/ 750:
+/***/ 754:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4064,8 +4489,8 @@ __decorate([
 GxaHeatmapComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-gxa-heatmap',
-        template: __webpack_require__(1032),
-        styles: [__webpack_require__(972)]
+        template: __webpack_require__(1044),
+        styles: [__webpack_require__(980)]
     }),
     __metadata("design:paramtypes", [])
 ], GxaHeatmapComponent);
@@ -4074,12 +4499,12 @@ GxaHeatmapComponent = __decorate([
 
 /***/ }),
 
-/***/ 751:
+/***/ 755:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__(995);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__(1003);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_litemol__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(55);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LitmolViewerComponent; });
@@ -4160,8 +4585,8 @@ __decorate([
 LitmolViewerComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-litmol-viewer',
-        template: __webpack_require__(1033),
-        styles: [__webpack_require__(973)]
+        template: __webpack_require__(1045),
+        styles: [__webpack_require__(981)]
     }),
     __metadata("design:paramtypes", [])
 ], LitmolViewerComponent);
@@ -4170,7 +4595,7 @@ LitmolViewerComponent = __decorate([
 
 /***/ }),
 
-/***/ 752:
+/***/ 756:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4341,8 +4766,8 @@ __decorate([
 ReactomeDiagramComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-reactome-diagram',
-        template: __webpack_require__(1034),
-        styles: [__webpack_require__(974)]
+        template: __webpack_require__(1046),
+        styles: [__webpack_require__(982)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
 ], ReactomeDiagramComponent);
@@ -4352,7 +4777,7 @@ var _a;
 
 /***/ }),
 
-/***/ 753:
+/***/ 757:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4423,8 +4848,8 @@ __decorate([
 ComplexOrganismComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-organism',
-        template: __webpack_require__(1035),
-        styles: [__webpack_require__(975)]
+        template: __webpack_require__(1047),
+        styles: [__webpack_require__(983)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexOrganismComponent);
@@ -4433,12 +4858,12 @@ ComplexOrganismComponent = __decorate([
 
 /***/ }),
 
-/***/ 754:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__(762);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4577,8 +5002,8 @@ __decorate([
 ComplexFilterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-filter',
-        template: __webpack_require__(1037),
-        styles: [__webpack_require__(977)]
+        template: __webpack_require__(1049),
+        styles: [__webpack_require__(985)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFilterComponent);
@@ -4588,12 +5013,12 @@ var _a, _b, _c, _d, _e, _f;
 
 /***/ }),
 
-/***/ 755:
+/***/ 759:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__(761);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4620,8 +5045,8 @@ __decorate([
 ComplexListComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-list',
-        template: __webpack_require__(1038),
-        styles: [__webpack_require__(978)]
+        template: __webpack_require__(1050),
+        styles: [__webpack_require__(986)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexListComponent);
@@ -4631,7 +5056,7 @@ var _a;
 
 /***/ }),
 
-/***/ 756:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4753,8 +5178,8 @@ __decorate([
 ComplexPaginatorComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-complex-paginator',
-        template: __webpack_require__(1039),
-        styles: [__webpack_require__(979)]
+        template: __webpack_require__(1051),
+        styles: [__webpack_require__(987)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexPaginatorComponent);
@@ -4764,7 +5189,7 @@ var _a;
 
 /***/ }),
 
-/***/ 757:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4811,7 +5236,7 @@ var ComplexSearchResult = (function () {
 
 /***/ }),
 
-/***/ 758:
+/***/ 762:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4853,7 +5278,7 @@ var Facets = (function () {
 
 /***/ }),
 
-/***/ 759:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4879,8 +5304,8 @@ var NewsletterSubscriptionComponent = (function () {
 NewsletterSubscriptionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-newsletter-subscription',
-        template: __webpack_require__(1043),
-        styles: [__webpack_require__(983)]
+        template: __webpack_require__(1055),
+        styles: [__webpack_require__(991)]
     }),
     __metadata("design:paramtypes", [])
 ], NewsletterSubscriptionComponent);
@@ -4889,7 +5314,7 @@ NewsletterSubscriptionComponent = __decorate([
 
 /***/ }),
 
-/***/ 760:
+/***/ 764:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4922,8 +5347,8 @@ var TileMenuComponent = (function () {
 TileMenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-tile-menu',
-        template: __webpack_require__(1044),
-        styles: [__webpack_require__(984)]
+        template: __webpack_require__(1056),
+        styles: [__webpack_require__(992)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object])
 ], TileMenuComponent);
@@ -4933,7 +5358,7 @@ var _a;
 
 /***/ }),
 
-/***/ 761:
+/***/ 765:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4973,8 +5398,8 @@ var TwitterDisplayComponent = (function () {
 TwitterDisplayComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-twitter-display',
-        template: __webpack_require__(1045),
-        styles: [__webpack_require__(985)]
+        template: __webpack_require__(1057),
+        styles: [__webpack_require__(993)]
     }),
     __metadata("design:paramtypes", [])
 ], TwitterDisplayComponent);
@@ -4983,7 +5408,7 @@ TwitterDisplayComponent = __decorate([
 
 /***/ }),
 
-/***/ 762:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5009,8 +5434,8 @@ var ExamplesLargeComponent = (function () {
 ExamplesLargeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-examples-large',
-        template: __webpack_require__(1046),
-        styles: [__webpack_require__(986)]
+        template: __webpack_require__(1058),
+        styles: [__webpack_require__(994)]
     }),
     __metadata("design:paramtypes", [])
 ], ExamplesLargeComponent);
@@ -5019,7 +5444,7 @@ ExamplesLargeComponent = __decorate([
 
 /***/ }),
 
-/***/ 763:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5051,8 +5476,8 @@ var SearchComponent = (function () {
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-search',
-        template: __webpack_require__(1047),
-        styles: [__webpack_require__(987)]
+        template: __webpack_require__(1059),
+        styles: [__webpack_require__(995)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object])
 ], SearchComponent);
@@ -5062,7 +5487,7 @@ var _a;
 
 /***/ }),
 
-/***/ 764:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5121,7 +5546,7 @@ var BasketItem = (function () {
 
 /***/ }),
 
-/***/ 765:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5185,8 +5610,8 @@ var ProgressSpinnerComponent = ProgressSpinnerComponent_1 = (function () {
 ProgressSpinnerComponent = ProgressSpinnerComponent_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-progress-spinner',
-        template: __webpack_require__(1049),
-        styles: [__webpack_require__(989)]
+        template: __webpack_require__(1061),
+        styles: [__webpack_require__(997)]
     }),
     __metadata("design:paramtypes", [])
 ], ProgressSpinnerComponent);
@@ -5245,78 +5670,6 @@ var _a;
 
 /***/ }),
 
-/***/ 945:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 946:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 947:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 948:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 949:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5343,7 +5696,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "a {\n  text-decoration:none;\n  border-width: 0;\n}\n", ""]);
 
 // exports
 
@@ -5721,7 +6074,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5736,10 +6089,10 @@ module.exports = module.exports.toString();
 
 exports = module.exports = __webpack_require__(2)();
 // imports
-exports.push([module.i, "@import url(http://www.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
+
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5775,7 +6128,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, ".selected {\n  background-color: greenyellow;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5793,7 +6146,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, ".icon {\n  font-size: 120px;\n  color: #808080;\n  ;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5847,7 +6200,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n", ""]);
 
 // exports
 
@@ -5865,7 +6218,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  background: #fbfbfb;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n", ""]);
 
 // exports
 
@@ -5880,10 +6233,10 @@ module.exports = module.exports.toString();
 
 exports = module.exports = __webpack_require__(2)();
 // imports
-
+exports.push([module.i, "@import url(http://www.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n", ""]);
 
 // exports
 
@@ -5919,7 +6272,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".selected {\n  background-color: greenyellow;\n}\n", ""]);
 
 // exports
 
@@ -5934,10 +6287,10 @@ module.exports = module.exports.toString();
 
 exports = module.exports = __webpack_require__(2)();
 // imports
-exports.push([module.i, "@import url(//cdn-images.mailchimp.com/embedcode/slim-10_7.css);", ""]);
+
 
 // module
-exports.push([module.i, "/*noinspection CssUnknownTarget*/\n\n#mc_embed_signup {\n  background: #fff;\n  clear: left;\n  font: 14px Helvetica, Arial, sans-serif;\n}\n\ninput#mce-EMAIL.email {\n  width: 100% !important;\n}\n\ninput#mc-embedded-subscribe.button {\n  width: 100% !important;\n  background-color: #007c82\n}\n", ""]);
+exports.push([module.i, ".icon {\n  font-size: 120px;\n  color: #808080;\n  ;\n}\n\n\n\na {\n  text-decoration:none;\n  border-width: 0;\n}\n", ""]);
 
 // exports
 
@@ -5955,7 +6308,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, ".tile {\n  height: 140px;\n  min-width: 180px;\n  margin-bottom: 1em;\n  border-radius: 15px\n}\n\n.menu-blue {\n  background-color: #005c82;\n}\n\n.menu-gold {\n  background-color: #bca04d;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5973,7 +6326,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "h3 {\n  border-bottom:2px solid black;\n}\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -6055,70 +6408,149 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 993:
-/***/ (function(module, exports) {
+/***/ 990:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {
-	"name": "complex-portal-view",
-	"version": "0.0.6-beta",
-	"license": "MIT",
-	"angular-cli": {},
-	"scripts": {
-		"ng": "ng",
-		"start": "ng serve",
-		"test": "ng test",
-		"pree2e": "webdriver-manager update --standalone false --gecko false",
-		"e2e": "protractor"
-	},
-	"private": true,
-	"dependencies": {
-		"@angular/common": "^2.3.1",
-		"@angular/compiler": "^2.3.1",
-		"@angular/core": "^2.3.1",
-		"@angular/forms": "^2.3.1",
-		"@angular/http": "^2.3.1",
-		"@angular/material": "^2.0.0-beta.2",
-		"@angular/platform-browser": "^2.3.1",
-		"@angular/platform-browser-dynamic": "^2.3.1",
-		"@angular/router": "^3.3.1",
-		"EBI-Icon-fonts": "https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1",
-		"angulartics2": "^1.6.3",
-		"complexviewer": "/Users/maximiliankoch/interaction-viewer",
-		"core-js": "^2.4.1",
-		"ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13",
-		"expose-loader": "^0.7.1",
-		"install": "^0.8.7",
-		"jquery": "^3.1.1",
-		"litemol": "https://github.com/dsehnal/LiteMol/tarball/v1.0",
-		"ngx-toastr": "^4.4.1",
-		"react": "^15.4.2",
-		"rxjs": "^5.0.1",
-		"svgsaver": "^0.6.2",
-		"ts-helpers": "^1.1.1",
-		"ts-md5": "^1.2.0",
-		"zone.js": "^0.7.2"
-	},
-	"devDependencies": {
-		"@angular/cli": "^1.0.0-rc.4",
-		"@angular/compiler-cli": "^2.3.1",
-		"@types/jasmine": "2.5.38",
-		"@types/node": "^6.0.42",
-		"codelyzer": "~2.0.0-beta.1",
-		"jasmine-core": "2.5.2",
-		"jasmine-spec-reporter": "2.5.0",
-		"karma": "1.2.0",
-		"karma-chrome-launcher": "^2.0.0",
-		"karma-cli": "^1.0.1",
-		"karma-jasmine": "^1.0.2",
-		"karma-remap-istanbul": "^0.2.1",
-		"protractor": "~4.0.13",
-		"ts-node": "1.2.1",
-		"tslint": "^4.3.0",
-		"typescript": "^2.0.10"
-	}
-};
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 991:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+exports.push([module.i, "@import url(//cdn-images.mailchimp.com/embedcode/slim-10_7.css);", ""]);
+
+// module
+exports.push([module.i, "/*noinspection CssUnknownTarget*/\n\n#mc_embed_signup {\n  background: #fff;\n  clear: left;\n  font: 14px Helvetica, Arial, sans-serif;\n}\n\ninput#mce-EMAIL.email {\n  width: 100% !important;\n}\n\ninput#mc-embedded-subscribe.button {\n  width: 100% !important;\n  background-color: #007c82\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 992:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, ".tile {\n  height: 140px;\n  min-width: 180px;\n  margin-bottom: 1em;\n  border-radius: 15px\n}\n\n.menu-blue {\n  background-color: #005c82;\n}\n\n.menu-gold {\n  background-color: #bca04d;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 993:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "h3 {\n  border-bottom:2px solid black;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 994:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 995:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 996:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 997:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ })
 
-},[1109]);
+},[1121]);
 //# sourceMappingURL=main.bundle.js.map
