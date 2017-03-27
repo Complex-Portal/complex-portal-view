@@ -3,3 +3,10 @@
   color: #808080;
   ;
 }
+
+
+
+a {
+  text-decoration:none;
+  border-width: 0;
+}
