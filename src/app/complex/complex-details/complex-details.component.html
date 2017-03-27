@@ -27,8 +27,6 @@
           <app-complex-function *ngIf="complexDetails"
                                 [functionDescription]="complexDetails.functions"
                                 [crossReferences]="complexDetails.crossReferences"
-                                [synonyms]="complexDetails.synonyms"
-                                [systematicName]="complexDetails.systematicName"
                                 [ligands]="complexDetails.ligands"
                                 [agonists]="complexDetails.agonists"
                                 [antagonists]="complexDetails.antagonists"></app-complex-function>
@@ -52,7 +50,9 @@
         </div>
         <div class="columns medium-12">
           <app-complex-references *ngIf="complexDetails"
-                                  [crossReferences]="complexDetails.crossReferences"></app-complex-references>
+                                  [crossReferences]="complexDetails.crossReferences"
+                                  [synonyms]="complexDetails.synonyms"
+                                  [systematicName]="complexDetails.systematicName"></app-complex-references>
         </div>
       </div>
       <div class="columns medium-12">

@@ -2,8 +2,8 @@ import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-synonyms',
-  templateUrl: './synonyms.component.html',
-  styleUrls: ['./synonyms.component.css']
+  templateUrl: 'synonyms.component.html',
+  styleUrls: ['synonyms.component.css']
 })
 export class SynonymsComponent implements OnInit {
   private _synonyms: string[];

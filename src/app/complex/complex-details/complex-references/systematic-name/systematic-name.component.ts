@@ -2,8 +2,8 @@ import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-systematic-name',
-  templateUrl: './systematic-name.component.html',
-  styleUrls: ['./systematic-name.component.css']
+  templateUrl: 'systematic-name.component.html',
+  styleUrls: ['systematic-name.component.css']
 })
 export class SystematicNameComponent implements OnInit {
   private _systematicName: string[];

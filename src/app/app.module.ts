@@ -42,8 +42,8 @@ import {GxaHeatmapComponent} from './complex/complex-details/shared/visualisatio
 import {GoCelluarCrossreferenceComponent} from './complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component';
 import {ChemblCrossreferenceComponent} from './complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component';
 import {EfoCrossreferencesComponent} from './complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component';
-import {SynonymsComponent} from './complex/complex-details/complex-function/synonyms/synonyms.component';
-import {SystematicNameComponent} from './complex/complex-details/complex-function/systematic-name/systematic-name.component';
+import {SynonymsComponent} from './complex/complex-details/complex-references/synonyms/synonyms.component';
+import {SystematicNameComponent} from './complex/complex-details/complex-references/systematic-name/systematic-name.component';
 import {OlsService} from './shared/ols/service/ols.service';
 import {LigandsComponent} from './complex/complex-details/complex-function/ligands/ligands.component';
 import {GoMolecularFunctionComponent} from './complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component';

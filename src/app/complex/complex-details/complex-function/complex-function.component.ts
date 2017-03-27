@@ -13,8 +13,7 @@ export class ComplexFunctionComponent implements OnInit {
   private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
   // private _pubmedXRefs: CrossReference[];
-  private _synonyms: string[];
-  private _systematicName: string[];
+
   private _ligands: string[];
   private _agonists: string[];
   private _antagonists: string[];
@@ -104,24 +103,24 @@ export class ComplexFunctionComponent implements OnInit {
   // set pubmedXRefs(value: CrossReference[]) {
   //   this._pubmedXRefs = value;
   // }
-
-  get synonyms(): string[] {
-    return this._synonyms;
-  }
-
-  @Input()
-  set synonyms(value: string[]) {
-    this._synonyms = value;
-  }
-
-  get systematicName(): string[] {
-    return this._systematicName;
-  }
-
-  @Input()
-  set systematicName(value: string[]) {
-    this._systematicName = value;
-  }
+  //
+  // get synonyms(): string[] {
+  //   return this._synonyms;
+  // }
+  //
+  // @Input()
+  // set synonyms(value: string[]) {
+  //   this._synonyms = value;
+  // }
+  //
+  // get systematicName(): string[] {
+  //   return this._systematicName;
+  // }
+  //
+  // @Input()
+  // set systematicName(value: string[]) {
+  //   this._systematicName = value;
+  // }
 
   get ligands(): string[] {
     return this._ligands;
