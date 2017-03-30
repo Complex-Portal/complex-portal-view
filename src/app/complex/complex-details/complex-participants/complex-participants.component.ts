@@ -8,6 +8,7 @@ import {Participant} from '../../shared/model/complex-details/participant.model'
 })
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
+  // TODO: Is a const
   private _displayedElements = 5;
 
   constructor() {
