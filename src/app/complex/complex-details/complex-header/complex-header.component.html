@@ -1,6 +1,6 @@
 <div class="row">
   <div class="columns medium-12 callout">
-    <div class="columns medium-9 no-pad-left">
+    <div class="columns medium-10 no-pad-left">
       <h2>{{complexName}}</h2>
       <h3><i>{{complexSpecies}}</i></h3>
     </div>
@@ -22,5 +22,9 @@
         </div>
       </div>
     </div>
+    <div class="columns medium-12">
+      <app-complex-evidence [crossReferences]="crossReferences"></app-complex-evidence>
+    </div>
   </div>
+
 </div>

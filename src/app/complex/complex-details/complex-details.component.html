@@ -5,7 +5,8 @@
         <app-complex-header *ngIf="complexDetails"
                             [complexAC]="complexDetails.ac"
                             [complexName]="complexDetails.name"
-                            [complexSpecies]="complexDetails.species"></app-complex-header>
+                            [complexSpecies]="complexDetails.species"
+                            [crossReferences]="complexDetails.crossReferences"></app-complex-header>
       </div>
       <div class="columns medium-12 no-pad-left">
         <div class="columns medium-12">
@@ -18,10 +19,6 @@
             <app-complex-participants *ngIf="complexDetails"
                                       [participants]="complexDetails.participants"></app-complex-participants>
           </div>
-        </div>
-        <div class="columns medium-12">
-          <app-complex-evidence *ngIf="complexDetails"
-                                [crossReferences]="complexDetails.crossReferences"></app-complex-evidence>
         </div>
         <div class="columns medium-12 ">
           <app-complex-function *ngIf="complexDetails"

@@ -8,11 +8,12 @@ import {CrossReference} from "../../shared/model/complex-details/cross-reference
 })
 export class ComplexEvidenceComponent implements OnInit {
   private _crossReferences: CrossReference[];
-  private _ecoXRefs: CrossReference[];
+  private _ecoXRef: CrossReference;
   private _intactXRefs: CrossReference[];
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     for (let i = 0; i < this._crossReferences.length; i++) {
@@ -20,10 +21,31 @@ export class ComplexEvidenceComponent implements OnInit {
       const database = this._crossReferences[i].database;
 
       if (database === 'evidence ontology') {
-        if (this._ecoXRefs === undefined) {
-          this._ecoXRefs = [];
+          this._ecoXRef = crossRef;
+          console.log(this._ecoXRef.description);
+          switch (this._ecoXRef.identifier) {
+            case ('ECO:0000353'):
+              this._ecoXRef.description = 'physical interaction evidence';
+              break;
+            case ('ECO:0005610'):
+              this._ecoXRef.description = 'inferred by homology';
+              break;
+            case ('ECO:0005544'):
+              this._ecoXRef.description = 'inferred by orthology';
+              break;
+            case ('ECO:0005546'):
+              this._ecoXRef.description = 'inferred by paralogy';
+              break;
+            case ('ECO:0005547'):
+              this._ecoXRef.description = 'inferred by curator';
+              break;
+            case ('ECO:0005543'):
+              this._ecoXRef.description = 'inferred from mixed species evidence';
+              break;
+            case ('ECO:0005542'):
+              this._ecoXRef.description = 'inferred from single species evidence';
+              break;
         }
-        this._ecoXRefs.push(crossRef);
       }
       if (database === 'intact') {
         if (this._intactXRefs === undefined) {
@@ -43,12 +65,12 @@ export class ComplexEvidenceComponent implements OnInit {
     this._crossReferences = value;
   }
 
-  get ecoXRefs(): CrossReference[] {
-    return this._ecoXRefs;
+  get ecoXRef(): CrossReference {
+    return this._ecoXRef;
   }
 
-  set ecoXRefs(value: CrossReference[]) {
-    this._ecoXRefs = value;
+  set ecoXRef(value: CrossReference) {
+    this._ecoXRef = value;
   }
 
   get intactXRefs(): CrossReference[] {

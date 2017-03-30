@@ -63,8 +63,6 @@ import { ComplexOrganismsComponent } from './complex/complex-organisms/complex-o
 import { ComplexOrganismComponent } from './complex/complex-organisms/complex-organism/complex-organism.component';
 import { ComplexReferencesComponent } from './complex/complex-details/complex-references/complex-references.component';
 import { ComplexEvidenceComponent } from './complex/complex-details/complex-evidence/complex-evidence.component';
-import { EcoCrossreferencesComponent } from './complex/complex-details/complex-evidence/eco-crossreferences/eco-crossreferences.component';
-import { IntactCrossreferencesComponent } from './complex/complex-details/complex-evidence/intact-crossreferences/intact-crossreferences.component';
 
 @NgModule({
   declarations: [
@@ -115,8 +113,6 @@ import { IntactCrossreferencesComponent } from './complex/complex-details/comple
     ComplexOrganismComponent,
     ComplexReferencesComponent,
     ComplexEvidenceComponent,
-    EcoCrossreferencesComponent,
-    IntactCrossreferencesComponent,
   ],
   imports: [
     BrowserModule,
