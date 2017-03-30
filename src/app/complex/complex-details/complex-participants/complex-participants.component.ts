@@ -14,6 +14,11 @@ export class ComplexParticipantsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.participants.sort(function(a, b){
+      if(a.interactorType < b.interactorType) return -1;
+      if(a.interactorType > b.interactorType) return 1;
+      return 0;
+    });
   }
 
   public getLegendURL(interactorType: string): string {
