@@ -1,0 +1,22 @@
+<form [hidden]="!display" id="local-search" name="local-search" action="[search-action]" method="post">
+  <fieldset>
+    <div class="input-group margin-bottom-none">
+      <input #searchTerm type="text" name="first" id="local-searchbox" placeholder="Search this service" value="{{query}}"
+             class="input-group-field">
+      <div class="input-group-button">
+        <input type="button" name="submit" value="1" (click)="search(searchTerm.value)"
+               class="button icon icon-functional"></div>
+    </div>
+    <small class="">
+      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->
+      <!-- <span class="adv"><a href="../search" id="adv-search" title="Advanced">Advanced</a></span> | -->
+      <!-- Include some example searchterms - keep them short and few. -->
+      <a [routerLink]="['/search']" [queryParams]="{query: 'GO:0016491'}" >GO:0016491</a>
+      <a [routerLink]="['/search']" [queryParams]="{query: 'Ndc80'}">Ndc80</a>
+      <a [routerLink]="['/search']" [queryParams]="{query: 'Q05471'}">Q05471</a>
+      <a [routerLink]="['/search']" [queryParams]="{query: 'PCNA'}">PCNA</a>
+      <a [routerLink]="['/search']" [queryParams]="{query: 'EBI-9008420'}">EBI-9008420</a>
+    </small>
+  </fieldset>
+</form>
+<!-- /local-search -->
