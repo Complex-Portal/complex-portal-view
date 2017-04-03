@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, OnChanges, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -61,6 +61,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.router.navigate(['search'], {
       queryParams
     });
+    ProgressBarComponent.hide();
   }
 
   private prepareFiltersForParams(queryParams: NavigationExtras): void {
