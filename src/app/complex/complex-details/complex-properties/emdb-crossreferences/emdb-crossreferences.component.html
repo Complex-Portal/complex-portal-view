@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="columns medium-12 no-pad-left">
+    <h3>EMDB Cross References ({{crossReferences.length}})</h3>
+    <table class="hover">
+      <tbody>
+      <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
+        <td>
+          <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}}
+            <i class="icon icon-generic small" data-icon="x"></i></a>
+        </td>
+      </tr>
+      <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
+        <td>
+          <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
