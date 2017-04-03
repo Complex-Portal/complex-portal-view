@@ -33,12 +33,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Init some libs.
-    this.initialiseFoundation();
-    this.initialiseGoogleAnalytics();
-    this.initialiseFoundationHacks();
-
-
     // For every router change, we load the ProgressBar by default.
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -51,6 +45,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
+    // Init some libs.
+    this.initialiseFoundation();
+    this.initialiseGoogleAnalytics();
+    this.initialiseFoundationHacks();
     // ProgressBarComponent.hide();
   }
 
