@@ -31,6 +31,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit {
     this.route
       .params
       .subscribe(params => {
+        console.log(params);
         this._query = params['id'];
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails);

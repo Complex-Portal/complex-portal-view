@@ -10,6 +10,7 @@ export class ComplexPropertiesComponent implements OnInit {
   private _propertiesDescription: string;
   private _crossReferences: CrossReference[];
   private _pdbXRefs: CrossReference[];
+  private _emdbXRefs: CrossReference[];
   private _comments: string[];
 
   constructor() {
@@ -25,6 +26,12 @@ export class ComplexPropertiesComponent implements OnInit {
           this._pdbXRefs = [];
         }
         this._pdbXRefs.push(crossRef);
+      }
+      if (database === 'emdb') {
+        if (this._emdbXRefs === undefined) {
+          this._emdbXRefs = [];
+        }
+        this._emdbXRefs.push(crossRef);
       }
     }
   }
@@ -53,6 +60,15 @@ export class ComplexPropertiesComponent implements OnInit {
 
   set pdbXRefs(value: CrossReference[]) {
     this._pdbXRefs = value;
+  }
+
+  get emdbXRefs(): CrossReference[] {
+    return this._emdbXRefs;
+  }
+
+  @Input()
+  set emdbXRefs(value: CrossReference[]) {
+    this._emdbXRefs = value;
   }
 
   get comments(): string[] {

@@ -1,11 +1,13 @@
 <div class="row">
-  <h2>Expression</h2>
-  <div class="columns medium-12">
-    <app-gxa-heatmap *ngIf="gxa && gxaParamsQueries" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
-                     [complexSpecies]="complexSpecies"></app-gxa-heatmap>
-  </div>
-  <div class="columns medium-12">
-    <app-go-celluar-crossreference *ngIf="goCellularXRefs"
-                                   [crossReferences]="goCellularXRefs"></app-go-celluar-crossreference>
+  <div class="columns medium-12 no-pad-left" *ngIf="(gxa && gxaParamsQueries) || goCellularXRefs">
+    <h2>Expression</h2>
+    <div class="columns medium-12">
+      <app-gxa-heatmap *ngIf="gxa && gxaParamsQueries" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
+                       [complexSpecies]="complexSpecies"></app-gxa-heatmap>
+    </div>
+    <div class="columns medium-12">
+      <app-go-celluar-crossreference *ngIf="goCellularXRefs"
+                                     [crossReferences]="goCellularXRefs"></app-go-celluar-crossreference>
+    </div>
   </div>
 </div>
