@@ -79,6 +79,17 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             res[i].symbol = 'L';
             res[i].type = 'animal';
             break;
+          case 'Torpedo marmorata':
+            res[i].symbol = '+';
+            res[i].type = 'animal';
+            break;
+          case 'Tetronarce californica':
+            res[i].symbol = '+';
+            res[i].type = 'animal';
+          case 'Lymnaea stagnalis':
+            res[i].symbol = '\'';
+            res[i].type = 'animal';
+            break;
           default:
             res[i].symbol = 'x';
             res[i].type = 'none';
