@@ -65,6 +65,7 @@ import { ComplexReferencesComponent } from './complex/complex-details/complex-re
 import { ComplexEvidenceComponent } from './complex/complex-details/complex-evidence/complex-evidence.component';
 import { EmdbCrossreferencesComponent } from './complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component';
 import { LocalSearchComponent } from './search/local-search/local-search.component';
+import { AssembliesComponent } from './complex/complex-details/complex-function/assemblies/assemblies.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { LocalSearchComponent } from './search/local-search/local-search.compone
     ComplexEvidenceComponent,
     EmdbCrossreferencesComponent,
     LocalSearchComponent,
+    AssembliesComponent,
   ],
   imports: [
     BrowserModule,
