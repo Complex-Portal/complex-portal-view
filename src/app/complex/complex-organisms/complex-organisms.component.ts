@@ -86,6 +86,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
           case 'Tetronarce californica':
             res[i].symbol = '+';
             res[i].type = 'animal';
+            break;
           case 'Lymnaea stagnalis':
             res[i].symbol = '\'';
             res[i].type = 'animal';
