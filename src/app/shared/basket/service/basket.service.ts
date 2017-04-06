@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
@@ -8,8 +8,10 @@ const COMPLEX_STORE = 'cp_complex_store';
 @Injectable()
 export class BasketService {
   private _complexBasket: {[name: string]: BasketItem} = {};
+  public onBasketCountChanged$: EventEmitter<number>;
 
   constructor(private notificationService: NotificationService) {
+    this.onBasketCountChanged$ = new EventEmitter<number>();
     this.initialiseBasket();
   }
 
@@ -29,7 +31,7 @@ export class BasketService {
     }
   }
 
-  public getKeys(object:Object) : string[]{
+  public getKeys(object: Object): string[] {
     return Object.keys(object);
   }
 
@@ -40,6 +42,7 @@ export class BasketService {
       this.saveInLocalStorage();
       this.notificationService.addSuccessNotification('Stored ' + id + ' in you basket!');
     }
+    this.onBasketCountChanged$.emit(this.getBasketCount());
   }
 
   public deleteFromBasket(key: string): void {
@@ -47,6 +50,7 @@ export class BasketService {
     delete this._complexBasket[key];
     this.saveInLocalStorage();
     this.notificationService.addSuccessNotification('Removed ' + id + ' in you basket!');
+    this.onBasketCountChanged$.emit(this.getBasketCount());
   }
 
   private saveInLocalStorage(): void {
@@ -72,5 +76,9 @@ export class BasketService {
 
   get complexBasket() {
     return this._complexBasket;
+  }
+
+  public getBasketCount() : number {
+    return this.getKeys(this._complexBasket).length;
   }
 }

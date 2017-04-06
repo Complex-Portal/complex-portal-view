@@ -6,6 +6,7 @@ import {environment} from '../environments/environment';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrConfig} from "ngx-toastr";
+import {BasketService} from "./shared/basket/service/basket.service";
 declare const $: any;
 declare const ga: any;
 
@@ -20,9 +21,12 @@ const environmentName: string = environment.evn;
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
   private _environmentName: string;
+  private basketCount = 0;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
-              private notificationService: NotificationService, private toastrConfig: ToastrConfig) {
+              private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService : BasketService) {
+    this.basketService.onBasketCountChanged$.subscribe(count => this.basketCount = count);
+    this.basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
     toastrConfig.closeButton = true; // displayedElements close button
@@ -30,9 +34,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
       '\'Issues\'-button in the top bar.', this.toastrConfig);
     this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
+    // this.basketService.initialiseBasket();
   }
 
   ngOnInit(): void {
+
     // For every router change, we load the ProgressBar by default.
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
