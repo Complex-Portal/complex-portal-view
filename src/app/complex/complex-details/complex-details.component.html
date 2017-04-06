@@ -1,14 +1,14 @@
 <section>
   <div id="main-content-area">
     <div class="columns medium-12">
-      <div class="columns medium-12">
+      <div class="columns medium-12" style="margin-bottom: 30px">
         <app-complex-header *ngIf="complexDetails"
                             [complexAC]="complexDetails.ac"
                             [complexName]="complexDetails.name"
                             [complexSpecies]="complexDetails.species"
                             [crossReferences]="complexDetails.crossReferences"></app-complex-header>
       </div>
-      <div class="columns medium-12 no-pad-left">
+      <div class="columns medium-12 no-pad-left" style="margin-bottom: 30px">
         <div class="columns medium-12">
           <div class="columns medium-6 no-pad-left no-pad-right">
             <app-complex-viewer *ngIf="complexDetails && complexMIJSON"
@@ -20,7 +20,7 @@
                                       [participants]="complexDetails.participants"></app-complex-participants>
           </div>
         </div>
-        <div class="columns medium-12 ">
+        <div class="columns medium-12 " style="margin-bottom: 30px">
           <app-complex-function *ngIf="complexDetails"
                                 [functionDescription]="complexDetails.functions"
                                 [crossReferences]="complexDetails.crossReferences"
@@ -28,25 +28,25 @@
                                 [agonists]="complexDetails.agonists"
                                 [antagonists]="complexDetails.antagonists"></app-complex-function>
         </div>
-        <div class="columns medium-12">
+        <div class="columns medium-12" style="margin-bottom: 30px">
           <app-complex-properties *ngIf="complexDetails"
                                   [propertiesDescription]="complexDetails.properties"
                                   [comments]="complexDetails.comments"
                                   [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
         </div>
-        <div class="columns medium-12">
+        <div class="columns medium-12"style="margin-bottom: 30px">
           <app-complex-expression *ngIf="complexDetails && gxa"
                                   [gxa]="gxa"
                                   [participants]="complexDetails.participants"
                                   [complexSpecies]="complexDetails.species"
                                   [crossReferences]="complexDetails.crossReferences"></app-complex-expression>
         </div>
-        <div class="columns medium-12">
+        <div class="columns medium-12" style="margin-bottom: 30px">
           <app-complex-disease *ngIf="complexDetails"
                                [diseaseDescriptions]="complexDetails.diseases"
                                [crossReferences]="complexDetails.crossReferences"></app-complex-disease>
         </div>
-        <div class="columns medium-12">
+        <div class="columns medium-12" style="margin-bottom: 30px">
           <app-complex-references *ngIf="complexDetails"
                                   [crossReferences]="complexDetails.crossReferences"
                                   [synonyms]="complexDetails.synonyms"
