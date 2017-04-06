@@ -44,12 +44,6 @@ export class ComplexFunctionComponent implements OnInit {
         }
         this.reactomeXRefs.push(crossRef);
       }
-      // if (database === 'pubmed') {
-      //   if (this.pubmedXRefs === undefined) {
-      //     this.pubmedXRefs = [];
-      //   }
-      //   this.pubmedXRefs.push(crossRef);
-      // }
     }
   }
 
