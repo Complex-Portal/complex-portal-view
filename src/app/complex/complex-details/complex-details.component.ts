@@ -1,23 +1,27 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
+import {Subscription} from "rxjs";
+import {NotificationService} from "../../shared/notification/service/notification.service";
 declare const expressionAtlasHeatmapHighcharts: any;
+declare const $: any;
 
 @Component({
   selector: 'app-complex-details',
   templateUrl: './complex-details.component.html',
   styleUrls: ['./complex-details.component.css']
 })
-export class ComplexDetailsComponent implements OnInit, AfterViewInit {
+export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  private _callSubscription: Subscription;
   private _complexDetails: ComplexDetails;
   private _complexMIJSON: any;
   private _query: string;
   private _gxa;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
               private complexPortalService: ComplexPortalService) {
 
     if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
@@ -28,15 +32,21 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route
+    this._callSubscription = this.route
       .params
       .subscribe(params => {
-        console.log(params);
-        this._query = params['id'];
         this.complexPortalService.getComplex(this._query).subscribe(
-          complexDetails => this.complexDetails = complexDetails);
+          complexDetails => this.complexDetails = complexDetails,
+          err => {
+            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
+            this.router.navigate(['home'])
+          });
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
-          complexMIJSON => this.complexMIJSON = complexMIJSON);
+          complexMIJSON => this.complexMIJSON = complexMIJSON,
+          err => {
+            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
+            this.router.navigate(['home'])
+          });
         document.body.scrollTop = 0;
       });
   }
@@ -44,6 +54,14 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
+    // $('#myStickyElement').foundation();
+    $('#testDropDown').foundation();
+    $(window).trigger('load.zf.sticky')
+  }
+
+
+  ngOnDestroy(): void {
+    this._callSubscription.unsubscribe();
   }
 
   get complexDetails(): ComplexDetails {
