@@ -68,7 +68,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   }
 
   @HostListener('window:resize', ['$event.target'])
-  onResize() {
+  onResize(): void {
     this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
     this.selectComplex(this.selectedComplex);
   }
@@ -78,15 +78,11 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     const context = this;
     this.globelDiagram.loadDiagram(this.selectedPathway);
     this.globelDiagram.onDiagramLoaded(function (loaded) {
-      // Work around for now. GitHub issue #31
-      // setTimeout(function () {
       context.selectComplex(context.selectedComplex);
-
-      // }, 1)
     });
   }
 
-  public selectComplex(reactomeComplexId: string) {
+  public selectComplex(reactomeComplexId: string): void {
     this.selectedComplex = reactomeComplexId;
     this.globelDiagram.resetFlaggedItems();
     this.globelDiagram.flagItems(reactomeComplexId);

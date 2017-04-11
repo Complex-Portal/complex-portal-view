@@ -1,3 +1,7 @@
 .selected {
   background-color: greenyellow;
 }
+
+.none-pointer-events {
+  pointer-events: none;
+}
