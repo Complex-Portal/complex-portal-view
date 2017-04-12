@@ -29,6 +29,7 @@
         "../src/assets/js/ebi-framework/foot",
         "../src/assets/js/ebi-framework/script",
         "../node_modules/ebi_framework/libraries/foundation-6/dist/foundation",
+        "../node_modules/ebi_framework/libraries/foundation-6/dist/plugins/foundation.dropdownMenu",
         "../node_modules/ebi_framework/js/foundationExtendEBI"
       ],
       "environmentSource": "environments/environment.ts",
