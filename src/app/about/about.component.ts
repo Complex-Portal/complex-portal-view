@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/progress-bar.component";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-about',
