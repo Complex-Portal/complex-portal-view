@@ -2,7 +2,7 @@
   <div class="columns medium-12 no-pad-left no-pad-right">
     <!-- local-search -->
     <!-- if you do not have a local-search, delete the following form -->
-    <form id="content-search" name="content-search" action="[search-action]" method="post">
+    <form id="content-search" name="content-search" action="[search-action]" method="post" (keyup.enter)="search(query.value)">
       <h2>Search in Complex Portal</h2>
       <fieldset>
         <div class="input-group margin-bottom-none">

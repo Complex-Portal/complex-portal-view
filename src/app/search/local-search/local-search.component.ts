@@ -9,8 +9,8 @@ import {Location} from '@angular/common';
   styleUrls: ['./local-search.component.css']
 })
 export class LocalSearchComponent implements OnInit {
-  private display: boolean;
-  private query: string;
+  private _display: boolean;
+  private _query: string;
 
   constructor(private location: Location, private router: Router, private route: ActivatedRoute) {
 
@@ -19,19 +19,19 @@ export class LocalSearchComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((val) => {
         if (this.location.path().startsWith('/home')) {
-          this.display = false;
+          this._display = false;
         } else {
-          this.display = true;
+          this._display = true;
           if (this.location.path().startsWith('/search')) {
             this.route
               .queryParams
               .subscribe(queryParams => {
-                this.query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+                this._query = queryParams['_query'] ? queryParams['_query'] : console.log('Error');
               });
           } else if (this.location.path().startsWith('/complex')) {
-            this.query = this.location.path().split("/")[2];
+            this._query = this.location.path().split("/")[2];
           } else {
-            this.query = "";
+            this._query = "";
           }
         }
       }
@@ -40,5 +40,14 @@ export class LocalSearchComponent implements OnInit {
 
   search(query: string) {
     this.router.navigate(['search'], { queryParams: { query: query, page: 1 }});
+  }
+
+
+  get display(): boolean {
+    return this._display;
+  }
+
+  get query(): string {
+    return this._query;
   }
 }
