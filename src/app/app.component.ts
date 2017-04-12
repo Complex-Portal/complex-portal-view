@@ -21,12 +21,12 @@ const environmentName: string = environment.evn;
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
   private _environmentName: string;
-  private basketCount = 0;
+  private _basketCount = 0;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService : BasketService) {
-    this.basketService.onBasketCountChanged$.subscribe(count => this.basketCount = count);
-    this.basketCount = this.basketService.getBasketCount();
+    this.basketService.onBasketCountChanged$.subscribe(count => this._basketCount = count);
+    this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
     toastrConfig.closeButton = true; // displayedElements close button
@@ -109,5 +109,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   set environmentName(value: string) {
     this._environmentName = value;
+  }
+
+
+  get basketCount(): number {
+    return this._basketCount;
   }
 }
