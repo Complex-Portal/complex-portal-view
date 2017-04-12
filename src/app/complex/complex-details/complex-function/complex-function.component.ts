@@ -1,12 +1,14 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+
+declare const $ : any;
 
 @Component({
   selector: 'app-complex-function',
   templateUrl: './complex-function.component.html',
   styleUrls: ['./complex-function.component.css']
 })
-export class ComplexFunctionComponent implements OnInit {
+export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _crossReferences: CrossReference[];
   private _functionDescription: string;
   private _goXRefs: CrossReference[];
@@ -47,6 +49,11 @@ export class ComplexFunctionComponent implements OnInit {
     }
   }
 
+
+  ngAfterViewInit(): void {
+    $('.goToMenu').foundation();
+
+  }
 
   get crossReferences(): CrossReference[] {
     return this._crossReferences;
@@ -89,32 +96,6 @@ export class ComplexFunctionComponent implements OnInit {
   set reactomeXRefs(value: CrossReference[]) {
     this._reactomeXRefs = value;
   }
-
-  // get pubmedXRefs(): CrossReference[] {
-  //   return this._pubmedXRefs;
-  // }
-  //
-  // set pubmedXRefs(value: CrossReference[]) {
-  //   this._pubmedXRefs = value;
-  // }
-  //
-  // get synonyms(): string[] {
-  //   return this._synonyms;
-  // }
-  //
-  // @Input()
-  // set synonyms(value: string[]) {
-  //   this._synonyms = value;
-  // }
-  //
-  // get systematicName(): string[] {
-  //   return this._systematicName;
-  // }
-  //
-  // @Input()
-  // set systematicName(value: string[]) {
-  //   this._systematicName = value;
-  // }
 
   get ligands(): string[] {
     return this._ligands;
