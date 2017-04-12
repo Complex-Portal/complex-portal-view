@@ -8,7 +8,7 @@
                             [complexSpecies]="complexDetails.species"
                             [crossReferences]="complexDetails.crossReferences"></app-complex-header>
       </div>
-      <div class="columns medium-12 no-pad-left" style="margin-bottom: 30px">
+      <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div class="columns medium-12">
           <div class="columns medium-6 no-pad-left no-pad-right">
             <app-complex-viewer *ngIf="complexDetails && complexMIJSON"
@@ -34,7 +34,7 @@
                                   [comments]="complexDetails.comments"
                                   [crossReferences]="complexDetails.crossReferences"></app-complex-properties>
         </div>
-        <div class="columns medium-12"style="margin-bottom: 30px">
+        <div class="columns medium-12" style="margin-bottom: 30px">
           <app-complex-expression *ngIf="complexDetails && gxa"
                                   [gxa]="gxa"
                                   [participants]="complexDetails.participants"

@@ -3,8 +3,9 @@ import {ComplexDetails} from '../shared/model/complex-details/complex-details.mo
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
-import {Subscription} from "rxjs";
+import {Subscription} from "rxjs/Subscription";
 import {NotificationService} from "../../shared/notification/service/notification.service";
+
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
 
@@ -35,18 +36,21 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     this._callSubscription = this.route
       .params
       .subscribe(params => {
+        this.query = params['id'];
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails,
-          err => {
+          error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
             this.router.navigate(['home'])
-          });
+          }
+          );
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,
-          err => {
+          error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
             this.router.navigate(['home'])
-          });
+          }
+        );
         document.body.scrollTop = 0;
       });
   }
