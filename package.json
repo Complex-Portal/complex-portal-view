@@ -32,7 +32,7 @@
     "jquery": "^3.1.1",
     "litemol": "https://github.com/dsehnal/LiteMol/tarball/v1.0",
     "ngx-toastr": "^5.0.6",
-    "react": "^15.4.2",
+    "react": "^15.5.4",
     "rxjs": "^5.0.1",
     "svgsaver": "^0.6.2",
     "ts-helpers": "^1.1.1",
