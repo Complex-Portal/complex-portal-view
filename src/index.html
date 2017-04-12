@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <base href="/">
@@ -119,14 +120,11 @@
 <app-root></app-root>
 <!-- End suggested layout containers -->
 
-<script>
-  function onReactomeDiagramReady() {
-    window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
-  }
-</script>
+<script src="assets/js/reactome-event.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript"
         src="https://www.ebi.ac.uk/gxa/resources/js-bundles/vendorCommons.bundle.js"></script>
-<script type="text/javascript"
-        src="https://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
+
 </body>
 </html>
