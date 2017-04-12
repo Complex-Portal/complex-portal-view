@@ -7,7 +7,7 @@ interface GXAQueryParams {
 }
 
 @Component({
-  selector: 'app-gxa-heatmap',
+  selector: 'cp-gxa-heatmap',
   templateUrl: 'gxa-heatmap.component.html',
   styleUrls: ['gxa-heatmap.component.css']
 })

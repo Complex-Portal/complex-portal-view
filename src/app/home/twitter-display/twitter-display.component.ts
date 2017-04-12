@@ -3,7 +3,7 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 const twitterURL = 'platform.twitter.com/widgets.js';
 
 @Component({
-  selector: 'app-twitter-display',
+  selector: 'cp-twitter-display',
   templateUrl: './twitter-display.component.html',
   styleUrls: ['./twitter-display.component.css']
 })

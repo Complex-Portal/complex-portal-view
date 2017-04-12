@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-synonyms',
+  selector: 'cp-synonyms',
   templateUrl: 'synonyms.component.html',
   styleUrls: ['synonyms.component.css']
 })

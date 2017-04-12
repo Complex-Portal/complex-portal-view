@@ -4,7 +4,7 @@ import {ComplexPortalService} from "../shared/service/complex-portal.service";
 import {Facet} from "../shared/model/complex-results/facets/facet.model";
 
 @Component({
-  selector: 'app-complex-organisms',
+  selector: 'cp-complex-organisms',
   templateUrl: './complex-organisms.component.html',
   styleUrls: ['./complex-organisms.component.css']
 })

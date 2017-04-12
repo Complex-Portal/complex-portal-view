@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-go-biological-process',
+  selector: 'cp-go-biological-process',
   templateUrl: 'go-biological-process.component.html',
   styleUrls: ['go-biological-process.component.css']
 })

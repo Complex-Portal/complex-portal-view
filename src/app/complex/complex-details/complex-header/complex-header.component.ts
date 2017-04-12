@@ -5,7 +5,7 @@ import {NotificationService} from '../../../shared/notification/service/notifica
 import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
 
 @Component({
-  selector: 'app-complex-header',
+  selector: 'cp-complex-header',
   templateUrl: './complex-header.component.html',
   styleUrls: ['./complex-header.component.css']
 })

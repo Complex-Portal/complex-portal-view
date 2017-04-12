@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-chembl-crossreference',
+  selector: 'cp-chembl-crossreference',
   templateUrl: './chembl-crossreference.component.html',
   styleUrls: ['./chembl-crossreference.component.css']
 })

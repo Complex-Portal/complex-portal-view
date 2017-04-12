@@ -10,7 +10,7 @@ declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
 
 @Component({
-  selector: 'app-complex-details',
+  selector: 'cp-complex-details',
   templateUrl: './complex-details.component.html',
   styleUrls: ['./complex-details.component.css']
 })

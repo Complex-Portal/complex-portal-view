@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-assemblies',
+  selector: 'cp-assemblies',
   templateUrl: './assemblies.component.html',
   styleUrls: ['./assemblies.component.css']
 })

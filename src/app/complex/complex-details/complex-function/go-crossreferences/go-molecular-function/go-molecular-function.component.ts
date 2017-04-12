@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-go-molecular-function',
+  selector: 'cp-go-molecular-function',
   templateUrl: 'go-molecular-function.component.html',
   styleUrls: ['go-molecular-function.component.css']
 })

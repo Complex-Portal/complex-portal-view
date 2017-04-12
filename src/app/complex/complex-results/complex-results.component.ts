@@ -6,7 +6,7 @@ import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar
 
 
 @Component({
-  selector: 'app-complex-results',
+  selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
   styleUrls: ['./complex-results.component.css']
 })

@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from "../../../shared/model/complex-details/cross-reference.model";
 
 @Component({
-  selector: 'app-emdb-crossreferences',
+  selector: 'cp-emdb-crossreferences',
   templateUrl: './emdb-crossreferences.component.html',
   styleUrls: ['./emdb-crossreferences.component.css']
 })

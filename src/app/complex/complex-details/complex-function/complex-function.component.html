@@ -2,28 +2,28 @@
   <div class="columns medium-12 no-pad-left no-pad-right">
     <div class="columns medium-12 clearfix no-pad-left">
       <h2 class="float-left">Function</h2>
-      <app-go-to></app-go-to>
+      <cp-go-to></cp-go-to>
     </div>
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
       <p>{{functionDescription}}</p>
     </div>
     <div id="ligands" class="columns medium-12 no-pad-left" *ngIf="ligands && ligands.length !== 0">
-      <app-ligands [ligands]="ligands"></app-ligands>
+      <cp-ligands [ligands]="ligands"></cp-ligands>
     </div>
     <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs">
-      <app-go-crossreferences [crossReferences]="goXRefs"></app-go-crossreferences>
+      <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>
     </div>
     <div id="agonists" class="columns medium-6 no-pad-left" *ngIf="agonists && agonists.length !== 0">
-      <app-agonists [agonists]="agonists"></app-agonists>
+      <cp-agonists [agonists]="agonists"></cp-agonists>
     </div>
     <div id="antagonists" class="columns medium-6 no-pad-left" *ngIf="antagonists && antagonists.length !== 0">
-      <app-antagonists [antagonists]="antagonists"></app-antagonists>
+      <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
     </div>
     <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs">
-      <app-reactome-crossreferences [crossReferences]="reactomeXRefs"></app-reactome-crossreferences>
+      <cp-reactome-crossreferences [crossReferences]="reactomeXRefs"></cp-reactome-crossreferences>
     </div>
     <div id="intenzXRefs" class="columns medium-12 no-pad-left" *ngIf="intenzXRefs">
-      <app-intenz-crossreferences [crossReferences]="intenzXRefs"></app-intenz-crossreferences>
+      <cp-intenz-crossreferences [crossReferences]="intenzXRefs"></cp-intenz-crossreferences>
     </div>
   </div>
 </div>

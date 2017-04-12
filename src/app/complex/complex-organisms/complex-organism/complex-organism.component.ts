@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-complex-organism',
+  selector: 'cp-complex-organism',
   templateUrl: './complex-organism.component.html',
   styleUrls: ['./complex-organism.component.css']
 })

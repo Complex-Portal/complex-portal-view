@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-go-celluar-crossreference',
+  selector: 'cp-go-celluar-crossreference',
   templateUrl: './go-celluar-crossreference.component.html',
   styleUrls: ['./go-celluar-crossreference.component.css']
 })

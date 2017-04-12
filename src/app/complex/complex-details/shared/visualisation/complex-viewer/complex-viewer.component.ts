@@ -5,7 +5,7 @@ const SvgSaver = require('svgsaver');
 const xiNET = require('expose-loader?xiNET!complexviewer');
 
 @Component({
-  selector: 'app-complex-viewer',
+  selector: 'cp-complex-viewer',
   templateUrl: 'complex-viewer.component.html',
   styleUrls: ['complex-viewer.component.css']
 })

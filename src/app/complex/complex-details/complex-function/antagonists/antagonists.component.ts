@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-antagonists',
+  selector: 'cp-antagonists',
   templateUrl: './antagonists.component.html',
   styleUrls: ['./antagonists.component.css']
 })

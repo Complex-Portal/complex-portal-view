@@ -12,7 +12,7 @@ interface Publication {
 }
 
 @Component({
-  selector: 'app-euro-pmc-crossreferences',
+  selector: 'cp-euro-pmc-crossreferences',
   templateUrl: 'euro-pmc-crossreferences.component.html',
   styleUrls: ['euro-pmc-crossreferences.component.css']
 })

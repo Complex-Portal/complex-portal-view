@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-pdb-crossreferences',
+  selector: 'cp-pdb-crossreferences',
   templateUrl: './pdb-crossreferences.component.html',
   styleUrls: ['./pdb-crossreferences.component.css']
 })

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-systematic-name',
+  selector: 'cp-systematic-name',
   templateUrl: 'systematic-name.component.html',
   styleUrls: ['systematic-name.component.css']
 })

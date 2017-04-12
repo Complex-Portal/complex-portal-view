@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-agonists',
+  selector: 'cp-agonists',
   templateUrl: './agonists.component.html',
   styleUrls: ['./agonists.component.css']
 })

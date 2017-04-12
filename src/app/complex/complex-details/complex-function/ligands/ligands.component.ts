@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-ligands',
+  selector: 'cp-ligands',
   templateUrl: './ligands.component.html',
   styleUrls: ['./ligands.component.css']
 })

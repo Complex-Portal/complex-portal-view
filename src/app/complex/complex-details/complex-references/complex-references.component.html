@@ -2,13 +2,13 @@
   <div class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs || synonyms || systematicName">
     <h2>Names and Publications</h2>
     <div id="pubmedXRefs" class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs">
-      <app-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></app-euro-pmc-crossreferences>
+      <cp-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></cp-euro-pmc-crossreferences>
     </div>
     <div id="synonyms" class="columns medium-6 no-pad-left" *ngIf="synonyms">
-      <app-synonyms [synonyms]="synonyms"></app-synonyms>
+      <cp-synonyms [synonyms]="synonyms"></cp-synonyms>
     </div>
     <div id="systematicName" class="columns medium-6 no-pad-left" *ngIf="systematicName">
-      <app-systematic-name [systematicName]="systematicName"></app-systematic-name>
+      <cp-systematic-name [systematicName]="systematicName"></cp-systematic-name>
     </div>
   </div>
 </div>

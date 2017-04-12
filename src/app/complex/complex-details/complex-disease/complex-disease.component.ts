@@ -3,7 +3,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 
 
 @Component({
-  selector: 'app-complex-disease',
+  selector: 'cp-complex-disease',
   templateUrl: './complex-disease.component.html',
   styleUrls: ['./complex-disease.component.css']
 })

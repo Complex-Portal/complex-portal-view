@@ -7,7 +7,7 @@ import {ReactomeComplex} from './shared/model/reactome-complex';
 import {ReactomePathway} from './shared/model/reactome-pathway';
 
 @Component({
-  selector: 'app-reactome-crossreferences',
+  selector: 'cp-reactome-crossreferences',
   templateUrl: './reactome-crossreferences.component.html',
   styleUrls: ['./reactome-crossreferences.component.css']
 })

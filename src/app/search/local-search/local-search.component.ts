@@ -4,7 +4,7 @@ import {Location} from '@angular/common';
 
 
 @Component({
-  selector: 'app-local-search',
+  selector: 'cp-local-search',
   templateUrl: './local-search.component.html',
   styleUrls: ['./local-search.component.css']
 })

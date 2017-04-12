@@ -7,7 +7,7 @@ import {ReactomeService} from '../../../complex-function/reactome-crossreference
 const baseURL = environment.reactome_base_url;
 
 @Component({
-  selector: 'app-reactome-diagram',
+  selector: 'cp-reactome-diagram',
   templateUrl: 'reactome-diagram.component.html',
   styleUrls: ['reactome-diagram.component.css']
 })

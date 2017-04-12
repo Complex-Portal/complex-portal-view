@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-complex-paginator',
+  selector: 'cp-complex-paginator',
   templateUrl: './complex-paginator.component.html',
   styleUrls: ['./complex-paginator.component.css']
 })

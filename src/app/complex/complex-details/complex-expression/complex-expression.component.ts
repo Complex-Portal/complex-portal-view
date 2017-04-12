@@ -8,7 +8,7 @@ interface GXAQueryParams {
 }
 
 @Component({
-  selector: 'app-complex-expression',
+  selector: 'cp-complex-expression',
   templateUrl: './complex-expression.component.html',
   styleUrls: ['./complex-expression.component.css']
 })

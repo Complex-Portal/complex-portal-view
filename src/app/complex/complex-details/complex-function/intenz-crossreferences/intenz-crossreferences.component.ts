@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-intenz-crossreferences',
+  selector: 'cp-intenz-crossreferences',
   templateUrl: './intenz-crossreferences.component.html',
   styleUrls: ['./intenz-crossreferences.component.css']
 })

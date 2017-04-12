@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-complex-footer',
+  selector: 'cp-complex-footer',
   templateUrl: './complex-footer.component.html',
   styleUrls: ['./complex-footer.component.css']
 })

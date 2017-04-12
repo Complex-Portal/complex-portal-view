@@ -4,7 +4,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 declare const $ : any;
 
 @Component({
-  selector: 'app-complex-function',
+  selector: 'cp-complex-function',
   templateUrl: './complex-function.component.html',
   styleUrls: ['./complex-function.component.css']
 })

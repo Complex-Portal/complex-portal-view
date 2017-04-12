@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
-  selector: 'app-complex-properties',
+  selector: 'cp-complex-properties',
   templateUrl: './complex-properties.component.html',
   styleUrls: ['./complex-properties.component.css']
 })

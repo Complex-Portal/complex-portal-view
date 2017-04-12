@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 
 @Component({
-  selector: 'app-complex-participants',
+  selector: 'cp-complex-participants',
   templateUrl: './complex-participants.component.html',
   styleUrls: ['./complex-participants.component.css']
 })

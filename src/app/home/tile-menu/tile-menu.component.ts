@@ -1,10 +1,10 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 
-declare var $: any;
+declare const $: any;
 
 @Component({
-  selector: 'app-tile-menu',
+  selector: 'cp-tile-menu',
   templateUrl: './tile-menu.component.html',
   styleUrls: ['./tile-menu.component.css']
 })
@@ -14,7 +14,7 @@ export class TileMenuComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $('app-tile-menu').foundation();
+    $('cp-tile-menu').foundation();
   }
 
   featureNotAvailableYet() {

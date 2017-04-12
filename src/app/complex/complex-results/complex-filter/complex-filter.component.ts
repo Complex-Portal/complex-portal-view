@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 
 @Component({
-  selector: 'app-complex-filter',
+  selector: 'cp-complex-filter',
   templateUrl: './complex-filter.component.html',
   styleUrls: ['./complex-filter.component.css']
 })

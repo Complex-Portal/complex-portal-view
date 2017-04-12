@@ -3,7 +3,7 @@ import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/pr
 import {environment} from "../../environments/environment";
 
 @Component({
-  selector: 'app-about',
+  selector: 'cp-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })

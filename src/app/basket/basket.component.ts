@@ -4,7 +4,7 @@ import {BasketItem} from '../shared/basket/model/basketItem';
 import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/progress-bar.component";
 
 @Component({
-  selector: 'app-basket',
+  selector: 'cp-basket',
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.css']
 })

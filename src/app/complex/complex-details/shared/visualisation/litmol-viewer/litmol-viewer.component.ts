@@ -6,7 +6,7 @@ import {environment} from '../../../../../../environments/environment';
 const baseURL = environment.pdb_base_url;
 
 @Component({
-  selector: 'app-litmol-viewer',
+  selector: 'cp-litmol-viewer',
   templateUrl: 'litmol-viewer.component.html',
   styleUrls: ['litmol-viewer.component.css']
 })

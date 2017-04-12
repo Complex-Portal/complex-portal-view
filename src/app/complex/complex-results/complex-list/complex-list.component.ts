@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 
 @Component({
-  selector: 'app-complex-list',
+  selector: 'cp-complex-list',
   templateUrl: './complex-list.component.html',
   styleUrls: ['./complex-list.component.css']
 })

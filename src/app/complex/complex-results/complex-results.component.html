@@ -2,25 +2,25 @@
   <div class="columns medium-12" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
     <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
     <div class="columns medium-4">
-      <app-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
-                          [spicesFilter]="spicesFilter"
-                          [bioRoleFilter]="bioRoleFilter"
-                          [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
-                          (onResetAllFilters)="onResetAllFilters($event)"
-                          (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
-                          (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                          (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
+      <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
+                         [spicesFilter]="spicesFilter"
+                         [bioRoleFilter]="bioRoleFilter"
+                         [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
+                         (onResetAllFilters)="onResetAllFilters($event)"
+                         (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
+                         (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
+                         (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
         Loading ...
-      </app-complex-filter>
+      </cp-complex-filter>
     </div>
     <div class="columns medium-8">
-      <app-complex-paginator [currentPageIndex]="currentPageIndex"
-                             [lastPageIndex]="lastPageIndex"
-                             (onPageChange)="onPageChange($event)"></app-complex-paginator>
-      <app-complex-list [complexSearch]="complexSearch">Loading ...</app-complex-list>
-      <app-complex-paginator [currentPageIndex]="currentPageIndex"
-                             [lastPageIndex]="lastPageIndex"
-                             (onPageChange)="onPageChange($event)"></app-complex-paginator>
+      <cp-complex-paginator [currentPageIndex]="currentPageIndex"
+                            [lastPageIndex]="lastPageIndex"
+                            (onPageChange)="onPageChange($event)"></cp-complex-paginator>
+      <cp-complex-list [complexSearch]="complexSearch">Loading ...</cp-complex-list>
+      <cp-complex-paginator [currentPageIndex]="currentPageIndex"
+                            [lastPageIndex]="lastPageIndex"
+                            (onPageChange)="onPageChange($event)"></cp-complex-paginator>
     </div>
   </div>
   <div class="columns medium-12 callout alert" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">

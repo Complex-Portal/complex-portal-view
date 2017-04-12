@@ -3,7 +3,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 import {OlsService} from '../../../../shared/ols/service/ols.service';
 
 @Component({
-  selector: 'app-efo-crossreferences',
+  selector: 'cp-efo-crossreferences',
   templateUrl: './efo-crossreferences.component.html',
   styleUrls: ['./efo-crossreferences.component.css']
 })
