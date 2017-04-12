@@ -54,7 +54,7 @@ import {AntagonistsComponent} from './complex/complex-details/complex-function/a
 import {BasketComponent} from './basket/basket.component';
 import {BasketService} from './shared/basket/service/basket.service';
 import {Md5} from 'ts-md5/dist/md5';
-import {MaterialModule} from '@angular/material';
+import {MaterialModule, MdProgressBar, MdProgressBarModule} from '@angular/material';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 import {ToastrModule} from "ngx-toastr";
@@ -66,6 +66,8 @@ import { ComplexEvidenceComponent } from './complex/complex-details/complex-evid
 import { EmdbCrossreferencesComponent } from './complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component';
 import { LocalSearchComponent } from './search/local-search/local-search.component';
 import { AssembliesComponent } from './complex/complex-details/complex-function/assemblies/assemblies.component';
+import { GoToComponent } from './complex/complex-details/shared/go-to/go-to.component';
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -119,6 +121,7 @@ import { AssembliesComponent } from './complex/complex-details/complex-function/
     EmdbCrossreferencesComponent,
     LocalSearchComponent,
     AssembliesComponent,
+    GoToComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,7 +130,8 @@ import { AssembliesComponent } from './complex/complex-details/complex-function/
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-    MaterialModule,
+    MdProgressBarModule,
+    NoopAnimationsModule
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
   bootstrap: [AppComponent]
