@@ -18,15 +18,16 @@ export class LocalSearchComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((val) => {
+      console.log(this.location.path());
         if (this.location.path().startsWith('/home')) {
           this._display = false;
         } else {
           this._display = true;
-          if (this.location.path().startsWith('/search')) {
+          if (this.location.path().startsWith('/complex/search')) {
             this.route
               .queryParams
               .subscribe(queryParams => {
-                this._query = queryParams['_query'] ? queryParams['_query'] : console.log('Error');
+                this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
               });
           } else if (this.location.path().startsWith('/complex')) {
             this._query = this.location.path().split("/")[2];
