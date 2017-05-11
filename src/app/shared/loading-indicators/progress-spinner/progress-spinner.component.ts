@@ -27,7 +27,7 @@ export class ProgressSpinnerComponent implements OnInit {
   }
 
   ngOnInit() {
-    let context = this;
+    const context = this;
     setTimeout(function () {
       context._takesLonger = true;
     }, 5000);
