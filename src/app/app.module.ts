@@ -20,13 +20,13 @@ import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spi
 import {ToastrModule} from "ngx-toastr";
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {MdProgressBarModule} from "@angular/material";
+import {MdProgressBarModule, MdProgressSpinnerModule} from "@angular/material";
+import {Ng2PageScrollModule} from "ng2-page-scroll";
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressBarComponent,
-    ProgressSpinnerComponent,
     LocalSearchComponent,
   ],
   imports: [
@@ -37,7 +37,8 @@ import {MdProgressBarModule} from "@angular/material";
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     MdProgressBarModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    Ng2PageScrollModule.forRoot()
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
   bootstrap: [AppComponent]
