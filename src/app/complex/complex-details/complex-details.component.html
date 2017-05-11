@@ -2,7 +2,7 @@
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
-        <cp-complex-header *ngIf="complexDetails"
+        <cp-complex-header *ngIf="complexDetails;else loadingSpinner"
                            [complexAC]="complexDetails.ac"
                            [complexName]="complexDetails.name"
                            [complexSpecies]="complexDetails.species"
@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="columns medium-12 " style="margin-bottom: 30px">
-          <cp-complex-function *ngIf="complexDetails"
+          <cp-complex-function *ngIf="complexDetails;"
                                [functionDescription]="complexDetails.functions"
                                [crossReferences]="complexDetails.crossReferences"
                                [ligands]="complexDetails.ligands"
@@ -29,34 +29,37 @@
                                [antagonists]="complexDetails.antagonists"></cp-complex-function>
         </div>
         <div class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-properties *ngIf="complexDetails"
+          <cp-complex-properties *ngIf="complexDetails;"
                                  [propertiesDescription]="complexDetails.properties"
                                  [comments]="complexDetails.comments"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-properties>
         </div>
         <div class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-expression *ngIf="complexDetails && gxa"
+          <cp-complex-expression *ngIf="complexDetails && gxa;"
                                  [gxa]="gxa"
                                  [participants]="complexDetails.participants"
                                  [complexSpecies]="complexDetails.species"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
         </div>
-        <div class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-disease *ngIf="complexDetails"
+        <div id="testDiv" class="columns medium-12" style="margin-bottom: 30px">
+          <cp-complex-disease *ngIf="complexDetails;"
                               [diseaseDescriptions]="complexDetails.diseases"
                               [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
         </div>
         <div class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-references *ngIf="complexDetails"
+          <cp-complex-references *ngIf="complexDetails;"
                                  [crossReferences]="complexDetails.crossReferences"
                                  [synonyms]="complexDetails.synonyms"
                                  [systematicName]="complexDetails.systematicName"></cp-complex-references>
         </div>
       </div>
       <div class="columns medium-12">
-        <cp-complex-footer *ngIf="complexDetails"
+        <cp-complex-footer *ngIf="complexDetails;"
                            [institute]="complexDetails.institution"></cp-complex-footer>
       </div>
     </div>
+    <ng-template #loadingSpinner>
+      <cp-progress-spinner [query]="query"></cp-progress-spinner>
+    </ng-template>
   </div>
 </section>
