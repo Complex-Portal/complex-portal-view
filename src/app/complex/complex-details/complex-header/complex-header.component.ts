@@ -14,7 +14,7 @@ export class ComplexHeaderComponent implements OnInit {
   private _complexAC: string;
   private _complexName: string;
   private _complexSpecies: string;
-  private _crossReferences : CrossReference[];
+  private _crossReferences: CrossReference[];
   private _jsonURL: string;
 
   constructor(private basketService: BasketService, private notificationService: NotificationService) {

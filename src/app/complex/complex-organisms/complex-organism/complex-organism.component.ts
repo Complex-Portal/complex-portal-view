@@ -6,11 +6,12 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./complex-organism.component.css']
 })
 export class ComplexOrganismComponent implements OnInit {
-  private _name : string;
-  private _symbol : string;
-  private _count : string;
+  private _name: string;
+  private _symbol: string;
+  private _count: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
