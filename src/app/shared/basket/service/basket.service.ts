@@ -7,7 +7,7 @@ const COMPLEX_STORE = 'cp_complex_store';
 
 @Injectable()
 export class BasketService {
-  private _complexBasket: {[name: string]: BasketItem} = {};
+  private _complexBasket: { [name: string]: BasketItem } = {};
   public onBasketCountChanged$: EventEmitter<number>;
 
   constructor(private notificationService: NotificationService) {
@@ -78,7 +78,7 @@ export class BasketService {
     return this._complexBasket;
   }
 
-  public getBasketCount() : number {
+  public getBasketCount(): number {
     return this.getKeys(this._complexBasket).length;
   }
 }
