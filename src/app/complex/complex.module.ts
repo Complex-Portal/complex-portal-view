@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from "@angular/router";
-import {MdProgressSpinnerModule} from "@angular/material";
-import {ProgressSpinnerComponent} from "../shared/loading-indicators/progress-spinner/progress-spinner.component";
+import {RouterModule} from '@angular/router';
+import {MdProgressSpinnerModule} from '@angular/material';
+import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
