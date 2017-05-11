@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class ProgressBarComponent implements OnInit {
   private static show: boolean;
   private _color = 'primary';
-  private _mode = 'indeterminate';
+  private _mode = 'query';
 
   public static display(): void {
     ProgressBarComponent.show = true;
