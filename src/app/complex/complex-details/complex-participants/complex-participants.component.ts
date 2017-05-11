@@ -15,10 +15,15 @@ export class ComplexParticipantsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.participants.sort(function(a, b){
-      if(a.interactorType < b.interactorType) return -1;
-      if(a.interactorType > b.interactorType) return 1;
-      return 0;
+    this.participants.sort(function (a, b) {
+      if (a.interactorType < b.interactorType) {
+        return -1;
+      } else if (a.interactorType > b.interactorType) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
     });
   }
 
