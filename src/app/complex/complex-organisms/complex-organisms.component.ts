@@ -10,6 +10,7 @@ import {Facet} from "../shared/model/complex-results/facets/facet.model";
 })
 export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
   private _specieFacets: Facet[];
+  private _query = 'organisms';
 
   constructor(private complexPortalService: ComplexPortalService) {
   }
@@ -102,6 +103,10 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
 
   get specieFacets(): Facet[] {
     return this._specieFacets;
+  }
+
+  get query(): string {
+    return this._query;
   }
 
   ngAfterViewInit(): void {
