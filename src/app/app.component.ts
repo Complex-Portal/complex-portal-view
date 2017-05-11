@@ -14,7 +14,7 @@ const {version: version} = require('../../package.json');
 const environmentName: string = environment.evn;
 
 @Component({
-  selector: 'app-root',
+  selector: 'cp-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
