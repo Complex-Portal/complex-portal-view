@@ -10,7 +10,7 @@ export class ProgressSpinnerComponent implements OnInit {
   private _color = 'primary';
   private _mode = 'indeterminate';
   private _query: string;
-  private takesLonger: boolean;
+  private _takesLonger: boolean;
 
   public static display(): void {
     ProgressSpinnerComponent.show = true;
@@ -29,7 +29,7 @@ export class ProgressSpinnerComponent implements OnInit {
   ngOnInit() {
     let context = this;
     setTimeout(function () {
-      context.takesLonger = true;
+      context._takesLonger = true;
     }, 5000);
   }
 
@@ -61,5 +61,9 @@ export class ProgressSpinnerComponent implements OnInit {
   @Input()
   set query(value: string) {
     this._query = value;
+  }
+
+  get takesLonger(): boolean {
+    return this._takesLonger;
   }
 }
