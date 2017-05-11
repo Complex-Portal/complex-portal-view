@@ -5,6 +5,7 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
 import {Subscription} from "rxjs/Subscription";
 import {NotificationService} from "../../shared/notification/service/notification.service";
+import {PageScrollConfig} from "ng2-page-scroll";
 
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
@@ -24,6 +25,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
               private complexPortalService: ComplexPortalService) {
+    PageScrollConfig.defaultScrollOffset = 50;
 
     if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
       this._gxa = expressionAtlasHeatmapHighcharts;
@@ -43,7 +45,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
             this.router.navigate(['home'])
           }
-          );
+        );
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,
           error => {
@@ -58,7 +60,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
-    // $('#myStickyElement').foundation();
     $('#testDropDown').foundation();
     $(window).trigger('load.zf.sticky')
   }
