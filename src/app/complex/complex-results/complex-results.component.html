@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="columns medium-12" *ngIf="complexSearch && (complexSearch.totalNumberOfResults !== 0)">
+  <ng-container *ngIf="complexSearch;else loadingSpinner">
+  <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
     <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
     <div class="columns medium-4">
       <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
@@ -10,7 +11,6 @@
                          (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
                          (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
                          (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
-        Loading ...
       </cp-complex-filter>
     </div>
     <div class="columns medium-8">
@@ -23,7 +23,7 @@
                             (onPageChange)="onPageChange($event)"></cp-complex-paginator>
     </div>
   </div>
-  <div class="columns medium-12 callout alert" *ngIf="complexSearch && complexSearch.totalNumberOfResults === 0">
+  <div class="columns medium-12 callout alert" *ngIf="complexSearch.totalNumberOfResults === 0">
     <h2>No Complex Portal results found</h2>
     <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>
     <h4>Please consider refining your terms:</h4>
@@ -36,4 +36,8 @@
       </li>
     </ul>
   </div>
+  </ng-container>
+  <ng-template #loadingSpinner>
+    <cp-progress-spinner [query]="query"></cp-progress-spinner>
+  </ng-template>
 </div>
