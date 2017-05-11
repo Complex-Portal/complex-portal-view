@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
-declare const $ : any;
+declare const $: any;
 
 @Component({
   selector: 'cp-complex-function',
@@ -52,7 +52,6 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     $('.goToMenu').foundation();
-
   }
 
   get crossReferences(): CrossReference[] {
