@@ -42,15 +42,17 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails,
           error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
-            this.router.navigate(['home'])
+            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
+              'Please try again later or contact us!');
+            this.router.navigate(['home']);
           }
         );
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,
           error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. Please try again later or contact us!');
-            this.router.navigate(['home'])
+            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
+              'Please try again later or contact us!');
+            this.router.navigate(['home']);
           }
         );
         document.body.scrollTop = 0;
@@ -61,7 +63,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
     $('#testDropDown').foundation();
-    $(window).trigger('load.zf.sticky')
   }
 
 
