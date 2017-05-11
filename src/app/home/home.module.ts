@@ -14,7 +14,7 @@ import {ExamplesLargeComponent} from '../search/examples/examples-large/examples
   ]),
     CommonModule
   ],
-  declarations: [HomeComponent,SearchComponent,
+  declarations: [HomeComponent, SearchComponent,
     NewsletterSubscriptionComponent,
     TwitterDisplayComponent,
     TileMenuComponent,

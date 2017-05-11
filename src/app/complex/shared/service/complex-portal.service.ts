@@ -26,7 +26,7 @@ export class ComplexPortalService {
   }
 
 
-  getComplexOrganisms(){
+  getComplexOrganisms() {
     return this.findComplex('*').map(res => res.facets.species_f);
   }
 
