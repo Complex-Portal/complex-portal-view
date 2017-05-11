@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'cp-progress-spinner',
@@ -9,6 +9,8 @@ export class ProgressSpinnerComponent implements OnInit {
   private static show: boolean;
   private _color = 'primary';
   private _mode = 'indeterminate';
+  private _query: string;
+  private takesLonger: boolean;
 
   public static display(): void {
     ProgressSpinnerComponent.show = true;
@@ -25,6 +27,10 @@ export class ProgressSpinnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    let context = this;
+    setTimeout(function () {
+      context.takesLonger = true;
+    }, 5000);
   }
 
   get isDisplayed(): boolean {
@@ -45,5 +51,15 @@ export class ProgressSpinnerComponent implements OnInit {
 
   set mode(value: string) {
     this._mode = value;
+  }
+
+
+  get query(): string {
+    return this._query;
+  }
+
+  @Input()
+  set query(value: string) {
+    this._query = value;
   }
 }

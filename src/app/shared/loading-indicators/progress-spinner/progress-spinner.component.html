@@ -1,4 +1,11 @@
-<!--<md-progress-circle *ngIf="isDisplayed"-->
-                    <!--[color]="color"-->
-                    <!--[mode]="mode">-->
-<!--</md-progress-circle>-->
+<div class="small-5 small-centered columns">
+  <md-progress-spinner style="margin:0 auto;"
+                       [attr.color]="color"
+                       [mode]="mode"
+                       [value]="0">
+  </md-progress-spinner>
+  <div style="text-align: center">
+    <h4>Loading {{query}}</h4>
+    <p *ngIf="takesLonger">This takes longer than usual. Bare with us!</p>
+  </div>
+</div>
