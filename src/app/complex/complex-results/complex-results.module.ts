@@ -5,17 +5,22 @@ import {RouterModule} from "@angular/router";
 import {ComplexPaginatorComponent} from "./complex-paginator/complex-paginator.component";
 import {ComplexFilterComponent} from "./complex-filter/complex-filter.component";
 import {ComplexListComponent} from "./complex-list/complex-list.component";
+import {MdProgressSpinnerModule} from "@angular/material";
+import {ProgressSpinnerComponent} from "../../shared/loading-indicators/progress-spinner/progress-spinner.component";
+import {ComplexModule} from "app/complex/complex.module";
 
 @NgModule({
   imports: [RouterModule.forChild([
-    {path: '', component: ComplexResultsComponent}
+    {path: '', component: ComplexResultsComponent},
   ]),
-    CommonModule
+    CommonModule,
+    ComplexModule
   ],
   declarations: [ComplexResultsComponent,
     ComplexListComponent,
     ComplexFilterComponent,
-    ComplexPaginatorComponent]
+    ComplexPaginatorComponent,
+  ]
 })
 export class ComplexResultsModule {
 }
