@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
-import {ComplexPortalService} from "../shared/service/complex-portal.service";
-import {Facet} from "../shared/model/complex-results/facets/facet.model";
+import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {ComplexPortalService} from '../shared/service/complex-portal.service';
+import {Facet} from '../shared/model/complex-results/facets/facet.model';
 
 @Component({
   selector: 'cp-complex-organisms',

@@ -20,8 +20,7 @@ export class ComplexParticipantsComponent implements OnInit {
         return -1;
       } else if (a.interactorType > b.interactorType) {
         return 1;
-      }
-      else {
+      } else {
         return 0;
       }
     });

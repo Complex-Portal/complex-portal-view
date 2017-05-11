@@ -25,7 +25,7 @@ export class ComplexReferencesComponent implements OnInit {
           this._pubmedXRefs = [];
         }
         this._pubmedXRefs.push(crossRef);
-        console.log(this.pubmedXRefs)
+        console.log(this.pubmedXRefs);
       }
     }
   }

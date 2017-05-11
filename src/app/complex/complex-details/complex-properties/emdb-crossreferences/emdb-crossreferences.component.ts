@@ -7,10 +7,11 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
   styleUrls: ['./emdb-crossreferences.component.css']
 })
 export class EmdbCrossreferencesComponent implements OnInit {
-  private _crossReferences : CrossReference[];
+  private _crossReferences: CrossReference[];
   private _displayedElements = 5;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _basketCount = 0;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
-              private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService : BasketService) {
+              private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService: BasketService) {
     this.basketService.onBasketCountChanged$.subscribe(count => this._basketCount = count);
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
