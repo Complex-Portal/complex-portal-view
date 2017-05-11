@@ -5,8 +5,8 @@ import {environment} from '../environments/environment';
 
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
-import {ToastrConfig} from "ngx-toastr";
-import {BasketService} from "./shared/basket/service/basket.service";
+import {ToastrConfig} from 'ngx-toastr';
+import {BasketService} from './shared/basket/service/basket.service';
 declare const $: any;
 declare const ga: any;
 

@@ -2,10 +2,10 @@ import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
-import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
-import {Subscription} from "rxjs/Subscription";
-import {NotificationService} from "../../shared/notification/service/notification.service";
-import {PageScrollConfig} from "ng2-page-scroll";
+import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Subscription} from 'rxjs/Subscription';
+import {NotificationService} from '../../shared/notification/service/notification.service';
+import {PageScrollConfig} from 'ng2-page-scroll';
 
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;

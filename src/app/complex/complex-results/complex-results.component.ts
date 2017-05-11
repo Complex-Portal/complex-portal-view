@@ -2,7 +2,7 @@ import {Component, OnInit, AfterViewInit, OnChanges, SimpleChanges} from '@angul
 import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
-import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
+import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 
 
 @Component({

@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
-import {CrossReference} from "../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'cp-complex-header',

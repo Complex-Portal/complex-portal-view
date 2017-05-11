@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {Angulartics2} from "angulartics2";
+import {Angulartics2} from 'angulartics2';
 
 @Component({
   selector: 'cp-search',

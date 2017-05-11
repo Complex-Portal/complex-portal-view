@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
 
@@ -30,9 +30,9 @@ export class LocalSearchComponent implements OnInit {
                 this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
               });
           } else if (this.location.path().startsWith('/complex')) {
-            this._query = this.location.path().split("/")[2];
+            this._query = this.location.path().split('/')[2];
           } else {
-            this._query = "";
+            this._query = '';
           }
         }
       }

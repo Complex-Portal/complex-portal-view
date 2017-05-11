@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {BasketService} from '../shared/basket/service/basket.service';
 import {BasketItem} from '../shared/basket/model/basketItem';
-import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/progress-bar.component";
+import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'cp-basket',

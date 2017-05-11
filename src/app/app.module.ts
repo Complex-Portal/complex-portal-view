@@ -16,12 +16,11 @@ import {OlsService} from './shared/ols/service/ols.service';
 import {BasketService} from './shared/basket/service/basket.service';
 import {Md5} from 'ts-md5/dist/md5';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
-import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
-import {ToastrModule} from "ngx-toastr";
+import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {MdProgressBarModule, MdProgressSpinnerModule} from "@angular/material";
-import {Ng2PageScrollModule} from "ng2-page-scroll";
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MdProgressBarModule} from '@angular/material';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 @NgModule({
   declarations: [
