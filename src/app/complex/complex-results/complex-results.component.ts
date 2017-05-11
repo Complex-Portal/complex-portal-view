@@ -57,7 +57,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
     this.prepareFiltersForParams(queryParams);
-    this.router.navigate(['search'], {
+    this.router.navigate(['complex/search'], {
       queryParams
     });
     ProgressBarComponent.hide();
