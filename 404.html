@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <base href="https://complex-portal.github.io/complex-portal-view/">
@@ -27,30 +28,30 @@
   <!-- If you have custom icon, replace these as appropriate.
        You can generate them at realfavicongenerator.net -->
   <link rel="icon" type="image/x-icon"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/favicon.ico"/>
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/favicon.ico"/>
   <link rel="icon" type="image/png"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/favicon-32x32.png"/>
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/favicon-32x32.png"/>
   <link rel="icon" type="image/png" sizes="192×192"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/android-chrome-192x192.png"/>
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/android-chrome-192x192.png"/>
   <!-- Android (192px) -->
   <link rel="apple-touch-icon-precomposed" sizes="114x114"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/apple-icon-114x114.png">
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/apple-icon-114x114.png">
   <!-- For iPhone 4 Retina display (114px) -->
   <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/apple-icon-72x72.png">
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/apple-icon-72x72.png">
   <!-- For iPad (72px) -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/apple-icon-144x144.png">
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/apple-icon-144x144.png">
   <!-- For iPad retinat (144px) -->
   <link rel="apple-touch-icon-precomposed"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/apple-icon-57x57.png">
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/apple-icon-57x57.png">
   <!-- For iPhone (57px) -->
   <link rel="mask-icon"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/safari-pinned-tab.svg"
+        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/safari-pinned-tab.svg"
         color="#ffffff"> <!-- Safari icon for pinned tab -->
   <meta name="msapplication-TileColor" content="#2b5797"> <!-- MS Icons -->
   <meta name="msapplication-TileImage"
-        content="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/images/logos/EMBL-EBI/favicons/mstile-144x144.png">
+        content="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/favicons/mstile-144x144.png">
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
@@ -59,7 +60,7 @@
         type="text/css" media="all">
   <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/css/ebi-global.css"
         type="text/css" media="all">
-  <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Icon-fonts/v1.1/fonts.css" type="text/css"
+  <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css"
         media="all">
 
   <!-- Use this CSS file for any custom styling -->
@@ -116,17 +117,16 @@
 
 
 <!-- Suggested layout containers -->
-<app-root></app-root>
+<cp-root></cp-root>
 <!-- End suggested layout containers -->
 
-<script>
-  function onReactomeDiagramReady() {
-    window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
-  }
-</script>
+<script src="assets/js/reactome-event.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript"
         src="https://www.ebi.ac.uk/gxa/resources/js-bundles/vendorCommons.bundle.js"></script>
-<script type="text/javascript"
-        src="https://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
+<script language="JavaScript" type="text/javascript"
+        src="http://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
+
 <script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>
