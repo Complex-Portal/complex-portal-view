@@ -1,14 +1,38 @@
 <ul class="goToMenu dropdown menu float-right" data-disable-hover="true" data-click-open="true"
     data-close-on-click-inside="true" data-dropdown-menu>
   <li>
-    <a class="label" href="#"><i class="icon icon-functional" data-icon="M"></i>Go to</a>
+    <a class="label" (click)="doCheckSection()"><i class="icon icon-functional" data-icon="M"></i>Go to</a>
     <ul class="menu">
-      <li><a href="#">Participants</a></li>
-      <li ><a class="selected" href="#">Function</a></li>
-      <li><a href="#">Properties</a></li>
-      <li><a href="#">Expression</a></li>
-      <li><a href="#">Diseases and Pathologies</a></li>
-      <li><a href="#">Names and Publications</a></li>
+      <li>
+        <a pageScroll href="#participants"
+           [ngClass]="{'selected': isSelected('Participants')}"
+           *ngIf="sectionService.participantsSection">Participants</a>
+      </li>
+      <li>
+        <a pageScroll href="#function"
+           [ngClass]="{'selected': isSelected('Function')}"
+           *ngIf="sectionService.functionSection">Function</a>
+      </li>
+      <li>
+        <a pageScroll href="#properties"
+           [ngClass]="{'selected': isSelected('Properties')}"
+           *ngIf="sectionService.propertiesSection">Properties</a>
+      </li>
+      <li>
+        <a pageScroll href="#expression"
+           [ngClass]="{'selected': isSelected('Expression and Cellular Location')}"
+           *ngIf="sectionService.expressionSection">Expression and Cellular Location</a>
+      </li>
+      <li>
+        <a pageScroll href="#disease"
+           [ngClass]="{'selected': isSelected('Diseases and Pathologies')}"
+           *ngIf="sectionService.diseaseSection">Diseases and Pathologies</a>
+      </li>
+      <li>
+        <a pageScroll href="#references"
+           [ngClass]="{'selected': isSelected('Names and Publications')}"
+           *ngIf="sectionService.namesSection">Names and Publications</a>
+      </li>
     </ul>
   </li>
 </ul>

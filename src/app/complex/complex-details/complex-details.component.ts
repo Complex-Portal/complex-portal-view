@@ -5,7 +5,8 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationService} from '../../shared/notification/service/notification.service';
-import {PageScrollConfig} from 'ng2-page-scroll';
+import {SectionService} from "./shared/service/section/section.service";
+import {PageScrollConfig} from "ng2-page-scroll";
 
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
@@ -24,7 +25,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _gxa;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
-              private complexPortalService: ComplexPortalService) {
+              private complexPortalService: ComplexPortalService, private sectionService : SectionService) {
     PageScrollConfig.defaultScrollOffset = 50;
 
     if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
@@ -62,12 +63,12 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
-    $('#testDropDown').foundation();
   }
 
 
   ngOnDestroy(): void {
     this._callSubscription.unsubscribe();
+    this.sectionService.reset();
   }
 
   get complexDetails(): ComplexDetails {

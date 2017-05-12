@@ -9,7 +9,8 @@
                            [crossReferences]="complexDetails.crossReferences"></cp-complex-header>
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
-        <div class="columns medium-12">
+        <div id="participants" class="columns medium-12">
+          <cp-go-to [sectionName]="'Participants'"></cp-go-to>
           <div class="columns medium-6 no-pad-left no-pad-right">
             <cp-complex-viewer *ngIf="complexDetails && complexMIJSON"
                                [complexAC]="complexDetails.ac"
@@ -20,7 +21,7 @@
                                      [participants]="complexDetails.participants"></cp-complex-participants>
           </div>
         </div>
-        <div class="columns medium-12 " style="margin-bottom: 30px">
+        <div id="function" class="columns medium-12 " style="margin-bottom: 30px">
           <cp-complex-function *ngIf="complexDetails;"
                                [functionDescription]="complexDetails.functions"
                                [crossReferences]="complexDetails.crossReferences"
@@ -28,25 +29,25 @@
                                [agonists]="complexDetails.agonists"
                                [antagonists]="complexDetails.antagonists"></cp-complex-function>
         </div>
-        <div class="columns medium-12" style="margin-bottom: 30px">
+        <div id="properties" class="columns medium-12" style="margin-bottom: 30px">
           <cp-complex-properties *ngIf="complexDetails;"
                                  [propertiesDescription]="complexDetails.properties"
                                  [comments]="complexDetails.comments"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-properties>
         </div>
-        <div class="columns medium-12" style="margin-bottom: 30px">
+        <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
           <cp-complex-expression *ngIf="complexDetails && gxa;"
                                  [gxa]="gxa"
                                  [participants]="complexDetails.participants"
                                  [complexSpecies]="complexDetails.species"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
         </div>
-        <div id="testDiv" class="columns medium-12" style="margin-bottom: 30px">
+        <div id="disease" class="columns medium-12" style="margin-bottom: 30px">
           <cp-complex-disease *ngIf="complexDetails;"
                               [diseaseDescriptions]="complexDetails.diseases"
                               [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
         </div>
-        <div class="columns medium-12" style="margin-bottom: 30px">
+        <div id="references" class="columns medium-12" style="margin-bottom: 30px">
           <cp-complex-references *ngIf="complexDetails;"
                                  [crossReferences]="complexDetails.crossReferences"
                                  [synonyms]="complexDetails.synonyms"

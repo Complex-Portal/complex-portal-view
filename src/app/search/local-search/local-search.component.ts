@@ -18,7 +18,6 @@ export class LocalSearchComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((val) => {
-      console.log(this.location.path());
         if (this.location.path().startsWith('/home')) {
           this._display = false;
         } else {
@@ -40,7 +39,7 @@ export class LocalSearchComponent implements OnInit {
   }
 
   search(query: string) {
-    this.router.navigate(['search'], { queryParams: { query: query, page: 1 }});
+    this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 }});
   }
 
 

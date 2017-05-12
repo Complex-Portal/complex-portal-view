@@ -14,7 +14,6 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _goXRefs: CrossReference[];
   private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
-  // private _pubmedXRefs: CrossReference[];
 
   private _ligands: string[];
   private _agonists: string[];

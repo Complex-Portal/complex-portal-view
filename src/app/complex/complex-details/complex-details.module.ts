@@ -40,7 +40,9 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {ReactomeService} from './complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
-import {ComplexModule} from '../complex.module';
+import {ProgressSpinnerModule} from "../../shared/loading-indicators/progress-spinner/progress-spinner.module";
+import {SectionService} from "./shared/service/section/section.service";
+import {Ng2PageScrollModule} from "ng2-page-scroll";
 
 @NgModule({
   imports: [
@@ -48,7 +50,8 @@ import {ComplexModule} from '../complex.module';
       {path: '', component: ComplexDetailsComponent}
     ]),
     CommonModule,
-    ComplexModule,
+    ProgressSpinnerModule,
+    Ng2PageScrollModule.forRoot()
   ],
   declarations: [
     ComplexDetailsComponent,
@@ -84,7 +87,7 @@ import {ComplexModule} from '../complex.module';
     AssembliesComponent,
     GoToComponent,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5, SectionService],
 
 })
 export class ComplexDetailsModule {

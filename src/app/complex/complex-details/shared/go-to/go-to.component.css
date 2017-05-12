@@ -1,7 +1,12 @@
 .selected {
   font-weight: bold;
+  cursor: not-allowed;
 }
 
-.default {
-  font-weight: normal;
-}
+/*.default {*/
+  /*font-weight: normal;*/
+/*}*/
+
+/*.hidden {*/
+  /*visibility: hidden;*/
+/*}*/

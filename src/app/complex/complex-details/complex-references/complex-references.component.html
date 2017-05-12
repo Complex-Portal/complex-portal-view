@@ -1,6 +1,7 @@
 <div class="row">
   <div class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs || synonyms || systematicName">
-    <h2>Names and Publications</h2>
+    <h2 class="float-left">Names and Publications</h2>
+    <cp-go-to class="float-right" [sectionName]="'Names and Publications'"></cp-go-to>
     <div id="pubmedXRefs" class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs">
       <cp-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></cp-euro-pmc-crossreferences>
     </div>
@@ -12,5 +13,3 @@
     </div>
   </div>
 </div>
-
-

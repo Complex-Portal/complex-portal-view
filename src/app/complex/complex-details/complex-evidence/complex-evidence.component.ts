@@ -22,7 +22,6 @@ export class ComplexEvidenceComponent implements OnInit {
 
       if (database === 'evidence ontology') {
           this._ecoXRef = crossRef;
-          console.log(this._ecoXRef.description);
           switch (this._ecoXRef.identifier) {
             case ('ECO:0000353'):
               this._ecoXRef.description = 'physical interaction evidence';

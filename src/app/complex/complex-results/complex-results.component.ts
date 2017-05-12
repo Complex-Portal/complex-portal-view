@@ -30,9 +30,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       .queryParams
       .subscribe(queryParams => {
         this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
-        this._spicesFilter = queryParams['species'] ? queryParams['species'].split(',') : [];
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split(',') : [];
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split(',') : [];
+        this._spicesFilter = queryParams['species'] ? queryParams['species'] : [];
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'] : [];
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'] : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         // TODO This is out for now, but CP-84 should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
