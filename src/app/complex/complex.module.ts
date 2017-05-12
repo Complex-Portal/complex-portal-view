@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {MdProgressSpinnerModule} from '@angular/material';
-import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -11,12 +9,10 @@ import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-sp
     {path: ':id', loadChildren: 'app/complex/complex-details/complex-details.module#ComplexDetailsModule'},
   ]),
     CommonModule,
-    MdProgressSpinnerModule
   ],
-  declarations: [ProgressSpinnerComponent
+  declarations: [
   ],
   exports: [
-    ProgressSpinnerComponent
   ]
 })
 export class ComplexModule {
