@@ -13,4 +13,6 @@ export const environment = {
   reactome_base_url: '//reactomedev.oicr.on.ca',
   pdb_base_url: '//www.ebi.ac.uk/pdbe',
   ols_base_url: '//www.ebi.ac.uk/ols/api/ontologies',
+  ols_go_url: '//www.ebi.ac.uk/ols/ontologies/go/terms?obo_id=',
+  ols_eco_url: '//www.ebi.ac.uk/ols/ontologies/eco/terms?obo_id='
 };
