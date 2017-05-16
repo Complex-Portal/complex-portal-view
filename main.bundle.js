@@ -1,89 +1,14 @@
 webpackJsonp([9,13],{
 
-/***/ 105:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressBarComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ProgressBarComponent = ProgressBarComponent_1 = (function () {
-    function ProgressBarComponent() {
-        this._color = 'primary';
-        this._mode = 'query';
-        ProgressBarComponent_1.show = false;
-    }
-    ProgressBarComponent.display = function () {
-        ProgressBarComponent_1.show = true;
-    };
-    ProgressBarComponent.hide = function () {
-        setTimeout(function () {
-            ProgressBarComponent_1.show = false;
-        }, 1000);
-    };
-    ProgressBarComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(ProgressBarComponent.prototype, "isDisplayed", {
-        get: function () {
-            return ProgressBarComponent_1.show;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressBarComponent.prototype, "color", {
-        get: function () {
-            return this._color;
-        },
-        set: function (value) {
-            this._color = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProgressBarComponent.prototype, "mode", {
-        get: function () {
-            return this._mode;
-        },
-        set: function (value) {
-            this._mode = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ProgressBarComponent;
-}());
-ProgressBarComponent = ProgressBarComponent_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-progress-bar',
-        template: __webpack_require__(378),
-        styles: [__webpack_require__(366)]
-    }),
-    __metadata("design:paramtypes", [])
-], ProgressBarComponent);
-
-var ProgressBarComponent_1;
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/progress-bar.component.js.map
-
-/***/ }),
-
 /***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__(71);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -180,40 +105,176 @@ var _a;
 
 /***/ }),
 
-/***/ 171:
+/***/ 111:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataContentComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DataContentComponent = (function () {
+    function DataContentComponent(router) {
+        this.router = router;
+    }
+    DataContentComponent.prototype.ngOnInit = function () {
+    };
+    DataContentComponent.prototype.ngAfterViewInit = function () {
+        __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
+    };
+    DataContentComponent.prototype.goToComplex = function (ac) {
+        this.router.navigate(['complex', ac]);
+    };
+    DataContentComponent.prototype.goToECO = function (term) {
+        this.goTo(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].ols_eco_url + term);
+    };
+    DataContentComponent.prototype.goToGO = function (term) {
+        this.goTo(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].ols_go_url + term);
+    };
+    DataContentComponent.prototype.goTo = function (url) {
+        window.open(url, '_blank');
+    };
+    return DataContentComponent;
+}());
+DataContentComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'cp-data-content',
+        template: __webpack_require__(383),
+        styles: [__webpack_require__(368)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _a || Object])
+], DataContentComponent);
+
+var _a;
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/data-content.component.js.map
+
+/***/ }),
+
+/***/ 112:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DocumentationComponent = (function () {
+    function DocumentationComponent() {
+    }
+    DocumentationComponent.prototype.ngOnInit = function () {
+    };
+    DocumentationComponent.prototype.ngAfterViewInit = function () {
+        __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
+    };
+    return DocumentationComponent;
+}());
+DocumentationComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'cp-documentation',
+        template: __webpack_require__(384),
+        styles: [__webpack_require__(369)]
+    }),
+    __metadata("design:paramtypes", [])
+], DocumentationComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/documentation.component.js.map
+
+/***/ }),
+
+/***/ 113:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuerySyntaxComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var QuerySyntaxComponent = (function () {
+    function QuerySyntaxComponent() {
+    }
+    QuerySyntaxComponent.prototype.ngOnInit = function () {
+    };
+    return QuerySyntaxComponent;
+}());
+QuerySyntaxComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'cp-query-syntax',
+        template: __webpack_require__(385),
+        styles: [__webpack_require__(370)]
+    }),
+    __metadata("design:paramtypes", [])
+], QuerySyntaxComponent);
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/query-syntax.component.js.map
+
+/***/ }),
+
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"app/about/about.module": [
-		432,
+		441,
 		6
 	],
 	"app/basket/basket.module": [
-		433,
+		442,
 		5
 	],
 	"app/complex/complex-details/complex-details.module": [
-		434,
+		443,
 		0
 	],
 	"app/complex/complex-organisms/complex-organisms.module": [
-		435,
+		444,
 		3
 	],
 	"app/complex/complex-results/complex-results.module": [
-		436,
+		445,
 		2
 	],
 	"app/complex/complex.module": [
-		437,
+		446,
 		7
 	],
 	"app/download/download.module": [
-		438,
+		447,
 		4
 	],
 	"app/home/home.module": [
-		439,
+		448,
 		1
 	]
 };
@@ -228,20 +289,20 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
 module.exports = webpackAsyncContext;
-webpackAsyncContext.id = 171;
+webpackAsyncContext.id = 174;
 
 
 /***/ }),
 
-/***/ 172:
+/***/ 175:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(199);
 
 
 
@@ -254,20 +315,20 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 185:
+/***/ 188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPortalService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -372,19 +433,19 @@ var _a;
 
 /***/ }),
 
-/***/ 187:
+/***/ 190:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -435,19 +496,19 @@ var _a;
 
 /***/ }),
 
-/***/ 188:
+/***/ 191:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -493,19 +554,19 @@ var _a;
 
 /***/ }),
 
-/***/ 189:
+/***/ 192:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OlsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -560,18 +621,18 @@ var _a;
 
 /***/ }),
 
-/***/ 195:
+/***/ 198:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angulartics2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ngx_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__ = __webpack_require__(106);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
@@ -592,7 +653,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var version = __webpack_require__(368).version;
+var version = __webpack_require__(374).version;
 var environmentName = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].evn;
 var AppComponent = (function () {
     function AppComponent(angulartics2GoogleAnalytics, router, notificationService, toastrConfig, basketService) {
@@ -698,8 +759,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-root',
-        template: __webpack_require__(376),
-        styles: [__webpack_require__(364)]
+        template: __webpack_require__(382),
+        styles: [__webpack_require__(367)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["ToastrConfig"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["ToastrConfig"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _e || Object])
 ], AppComponent);
@@ -709,33 +770,36 @@ var _a, _b, _c, _d, _e;
 
 /***/ }),
 
-/***/ 196:
+/***/ 199:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__ = __webpack_require__(185);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_notification_service_notification_service__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angulartics2__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angulartics2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_ols_service_ols_service__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_ols_service_ols_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_basket_service_basket_service__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ngx_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__search_local_search_local_search_component__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_platform_browser_animations__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_material__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__search_local_search_local_search_component__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_platform_browser_animations__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_material__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__documentation_documentation_component__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__documentation_query_syntax_query_syntax_component__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__documentation_data_content_data_content_component__ = __webpack_require__(111);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -744,6 +808,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /* tslint:disable:max-line-length */
+
+
+
 
 
 
@@ -775,6 +842,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */],
             __WEBPACK_IMPORTED_MODULE_17__search_local_search_local_search_component__["a" /* LocalSearchComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__documentation_documentation_component__["a" /* DocumentationComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__documentation_query_syntax_query_syntax_component__["a" /* QuerySyntaxComponent */],
+            __WEBPACK_IMPORTED_MODULE_22__documentation_data_content_data_content_component__["a" /* DataContentComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -795,11 +865,17 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 197:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__documentation_documentation_component__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__documentation_query_syntax_query_syntax_component__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__documentation_data_content_data_content_component__ = __webpack_require__(111);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return rootRouterConfig; });
+
+
+
 var rootRouterConfig = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'complex', loadChildren: 'app/complex/complex.module#ComplexModule' },
@@ -807,17 +883,20 @@ var rootRouterConfig = [
     { path: 'download', loadChildren: 'app/download/download.module#DownloadModule' },
     { path: 'basket', loadChildren: 'app/basket/basket.module#BasketModule' },
     { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
+    { path: 'documentation', component: __WEBPACK_IMPORTED_MODULE_0__documentation_documentation_component__["a" /* DocumentationComponent */] },
+    { path: 'documentation/query_syntax', component: __WEBPACK_IMPORTED_MODULE_1__documentation_query_syntax_query_syntax_component__["a" /* QuerySyntaxComponent */] },
+    { path: 'documentation/data_content', component: __WEBPACK_IMPORTED_MODULE_2__documentation_data_content_data_content_component__["a" /* DataContentComponent */] },
 ];
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app.routes.js.map
 
 /***/ }),
 
-/***/ 198:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalSearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -884,8 +963,8 @@ var LocalSearchComponent = (function () {
 LocalSearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-local-search',
-        template: __webpack_require__(377),
-        styles: [__webpack_require__(365)]
+        template: __webpack_require__(386),
+        styles: [__webpack_require__(371)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _c || Object])
 ], LocalSearchComponent);
@@ -895,7 +974,7 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 199:
+/***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -954,10 +1033,36 @@ var BasketItem = (function () {
 
 /***/ }),
 
-/***/ 364:
+/***/ 34:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
+var environment = {
+    production: false,
+    evn: 'dev',
+    analytics_id: 'UA-672146-11',
+    complex_ws_base_url: '//wwwdev.ebi.ac.uk/intact/complex-ws',
+    europepmc_base_url: '//www.ebi.ac.uk/europepmc',
+    reactome_base_url: '//reactomedev.oicr.on.ca',
+    pdb_base_url: '//www.ebi.ac.uk/pdbe',
+    ols_base_url: '//www.ebi.ac.uk/ols/api/ontologies',
+    ols_go_url: '//www.ebi.ac.uk/ols/ontologies/go/terms?obo_id=',
+    ols_eco_url: '//www.ebi.ac.uk/ols/ontologies/eco/terms?obo_id='
+};
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/environment.js.map
+
+/***/ }),
+
+/***/ 367:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(17)(false);
 // imports
 
 
@@ -972,43 +1077,97 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 365:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(27)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 366:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(27)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 368:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 369:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 370:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 371:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 372:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 374:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -1075,65 +1234,137 @@ module.exports = {
 
 /***/ }),
 
-/***/ 376:
+/***/ 382:
 /***/ (function(module, exports) {
 
-module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"180\" data-btm-anchor=\"300000\">\n    <header>\n\n      <div id=\"global-masthead\" class=\"clearfix\">\n        <!--This has to be one line and no newline characters-->\n        <a href=\"//www.ebi.ac.uk/\" title=\"Go to the EMBL-EBI homepage\"><span class=\"ebi-logo\"></span></a>\n\n        <nav>\n          <div class=\"row\">\n            <ul id=\"global-nav\" class=\"menu\">\n              <!-- set active class as appropriate -->\n              <li id=\"home-mobile\" class=\"\"><a href=\"//www.ebi.ac.uk\"></a></li>\n              <li id=\"home\" class=\"active\"><a href=\"//www.ebi.ac.uk\"><i class=\"icon icon-generic\" data-icon=\"H\"></i>\n                EMBL-EBI</a></li>\n              <li id=\"services\"><a href=\"//www.ebi.ac.uk/services\"><i class=\"icon icon-generic\" data-icon=\"(\"></i>\n                Services</a></li>\n              <li id=\"research\"><a href=\"//www.ebi.ac.uk/research\"><i class=\"icon icon-generic\" data-icon=\")\"></i>\n                Research</a></li>\n              <li id=\"training\"><a href=\"//www.ebi.ac.uk/training\"><i class=\"icon icon-generic\" data-icon=\"t\"></i>\n                Training</a></li>\n              <li id=\"about\"><a href=\"//www.ebi.ac.uk/about\"><i class=\"icon icon-generic\" data-icon=\"i\"></i> About\n                us</a></li>\n              <li id=\"search\">\n                <a data-toggle=\"search-global-dropdown\"><i class=\"icon icon-functional\" data-icon=\"1\"></i>\n                  <span class=\"show-for-small-only\">Search</span></a>\n                <div id=\"search-global-dropdown\" class=\"dropdown-pane\" data-dropdown data-options=\"closeOnClick:true;\">\n                  <form id=\"global-search\" name=\"global-search\" action=\"/ebisearch/search.ebi\" method=\"GET\">\n                    <fieldset>\n                      <div class=\"input-group\">\n                        <input type=\"text\" name=\"query\" id=\"global-searchbox\" class=\"input-group-field\"\n                               placeholder=\"Search all of EMBL-EBI\">\n                        <div class=\"input-group-button\">\n                          <input type=\"submit\" name=\"submit\" value=\"Search\" class=\"button\">\n                          <input type=\"hidden\" name=\"db\" value=\"allebi\" checked=\"checked\">\n                          <input type=\"hidden\" name=\"requestFrom\" value=\"global-masthead\" checked=\"checked\">\n                        </div>\n                      </div>\n                    </fieldset>\n                  </form>\n                </div>\n              </li>\n              <li class=\"float-right show-for-medium embl-selector\">\n                <button class=\"button float-right\" type=\"button\" data-toggle=\"embl-dropdown\">Hinxton</button>\n                <!-- The dropdown menu will be programatically added by script.js -->\n              </li>\n            </ul>\n          </div>\n        </nav>\n\n      </div>\n\n      <div class=\"masthead row\">\n\n        <!-- local-title -->\n        <div class=\"columns medium-6\" id=\"local-title\">\n          <h1>\n            <a routerLink=\"/home\" title=\"Back to [service-name] homepage\">\n              <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">\n              Complex Portal\n            </a>\n          </h1>\n\n        </div>\n         <!--/local-title -->\n        <div class=\"columns medium-6\">\n         <cp-local-search></cp-local-search>\n        </div>\n\n\n        <!-- local-nav -->\n        <nav>\n          <ul class=\"dropdown menu float-left\" data-description=\"navigational\">\n            <li><a routerLink=\"/home\">Home</a></li>\n            <li><a href=\"http://www.ebi.ac.uk/intact/complex/help/\" target=\"_blank\">Help</a></li>\n            <li><a routerLink=\"/about\">About</a></li>\n            <li><a routerLink=\"/basket\">Basket ({{basketCount}})</a></li>\n            <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Feedback</a></li>\n            <!--<li><a routerLink=\"/favorites\">Favorites</a></li>-->\n          </ul>\n        </nav>\n        <!-- /local-nav -->\n      </div>\n    </header>\n  </div>\n  <cp-progress-bar></cp-progress-bar>\n</div>\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n  </section>\n  <!-- End suggested layout containers -->\n\n</div>\n\n<footer>\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <!--\n        <div id=\"local-footer\">\n          <div class=\"row\">\n            <span class=\"reference\">How to reference this page: ...</span>\n          </div>\n        </div>\n   -->\n  <!-- End optional local footer -->\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <div id=\"local-footer\">\n    <div class=\"row padding-top-large padding-bottom-large\">\n      <div class=\"columns medium-12\">\n        <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n        <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n        <table>\n          <tbody>\n          <tr>\n            <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n            <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a></td>\n            <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n              src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n            <td><a href=\"//matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n              src=\"assets/images/contributors/matrixdb.png\"></a></td>\n            <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n            <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a></td>\n            <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n            <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a></td>\n          </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"global-footer\">\n\n    <nav id=\"global-nav-expanded\" class=\"row\">\n      <!-- Footer will be automatically inserted by footer.js -->\n    </nav>\n\n    <section id=\"ebi-footer-meta\" class=\"row\">\n      <!-- Footer meta will be automatically inserted by footer.js -->\n    </section>\n\n  </div>\n\n</footer>\n"
+module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"180\" data-btm-anchor=\"300000\">\n    <header>\n\n      <div id=\"global-masthead\" class=\"clearfix\">\n        <!--This has to be one line and no newline characters-->\n        <a href=\"//www.ebi.ac.uk/\" title=\"Go to the EMBL-EBI homepage\"><span class=\"ebi-logo\"></span></a>\n\n        <nav>\n          <div class=\"row\">\n            <ul id=\"global-nav\" class=\"menu\">\n              <!-- set active class as appropriate -->\n              <li id=\"home-mobile\" class=\"\"><a href=\"//www.ebi.ac.uk\"></a></li>\n              <li id=\"home\" class=\"active\"><a href=\"//www.ebi.ac.uk\"><i class=\"icon icon-generic\" data-icon=\"H\"></i>\n                EMBL-EBI</a></li>\n              <li id=\"services\"><a href=\"//www.ebi.ac.uk/services\"><i class=\"icon icon-generic\" data-icon=\"(\"></i>\n                Services</a></li>\n              <li id=\"research\"><a href=\"//www.ebi.ac.uk/research\"><i class=\"icon icon-generic\" data-icon=\")\"></i>\n                Research</a></li>\n              <li id=\"training\"><a href=\"//www.ebi.ac.uk/training\"><i class=\"icon icon-generic\" data-icon=\"t\"></i>\n                Training</a></li>\n              <li id=\"about\"><a href=\"//www.ebi.ac.uk/about\"><i class=\"icon icon-generic\" data-icon=\"i\"></i> About\n                us</a></li>\n              <li id=\"search\">\n                <a data-toggle=\"search-global-dropdown\"><i class=\"icon icon-functional\" data-icon=\"1\"></i>\n                  <span class=\"show-for-small-only\">Search</span></a>\n                <div id=\"search-global-dropdown\" class=\"dropdown-pane\" data-dropdown data-options=\"closeOnClick:true;\">\n                  <form id=\"global-search\" name=\"global-search\" action=\"/ebisearch/search.ebi\" method=\"GET\">\n                    <fieldset>\n                      <div class=\"input-group\">\n                        <input type=\"text\" name=\"query\" id=\"global-searchbox\" class=\"input-group-field\"\n                               placeholder=\"Search all of EMBL-EBI\">\n                        <div class=\"input-group-button\">\n                          <input type=\"submit\" name=\"submit\" value=\"Search\" class=\"button\">\n                          <input type=\"hidden\" name=\"db\" value=\"allebi\" checked=\"checked\">\n                          <input type=\"hidden\" name=\"requestFrom\" value=\"global-masthead\" checked=\"checked\">\n                        </div>\n                      </div>\n                    </fieldset>\n                  </form>\n                </div>\n              </li>\n              <li class=\"float-right show-for-medium embl-selector\">\n                <button class=\"button float-right\" type=\"button\" data-toggle=\"embl-dropdown\">Hinxton</button>\n                <!-- The dropdown menu will be programatically added by script.js -->\n              </li>\n            </ul>\n          </div>\n        </nav>\n\n      </div>\n\n      <div class=\"masthead row\">\n\n        <!-- local-title -->\n        <div class=\"columns medium-6\" id=\"local-title\">\n          <h1>\n            <a routerLink=\"/home\" title=\"Back to [service-name] homepage\">\n              <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">\n              Complex Portal\n            </a>\n          </h1>\n\n        </div>\n         <!--/local-title -->\n        <div class=\"columns medium-6\">\n         <cp-local-search></cp-local-search>\n        </div>\n\n\n        <!-- local-nav -->\n        <nav>\n          <ul class=\"dropdown menu float-left\" data-description=\"navigational\">\n            <li><a routerLink=\"/home\">Home</a></li>\n            <li><a routerLink=\"/documentation\">Documentation</a></li>\n            <li><a routerLink=\"/about\">About</a></li>\n            <li><a routerLink=\"/basket\">Basket ({{basketCount}})</a></li>\n            <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Feedback</a></li>\n            <!--<li><a routerLink=\"/favorites\">Favorites</a></li>-->\n          </ul>\n        </nav>\n        <!-- /local-nav -->\n      </div>\n    </header>\n  </div>\n  <cp-progress-bar></cp-progress-bar>\n</div>\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n  </section>\n  <!-- End suggested layout containers -->\n\n</div>\n\n<footer>\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <!--\n        <div id=\"local-footer\">\n          <div class=\"row\">\n            <span class=\"reference\">How to reference this page: ...</span>\n          </div>\n        </div>\n   -->\n  <!-- End optional local footer -->\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <div id=\"local-footer\">\n    <div class=\"row padding-top-large padding-bottom-large\">\n      <div class=\"columns medium-12\">\n        <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n        <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n        <table>\n          <tbody>\n          <tr>\n            <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n            <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a></td>\n            <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n              src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n            <td><a href=\"//matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n              src=\"assets/images/contributors/matrixdb.png\"></a></td>\n            <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n            <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a></td>\n            <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n            <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a></td>\n          </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"global-footer\">\n\n    <nav id=\"global-nav-expanded\" class=\"row\">\n      <!-- Footer will be automatically inserted by footer.js -->\n    </nav>\n\n    <section id=\"ebi-footer-meta\" class=\"row\">\n      <!-- Footer meta will be automatically inserted by footer.js -->\n    </section>\n\n  </div>\n\n</footer>\n"
 
 /***/ }),
 
-/***/ 377:
+/***/ 383:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Data Content</h2>\n    <div class=\"medium-12\">\n      <h3>\n        What can be described as a complex\n      </h3>\n      <p>\n        A stable set of (two or more) interacting macromolecules such as proteins which can be co-purified by an\n        acceptable method and have been shown to exist as an isolated, functional unit in vivo. Any interacting,\n        integral non-protein molecules (e.g. small molecules, nucleic acids) may also be included.\n      </p>\n    </div>\n\n    <div class=\"columns medium-6\">\n      <h3>What should <b>NOT</b> be captured:</h3>\n      <ul>\n        <li>\n          Enzyme/substrate, receptor/ligand or any similar transient interactions unless these are a critical part of\n          the complex assembly (e.g. PDGF receptors only become 'dimeric' when linked by the dimeric ligand forming a\n          tetramer).\n        </li>\n        <li>\n          Proteins associated in a pulldown/coimmunoprecipitation with no functional link or any evidence that this is\n          a defined biological entity rather than a loose affinity complex.\n        </li>\n        <li>\n          Any literature complex where the only evidence is based on genetic interaction data.\n        </li>\n        <li>\n          Partial complexes\n        </li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6\">\n      <h3>Tricky cases we <b>DO</b> capture:</h3>\n      <ul>\n        <li>\n          Substrates or ligands if the enzyme or receptor complex only forms in their presence (see PDGF receptors\n          above, e.g. <a (click)=\"goToComplex('EBI-9082861')\">EBI-9082861</a>).\n        </li>\n        <li>\n          Homologous proteins, with the same functionality, which would be inferred based on homology of the\n          genome-encoded components made primarily on functional conservation between the two systems to form a\n          complex but for which no physical link has been demonstrated, e.g. proteins A and B have been shown to\n          physically interact and form a functional complex, protein C is a homologue of protein B by sequence\n          similarity and is know to have the same function as B but protein A-C interaction has not been demonstrated\n          experimentally (E.g. SUMO - E1 ligase complexes where there is interaction evidence for binding with SUMO1\n          (<a (click)=\"goToComplex('EBI-9349603')\">EBI-9349603</a>) but not with\n          SUMO2 (<a (click)=\"goToComplex('EBI-9345927')\">EBI-9345927</a>)). These\n          complexes are tagged with <a\n          href=\"http://www.ebi.ac.uk/ols/ontologies/eco/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FECO_0005547\"\n          target=\"_blank\">ECO:0005547 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a> biological system\n          reconstruction evidence based on inference from background scientific knowledge used in manual assertion.\n        </li>\n        <li>\n          Complexes that lack full experimental evidence but are commonly regarded as existing, e.g. transmembrane\n          receptors (e.g <a (click)=\"goToComplex('EBI-9008426')\">EBI-9008426</a>,\n          GABA receptors) for which only pharmacological evidence exists. These complexes\n          are tagged with <a (click)=\"goToECO('ECO:0000306')\">ECO:0000306 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n          - inferred from background scientific knowledge by manual assertion.\n        </li>\n      </ul>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Complex Nomenclature</h3>\n      <dl>\n        <dt>\n          <b> Complex recommended name</b>\n        </dt>\n        <dd>\n          The most informative, well accepted name in the literature, that is intuitive to the user. Where possible,\n          this will be the same as the equivalent component term in GO. The term should always end in the word 'complex'\n          or homo'n'mer. The recommended name is kept consistent when a complex is conserved across a taxonomic range.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Complex systematic name</b></dt>\n        <dd>Derived using the Reactome rules for naming complexes. In principle this is a string of gene names of the\n          participants of the complex separated by a colon (e.g. \"fiba:fibb:fibg\"). The order is determined by the order\n          of synthesis of the complex. Where several participants join at the same time, or the order is unknown,\n          alphanumeric order is used. Recommended gene names for each model organism will be used; therefore the\n          systematic name may not be consistent when a complex is conserved across a taxonomic range.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Complex synonym</b></dt>\n        <dd>All other possible names the complex is known by or can be described as.</dd>\n      </dl>\n      <dl>\n        <dt><b>Short label</b></dt>\n        <dd>Currently an obligate part of the data model, it may be possible to remove these once the model is updated.\n          Currently, an appropriate designation for the complex with species indicated using the UniProt five letter\n          code e.g. fibrinogen_human, tfiid_mouse. When the same complex is conserved across a taxonomic range, the root\n          name is maintained across all entries e.g. fibrinogen_human, fibrinogen_mouse, fibrinogen_bovin.\n        </dd>\n      </dl>\n      <!--<dl>-->\n      <!--<dt><b></b></dt>-->\n      <!--<dd></dd>-->\n      <!--</dl>-->\n      <!--<dl>-->\n      <!--<dt><b></b></dt>-->\n      <!--<dd></dd>-->\n      <!--</dl>-->\n      <!--<dl>-->\n      <!--<dt><b></b></dt>-->\n      <!--<dd></dd>-->\n      <!--</dl>-->\n      <!--<dl>-->\n      <!--<dt><b></b></dt>-->\n      <!--<dd></dd>-->\n      <!--</dl>-->\n    </div>\n    <div class=\"medium-12\">\n      <h3>Complex Participants</h3>\n      <dl>\n        <dt><b>Proteins</b></dt>\n        <dd>All proteins are derived from, and linked to, UniProtKB, ideally UniProtKB/Swiss-Prot.\n          Isoform and chain designators will be used when appropriate. Should one or more isoforms exist, annotation\n          will\n          be to the canonical protein entry unless either only one isoform is known to exist in the complex or different\n          isoforms give the complex different properties. In the latter case, a separate entry should be made for each\n          variation with detail given in \"curated-complex\" or \"complex-properties\" as appropriate (see below for details\n          on complex variants).\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Small molecules /polysaccharides</b></dt>\n        <dd>All small molecules are derived from, and linked to, ChEBI. Small\n          molecules are entered if they are integral to the complex or bind to the complex as part of its function, e.g.\n          cofactors, electron donors/acceptors, such as ATP, H+. Enzyme targets are not added as participants. For\n          example, ATP is entered as a cofactor if the enzyme function is NOT primarily an ATPase (e.g. <a (click)=\"goToComplex('EBI-9008779')\">EBI-9008779</a>\n          gyrase_ecoli) but NOT entered for ATPases where it is a substrate (e.g. <a (click)=\"goToComplex('EBI-9007893')\">EBI-9007893</a> mfd-uvra_ecoli, a DNA\n          translocase).\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Nucleic acids</b></dt>\n        <dd>Nucleic acids are only entered as participants when they are an obligate part of the\n          complex. Non-coding RNA participants are linked to RNACentral, all other nucleic acid types are created as\n          generic molecules linked to generic ChEBI identifiers. For complexes which assemble and then bind to a nucleic\n          acid, this function is indicated in free text and using GO terms such as GO:0003677 DNA binding.\n        </dd>\n      </dl>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Participant Features</h3>\n      <ul>\n        <li>Any features known to be involved in the reactions are mapped to the underlying sequence, as given in the\n          source database, and cross-referenced to InterPro when possible. If a PTM is required for complex activation,\n          this is curated as a feature and the effects detailed in the annotation field 'Complex-properties'.\n        </li>\n        <li>Binding sites or residues within proteins, known to directly interact within the complex, are shown as\n          linked features in the graphical views.\n        </li>\n        <li>Stoichiometry is added, when known. Stoichiometry=0 is used for participants with no information about\n          stoichiometry. It is common that stoichiometry is only know for some participants in the same complex.\n        </li>\n      </ul>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Interaction Type</h3>\n      <p>\n        This will always be 'Physical association' - the controlled vocabulary term indicating that these proteins are\n        present in the same complex - unless there are one or two protein species involved in which case it will be\n        'Direct interaction'. Proteins directly binding to each other within a larger complex will be indicated by\n        linked features (see above).\n      </p>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Free text annotation</h3>\n      <dl>\n        <dt><b>Curated-complex</b></dt>\n        <dd>A brief, free-text description of the function of the complex, written in the same\n          style as a UniProtKB/Swiss-Prot entry. For example \"Required for processive DNA replication and may act as a\n          replicative helicase during DNA synthesis. Plays a central role in S-phase genome stability.\".\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Complex-properties</b></dt>\n        <dd>Details of physical properties of the complex. This may include details about the\n          topology, varying (as opposed to absolute) stoichiometry, molecular weight and Stoke's radius of the complex.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Complex-assembly</b></dt>\n        <dd>Experimentally verified structural assembly e.g. homodimer, heterohexamer. Assemblies\n          which have been computationally predicted are not included.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Disease</b></dt>\n        <dd>Only added when the disease state has been specifically linked to the protein when in the\n          complex.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Ligand</b></dt>\n        <dd>When a complex has one or more ligands transiently associated with it, they will be listed\n          under this heading.\n        </dd>\n      </dl>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Structured Annotations</h3>\n      <p>All structured annotation is entered as database/controlled vocabulary cross-reference with an appropriate\n        qualifier term.</p>\n      <dl>\n        <dt><b>Gene Ontology</b></dt>\n        <dd>Used to indicate the function, process and component of the complex as a whole. The\n          Function term, in particular, may not be true for all members of the complex, for example enzyme complexes\n          will\n          be annotated with a catalytic function term even when some subunits play only a regulatory role.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Experimental evidence</b></dt>\n        <dd>When high quality evidence for the existence of this complex is present in an\n          IMEx database, this will be added manually as a cross-reference so that it may be downloaded in the same file\n          as\n          the complex.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>3D structure</b></dt>\n        <dd>Representative PDB cross-references will be added when the complex has been crystallised\n          in its entirety.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Electron microscopy</b></dt>\n        <dd>Representative EMDB cross-references will be added when the complex has been\n          visualised by electron microscopy in its entirety.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Evidence codes</b></dt>\n        <dd>The following ECO codes will be used to indicate the strength of evidence that a\n          complex exists:\n        </dd>\n        <table class=\"hover\">\n          <thead>\n          <tr>\n            <th width=\"150\">ECO Code</th>\n            <th width=\"300\">Name</th>\n            <th>Description</th>\n          </tr>\n          </thead>\n          <tbody>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0005542')\">ECO:0005542 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>biological system reconstruction evidence by experimental evidence from single species used\n              in manual assertion\n            </td>\n            <td>Indicates that experimental evidence for the complexes exists but only by combining data\n              from several experiments. Experimental data can be found in an IMEx database, PDB or EMDB.\n            </td>\n          </tr>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0000353')\">ECO:0000353 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>physical interaction evidence used in manual assertion</td>\n            <td>Indicates that experimental evidence for the complexes exists in a single experiment. This will consist\n              of either a cross-reference to experimental data in an IMEx database, PDB or EMDB.\n            </td>\n          </tr>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0005543')\">ECO:0005543 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>biological system reconstruction evidence by experimental evidence from mixed species used in\n              manual assertion\n            </td>\n            <td>Indicates that experimental evidence for the complexes exists in a single experiment but the constructs\n              are derived from homologous gene products in different species. Experimental data can be found in an IMEx\n              database, PDB or EMDB.\n            </td>\n          </tr>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0005544')\">ECO:0005544 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>biological system reconstruction evidence based on orthology evidence used in manual assertion</td>\n            <td>Indicates only limited experimental evidence exists for a complex in one species (e.g. mouse) but it is\n              desirable to curate the complex which has been curated in another species (e.g. human). Sequences and\n              number\n              of genome-encoded components are fairly conserved but some divergence may be observed. The complex with\n              the\n              experimental evidence has to be cross-referenced with the qualifier = \"inferred-from\" and must have the\n              ECO:0000353, ECO:0005542 or ECO:0005543 tag.\n            </td>\n          </tr>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0005546')\">ECO:0005546 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>biological system reconstruction evidence based on paralogy evidence used in manual assertion</td>\n            <td>Indicates only limited experimental evidence exists for one complex but full experimental evidence\n              exists for a similar complex of the same species. Sequences and number of genome-encoded components are\n              fairly conserved but some divergence may be observed. The complex with the experimental evidence has to be\n              cross-referenced with the qualifier = \"inferred-from\" and must have the ECO:0000353, ECO:0005542 or\n              ECO:0005543 tag.\n            </td>\n          </tr>\n          <tr>\n            <td><a (click)=\"goToECO('ECO:0005547')\">ECO:0005547 <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n            <td>biological system reconstruction evidence based on inference from background scientific\n              knowledge used in manual assertion\n            </td>\n            <td>Is used if no or only partial experimental evidence is present but the\n              complex is generally assumed to exist. Functional studies or ligand binding evidence from pharmacological\n              experiments are often used for the reconstruction of such complexes.\n            </td>\n          </tr>\n          </tbody>\n        </table>\n      </dl>\n      <dl>\n        <dt><b>Enzymatic activity</b></dt>\n        <dd>The E.C. number linked to IntEnz will be added when an enzyme complex is described.</dd>\n      </dl>\n      <dl>\n        <dt><b>Additional literature</b></dt>\n        <dd>Review articles or experimental data not appropriate for entering into IntAct\n          are added.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Pathway information</b></dt>\n        <dd>For human complexes, crosslinks to Reactome put complexes into a pathway context.\n          Note that the definition of a complex is different in Reactome and in many cases a one-to-many relationship\n          exists.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Disease information</b></dt>\n        <dd>Cross references to the Experimental Factor Ontology (EFO) or their contributing databases (e.g. Orphanet,\n          Human Phenotype Ontology) may be added if a complex or a chain when within that complex has been linked to a\n          specific disease condition.\n        </dd>\n      </dl>\n      <dl>\n        <dt><b>Drug target information</b></dt>\n        <dd>Cross-links to ChEMBL are used to indicate complexes which have been used as\n          drug targets.\n        </dd>\n      </dl>\n    </div>\n    <div class=\"medium-12\">\n      <h3>Complex Variants</h3>\n      <p>\n        If variant forms of a complex exist i.e. the same functional unit can exist in alternate forms with differing\n        macromolecular composition, these are curated as separate objects. For example, PDGF can exist as a PDGF-A\n        homodimer, PDGF-B homodimer, PDGF-AB heterodimer, PDGF-C homodimer and a PDGF-D homodimer If the variants have\n        well-accepted names, e.g. PDGF-AB, these may be used as the primary name. If not, then the recommended name is\n        qualified by variant 1, variant 2 e.g. TRAMP complex variant 1 (<a (click)=\"goToComplex('EBI-2352894')\">EBI-2352894</a>).\n      </p>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 384:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"intro-unit\">\n      <h2>Documentation</h2>\n      <div class=\"row button-grid small-up-1 medium-up-2 large-up-2 margin-top-xlarge no-pad-right\" data-equalizer\n           data-equalize-on=\"medium\" id=\"large-button-grid\">\n        <div class=\"column  padding-bottom-large\">\n          <p>Query Syntax contains details about the types of search that can be performed and the syntax required.</p>\n          <a class=\"button medium-12 columns text-center\" data-equalizer-watch routerLink=\"/documentation/query_syntax\">\n            <h3 class=\"icon icon-functional white-color\" data-icon=\"1\"></h3>\n            <h5 class=\"white-color\">Query Syntax</h5>\n          </a>\n        </div>\n        <div class=\"column  padding-bottom-large\">\n          <p>Data Content documents the type of data and features that are captured for each complex.</p>\n          <a class=\"button medium-12 columns text-center\" data-equalizer-watch routerLink=\"/documentation/data_content\">\n            <h3 class=\"icon icon-generic  white-color\" data-icon=\";\"></h3>\n            <h5 class=\"white-color\">Data Content</h5>\n          </a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 385:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Query Syntax</h2>\n    <div class=\"medium-12\">\n      <p>\n        To do a search you can use the Complex Query Language (CQL), which is based on Lucene's syntax.\n      </p>\n      <p>\n        Free text search will look by default for:\n      </p>\n      <ul>\n        <li>\n          Identifiers, names and synonyms of molecules (protein, gene, small molecule)\n        </li>\n        <li>\n          Identifiers, names and synonyms of complexes\n        </li>\n        <li>\n          Cross-references of complexes\n        </li>\n        <li>\n          Species\n        </li>\n      </ul>\n      <p>\n        Search for groups of complexes by using the Gene Ontology. For example, GO:0016491 will search for all\n        complexes annotated with \"oxidoreductase activity\" and all downstream child terms of this.\n      </p>\n      <p>\n        Narrow your initial search result by using the filters on the results page for:\n      </p>\n      <ul>\n        <li>Species</li>\n        <li>Molecule type</li>\n        <li>Biological role</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 386:
 /***/ (function(module, exports) {
 
 module.exports = "<form [hidden]=\"!display\" id=\"local-search\" name=\"local-search\" action=\"[search-action]\" method=\"post\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\" value=\"{{query}}\"\n             class=\"input-group-field\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value)\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a>\n    </small>\n  </fieldset>\n</form>\n<!-- /local-search -->\n"
 
 /***/ }),
 
-/***/ 378:
+/***/ 387:
 /***/ (function(module, exports) {
 
 module.exports = "<md-progress-bar *ngIf=\"isDisplayed\"\n                 [color]=\"color\"\n                 [mode]=\"mode\">\n</md-progress-bar>\n\n"
 
 /***/ }),
 
-/***/ 40:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
-var environment = {
-    production: false,
-    evn: 'dev',
-    analytics_id: 'UA-672146-11',
-    complex_ws_base_url: '//wwwdev.ebi.ac.uk/intact/complex-ws',
-    europepmc_base_url: '//www.ebi.ac.uk/europepmc',
-    reactome_base_url: '//reactomedev.oicr.on.ca',
-    pdb_base_url: '//www.ebi.ac.uk/pdbe',
-    ols_base_url: '//www.ebi.ac.uk/ols/api/ontologies',
-};
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/environment.js.map
-
-/***/ }),
-
-/***/ 428:
+/***/ 437:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(172);
+module.exports = __webpack_require__(175);
 
 
 /***/ }),
 
-/***/ 70:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__ = __webpack_require__(92);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressBarComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ProgressBarComponent = ProgressBarComponent_1 = (function () {
+    function ProgressBarComponent() {
+        this._color = 'primary';
+        this._mode = 'query';
+        ProgressBarComponent_1.show = false;
+    }
+    ProgressBarComponent.display = function () {
+        ProgressBarComponent_1.show = true;
+    };
+    ProgressBarComponent.hide = function () {
+        setTimeout(function () {
+            ProgressBarComponent_1.show = false;
+        }, 1000);
+    };
+    ProgressBarComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(ProgressBarComponent.prototype, "isDisplayed", {
+        get: function () {
+            return ProgressBarComponent_1.show;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressBarComponent.prototype, "color", {
+        get: function () {
+            return this._color;
+        },
+        set: function (value) {
+            this._color = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProgressBarComponent.prototype, "mode", {
+        get: function () {
+            return this._mode;
+        },
+        set: function (value) {
+            this._mode = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ProgressBarComponent;
+}());
+ProgressBarComponent = ProgressBarComponent_1 = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'cp-progress-bar',
+        template: __webpack_require__(387),
+        styles: [__webpack_require__(372)]
+    }),
+    __metadata("design:paramtypes", [])
+], ProgressBarComponent);
+
+var ProgressBarComponent_1;
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/progress-bar.component.js.map
+
+/***/ }),
+
+/***/ 71:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngx_toastr__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1178,5 +1409,5 @@ var _a;
 
 /***/ })
 
-},[428]);
+},[437]);
 //# sourceMappingURL=main.bundle.js.map

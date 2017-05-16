@@ -1,16 +1,16 @@
 webpackJsonp([3,13],{
 
-/***/ 435:
+/***/ 444:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__ = __webpack_require__(514);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__ = __webpack_require__(515);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(456);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexOrganismsModule", function() { return ComplexOrganismsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -46,7 +46,7 @@ ComplexOrganismsModule = __decorate([
 
 /***/ }),
 
-/***/ 446:
+/***/ 455:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -136,8 +136,8 @@ __decorate([
 ProgressSpinnerComponent = ProgressSpinnerComponent_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-progress-spinner',
-        template: __webpack_require__(450),
-        styles: [__webpack_require__(449)]
+        template: __webpack_require__(459),
+        styles: [__webpack_require__(458)]
     }),
     __metadata("design:paramtypes", [])
 ], ProgressSpinnerComponent);
@@ -147,14 +147,14 @@ var ProgressSpinnerComponent_1;
 
 /***/ }),
 
-/***/ 447:
+/***/ 456:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(455);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressSpinnerModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -190,10 +190,10 @@ ProgressSpinnerModule = __decorate([
 
 /***/ }),
 
-/***/ 449:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(17)(false);
 // imports
 
 
@@ -208,14 +208,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 450:
+/***/ 459:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"small-5 small-centered columns\">\n  <md-progress-spinner style=\"margin:0 auto;\"\n                       [attr.color]=\"color\"\n                       [mode]=\"mode\"\n                       [value]=\"0\">\n  </md-progress-spinner>\n  <div style=\"text-align: center\">\n    <h4>Loading {{query}}</h4>\n    <p *ngIf=\"takesLonger\">This takes longer than usual. Bare with us!</p>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 514:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -286,8 +286,8 @@ __decorate([
 ComplexOrganismComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-organism',
-        template: __webpack_require__(633),
-        styles: [__webpack_require__(578)]
+        template: __webpack_require__(642),
+        styles: [__webpack_require__(587)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexOrganismComponent);
@@ -296,13 +296,13 @@ ComplexOrganismComponent = __decorate([
 
 /***/ }),
 
-/***/ 515:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(188);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -428,8 +428,8 @@ var ComplexOrganismsComponent = (function () {
 ComplexOrganismsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-organisms',
-        template: __webpack_require__(634),
-        styles: [__webpack_require__(579)]
+        template: __webpack_require__(643),
+        styles: [__webpack_require__(588)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _a || Object])
 ], ComplexOrganismsComponent);
@@ -439,10 +439,10 @@ var _a;
 
 /***/ }),
 
-/***/ 578:
+/***/ 587:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(17)(false);
 // imports
 
 
@@ -457,10 +457,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 579:
+/***/ 588:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(27)(false);
+exports = module.exports = __webpack_require__(17)(false);
 // imports
 
 
@@ -475,14 +475,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 633:
+/***/ 642:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\" *ngIf=\"symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{name}}</h5>\n    <!--<br>-->\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"symbol !== 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-species\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"symbol === 'x'\">\n      <a [routerLink]=\"['/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-functional\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\">ComplexTab</a>\n    <a class=\"tag\">PSI-XML2.5</a>\n    <a class=\"tag\">PSI-XML3.0</a>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 634:
+/***/ 643:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"column medium-12\">\n    <ng-container *ngIf=\"specieFacets;else loadingSpinner\">\n      <div  class=\"column medium-3\" *ngFor=\"let specieFacet of specieFacets\">\n        <cp-complex-organism [name]=\"specieFacet.name\" [symbol]=\"specieFacet.symbol\" [count]=\"specieFacet.count\"></cp-complex-organism>\n      </div>\n    </ng-container>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</div>\n"
