@@ -1,4 +1,7 @@
 import {Routes} from '@angular/router';
+import {DocumentationComponent} from "./documentation/documentation.component";
+import {QuerySyntaxComponent} from "./documentation/query-syntax/query-syntax.component";
+import {DataContentComponent} from "./documentation/data-content/data-content.component";
 
 export const rootRouterConfig: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -7,4 +10,7 @@ export const rootRouterConfig: Routes = [
   {path: 'download', loadChildren: 'app/download/download.module#DownloadModule'},
   {path: 'basket', loadChildren: 'app/basket/basket.module#BasketModule'},
   {path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
+  {path: 'documentation', component: DocumentationComponent},
+  {path: 'documentation/query_syntax', component: QuerySyntaxComponent},
+  {path: 'documentation/data_content', component: DataContentComponent},
 ];

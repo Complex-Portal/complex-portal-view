@@ -20,12 +20,18 @@ import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MdProgressBarModule} from '@angular/material';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { QuerySyntaxComponent } from './documentation/query-syntax/query-syntax.component';
+import { DataContentComponent } from './documentation/data-content/data-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressBarComponent,
     LocalSearchComponent,
+    DocumentationComponent,
+    QuerySyntaxComponent,
+    DataContentComponent,
   ],
   imports: [
     BrowserModule,
