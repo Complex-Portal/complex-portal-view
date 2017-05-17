@@ -17,7 +17,7 @@ export class ComplexExpressionComponent implements OnInit {
   private _participants: Participant[];
   private _complexSpecies: string;
   private _crossReferences: CrossReference[];
-  private _gxaParamsQueries: GXAQueryParams[];
+  private _gxaParamsQueries: string;
   private _goCellularXRefs: CrossReference[];
 
   constructor() {
@@ -27,12 +27,10 @@ export class ComplexExpressionComponent implements OnInit {
     for (let i = 0; i < this._participants.length; i++) {
       if (this._participants[i].interactorType === 'protein') {
         if (this._gxaParamsQueries === undefined) {
-          this._gxaParamsQueries = [];
+          this.gxaParamsQueries = this._participants[i].identifier;
+        } else {
+          this.gxaParamsQueries += ' ' + this._participants[i].identifier;
         }
-        this._gxaParamsQueries.push({
-          value: this._participants[i].identifier,
-          category: 'uniprot'
-        });
       }
     }
     for (let i = 0; i < this._crossReferences.length; i++) {
@@ -86,12 +84,12 @@ export class ComplexExpressionComponent implements OnInit {
     this._crossReferences = value;
   }
 
-  get gxaParamsQueries(): GXAQueryParams[] {
+  get gxaParamsQueries(): string {
     return this._gxaParamsQueries;
   }
 
   @Input()
-  set gxaParamsQueries(value: GXAQueryParams[]) {
+  set gxaParamsQueries(value: string) {
     this._gxaParamsQueries = value;
   }
 
