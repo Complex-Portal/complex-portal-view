@@ -3,7 +3,7 @@
     <h2 class="float-left">Expression and Cellular Location</h2>
     <cp-go-to class="float-right" [sectionName]="'Expression and Cellular Location'"></cp-go-to>
     <div class="columns medium-12">
-      <cp-gxa-heatmap *ngIf="gxa && gxaParamsQueries" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
+      <cp-gxa-heatmap *ngIf="gxa && gxaParamsQueries && complexSpecies" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
                       [complexSpecies]="complexSpecies"></cp-gxa-heatmap>
     </div>
     <div class="columns medium-12">
