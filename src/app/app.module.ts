@@ -23,6 +23,7 @@ import {MdProgressBarModule} from '@angular/material';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { QuerySyntaxComponent } from './documentation/query-syntax/query-syntax.component';
 import { DataContentComponent } from './documentation/data-content/data-content.component';
+import { OntologiesComponent } from './ontologies/ontologies.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DataContentComponent } from './documentation/data-content/data-content.
     DocumentationComponent,
     QuerySyntaxComponent,
     DataContentComponent,
+    OntologiesComponent,
   ],
   imports: [
     BrowserModule,
