@@ -12,15 +12,15 @@ export class NotificationService {
   }
 
   public addErrorNotification(errorNotification: string): void {
-    this.toastrService.error('Something went wrong :(', errorNotification);
+    this.toastrService.error(errorNotification, 'Something went wrong :(');
   }
 
   public addAnnouncementNotification(announcementNotification: string, options): void {
-    this.toastrService.info('Just to let you know!', announcementNotification, options);
+    this.toastrService.info(announcementNotification, 'Just to let you know!', options);
   }
 
   public addHintNotification(hintNotification: string): void {
-    this.toastrService.warning('Just to let you know!', hintNotification);
+    this.toastrService.warning(hintNotification, 'Just to let you know!');
   }
 
   public addStaticNotification(staticNotification: string): void {
