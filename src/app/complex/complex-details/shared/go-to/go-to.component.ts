@@ -1,7 +1,15 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input,
+  OnInit
+} from '@angular/core';
 import {SectionService} from "../service/section/section.service";
+import {PageScrollInstance, PageScrollService} from "ng2-page-scroll";
+import {DOCUMENT} from "@angular/platform-browser";
+import {GoogleAnalyticsService} from "../../../../shared/google-analytics/google-analytics.service";
+import {Action} from "../../../../shared/google-analytics/action.enum";
+import {Category} from "../../../../shared/google-analytics/category.enum";
 
-declare const $ : any;
+declare const $: any;
 
 @Component({
   selector: 'cp-go-to',
@@ -12,7 +20,8 @@ declare const $ : any;
 export class GoToComponent implements OnInit, AfterViewInit {
   private _sectionName: string;
 
-  constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef) {
+  constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef,
+              private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any, private ga: GoogleAnalyticsService) {
   }
 
 
@@ -42,6 +51,12 @@ export class GoToComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     $('.goToMenu').foundation();
+  }
+
+  public scrollToElement(idReference: string) {
+    this.ga.invokeCustomEvent(Action.GoToMenu, Category.details, idReference);
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
+    this.pageScrollService.start(pageScrollInstance);
   }
 
   public doCheckSection(): void {

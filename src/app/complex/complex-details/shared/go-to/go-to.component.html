@@ -4,32 +4,32 @@
     <a class="label" (click)="doCheckSection()"><i class="icon icon-functional" data-icon="M"></i>Go to</a>
     <ul class="menu">
       <li>
-        <a pageScroll href="#participants"
+        <a (click)="scrollToElement('participants')"
            [ngClass]="{'selected': isSelected('Participants')}"
            *ngIf="sectionService.participantsSection">Participants</a>
       </li>
       <li>
-        <a pageScroll href="#function"
+        <a (click)="scrollToElement('function')"
            [ngClass]="{'selected': isSelected('Function')}"
            *ngIf="sectionService.functionSection">Function</a>
       </li>
       <li>
-        <a pageScroll href="#properties"
+        <a (click)="scrollToElement('properties')"
            [ngClass]="{'selected': isSelected('Properties')}"
            *ngIf="sectionService.propertiesSection">Properties</a>
       </li>
       <li>
-        <a pageScroll href="#expression"
+        <a (click)="scrollToElement('expression')"
            [ngClass]="{'selected': isSelected('Expression and Cellular Location')}"
            *ngIf="sectionService.expressionSection">Expression and Cellular Location</a>
       </li>
       <li>
-        <a pageScroll href="#disease"
+        <a (click)="scrollToElement('disease')"
            [ngClass]="{'selected': isSelected('Diseases and Pathologies')}"
            *ngIf="sectionService.diseaseSection">Diseases and Pathologies</a>
       </li>
       <li>
-        <a pageScroll href="#references"
+        <a (click)="scrollToElement('references')"
            [ngClass]="{'selected': isSelected('Names and Publications')}"
            *ngIf="sectionService.namesSection">Names and Publications</a>
       </li>
