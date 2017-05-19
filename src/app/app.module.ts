@@ -24,6 +24,7 @@ import { DocumentationComponent } from './documentation/documentation.component'
 import { QuerySyntaxComponent } from './documentation/query-syntax/query-syntax.component';
 import { DataContentComponent } from './documentation/data-content/data-content.component';
 import { OntologiesComponent } from './ontologies/ontologies.component';
+import {GoogleAnalyticsService} from "./shared/google-analytics/google-analytics.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { OntologiesComponent } from './ontologies/ontologies.component';
     MdProgressBarModule,
     NoopAnimationsModule,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5, GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
