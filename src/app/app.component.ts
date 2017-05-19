@@ -22,6 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
   private _environmentName: string;
   private _basketCount = 0;
+  private _EBI_BASE_URL = environment.ebi_base_url;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService: BasketService) {
@@ -114,5 +115,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   get basketCount(): number {
     return this._basketCount;
+  }
+
+  get EBI_BASE_URL(): string {
+    return this._EBI_BASE_URL;
   }
 }
