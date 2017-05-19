@@ -28,9 +28,9 @@ export class GxaHeatmapComponent implements OnInit {
       case 'Rattus norvegicus; 10116':
         this._experimentId = 'E-GEOD-53960';
         break;
-      // case 'Gallus gallus (Chicken); 9031':
-      //   this._experimentId = 'E-MTAB-2797';
-      //   break;
+      case 'Gallus gallus (Chicken); 9031':
+        this._experimentId = 'E-MTAB-2797';
+        break;
       case 'Caenorhabditis elegans; 6239':
         this._experimentId = 'E-MTAB-2812';
         break;
@@ -43,7 +43,7 @@ export class GxaHeatmapComponent implements OnInit {
       this._gxa.render({
         target: 'highchartsContainer',
         experiment: this._experimentId,
-        atlasUrl: 'https://wwwdev.ebi.ac.uk/gxa/',
+        atlasUrl: 'https://www.ebi.ac.uk/gxa/',
         query: {
           gene: this.gxaParamsQueries
         },
