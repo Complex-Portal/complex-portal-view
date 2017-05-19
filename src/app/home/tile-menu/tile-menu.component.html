@@ -1,53 +1,52 @@
 <div class="row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right" data-equalizer
      data-equalize-on="medium" id="large-button-grid">
   <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns" data-equalizer-watch [routerLink]="['/download']">
+    <a class="button medium-12 columns" data-equalizer-watch (click)="goToDownload()">
       <h3 class="icon icon-functional white-color" data-icon="="></h3>
       <h5 class="white-color">Programmatic Access</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns" data-equalizer-watch [routerLink]="['/basket']">
+    <a class="button medium-12 columns" data-equalizer-watch (click)="goToBasket()">
       <h3 class="icon icon-generic white-color" data-icon="b"></h3>
       <h5 class="white-color">Basket</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns" data-equalizer-watch [routerLink]="['/complex/organisms']">
+    <a class="button medium-12 columns" data-equalizer-watch (click)="goToOrganisms()">
       <h3 class="icon icon-species white-color" data-icon="H"></h3>
       <h5 class="white-color">Organisms</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns" data-equalizer-watch [routerLink]="['/ontologies']">
+    <a class="button medium-12 columns" data-equalizer-watch (click)="goToOntologies()">
       <h3 class="icon icon-conceptual white-color" data-icon="o"></h3>
       <h5 class="white-color">Ontologies</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
     <a
-      class="button medium-12 columns training-background" data-equalizer-watch href="//www.ebi.ac.uk/support/intact">
+      class="button medium-12 columns training-background" data-equalizer-watch (click)="goToRequestComplex()">
       <h3 class="icon icon-generic white-color" data-icon="\"></h3>
       <h5 class="white-color">Request<br/>Complex</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
     <a
-      class="button medium-12 columns industry-background" data-equalizer-watch
-      href="http://www.ebi.ac.uk/intact/resources/training">
+      class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToTraining()">>
       <h3 class="icon icon-generic white-color" data-icon="t"></h3>
       <h5 class="white-color">Training</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns industry-background" data-equalizer-watch [routerLink]="['/documentation']">
+    <a class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToDocumentation()">>
       <h3 class="icon icon-generic white-color" data-icon="?"></h3>
       <h5 class="white-color">Documentation</h5>
     </a>
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
     <a
-      class="button medium-12 columns industry-background" data-equalizer-watch href="featureNotAvailableYet()">
+      class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToCitation()">>
       <h3 class="icon icon-generic white-color" data-icon="P"></h3>
       <h5 class="white-color">Citation</h5>
     </a>
