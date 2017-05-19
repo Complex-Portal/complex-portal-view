@@ -2,6 +2,10 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
+import {GoogleAnalyticsService} from "../../google-analytics/google-analytics.service";
+import {Category} from "../../google-analytics/category.enum";
+import {Label} from "../../google-analytics/label.enum";
+import {Action} from "../../google-analytics/action.enum";
 
 const COMPLEX_STORE = 'cp_complex_store';
 
@@ -10,7 +14,7 @@ export class BasketService {
   private _complexBasket: { [name: string]: BasketItem } = {};
   public onBasketCountChanged$: EventEmitter<number>;
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService, private ga : GoogleAnalyticsService) {
     this.onBasketCountChanged$ = new EventEmitter<number>();
     this.initialiseBasket();
   }
@@ -40,6 +44,7 @@ export class BasketService {
     if (!this.isInBasket(id)) {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
       this.saveInLocalStorage();
+      this.ga.invokeCustomEvent(Action.AddToBasket, Category.basket, id);
       this.notificationService.addSuccessNotification('Stored ' + id + ' in you basket!');
     }
     this.onBasketCountChanged$.emit(this.getBasketCount());
@@ -49,6 +54,7 @@ export class BasketService {
     const id = this._complexBasket[key].id;
     delete this._complexBasket[key];
     this.saveInLocalStorage();
+    this.ga.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, id);
     this.notificationService.addSuccessNotification('Removed ' + id + ' in you basket!');
     this.onBasketCountChanged$.emit(this.getBasketCount());
   }
