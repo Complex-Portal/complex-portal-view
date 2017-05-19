@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'cp-about',
@@ -7,6 +8,8 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit, AfterViewInit {
+  private _INTACT_BASE_URL = environment.intact_base_url;
+  private _INTACT_SUPPORT_URL = environment.intact_support_url;
 
   constructor() { }
 
@@ -15,5 +18,13 @@ export class AboutComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
+  }
+
+  get INTACT_BASE_URL(): any {
+    return this._INTACT_BASE_URL;
+  }
+
+  get INTACT_SUPPORT_URL(): any {
+    return this._INTACT_SUPPORT_URL;
   }
 }
