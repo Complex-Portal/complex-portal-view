@@ -452,7 +452,7 @@ process.umask = function() { return 0; };
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__(527);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__(519);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__(521);
@@ -485,7 +485,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__ = __webpack_require__(520);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_function_assemblies_assemblies_component__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__ = __webpack_require__(524);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_basket_service_basket_service__ = __webpack_require__(107);
@@ -1529,7 +1529,7 @@ var ProgressSpinnerComponent_1;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(461);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressSpinnerModule; });
@@ -14220,7 +14220,7 @@ var PageScrollInstance = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__ = __webpack_require__(478);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__ = __webpack_require__(485);
@@ -14812,7 +14812,7 @@ module.exports = getIteratorFn;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__ = __webpack_require__(71);
@@ -102892,7 +102892,7 @@ exports.default = __webpack_require__(608)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__ = __webpack_require__(478);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__ = __webpack_require__(486);
@@ -103704,7 +103704,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /* 647 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <a href=\"{{getReactomeURL()}}\" target=\"_blank\">Open in Reactome <i class=\"icon icon-generic small\"\n                                                                         data-icon=\"x\"></i></a>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 648 */,

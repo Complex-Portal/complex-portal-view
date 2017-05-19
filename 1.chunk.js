@@ -6,8 +6,8 @@ webpackJsonp([1,13],{
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_component__ = __webpack_require__(538);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tile_menu_tile_menu_component__ = __webpack_require__(540);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__twitter_display_twitter_display_component__ = __webpack_require__(541);
@@ -140,6 +140,11 @@ NewsletterSubscriptionComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TileMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -152,15 +157,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
+
+
 var TileMenuComponent = (function () {
-    function TileMenuComponent(notificationService) {
+    function TileMenuComponent(notificationService, router, ga) {
         this.notificationService = notificationService;
+        this.router = router;
+        this.ga = ga;
     }
     TileMenuComponent.prototype.ngAfterViewInit = function () {
         $('cp-tile-menu').foundation();
     };
     TileMenuComponent.prototype.featureNotAvailableYet = function () {
         this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
+    };
+    TileMenuComponent.prototype.goToDownload = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'download');
+        this.router.navigate(['download']);
+    };
+    TileMenuComponent.prototype.goToBasket = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'basket');
+        this.router.navigate(['basket']);
+    };
+    TileMenuComponent.prototype.goToOrganisms = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'organisms');
+        this.router.navigate(['complex/organisms']);
+    };
+    TileMenuComponent.prototype.goToOntologies = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'ontologies');
+        this.router.navigate(['ontologies']);
+    };
+    TileMenuComponent.prototype.goToRequestComplex = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'request complex');
+        window.open(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].intact_support_url, '_blank');
+    };
+    TileMenuComponent.prototype.goToTraining = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'training');
+        window.open(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].intact_training_url, '_blank');
+    };
+    TileMenuComponent.prototype.goToDocumentation = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'documentation');
+        this.router.navigate(['documentation']);
+    };
+    TileMenuComponent.prototype.goToCitation = function () {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].home, 'citation');
+        this.router.navigate(['home']);
     };
     return TileMenuComponent;
 }());
@@ -170,10 +214,10 @@ TileMenuComponent = __decorate([
         template: __webpack_require__(657),
         styles: [__webpack_require__(602)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
 ], TileMenuComponent);
 
-var _a;
+var _a, _b, _c;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/tile-menu.component.js.map
 
 /***/ }),
@@ -269,7 +313,7 @@ ExamplesLargeComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(108);
@@ -440,7 +484,7 @@ module.exports = "<div id=\"mc_embed_signup\">\n  <form ngNoForm action=\"//ebi.
 /***/ 657:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/download']\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/basket']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/complex/organisms']\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/ontologies']\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/support/intact\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch\n      href=\"http://www.ebi.ac.uk/intact/resources/training\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch [routerLink]=\"['/documentation']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToDownload()\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToBasket()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOrganisms()\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOntologies()\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch (click)=\"goToRequestComplex()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToTraining()\">>\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToDocumentation()\">>\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToCitation()\">>\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
