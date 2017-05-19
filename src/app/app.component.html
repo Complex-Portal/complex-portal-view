@@ -4,14 +4,14 @@
 
       <div id="global-masthead" class="clearfix">
         <!--This has to be one line and no newline characters-->
-        <a href="//www.ebi.ac.uk/" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
+        <a href="{{EBI_BASE_URL}}" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
 
         <nav>
           <div class="row">
             <ul id="global-nav" class="menu">
               <!-- set active class as appropriate -->
-              <li id="home-mobile" class=""><a href="//www.ebi.ac.uk"></a></li>
-              <li id="home" class="active"><a href="//www.ebi.ac.uk"><i class="icon icon-generic" data-icon="H"></i>
+              <li id="home-mobile" class=""><a href="{{EBI_BASE_URL}}"></a></li>
+              <li id="home" class="active"><a href="{{EBI_BASE_URL}}"><i class="icon icon-generic" data-icon="H"></i>
                 EMBL-EBI</a></li>
               <li id="services"><a href="//www.ebi.ac.uk/services"><i class="icon icon-generic" data-icon="("></i>
                 Services</a></li>
@@ -66,11 +66,10 @@
         <div class="columns medium-6">
          <cp-local-search></cp-local-search>
         </div>
-
-
         <!-- local-nav -->
         <nav>
           <ul class="dropdown menu float-left" data-description="navigational">
+            <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/documentation">Documentation</a></li>
             <li><a routerLink="/about">About</a></li>
             <li><a routerLink="/basket">Basket ({{basketCount}})</a></li>
