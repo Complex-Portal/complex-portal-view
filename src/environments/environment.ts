@@ -4,10 +4,10 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 const EBI_BASE_URL = '//wwwdev.ebi.ac.uk/';
-const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/';
+const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
+const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 
-
-  export const environment = {
+export const environment = {
   production: false,
   evn: 'dev',
 
@@ -18,10 +18,13 @@ const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/';
   pdb_base_url: EBI_BASE_URL + 'pdbe',
   ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',
   ols_go_url: EBI_BASE_URL + 'ols/ontologies/go/terms?obo_id=',
-  ols_eco_url: EBI_BASE_URL+ 'ols/ontologies/eco/terms?obo_id=',
+  ols_eco_url: EBI_BASE_URL + 'ols/ontologies/eco/terms?obo_id=',
   reactome_base_url: '//reactomedev.oicr.on.ca',
-  intact_base_ftp: 'ftp://ftp.ebi.ac.uk/pub/databases/intact/complex/',
-  complex_tab: INTACT_FTP_BASE_URL + 'current/complextab/',
-  complex_psi25: INTACT_FTP_BASE_URL + 'current/psi25/',
-  complex_psi30: INTACT_FTP_BASE_URL+ 'current/psi30/'
+  complex_current: COMPLEX__FTP_BASE_URL + 'current',
+  complex_tab: COMPLEX__FTP_BASE_URL + 'current/complextab/',
+  complex_tab_readme: COMPLEX__FTP_BASE_URL + 'current/complextab/README.htm',
+  complex_psi25: COMPLEX__FTP_BASE_URL + 'current/psi25/',
+  complex_psi30: COMPLEX__FTP_BASE_URL + 'current/psi30/',
+  intact_base_url: EBI_BASE_URL + 'intact',
+  intact_support_url: EBI_BASE_URL + 'support/intact'
 };
