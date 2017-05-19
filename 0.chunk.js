@@ -1,5 +1,5 @@
-webpackJsonp([0,13],Array(188).concat([
-/* 188 */
+webpackJsonp([0,13],Array(191).concat([
+/* 191 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -189,9 +189,6 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 189 */,
-/* 190 */,
-/* 191 */,
 /* 192 */,
 /* 193 */,
 /* 194 */,
@@ -446,57 +443,60 @@ process.umask = function() { return 0; };
 /* 443 */,
 /* 444 */,
 /* 445 */,
-/* 446 */
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__(524);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__(516);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__(518);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__(507);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__ = __webpack_require__(514);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__ = __webpack_require__(503);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__ = __webpack_require__(512);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_details_component__ = __webpack_require__(492);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__ = __webpack_require__(497);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__ = __webpack_require__(494);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__(522);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__ = __webpack_require__(513);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__(525);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__(509);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__ = __webpack_require__(501);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__ = __webpack_require__(499);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__(506);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__ = __webpack_require__(508);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__ = __webpack_require__(519);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__ = __webpack_require__(520);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__ = __webpack_require__(495);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__ = __webpack_require__(493);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__(498);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__(523);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__(504);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__ = __webpack_require__(515);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__ = __webpack_require__(496);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__ = __webpack_require__(517);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_function_assemblies_assemblies_component__ = __webpack_require__(502);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__(527);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_details_component__ = __webpack_require__(495);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__(525);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__(528);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__ = __webpack_require__(511);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__ = __webpack_require__(498);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__ = __webpack_require__(496);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__(526);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__ = __webpack_require__(518);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__ = __webpack_require__(520);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_function_assemblies_assemblies_component__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__ = __webpack_require__(524);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_basket_service_basket_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_ols_service_ols_service__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_service_complex_portal_service__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_basket_service_basket_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_ols_service_ols_service__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_service_complex_portal_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__shared_notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(459);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__shared_service_section_section_service__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44_ng2_page_scroll__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__shared_service_section_section_service__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44_ng2_page_scroll__ = __webpack_require__(476);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexDetailsModule", function() { return ComplexDetailsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -605,12 +605,12 @@ ComplexDetailsModule = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-details.module.js.map
 
 /***/ }),
-/* 447 */,
-/* 448 */,
-/* 449 */,
 /* 450 */,
 /* 451 */,
-/* 452 */
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */
 /***/ (function(module, exports) {
 
 var Config = {
@@ -633,7 +633,7 @@ module.exports = Config;
 
 
 /***/ }),
-/* 453 */
+/* 456 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -649,7 +649,7 @@ module.exports = Config;
 
 
 
-var emptyFunction = __webpack_require__(471);
+var emptyFunction = __webpack_require__(474);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -703,10 +703,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 454 */
+/* 457 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -722,8 +722,8 @@ module.exports = warning;
 
 
 
-var colorbrewer = __webpack_require__(468);//Josh - should path for this be ../../../vendor...?
-var Config = __webpack_require__(452);
+var colorbrewer = __webpack_require__(471);//Josh - should path for this be ../../../vendor...?
+var Config = __webpack_require__(455);
 
 //josh - should these be moved to Config.js?
 Molecule.LABELMAXLENGTH = 90; // maximal width reserved for protein-labels
@@ -971,7 +971,7 @@ module.exports = Molecule;
 
 
 /***/ }),
-/* 455 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1030,10 +1030,10 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 456 */
+/* 459 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1049,15 +1049,15 @@ module.exports = invariant;
 
 
 
-var _assign = __webpack_require__(465);
+var _assign = __webpack_require__(468);
 
-var ReactCurrentOwner = __webpack_require__(466);
+var ReactCurrentOwner = __webpack_require__(469);
 
-var warning = __webpack_require__(453);
-var canDefineProperty = __webpack_require__(467);
+var warning = __webpack_require__(456);
+var canDefineProperty = __webpack_require__(470);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-var REACT_ELEMENT_TYPE = __webpack_require__(486);
+var REACT_ELEMENT_TYPE = __webpack_require__(489);
 
 var RESERVED_PROPS = {
   key: true,
@@ -1377,10 +1377,10 @@ ReactElement.isValidElement = function (object) {
 };
 
 module.exports = ReactElement;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 457 */
+/* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1424,7 +1424,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 458 */
+/* 461 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1514,8 +1514,8 @@ __decorate([
 ProgressSpinnerComponent = ProgressSpinnerComponent_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-progress-spinner',
-        template: __webpack_require__(462),
-        styles: [__webpack_require__(461)]
+        template: __webpack_require__(465),
+        styles: [__webpack_require__(464)]
     }),
     __metadata("design:paramtypes", [])
 ], ProgressSpinnerComponent);
@@ -1524,14 +1524,14 @@ var ProgressSpinnerComponent_1;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/progress-spinner.component.js.map
 
 /***/ }),
-/* 459 */
+/* 462 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(461);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressSpinnerModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1566,7 +1566,7 @@ ProgressSpinnerModule = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/progress-spinner.module.js.map
 
 /***/ }),
-/* 460 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1586,7 +1586,7 @@ ProgressSpinnerModule = __decorate([
 
 
 
-var Config = __webpack_require__(452);
+var Config = __webpack_require__(455);
 
 var Link = function (){};
 Link.maxNoEvidences = 0;
@@ -1724,7 +1724,7 @@ module.exports = Link;
 
 
 /***/ }),
-/* 461 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -1741,13 +1741,13 @@ exports.push([module.i, "", ""]);
 module.exports = module.exports.toString();
 
 /***/ }),
-/* 462 */
+/* 465 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"small-5 small-centered columns\">\n  <md-progress-spinner style=\"margin:0 auto;\"\n                       [attr.color]=\"color\"\n                       [mode]=\"mode\"\n                       [value]=\"0\">\n  </md-progress-spinner>\n  <div style=\"text-align: center\">\n    <h4>Loading {{query}}</h4>\n    <p *ngIf=\"takesLonger\">This takes longer than usual. Bare with us!</p>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 463 */
+/* 466 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1844,7 +1844,7 @@ SectionService = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/section.service.js.map
 
 /***/ }),
-/* 464 */
+/* 467 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1887,7 +1887,7 @@ var PageScrollUtilService = (function () {
 
 
 /***/ }),
-/* 465 */
+/* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1984,7 +1984,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 466 */
+/* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2020,7 +2020,7 @@ var ReactCurrentOwner = {
 module.exports = ReactCurrentOwner;
 
 /***/ }),
-/* 467 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2049,17 +2049,17 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = canDefineProperty;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 468 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(541);
+module.exports = __webpack_require__(544);
 
 
 /***/ }),
-/* 469 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2071,11 +2071,11 @@ module.exports = __webpack_require__(541);
 
 
 
-var Link = __webpack_require__(460);
-var SequenceDatum = __webpack_require__(480);
+var Link = __webpack_require__(463);
+var SequenceDatum = __webpack_require__(484);
 //~ var BinaryLink = require('./BinaryLink');
 //~ var UnaryLink = require('./UnaryLink');
-var Config = __webpack_require__(452);
+var Config = __webpack_require__(455);
 
 SequenceLink.prototype = new Link();
 function SequenceLink(id, fromFeatPos, toFeatPos, xlvController) {
@@ -2410,7 +2410,7 @@ module.exports = SequenceLink;
 
 
 /***/ }),
-/* 470 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -11973,7 +11973,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 }();
 
 /***/ }),
-/* 471 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12017,7 +12017,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 472 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12040,10 +12040,35 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 473 */
+/* 476 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_ng2_page_scroll_directive__ = __webpack_require__(486);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_ng2_page_scroll_service__ = __webpack_require__(478);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__src_ng2_page_scroll_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__ = __webpack_require__(477);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_ng2_page_scroll_instance__ = __webpack_require__(485);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__src_ng2_page_scroll_instance__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_ng2_page_scroll_util_service__ = __webpack_require__(467);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__ = __webpack_require__(610);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__["a"]; });
+
+
+
+
+
+
+
+
+/***/ }),
+/* 477 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12159,13 +12184,13 @@ PageScrollConfig._easingLogic = {
 
 
 /***/ }),
-/* 474 */
+/* 478 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__(473);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__(467);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScrollService; });
 
 
@@ -12380,7 +12405,7 @@ PageScrollService.ctorParameters = function () { return []; };
 
 
 /***/ }),
-/* 475 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12396,14 +12421,14 @@ PageScrollService.ctorParameters = function () { return []; };
 
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var ReactNoopUpdateQueue = __webpack_require__(477);
+var ReactNoopUpdateQueue = __webpack_require__(481);
 
-var canDefineProperty = __webpack_require__(467);
-var emptyObject = __webpack_require__(472);
-var invariant = __webpack_require__(455);
-var warning = __webpack_require__(453);
+var canDefineProperty = __webpack_require__(470);
+var emptyObject = __webpack_require__(475);
+var invariant = __webpack_require__(458);
+var warning = __webpack_require__(456);
 
 /**
  * Base class helpers for the updating state of a component.
@@ -12501,10 +12526,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactComponent;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 476 */
+/* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12521,12 +12546,12 @@ module.exports = ReactComponent;
 
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var ReactCurrentOwner = __webpack_require__(466);
+var ReactCurrentOwner = __webpack_require__(469);
 
-var invariant = __webpack_require__(455);
-var warning = __webpack_require__(453);
+var invariant = __webpack_require__(458);
+var warning = __webpack_require__(456);
 
 function isNative(fn) {
   // Based on isNative() from Lodash
@@ -12841,10 +12866,10 @@ var ReactComponentTreeHook = {
 };
 
 module.exports = ReactComponentTreeHook;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 477 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12860,7 +12885,7 @@ module.exports = ReactComponentTreeHook;
 
 
 
-var warning = __webpack_require__(453);
+var warning = __webpack_require__(456);
 
 function warnNoop(publicInstance, callerName) {
   if (process.env.NODE_ENV !== 'production') {
@@ -12943,10 +12968,10 @@ var ReactNoopUpdateQueue = {
 };
 
 module.exports = ReactNoopUpdateQueue;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 478 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12975,7 +13000,7 @@ module.exports = Annotation;
 
 
 /***/ }),
-/* 479 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12991,9 +13016,9 @@ module.exports = Annotation;
 
 
 
-var Molecule = __webpack_require__(454);
+var Molecule = __webpack_require__(457);
 //var Rotator = require('../../controller/Rotator');
-var Config = __webpack_require__(452);
+var Config = __webpack_require__(455);
 
 Polymer.STICKHEIGHT = 20;//height of stick in pixels
 Polymer.MAXSIZE = 0; // residue count of longest sequence
@@ -13590,7 +13615,7 @@ module.exports = Polymer;
 
 
 /***/ }),
-/* 480 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13695,38 +13720,13 @@ module.exports = SequenceDatum;
 
 
 /***/ }),
-/* 481 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_ng2_page_scroll_directive__ = __webpack_require__(483);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_ng2_page_scroll_service__ = __webpack_require__(474);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__ = __webpack_require__(473);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_ng2_page_scroll_instance__ = __webpack_require__(482);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_ng2_page_scroll_util_service__ = __webpack_require__(464);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__ = __webpack_require__(607);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__["a"]; });
-
-
-
-
-
-
-
-
-/***/ }),
-/* 482 */
+/* 485 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__(473);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__(467);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScrollInstance; });
 /**
  * Created by sebastianfuss on 29.08.16.
@@ -14215,16 +14215,16 @@ var PageScrollInstance = (function () {
 
 
 /***/ }),
-/* 483 */
+/* 486 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__ = __webpack_require__(474);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__ = __webpack_require__(482);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng2_page_scroll_util_service__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__ = __webpack_require__(485);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng2_page_scroll_util_service__ = __webpack_require__(467);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScroll; });
 
 
@@ -14351,7 +14351,7 @@ PageScroll.propDecorators = {
 
 
 /***/ }),
-/* 484 */
+/* 487 */
 /***/ (function(module, exports) {
 
 
@@ -14423,7 +14423,7 @@ Point.prototype.sub = function (point) {
 module.exports = Point;
 
 /***/ }),
-/* 485 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14444,7 +14444,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 486 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14469,7 +14469,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
 
 /***/ }),
-/* 487 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14492,15 +14492,15 @@ module.exports = REACT_ELEMENT_TYPE;
 
 
 
-var ReactCurrentOwner = __webpack_require__(466);
-var ReactComponentTreeHook = __webpack_require__(476);
-var ReactElement = __webpack_require__(456);
+var ReactCurrentOwner = __webpack_require__(469);
+var ReactComponentTreeHook = __webpack_require__(480);
+var ReactElement = __webpack_require__(459);
 
-var checkReactTypeSpec = __webpack_require__(668);
+var checkReactTypeSpec = __webpack_require__(671);
 
-var canDefineProperty = __webpack_require__(467);
-var getIteratorFn = __webpack_require__(489);
-var warning = __webpack_require__(453);
+var canDefineProperty = __webpack_require__(470);
+var getIteratorFn = __webpack_require__(492);
+var warning = __webpack_require__(456);
 
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner.current) {
@@ -14725,10 +14725,10 @@ var ReactElementValidator = {
 };
 
 module.exports = ReactElementValidator;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 488 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14756,10 +14756,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactPropTypeLocationNames;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 489 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14805,19 +14805,19 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 490 */,
-/* 491 */,
-/* 492 */
+/* 493 */,
+/* 494 */,
+/* 495 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__ = __webpack_require__(476);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDetailsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -14842,7 +14842,7 @@ var ComplexDetailsComponent = (function () {
         this.notificationService = notificationService;
         this.complexPortalService = complexPortalService;
         this.sectionService = sectionService;
-        __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__["b" /* PageScrollConfig */].defaultScrollOffset = 50;
+        __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__["d" /* PageScrollConfig */].defaultScrollOffset = 50;
         if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
             this._gxa = expressionAtlasHeatmapHighcharts;
         }
@@ -14921,8 +14921,8 @@ var ComplexDetailsComponent = (function () {
 ComplexDetailsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-details',
-        template: __webpack_require__(613),
-        styles: [__webpack_require__(558)]
+        template: __webpack_require__(616),
+        styles: [__webpack_require__(561)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */]) === "function" && _e || Object])
 ], ComplexDetailsComponent);
@@ -14931,7 +14931,7 @@ var _a, _b, _c, _d, _e;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-details.component.js.map
 
 /***/ }),
-/* 493 */
+/* 496 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14983,8 +14983,8 @@ __decorate([
 ChemblCrossreferenceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-chembl-crossreference',
-        template: __webpack_require__(614),
-        styles: [__webpack_require__(559)]
+        template: __webpack_require__(617),
+        styles: [__webpack_require__(562)]
     }),
     __metadata("design:paramtypes", [])
 ], ChemblCrossreferenceComponent);
@@ -14992,7 +14992,7 @@ ChemblCrossreferenceComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/chembl-crossreference.component.js.map
 
 /***/ }),
-/* 494 */
+/* 497 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15084,8 +15084,8 @@ __decorate([
 ComplexDiseaseComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-disease',
-        template: __webpack_require__(615),
-        styles: [__webpack_require__(560)]
+        template: __webpack_require__(618),
+        styles: [__webpack_require__(563)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexDiseaseComponent);
@@ -15093,12 +15093,12 @@ ComplexDiseaseComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-disease.component.js.map
 
 /***/ }),
-/* 495 */
+/* 498 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__ = __webpack_require__(196);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EfoCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -15161,8 +15161,8 @@ __decorate([
 EfoCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-efo-crossreferences',
-        template: __webpack_require__(616),
-        styles: [__webpack_require__(561)]
+        template: __webpack_require__(619),
+        styles: [__webpack_require__(564)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */]) === "function" && _a || Object])
 ], EfoCrossreferencesComponent);
@@ -15171,7 +15171,7 @@ var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/efo-crossreferences.component.js.map
 
 /***/ }),
-/* 496 */
+/* 499 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15268,8 +15268,8 @@ __decorate([
 ComplexEvidenceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-evidence',
-        template: __webpack_require__(617),
-        styles: [__webpack_require__(562)]
+        template: __webpack_require__(620),
+        styles: [__webpack_require__(565)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexEvidenceComponent);
@@ -15277,7 +15277,7 @@ ComplexEvidenceComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-evidence.component.js.map
 
 /***/ }),
-/* 497 */
+/* 500 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15409,8 +15409,8 @@ __decorate([
 ComplexExpressionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-expression',
-        template: __webpack_require__(618),
-        styles: [__webpack_require__(563)]
+        template: __webpack_require__(621),
+        styles: [__webpack_require__(566)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexExpressionComponent);
@@ -15418,7 +15418,7 @@ ComplexExpressionComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-expression.component.js.map
 
 /***/ }),
-/* 498 */
+/* 501 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15470,8 +15470,8 @@ __decorate([
 GoCelluarCrossreferenceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-go-celluar-crossreference',
-        template: __webpack_require__(619),
-        styles: [__webpack_require__(564)]
+        template: __webpack_require__(622),
+        styles: [__webpack_require__(567)]
     }),
     __metadata("design:paramtypes", [])
 ], GoCelluarCrossreferenceComponent);
@@ -15479,7 +15479,7 @@ GoCelluarCrossreferenceComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/go-celluar-crossreference.component.js.map
 
 /***/ }),
-/* 499 */
+/* 502 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15535,8 +15535,8 @@ __decorate([
 ComplexFooterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-footer',
-        template: __webpack_require__(620),
-        styles: [__webpack_require__(565)]
+        template: __webpack_require__(623),
+        styles: [__webpack_require__(568)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFooterComponent);
@@ -15544,7 +15544,7 @@ ComplexFooterComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-footer.component.js.map
 
 /***/ }),
-/* 500 */
+/* 503 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15596,8 +15596,8 @@ __decorate([
 AgonistsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-agonists',
-        template: __webpack_require__(621),
-        styles: [__webpack_require__(566)]
+        template: __webpack_require__(624),
+        styles: [__webpack_require__(569)]
     }),
     __metadata("design:paramtypes", [])
 ], AgonistsComponent);
@@ -15605,7 +15605,7 @@ AgonistsComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/agonists.component.js.map
 
 /***/ }),
-/* 501 */
+/* 504 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15657,8 +15657,8 @@ __decorate([
 AntagonistsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-antagonists',
-        template: __webpack_require__(622),
-        styles: [__webpack_require__(567)]
+        template: __webpack_require__(625),
+        styles: [__webpack_require__(570)]
     }),
     __metadata("design:paramtypes", [])
 ], AntagonistsComponent);
@@ -15666,7 +15666,7 @@ AntagonistsComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/antagonists.component.js.map
 
 /***/ }),
-/* 502 */
+/* 505 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15692,8 +15692,8 @@ var AssembliesComponent = (function () {
 AssembliesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-assemblies',
-        template: __webpack_require__(623),
-        styles: [__webpack_require__(568)]
+        template: __webpack_require__(626),
+        styles: [__webpack_require__(571)]
     }),
     __metadata("design:paramtypes", [])
 ], AssembliesComponent);
@@ -15701,7 +15701,7 @@ AssembliesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/assemblies.component.js.map
 
 /***/ }),
-/* 503 */
+/* 506 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15857,8 +15857,8 @@ __decorate([
 ComplexFunctionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-function',
-        template: __webpack_require__(624),
-        styles: [__webpack_require__(569)]
+        template: __webpack_require__(627),
+        styles: [__webpack_require__(572)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFunctionComponent);
@@ -15866,7 +15866,7 @@ ComplexFunctionComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-function.component.js.map
 
 /***/ }),
-/* 504 */
+/* 507 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15918,8 +15918,8 @@ __decorate([
 GoBiologicalProcessComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-go-biological-process',
-        template: __webpack_require__(625),
-        styles: [__webpack_require__(570)]
+        template: __webpack_require__(628),
+        styles: [__webpack_require__(573)]
     }),
     __metadata("design:paramtypes", [])
 ], GoBiologicalProcessComponent);
@@ -15927,7 +15927,7 @@ GoBiologicalProcessComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/go-biological-process.component.js.map
 
 /***/ }),
-/* 505 */
+/* 508 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16004,8 +16004,8 @@ __decorate([
 GoCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-go-crossreferences',
-        template: __webpack_require__(626),
-        styles: [__webpack_require__(571)]
+        template: __webpack_require__(629),
+        styles: [__webpack_require__(574)]
     }),
     __metadata("design:paramtypes", [])
 ], GoCrossreferencesComponent);
@@ -16013,7 +16013,7 @@ GoCrossreferencesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/go-crossreferences.component.js.map
 
 /***/ }),
-/* 506 */
+/* 509 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16065,8 +16065,8 @@ __decorate([
 GoMolecularFunctionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-go-molecular-function',
-        template: __webpack_require__(627),
-        styles: [__webpack_require__(572)]
+        template: __webpack_require__(630),
+        styles: [__webpack_require__(575)]
     }),
     __metadata("design:paramtypes", [])
 ], GoMolecularFunctionComponent);
@@ -16074,7 +16074,7 @@ GoMolecularFunctionComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/go-molecular-function.component.js.map
 
 /***/ }),
-/* 507 */
+/* 510 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16126,8 +16126,8 @@ __decorate([
 IntenzCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-intenz-crossreferences',
-        template: __webpack_require__(628),
-        styles: [__webpack_require__(573)]
+        template: __webpack_require__(631),
+        styles: [__webpack_require__(576)]
     }),
     __metadata("design:paramtypes", [])
 ], IntenzCrossreferencesComponent);
@@ -16135,7 +16135,7 @@ IntenzCrossreferencesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/intenz-crossreferences.component.js.map
 
 /***/ }),
-/* 508 */
+/* 511 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16187,8 +16187,8 @@ __decorate([
 LigandsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-ligands',
-        template: __webpack_require__(629),
-        styles: [__webpack_require__(574)]
+        template: __webpack_require__(632),
+        styles: [__webpack_require__(577)]
     }),
     __metadata("design:paramtypes", [])
 ], LigandsComponent);
@@ -16196,18 +16196,18 @@ LigandsComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/ligands.component.js.map
 
 /***/ }),
-/* 509 */
+/* 512 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__ = __webpack_require__(510);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__ = __webpack_require__(511);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__ = __webpack_require__(514);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -16357,8 +16357,8 @@ __decorate([
 ReactomeCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-reactome-crossreferences',
-        template: __webpack_require__(630),
-        styles: [__webpack_require__(575)]
+        template: __webpack_require__(633),
+        styles: [__webpack_require__(578)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
 ], ReactomeCrossreferencesComponent);
@@ -16367,7 +16367,7 @@ var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-crossreferences.component.js.map
 
 /***/ }),
-/* 510 */
+/* 513 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16413,7 +16413,7 @@ var ReactomeComplex = (function () {
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-complex.js.map
 
 /***/ }),
-/* 511 */
+/* 514 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16459,13 +16459,13 @@ var ReactomePathway = (function () {
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-pathway.js.map
 
 /***/ }),
-/* 512 */
+/* 515 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexHeaderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -16567,8 +16567,8 @@ __decorate([
 ComplexHeaderComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-header',
-        template: __webpack_require__(631),
-        styles: [__webpack_require__(576)]
+        template: __webpack_require__(634),
+        styles: [__webpack_require__(579)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
 ], ComplexHeaderComponent);
@@ -16577,12 +16577,12 @@ var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-header.component.js.map
 
 /***/ }),
-/* 513 */
+/* 516 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_service_section_section_service__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_service_section_section_service__ = __webpack_require__(466);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexParticipantsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -16656,8 +16656,8 @@ __decorate([
 ComplexParticipantsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-participants',
-        template: __webpack_require__(632),
-        styles: [__webpack_require__(577)]
+        template: __webpack_require__(635),
+        styles: [__webpack_require__(580)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_service_section_section_service__["a" /* SectionService */]) === "function" && _a || Object])
 ], ComplexParticipantsComponent);
@@ -16666,7 +16666,7 @@ var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-participants.component.js.map
 
 /***/ }),
-/* 514 */
+/* 517 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16686,6 +16686,12 @@ var ComplexPropertiesComponent = (function () {
     function ComplexPropertiesComponent() {
     }
     ComplexPropertiesComponent.prototype.ngOnInit = function () {
+        if (this._propertiesDescription.length === 0) {
+            this._propertiesDescription = null;
+        }
+        if (this._comments.length === 0) {
+            this._comments = null;
+        }
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var database = this.crossReferences[i].database;
@@ -16694,6 +16700,7 @@ var ComplexPropertiesComponent = (function () {
                     this._pdbXRefs = [];
                 }
                 this._pdbXRefs.push(crossRef);
+                console.log(crossRef.identifier);
             }
             if (database === 'emdb') {
                 if (this._emdbXRefs === undefined) {
@@ -16778,8 +16785,8 @@ __decorate([
 ComplexPropertiesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-properties',
-        template: __webpack_require__(633),
-        styles: [__webpack_require__(578)]
+        template: __webpack_require__(636),
+        styles: [__webpack_require__(581)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexPropertiesComponent);
@@ -16787,7 +16794,7 @@ ComplexPropertiesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-properties.component.js.map
 
 /***/ }),
-/* 515 */
+/* 518 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16836,8 +16843,8 @@ __decorate([
 EmdbCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-emdb-crossreferences',
-        template: __webpack_require__(634),
-        styles: [__webpack_require__(579)]
+        template: __webpack_require__(637),
+        styles: [__webpack_require__(582)]
     }),
     __metadata("design:paramtypes", [])
 ], EmdbCrossreferencesComponent);
@@ -16845,7 +16852,7 @@ EmdbCrossreferencesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/emdb-crossreferences.component.js.map
 
 /***/ }),
-/* 516 */
+/* 519 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16925,8 +16932,8 @@ __decorate([
 PdbCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-pdb-crossreferences',
-        template: __webpack_require__(635),
-        styles: [__webpack_require__(580)]
+        template: __webpack_require__(638),
+        styles: [__webpack_require__(583)]
     }),
     __metadata("design:paramtypes", [])
 ], PdbCrossreferencesComponent);
@@ -16934,7 +16941,7 @@ PdbCrossreferencesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/pdb-crossreferences.component.js.map
 
 /***/ }),
-/* 517 */
+/* 520 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17025,8 +17032,8 @@ __decorate([
 ComplexReferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-references',
-        template: __webpack_require__(636),
-        styles: [__webpack_require__(581)]
+        template: __webpack_require__(639),
+        styles: [__webpack_require__(584)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexReferencesComponent);
@@ -17034,12 +17041,12 @@ ComplexReferencesComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-references.component.js.map
 
 /***/ }),
-/* 518 */
+/* 521 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -17134,8 +17141,8 @@ __decorate([
 EuroPmcCrossreferencesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-euro-pmc-crossreferences',
-        template: __webpack_require__(637),
-        styles: [__webpack_require__(582)]
+        template: __webpack_require__(640),
+        styles: [__webpack_require__(585)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
 ], EuroPmcCrossreferencesComponent);
@@ -17144,7 +17151,7 @@ var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/euro-pmc-crossreferences.component.js.map
 
 /***/ }),
-/* 519 */
+/* 522 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17196,8 +17203,8 @@ __decorate([
 SynonymsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-synonyms',
-        template: __webpack_require__(638),
-        styles: [__webpack_require__(583)]
+        template: __webpack_require__(641),
+        styles: [__webpack_require__(586)]
     }),
     __metadata("design:paramtypes", [])
 ], SynonymsComponent);
@@ -17205,7 +17212,7 @@ SynonymsComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/synonyms.component.js.map
 
 /***/ }),
-/* 520 */
+/* 523 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17246,8 +17253,8 @@ __decorate([
 SystematicNameComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-systematic-name',
-        template: __webpack_require__(639),
-        styles: [__webpack_require__(584)]
+        template: __webpack_require__(642),
+        styles: [__webpack_require__(587)]
     }),
     __metadata("design:paramtypes", [])
 ], SystematicNameComponent);
@@ -17255,12 +17262,17 @@ SystematicNameComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/systematic-name.component.js.map
 
 /***/ }),
-/* 521 */
+/* 524 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__ = __webpack_require__(109);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoToComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -17271,12 +17283,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
 
 
 var GoToComponent = (function () {
-    function GoToComponent(_sectionService, cdr) {
+    function GoToComponent(_sectionService, cdr, pageScrollService, document, ga) {
         this._sectionService = _sectionService;
         this.cdr = cdr;
+        this.pageScrollService = pageScrollService;
+        this.document = document;
+        this.ga = ga;
     }
     GoToComponent.prototype.ngOnInit = function () {
         switch (this._sectionName) {
@@ -17302,6 +17325,11 @@ var GoToComponent = (function () {
     };
     GoToComponent.prototype.ngAfterViewInit = function () {
         $('.goToMenu').foundation();
+    };
+    GoToComponent.prototype.scrollToElement = function (idReference) {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__["a" /* Action */].GoToMenu, __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__["a" /* Category */].details, idReference);
+        var pageScrollInstance = __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["b" /* PageScrollInstance */].simpleInstance(this.document, '#' + idReference);
+        this.pageScrollService.start(pageScrollInstance);
     };
     GoToComponent.prototype.doCheckSection = function () {
         this.cdr.detectChanges();
@@ -17336,18 +17364,19 @@ __decorate([
 GoToComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-go-to',
-        template: __webpack_require__(640),
-        styles: [__webpack_require__(585)],
+        template: __webpack_require__(643),
+        styles: [__webpack_require__(588)],
         changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _b || Object])
+    __param(3, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["DOCUMENT"])),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["c" /* PageScrollService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["c" /* PageScrollService */]) === "function" && _c || Object, Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
 ], GoToComponent);
 
-var _a, _b;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/go-to.component.js.map
 
 /***/ }),
-/* 522 */
+/* 525 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17366,8 +17395,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var xlv;
-var SvgSaver = __webpack_require__(673);
-var xiNET = __webpack_require__(603);
+var SvgSaver = __webpack_require__(676);
+var xiNET = __webpack_require__(606);
 var ComplexViewerComponent = (function () {
     function ComplexViewerComponent(notificationService) {
         this.notificationService = notificationService;
@@ -17429,8 +17458,8 @@ __decorate([
 ComplexViewerComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-viewer',
-        template: __webpack_require__(641),
-        styles: [__webpack_require__(586)]
+        template: __webpack_require__(644),
+        styles: [__webpack_require__(589)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object])
 ], ComplexViewerComponent);
@@ -17439,7 +17468,7 @@ var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-viewer.component.js.map
 
 /***/ }),
-/* 523 */
+/* 526 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17470,9 +17499,9 @@ var GxaHeatmapComponent = (function () {
             case 'Rattus norvegicus; 10116':
                 this._experimentId = 'E-GEOD-53960';
                 break;
-            // case 'Gallus gallus (Chicken); 9031':
-            //   this._experimentId = 'E-MTAB-2797';
-            //   break;
+            case 'Gallus gallus (Chicken); 9031':
+                this._experimentId = 'E-MTAB-2797';
+                break;
             case 'Caenorhabditis elegans; 6239':
                 this._experimentId = 'E-MTAB-2812';
                 break;
@@ -17484,7 +17513,7 @@ var GxaHeatmapComponent = (function () {
             this._gxa.render({
                 target: 'highchartsContainer',
                 experiment: this._experimentId,
-                atlasUrl: 'https://wwwdev.ebi.ac.uk/gxa/',
+                atlasUrl: 'https://www.ebi.ac.uk/gxa/',
                 query: {
                     gene: this.gxaParamsQueries
                 },
@@ -17569,8 +17598,8 @@ __decorate([
 GxaHeatmapComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-gxa-heatmap',
-        template: __webpack_require__(642),
-        styles: [__webpack_require__(587)]
+        template: __webpack_require__(645),
+        styles: [__webpack_require__(590)]
     }),
     __metadata("design:paramtypes", [])
 ], GxaHeatmapComponent);
@@ -17578,12 +17607,12 @@ GxaHeatmapComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/gxa-heatmap.component.js.map
 
 /***/ }),
-/* 524 */
+/* 527 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__(606);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__(609);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_litemol__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(35);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LitmolViewerComponent; });
@@ -17664,8 +17693,8 @@ __decorate([
 LitmolViewerComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-litmol-viewer',
-        template: __webpack_require__(643),
-        styles: [__webpack_require__(588)]
+        template: __webpack_require__(646),
+        styles: [__webpack_require__(591)]
     }),
     __metadata("design:paramtypes", [])
 ], LitmolViewerComponent);
@@ -17673,13 +17702,13 @@ LitmolViewerComponent = __decorate([
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/litmol-viewer.component.js.map
 
 /***/ }),
-/* 525 */
+/* 528 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeDiagramComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -17841,8 +17870,8 @@ __decorate([
 ReactomeDiagramComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-reactome-diagram',
-        template: __webpack_require__(644),
-        styles: [__webpack_require__(589)]
+        template: __webpack_require__(647),
+        styles: [__webpack_require__(592)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
 ], ReactomeDiagramComponent);
@@ -17851,9 +17880,6 @@ var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-diagram.component.js.map
 
 /***/ }),
-/* 526 */,
-/* 527 */,
-/* 528 */,
 /* 529 */,
 /* 530 */,
 /* 531 */,
@@ -17866,7 +17892,10 @@ var _a;
 /* 538 */,
 /* 539 */,
 /* 540 */,
-/* 541 */
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
@@ -18191,7 +18220,7 @@ if (true) {
 
 
 /***/ }),
-/* 542 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18208,28 +18237,28 @@ if (true) {
 
 
 var xiNET = {}; //crosslinkviewer's javascript namespace
-var RGBColor = __webpack_require__(672);
-var d3 = __webpack_require__(470);
-var colorbrewer = __webpack_require__(468);
-var xiNET_Storage = __webpack_require__(544);
-var Annotation = __webpack_require__(478);
-var Molecule = __webpack_require__(454);
-var Polymer = __webpack_require__(479);
-var Protein = __webpack_require__(550);
-var BioactiveEntity = __webpack_require__(545);
-var Gene = __webpack_require__(548);
-var DNA = __webpack_require__(547);
-var RNA = __webpack_require__(551);
-var Complex = __webpack_require__(546);
-var MoleculeSet = __webpack_require__(549);
-var Link = __webpack_require__(460);
-var NaryLink = __webpack_require__(553);
-var SequenceLink = __webpack_require__(469);
-var SequenceDatum = __webpack_require__(480);
-var BinaryLink = __webpack_require__(552);
-var UnaryLink = __webpack_require__(554);
-var Expand = __webpack_require__(543);
-var Config = __webpack_require__(452);
+var RGBColor = __webpack_require__(675);
+var d3 = __webpack_require__(473);
+var colorbrewer = __webpack_require__(471);
+var xiNET_Storage = __webpack_require__(547);
+var Annotation = __webpack_require__(482);
+var Molecule = __webpack_require__(457);
+var Polymer = __webpack_require__(483);
+var Protein = __webpack_require__(553);
+var BioactiveEntity = __webpack_require__(548);
+var Gene = __webpack_require__(551);
+var DNA = __webpack_require__(550);
+var RNA = __webpack_require__(554);
+var Complex = __webpack_require__(549);
+var MoleculeSet = __webpack_require__(552);
+var Link = __webpack_require__(463);
+var NaryLink = __webpack_require__(556);
+var SequenceLink = __webpack_require__(472);
+var SequenceDatum = __webpack_require__(484);
+var BinaryLink = __webpack_require__(555);
+var UnaryLink = __webpack_require__(557);
+var Expand = __webpack_require__(546);
+var Config = __webpack_require__(455);
 
 var MouseEventCodes = {};
 MouseEventCodes.MOUSE_UP = 0;//start state, also set when mouse up on svgElement
@@ -19740,13 +19769,13 @@ xiNET.Controller.prototype.hideTooltip = function (evt) {
 module.exports = xiNET.Controller;
 
 /***/ }),
-/* 543 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var d3 = __webpack_require__(470);
+var d3 = __webpack_require__(473);
 
 var matrix = function(json) {
 	var startTime =  +new Date();
@@ -19880,7 +19909,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 544 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19897,7 +19926,7 @@ module.exports = {
 
 
 function xiNET_Storage() {}
-var Annotation = __webpack_require__(478);
+var Annotation = __webpack_require__(482);
 
 xiNET_Storage.ns = "xiNET.";
 
@@ -20070,7 +20099,7 @@ module.exports = xiNET_Storage;
 
 
 /***/ }),
-/* 545 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20086,8 +20115,8 @@ module.exports = xiNET_Storage;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 BioactiveEntity.prototype = new Molecule();
 
@@ -20192,7 +20221,7 @@ module.exports = BioactiveEntity;
 
 
 /***/ }),
-/* 546 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20208,8 +20237,8 @@ module.exports = BioactiveEntity;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 Complex.prototype = new Molecule();
 
@@ -20252,7 +20281,7 @@ module.exports = Complex;
 
 
 /***/ }),
-/* 547 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20268,8 +20297,8 @@ module.exports = Complex;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 DNA.prototype = new Molecule();
 
@@ -20374,7 +20403,7 @@ module.exports = DNA;
 
 
 /***/ }),
-/* 548 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20390,8 +20419,8 @@ module.exports = DNA;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 Gene.prototype = new Molecule();
 
@@ -20515,7 +20544,7 @@ module.exports = Gene;
 
 
 /***/ }),
-/* 549 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20531,8 +20560,8 @@ module.exports = Gene;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 MoleculeSet.prototype = new Molecule();
 
@@ -20663,7 +20692,7 @@ module.exports = MoleculeSet;
 
 
 /***/ }),
-/* 550 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20679,10 +20708,10 @@ module.exports = MoleculeSet;
 
 
 
-var Molecule = __webpack_require__(454);
-var Polymer = __webpack_require__(479);
+var Molecule = __webpack_require__(457);
+var Polymer = __webpack_require__(483);
 //~ var Rotator = require('../../controller/Rotator');
-var Config = __webpack_require__(452);
+var Config = __webpack_require__(455);
 
 Protein.prototype = new Polymer();
 
@@ -20794,7 +20823,7 @@ module.exports = Protein;
 
 
 /***/ }),
-/* 551 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20810,8 +20839,8 @@ module.exports = Protein;
 
 
 
-var Molecule = __webpack_require__(454);
-var Config = __webpack_require__(452);
+var Molecule = __webpack_require__(457);
+var Config = __webpack_require__(455);
 
 RNA.prototype = new Molecule();
 
@@ -20916,7 +20945,7 @@ module.exports = RNA;
 
 
 /***/ }),
-/* 552 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20928,13 +20957,13 @@ module.exports = RNA;
 
 
 
-var Config = __webpack_require__(452);
-var Link = __webpack_require__(460);
-var SequenceLink = __webpack_require__(469);
+var Config = __webpack_require__(455);
+var Link = __webpack_require__(463);
+var SequenceLink = __webpack_require__(472);
 //josh - following are libraries and should be in 'vendor'?
 //  but I don't know how to set up the dependency if its there
-var Intersection = __webpack_require__(604);
-var Point2D = __webpack_require__(484);
+var Intersection = __webpack_require__(607);
+var Point2D = __webpack_require__(487);
 
 // BinaryLink.js
 // the class representing a binary interaction
@@ -21175,7 +21204,7 @@ module.exports = BinaryLink;
 
 
 /***/ }),
-/* 553 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21192,11 +21221,11 @@ module.exports = BinaryLink;
 
 
 
-var colorbrewer = __webpack_require__(468);
-var Link = __webpack_require__(460);
-var Config = __webpack_require__(452);
-var Molecule = __webpack_require__(454);
-var d3 = __webpack_require__(470);
+var colorbrewer = __webpack_require__(471);
+var Link = __webpack_require__(463);
+var Config = __webpack_require__(455);
+var Molecule = __webpack_require__(457);
+var d3 = __webpack_require__(473);
 
 NaryLink.naryColours = d3.scale.ordinal().range(colorbrewer.Paired[6]);//d3.scale.category20c();//d3.scale.ordinal().range(colorbrewer.Paired[12]);//
 NaryLink.orbitNodes = 16;
@@ -21325,7 +21354,7 @@ module.exports = NaryLink;
 
 
 /***/ }),
-/* 554 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21342,9 +21371,9 @@ module.exports = NaryLink;
 
 
 
-var Config = __webpack_require__(452);
-var Link = __webpack_require__(460);
-var SequenceLink = __webpack_require__(469);
+var Config = __webpack_require__(455);
+var Link = __webpack_require__(463);
+var SequenceLink = __webpack_require__(472);
 
 UnaryLink.prototype = new Link();
 
@@ -21516,7 +21545,7 @@ module.exports = UnaryLink;
 
 
 /***/ }),
-/* 555 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21590,59 +21619,8 @@ exports['default'] = computedStyles;
 module.exports = exports['default'];
 
 /***/ }),
-/* 556 */,
-/* 557 */,
-/* 558 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-/* 559 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-/* 560 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
+/* 559 */,
+/* 560 */,
 /* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22042,7 +22020,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -22059,7 +22037,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, ".selected {\n  font-weight: bold;\n  cursor: not-allowed;\n}\n\n/*.default {*/\n  /*font-weight: normal;*/\n/*}*/\n\n/*.hidden {*/\n  /*visibility: hidden;*/\n/*}*/\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -22076,7 +22054,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  background: #fbfbfb;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -22090,7 +22068,7 @@ module.exports = module.exports.toString();
 
 exports = module.exports = __webpack_require__(15)(false);
 // imports
-exports.push([module.i, "@import url(https://wwwdev.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
+
 
 // module
 exports.push([module.i, "\n", ""]);
@@ -22110,7 +22088,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".selected {\n  font-weight: bold;\n  cursor: not-allowed;\n}\n\n/*.default {*/\n  /*font-weight: normal;*/\n/*}*/\n\n/*.hidden {*/\n  /*visibility: hidden;*/\n/*}*/\n", ""]);
 
 // exports
 
@@ -22127,6 +22105,57 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
+exports.push([module.i, "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  background: #fbfbfb;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+/* 590 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+exports.push([module.i, "@import url(https://wwwdev.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+/* 591 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+/* 592 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
 exports.push([module.i, ".selected {\n  background-color: greenyellow;\n}\n\n.none-pointer-events {\n  pointer-events: none;\n}\n", ""]);
 
 // exports
@@ -22136,9 +22165,6 @@ exports.push([module.i, ".selected {\n  background-color: greenyellow;\n}\n\n.no
 module.exports = module.exports.toString();
 
 /***/ }),
-/* 590 */,
-/* 591 */,
-/* 592 */,
 /* 593 */,
 /* 594 */,
 /* 595 */,
@@ -22149,17 +22175,20 @@ module.exports = module.exports.toString();
 /* 600 */,
 /* 601 */,
 /* 602 */,
-/* 603 */
+/* 603 */,
+/* 604 */,
+/* 605 */,
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["xiNET"] = __webpack_require__(542);
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["xiNET"] = __webpack_require__(545);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
 
 /***/ }),
-/* 604 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Point2D = __webpack_require__(484);
+var Point2D = __webpack_require__(487);
 
 /*****
 *
@@ -23786,7 +23815,7 @@ Intersection.bezout = function(e1, e2) {
 module.exports = Intersection
 
 /***/ }),
-/* 605 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global, module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
@@ -99786,7 +99815,7 @@ var __LiteMolReactDOM;
     var module = {};
 
     // REPLACE require("react") by __LiteMolReact
-    !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e(__LiteMolReact);else if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(671)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+    !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e(__LiteMolReact);else if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(674)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else{var f;f="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,f.ReactDOM=e(f.React)}}(function(e){return e.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED});
@@ -102844,10 +102873,10 @@ if (typeof module === 'object' && typeof module.exports === 'object') {
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188), __webpack_require__(36), __webpack_require__(674)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191), __webpack_require__(36), __webpack_require__(677)(module)))
 
 /***/ }),
-/* 606 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Provide support to 
@@ -102856,17 +102885,17 @@ if (typeof module === 'object' && typeof module.exports === 'object') {
 //   import LiteMol from 'LiteMol'
 
 exports.__esModule = true;
-exports.default = __webpack_require__(605)
+exports.default = __webpack_require__(608)
 
 /***/ }),
-/* 607 */
+/* 610 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__ = __webpack_require__(474);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__ = __webpack_require__(483);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__ = __webpack_require__(486);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ng2PageScrollModule; });
 /**
  * Created by sebastianfuss on 03.09.16.
@@ -102901,7 +102930,7 @@ Ng2PageScrollModule.ctorParameters = function () { return []; };
 
 
 /***/ }),
-/* 608 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -102917,9 +102946,9 @@ Ng2PageScrollModule.ctorParameters = function () { return []; };
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(455);
-  var warning = __webpack_require__(453);
-  var ReactPropTypesSecret = __webpack_require__(485);
+  var invariant = __webpack_require__(458);
+  var warning = __webpack_require__(456);
+  var ReactPropTypesSecret = __webpack_require__(488);
   var loggedTypeFailures = {};
 }
 
@@ -102967,10 +102996,10 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 609 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -102989,7 +103018,7 @@ module.exports = checkPropTypes;
 // Therefore we re-export development-only version with all the PropTypes checks here.
 // However if one is migrating to the `prop-types` npm library, they will go through the
 // `index.js` entry point, and it will branch depending on the environment.
-var factory = __webpack_require__(610);
+var factory = __webpack_require__(613);
 module.exports = function(isValidElement) {
   // It is still allowed in 15.5.
   var throwOnDirectAccess = false;
@@ -102998,7 +103027,7 @@ module.exports = function(isValidElement) {
 
 
 /***/ }),
-/* 610 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103013,12 +103042,12 @@ module.exports = function(isValidElement) {
 
 
 
-var emptyFunction = __webpack_require__(471);
-var invariant = __webpack_require__(455);
-var warning = __webpack_require__(453);
+var emptyFunction = __webpack_require__(474);
+var invariant = __webpack_require__(458);
+var warning = __webpack_require__(456);
 
-var ReactPropTypesSecret = __webpack_require__(485);
-var checkPropTypes = __webpack_require__(608);
+var ReactPropTypesSecret = __webpack_require__(488);
+var checkPropTypes = __webpack_require__(611);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -103481,206 +103510,203 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 611 */,
-/* 612 */,
-/* 613 */
+/* 614 */,
+/* 615 */,
+/* 616 */
 /***/ (function(module, exports) {
 
 module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n        <cp-complex-header *ngIf=\"complexDetails;else loadingSpinner\"\n                           [complexAC]=\"complexDetails.ac\"\n                           [complexName]=\"complexDetails.name\"\n                           [complexSpecies]=\"complexDetails.species\"\n                           [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-header>\n      </div>\n      <div class=\"columns medium-12 no-pad-left no-pad-right\" style=\"margin-bottom: 30px\">\n        <div id=\"participants\" class=\"columns medium-12\">\n          <cp-go-to [sectionName]=\"'Participants'\"></cp-go-to>\n          <div class=\"columns medium-6 no-pad-left no-pad-right\">\n            <cp-complex-viewer *ngIf=\"complexDetails && complexMIJSON\"\n                               [complexAC]=\"complexDetails.ac\"\n                               [complexMIJSON]=\"complexMIJSON\"></cp-complex-viewer>\n          </div>\n          <div class=\"columns medium-6\">\n            <cp-complex-participants *ngIf=\"complexDetails\"\n                                     [participants]=\"complexDetails.participants\"></cp-complex-participants>\n          </div>\n        </div>\n        <div id=\"function\" class=\"columns medium-12 \" style=\"margin-bottom: 30px\">\n          <cp-complex-function *ngIf=\"complexDetails;\"\n                               [functionDescription]=\"complexDetails.functions\"\n                               [crossReferences]=\"complexDetails.crossReferences\"\n                               [ligands]=\"complexDetails.ligands\"\n                               [agonists]=\"complexDetails.agonists\"\n                               [antagonists]=\"complexDetails.antagonists\"></cp-complex-function>\n        </div>\n        <div id=\"properties\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-properties *ngIf=\"complexDetails;\"\n                                 [propertiesDescription]=\"complexDetails.properties\"\n                                 [comments]=\"complexDetails.comments\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-properties>\n        </div>\n        <div id=\"expression\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-expression *ngIf=\"complexDetails && gxa;\"\n                                 [gxa]=\"gxa\"\n                                 [participants]=\"complexDetails.participants\"\n                                 [complexSpecies]=\"complexDetails.species\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-expression>\n        </div>\n        <div id=\"disease\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-disease *ngIf=\"complexDetails;\"\n                              [diseaseDescriptions]=\"complexDetails.diseases\"\n                              [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-disease>\n        </div>\n        <div id=\"references\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-references *ngIf=\"complexDetails;\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"\n                                 [synonyms]=\"complexDetails.synonyms\"\n                                 [systematicName]=\"complexDetails.systematicName\"></cp-complex-references>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <cp-complex-footer *ngIf=\"complexDetails;\"\n                           [institute]=\"complexDetails.institution\"></cp-complex-footer>\n      </div>\n    </div>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</section>\n"
 
 /***/ }),
-/* 614 */
+/* 617 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>ChEMBL Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 615 */
+/* 618 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs\">\n    <h2 class=\"float-left\">Diseases and Pathologies</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Diseases and Pathologies'\"></cp-go-to>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions\">\n      <ul class=\"no-bullet\" *ngFor=\"let diseaseDescription of diseaseDescriptions\">\n        <li>{{diseaseDescription}}</li>\n      </ul>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"efoXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"efoXRefs\">\n        <cp-efo-crossreferences [crossReferences]=\"efoXRefs\"></cp-efo-crossreferences>\n      </div>\n      <div id=\"chemblXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"chemblXRefs\">\n        <cp-chembl-crossreference [crossReferences]=\"chemblXRefs\"></cp-chembl-crossreference>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 616 */
+/* 619 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>EFO Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Name</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n        <td>\n          {{crossReference.description}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 617 */
+/* 620 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row no-pad-left\" *ngIf=\"ecoXRef || intactXRefs\">\n  <!--<h2>Evidences</h2>-->\n  <span>\n    Evidence by\n    <a href=\"{{ecoXRef.searchURL}}\"\n       target=\"_blank\"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i\n      class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n    <ng-container *ngIf=\"intactXRefs\">\n      in IntAct\n      <ng-container *ngFor=\"let crossReference of intactXRefs;let isLast=last\">\n        <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"> {{crossReference.identifier}} <i\n          class=\"icon icon-generic small\" data-icon=\"x\"></i></a>{{isLast ? '' : ', '}}\n      </ng-container>\n    </ng-container>\n  </span>\n</div>\n"
 
 /***/ }),
-/* 618 */
+/* 621 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(gxa && gxaParamsQueries) || goCellularXRefs\">\n    <h2 class=\"float-left\">Expression and Cellular Location</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Expression and Cellular Location'\"></cp-go-to>\n    <div class=\"columns medium-12\">\n      <cp-gxa-heatmap *ngIf=\"gxa && gxaParamsQueries && complexSpecies\" [gxa]=\"gxa\" [gxaParamsQueries]=\"gxaParamsQueries\"\n                      [complexSpecies]=\"complexSpecies\"></cp-gxa-heatmap>\n    </div>\n    <div class=\"columns medium-12\">\n      <cp-go-celluar-crossreference *ngIf=\"goCellularXRefs\"\n                                    [crossReferences]=\"goCellularXRefs\"></cp-go-celluar-crossreference>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 619 */
+/* 622 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Cellular Component ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 620 */
+/* 623 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-7 no-pad-left\">\n    </div>\n    <div class=\"columns medium-4\">\n      <h3>Curated by:</h3> <h4>{{institute}}</h4>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 621 */
+/* 624 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Agonists ({{agonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let agonist of agonists | slice:0:displayedElements\">\n        <td>\n          {{agonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < agonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = agonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 622 */
+/* 625 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Antagonists ({{antagonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let antagonist of antagonists | slice:0:displayedElements\">\n        <td>\n          {{antagonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < antagonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = antagonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 623 */
+/* 626 */
 /***/ (function(module, exports) {
 
 module.exports = "<p>\n  assemblies works!\n</p>\n"
 
 /***/ }),
-/* 624 */
+/* 627 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row no-pad-left no-pad-right\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <div class=\"columns medium-12 clearfix no-pad-left\">\n      <h2 class=\"float-left\">Function</h2>\n      <cp-go-to class=\"float-right\" [sectionName]=\"'Function'\"></cp-go-to>\n    </div>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"functionDescription\">\n      <p>{{functionDescription}}</p>\n    </div>\n    <div id=\"ligands\" class=\"columns medium-12 no-pad-left\" *ngIf=\"ligands && ligands.length !== 0\">\n      <cp-ligands [ligands]=\"ligands\"></cp-ligands>\n    </div>\n    <div id=\"goXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"goXRefs\">\n      <cp-go-crossreferences [crossReferences]=\"goXRefs\"></cp-go-crossreferences>\n    </div>\n    <div id=\"agonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"agonists && agonists.length !== 0\">\n      <cp-agonists [agonists]=\"agonists\"></cp-agonists>\n    </div>\n    <div id=\"antagonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"antagonists && antagonists.length !== 0\">\n      <cp-antagonists [antagonists]=\"antagonists\"></cp-antagonists>\n    </div>\n    <div id=\"reactomeXRefs\" class=\"columns medium-12\" *ngIf=\"reactomeXRefs\">\n      <cp-reactome-crossreferences [crossReferences]=\"reactomeXRefs\"></cp-reactome-crossreferences>\n    </div>\n    <div id=\"intenzXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"intenzXRefs\">\n      <cp-intenz-crossreferences [crossReferences]=\"intenzXRefs\"></cp-intenz-crossreferences>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 625 */
+/* 628 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Biological Process ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 626 */
+/* 629 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"columns medium-6\">\n      <cp-go-molecular-function *ngIf=\"molecularFunctions\"\n                                [crossReferences]=\"molecularFunctions\"></cp-go-molecular-function>\n    </div>\n    <div class=\"columns medium-6\">\n      <cp-go-biological-process *ngIf=\"biologicalProcess\" [crossReferences]=\"biologicalProcess\"></cp-go-biological-process>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 627 */
+/* 630 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Molecular Function ({{crossReferences.length}})\n    </h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 628 */
+/* 631 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>IntEnz Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 629 */
+/* 632 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Ligands ({{ligands.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let ligand of ligands | slice:0:displayedElements\">\n        <td>\n          {{ligand}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < ligands.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = ligands.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 630 */
+/* 633 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>Pathways</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Complex Identifier</th>\n      <th>Complex Name</th>\n      <th>Pathway Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements\">\n        <td><a (click)=\"selectComplexWithFirstPathway(reactomeComplex)\">{{reactomeComplex}}</a></td>\n        <td>{{reactomeComplexes[reactomeComplex].name}}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements\">\n              <a (click)=\"selectComplexByPathway(reactomeComplex, reactomePathway)\">{{reactomePathway}}</a>\n            </li>\n            <li class=\"text-center no-bullet\" *ngIf=\"displayedElements < reactomeComplexes[reactomeComplex].pathways.length\">\n              <a class=\"label\" (click)=\"displayedElements = reactomeComplexes[reactomeComplex].pathways.length\">Show\n                all</a>\n            </li>\n          </ul>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < reactomeComplexes.length\">\n        <td></td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = reactomeComplexes.length\">Show all</a>\n        </td>\n        <td></td>\n      </tr>\n      </tbody>\n    </table>\n    <div class=\"columns medium-12 no-pad-left\" *ngIf=\"selectedComplex && selectedPathway\">\n      <cp-reactome-diagram [reactomeComplexe]=\"reactomeComplexes\" [reactomePathways]=\"reactomePathways\"\n                           [selectedComplex]=\"selectedComplex\"\n                           [selectedPathway]=\"selectedPathway\"></cp-reactome-diagram>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
-/* 631 */
+/* 634 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-10 no-pad-left\">\n      <h2>{{complexName}}</h2>\n      <h3><i>{{complexSpecies}}</i></h3>\n    </div>\n    <div class=\"columns medium-2\">\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n          <a href=\"{{jsonURL}}\" target=\"_blank\"><h3 class=\"icon icon-fileformats hover\" data-icon=\"J\"></h3></a>\n        </div>\n        <div class=\"columns medium-6\">\n          <a (click)=\"saveComplex()\"><h3 class=\"icon icon-generic hover\" style=\"color: black\" data-icon=\"b\"></h3></a>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <div class=\"columns medium-6\">\n\n        </div>\n        <div class=\"columns medium-6\">\n\n        </div>\n      </div>\n    </div>\n    <div class=\"columns medium-12\">\n      <cp-complex-evidence [crossReferences]=\"crossReferences\"></cp-complex-evidence>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
-/* 632 */
+/* 635 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <table class=\"hover\">\n      <thead>\n      <th>Legend</th>\n      <th>Description</th>\n      <th>Stoichiometry</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n          </div>\n        </td>\n        <td>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n            {{participant.name}} ({{participant.bioRole}})</b></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                     target=\"_blank\">{{participant.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n        </td>\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <p class=\"badge\" *ngIf=\"participant.stochiometry\">{{getConvertedStochiometry(participant.stochiometry)}}</p>\n          </div>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n        <td>\n          <!--empty placeholder-->\n        </td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n        </td>\n        <td>\n          <!--empty placeholder-->\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 633 */
+/* 636 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription || pdbXRefs || emdbXRefs\">\n    <h2 class=\"float-left\">Properties</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Properties'\"></cp-go-to>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription\">\n      {{propertiesDescription}}\n    </div>\n    <div id=\"comment\" class=\"columns medium-12 no-pad-left\" *ngIf=\"comments  && comments.length !== 0\">\n      <h3>Comments</h3>\n      <ul class=\"no-bullet\" *ngFor=\"let comment of comments\">\n        <li>{{comment}}</li>\n      </ul>\n    </div>\n    <div id=\"pdbXRefs\" class=\"columns medium-12\" *ngIf=\"pdbXRefs\">\n      <cp-pdb-crossreferences [crossReferences]=\"pdbXRefs\"></cp-pdb-crossreferences>\n    </div>\n    <div id=\"emdbXRefs\" class=\"columns medium-12\" *ngIf=\"emdbXRefs\">\n      <cp-emdb-crossreferences [crossReferences]=\"emdbXRefs\"></cp-emdb-crossreferences>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
-/* 634 */
+/* 637 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>EMDB Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 635 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <cp-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></cp-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <table class=\"hover\">\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-/* 636 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Names and Publications</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Names and Publications'\"></cp-go-to>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms\">\n      <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n    </div>\n    <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName\">\n      <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-/* 637 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Additional Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
 /* 638 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <cp-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></cp-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <h4>Available structures ({{crossReferences.length}}):</h4>\n      <table class=\"hover\">\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 639 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Names and Publications</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Names and Publications'\"></cp-go-to>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms\">\n      <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n    </div>\n    <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName\">\n      <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 640 */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"goToMenu dropdown menu float-right\" data-disable-hover=\"true\" data-click-open=\"true\"\n    data-close-on-click-inside=\"true\" data-dropdown-menu>\n  <li>\n    <a class=\"label\" (click)=\"doCheckSection()\"><i class=\"icon icon-functional\" data-icon=\"M\"></i>Go to</a>\n    <ul class=\"menu\">\n      <li>\n        <a pageScroll href=\"#participants\"\n           [ngClass]=\"{'selected': isSelected('Participants')}\"\n           *ngIf=\"sectionService.participantsSection\">Participants</a>\n      </li>\n      <li>\n        <a pageScroll href=\"#function\"\n           [ngClass]=\"{'selected': isSelected('Function')}\"\n           *ngIf=\"sectionService.functionSection\">Function</a>\n      </li>\n      <li>\n        <a pageScroll href=\"#properties\"\n           [ngClass]=\"{'selected': isSelected('Properties')}\"\n           *ngIf=\"sectionService.propertiesSection\">Properties</a>\n      </li>\n      <li>\n        <a pageScroll href=\"#expression\"\n           [ngClass]=\"{'selected': isSelected('Expression and Cellular Location')}\"\n           *ngIf=\"sectionService.expressionSection\">Expression and Cellular Location</a>\n      </li>\n      <li>\n        <a pageScroll href=\"#disease\"\n           [ngClass]=\"{'selected': isSelected('Diseases and Pathologies')}\"\n           *ngIf=\"sectionService.diseaseSection\">Diseases and Pathologies</a>\n      </li>\n      <li>\n        <a pageScroll href=\"#references\"\n           [ngClass]=\"{'selected': isSelected('Names and Publications')}\"\n           *ngIf=\"sectionService.namesSection\">Names and Publications</a>\n      </li>\n    </ul>\n  </li>\n</ul>\n"
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Additional Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 641 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row padding-top-small\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onExpandAll()\">Expand All</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"downloadAsSVG()\">Export SVG</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onReset()\">Reset</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left no-pad-right\">\n      <a class=\"button expanded\" (click)=\"featureNotAvailableYet()\">Enlarge</a>\n    </div>\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>MI features</option>\n      <option value=\"UniprotKB\">UniprotKB</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Interactor</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div id=\"networkContainer\"></div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 642 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12\">\n    <div id=\"highchartsContainer\"></div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 643 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
+module.exports = "<ul class=\"goToMenu dropdown menu float-right\" data-disable-hover=\"true\" data-click-open=\"true\"\n    data-close-on-click-inside=\"true\" data-dropdown-menu>\n  <li>\n    <a class=\"label\" (click)=\"doCheckSection()\"><i class=\"icon icon-functional\" data-icon=\"M\"></i>Go to</a>\n    <ul class=\"menu\">\n      <li>\n        <a (click)=\"scrollToElement('participants')\"\n           [ngClass]=\"{'selected': isSelected('Participants')}\"\n           *ngIf=\"sectionService.participantsSection\">Participants</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('function')\"\n           [ngClass]=\"{'selected': isSelected('Function')}\"\n           *ngIf=\"sectionService.functionSection\">Function</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('properties')\"\n           [ngClass]=\"{'selected': isSelected('Properties')}\"\n           *ngIf=\"sectionService.propertiesSection\">Properties</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('expression')\"\n           [ngClass]=\"{'selected': isSelected('Expression and Cellular Location')}\"\n           *ngIf=\"sectionService.expressionSection\">Expression and Cellular Location</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('disease')\"\n           [ngClass]=\"{'selected': isSelected('Diseases and Pathologies')}\"\n           *ngIf=\"sectionService.diseaseSection\">Diseases and Pathologies</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('references')\"\n           [ngClass]=\"{'selected': isSelected('Names and Publications')}\"\n           *ngIf=\"sectionService.namesSection\">Names and Publications</a>\n      </li>\n    </ul>\n  </li>\n</ul>\n"
 
 /***/ }),
 /* 644 */
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"row padding-top-small\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onExpandAll()\">Expand All</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"downloadAsSVG()\">Export SVG</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left\">\n      <a class=\"button expanded\" (click)=\"onReset()\">Reset</a>\n    </div>\n    <div class=\"columns small-3 medium-3 no-pad-left no-pad-right\">\n      <a class=\"button expanded\" (click)=\"featureNotAvailableYet()\">Enlarge</a>\n    </div>\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>MI features</option>\n      <option value=\"UniprotKB\">UniprotKB</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Interactor</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div id=\"networkContainer\"></div>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+/* 645 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12\">\n    <div id=\"highchartsContainer\"></div>\n  </div>\n</div>\n"
+
+/***/ }),
+/* 646 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
+
+/***/ }),
+/* 647 */
+/***/ (function(module, exports) {
+
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <a href=\"{{getReactomeURL()}}\" target=\"_blank\">Open in Reactome <i class=\"icon icon-generic small\"\n                                                                         data-icon=\"x\"></i></a>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
-/* 645 */,
-/* 646 */,
-/* 647 */,
 /* 648 */,
 /* 649 */,
 /* 650 */,
@@ -103691,7 +103717,10 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-r
 /* 655 */,
 /* 656 */,
 /* 657 */,
-/* 658 */
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103755,7 +103784,7 @@ var KeyEscapeUtils = {
 module.exports = KeyEscapeUtils;
 
 /***/ }),
-/* 659 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103772,9 +103801,9 @@ module.exports = KeyEscapeUtils;
 
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var invariant = __webpack_require__(455);
+var invariant = __webpack_require__(458);
 
 /**
  * Static poolers. Several custom versions for each potential number of
@@ -103870,10 +103899,10 @@ var PooledClass = {
 };
 
 module.exports = PooledClass;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 660 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103889,27 +103918,27 @@ module.exports = PooledClass;
 
 
 
-var _assign = __webpack_require__(465);
+var _assign = __webpack_require__(468);
 
-var ReactChildren = __webpack_require__(661);
-var ReactComponent = __webpack_require__(475);
-var ReactPureComponent = __webpack_require__(666);
-var ReactClass = __webpack_require__(662);
-var ReactDOMFactories = __webpack_require__(663);
-var ReactElement = __webpack_require__(456);
-var ReactPropTypes = __webpack_require__(664);
-var ReactVersion = __webpack_require__(667);
+var ReactChildren = __webpack_require__(664);
+var ReactComponent = __webpack_require__(479);
+var ReactPureComponent = __webpack_require__(669);
+var ReactClass = __webpack_require__(665);
+var ReactDOMFactories = __webpack_require__(666);
+var ReactElement = __webpack_require__(459);
+var ReactPropTypes = __webpack_require__(667);
+var ReactVersion = __webpack_require__(670);
 
-var onlyChild = __webpack_require__(669);
-var warning = __webpack_require__(453);
+var onlyChild = __webpack_require__(672);
+var warning = __webpack_require__(456);
 
 var createElement = ReactElement.createElement;
 var createFactory = ReactElement.createFactory;
 var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
-  var canDefineProperty = __webpack_require__(467);
-  var ReactElementValidator = __webpack_require__(487);
+  var canDefineProperty = __webpack_require__(470);
+  var ReactElementValidator = __webpack_require__(490);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
   createFactory = ReactElementValidator.createFactory;
@@ -103980,10 +104009,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = React;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 661 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103999,11 +104028,11 @@ module.exports = React;
 
 
 
-var PooledClass = __webpack_require__(659);
-var ReactElement = __webpack_require__(456);
+var PooledClass = __webpack_require__(662);
+var ReactElement = __webpack_require__(459);
 
-var emptyFunction = __webpack_require__(471);
-var traverseAllChildren = __webpack_require__(670);
+var emptyFunction = __webpack_require__(474);
+var traverseAllChildren = __webpack_require__(673);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
 var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -104179,7 +104208,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 /***/ }),
-/* 662 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -104195,17 +104224,17 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(457),
-    _assign = __webpack_require__(465);
+var _prodInvariant = __webpack_require__(460),
+    _assign = __webpack_require__(468);
 
-var ReactComponent = __webpack_require__(475);
-var ReactElement = __webpack_require__(456);
-var ReactPropTypeLocationNames = __webpack_require__(488);
-var ReactNoopUpdateQueue = __webpack_require__(477);
+var ReactComponent = __webpack_require__(479);
+var ReactElement = __webpack_require__(459);
+var ReactPropTypeLocationNames = __webpack_require__(491);
+var ReactNoopUpdateQueue = __webpack_require__(481);
 
-var emptyObject = __webpack_require__(472);
-var invariant = __webpack_require__(455);
-var warning = __webpack_require__(453);
+var emptyObject = __webpack_require__(475);
+var invariant = __webpack_require__(458);
+var warning = __webpack_require__(456);
 
 var MIXINS_KEY = 'mixins';
 
@@ -104905,10 +104934,10 @@ var ReactClass = {
 };
 
 module.exports = ReactClass;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 663 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -104924,7 +104953,7 @@ module.exports = ReactClass;
 
 
 
-var ReactElement = __webpack_require__(456);
+var ReactElement = __webpack_require__(459);
 
 /**
  * Create a factory that creates HTML tag elements.
@@ -104933,7 +104962,7 @@ var ReactElement = __webpack_require__(456);
  */
 var createDOMFactory = ReactElement.createFactory;
 if (process.env.NODE_ENV !== 'production') {
-  var ReactElementValidator = __webpack_require__(487);
+  var ReactElementValidator = __webpack_require__(490);
   createDOMFactory = ReactElementValidator.createFactory;
 }
 
@@ -105081,10 +105110,10 @@ var ReactDOMFactories = {
 };
 
 module.exports = ReactDOMFactories;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 664 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105100,15 +105129,15 @@ module.exports = ReactDOMFactories;
 
 
 
-var _require = __webpack_require__(456),
+var _require = __webpack_require__(459),
     isValidElement = _require.isValidElement;
 
-var factory = __webpack_require__(609);
+var factory = __webpack_require__(612);
 
 module.exports = factory(isValidElement);
 
 /***/ }),
-/* 665 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105130,7 +105159,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 666 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105146,12 +105175,12 @@ module.exports = ReactPropTypesSecret;
 
 
 
-var _assign = __webpack_require__(465);
+var _assign = __webpack_require__(468);
 
-var ReactComponent = __webpack_require__(475);
-var ReactNoopUpdateQueue = __webpack_require__(477);
+var ReactComponent = __webpack_require__(479);
+var ReactNoopUpdateQueue = __webpack_require__(481);
 
-var emptyObject = __webpack_require__(472);
+var emptyObject = __webpack_require__(475);
 
 /**
  * Base class helpers for the updating state of a component.
@@ -105177,7 +105206,7 @@ ReactPureComponent.prototype.isPureReactComponent = true;
 module.exports = ReactPureComponent;
 
 /***/ }),
-/* 667 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105196,7 +105225,7 @@ module.exports = ReactPureComponent;
 module.exports = '15.5.4';
 
 /***/ }),
-/* 668 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105212,13 +105241,13 @@ module.exports = '15.5.4';
 
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var ReactPropTypeLocationNames = __webpack_require__(488);
-var ReactPropTypesSecret = __webpack_require__(665);
+var ReactPropTypeLocationNames = __webpack_require__(491);
+var ReactPropTypesSecret = __webpack_require__(668);
 
-var invariant = __webpack_require__(455);
-var warning = __webpack_require__(453);
+var invariant = __webpack_require__(458);
+var warning = __webpack_require__(456);
 
 var ReactComponentTreeHook;
 
@@ -105228,7 +105257,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(476);
+  ReactComponentTreeHook = __webpack_require__(480);
 }
 
 var loggedTypeFailures = {};
@@ -105270,7 +105299,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(476);
+            ReactComponentTreeHook = __webpack_require__(480);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -105286,10 +105315,10 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 }
 
 module.exports = checkReactTypeSpec;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 669 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105304,11 +105333,11 @@ module.exports = checkReactTypeSpec;
  */
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var ReactElement = __webpack_require__(456);
+var ReactElement = __webpack_require__(459);
 
-var invariant = __webpack_require__(455);
+var invariant = __webpack_require__(458);
 
 /**
  * Returns the first child in a collection of children and verifies that there
@@ -105330,10 +105359,10 @@ function onlyChild(children) {
 }
 
 module.exports = onlyChild;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 670 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105349,15 +105378,15 @@ module.exports = onlyChild;
 
 
 
-var _prodInvariant = __webpack_require__(457);
+var _prodInvariant = __webpack_require__(460);
 
-var ReactCurrentOwner = __webpack_require__(466);
-var REACT_ELEMENT_TYPE = __webpack_require__(486);
+var ReactCurrentOwner = __webpack_require__(469);
+var REACT_ELEMENT_TYPE = __webpack_require__(489);
 
-var getIteratorFn = __webpack_require__(489);
-var invariant = __webpack_require__(455);
-var KeyEscapeUtils = __webpack_require__(658);
-var warning = __webpack_require__(453);
+var getIteratorFn = __webpack_require__(492);
+var invariant = __webpack_require__(458);
+var KeyEscapeUtils = __webpack_require__(661);
+var warning = __webpack_require__(456);
 
 var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
@@ -105512,20 +105541,20 @@ function traverseAllChildren(children, callback, traverseContext) {
 }
 
 module.exports = traverseAllChildren;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(188)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)))
 
 /***/ }),
-/* 671 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(660);
+module.exports = __webpack_require__(663);
 
 
 /***/ }),
-/* 672 */
+/* 675 */
 /***/ (function(module, exports) {
 
 /*
@@ -105833,7 +105862,7 @@ module.exports = function(color_string) {
 
 
 /***/ }),
-/* 673 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105849,7 +105878,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _computedStyles = __webpack_require__(555);
+var _computedStyles = __webpack_require__(558);
 
 var _computedStyles2 = _interopRequireDefault(_computedStyles);
 
@@ -106217,7 +106246,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 674 */
+/* 677 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

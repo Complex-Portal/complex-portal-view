@@ -1,18 +1,18 @@
 webpackJsonp([2,13],{
 
-/***/ 448:
+/***/ 451:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_results_component__ = __webpack_require__(531);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_results_component__ = __webpack_require__(534);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__ = __webpack_require__(530);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__ = __webpack_require__(528);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__ = __webpack_require__(529);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__ = __webpack_require__(533);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__ = __webpack_require__(531);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__ = __webpack_require__(532);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(462);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexResultsModule", function() { return ComplexResultsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -53,7 +53,7 @@ ComplexResultsModule = __decorate([
 
 /***/ }),
 
-/***/ 458:
+/***/ 461:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -143,8 +143,8 @@ __decorate([
 ProgressSpinnerComponent = ProgressSpinnerComponent_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-progress-spinner',
-        template: __webpack_require__(462),
-        styles: [__webpack_require__(461)]
+        template: __webpack_require__(465),
+        styles: [__webpack_require__(464)]
     }),
     __metadata("design:paramtypes", [])
 ], ProgressSpinnerComponent);
@@ -154,14 +154,14 @@ var ProgressSpinnerComponent_1;
 
 /***/ }),
 
-/***/ 459:
+/***/ 462:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__progress_spinner_component__ = __webpack_require__(461);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressSpinnerModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -197,7 +197,7 @@ ProgressSpinnerModule = __decorate([
 
 /***/ }),
 
-/***/ 461:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -215,19 +215,19 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 462:
+/***/ 465:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"small-5 small-centered columns\">\n  <md-progress-spinner style=\"margin:0 auto;\"\n                       [attr.color]=\"color\"\n                       [mode]=\"mode\"\n                       [value]=\"0\">\n  </md-progress-spinner>\n  <div style=\"text-align: center\">\n    <h4>Loading {{query}}</h4>\n    <p *ngIf=\"takesLonger\">This takes longer than usual. Bare with us!</p>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 528:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__(533);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__(536);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -366,8 +366,8 @@ __decorate([
 ComplexFilterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-filter',
-        template: __webpack_require__(647),
-        styles: [__webpack_require__(592)]
+        template: __webpack_require__(650),
+        styles: [__webpack_require__(595)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexFilterComponent);
@@ -377,12 +377,12 @@ var _a, _b, _c, _d, _e, _f;
 
 /***/ }),
 
-/***/ 529:
+/***/ 532:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__(532);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__(535);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -409,8 +409,8 @@ __decorate([
 ComplexListComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-list',
-        template: __webpack_require__(648),
-        styles: [__webpack_require__(593)]
+        template: __webpack_require__(651),
+        styles: [__webpack_require__(596)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexListComponent);
@@ -420,7 +420,7 @@ var _a;
 
 /***/ }),
 
-/***/ 530:
+/***/ 533:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -542,8 +542,8 @@ __decorate([
 ComplexPaginatorComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-paginator',
-        template: __webpack_require__(649),
-        styles: [__webpack_require__(594)]
+        template: __webpack_require__(652),
+        styles: [__webpack_require__(597)]
     }),
     __metadata("design:paramtypes", [])
 ], ComplexPaginatorComponent);
@@ -553,13 +553,13 @@ var _a;
 
 /***/ }),
 
-/***/ 531:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexResultsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -738,8 +738,8 @@ var ComplexResultsComponent = (function () {
 ComplexResultsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-results',
-        template: __webpack_require__(650),
-        styles: [__webpack_require__(595)]
+        template: __webpack_require__(653),
+        styles: [__webpack_require__(598)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _c || Object])
 ], ComplexResultsComponent);
@@ -749,7 +749,7 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 532:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -796,7 +796,7 @@ var ComplexSearchResult = (function () {
 
 /***/ }),
 
-/***/ 533:
+/***/ 536:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -838,60 +838,6 @@ var Facets = (function () {
 
 /***/ }),
 
-/***/ 592:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 593:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 594:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(15)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 595:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -910,28 +856,82 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 647:
+/***/ 596:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 597:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 598:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 650:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{facet.name}} ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTyoeFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 648:
+/***/ 651:
 /***/ (function(module, exports) {
 
 module.exports = "<ul class=\"no-bullet\">\n  <li *ngFor=\"let complex of complexSearch.elements\">\n    <h3><a [routerLink]=\"['/complex', complex.complexAC]\">{{complex.complexName}}</a></h3>\n    <div class=\"description\" style=\"background-color: white\">\n      <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>\n      <b>Description:</b>\n      <div *ngIf=\"complex.description.length <= 250\">\n        {{complex.description}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n      <div *ngIf=\"complex.description.length > 250\">\n        {{complex.description.substr(0,250)}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n    </div>\n  </li>\n</ul>\n"
 
 /***/ }),
 
-/***/ 649:
+/***/ 652:
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n  <h5 class=\"text-center\">{{currentPageIndex}} of {{lastPageIndex}}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{index[0]}}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{index[0]}}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
-/***/ 650:
+/***/ 653:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n  <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n    <h2 class=\"padding-left-large\">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>\n    <div class=\"columns medium-4\">\n      <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                         [spicesFilter]=\"spicesFilter\"\n                         [bioRoleFilter]=\"bioRoleFilter\"\n                         [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                         (onResetAllFilters)=\"onResetAllFilters($event)\"\n                         (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                         (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                         (onInteractorTyoeFilterChanged)=\"onInteractorTyoeFilterChanged($event)\">\n      </cp-complex-filter>\n    </div>\n    <div class=\"columns medium-8\">\n      <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                            [lastPageIndex]=\"lastPageIndex\"\n                            (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      <cp-complex-list [complexSearch]=\"complexSearch\">Loading ...</cp-complex-list>\n      <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                            [lastPageIndex]=\"lastPageIndex\"\n                            (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n    </div>\n  </div>\n  <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n    <h2>No Complex Portal results found</h2>\n    <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>\n    <h4>Please consider refining your terms:</h4>\n    <ul>\n      <li>Make sure all words are spelled correctly</li>\n      <li>Try different keywords</li>\n      <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n      <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results than\n        \"bike shed\"\n      </li>\n    </ul>\n  </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n"

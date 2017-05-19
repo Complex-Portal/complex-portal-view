@@ -1,6 +1,6 @@
 webpackJsonp([1,13],{
 
-/***/ 451:
+/***/ 454:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,12 +8,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_component__ = __webpack_require__(535);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tile_menu_tile_menu_component__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__twitter_display_twitter_display_component__ = __webpack_require__(538);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newsletter_subscription_newsletter_subscription_component__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__search_search_component__ = __webpack_require__(540);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_examples_examples_large_examples_large_component__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_component__ = __webpack_require__(538);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tile_menu_tile_menu_component__ = __webpack_require__(540);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__twitter_display_twitter_display_component__ = __webpack_require__(541);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newsletter_subscription_newsletter_subscription_component__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__search_search_component__ = __webpack_require__(543);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_examples_examples_large_examples_large_component__ = __webpack_require__(542);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -55,7 +55,7 @@ HomeModule = __decorate([
 
 /***/ }),
 
-/***/ 535:
+/***/ 538:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88,8 +88,8 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-home',
-        template: __webpack_require__(652),
-        styles: [__webpack_require__(597)]
+        template: __webpack_require__(655),
+        styles: [__webpack_require__(600)]
     }),
     __metadata("design:paramtypes", [])
 ], HomeComponent);
@@ -98,7 +98,7 @@ HomeComponent = __decorate([
 
 /***/ }),
 
-/***/ 536:
+/***/ 539:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -124,8 +124,8 @@ var NewsletterSubscriptionComponent = (function () {
 NewsletterSubscriptionComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-newsletter-subscription',
-        template: __webpack_require__(653),
-        styles: [__webpack_require__(598)]
+        template: __webpack_require__(656),
+        styles: [__webpack_require__(601)]
     }),
     __metadata("design:paramtypes", [])
 ], NewsletterSubscriptionComponent);
@@ -134,7 +134,7 @@ NewsletterSubscriptionComponent = __decorate([
 
 /***/ }),
 
-/***/ 537:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -167,8 +167,8 @@ var TileMenuComponent = (function () {
 TileMenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-tile-menu',
-        template: __webpack_require__(654),
-        styles: [__webpack_require__(599)]
+        template: __webpack_require__(657),
+        styles: [__webpack_require__(602)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object])
 ], TileMenuComponent);
@@ -178,7 +178,7 @@ var _a;
 
 /***/ }),
 
-/***/ 538:
+/***/ 541:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -218,8 +218,8 @@ var TwitterDisplayComponent = (function () {
 TwitterDisplayComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-twitter-display',
-        template: __webpack_require__(655),
-        styles: [__webpack_require__(600)]
+        template: __webpack_require__(658),
+        styles: [__webpack_require__(603)]
     }),
     __metadata("design:paramtypes", [])
 ], TwitterDisplayComponent);
@@ -228,7 +228,7 @@ TwitterDisplayComponent = __decorate([
 
 /***/ }),
 
-/***/ 539:
+/***/ 542:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -254,8 +254,8 @@ var ExamplesLargeComponent = (function () {
 ExamplesLargeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-examples-large',
-        template: __webpack_require__(656),
-        styles: [__webpack_require__(601)]
+        template: __webpack_require__(659),
+        styles: [__webpack_require__(604)]
     }),
     __metadata("design:paramtypes", [])
 ], ExamplesLargeComponent);
@@ -264,14 +264,15 @@ ExamplesLargeComponent = __decorate([
 
 /***/ }),
 
-/***/ 540:
+/***/ 543:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angulartics2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(108);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -285,15 +286,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var SearchComponent = (function () {
-    function SearchComponent(router, angulartics2) {
+    function SearchComponent(router, ga) {
         this.router = router;
-        this.angulartics2 = angulartics2;
+        this.ga = ga;
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
     SearchComponent.prototype.search = function (query) {
-        this.angulartics2.eventTrack.next({ action: query, properties: { category: 'search', label: 'home' } });
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
     return SearchComponent;
@@ -301,10 +304,10 @@ var SearchComponent = (function () {
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-search',
-        template: __webpack_require__(657),
-        styles: [__webpack_require__(602)]
+        template: __webpack_require__(660),
+        styles: [__webpack_require__(605)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2"]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
 ], SearchComponent);
 
 var _a, _b;
@@ -312,7 +315,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 597:
+/***/ 600:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -330,7 +333,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 598:
+/***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -348,7 +351,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 599:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -366,7 +369,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 600:
+/***/ 603:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -384,7 +387,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 601:
+/***/ 604:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -402,7 +405,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 602:
+/***/ 605:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -417,45 +420,45 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 652:
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n          <cp-examples-large></cp-examples-large>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
-
-/***/ }),
-
-/***/ 653:
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"mc_embed_signup\">\n  <form ngNoForm action=\"//ebi.us9.list-manage.com/subscribe/post?u=d50725c1556266fd605025eaf&id=91a036cbb0\" method=\"post\"\n        id=\"mc-embedded-subscribe-form\" name=\"mc-embedded-subscribe-form\" class=\"validate\" target=\"_blank\" novalidate>\n    <div id=\"mc_embed_signup_scroll\">\n      <h3><i class=\"icon icon-generic\" data-icon=\"m\"></i>Newsletter</h3>\n      <input type=\"email\" value=\"\" name=\"EMAIL\" class=\"email\" id=\"mce-EMAIL\" placeholder=\"email address\" required>\n      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n      <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input type=\"text\"\n                                                                                name=\"b_d50725c1556266fd605025eaf_91a036cbb0\"\n                                                                                tabindex=\"-1\" value=\"\"></div>\n      <div class=\"clear\"><input type=\"submit\" value=\"Subscribe\" name=\"subscribe\" id=\"mc-embedded-subscribe\"\n                                class=\"button\"></div>\n    </div>\n  </form>\n</div>\n"
-
-/***/ }),
-
-/***/ 654:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/download']\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/basket']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/complex/organisms']\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/ontologies']\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/support/intact\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch\n      href=\"http://www.ebi.ac.uk/intact/resources/training\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch [routerLink]=\"['/documentation']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 655:
 /***/ (function(module, exports) {
 
-module.exports = "<h3><i class=\"icon icon-generic\" data-icon=\"N\"></i>News</h3>\n<a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"400\" data-theme=\"light\" data-tweet-limit=\"3\"\n   data-chrome=\"nofooter noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/intact_project\">Tweets\n  by IntAct</a>\n"
+module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n          <cp-examples-large></cp-examples-large>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 
 /***/ 656:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div id=\"mc_embed_signup\">\n  <form ngNoForm action=\"//ebi.us9.list-manage.com/subscribe/post?u=d50725c1556266fd605025eaf&id=91a036cbb0\" method=\"post\"\n        id=\"mc-embedded-subscribe-form\" name=\"mc-embedded-subscribe-form\" class=\"validate\" target=\"_blank\" novalidate>\n    <div id=\"mc_embed_signup_scroll\">\n      <h3><i class=\"icon icon-generic\" data-icon=\"m\"></i>Newsletter</h3>\n      <input type=\"email\" value=\"\" name=\"EMAIL\" class=\"email\" id=\"mce-EMAIL\" placeholder=\"email address\" required>\n      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n      <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input type=\"text\"\n                                                                                name=\"b_d50725c1556266fd605025eaf_91a036cbb0\"\n                                                                                tabindex=\"-1\" value=\"\"></div>\n      <div class=\"clear\"><input type=\"submit\" value=\"Subscribe\" name=\"subscribe\" id=\"mc-embedded-subscribe\"\n                                class=\"button\"></div>\n    </div>\n  </form>\n</div>\n"
 
 /***/ }),
 
 /***/ 657:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/download']\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/basket']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/complex/organisms']\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch [routerLink]=\"['/ontologies']\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch href=\"//www.ebi.ac.uk/support/intact\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request<br/>Complex</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch\n      href=\"http://www.ebi.ac.uk/intact/resources/training\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch [routerLink]=\"['/documentation']\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch href=\"featureNotAvailableYet()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">Citation</h5>\n    </a>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 658:
+/***/ (function(module, exports) {
+
+module.exports = "<h3><i class=\"icon icon-generic\" data-icon=\"N\"></i>News</h3>\n<a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"400\" data-theme=\"light\" data-tweet-limit=\"3\"\n   data-chrome=\"nofooter noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/intact_project\">Tweets\n  by IntAct</a>\n"
+
+/***/ }),
+
+/***/ 659:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ 660:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <form id=\"content-search\" name=\"content-search\">\n      <h2>Search in Complex Portal</h2>\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value)\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </form>\n  </div>\n</div>\n"
