@@ -17,6 +17,12 @@ export class ComplexPropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this._propertiesDescription.length === 0){
+      this._propertiesDescription = null;
+    }
+    if(this._comments.length === 0){
+      this._comments = null;
+    }
     for (let i = 0; i < this.crossReferences.length; i++) {
       const crossRef = this.crossReferences[i];
       const database = this.crossReferences[i].database;
@@ -26,6 +32,7 @@ export class ComplexPropertiesComponent implements OnInit {
           this._pdbXRefs = [];
         }
         this._pdbXRefs.push(crossRef);
+        console.log(crossRef.identifier)
       }
       if (database === 'emdb') {
         if (this._emdbXRefs === undefined) {
