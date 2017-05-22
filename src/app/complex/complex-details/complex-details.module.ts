@@ -87,7 +87,7 @@ import {Ng2PageScrollModule} from "ng2-page-scroll";
     AssembliesComponent,
     GoToComponent,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5, SectionService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, Md5, SectionService],
 
 })
 export class ComplexDetailsModule {

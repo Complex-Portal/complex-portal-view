@@ -4,7 +4,6 @@ import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
 import {GoogleAnalyticsService} from "../../google-analytics/google-analytics.service";
 import {Category} from "../../google-analytics/category.enum";
-import {Label} from "../../google-analytics/label.enum";
 import {Action} from "../../google-analytics/action.enum";
 
 const COMPLEX_STORE = 'cp_complex_store';
