@@ -12,11 +12,11 @@
       <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->
       <!-- <span class="adv"><a href="../search" id="adv-search" title="Advanced">Advanced</a></span> | -->
       <!-- Include some example searchterms - keep them short and few. -->
-      <a [routerLink]="['/complex/search']" [queryParams]="{query: 'GO:0016491'}">GO:0016491</a>
-      <a [routerLink]="['/complex/search']" [queryParams]="{query: 'Ndc80'}">Ndc80</a>
-      <a [routerLink]="['/complex/search']" [queryParams]="{query: 'Q05471'}">Q05471</a>
-      <a [routerLink]="['/complex/search']" [queryParams]="{query: 'PCNA'}">PCNA</a>
-      <a [routerLink]="['/complex/search']" [queryParams]="{query: 'EBI-9008420'}">EBI-9008420</a>
+      <a (click)="search('GO:0016491', 'example')">GO:0016491</a>
+      <a (click)="search('Ndc80', 'example')">Ndc80</a >
+      <a (click)="search('Q05471', 'example')">Q05471</a>
+      <a (click)="search('PCNA', 'example')">PCNA</a>
+      <a (click)="search('EBI-9008420', 'example')">EBI-9008420</a>
     </small>
   </fieldset>
 </div>

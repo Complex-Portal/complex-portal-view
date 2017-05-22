@@ -1,4 +1,5 @@
 export enum Action {
+  example,
   searchInvoker,
   Tile,
   RemoveFromBasket,
