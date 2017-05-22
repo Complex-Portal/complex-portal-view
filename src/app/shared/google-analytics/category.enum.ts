@@ -1,4 +1,5 @@
 export enum Category {
+  download,
   organisms,
   species,
   header,

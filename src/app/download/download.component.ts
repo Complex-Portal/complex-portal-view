@@ -1,6 +1,10 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import {environment} from "../../environments/environment";
+import {GoogleAnalyticsService} from "../shared/google-analytics/google-analytics.service";
+import {Router} from "@angular/router";
+import {Action} from "../shared/google-analytics/action.enum";
+import {Category} from "../shared/google-analytics/category.enum";
 
 @Component({
   selector: 'cp-download',
@@ -15,7 +19,8 @@ export class DownloadComponent implements OnInit, AfterViewInit {
   private _COMPLEX_TAB_README = environment.complex_tab_readme;
   private _COMPLEX_CURRENT = environment.complex_current;
 
-  constructor() { }
+  constructor(private router: Router, private ga: GoogleAnalyticsService) {
+  }
 
   ngOnInit() {
     ProgressBarComponent.display();
@@ -25,27 +30,33 @@ export class DownloadComponent implements OnInit, AfterViewInit {
     ProgressBarComponent.hide();
   }
 
-  get COMPLEX_PSI25(): string {
-    return this._COMPLEX_PSI25;
+  goToComplexPSI25(): void {
+    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML25');
+    window.open(environment.complex_psi25, '_blank');
   }
 
-  get COMPLEX_PSI30(): string {
-    return this._COMPLEX_PSI30;
+  goToComplexPSI30(): void {
+    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML30');
+    window.open(environment.complex_psi30, '_blank');
   }
 
-  get COMPLEX_TAB(): string {
-    return this._COMPLEX_TAB;
+  goToComplexTAB(): void {
+    this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexTAB');
+    window.open(environment.complex_tab, '_blank');
   }
 
-  get COMPLEX_WS(): string {
-    return this._COMPLEX_WS;
+  goToComplexWS(): void {
+    this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexWS');
+    window.open(environment.complex_ws_base_url, '_blank');
   }
 
-  get COMPLEX_TAB_README(): any {
-    return this._COMPLEX_TAB_README;
+  goToComplexTabeReadMe(): void {
+    this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexTABReadMe');
+    window.open(environment.complex_tab_readme, '_blank');
   }
 
-  get COMPLEX_CURRENT(): any {
-    return this._COMPLEX_CURRENT;
+  goToComplexFTPCurrent(): void {
+    this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexCurrentFTP');
+    window.open(environment.complex_current, '_blank');
   }
 }

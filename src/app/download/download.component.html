@@ -5,8 +5,8 @@
       XML2.5 and XML3.0 formats (see the PSI website for a detailed format description). The files are grouped by
       species. We have now also developed ComplexTAB, a flatfile format to enable simpler parsing or loading into
       Microsoft Excel. A separate ComplexTAB file has been produced for each species - details on the format are
-      available <a href="{{COMPLEX_TAB_README}}" target="_blank">here</a>. All files are available from the <a
-        href="{{COMPLEX_CURRENT}}" target="_blank">ftp site</a> and will be
+      available <a (click)="goToComplexTabeReadMe()">here <i class="icon icon-generic small" data-icon="x"></i></a>. All files are available from the <a
+        (click)="goToComplexFTPCurrent()">ftp site <i class="icon icon-generic small" data-icon="x"></i></a> and will be
       updated as we add new complexes with every data release.</p>
     <ul>
       <li class="icon-bullet"><span class="icon icon-generic" data-icon="*"></span> All Complex Portal data and software
@@ -16,29 +16,28 @@
     <div class="row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right" data-equalizer
          data-equalize-on="medium" id="large-button-grid">
       <div class="column  padding-bottom-large">
-        <a class="button medium-12 columns text-center" data-equalizer-watch
-           href="{{COMPLEX_PSI25}}" target="_blank">
+        <a class="button medium-12 columns text-center" data-equalizer-watch (click)="goToComplexPSI25()">
           <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
           <h5 class="white-color">PSI-MI XML 2.5</h5>
         </a>
       </div>
       <div class="column  padding-bottom-large">
         <a class="button medium-12 columns text-center" data-equalizer-watch
-           href="{{COMPLEX_PSI30}}" target="_blank">
+           (click)="goToComplexPSI30()">
           <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
           <h5 class="white-color">PSI-MI XML 3.0</h5>
         </a>
       </div>
       <div class="column  padding-bottom-large">
         <a class="button medium-12 columns text-center" data-equalizer-watch
-           href="{{COMPLEX_TAB}}" target="_blank">
+           (click)="goToComplexTAB()">
           <h3 class="icon icon-fileformats  white-color" data-icon="v"></h3>
           <h5 class="white-color">ComplexTab</h5>
         </a>
       </div>
       <div class="column  padding-bottom-large">
         <a class="button medium-12 columns text-center" data-equalizer-watch
-           href="{{COMPLEX_WS}}" target="_blank">
+           (click)="goToComplexWS()">
           <h3 class="icon icon-fileformats white-color" data-icon="J"></h3>
           <h5 class="white-color">PSI-MI JSON</h5>
         </a>

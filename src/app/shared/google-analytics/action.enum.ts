@@ -1,4 +1,6 @@
 export enum Action {
+  download,
+  externalLink,
   example,
   searchInvoker,
   Tile,
