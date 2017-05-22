@@ -142,9 +142,9 @@ NewsletterSubscriptionComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_google_analytics_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TileMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -314,9 +314,9 @@ ExamplesLargeComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(72);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -339,7 +339,13 @@ var SearchComponent = (function () {
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
-    SearchComponent.prototype.search = function (query) {
+    SearchComponent.prototype.search = function (query, type) {
+        if (type === 'enter') {
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, type);
+        }
+        else {
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, type);
+        }
         this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
@@ -470,7 +476,7 @@ module.exports = module.exports.toString();
 /***/ 655:
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n          <cp-examples-large></cp-examples-large>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section>\n  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->\n  <!--<nav aria-label=\"You are here:\" role=\"navigation\">-->\n    <!--<ul class=\"breadcrumbs\">-->\n      <!--<li>-->\n        <!--<span class=\"displayedElements-for-sr\">Current: </span> Complex Portal-->\n      <!--</li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 no-pad-left\">\n          <h5>\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of\n            key model organisms. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below.\n          </h5>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n        <!--<div class=\"columns medium-12 no-pad-left\">-->\n          <!--<app-contributors-display></app-contributors-display>-->\n        <!--</div>-->\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 
@@ -498,14 +504,14 @@ module.exports = "<h3><i class=\"icon icon-generic\" data-icon=\"N\"></i>News</h
 /***/ 659:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\" >GO:0016491</a></li>\n        <li>Gene name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a></li>\n        <li>UniProt AC(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a></li>\n        <li>Complex AC: <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n<a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n<a (click)=\"search('Ndc80', 'example')\">Ndc80</a >\n<a (click)=\"search('Q05471', 'example')\">Q05471</a>\n<a (click)=\"search('PCNA', 'example')\">PCNA</a>\n<a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a>\n"
 
 /***/ }),
 
 /***/ 660:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <form id=\"content-search\" name=\"content-search\">\n      <h2>Search in Complex Portal</h2>\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value)\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <div id=\"content-search\" name=\"content-search\" >\n      <h2>Search in Complex Portal</h2>\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\" (keydown.enter)=\"search(query.value, 'enter')\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value, 'button')\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </div>\n  </div>\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a></li>\n        <li>Gene name(s): <a (click)=\"search('Ndc80', 'example')\">Ndc80</a></li>\n        <li>UniProt AC(s): <a (click)=\"search('Q05471', 'example')\">Q05471</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Protein name(s): <a (click)=\"search('PCNA', 'example')\">PCNA</a></li>\n        <li>Complex AC: <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
 
 /***/ })
 

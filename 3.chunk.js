@@ -220,6 +220,10 @@ module.exports = "<div class=\"small-5 small-centered columns\">\n  <md-progress
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_action_enum__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__ = __webpack_require__(73);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -231,10 +235,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var ComplexOrganismComponent = (function () {
-    function ComplexOrganismComponent() {
+    function ComplexOrganismComponent(router, ga) {
+        this.router = router;
+        this.ga = ga;
     }
     ComplexOrganismComponent.prototype.ngOnInit = function () {
+    };
+    ComplexOrganismComponent.prototype.search = function (specieName) {
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].organisms, specieName);
+        this.router.navigate(['complex/search'], { queryParams: { query: '*', species: [specieName], page: 1 } });
     };
     Object.defineProperty(ComplexOrganismComponent.prototype, "name", {
         get: function () {
@@ -289,9 +303,10 @@ ComplexOrganismComponent = __decorate([
         template: __webpack_require__(648),
         styles: [__webpack_require__(593)]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
 ], ComplexOrganismComponent);
 
+var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-organism.component.js.map
 
 /***/ }),
@@ -478,7 +493,7 @@ module.exports = module.exports.toString();
 /***/ 648:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{name}}</h5>\n    <!--<br>-->\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"symbol !== 'x'\">\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-species\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"symbol === 'x'\">\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: '*', species: [name] }\"><span class=\"icon icon-functional\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\">ComplexTab</a>\n    <a class=\"tag\">PSI-XML2.5</a>\n    <a class=\"tag\">PSI-XML3.0</a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{name}}</h5>\n    <!--<br>-->\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"symbol !== 'x'\">\n      <a (click)=\"search(name)\"><span class=\"icon icon-species\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"symbol === 'x'\">\n      <a (click)=\"search(name)\"><span class=\"icon icon-functional\" attr.data-icon=\"{{symbol}}\"></span><br>{{count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\">ComplexTab</a>\n    <a class=\"tag\">PSI-XML2.5</a>\n    <a class=\"tag\">PSI-XML3.0</a>\n  </div>\n</div>\n"
 
 /***/ }),
 

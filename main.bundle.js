@@ -1,80 +1,5 @@
 webpackJsonp([9,13],{
 
-/***/ 107:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
-var Action;
-(function (Action) {
-    Action[Action["Tile"] = 0] = "Tile";
-    Action[Action["RemoveFromBasket"] = 1] = "RemoveFromBasket";
-    Action[Action["search"] = 2] = "search";
-    Action[Action["AddToBasket"] = 3] = "AddToBasket";
-    Action[Action["GoToMenu"] = 4] = "GoToMenu";
-})(Action || (Action = {}));
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
-
-/***/ }),
-
-/***/ 108:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
-var Category;
-(function (Category) {
-    Category[Category["home"] = 0] = "home";
-    Category[Category["details"] = 1] = "details";
-    Category[Category["basket"] = 2] = "basket";
-    Category[Category["search"] = 3] = "search";
-})(Category || (Category = {}));
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
-
-/***/ }),
-
-/***/ 109:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angulartics2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_enum__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action_enum__ = __webpack_require__(107);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var GoogleAnalyticsService = (function () {
-    function GoogleAnalyticsService(angulartics2) {
-        this.angulartics2 = angulartics2;
-    }
-    GoogleAnalyticsService.prototype.invokeCustomEvent = function (value, category, label) {
-        this.angulartics2.eventTrack.next({ action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value], properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label } });
-    };
-    return GoogleAnalyticsService;
-}());
-GoogleAnalyticsService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"]) === "function" && _a || Object])
-], GoogleAnalyticsService);
-
-var _a;
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/google-analytics.service.js.map
-
-/***/ }),
-
 /***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -84,9 +9,9 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__ = __webpack_require__(72);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -752,12 +677,12 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angulartics2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ngx_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
@@ -916,7 +841,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angulartics2__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angulartics2__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angulartics2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(195);
@@ -925,7 +850,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ngx_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__search_local_search_local_search_component__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_platform_browser_animations__ = __webpack_require__(201);
@@ -934,7 +859,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__documentation_query_syntax_query_syntax_component__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__documentation_data_content_data_content_component__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ontologies_ontologies_component__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1039,6 +964,9 @@ var rootRouterConfig = [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__(73);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalSearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1052,11 +980,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var LocalSearchComponent = (function () {
-    function LocalSearchComponent(location, router, route) {
+    function LocalSearchComponent(location, router, route, ga) {
         this.location = location;
         this.router = router;
         this.route = route;
+        this.ga = ga;
     }
     LocalSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1073,6 +1005,9 @@ var LocalSearchComponent = (function () {
                         _this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
                     });
                 }
+                else if (_this.location.path().startsWith('/complex/organisms')) {
+                    _this._query = '';
+                }
                 else if (_this.location.path().startsWith('/complex')) {
                     _this._query = _this.location.path().split('/')[2];
                 }
@@ -1082,7 +1017,14 @@ var LocalSearchComponent = (function () {
             }
         });
     };
-    LocalSearchComponent.prototype.search = function (query) {
+    LocalSearchComponent.prototype.search = function (query, type) {
+        if (type === 'enter') {
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, type);
+        }
+        else {
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, type);
+        }
+        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
     Object.defineProperty(LocalSearchComponent.prototype, "display", {
@@ -1107,10 +1049,10 @@ LocalSearchComponent = __decorate([
         template: __webpack_require__(392),
         styles: [__webpack_require__(376)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
 ], LocalSearchComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/local-search.component.js.map
 
 /***/ }),
@@ -1442,7 +1384,7 @@ module.exports = "<!--<input style=\"font-weight: normal\" size=\"35\" type=\"te
 /***/ 392:
 /***/ (function(module, exports) {
 
-module.exports = "<form [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value)\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'GO:0016491'}\">GO:0016491</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Ndc80'}\">Ndc80</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'Q05471'}\">Q05471</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'PCNA'}\">PCNA</a>\n      <a [routerLink]=\"['/complex/search']\" [queryParams]=\"{query: 'EBI-9008420'}\">EBI-9008420</a>\n    </small>\n  </fieldset>\n</form>\n<!-- /local-search -->\n"
+module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\" (keydown.enter)=\"search(query.value, 'enter')\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value, 'button')\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n      <a (click)=\"search('Ndc80', 'example')\">Ndc80</a >\n      <a (click)=\"search('Q05471', 'example')\">Q05471</a>\n      <a (click)=\"search('PCNA', 'example')\">PCNA</a>\n      <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a>\n    </small>\n  </fieldset>\n</div>\n<!-- /local-search -->\n"
 
 /***/ }),
 
@@ -1541,7 +1483,7 @@ var ProgressBarComponent_1;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngx_toastr__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1583,6 +1525,86 @@ NotificationService = __decorate([
 
 var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/notification.service.js.map
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
+var Action;
+(function (Action) {
+    Action[Action["example"] = 0] = "example";
+    Action[Action["searchInvoker"] = 1] = "searchInvoker";
+    Action[Action["Tile"] = 2] = "Tile";
+    Action[Action["RemoveFromBasket"] = 3] = "RemoveFromBasket";
+    Action[Action["search"] = 4] = "search";
+    Action[Action["AddToBasket"] = 5] = "AddToBasket";
+    Action[Action["GoToMenu"] = 6] = "GoToMenu";
+})(Action || (Action = {}));
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
+var Category;
+(function (Category) {
+    Category[Category["organisms"] = 0] = "organisms";
+    Category[Category["species"] = 1] = "species";
+    Category[Category["header"] = 2] = "header";
+    Category[Category["home"] = 3] = "home";
+    Category[Category["details"] = 4] = "details";
+    Category[Category["basket"] = 5] = "basket";
+    Category[Category["search"] = 6] = "search";
+})(Category || (Category = {}));
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angulartics2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_enum__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action_enum__ = __webpack_require__(72);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GoogleAnalyticsService = (function () {
+    function GoogleAnalyticsService(angulartics2) {
+        this.angulartics2 = angulartics2;
+    }
+    GoogleAnalyticsService.prototype.invokeCustomEvent = function (value, category, label) {
+        this.angulartics2.eventTrack.next({ action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value], properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label } });
+    };
+    return GoogleAnalyticsService;
+}());
+GoogleAnalyticsService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"]) === "function" && _a || Object])
+], GoogleAnalyticsService);
+
+var _a;
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/google-analytics.service.js.map
 
 /***/ })
 
