@@ -488,15 +488,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_basket_service_basket_service__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_ols_service_ols_service__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_service_complex_portal_service__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__shared_notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__shared_service_section_section_service__ = __webpack_require__(466);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44_ng2_page_scroll__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43_ng2_page_scroll__ = __webpack_require__(476);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexDetailsModule", function() { return ComplexDetailsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -504,7 +503,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -561,8 +559,8 @@ ComplexDetailsModule = __decorate([
                 { path: '', component: __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */] }
             ]),
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_42__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */],
-            __WEBPACK_IMPORTED_MODULE_44_ng2_page_scroll__["a" /* Ng2PageScrollModule */].forRoot()
+            __WEBPACK_IMPORTED_MODULE_41__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */],
+            __WEBPACK_IMPORTED_MODULE_43_ng2_page_scroll__["a" /* Ng2PageScrollModule */].forRoot()
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */],
@@ -598,7 +596,7 @@ ComplexDetailsModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_32__complex_function_assemblies_assemblies_component__["a" /* AssembliesComponent */],
             __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__["a" /* GoToComponent */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_38__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_39__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_40__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_41__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_37__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_36__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_43__shared_service_section_section_service__["a" /* SectionService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__["a" /* SectionService */]],
     })
 ], ComplexDetailsModule);
 
@@ -16465,7 +16463,7 @@ var ReactomePathway = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexHeaderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -17270,9 +17268,9 @@ SystematicNameComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__ = __webpack_require__(476);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__ = __webpack_require__(108);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoToComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

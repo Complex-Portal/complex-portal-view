@@ -4,14 +4,89 @@ webpackJsonp([9,13],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
+var Action;
+(function (Action) {
+    Action[Action["Tile"] = 0] = "Tile";
+    Action[Action["RemoveFromBasket"] = 1] = "RemoveFromBasket";
+    Action[Action["search"] = 2] = "search";
+    Action[Action["AddToBasket"] = 3] = "AddToBasket";
+    Action[Action["GoToMenu"] = 4] = "GoToMenu";
+})(Action || (Action = {}));
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
+
+/***/ }),
+
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
+var Category;
+(function (Category) {
+    Category[Category["home"] = 0] = "home";
+    Category[Category["details"] = 1] = "details";
+    Category[Category["basket"] = 2] = "basket";
+    Category[Category["search"] = 3] = "search";
+})(Category || (Category = {}));
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angulartics2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_enum__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action_enum__ = __webpack_require__(107);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GoogleAnalyticsService = (function () {
+    function GoogleAnalyticsService(angulartics2) {
+        this.angulartics2 = angulartics2;
+    }
+    GoogleAnalyticsService.prototype.invokeCustomEvent = function (value, category, label) {
+        this.angulartics2.eventTrack.next({ action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value], properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label } });
+    };
+    return GoogleAnalyticsService;
+}());
+GoogleAnalyticsService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"]) === "function" && _a || Object])
+], GoogleAnalyticsService);
+
+var _a;
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/google-analytics.service.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__ = __webpack_require__(107);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -111,81 +186,6 @@ BasketService = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/basket.service.js.map
-
-/***/ }),
-
-/***/ 108:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
-var Action;
-(function (Action) {
-    Action[Action["Tile"] = 0] = "Tile";
-    Action[Action["RemoveFromBasket"] = 1] = "RemoveFromBasket";
-    Action[Action["search"] = 2] = "search";
-    Action[Action["AddToBasket"] = 3] = "AddToBasket";
-    Action[Action["GoToMenu"] = 4] = "GoToMenu";
-})(Action || (Action = {}));
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
-
-/***/ }),
-
-/***/ 109:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
-var Category;
-(function (Category) {
-    Category[Category["home"] = 0] = "home";
-    Category[Category["details"] = 1] = "details";
-    Category[Category["basket"] = 2] = "basket";
-    Category[Category["search"] = 3] = "search";
-})(Category || (Category = {}));
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
-
-/***/ }),
-
-/***/ 110:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angulartics2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_enum__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action_enum__ = __webpack_require__(108);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var GoogleAnalyticsService = (function () {
-    function GoogleAnalyticsService(angulartics2) {
-        this.angulartics2 = angulartics2;
-    }
-    GoogleAnalyticsService.prototype.invokeCustomEvent = function (value, category, label) {
-        this.angulartics2.eventTrack.next({ action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value], properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label } });
-    };
-    return GoogleAnalyticsService;
-}());
-GoogleAnalyticsService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"]) === "function" && _a || Object])
-], GoogleAnalyticsService);
-
-var _a;
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/google-analytics.service.js.map
 
 /***/ }),
 
@@ -759,7 +759,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ngx_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -921,7 +921,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_ols_service_ols_service__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_basket_service_basket_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_basket_service_basket_service__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
@@ -934,7 +934,7 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__documentation_query_syntax_query_syntax_component__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__documentation_data_content_data_content_component__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ontologies_ontologies_component__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__ = __webpack_require__(109);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
