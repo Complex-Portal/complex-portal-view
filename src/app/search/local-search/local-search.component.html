@@ -1,11 +1,11 @@
-<form [hidden]="!display" id="local-search" name="local-search">
+<div [hidden]="!display" id="local-search" name="local-search">
   <fieldset>
     <div class="input-group margin-bottom-none">
       <input #searchTerm type="text" name="first" id="local-searchbox" placeholder="Search this service"
              value="{{query}}"
-             class="input-group-field">
+             class="input-group-field" (keydown.enter)="search(query.value, 'enter')">
       <div class="input-group-button">
-        <input type="button" name="submit" value="1" (click)="search(searchTerm.value)"
+        <input type="button" name="submit" value="1" (click)="search(searchTerm.value, 'button')"
                class="button icon icon-functional"></div>
     </div>
     <small class="">
@@ -19,5 +19,5 @@
       <a [routerLink]="['/complex/search']" [queryParams]="{query: 'EBI-9008420'}">EBI-9008420</a>
     </small>
   </fieldset>
-</form>
+</div>
 <!-- /local-search -->

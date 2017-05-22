@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {GoogleAnalyticsService} from "../../shared/google-analytics/google-analytics.service";
+import {Action} from "../../shared/google-analytics/action.enum";
+import {Category} from "../../shared/google-analytics/category.enum";
 
 
 @Component({
@@ -12,7 +15,7 @@ export class LocalSearchComponent implements OnInit {
   private _display: boolean;
   private _query: string;
 
-  constructor(private location: Location, private router: Router, private route: ActivatedRoute) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private ga: GoogleAnalyticsService) {
 
   }
 
@@ -28,6 +31,8 @@ export class LocalSearchComponent implements OnInit {
               .subscribe(queryParams => {
                 this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
               });
+          } else if (this.location.path().startsWith('/complex/organisms')) {
+            this._query = '';
           } else if (this.location.path().startsWith('/complex')) {
             this._query = this.location.path().split('/')[2];
           } else {
@@ -38,10 +43,15 @@ export class LocalSearchComponent implements OnInit {
     );
   }
 
-  search(query: string) {
-    this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 }});
+  search(query: string, type : string) {
+    if(type === 'enter'){
+      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+    } else {
+      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+    }
+    this.ga.invokeCustomEvent(Action.search, Category.header, query);
+    this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
   }
-
 
   get display(): boolean {
     return this._display;

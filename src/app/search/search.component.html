@@ -2,18 +2,18 @@
   <div class="columns medium-12 no-pad-left no-pad-right">
     <!-- local-search -->
     <!-- if you do not have a local-search, delete the following form -->
-    <form id="content-search" name="content-search">
+    <div id="content-search" name="content-search" >
       <h2>Search in Complex Portal</h2>
       <fieldset>
         <div class="input-group margin-bottom-none">
-          <input #query type="text" name="first" id="content-searchbox" class="input-group-field"
+          <input #query type="text" name="first" id="content-searchbox" class="input-group-field" (keydown.enter)="search(query.value, 'enter')"
                  placeholder="GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC">
           <div class="input-group-button">
-            <input type="button" name="submit" value="1" (click)="search(query.value)"
+            <input type="button" name="submit" value="1" (click)="search(query.value, 'button')"
                    class="button icon icon-functional">
           </div>
         </div>
       </fieldset>
-    </form>
+    </div>
   </div>
 </div>
