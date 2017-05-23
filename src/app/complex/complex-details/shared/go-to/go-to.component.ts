@@ -2,12 +2,12 @@ import {
   AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input,
   OnInit
 } from '@angular/core';
-import {SectionService} from "../service/section/section.service";
-import {PageScrollInstance, PageScrollService} from "ng2-page-scroll";
-import {DOCUMENT} from "@angular/platform-browser";
-import {GoogleAnalyticsService} from "../../../../shared/google-analytics/google-analytics.service";
-import {Action} from "../../../../shared/google-analytics/action.enum";
-import {Category} from "../../../../shared/google-analytics/category.enum";
+import {SectionService} from '../service/section/section.service';
+import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
+import {DOCUMENT} from '@angular/platform-browser';
+import {GoogleAnalyticsService} from '../../../../shared/google-analytics/google-analytics.service';
+import {Action} from '../../../../shared/google-analytics/action.enum';
+import {Category} from '../../../../shared/google-analytics/category.enum';
 
 declare const $: any;
 
@@ -42,7 +42,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
       case 'Expression and Cellular Location':
         this._sectionService.expressionSectionAvailable();
         break;
-      case 'Names and Publications':
+      case 'Additional Information':
         this._sectionService.namesSectionAvailable();
         break;
     }
@@ -55,7 +55,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
 
   public scrollToElement(idReference: string) {
     this.ga.invokeCustomEvent(Action.GoToMenu, Category.details, idReference);
-    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
+    const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
     this.pageScrollService.start(pageScrollInstance);
   }
 

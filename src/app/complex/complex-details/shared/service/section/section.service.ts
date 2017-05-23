@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SectionService {
@@ -13,7 +13,7 @@ export class SectionService {
   constructor() {
   }
 
-  public reset() : void {
+  public reset(): void {
     this._participantsSection = false;
     this._functionSection = false;
     this._propertiesSection = false;
@@ -22,27 +22,27 @@ export class SectionService {
     this._namesSection = false;
   }
 
-  public participantsSectionAvailable() : void {
+  public participantsSectionAvailable(): void {
     this._participantsSection = true;
   }
 
-  public functionSectionAvailable() : void {
+  public functionSectionAvailable(): void {
     this._functionSection = true;
   }
 
-  public propertiesSectionAvailable() : void {
+  public propertiesSectionAvailable(): void {
     this._propertiesSection = true;
   }
 
-  public expressionSectionAvailable() : void {
+  public expressionSectionAvailable(): void {
     this._expressionSection = true;
   }
 
-  public diseaseSectionAvailable() : void {
+  public diseaseSectionAvailable(): void {
     this._diseaseSection = true;
   }
 
-  public namesSectionAvailable() : void {
+  public namesSectionAvailable(): void {
     this._namesSection = true;
   }
 
