@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__download_component__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__download_component__ = __webpack_require__(538);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DownloadModule", function() { return DownloadModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40,7 +40,7 @@ DownloadModule = __decorate([
 
 /***/ }),
 
-/***/ 537:
+/***/ 538:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,8 +114,8 @@ var DownloadComponent = (function () {
 DownloadComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-download',
-        template: __webpack_require__(654),
-        styles: [__webpack_require__(599)]
+        template: __webpack_require__(657),
+        styles: [__webpack_require__(601)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
 ], DownloadComponent);
@@ -125,7 +125,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 599:
+/***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -143,7 +143,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 654:
+/***/ 657:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Programmatic Access</h2>\n    <p>The Complex Portal is released monthly and data on individual complexes is available for download in both PSI-MI\n      XML2.5 and XML3.0 formats (see the PSI website for a detailed format description). The files are grouped by\n      species. We have now also developed ComplexTAB, a flatfile format to enable simpler parsing or loading into\n      Microsoft Excel. A separate ComplexTAB file has been produced for each species - details on the format are\n      available <a (click)=\"goToComplexTabeReadMe()\">here <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>. All files are available from the <a\n        (click)=\"goToComplexFTPCurrent()\">ftp site <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a> and will be\n      updated as we add new complexes with every data release.</p>\n    <ul>\n      <li class=\"icon-bullet\"><span class=\"icon icon-generic\" data-icon=\"*\"></span> All Complex Portal data and software\n        is freely available to all users, academic or commercial, under the terms of the Apache License, Version 2.0\n      </li>\n    </ul>\n    <div class=\"row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n         data-equalize-on=\"medium\" id=\"large-button-grid\">\n      <div class=\"column  padding-bottom-large\">\n        <a class=\"button medium-12 columns text-center\" data-equalizer-watch (click)=\"goToComplexPSI25()\">\n          <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n          <h5 class=\"white-color\">PSI-MI XML 2.5</h5>\n        </a>\n      </div>\n      <div class=\"column  padding-bottom-large\">\n        <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n           (click)=\"goToComplexPSI30()\">\n          <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n          <h5 class=\"white-color\">PSI-MI XML 3.0</h5>\n        </a>\n      </div>\n      <div class=\"column  padding-bottom-large\">\n        <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n           (click)=\"goToComplexTAB()\">\n          <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"v\"></h3>\n          <h5 class=\"white-color\">ComplexTab</h5>\n        </a>\n      </div>\n      <div class=\"column  padding-bottom-large\">\n        <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n           (click)=\"goToComplexWS()\">\n          <h3 class=\"icon icon-fileformats white-color\" data-icon=\"J\"></h3>\n          <h5 class=\"white-color\">PSI-MI JSON</h5>\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n\n\n\n"
