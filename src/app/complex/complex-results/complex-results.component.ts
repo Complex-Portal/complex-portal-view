@@ -1,8 +1,8 @@
-import {Component, OnInit, AfterViewInit, OnChanges, SimpleChanges} from '@angular/core';
-import {ActivatedRoute, Router, NavigationExtras} from '@angular/router';
-import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
-import {ComplexPortalService} from '../shared/service/complex-portal.service';
-import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import { Component, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ComplexSearchResult } from '../shared/model/complex-results/complex-search.model';
+import { ComplexPortalService } from '../shared/service/complex-portal.service';
+import { ProgressBarComponent } from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 
 
 @Component({
@@ -11,7 +11,6 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
   styleUrls: ['./complex-results.component.css']
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-
   private _query;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
@@ -22,10 +21,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-              private complexPortalService: ComplexPortalService) {
-  }
-
-  ngOnInit() {
+    private complexPortalService: ComplexPortalService) {
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -38,18 +34,24 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
-          this.complexSearch = complexSearch;
-          if (this.complexSearch.totalNumberOfResults !== 0) {
-            this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
-          }
-        });
+            this.complexSearch = complexSearch;
+            if (this.complexSearch.totalNumberOfResults !== 0) {
+              this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+            }
+            ProgressBarComponent.hide();
+          });
         document.body.scrollTop = 0;
       });
   }
 
+  ngOnInit() {
+    console.log('Hallo');
+
+  }
+
 
   ngAfterViewInit(): void {
-    ProgressBarComponent.hide();
+    // ProgressBarComponent.hide();
   }
 
   private reloadPage(): void {
@@ -57,7 +59,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
     this.prepareFiltersForParams(queryParams);
-    this.router.navigate(['complex/search'], {
+    this.router.navigate([], {
       queryParams
     });
     ProgressBarComponent.hide();
