@@ -1535,13 +1535,15 @@ var _a;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
 var Action;
 (function (Action) {
-    Action[Action["example"] = 0] = "example";
-    Action[Action["searchInvoker"] = 1] = "searchInvoker";
-    Action[Action["Tile"] = 2] = "Tile";
-    Action[Action["RemoveFromBasket"] = 3] = "RemoveFromBasket";
-    Action[Action["search"] = 4] = "search";
-    Action[Action["AddToBasket"] = 5] = "AddToBasket";
-    Action[Action["GoToMenu"] = 6] = "GoToMenu";
+    Action[Action["download"] = 0] = "download";
+    Action[Action["externalLink"] = 1] = "externalLink";
+    Action[Action["example"] = 2] = "example";
+    Action[Action["searchInvoker"] = 3] = "searchInvoker";
+    Action[Action["Tile"] = 4] = "Tile";
+    Action[Action["RemoveFromBasket"] = 5] = "RemoveFromBasket";
+    Action[Action["search"] = 6] = "search";
+    Action[Action["AddToBasket"] = 7] = "AddToBasket";
+    Action[Action["GoToMenu"] = 8] = "GoToMenu";
 })(Action || (Action = {}));
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
 
@@ -1554,13 +1556,14 @@ var Action;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
 var Category;
 (function (Category) {
-    Category[Category["organisms"] = 0] = "organisms";
-    Category[Category["species"] = 1] = "species";
-    Category[Category["header"] = 2] = "header";
-    Category[Category["home"] = 3] = "home";
-    Category[Category["details"] = 4] = "details";
-    Category[Category["basket"] = 5] = "basket";
-    Category[Category["search"] = 6] = "search";
+    Category[Category["download"] = 0] = "download";
+    Category[Category["organisms"] = 1] = "organisms";
+    Category[Category["species"] = 2] = "species";
+    Category[Category["header"] = 3] = "header";
+    Category[Category["home"] = 4] = "home";
+    Category[Category["details"] = 5] = "details";
+    Category[Category["basket"] = 6] = "basket";
+    Category[Category["search"] = 7] = "search";
 })(Category || (Category = {}));
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
 

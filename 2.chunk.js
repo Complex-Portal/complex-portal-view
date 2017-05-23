@@ -577,13 +577,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ComplexResultsComponent = (function () {
     function ComplexResultsComponent(route, router, complexPortalService) {
+        var _this = this;
         this.route = route;
         this.router = router;
         this.complexPortalService = complexPortalService;
         this._pageSize = 10;
-    }
-    ComplexResultsComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.route
             .queryParams
             .subscribe(function (queryParams) {
@@ -599,19 +597,21 @@ var ComplexResultsComponent = (function () {
                 if (_this.complexSearch.totalNumberOfResults !== 0) {
                     _this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this.pageSize);
                 }
+                __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
             });
             document.body.scrollTop = 0;
         });
-    };
+    }
+    ComplexResultsComponent.prototype.ngOnInit = function () { };
     ComplexResultsComponent.prototype.ngAfterViewInit = function () {
-        __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
+        // ProgressBarComponent.hide();
     };
     ComplexResultsComponent.prototype.reloadPage = function () {
         var queryParams = {};
         queryParams['query'] = this._query;
         queryParams['page'] = this._currentPageIndex;
         this.prepareFiltersForParams(queryParams);
-        this.router.navigate(['complex/search'], {
+        this.router.navigate([], {
             queryParams: queryParams
         });
         __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();

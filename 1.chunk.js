@@ -339,12 +339,12 @@ var SearchComponent = (function () {
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
-    SearchComponent.prototype.search = function (query, type) {
-        if (type === 'enter') {
-            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, type);
+    SearchComponent.prototype.search = function (query, typeOfButton) {
+        if (typeOfButton === 'enter') {
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, typeOfButton);
         }
         else {
-            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, type);
+            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, typeOfButton);
         }
         this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
