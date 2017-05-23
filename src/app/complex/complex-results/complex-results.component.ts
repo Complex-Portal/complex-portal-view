@@ -44,10 +44,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngOnInit() {
-    console.log('Hallo');
-
-  }
+  ngOnInit() { }
 
   ngAfterViewInit(): void {
     // ProgressBarComponent.hide();
