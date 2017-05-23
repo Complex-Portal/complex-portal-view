@@ -2,6 +2,9 @@
   <div class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs || synonyms || systematicName">
     <h2 class="float-left">Additional Information</h2>
     <cp-go-to class="float-right" [sectionName]="'Additional Information'"></cp-go-to>
+    <div id="externalResources" class="columns medium-12 no-pad-left" *ngIf="externalResources">
+      <cp-external-resources [crossReferences]="externalResources"></cp-external-resources>
+    </div>
     <div id="pubmedXRefs" class="columns medium-12 no-pad-left" *ngIf="pubmedXRefs">
       <cp-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></cp-euro-pmc-crossreferences>
     </div>

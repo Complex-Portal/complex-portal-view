@@ -1,0 +1,15 @@
+<div class="row" *ngIf="crossReferences">
+  <div class="columns medium-12 margin-top-medium">
+    <h3>External Resources</h3>
+    <table class="hover">
+      <thead>
+      <th>Identifier</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let crossReference of crossReferences">
+        <td><a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

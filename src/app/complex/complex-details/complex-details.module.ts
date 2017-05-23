@@ -43,6 +43,7 @@ import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/serv
 import {ProgressSpinnerModule} from "../../shared/loading-indicators/progress-spinner/progress-spinner.module";
 import {SectionService} from "./shared/service/section/section.service";
 import {Ng2PageScrollModule} from "ng2-page-scroll";
+import { ExternalResourcesComponent } from './complex-references/external-resources/external-resources.component';
 
 @NgModule({
   imports: [
@@ -86,6 +87,7 @@ import {Ng2PageScrollModule} from "ng2-page-scroll";
     EmdbCrossreferencesComponent,
     AssembliesComponent,
     GoToComponent,
+    ExternalResourcesComponent,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, Md5, SectionService],
 

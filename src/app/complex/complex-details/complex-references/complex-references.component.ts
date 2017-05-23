@@ -1,5 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { CrossReference } from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'cp-complex-references',
@@ -9,6 +9,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 export class ComplexReferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _pubmedXRefs: CrossReference[];
+  private _externalResources: CrossReference[];
   private _synonyms: string[];
   private _systematicName: string[];
 
@@ -25,6 +26,12 @@ export class ComplexReferencesComponent implements OnInit {
           this._pubmedXRefs = [];
         }
         this._pubmedXRefs.push(crossRef);
+      }
+      if (database === 'signor' || database === 'matrixdb') {
+        if (this._externalResources === undefined) {
+          this._externalResources = [];
+        }
+        this._externalResources.push(crossRef);
       }
     }
   }
@@ -46,7 +53,15 @@ export class ComplexReferencesComponent implements OnInit {
     this._pubmedXRefs = value;
   }
 
-  get synonyms(): string[] {
+  get externalResources(): CrossReference[] {
+    return this._externalResources;
+  }
+
+  set externalResources(value: CrossReference[]) {
+    this._externalResources = value;
+  }
+
+  nyms(): string[] {
     return this._synonyms;
   }
 
