@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'cp-home',
@@ -8,9 +9,10 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Complex Portal');
     ProgressBarComponent.display();
     document.body.scrollTop = 0;
   }

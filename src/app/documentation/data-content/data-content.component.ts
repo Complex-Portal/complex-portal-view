@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'cp-data-content',
@@ -10,12 +11,13 @@ import {environment} from "../../../environments/environment";
 })
 export class DataContentComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private titleService: Title) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
+    this.titleService.setTitle('Complex Portal - Data Content');
     ProgressBarComponent.hide();
   }
 

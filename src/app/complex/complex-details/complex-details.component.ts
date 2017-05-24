@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SectionService} from "./shared/service/section/section.service";
 import {PageScrollConfig} from "ng2-page-scroll";
+import {Title} from "@angular/platform-browser";
 
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
@@ -25,7 +26,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _gxa;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
-              private complexPortalService: ComplexPortalService, private sectionService : SectionService) {
+              private complexPortalService: ComplexPortalService, private sectionService: SectionService, private titleService: Title) {
     PageScrollConfig.defaultScrollOffset = 50;
 
     if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
@@ -40,6 +41,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       .params
       .subscribe(params => {
         this.query = params['id'];
+        this.titleService.setTitle('Complex Portal - ' + this.query);
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails,
           error => {

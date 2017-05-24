@@ -2,6 +2,7 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {BasketService} from '../shared/basket/service/basket.service';
 import {BasketItem} from '../shared/basket/model/basketItem';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'cp-basket',
@@ -11,11 +12,12 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: {[name: string]: BasketItem};
 
-  constructor(private _basketService: BasketService) {
+  constructor(private _basketService: BasketService, private titleService : Title) {
 
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Complex Portal - Basket');
     this._complexBasket = this._basketService.complexBasket;
   }
 

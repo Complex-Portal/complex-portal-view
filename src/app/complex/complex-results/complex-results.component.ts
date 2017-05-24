@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ComplexSearchResult } from '../shared/model/complex-results/complex-search.model';
 import { ComplexPortalService } from '../shared/service/complex-portal.service';
 import { ProgressBarComponent } from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -21,7 +22,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private complexPortalService: ComplexPortalService) {
+    private complexPortalService: ComplexPortalService, private titleService: Title) {
+  }
+
+  ngOnInit() {
+    this.titleService.setTitle('Complex Portal - Results');
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -34,17 +39,15 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
-            this.complexSearch = complexSearch;
-            if (this.complexSearch.totalNumberOfResults !== 0) {
-              this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
-            }
-            ProgressBarComponent.hide();
-          });
+          this.complexSearch = complexSearch;
+          if (this.complexSearch.totalNumberOfResults !== 0) {
+            this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+          }
+          ProgressBarComponent.hide();
+        });
         document.body.scrollTop = 0;
       });
   }
-
-  ngOnInit() { }
 
   ngAfterViewInit(): void {
     // ProgressBarComponent.hide();

@@ -5,6 +5,7 @@ import {GoogleAnalyticsService} from "../shared/google-analytics/google-analytic
 import {Router} from "@angular/router";
 import {Action} from "../shared/google-analytics/action.enum";
 import {Category} from "../shared/google-analytics/category.enum";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'cp-download',
@@ -19,10 +20,11 @@ export class DownloadComponent implements OnInit, AfterViewInit {
   private _COMPLEX_TAB_README = environment.complex_tab_readme;
   private _COMPLEX_CURRENT = environment.complex_current;
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService) {
+  constructor(private router: Router, private ga: GoogleAnalyticsService, private titleService: Title) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Complex Portal - Download');
     ProgressBarComponent.display();
   }
 

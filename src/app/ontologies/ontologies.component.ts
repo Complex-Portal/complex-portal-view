@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -9,10 +10,11 @@ import {Router} from "@angular/router";
 })
 export class OntologiesComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private titleService: Title) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Complex Portal - Ontologies');
     this.router.navigate(['home']);
   }
 

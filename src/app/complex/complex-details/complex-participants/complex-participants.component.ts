@@ -9,6 +9,8 @@ import {SectionService} from "../shared/service/section/section.service";
 })
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
+  private _complexAC: string;
+  private _complexMIJSON: string;
   private _displayedElements = 5;
 
   constructor(private sectionService: SectionService) {
@@ -56,5 +58,23 @@ export class ComplexParticipantsComponent implements OnInit {
 
   set displayedElements(value: number) {
     this._displayedElements = value;
+  }
+
+  get complexAC(): string {
+    return this._complexAC;
+  }
+
+  @Input()
+  set complexAC(value: string) {
+    this._complexAC = value;
+  }
+
+  get complexMIJSON(): string {
+    return this._complexMIJSON;
+  }
+
+  @Input()
+  set complexMIJSON(value: string) {
+    this._complexMIJSON = value;
   }
 }

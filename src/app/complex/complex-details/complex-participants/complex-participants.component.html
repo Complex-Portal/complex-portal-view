@@ -1,44 +1,54 @@
 <div class="row" *ngIf="participants">
-  <div class="columns medium-12 no-pad-right">
-    <table class="hover">
-      <thead>
-      <th>Legend</th>
-      <th>Description</th>
-      <th>Stoichiometry</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let participant of participants | slice:0:displayedElements">
-        <td>
-          <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
-            <img style="max-width: 50%; min-width: 30px" src="{{getLegendURL(participant.interactorType)}}">
-          </div>
-        </td>
-        <td>
-          <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
-            {{participant.name}} ({{participant.bioRole}})</b></div>
-          <div class="columns medium-12 no-pad-right no-pad-left"><a href="{{participant.identifierLink}}"
-                                                                     target="_blank">{{participant.identifier}} <i
-            class="icon icon-generic small" data-icon="x"></i></a></div>
-          <div class="columns medium-12 no-pad-right no-pad-left">{{participant.description}}</div>
-        </td>
-        <td>
-          <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
-            <p class="badge" *ngIf="participant.stochiometry">{{getConvertedStochiometry(participant.stochiometry)}}</p>
-          </div>
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < participants.length">
-        <td>
-          <!--empty placeholder-->
-        </td>
-        <td>
-          <a class="label" (click)="displayedElements = participants.length">Show all</a>
-        </td>
-        <td>
-          <!--empty placeholder-->
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <h2 class="float-left">Participants</h2>
+  <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
+  <div class="columns medium-12 no-pad-right no-pad-left">
+    <div class="columns medium-6 no-pad-right">
+      <cp-complex-viewer *ngIf="complexMIJSON && complexAC"
+      [complexAC]="complexAC"
+      [complexMIJSON]="complexMIJSON"></cp-complex-viewer>
+    </div>
+    <div class="columns medium-6 no-pad-right">
+      <table class="hover">
+        <thead>
+        <th>Legend</th>
+        <th>Description</th>
+        <th>Stoichiometry</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let participant of participants | slice:0:displayedElements">
+          <td>
+            <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
+              <img style="max-width: 50%; min-width: 30px" src="{{getLegendURL(participant.interactorType)}}">
+            </div>
+          </td>
+          <td>
+            <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
+              {{participant.name}} ({{participant.bioRole}})</b></div>
+            <div class="columns medium-12 no-pad-right no-pad-left"><a href="{{participant.identifierLink}}"
+                                                                       target="_blank">{{participant.identifier}} <i
+              class="icon icon-generic small" data-icon="x"></i></a></div>
+            <div class="columns medium-12 no-pad-right no-pad-left">{{participant.description}}</div>
+          </td>
+          <td>
+            <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
+              <p class="badge" *ngIf="participant.stochiometry">
+                {{getConvertedStochiometry(participant.stochiometry)}}</p>
+            </div>
+          </td>
+        </tr>
+        <tr class="text-center" style="background: white" *ngIf="displayedElements < participants.length">
+          <td>
+            <!--empty placeholder-->
+          </td>
+          <td>
+            <a class="label" (click)="displayedElements = participants.length">Show all</a>
+          </td>
+          <td>
+            <!--empty placeholder-->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

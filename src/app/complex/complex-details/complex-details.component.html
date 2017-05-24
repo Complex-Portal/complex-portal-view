@@ -10,16 +10,10 @@
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">
-          <cp-go-to [sectionName]="'Participants'"></cp-go-to>
-          <div class="columns medium-6 no-pad-left no-pad-right">
-            <cp-complex-viewer *ngIf="complexDetails && complexMIJSON"
-                               [complexAC]="complexDetails.ac"
-                               [complexMIJSON]="complexMIJSON"></cp-complex-viewer>
-          </div>
-          <div class="columns medium-6">
             <cp-complex-participants *ngIf="complexDetails"
-                                     [participants]="complexDetails.participants"></cp-complex-participants>
-          </div>
+                                     [participants]="complexDetails.participants"
+                                     [complexAC]="complexDetails.ac"
+                                     [complexMIJSON]="complexMIJSON"></cp-complex-participants>
         </div>
         <div id="function" class="columns medium-12 " style="margin-bottom: 30px">
           <cp-complex-function *ngIf="complexDetails;"

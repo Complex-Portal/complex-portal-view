@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/progress-bar.component";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'cp-documentation',
@@ -8,13 +9,14 @@ import {ProgressBarComponent} from "../shared/loading-indicators/progress-bar/pr
 })
 export class DocumentationComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
   }
 
 
   ngAfterViewInit(): void {
+    this.titleService.setTitle('Complex Portal - Documentation');
     ProgressBarComponent.hide();
   }
 }
