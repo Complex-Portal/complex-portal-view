@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 import {EuroPmcService} from './service/euro-pmc.service';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';

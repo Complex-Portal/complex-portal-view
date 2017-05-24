@@ -34,21 +34,20 @@ import {AssembliesComponent} from './complex-function/assemblies/assemblies.comp
 import {GoToComponent} from './shared/go-to/go-to.component';
 import {RouterModule} from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';
-import {BasketService} from '../../shared/basket/service/basket.service';
 import {OlsService} from '../../shared/ols/service/ols.service';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {ReactomeService} from './complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
-import {ProgressSpinnerModule} from "../../shared/loading-indicators/progress-spinner/progress-spinner.module";
-import {SectionService} from "./shared/service/section/section.service";
-import {Ng2PageScrollModule} from "ng2-page-scroll";
+import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
+import {SectionService} from './shared/service/section/section.service';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import { ExternalResourcesComponent } from './complex-references/external-resources/external-resources.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      {path: '', component: ComplexDetailsComponent}
+      {path: '', component: ComplexDetailsComponent},
     ]),
     CommonModule,
     ProgressSpinnerModule,

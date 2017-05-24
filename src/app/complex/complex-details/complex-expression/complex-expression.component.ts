@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -10,11 +10,11 @@ export class ChemblCrossreferenceComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _displayedElements = 5;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 
   get crossReferences(): CrossReference[] {
     return this._crossReferences;

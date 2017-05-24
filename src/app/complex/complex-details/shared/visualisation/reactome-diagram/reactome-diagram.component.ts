@@ -1,5 +1,13 @@
 import {
-  Component, OnInit, HostListener, Input, OnChanges, SimpleChanges, ViewChild, EventEmitter, Output
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
 import {ReactomeService} from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';

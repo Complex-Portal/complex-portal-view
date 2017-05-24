@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../../../shared/model/complex-details/participant.model';
 
 @Component({
@@ -38,8 +38,8 @@ export class GxaHeatmapComponent implements OnInit {
         this._isLoaded = false;
     }
 
-    if(this._experimentId){
-      let context = this;
+    if (this._experimentId) {
+      const context = this;
       this._gxa.render({
         target: 'highchartsContainer',
         experiment: this._experimentId,
@@ -47,7 +47,7 @@ export class GxaHeatmapComponent implements OnInit {
         query: {
           gene: this.gxaParamsQueries
         },
-        fail: function() {
+        fail: function () {
           context._isLoaded = false;
         }
       });

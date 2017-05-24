@@ -1,8 +1,8 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {Facet} from '../shared/model/complex-results/facets/facet.model';
-import {Title} from "@angular/platform-browser";
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'cp-complex-organisms',
@@ -13,7 +13,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
   private _specieFacets: Facet[];
   private _query = 'organisms';
 
-  constructor(private complexPortalService: ComplexPortalService, private titleService : Title) {
+  constructor(private complexPortalService: ComplexPortalService, private titleService: Title) {
   }
 
   ngOnInit() {

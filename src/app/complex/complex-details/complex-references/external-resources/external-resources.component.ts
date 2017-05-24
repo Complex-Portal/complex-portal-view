@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CrossReference} from "../../../shared/model/complex-details/cross-reference.model";
+import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'cp-external-resources',
@@ -10,7 +10,8 @@ export class ExternalResourcesComponent implements OnInit {
   private _crossReferences: CrossReference[];
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

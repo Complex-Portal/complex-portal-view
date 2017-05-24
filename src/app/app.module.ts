@@ -9,7 +9,7 @@ import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app.routes';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
 import {NotificationService} from './shared/notification/service/notification.service';
-import {Angulartics2Module, Angulartics2GoogleAnalytics} from 'angulartics2';
+import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
 import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {OlsService} from './shared/ols/service/ols.service';
@@ -20,11 +20,11 @@ import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MdProgressBarModule} from '@angular/material';
-import { DocumentationComponent } from './documentation/documentation.component';
-import { QuerySyntaxComponent } from './documentation/query-syntax/query-syntax.component';
-import { DataContentComponent } from './documentation/data-content/data-content.component';
-import { OntologiesComponent } from './ontologies/ontologies.component';
-import {GoogleAnalyticsService} from "./shared/google-analytics/google-analytics.service";
+import {DocumentationComponent} from './documentation/documentation.component';
+import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
+import {DataContentComponent} from './documentation/data-content/data-content.component';
+import {OntologiesComponent} from './ontologies/ontologies.component';
+import {GoogleAnalyticsService} from './shared/google-analytics/google-analytics.service';
 
 @NgModule({
   declarations: [

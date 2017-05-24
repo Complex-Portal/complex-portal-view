@@ -1,13 +1,13 @@
-import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationService} from '../../shared/notification/service/notification.service';
-import {SectionService} from "./shared/service/section/section.service";
-import {PageScrollConfig} from "ng2-page-scroll";
-import {Title} from "@angular/platform-browser";
+import {SectionService} from './shared/service/section/section.service';
+import {PageScrollConfig} from 'ng2-page-scroll';
+import {Title} from '@angular/platform-browser';
 
 declare const expressionAtlasHeatmapHighcharts: any;
 declare const $: any;
@@ -47,7 +47,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
           error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
               'Please try again later or contact us!');
-            this.router.navigate(['home']);
           }
         );
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
@@ -55,7 +54,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
           error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
               'Please try again later or contact us!');
-            this.router.navigate(['home']);
           }
         );
         document.body.scrollTop = 0;

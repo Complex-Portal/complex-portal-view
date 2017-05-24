@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ProgressBarComponent} from "../../shared/loading-indicators/progress-bar/progress-bar.component";
-import {Router} from "@angular/router";
-import {environment} from "../../../environments/environment";
-import {Title} from "@angular/platform-browser";
+import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'cp-data-content',
@@ -11,7 +11,8 @@ import {Title} from "@angular/platform-browser";
 })
 export class DataContentComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private titleService: Title) { }
+  constructor(private router: Router, private titleService: Title) {
+  }
 
   ngOnInit() {
   }
@@ -21,19 +22,19 @@ export class DataContentComponent implements OnInit, AfterViewInit {
     ProgressBarComponent.hide();
   }
 
-  public goToComplex (ac : string) : void {
-    this.router.navigate(['complex', ac])
+  public goToComplex(ac: string): void {
+    this.router.navigate(['complex', ac]);
   }
 
-  public goToECO (term : string) : void {
-    this.goTo(environment.ols_eco_url+term)
+  public goToECO(term: string): void {
+    this.goTo(environment.ols_eco_url + term);
   }
 
-  public goToGO (term : string) : void {
-    this.goTo(environment.ols_go_url+term)
+  public goToGO(term: string): void {
+    this.goTo(environment.ols_go_url + term);
   }
 
-  private goTo(url : string) : void {
+  private goTo(url: string): void {
     window.open(
       url,
       '_blank'

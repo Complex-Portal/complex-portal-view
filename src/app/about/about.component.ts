@@ -1,7 +1,7 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
-import {environment} from "../../environments/environment";
-import {Title} from "@angular/platform-browser";
+import {environment} from '../../environments/environment';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'cp-about',

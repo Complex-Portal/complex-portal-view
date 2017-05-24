@@ -1,5 +1,10 @@
 import {
-  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
   OnInit
 } from '@angular/core';
 import {SectionService} from '../service/section/section.service';
@@ -20,8 +25,8 @@ declare const $: any;
 export class GoToComponent implements OnInit, AfterViewInit {
   private _sectionName: string;
 
-  constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef,
-              private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any, private ga: GoogleAnalyticsService) {
+  constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef, private pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private document: any, private ga: GoogleAnalyticsService) {
   }
 
 

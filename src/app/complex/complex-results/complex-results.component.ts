@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
-import { ComplexSearchResult } from '../shared/model/complex-results/complex-search.model';
-import { ComplexPortalService } from '../shared/service/complex-portal.service';
-import { ProgressBarComponent } from '../../shared/loading-indicators/progress-bar/progress-bar.component';
-import {Title} from "@angular/platform-browser";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
+import {ComplexPortalService} from '../shared/service/complex-portal.service';
+import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private complexPortalService: ComplexPortalService, private titleService: Title) {
+              private complexPortalService: ComplexPortalService, private titleService: Title) {
   }
 
   ngOnInit() {

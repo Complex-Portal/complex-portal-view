@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
-import {DocumentationComponent} from "./documentation/documentation.component";
-import {QuerySyntaxComponent} from "./documentation/query-syntax/query-syntax.component";
-import {DataContentComponent} from "./documentation/data-content/data-content.component";
-import {OntologiesComponent} from "./ontologies/ontologies.component";
+import {DocumentationComponent} from './documentation/documentation.component';
+import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
+import {DataContentComponent} from './documentation/data-content/data-content.component';
+import {OntologiesComponent} from './ontologies/ontologies.component';
 
 export const rootRouterConfig: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

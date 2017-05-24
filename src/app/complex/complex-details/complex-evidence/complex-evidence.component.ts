@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -21,29 +21,29 @@ export class ComplexEvidenceComponent implements OnInit {
       const database = this._crossReferences[i].database;
 
       if (database === 'evidence ontology') {
-          this._ecoXRef = crossRef;
-          switch (this._ecoXRef.identifier) {
-            case ('ECO:0000353'):
-              this._ecoXRef.description = 'physical interaction evidence';
-              break;
-            case ('ECO:0005610'):
-              this._ecoXRef.description = 'inferred by homology';
-              break;
-            case ('ECO:0005544'):
-              this._ecoXRef.description = 'inferred by orthology';
-              break;
-            case ('ECO:0005546'):
-              this._ecoXRef.description = 'inferred by paralogy';
-              break;
-            case ('ECO:0005547'):
-              this._ecoXRef.description = 'inferred by curator';
-              break;
-            case ('ECO:0005543'):
-              this._ecoXRef.description = 'inferred from mixed species evidence';
-              break;
-            case ('ECO:0005542'):
-              this._ecoXRef.description = 'inferred from single species evidence';
-              break;
+        this._ecoXRef = crossRef;
+        switch (this._ecoXRef.identifier) {
+          case ('ECO:0000353'):
+            this._ecoXRef.description = 'physical interaction evidence';
+            break;
+          case ('ECO:0005610'):
+            this._ecoXRef.description = 'inferred by homology';
+            break;
+          case ('ECO:0005544'):
+            this._ecoXRef.description = 'inferred by orthology';
+            break;
+          case ('ECO:0005546'):
+            this._ecoXRef.description = 'inferred by paralogy';
+            break;
+          case ('ECO:0005547'):
+            this._ecoXRef.description = 'inferred by curator';
+            break;
+          case ('ECO:0005543'):
+            this._ecoXRef.description = 'inferred from mixed species evidence';
+            break;
+          case ('ECO:0005542'):
+            this._ecoXRef.description = 'inferred from single species evidence';
+            break;
         }
       }
       if (database === 'intact') {

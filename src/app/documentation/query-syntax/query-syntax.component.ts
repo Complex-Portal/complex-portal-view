@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Title} from "@angular/platform-browser";
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'cp-query-syntax',
@@ -8,11 +8,11 @@ import {Title} from "@angular/platform-browser";
 })
 export class QuerySyntaxComponent implements OnInit {
 
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Query Syntax');
 
   }
-
 }

@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
-import {SectionService} from "../shared/service/section/section.service";
+import {SectionService} from '../shared/service/section/section.service';
 
 @Component({
   selector: 'cp-complex-participants',

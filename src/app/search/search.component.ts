@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { GoogleAnalyticsService } from '../shared/google-analytics/google-analytics.service';
-import { Category } from '../shared/google-analytics/category.enum';
-import { Action } from '../shared/google-analytics/action.enum';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {GoogleAnalyticsService} from '../shared/google-analytics/google-analytics.service';
+import {Category} from '../shared/google-analytics/category.enum';
+import {Action} from '../shared/google-analytics/action.enum';
 
 @Component({
   selector: 'cp-search',
@@ -24,6 +24,6 @@ export class SearchComponent implements OnInit {
       this.ga.invokeCustomEvent(Action.searchInvoker, Category.home, typeOfButton);
     }
     this.ga.invokeCustomEvent(Action.search, Category.home, query);
-    this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
+    this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
   }
 }

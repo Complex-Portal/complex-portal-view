@@ -1,8 +1,8 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {GoogleAnalyticsService} from "../../../shared/google-analytics/google-analytics.service";
-import {Router} from "@angular/router";
-import {Action} from "../../../shared/google-analytics/action.enum";
-import {Category} from "../../../shared/google-analytics/category.enum";
+import {Component, Input, OnInit} from '@angular/core';
+import {GoogleAnalyticsService} from '../../../shared/google-analytics/google-analytics.service';
+import {Router} from '@angular/router';
+import {Action} from '../../../shared/google-analytics/action.enum';
+import {Category} from '../../../shared/google-analytics/category.enum';
 
 @Component({
   selector: 'cp-complex-organism',
@@ -20,7 +20,7 @@ export class ComplexOrganismComponent implements OnInit {
   ngOnInit() {
   }
 
-  search(specieName : string){
+  search(specieName: string) {
     this.ga.invokeCustomEvent(Action.search, Category.organisms, specieName);
     this.router.navigate(['complex/search'], {queryParams: {query: '*', species: [specieName], page: 1}});
 

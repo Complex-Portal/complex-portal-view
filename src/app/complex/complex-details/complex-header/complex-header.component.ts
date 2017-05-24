@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';

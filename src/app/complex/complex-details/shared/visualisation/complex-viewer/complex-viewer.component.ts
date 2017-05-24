@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
 import {NotificationService} from '../../../../../shared/notification/service/notification.service';
 let xlv: any;
 const SvgSaver = require('svgsaver');

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -17,10 +17,10 @@ export class ComplexPropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this._propertiesDescription.length === 0){
+    if (this._propertiesDescription.length === 0) {
       this._propertiesDescription = null;
     }
-    if(this._comments.length === 0){
+    if (this._comments.length === 0) {
       this._comments = null;
     }
     for (let i = 0; i < this.crossReferences.length; i++) {
@@ -32,7 +32,6 @@ export class ComplexPropertiesComponent implements OnInit {
           this._pdbXRefs = [];
         }
         this._pdbXRefs.push(crossRef);
-        console.log(crossRef.identifier)
       }
       if (database === 'emdb') {
         if (this._emdbXRefs === undefined) {

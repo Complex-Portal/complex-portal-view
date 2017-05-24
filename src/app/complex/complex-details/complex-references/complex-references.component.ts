@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CrossReference } from '../../shared/model/complex-details/cross-reference.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'cp-complex-references',
@@ -13,7 +13,8 @@ export class ComplexReferencesComponent implements OnInit {
   private _synonyms: string[];
   private _systematicName: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
 

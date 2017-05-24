@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {GoogleAnalyticsService} from "../../shared/google-analytics/google-analytics.service";
-import {Action} from "../../shared/google-analytics/action.enum";
-import {Category} from "../../shared/google-analytics/category.enum";
+import {GoogleAnalyticsService} from '../../shared/google-analytics/google-analytics.service';
+import {Action} from '../../shared/google-analytics/action.enum';
+import {Category} from '../../shared/google-analytics/category.enum';
 
 
 @Component({
@@ -43,8 +43,8 @@ export class LocalSearchComponent implements OnInit {
     );
   }
 
-  search(query: string, type : string) {
-    if(type === 'enter'){
+  search(query: string, type: string) {
+    if (type === 'enter') {
       this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
     } else {
       this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);

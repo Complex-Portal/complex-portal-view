@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 
 @Component({
@@ -9,7 +9,8 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
 export class ComplexListComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

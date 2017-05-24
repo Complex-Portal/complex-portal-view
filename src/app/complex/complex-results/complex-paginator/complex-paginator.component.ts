@@ -1,6 +1,4 @@
-import {
-  Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges
-} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-paginator',
