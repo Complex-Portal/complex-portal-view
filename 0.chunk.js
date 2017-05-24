@@ -1728,7 +1728,7 @@ module.exports = Link;
 /* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -14222,7 +14222,7 @@ var PageScrollInstance = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__ = __webpack_require__(478);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__ = __webpack_require__(485);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng2_page_scroll_util_service__ = __webpack_require__(467);
@@ -14819,6 +14819,7 @@ module.exports = getIteratorFn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(12);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDetailsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -14836,13 +14837,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ComplexDetailsComponent = (function () {
-    function ComplexDetailsComponent(route, router, notificationService, complexPortalService, sectionService) {
+    function ComplexDetailsComponent(route, router, notificationService, complexPortalService, sectionService, titleService) {
         this.route = route;
         this.router = router;
         this.notificationService = notificationService;
         this.complexPortalService = complexPortalService;
         this.sectionService = sectionService;
+        this.titleService = titleService;
         __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__["d" /* PageScrollConfig */].defaultScrollOffset = 50;
         if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
             this._gxa = expressionAtlasHeatmapHighcharts;
@@ -14857,6 +14860,7 @@ var ComplexDetailsComponent = (function () {
             .params
             .subscribe(function (params) {
             _this.query = params['id'];
+            _this.titleService.setTitle('Complex Portal - ' + _this.query);
             _this.complexPortalService.getComplex(_this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
                 _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
                     'Please try again later or contact us!');
@@ -14925,10 +14929,10 @@ ComplexDetailsComponent = __decorate([
         template: __webpack_require__(618),
         styles: [__webpack_require__(562)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["Title"]) === "function" && _f || Object])
 ], ComplexDetailsComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-details.component.js.map
 
 /***/ }),
@@ -16647,6 +16651,26 @@ var ComplexParticipantsComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexAC", {
+        get: function () {
+            return this._complexAC;
+        },
+        set: function (value) {
+            this._complexAC = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexMIJSON", {
+        get: function () {
+            return this._complexMIJSON;
+        },
+        set: function (value) {
+            this._complexMIJSON = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ComplexParticipantsComponent;
 }());
 __decorate([
@@ -16654,6 +16678,16 @@ __decorate([
     __metadata("design:type", Array),
     __metadata("design:paramtypes", [Array])
 ], ComplexParticipantsComponent.prototype, "participants", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], ComplexParticipantsComponent.prototype, "complexAC", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], ComplexParticipantsComponent.prototype, "complexMIJSON", null);
 ComplexParticipantsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-complex-participants',
@@ -17336,7 +17370,7 @@ SystematicNameComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__ = __webpack_require__(476);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_google_analytics_service__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__ = __webpack_require__(73);
@@ -21691,7 +21725,7 @@ module.exports = exports['default'];
 /* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21708,7 +21742,7 @@ module.exports = module.exports.toString();
 /* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21725,7 +21759,7 @@ module.exports = module.exports.toString();
 /* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21742,7 +21776,7 @@ module.exports = module.exports.toString();
 /* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21759,7 +21793,7 @@ module.exports = module.exports.toString();
 /* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21776,7 +21810,7 @@ module.exports = module.exports.toString();
 /* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21793,7 +21827,7 @@ module.exports = module.exports.toString();
 /* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21810,7 +21844,7 @@ module.exports = module.exports.toString();
 /* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21827,7 +21861,7 @@ module.exports = module.exports.toString();
 /* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21844,7 +21878,7 @@ module.exports = module.exports.toString();
 /* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21861,7 +21895,7 @@ module.exports = module.exports.toString();
 /* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21878,7 +21912,7 @@ module.exports = module.exports.toString();
 /* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21895,7 +21929,7 @@ module.exports = module.exports.toString();
 /* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21912,7 +21946,7 @@ module.exports = module.exports.toString();
 /* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21929,7 +21963,7 @@ module.exports = module.exports.toString();
 /* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21946,7 +21980,7 @@ module.exports = module.exports.toString();
 /* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21963,7 +21997,7 @@ module.exports = module.exports.toString();
 /* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21980,7 +22014,7 @@ module.exports = module.exports.toString();
 /* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -21997,7 +22031,7 @@ module.exports = module.exports.toString();
 /* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22014,7 +22048,7 @@ module.exports = module.exports.toString();
 /* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22031,7 +22065,7 @@ module.exports = module.exports.toString();
 /* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22048,7 +22082,7 @@ module.exports = module.exports.toString();
 /* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22065,7 +22099,7 @@ module.exports = module.exports.toString();
 /* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22082,7 +22116,7 @@ module.exports = module.exports.toString();
 /* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22099,7 +22133,7 @@ module.exports = module.exports.toString();
 /* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22116,7 +22150,7 @@ module.exports = module.exports.toString();
 /* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22133,7 +22167,7 @@ module.exports = module.exports.toString();
 /* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22150,7 +22184,7 @@ module.exports = module.exports.toString();
 /* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22167,7 +22201,7 @@ module.exports = module.exports.toString();
 /* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22184,7 +22218,7 @@ module.exports = module.exports.toString();
 /* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22201,7 +22235,7 @@ module.exports = module.exports.toString();
 /* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 exports.push([module.i, "@import url(https://wwwdev.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
 
@@ -22218,7 +22252,7 @@ module.exports = module.exports.toString();
 /* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -22235,7 +22269,7 @@ module.exports = module.exports.toString();
 /* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -103602,7 +103636,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* 618 */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n        <cp-complex-header *ngIf=\"complexDetails;else loadingSpinner\"\n                           [complexAC]=\"complexDetails.ac\"\n                           [complexName]=\"complexDetails.name\"\n                           [complexSpecies]=\"complexDetails.species\"\n                           [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-header>\n      </div>\n      <div class=\"columns medium-12 no-pad-left no-pad-right\" style=\"margin-bottom: 30px\">\n        <div id=\"participants\" class=\"columns medium-12\">\n          <cp-go-to [sectionName]=\"'Participants'\"></cp-go-to>\n          <div class=\"columns medium-6 no-pad-left no-pad-right\">\n            <cp-complex-viewer *ngIf=\"complexDetails && complexMIJSON\"\n                               [complexAC]=\"complexDetails.ac\"\n                               [complexMIJSON]=\"complexMIJSON\"></cp-complex-viewer>\n          </div>\n          <div class=\"columns medium-6\">\n            <cp-complex-participants *ngIf=\"complexDetails\"\n                                     [participants]=\"complexDetails.participants\"></cp-complex-participants>\n          </div>\n        </div>\n        <div id=\"function\" class=\"columns medium-12 \" style=\"margin-bottom: 30px\">\n          <cp-complex-function *ngIf=\"complexDetails;\"\n                               [functionDescription]=\"complexDetails.functions\"\n                               [crossReferences]=\"complexDetails.crossReferences\"\n                               [ligands]=\"complexDetails.ligands\"\n                               [agonists]=\"complexDetails.agonists\"\n                               [antagonists]=\"complexDetails.antagonists\"></cp-complex-function>\n        </div>\n        <div id=\"properties\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-properties *ngIf=\"complexDetails;\"\n                                 [propertiesDescription]=\"complexDetails.properties\"\n                                 [comments]=\"complexDetails.comments\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-properties>\n        </div>\n        <div id=\"expression\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-expression *ngIf=\"complexDetails && gxa;\"\n                                 [gxa]=\"gxa\"\n                                 [participants]=\"complexDetails.participants\"\n                                 [complexSpecies]=\"complexDetails.species\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-expression>\n        </div>\n        <div id=\"disease\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-disease *ngIf=\"complexDetails;\"\n                              [diseaseDescriptions]=\"complexDetails.diseases\"\n                              [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-disease>\n        </div>\n        <div id=\"references\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-references *ngIf=\"complexDetails;\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"\n                                 [synonyms]=\"complexDetails.synonyms\"\n                                 [systematicName]=\"complexDetails.systematicName\"></cp-complex-references>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <cp-complex-footer *ngIf=\"complexDetails;\"\n                           [institute]=\"complexDetails.institution\"></cp-complex-footer>\n      </div>\n    </div>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</section>\n"
+module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n        <cp-complex-header *ngIf=\"complexDetails;else loadingSpinner\"\n                           [complexAC]=\"complexDetails.ac\"\n                           [complexName]=\"complexDetails.name\"\n                           [complexSpecies]=\"complexDetails.species\"\n                           [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-header>\n      </div>\n      <div class=\"columns medium-12 no-pad-left no-pad-right\" style=\"margin-bottom: 30px\">\n        <div id=\"participants\" class=\"columns medium-12\">\n            <cp-complex-participants *ngIf=\"complexDetails\"\n                                     [participants]=\"complexDetails.participants\"\n                                     [complexAC]=\"complexDetails.ac\"\n                                     [complexMIJSON]=\"complexMIJSON\"></cp-complex-participants>\n        </div>\n        <div id=\"function\" class=\"columns medium-12 \" style=\"margin-bottom: 30px\">\n          <cp-complex-function *ngIf=\"complexDetails;\"\n                               [functionDescription]=\"complexDetails.functions\"\n                               [crossReferences]=\"complexDetails.crossReferences\"\n                               [ligands]=\"complexDetails.ligands\"\n                               [agonists]=\"complexDetails.agonists\"\n                               [antagonists]=\"complexDetails.antagonists\"></cp-complex-function>\n        </div>\n        <div id=\"properties\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-properties *ngIf=\"complexDetails;\"\n                                 [propertiesDescription]=\"complexDetails.properties\"\n                                 [comments]=\"complexDetails.comments\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-properties>\n        </div>\n        <div id=\"expression\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-expression *ngIf=\"complexDetails && gxa;\"\n                                 [gxa]=\"gxa\"\n                                 [participants]=\"complexDetails.participants\"\n                                 [complexSpecies]=\"complexDetails.species\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-expression>\n        </div>\n        <div id=\"disease\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-disease *ngIf=\"complexDetails;\"\n                              [diseaseDescriptions]=\"complexDetails.diseases\"\n                              [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-disease>\n        </div>\n        <div id=\"references\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-references *ngIf=\"complexDetails;\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"\n                                 [synonyms]=\"complexDetails.synonyms\"\n                                 [systematicName]=\"complexDetails.systematicName\"></cp-complex-references>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <cp-complex-footer *ngIf=\"complexDetails;\"\n                           [institute]=\"complexDetails.institution\"></cp-complex-footer>\n      </div>\n    </div>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</section>\n"
 
 /***/ }),
 /* 619 */
@@ -103716,7 +103750,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\
 /* 637 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <table class=\"hover\">\n      <thead>\n      <th>Legend</th>\n      <th>Description</th>\n      <th>Stoichiometry</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n          </div>\n        </td>\n        <td>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n            {{participant.name}} ({{participant.bioRole}})</b></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                     target=\"_blank\">{{participant.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n          <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n        </td>\n        <td>\n          <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n            <p class=\"badge\" *ngIf=\"participant.stochiometry\">{{getConvertedStochiometry(participant.stochiometry)}}</p>\n          </div>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n        <td>\n          <!--empty placeholder-->\n        </td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n        </td>\n        <td>\n          <!--empty placeholder-->\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <h2 class=\"float-left\">Participants</h2>\n  <cp-go-to class=\"float-right\" [sectionName]=\"'Participants'\"></cp-go-to>\n  <div class=\"columns medium-12 no-pad-right no-pad-left\">\n    <div class=\"columns medium-6 no-pad-right\">\n      <cp-complex-viewer *ngIf=\"complexMIJSON && complexAC\"\n      [complexAC]=\"complexAC\"\n      [complexMIJSON]=\"complexMIJSON\"></cp-complex-viewer>\n    </div>\n    <div class=\"columns medium-6 no-pad-right\">\n      <table class=\"hover\">\n        <thead>\n        <th>Legend</th>\n        <th>Description</th>\n        <th>Stoichiometry</th>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n            </div>\n          </td>\n          <td>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n              {{participant.name}} ({{participant.bioRole}})</b></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                       target=\"_blank\">{{participant.identifier}} <i\n              class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n          </td>\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <p class=\"badge\" *ngIf=\"participant.stochiometry\">\n                {{getConvertedStochiometry(participant.stochiometry)}}</p>\n            </div>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n          <td>\n            <!--empty placeholder-->\n          </td>\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n          </td>\n          <td>\n            <!--empty placeholder-->\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 /* 638 */

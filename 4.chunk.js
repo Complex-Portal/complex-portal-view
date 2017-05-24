@@ -51,6 +51,7 @@ DownloadModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_action_enum__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_google_analytics_category_enum__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(12);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -68,10 +69,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DownloadComponent = (function () {
-    function DownloadComponent(router, ga) {
+    function DownloadComponent(router, ga, titleService) {
         this.router = router;
         this.ga = ga;
+        this.titleService = titleService;
         this._COMPLEX_PSI25 = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_psi25;
         this._COMPLEX_PSI30 = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_psi30;
         this._COMPLEX_TAB = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_tab;
@@ -80,6 +83,7 @@ var DownloadComponent = (function () {
         this._COMPLEX_CURRENT = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_current;
     }
     DownloadComponent.prototype.ngOnInit = function () {
+        this.titleService.setTitle('Complex Portal - Download');
         __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].display();
     };
     DownloadComponent.prototype.ngAfterViewInit = function () {
@@ -117,10 +121,10 @@ DownloadComponent = __decorate([
         template: __webpack_require__(657),
         styles: [__webpack_require__(601)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["Title"]) === "function" && _c || Object])
 ], DownloadComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/download.component.js.map
 
 /***/ }),
@@ -128,7 +132,7 @@ var _a, _b;
 /***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 

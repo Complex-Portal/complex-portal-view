@@ -193,7 +193,7 @@ ProgressSpinnerModule = __decorate([
 /***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -318,6 +318,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(12);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -331,13 +332,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ComplexOrganismsComponent = (function () {
-    function ComplexOrganismsComponent(complexPortalService) {
+    function ComplexOrganismsComponent(complexPortalService, titleService) {
         this.complexPortalService = complexPortalService;
+        this.titleService = titleService;
         this._query = 'organisms';
     }
     ComplexOrganismsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.titleService.setTitle('Complex Portal - Organisms');
         this.complexPortalService.getComplexOrganisms().subscribe(function (result) {
             for (var i = 0; i < result.length; i++) {
                 switch (result[i].name) {
@@ -446,10 +450,10 @@ ComplexOrganismsComponent = __decorate([
         template: __webpack_require__(652),
         styles: [__webpack_require__(596)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"]) === "function" && _b || Object])
 ], ComplexOrganismsComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-organisms.component.js.map
 
 /***/ }),
@@ -457,7 +461,7 @@ var _a;
 /***/ 595:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
@@ -475,7 +479,7 @@ module.exports = module.exports.toString();
 /***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 

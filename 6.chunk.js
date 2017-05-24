@@ -48,6 +48,7 @@ AboutModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(12);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -61,12 +62,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AboutComponent = (function () {
-    function AboutComponent() {
+    function AboutComponent(titleService) {
+        this.titleService = titleService;
         this._INTACT_BASE_URL = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].intact_base_url;
         this._INTACT_SUPPORT_URL = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].intact_support_url;
     }
     AboutComponent.prototype.ngOnInit = function () {
+        this.titleService.setTitle('Complex Portal - About');
     };
     AboutComponent.prototype.ngAfterViewInit = function () {
         __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
@@ -93,9 +97,10 @@ AboutComponent = __decorate([
         template: __webpack_require__(616),
         styles: [__webpack_require__(560)]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"]) === "function" && _a || Object])
 ], AboutComponent);
 
+var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/about.component.js.map
 
 /***/ }),
@@ -103,7 +108,7 @@ AboutComponent = __decorate([
 /***/ 560:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 

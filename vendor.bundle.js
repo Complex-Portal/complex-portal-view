@@ -14609,193 +14609,7 @@ var SafeSubscriber = (function (_super) {
 //# sourceMappingURL=Subscriber.js.map
 
 /***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap) {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-  var base64 = new Buffer(JSON.stringify(sourceMap)).toString('base64');
-  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-  return '/*# ' + data + ' */';
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(98).Buffer))
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(2);
-var ReplaySubject_1 = __webpack_require__(397);
-var common_1 = __webpack_require__(34);
-var router_1 = __webpack_require__(33);
-__webpack_require__(160);
-var Angulartics2 = (function () {
-    function Angulartics2(location, router) {
-        this.settings = {
-            pageTracking: {
-                autoTrackVirtualPages: true,
-                basePath: '',
-                excludedRoutes: []
-            },
-            eventTracking: {},
-            developerMode: false
-        };
-        this.pageTrack = new ReplaySubject_1.ReplaySubject(10);
-        this.eventTrack = new ReplaySubject_1.ReplaySubject(10);
-        this.exceptionTrack = new ReplaySubject_1.ReplaySubject(10);
-        this.setAlias = new ReplaySubject_1.ReplaySubject(10);
-        this.setUsername = new ReplaySubject_1.ReplaySubject(10);
-        this.setUserProperties = new ReplaySubject_1.ReplaySubject(10);
-        this.setUserPropertiesOnce = new ReplaySubject_1.ReplaySubject(10);
-        this.setSuperProperties = new ReplaySubject_1.ReplaySubject(10);
-        this.setSuperPropertiesOnce = new ReplaySubject_1.ReplaySubject(10);
-        this.userTimings = new ReplaySubject_1.ReplaySubject(10);
-        this.trackLocation(location, router);
-    }
-    Angulartics2.prototype.trackLocation = function (location, router) {
-        var _this = this;
-        router.events
-            .filter(function (event) { return event instanceof router_1.NavigationEnd; })
-            .subscribe(function (event) {
-            if (!_this.settings.developerMode) {
-                _this.trackUrlChange(event.urlAfterRedirects, location);
-            }
-        });
-    };
-    Angulartics2.prototype.virtualPageviews = function (value) {
-        this.settings.pageTracking.autoTrackVirtualPages = value;
-    };
-    Angulartics2.prototype.excludeRoutes = function (routes) {
-        this.settings.pageTracking.excludedRoutes = routes;
-    };
-    Angulartics2.prototype.firstPageview = function (value) {
-        this.settings.pageTracking.autoTrackFirstPage = value;
-    };
-    Angulartics2.prototype.withBase = function (value) {
-        this.settings.pageTracking.basePath = (value);
-    };
-    Angulartics2.prototype.developerMode = function (value) {
-        this.settings.developerMode = value;
-    };
-    Angulartics2.prototype.trackUrlChange = function (url, location) {
-        if (!this.settings.developerMode) {
-            if (this.settings.pageTracking.autoTrackVirtualPages && !this.matchesExcludedRoute(url)) {
-                this.pageTrack.next({
-                    path: this.settings.pageTracking.basePath.length ? this.settings.pageTracking.basePath + url : location.prepareExternalUrl(url),
-                    location: location
-                });
-            }
-        }
-    };
-    Angulartics2.prototype.matchesExcludedRoute = function (url) {
-        for (var _i = 0, _a = this.settings.pageTracking.excludedRoutes; _i < _a.length; _i++) {
-            var excludedRoute = _a[_i];
-            if ((excludedRoute instanceof RegExp && excludedRoute.test(url)) || url.indexOf(excludedRoute) > -1) {
-                return true;
-            }
-        }
-        return false;
-    };
-    return Angulartics2;
-}());
-Angulartics2 = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [common_1.Location, router_1.Router])
-], Angulartics2);
-exports.Angulartics2 = Angulartics2;
-
-
-/***/ }),
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19303,6 +19117,192 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["Version"]('4.1.0'
 
 
 /***/ }),
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap) {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+  var base64 = new Buffer(JSON.stringify(sourceMap)).toString('base64');
+  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+  return '/*# ' + data + ' */';
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(98).Buffer))
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(2);
+var ReplaySubject_1 = __webpack_require__(397);
+var common_1 = __webpack_require__(34);
+var router_1 = __webpack_require__(33);
+__webpack_require__(160);
+var Angulartics2 = (function () {
+    function Angulartics2(location, router) {
+        this.settings = {
+            pageTracking: {
+                autoTrackVirtualPages: true,
+                basePath: '',
+                excludedRoutes: []
+            },
+            eventTracking: {},
+            developerMode: false
+        };
+        this.pageTrack = new ReplaySubject_1.ReplaySubject(10);
+        this.eventTrack = new ReplaySubject_1.ReplaySubject(10);
+        this.exceptionTrack = new ReplaySubject_1.ReplaySubject(10);
+        this.setAlias = new ReplaySubject_1.ReplaySubject(10);
+        this.setUsername = new ReplaySubject_1.ReplaySubject(10);
+        this.setUserProperties = new ReplaySubject_1.ReplaySubject(10);
+        this.setUserPropertiesOnce = new ReplaySubject_1.ReplaySubject(10);
+        this.setSuperProperties = new ReplaySubject_1.ReplaySubject(10);
+        this.setSuperPropertiesOnce = new ReplaySubject_1.ReplaySubject(10);
+        this.userTimings = new ReplaySubject_1.ReplaySubject(10);
+        this.trackLocation(location, router);
+    }
+    Angulartics2.prototype.trackLocation = function (location, router) {
+        var _this = this;
+        router.events
+            .filter(function (event) { return event instanceof router_1.NavigationEnd; })
+            .subscribe(function (event) {
+            if (!_this.settings.developerMode) {
+                _this.trackUrlChange(event.urlAfterRedirects, location);
+            }
+        });
+    };
+    Angulartics2.prototype.virtualPageviews = function (value) {
+        this.settings.pageTracking.autoTrackVirtualPages = value;
+    };
+    Angulartics2.prototype.excludeRoutes = function (routes) {
+        this.settings.pageTracking.excludedRoutes = routes;
+    };
+    Angulartics2.prototype.firstPageview = function (value) {
+        this.settings.pageTracking.autoTrackFirstPage = value;
+    };
+    Angulartics2.prototype.withBase = function (value) {
+        this.settings.pageTracking.basePath = (value);
+    };
+    Angulartics2.prototype.developerMode = function (value) {
+        this.settings.developerMode = value;
+    };
+    Angulartics2.prototype.trackUrlChange = function (url, location) {
+        if (!this.settings.developerMode) {
+            if (this.settings.pageTracking.autoTrackVirtualPages && !this.matchesExcludedRoute(url)) {
+                this.pageTrack.next({
+                    path: this.settings.pageTracking.basePath.length ? this.settings.pageTracking.basePath + url : location.prepareExternalUrl(url),
+                    location: location
+                });
+            }
+        }
+    };
+    Angulartics2.prototype.matchesExcludedRoute = function (url) {
+        for (var _i = 0, _a = this.settings.pageTracking.excludedRoutes; _i < _a.length; _i++) {
+            var excludedRoute = _a[_i];
+            if ((excludedRoute instanceof RegExp && excludedRoute.test(url)) || url.indexOf(excludedRoute) > -1) {
+                return true;
+            }
+        }
+        return false;
+    };
+    return Angulartics2;
+}());
+Angulartics2 = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [common_1.Location, router_1.Router])
+], Angulartics2);
+exports.Angulartics2 = Angulartics2;
+
+
+/***/ }),
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
 /* 22 */,
 /* 23 */,
 /* 24 */,
@@ -19745,7 +19745,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_rxjs_operator_last___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_rxjs_operator_last__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_rxjs_operator_mergeAll__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_rxjs_operator_mergeAll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_rxjs_operator_mergeAll__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_platform_browser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_rxjs_operator_filter__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_rxjs_operator_filter__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouterLink", function() { return RouterLink; });
@@ -29936,7 +29936,7 @@ module.exports = g;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(12);
 /* unused harmony export BrowserXhr */
 /* unused harmony export JSONPBackend */
 /* unused harmony export JSONPConnection */
@@ -32643,9 +32643,9 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var angulartics2On_1 = __webpack_require__(118);
-__export(__webpack_require__(16));
+__export(__webpack_require__(17));
 __export(__webpack_require__(118));
 __export(__webpack_require__(212));
 exports.ANGULARTICS2_FORROOT_GUARD = new core_1.OpaqueToken('ANGULARTICS2_FORROOT_GUARD');
@@ -32944,7 +32944,7 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(2), __webpack_require__(21), __webpack_require__(30), __webpack_require__(34)) :
+	 true ? factory(exports, __webpack_require__(2), __webpack_require__(12), __webpack_require__(30), __webpack_require__(34)) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/platform-browser', 'rxjs/Subject', '@angular/common'], factory) :
 	(factory((global.ngxtoastr = global.ngxtoastr || {}),global.ng.core,global.ng.platformBrowser,global.Rx,global.ng.common));
 }(this, (function (exports,_angular_core,_angular_platformBrowser,rxjs_Subject,_angular_common) { 'use strict';
@@ -37205,7 +37205,7 @@ var AnimationGroupPlayer = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_fromPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_map__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__(12);
 /* unused harmony export AbstractControlDirective */
 /* unused harmony export AbstractFormGroupDirective */
 /* unused harmony export CheckboxControlValueAccessor */
@@ -43297,8 +43297,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var platform_browser_1 = __webpack_require__(21);
-var angulartics2_1 = __webpack_require__(16);
+var platform_browser_1 = __webpack_require__(12);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2On = (function () {
     function Angulartics2On(elRef, angulartics2, eventManager) {
         this.elRef = elRef;
@@ -44595,7 +44595,7 @@ exports.tryCatch = tryCatch;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
@@ -93107,7 +93107,7 @@ var ImportResolver = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_compiler__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(12);
 /* unused harmony export RESOURCE_CACHE_PROVIDER */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return platformBrowserDynamic; });
 /* unused harmony export VERSION */
@@ -93291,7 +93291,7 @@ var platformBrowserDynamic = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_animations_browser__ = __webpack_require__(198);
 /* unused harmony export BrowserAnimationsModule */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NoopAnimationsModule; });
@@ -93793,8 +93793,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
-var platform_browser_1 = __webpack_require__(21);
+var angulartics2_1 = __webpack_require__(17);
+var platform_browser_1 = __webpack_require__(12);
 var router_1 = __webpack_require__(33);
 var Angulartics2AppInsights = (function () {
     function Angulartics2AppInsights(angulartics2, title, router) {
@@ -93886,7 +93886,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2BaiduAnalytics = (function () {
     function Angulartics2BaiduAnalytics(angulartics2) {
         var _this = this;
@@ -93950,7 +93950,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2Facebook = (function () {
     function Angulartics2Facebook(angulartics2) {
         var _this = this;
@@ -94003,7 +94003,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2GoogleAnalytics = (function () {
     function Angulartics2GoogleAnalytics(angulartics2) {
         var _this = this;
@@ -94141,7 +94141,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2GoogleTagManager = (function () {
     function Angulartics2GoogleTagManager(angulartics2) {
         var _this = this;
@@ -94246,7 +94246,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2Kissmetrics = (function () {
     function Angulartics2Kissmetrics(angulartics2) {
         var _this = this;
@@ -94297,7 +94297,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2Mixpanel = (function () {
     function Angulartics2Mixpanel(angulartics2) {
         var _this = this;
@@ -94417,7 +94417,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2Piwik = (function () {
     function Angulartics2Piwik(angulartics2) {
         var _this = this;
@@ -94502,7 +94502,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
-var angulartics2_1 = __webpack_require__(16);
+var angulartics2_1 = __webpack_require__(17);
 var Angulartics2Segment = (function () {
     function Angulartics2Segment(angulartics2) {
         var _this = this;

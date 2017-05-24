@@ -47,6 +47,7 @@ BasketModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(12);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -60,11 +61,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var BasketComponent = (function () {
-    function BasketComponent(_basketService) {
+    function BasketComponent(_basketService, titleService) {
         this._basketService = _basketService;
+        this.titleService = titleService;
     }
     BasketComponent.prototype.ngOnInit = function () {
+        this.titleService.setTitle('Complex Portal - Basket');
         this._complexBasket = this._basketService.complexBasket;
     };
     BasketComponent.prototype.ngAfterViewInit = function () {
@@ -98,10 +102,10 @@ BasketComponent = __decorate([
         template: __webpack_require__(617),
         styles: [__webpack_require__(561)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"]) === "function" && _b || Object])
 ], BasketComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/basket.component.js.map
 
 /***/ }),
@@ -109,7 +113,7 @@ var _a;
 /***/ 561:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(16)(false);
 // imports
 
 
