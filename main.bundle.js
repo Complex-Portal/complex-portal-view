@@ -331,7 +331,7 @@ var map = {
 	],
 	"app/complex/complex-results/complex-results.module": [
 		451,
-		2
+		1
 	],
 	"app/complex/complex.module": [
 		452,
@@ -343,7 +343,7 @@ var map = {
 	],
 	"app/home/home.module": [
 		454,
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -767,12 +767,7 @@ var AppComponent = (function () {
         $(document).foundationExtendEBI();
     };
     AppComponent.prototype.initialiseGoogleAnalytics = function () {
-        if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production === false) {
-            ga('create', __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].analytics_id, 'none');
-        }
-        else {
-            ga('create', __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].analytics_id, 'none');
-        }
+        ga('create', __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].analytics_id, 'none');
     };
     AppComponent.prototype.initialiseFoundationHacks = function () {
         // copied from script.js (ebi framework)
@@ -1139,17 +1134,18 @@ var BasketItem = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `angular-cli.json`.
-var EBI_BASE_URL = '//wwwdev.ebi.ac.uk/';
+/**
+ * Created by Maximilian Koch (mkoch@ebi.ac.uk) on 01/06/2017.
+ */
+// Enviorment for GitHub Page
+var EBI_BASE_URL = '//www.ebi.ac.uk/';
+var REACTOME_BASE_URL = '//reactomedev.org';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 var environment = {
-    production: false,
-    evn: 'dev',
-    analytics_id: 'UA-672146-11',
+    production: true,
+    evn: 'test',
+    analytics_id: 'UA-672146-13',
     ebi_base_url: EBI_BASE_URL,
     complex_ws_base_url: EBI_BASE_URL + 'intact/complex-ws',
     europepmc_base_url: EBI_BASE_URL + 'europepmc',
@@ -1157,7 +1153,6 @@ var environment = {
     ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',
     ols_go_url: EBI_BASE_URL + 'ols/ontologies/go/terms?obo_id=',
     ols_eco_url: EBI_BASE_URL + 'ols/ontologies/eco/terms?obo_id=',
-    reactome_base_url: '//reactomedev.oicr.on.ca',
     complex_current: COMPLEX__FTP_BASE_URL + 'current',
     complex_tab: COMPLEX__FTP_BASE_URL + 'current/complextab/',
     complex_tab_readme: COMPLEX__FTP_BASE_URL + 'current/complextab/README.htm',
@@ -1166,6 +1161,7 @@ var environment = {
     intact_base_url: EBI_BASE_URL + 'intact',
     intact_support_url: EBI_BASE_URL + 'support/intact',
     intact_training_url: EBI_BASE_URL + 'intact/resources/training',
+    reactome_base_url: REACTOME_BASE_URL,
 };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/environment.js.map
 
@@ -1333,7 +1329,7 @@ module.exports = {
 		"install": "^0.8.7",
 		"jquery": "^3.1.1",
 		"litemol": "https://github.com/dsehnal/LiteMol/tarball/v1.0",
-		"ng2-page-scroll": "^4.0.0-beta.7",
+		"ng2-page-scroll": "^4.0.0-beta.8",
 		"ngx-toastr": "^5.0.6",
 		"react": "^15.5.4",
 		"rxjs": "^5.0.1",
@@ -1402,7 +1398,7 @@ module.exports = "<!--<input style=\"font-weight: normal\" size=\"35\" type=\"te
 /***/ 392:
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\" (keydown.enter)=\"search(query.value, 'enter')\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value, 'button')\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n      <a (click)=\"search('Ndc80', 'example')\">Ndc80</a >\n      <a (click)=\"search('Q05471', 'example')\">Q05471</a>\n      <a (click)=\"search('PCNA', 'example')\">PCNA</a>\n      <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a>\n    </small>\n  </fieldset>\n</div>\n<!-- /local-search -->\n"
+module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\" (keydown.enter)=\"search(searchTerm.value, 'enter')\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value, 'button')\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n      <a (click)=\"search('Ndc80', 'example')\">Ndc80</a>\n      <a (click)=\"search('Q05471', 'example')\">Q05471</a>\n      <a (click)=\"search('PCNA', 'example')\">PCNA</a>\n      <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a>\n    </small>\n  </fieldset>\n</div>\n<!-- /local-search -->\n"
 
 /***/ }),
 
@@ -1615,7 +1611,10 @@ var GoogleAnalyticsService = (function () {
         this.angulartics2 = angulartics2;
     }
     GoogleAnalyticsService.prototype.invokeCustomEvent = function (value, category, label) {
-        this.angulartics2.eventTrack.next({ action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value], properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label } });
+        this.angulartics2.eventTrack.next({
+            action: __WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */][value],
+            properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label }
+        });
     };
     return GoogleAnalyticsService;
 }());
