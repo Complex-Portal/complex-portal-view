@@ -3,7 +3,7 @@
     <div class="input-group margin-bottom-none">
       <input #searchTerm type="text" name="first" id="local-searchbox" placeholder="Search this service"
              value="{{query}}"
-             class="input-group-field" (keydown.enter)="search(query.value, 'enter')">
+             class="input-group-field" (keydown.enter)="search(searchTerm.value, 'enter')">
       <div class="input-group-button">
         <input type="button" name="submit" value="1" (click)="search(searchTerm.value, 'button')"
                class="button icon icon-functional"></div>
@@ -13,7 +13,7 @@
       <!-- <span class="adv"><a href="../search" id="adv-search" title="Advanced">Advanced</a></span> | -->
       <!-- Include some example searchterms - keep them short and few. -->
       <a (click)="search('GO:0016491', 'example')">GO:0016491</a>
-      <a (click)="search('Ndc80', 'example')">Ndc80</a >
+      <a (click)="search('Ndc80', 'example')">Ndc80</a>
       <a (click)="search('Q05471', 'example')">Q05471</a>
       <a (click)="search('PCNA', 'example')">PCNA</a>
       <a (click)="search('EBI-9008420', 'example')">EBI-9008420</a>
