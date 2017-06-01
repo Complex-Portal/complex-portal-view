@@ -66,11 +66,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private initialiseGoogleAnalytics(): void {
-    if (environment.production === false) {
-      ga('create', environment.analytics_id, 'none');
-    } else {
-      ga('create', environment.analytics_id, 'none');
-    }
+    ga('create', environment.analytics_id, 'none');
   }
 
   private initialiseFoundationHacks(): void {
