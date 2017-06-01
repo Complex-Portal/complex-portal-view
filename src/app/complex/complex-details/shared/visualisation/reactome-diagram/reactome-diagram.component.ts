@@ -64,12 +64,11 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   }
 
   public initReactomeDiagram(): void {
-    // this.onLoaded.emit();
     this.globelDiagram = this.diagramContext.Diagram.create({
       'proxyPrefix': baseURL,
       'placeHolder': 'diagramHolder',
       'width': this.diagramHolder.nativeElement.clientWidth,
-      'height': this.diagramHolder.nativeElement.clientWidth * 0.8,
+      'height': this.diagramHolder.nativeElement.clientWidth * 0.5,
     });
     this.loadDiagram();
 
