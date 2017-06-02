@@ -32,8 +32,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this._environmentName = environmentName;
     toastrConfig.closeButton = true; // displayedElements close button
     toastrConfig.timeOut = 0; // time to live
-    this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
-      '\'Issues\'-button in the top bar.', this.toastrConfig);
+    this.notificationService.addAnnouncementNotification('For reporting feedback or any request, please use the ' +
+      '\'Feeback\'-button in the top bar.', this.toastrConfig);
     this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
     // this.basketService.initialiseBasket();
   }
