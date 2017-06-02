@@ -1,31 +1,14 @@
-# ComplexPortalView
+# Complex-Portal-View
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.30.
+This project is a new implementation of the former [Complex-View](https://github.com/Complex-Portal/Complex-View). For the development we used [Angular-CLI](https://cli.angular.io) and [TypeScript](https://www.typescriptlang.org).
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+For any questions or any requests please use either the [GitHub Issue-Tracker](https://github.com/Complex-Portal/complex-portal-view/issues) or use our [EBI contact-form](http://www.ebi.ac.uk/support/intact).
 
-## Code scaffolding
+If you would like to read about the Complex Portal, please go [here](http://www.ebi.ac.uk/complexportal/about).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+The Complex Portal features a range of different third party JavaScript widgets, which help visualising biological data. 
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* [Reactome DiagramJS](http://www.reactome.org/pages/documentation/developer-guide/diagram/diagram-js/)
+* [GXA Heatmap](http://www.ebi.ac.uk/gxa/resources/test/widget/showcase/index.html)
+* [ComplexViewer](http://complexviewer.org)
+* [LiteMol Viewer](http://webchemdev.ncbr.muni.cz/Litemol/)
