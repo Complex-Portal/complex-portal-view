@@ -44,7 +44,7 @@ export class BasketService {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
       this.saveInLocalStorage();
       this.ga.invokeCustomEvent(Action.AddToBasket, Category.basket, id);
-      this.notificationService.addSuccessNotification('Stored ' + id + ' in you basket!');
+      this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
     }
     this.onBasketCountChanged$.emit(this.getBasketCount());
   }
@@ -54,7 +54,7 @@ export class BasketService {
     delete this._complexBasket[key];
     this.saveInLocalStorage();
     this.ga.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, id);
-    this.notificationService.addSuccessNotification('Removed ' + id + ' in you basket!');
+    this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
     this.onBasketCountChanged$.emit(this.getBasketCount());
   }
 
@@ -69,7 +69,7 @@ export class BasketService {
   private isInBasket(id: string): boolean {
     const key: string = this.toMd5(id);
     if (this._complexBasket[key]) {
-      this.notificationService.addErrorNotification(id + ' is already stored in you basket!');
+      this.notificationService.addErrorNotification(id + ' is already stored in your basket!');
       return true;
     }
     return false;
