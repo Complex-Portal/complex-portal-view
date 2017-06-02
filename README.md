@@ -2,6 +2,14 @@
 
 This project is a new implementation of the former [Complex-View](https://github.com/Complex-Portal/Complex-View). For the development we used [Angular-CLI](https://cli.angular.io) and [TypeScript](https://www.typescriptlang.org).
 
+Production version can be found here: 
+
+* [http://www.ebi.ac.uk/complexportal/home](http://www.ebi.ac.uk/complexportal/home)
+
+Test/Development version can be found here:
+
+*  [https://complex-portal.github.io/complex-portal-view/](https://complex-portal.github.io/complex-portal-view/)
+
 For any questions or any requests please use either the [GitHub Issue-Tracker](https://github.com/Complex-Portal/complex-portal-view/issues) or use our [EBI contact-form](http://www.ebi.ac.uk/support/intact).
 
 If you would like to read about the Complex Portal, please go [here](http://www.ebi.ac.uk/complexportal/about).
