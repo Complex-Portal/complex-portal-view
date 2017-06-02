@@ -4,7 +4,7 @@
 
 //Enivorment for production
 const EBI_BASE_URL = '//www.ebi.ac.uk/';
-const REACTOME_BASE_URL = '//reactomedev.org';
+const REACTOME_BASE_URL = '//reactome.org';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 
