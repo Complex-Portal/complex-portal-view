@@ -103654,7 +103654,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /* 620 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row no-pad-left\" *ngIf=\"ecoXRef || intactXRefs\">\n  <!--<h2>Evidences</h2>-->\n  <span>\n    Evidence by\n    <a href=\"{{ecoXRef.searchURL}}\"\n       target=\"_blank\"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i\n      class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n    <ng-container *ngIf=\"intactXRefs\">\n      in IntAct\n      <ng-container *ngFor=\"let crossReference of intactXRefs;let isLast=last\">\n        <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"> {{crossReference.identifier}} <i\n          class=\"icon icon-generic small\" data-icon=\"x\"></i></a>{{isLast ? '' : ', '}}\n      </ng-container>\n    </ng-container>\n  </span>\n</div>\n"
+module.exports = "<div class=\"row no-pad-left\" *ngIf=\"ecoXRef || intactXRefs\">\n  <span>\n    Evidence by\n    <a href=\"{{ecoXRef.searchURL}}\"\n       target=\"_blank\"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i\n      class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n    <ng-container *ngIf=\"intactXRefs\">\n      in IntAct\n      <ng-container *ngFor=\"let crossReference of intactXRefs;let isLast=last\">\n        <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"> {{crossReference.identifier}} <i\n          class=\"icon icon-generic small\" data-icon=\"x\"></i></a>{{isLast ? '' : ', '}}\n      </ng-container>\n    </ng-container>\n  </span>\n</div>\n"
 
 /***/ }),
 /* 621 */

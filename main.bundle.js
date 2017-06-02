@@ -63,7 +63,7 @@ var BasketService = (function () {
             this._complexBasket[this.toMd5(id)] = newBasketItem;
             this.saveInLocalStorage();
             this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__["a" /* Action */].AddToBasket, __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__["a" /* Category */].basket, id);
-            this.notificationService.addSuccessNotification('Stored ' + id + ' in you basket!');
+            this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
         }
         this.onBasketCountChanged$.emit(this.getBasketCount());
     };
@@ -72,7 +72,7 @@ var BasketService = (function () {
         delete this._complexBasket[key];
         this.saveInLocalStorage();
         this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__["a" /* Action */].RemoveFromBasket, __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__["a" /* Category */].basket, id);
-        this.notificationService.addSuccessNotification('Removed ' + id + ' in you basket!');
+        this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
         this.onBasketCountChanged$.emit(this.getBasketCount());
     };
     BasketService.prototype.saveInLocalStorage = function () {
@@ -84,7 +84,7 @@ var BasketService = (function () {
     BasketService.prototype.isInBasket = function (id) {
         var key = this.toMd5(id);
         if (this._complexBasket[key]) {
-            this.notificationService.addErrorNotification(id + ' is already stored in you basket!');
+            this.notificationService.addErrorNotification(id + ' is already stored in your basket!');
             return true;
         }
         return false;
@@ -739,8 +739,8 @@ var AppComponent = (function () {
         this._environmentName = environmentName;
         toastrConfig.closeButton = true; // displayedElements close button
         toastrConfig.timeOut = 0; // time to live
-        this.notificationService.addAnnouncementNotification('For reporting issues or any request, please use the ' +
-            '\'Issues\'-button in the top bar.', this.toastrConfig);
+        this.notificationService.addAnnouncementNotification('For reporting feedback or any request, please use the ' +
+            '\'Feeback\'-button in the top bar.', this.toastrConfig);
         this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
         // this.basketService.initialiseBasket();
     }
@@ -1139,7 +1139,7 @@ var BasketItem = (function () {
  */
 // Enviorment for GitHub Page
 var EBI_BASE_URL = '//www.ebi.ac.uk/';
-var REACTOME_BASE_URL = '//reactomedev.org';
+var REACTOME_BASE_URL = '//reactome.org';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 var environment = {
