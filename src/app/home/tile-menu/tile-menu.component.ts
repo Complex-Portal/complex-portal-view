@@ -22,6 +22,10 @@ export class TileMenuComponent implements AfterViewInit {
     $('cp-tile-menu').foundation();
   }
 
+  featureNotAvailableYet() {
+    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
+  }
+
   public goToDownload(): void {
     this.ga.invokeCustomEvent(Action.Tile, Category.home, 'download');
     this.router.navigate(['download']);
@@ -39,6 +43,7 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToOntologies(): void {
     this.ga.invokeCustomEvent(Action.Tile, Category.home, 'ontologies');
+    this.featureNotAvailableYet();
     this.router.navigate(['ontologies']);
   }
 
@@ -59,6 +64,7 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToCitation(): void {
     this.ga.invokeCustomEvent(Action.Tile, Category.home, 'citation');
+    this.featureNotAvailableYet();
     this.router.navigate(['home']);
   }
 }

@@ -24,6 +24,7 @@
     "@angular/router": "^4.0.1",
     "EBI-Icon-fonts": "https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1",
     "angulartics2": "^1.6.3",
+    "classlist.js": "^1.1.20150312",
     "complexviewer": "/Users/maximiliankoch/interaction-viewer",
     "core-js": "^2.4.1",
     "ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13",

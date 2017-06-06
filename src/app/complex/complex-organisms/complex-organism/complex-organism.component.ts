@@ -3,6 +3,7 @@ import {GoogleAnalyticsService} from '../../../shared/google-analytics/google-an
 import {Router} from '@angular/router';
 import {Action} from '../../../shared/google-analytics/action.enum';
 import {Category} from '../../../shared/google-analytics/category.enum';
+import {NotificationService} from '../../../shared/notification/service/notification.service';
 
 @Component({
   selector: 'cp-complex-organism',
@@ -14,7 +15,7 @@ export class ComplexOrganismComponent implements OnInit {
   private _symbol: string;
   private _count: string;
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService) {
+  constructor(private router: Router, private ga: GoogleAnalyticsService, private notificationService : NotificationService) {
   }
 
   ngOnInit() {
@@ -24,6 +25,10 @@ export class ComplexOrganismComponent implements OnInit {
     this.ga.invokeCustomEvent(Action.search, Category.organisms, specieName);
     this.router.navigate(['complex/search'], {queryParams: {query: '*', species: [specieName], page: 1}});
 
+  }
+
+  featureNotAvailableYet() {
+    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
   }
 
   get name(): string {
