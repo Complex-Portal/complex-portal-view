@@ -5,7 +5,7 @@
       <cp-litmol-viewer *ngIf="selectedXRef" [selectedXRef]="selectedXRef"></cp-litmol-viewer>
     </div>
     <div class="columns medium-4">
-      <h4>Available structures ({{crossReferences.length}}):</h4>
+      <h4>Curated structures ({{crossReferences.length}}):</h4>
       <table class="hover">
         <tbody style="height: 400px; overflow-y: scroll;">
         <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
