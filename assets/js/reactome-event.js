@@ -8,9 +8,11 @@ try {
 
     // var a = document.createElement('a');
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
-      console.log("Hallo");
-      var evt = document.createEvent('CustomEvent');
-      evt.initCustomEvent('onReactomeDiagramReady', false, false, {detail: this.Reactome})
+      var event = document.createEvent("CustomEvent");
+      event.initCustomEvent('myCustomEvent', true, true,
+        { 'param1': 1, 'param2': 2 });
+
+      document.dispatchEvent(event);
     } else {
       window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
     }

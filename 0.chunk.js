@@ -106098,7 +106098,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListener", null);
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:onReactomeDiagramReady', ['$event']),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('onReactomeDiagramReady', ['$event']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
