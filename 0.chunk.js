@@ -106004,11 +106004,12 @@ var ReactomeDiagramComponent = (function () {
         document.getElementsByTagName('head')[0].appendChild(node);
     };
     ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
-        this.diagramContext = event.detail;
-        this.initReactomeDiagram();
+        console.log('One');
+        // this.diagramContext = event.detail;
+        // this.initReactomeDiagram();
     };
     ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListenerIE = function (event) {
-        console.log(event);
+        console.log('Two');
         // this.diagramContext = event.detail;
         // this.initReactomeDiagram();
     };
