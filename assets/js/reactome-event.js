@@ -6,7 +6,6 @@ try {
   function onReactomeDiagramReady() {
     // window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
     console.log(this.Reactome.functions);
-    console.log(this.Reactome[functions]);
     console.log(this.Reactome["functions"]);
     console.log(this.Reactome['functions']);
     console.log(this.Reactome.detail);
