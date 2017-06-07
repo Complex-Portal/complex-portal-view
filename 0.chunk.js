@@ -106008,8 +106008,9 @@ var ReactomeDiagramComponent = (function () {
         this.initReactomeDiagram();
     };
     ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListenerIE = function (event) {
-        this.diagramContext = event.detail;
-        this.initReactomeDiagram();
+        console.log(event);
+        // this.diagramContext = event.detail;
+        // this.initReactomeDiagram();
     };
     ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
         this.globelDiagram = this.diagramContext.Diagram.create({
