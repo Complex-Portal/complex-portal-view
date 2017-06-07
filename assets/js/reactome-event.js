@@ -9,9 +9,8 @@ try {
     // var a = document.createElement('a');
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
       var event = document.createEvent("CustomEvent");
-      event.initCustomEvent('myCustomEvent', true, true,
-        { 'param1': 1, 'param2': 2 });
-
+      event.initCustomEvent('onReactomeDiagramReady', true, true,
+        {detail: this.Reactome});
       document.dispatchEvent(event);
     } else {
       window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
