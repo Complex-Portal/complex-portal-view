@@ -106007,7 +106007,7 @@ var ReactomeDiagramComponent = (function () {
         console.log('One');
         console.log(event.detail['functions']);
         // console.log(this.diagramContext);
-        this.diagramContext = event.detail;
+        this.diagramContext = event.detail['functions'];
         this.initReactomeDiagram();
     };
     //
