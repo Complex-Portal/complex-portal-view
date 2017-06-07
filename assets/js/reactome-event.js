@@ -5,7 +5,7 @@
 try {
   function onReactomeDiagramReady() {
     // window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
-    console.log(this.Reactome);
+    console.log(this.Reactome.functions);
     // var a = document.createElement('a');
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
       var event = document.createEvent("CustomEvent");
