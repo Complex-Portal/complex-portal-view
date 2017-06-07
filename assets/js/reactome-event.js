@@ -5,16 +5,16 @@
 try {
   function onReactomeDiagramReady() {
     // window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));
-    console.log(this.Reactome.detail.functions);
-    console.log(this.Reactome.detail["functions"]);
-    console.log(this.Reactome.detail['functions']);
-    console.log(this.Reactome.Diagram);
-    console.log(this.Reactome);
+    // console.log(this.Reactome.detail.functions);
+    // console.log(this.Reactome.detail["functions"]);
+    // console.log(this.Reactome.detail['functions']);
+    // console.log(this.Reactome.Diagram);
+    // console.log(this.Reactome);
     // var a = document.createElement('a');
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
       var event = document.createEvent("CustomEvent");
-      event.initCustomEvent('onReactomeDiagramReady', true, true,
-        {detail: this.Reactome});
+      event.initCustomEvent('onReactomeDiagramReadyIE', true, true);
+        // {detail: this.Reactome});
       document.dispatchEvent(event);
     } else {
       window.dispatchEvent(new CustomEvent('onReactomeDiagramReady', {detail: this.Reactome}));

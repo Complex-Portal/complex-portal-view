@@ -105961,6 +105961,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-r
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeDiagramComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -105974,10 +105975,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var baseURL = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].reactome_base_url;
 var ReactomeDiagramComponent = (function () {
-    function ReactomeDiagramComponent(reactomeService) {
+    function ReactomeDiagramComponent(reactomeService, notificationService) {
         this.reactomeService = reactomeService;
+        this.notificationService = notificationService;
         this._reactomeComplexe = {};
         this._reactomePathways = {};
         this.onLoaded = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -106003,22 +106006,14 @@ var ReactomeDiagramComponent = (function () {
         node.charset = 'utf-8';
         document.getElementsByTagName('head')[0].appendChild(node);
     };
-    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
-        console.log('One');
-        console.log(event.detail['functions']);
-        // console.log(this.diagramContext);
-        this.diagramContext = event.detail['functions'];
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyIE = function (event) {
+        this.notificationService.addHintNotification('It seems that you\'re using Internet Explorer. ' +
+            'We\'re currently experiencing issues with Internet Explorer 11 and the Reactome Diagram.');
+    };
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReady = function (event) {
+        this.diagramContext = event.detail;
         this.initReactomeDiagram();
     };
-    //
-    // @HostListener('document:onReactomeDiagramReady', ['$event'])
-    // onReactomeDiagramReadyListenerIE(event) {
-    // console.log('One');
-    // console.log(event.detail);
-    // console.log(this.diagramContext);
-    // // this.diagramContext = event.detail;
-    // // this.initReactomeDiagram();
-    // }
     ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
         this.globelDiagram = this.diagramContext.Diagram.create({
             'proxyPrefix': baseURL,
@@ -106099,11 +106094,17 @@ __decorate([
     __metadata("design:type", Object)
 ], ReactomeDiagramComponent.prototype, "onLoaded", void 0);
 __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:onReactomeDiagramReadyIE', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyIE", null);
+__decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:onReactomeDiagramReady', ['$event']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListener", null);
+], ReactomeDiagramComponent.prototype, "onReactomeDiagramReady", null);
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:resize', ['$event.target']),
     __metadata("design:type", Function),
@@ -106136,10 +106137,10 @@ ReactomeDiagramComponent = __decorate([
         template: __webpack_require__("./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html"),
         styles: [__webpack_require__("./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object])
 ], ReactomeDiagramComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-diagram.component.js.map
 
 /***/ }),
