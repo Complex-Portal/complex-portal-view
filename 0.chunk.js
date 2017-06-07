@@ -106007,6 +106007,11 @@ var ReactomeDiagramComponent = (function () {
         this.diagramContext = event.detail;
         this.initReactomeDiagram();
     };
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListenerIE = function (event) {
+        console.log("Hallo");
+        // this.diagramContext = event.detail;
+        // this.initReactomeDiagram();
+    };
     ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
         this.globelDiagram = this.diagramContext.Diagram.create({
             'proxyPrefix': baseURL,
@@ -106092,6 +106097,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListener", null);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:onReactomeDiagramReady', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListenerIE", null);
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:resize', ['$event.target']),
     __metadata("design:type", Function),
