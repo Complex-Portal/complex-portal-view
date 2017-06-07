@@ -8,7 +8,7 @@ try {
     console.log(this.Reactome.detail.functions);
     console.log(this.Reactome.detail["functions"]);
     console.log(this.Reactome.detail['functions']);
-    console.log(this.Reactome.detail.Diagram);
+    console.log(this.Reactome.Diagram);
     console.log(this.Reactome);
     // var a = document.createElement('a');
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
