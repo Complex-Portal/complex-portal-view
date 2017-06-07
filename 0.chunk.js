@@ -106005,8 +106005,7 @@ var ReactomeDiagramComponent = (function () {
     };
     ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
         console.log('One');
-        console.log(event.detail);
-        console.log(JSON.stringify(event.detail));
+        console.log(event.detail['functions']);
         // console.log(this.diagramContext);
         this.diagramContext = event.detail;
         this.initReactomeDiagram();
