@@ -46,9 +46,23 @@
   </div>
   <div class="column medium-3 small-6 text-center padding-bottom-large">
     <a
-      class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToCitation()">
+      class="button medium-12 columns industry-background" data-equalizer-watch data-open="citationModal">
       <h3 class="icon icon-generic white-color" data-icon="P"></h3>
       <h5 class="white-color">Citation</h5>
     </a>
+  </div>
+  <div class="reveal" id="citationModal" data-reveal>
+    <h3>Citing Complex Portal</h3>
+    <span class="lead">The complex portal - an encyclopaedia of macromolecular complexes.</span>
+    <span>Meldal BH et al [PMID: 25313161]</span>
+    <p><i>Nucl. Acids Res. (2014) doi: 10.1093/nar/gku975</i></p>
+    <a class="button readmore" href="//europepmc.org/abstract/MED/25313161" target="_blank">Abstract</a>
+    <a class="button readmore"
+       href="//academic.oup.com/nar/article/43/D1/D479/2439561/The-complex-portal-an-encyclopaedia-of" target="_blank">Full
+      text</a>
+
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 </div>

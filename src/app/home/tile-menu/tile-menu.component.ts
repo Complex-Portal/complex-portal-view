@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
