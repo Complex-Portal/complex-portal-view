@@ -36,6 +36,8 @@ export class ComplexParticipantsComponent implements OnInit {
         return 'assets/images/legend/protein-blob.png';
       case 'single stranded deoxyribonucleic acid':
         return 'assets/images/legend/dna.png';
+      case 'ribonucleic acid':
+        return 'assets/images/legend/rna.png';
     }
   }
 
