@@ -3,6 +3,10 @@
   cursor: not-allowed;
 }
 
+.label {
+  font-size: medium;
+}
+
 /*.default {*/
   /*font-weight: normal;*/
 /*}*/
