@@ -28,8 +28,4 @@ export class EmdbCrossreferencesComponent implements OnInit {
   get displayedElements(): number {
     return this._displayedElements;
   }
-
-  set displayedElements(value: number) {
-    this._displayedElements = value;
-  }
 }
