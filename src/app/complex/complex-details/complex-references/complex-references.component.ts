@@ -62,7 +62,7 @@ export class ComplexReferencesComponent implements OnInit {
     this._externalResources = value;
   }
 
-  nyms(): string[] {
+  get synonyms(): string[] {
     return this._synonyms;
   }
 
