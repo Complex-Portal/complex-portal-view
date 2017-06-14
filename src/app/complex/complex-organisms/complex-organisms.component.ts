@@ -77,7 +77,8 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             result[i].symbol = 'p';
             result[i].type = 'animal';
             break;
-          case 'Pseudomonas aeruginosa (strain ATCC 15692 / PAO1 / 1C / PRS 101 / LMG 12228)':
+          case 'Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 ' +
+          '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
             result[i].symbol = 'L';
             result[i].type = 'animal';
             break;
