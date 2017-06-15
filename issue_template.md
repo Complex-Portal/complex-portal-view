@@ -1,5 +1,5 @@
 <!--
-IF YOU DON'T FILL OUT THE FOLLOWING INFORMATION WE MIGHT CLOSE YOUR ISSUE WITHOUT INVESTIGATING
+Please fill out this form with as much information as possible. This way we can process your request quicker and don't need to ask for more information or process the request with false requirement. 
 -->
 
 **I'm submitting a ...**  (check one with "x")
@@ -28,3 +28,4 @@ please provide working examples, a mock-up or a step by step instruction.
 <!-- Windows, Mac OSX, Linux and Firfox, Chrome, IE (if possible with version) -->
 
 
+###### Just a few guidelines for writting GH issues: [HOW WE WRITE GITHUB ISSUES](https://wiredcraft.com/blog/how-we-write-our-github-issues/)
