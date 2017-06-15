@@ -28,4 +28,4 @@ please provide working examples, a mock-up or a step by step instruction.
 <!-- Windows, Mac OSX, Linux and Firfox, Chrome, IE (if possible with version) -->
 
 
-###### Just a few guidelines for how to wirte effective and good GitHub issues: [HOW WE WRITE GITHUB ISSUES](https://wiredcraft.com/blog/how-we-write-our-github-issues/)
+###### Just a few guidelines for how to write effective and good GitHub issues: [HOW WE WRITE GITHUB ISSUES](https://wiredcraft.com/blog/how-we-write-our-github-issues/)
