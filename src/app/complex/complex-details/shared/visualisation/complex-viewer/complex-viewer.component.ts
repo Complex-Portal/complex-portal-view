@@ -3,7 +3,7 @@ import {NotificationService} from '../../../../../shared/notification/service/no
 let xlv: any;
 const SvgSaver = require('svgsaver');
 const xiNET = require('expose-loader?xiNET!complexviewer');
-
+declare const $ : any;
 @Component({
   selector: 'cp-complex-viewer',
   templateUrl: 'complex-viewer.component.html',
@@ -19,6 +19,7 @@ export class ComplexViewerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    $('cp-complex-viewer').foundation();
     xlv = new xiNET('networkContainer');
     xlv.readMIJSON(this._complexMIJSON, true);
     xlv.autoLayout();
