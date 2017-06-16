@@ -1,5 +1,5 @@
 <div class="row no-pad-left" *ngIf="ecoXRef || intactXRefs">
-  <span class="icon icon-functional" data-icon="A">
+  <span class="icon icon-functional" attr.data-icon="{{flaskSymbol}}">
     Evidence by
     <a href="{{ecoXRef.searchURL}}"
        target="_blank"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i

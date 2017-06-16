@@ -10,6 +10,7 @@ export class ComplexEvidenceComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _ecoXRef: CrossReference;
   private _intactXRefs: CrossReference[];
+  private _flaskSymbol : string;
 
 
   constructor() {
@@ -25,24 +26,31 @@ export class ComplexEvidenceComponent implements OnInit {
         switch (this._ecoXRef.identifier) {
           case ('ECO:0000353'):
             this._ecoXRef.description = 'physical interaction evidence';
+            this._flaskSymbol = 'E';
             break;
           case ('ECO:0005610'):
             this._ecoXRef.description = 'inferred by homology';
+            this._flaskSymbol = 'C';
             break;
           case ('ECO:0005544'):
             this._ecoXRef.description = 'inferred by orthology';
+            this._flaskSymbol = 'C';
             break;
           case ('ECO:0005546'):
             this._ecoXRef.description = 'inferred by paralogy';
+            this._flaskSymbol = 'C';
             break;
           case ('ECO:0005547'):
             this._ecoXRef.description = 'inferred by curator';
+            this._flaskSymbol = 'B';
             break;
           case ('ECO:0005543'):
             this._ecoXRef.description = 'inferred from mixed species evidence';
+            this._flaskSymbol = 'E';
             break;
           case ('ECO:0005542'):
             this._ecoXRef.description = 'inferred from single species evidence';
+            this._flaskSymbol = 'E';
             break;
         }
       }
@@ -78,5 +86,9 @@ export class ComplexEvidenceComponent implements OnInit {
 
   set intactXRefs(value: CrossReference[]) {
     this._intactXRefs = value;
+  }
+
+  get flaskSymbol(): string {
+    return this._flaskSymbol;
   }
 }
