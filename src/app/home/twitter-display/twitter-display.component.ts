@@ -40,7 +40,7 @@ export class TwitterDisplayComponent implements OnInit {
     try {
       window.twttr.widgets.load(document.getElementById('twitter'));
     } catch (ignore) {
-      // ingore
+      // ignore
     }
   }
 }
