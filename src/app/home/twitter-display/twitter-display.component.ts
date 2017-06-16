@@ -20,7 +20,7 @@ export class TwitterDisplayComponent implements OnInit {
   ngOnInit() {
     /* tslint:disable */
     window.twttr = (function (d, s, id, call) {
-      var js, fjs = d.getElementsByTagName(s)[0],
+      let js, fjs = d.getElementsByTagName(s)[0],
         t = window.twttr || {};
       if (d.getElementById(id)) return t;
       js = d.createElement(s);
