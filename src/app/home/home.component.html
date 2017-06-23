@@ -1,22 +1,15 @@
 <section>
-  <!-- Your menu structure should make a breadcrumb redundant, but if a breadcrumb is needed uncomment the below -->
-  <!--<nav aria-label="You are here:" role="navigation">-->
-    <!--<ul class="breadcrumbs">-->
-      <!--<li>-->
-        <!--<span class="displayedElements-for-sr">Current: </span> Complex Portal-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</nav>-->
   <div id="main-content-area">
     <div class="row">
       <div class="columns medium-9">
-        <div class="columns medium-12 no-pad-left">
-          <h5>
+        <div class="columns medium-12 intro-unit no-pad-left padding-top-xsmall padding-bottom-small">
+          <h2>Explore the Complex Portal</h2>
+          <p class="lead">
             The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number
-            of
-            key model organisms. All data is freely available for search and download. To perform a search for
-            macromolecular complexes use the search box below.
-          </h5>
+            of key model organisms. The majority of complexes are made up of proteins but may also include nucleic acids
+            or small molecules. All data is freely available for search and download. To perform a search for
+            macromolecular complexes use the search box below. Read more <a routerLink="/about">here</a>.
+          </p>
         </div>
         <div class="columns medium-12 ">
           <cp-search></cp-search>
@@ -24,9 +17,6 @@
         <div class="columns medium-12 no-pad-left no-pad-right">
           <cp-tile-menu></cp-tile-menu>
         </div>
-        <!--<div class="columns medium-12 no-pad-left">-->
-          <!--<app-contributors-display></app-contributors-display>-->
-        <!--</div>-->
       </div>
       <div class="columns medium-3">
         <div class="columns medium-12">
