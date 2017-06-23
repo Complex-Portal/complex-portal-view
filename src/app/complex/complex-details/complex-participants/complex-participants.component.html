@@ -2,6 +2,10 @@
   <h2 class="float-left">Participants</h2>
   <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
   <div class="columns medium-12 no-pad-right no-pad-left">
+    <div class="columns medium-12 no-pad-right">
+      <cp-chord-diagram *ngIf="complexMIJSON"
+                         [complexMIJSON]="complexMIJSON"></cp-chord-diagram>
+    </div>
     <div class="columns medium-6 no-pad-right">
       <cp-complex-viewer *ngIf="complexMIJSON && complexAC"
       [complexAC]="complexAC"
