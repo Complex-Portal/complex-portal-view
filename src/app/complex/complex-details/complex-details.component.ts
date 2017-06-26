@@ -10,7 +10,6 @@ import {PageScrollConfig} from 'ng2-page-scroll';
 import {Title} from '@angular/platform-browser';
 
 declare const expressionAtlasHeatmapHighcharts: any;
-declare const $: any;
 
 @Component({
   selector: 'cp-complex-details',
@@ -25,7 +24,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _query: string;
   private _gxa;
 
-  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
+  constructor(private route: ActivatedRoute,private notificationService: NotificationService,
               private complexPortalService: ComplexPortalService, private sectionService: SectionService, private titleService: Title) {
     PageScrollConfig.defaultScrollOffset = 50;
 
