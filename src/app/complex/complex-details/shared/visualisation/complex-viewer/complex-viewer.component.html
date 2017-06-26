@@ -1,16 +1,16 @@
 <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
      data-equalize-on="medium" id="large-button-grid">
   <div class="columns small-6 medium-3 no-pad-left">
-    <a class="button expanded" data-equalizer-watch (click)="onExpandAll()">Expand All</a>
+    <a class="button secondary expanded" data-equalizer-watch (click)="onExpandAll()">Expand All</a>
   </div>
   <div class="columns small-6 medium-3 no-pad-left">
-    <a class="button expanded" data-equalizer-watch (click)="downloadAsSVG()">Export SVG</a>
+    <a class="button secondary expanded" data-equalizer-watch (click)="downloadAsSVG()">Export SVG</a>
   </div>
   <div class="columns small-6 medium-3 no-pad-left">
-    <a class="button expanded" data-equalizer-watch (click)="onReset()">Reset</a>
+    <a class="button secondary expanded" data-equalizer-watch (click)="onReset()">Reset</a>
   </div>
   <div class="columns small-6 medium-3 no-pad-left">
-    <a class="button expanded" data-equalizer-watch (click)="featureNotAvailableYet()">Enlarge</a>
+    <a class="button secondary expanded" data-equalizer-watch (click)="featureNotAvailableYet()">Enlarge</a>
   </div>
   <div class="columns medium-12 no-pad-left">
     <select (change)="onChangeAnnotation($event.target.value)">
