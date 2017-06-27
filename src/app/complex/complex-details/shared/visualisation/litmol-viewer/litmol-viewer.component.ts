@@ -28,7 +28,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
   ngOnInit() {
     this._plugin = LiteMol.default.Plugin.create({
       target: '#litemol',
-      viewportBackground: '#fff',
+      viewportBackground: '#fbfbfb',
       layoutState: {
         hideControls: true,
         isExpanded: false

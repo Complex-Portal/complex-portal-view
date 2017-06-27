@@ -33,7 +33,7 @@
     "expose-loader": "^0.7.1",
     "install": "^0.8.7",
     "jquery": "^3.1.1",
-    "litemol": "https://github.com/dsehnal/LiteMol/tarball/v1.0",
+    "litemol": "https://github.com/dsehnal/LiteMol/tarball/master",
     "ng2-page-scroll": "^4.0.0-beta.8",
     "ngx-toastr": "^5.0.6",
     "react": "^15.5.4",
