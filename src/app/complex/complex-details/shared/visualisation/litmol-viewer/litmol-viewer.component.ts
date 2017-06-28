@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 
-import * as LiteMol from 'litemol';
+import LiteMol from 'litemol';
 import {environment} from '../../../../../../environments/environment';
 
 const baseURL = environment.pdb_base_url;
@@ -26,7 +26,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this._plugin = LiteMol.default.Plugin.create({
+    this._plugin = LiteMol.Plugin.create({
       target: '#litemol',
       viewportBackground: '#fbfbfb',
       layoutState: {
