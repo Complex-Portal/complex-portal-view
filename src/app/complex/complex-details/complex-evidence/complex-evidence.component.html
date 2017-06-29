@@ -1,5 +1,5 @@
-<div class="row no-pad-left" *ngIf="ecoXRef || intactXRefs">
-  <span class="icon icon-functional" attr.data-icon="{{flaskSymbol}}">
+<i class="row" *ngIf="ecoXRef || intactXRefs">
+   <i class="icon icon-functional" attr.data-icon="{{flaskSymbol}}"></i>
     Evidence by
     <a href="{{ecoXRef.searchURL}}"
        target="_blank"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i
@@ -11,5 +11,4 @@
           class="icon icon-generic small" data-icon="x"></i></a>{{isLast ? '' : ', '}}
       </ng-container>
     </ng-container>
-  </span>
-</div>
+</i>
