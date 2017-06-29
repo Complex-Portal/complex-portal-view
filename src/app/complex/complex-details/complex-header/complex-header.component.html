@@ -1,30 +1,24 @@
 <div class="row">
   <div class="columns medium-12 callout">
-    <div class="columns medium-10 no-pad-left">
+    <div class="columns medium-10 no-pad-left float-left">
       <h2>{{complexName}}</h2>
       <h3><i>{{complexSpecies}}</i></h3>
-    </div>
-    <div class="columns medium-2">
-      <div class="columns medium-12">
-        <div class="columns medium-6">
-          <a href="{{jsonURL}}" target="_blank"><h3 class="icon icon-fileformats hover" data-icon="J"></h3></a>
-        </div>
-        <div class="columns medium-6">
-          <a (click)="saveComplex()"><h3 class="icon icon-generic hover" style="color: black" data-icon="b"></h3></a>
-        </div>
-      </div>
-      <div class="columns medium-12">
-        <div class="columns medium-6">
-
-        </div>
-        <div class="columns medium-6">
-
-        </div>
-      </div>
-    </div>
-    <div class="columns medium-12">
       <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
     </div>
+    <div class="columns medium-2 float-r">
+      <div class="columns medium-12">
+        <a class="button expanded" data-open="downloadModal">
+          <h4 class="icon icon-functional hover white-color" data-icon="="></h4>
+          <span class="white-color">Download</span>
+        </a>
+      </div>
+      <div class="columns medium-12">
+        <a class="button expanded" (click)="saveComplex()" [ngClass]="{'disabled': isInBasket()}">
+          <h4 class="icon icon-generic hover white-color" data-icon="b"></h4>
+          <span class="white-color">Basket</span>
+        </a>
+      </div>
+    </div>
   </div>
-
+  <cp-download-modal></cp-download-modal>
 </div>
