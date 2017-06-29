@@ -66,13 +66,9 @@ export class BasketService {
     return JSON.parse(localStorage.getItem(COMPLEX_STORE));
   }
 
-  private isInBasket(id: string): boolean {
+  public isInBasket(id: string): boolean {
     const key: string = this.toMd5(id);
-    if (this._complexBasket[key]) {
-      this.notificationService.addErrorNotification(id + ' is already stored in your basket!');
-      return true;
-    }
-    return false;
+    return !!this._complexBasket[key];
   }
 
   private toMd5(key: string): string {
