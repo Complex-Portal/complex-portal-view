@@ -43,6 +43,7 @@ import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-sp
 import {SectionService} from './shared/service/section/section.service';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import { ExternalResourcesComponent } from './complex-references/external-resources/external-resources.component';
+import { DownloadModalComponent } from './complex-header/download-modal/download-modal.component';
 
 @NgModule({
   imports: [
@@ -87,6 +88,7 @@ import { ExternalResourcesComponent } from './complex-references/external-resour
     AssembliesComponent,
     GoToComponent,
     ExternalResourcesComponent,
+    DownloadModalComponent,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, Md5, SectionService],
 
