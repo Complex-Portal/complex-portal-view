@@ -7,8 +7,11 @@
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
       <p>{{functionDescription}}</p>
     </div>
-    <div id="ligands" class="columns medium-12 no-pad-left" *ngIf="ligands && ligands.length !== 0">
+    <div id="ligands" class="columns medium-6 no-pad-left" *ngIf="ligands && ligands.length !== 0">
       <cp-ligands [ligands]="ligands"></cp-ligands>
+    </div>
+    <div id="assemblies" class="columns medium-6 no-pad-left" *ngIf="assemblies && assemblies.length !== 0">
+      <cp-assemblies [assemblies]="assemblies"></cp-assemblies>
     </div>
     <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs">
       <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>

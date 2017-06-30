@@ -18,6 +18,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _ligands: string[];
   private _agonists: string[];
   private _antagonists: string[];
+  private _assemblies: string[];
 
   constructor() {
   }
@@ -120,5 +121,15 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   @Input()
   set antagonists(value: string[]) {
     this._antagonists = value;
+  }
+
+
+  get assemblies(): string[] {
+    return this._assemblies;
+  }
+
+  @Input()
+  set assemblies(value: string[]) {
+    this._assemblies = value;
   }
 }
