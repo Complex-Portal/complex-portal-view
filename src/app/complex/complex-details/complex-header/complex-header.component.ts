@@ -83,11 +83,6 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
     this._jsonURL = value;
   }
 
-  goToComplexWS(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.details, 'ComplexWS');
-    window.open(environment.complex_ws_base_url + '/details/' + this._complexAC, '_blank');
-  }
-
   isInBasket() : boolean {
     return this.basketService.isInBasket(this._complexAC);
   }
