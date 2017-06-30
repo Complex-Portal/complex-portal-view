@@ -7,7 +7,6 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AssembliesComponent implements OnInit {
   private _assemblies : string[];
-  private _displayedElements = 5;
 
   constructor() {
   }
@@ -22,13 +21,5 @@ export class AssembliesComponent implements OnInit {
   @Input()
   set assemblies(value: string[]) {
     this._assemblies = value;
-  }
-
-  get displayedElements(): number {
-    return this._displayedElements;
-  }
-
-  set displayedElements(value: number) {
-    this._displayedElements = value;
   }
 }

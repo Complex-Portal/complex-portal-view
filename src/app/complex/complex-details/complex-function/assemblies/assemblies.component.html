@@ -1,16 +1,11 @@
 <div class="row">
   <div class="columns medium-12">
-    <h3>Assemblies ({{assemblies.length}})</h3>
+    <h3>Assemblies</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let assembly of assemblies | slice:0:displayedElements">
+      <tr *ngFor="let assembly of assemblies">
         <td>
           {{assembly}}
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < assemblies.length">
-        <td>
-          <a class="label" (click)="displayedElements = assemblies.length">Show all</a>
         </td>
       </tr>
       </tbody>
