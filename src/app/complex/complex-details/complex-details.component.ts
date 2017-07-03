@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -15,7 +15,7 @@ declare const $: any;
 @Component({
   selector: 'cp-complex-details',
   templateUrl: './complex-details.component.html',
-  styleUrls: ['./complex-details.component.css']
+  styleUrls: ['./complex-details.component.css'],
 })
 export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 

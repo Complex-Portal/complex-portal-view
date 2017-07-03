@@ -1,30 +1,41 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-const MiCircle = require('mi-chord');
 const MIModel = require('mi-model');
+const MiCircle = require('mi-chord');
 
 @Component({
   selector: 'cp-chord-diagram',
   templateUrl: './chord-diagram.component.html',
   styleUrls: ['./chord-diagram.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
-export class ChordDiagramComponent implements OnInit {
+export class ChordDiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   private _complexMIJSON: string;
-
+  private mimodel : any;
+  private micircle : any;
 
   constructor() {
+    this.mimodel = MIModel;
+    this.micircle = MiCircle;
   }
 
   ngOnInit() {
-      console.log(this._complexMIJSON);
 
+  }
+
+
+  ngAfterViewInit(): void {
     let circle;
-    new MIModel(this._complexMIJSON).load().then(function (m) {
-      console.log(m);
-      circle = new MiCircle('#target', m);
+    let contx = this;
+    console.log(this._complexMIJSON);
+    new this.mimodel(this._complexMIJSON).load().then(function (m) {
+      circle = new contx.micircle('#target', m);
       // console.log('circle', circle);
     });
+  }
+
+  ngOnDestroy(): void {
+    // document.getElementById('#target').innerHTML = "";
+
   }
 
   @Input()

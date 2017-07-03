@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {SectionService} from '../shared/service/section/section.service';
 
 @Component({
   selector: 'cp-complex-participants',
   templateUrl: './complex-participants.component.html',
-  styleUrls: ['./complex-participants.component.css']
+  styleUrls: ['./complex-participants.component.css'],
 })
 export class ComplexParticipantsComponent implements OnInit {
   private _participants: Participant[];
