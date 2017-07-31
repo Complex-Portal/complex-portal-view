@@ -11,6 +11,9 @@
         <li>{{comment}}</li>
       </ul>
     </div>
+    <div id="assemblies" class="columns medium-12 no-pad-left" *ngIf="assemblies && assemblies.length !== 0">
+      <cp-assemblies [assemblies]="assemblies"></cp-assemblies>
+    </div>
     <div id="pdbXRefs" class="columns medium-12" *ngIf="pdbXRefs">
       <cp-pdb-crossreferences [crossReferences]="pdbXRefs"></cp-pdb-crossreferences>
     </div>

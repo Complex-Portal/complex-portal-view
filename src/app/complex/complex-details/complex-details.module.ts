@@ -30,7 +30,7 @@ import {GoBiologicalProcessComponent} from './complex-function/go-crossreference
 import {EmdbCrossreferencesComponent} from './complex-properties/emdb-crossreferences/emdb-crossreferences.component';
 import {ComplexEvidenceComponent} from './complex-evidence/complex-evidence.component';
 import {ComplexReferencesComponent} from './complex-references/complex-references.component';
-import {AssembliesComponent} from './complex-function/assemblies/assemblies.component';
+import {AssembliesComponent} from './complex-properties/assemblies/assemblies.component';
 import {GoToComponent} from './shared/go-to/go-to.component';
 import {RouterModule} from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';

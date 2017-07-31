@@ -12,6 +12,8 @@ export class ComplexPropertiesComponent implements OnInit {
   private _pdbXRefs: CrossReference[];
   private _emdbXRefs: CrossReference[];
   private _comments: string[];
+  private _assemblies: string[];
+
 
   constructor() {
   }
@@ -84,5 +86,14 @@ export class ComplexPropertiesComponent implements OnInit {
   @Input()
   set comments(value: string[]) {
     this._comments = value;
+  }
+
+  get assemblies(): string[] {
+    return this._assemblies;
+  }
+
+  @Input()
+  set assemblies(value: string[]) {
+    this._assemblies = value;
   }
 }
