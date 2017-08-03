@@ -31,9 +31,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       .queryParams
       .subscribe(queryParams => {
         this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
-        this._spicesFilter = queryParams['species'] ? queryParams['species'] : [];
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'] : [];
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'] : [];
+        this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         // TODO This is out for now, but CP-84 should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -57,23 +57,23 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
-    this.prepareFiltersForParams(queryParams);
+    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
+      queryParams['species'] = this.prepareFiltersForParams(this.spicesFilter);
+    }
+    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
+      queryParams['bioRole'] = this.prepareFiltersForParams(this._bioRoleFilter);
+    }
+    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
+      queryParams['interactorType'] = this.prepareFiltersForParams(this._interactorTypeFilter);
+    }
     this.router.navigate([], {
       queryParams
     });
     ProgressBarComponent.hide();
   }
 
-  private prepareFiltersForParams(queryParams: NavigationExtras): void {
-    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
-      queryParams['species'] = this._spicesFilter;
-    }
-    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
-      queryParams['bioRole'] = this._bioRoleFilter;
-    }
-    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
-      queryParams['interactorType'] = this._interactorTypeFilter;
-    }
+  private prepareFiltersForParams(filter: string[]): string {
+    return filter.toString().replace(/,/g, '+');
   }
 
   public onPageChange(pageIndex: number): void {
