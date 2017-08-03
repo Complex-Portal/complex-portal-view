@@ -21,7 +21,8 @@
       "styles": [
         "styles.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "../src/assets/styles/scss/material.scss"
+        "../src/assets/styles/scss/material.scss",
+        "../node_modules/animate.css/animate.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery",

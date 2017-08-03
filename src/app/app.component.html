@@ -72,7 +72,7 @@
             <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/about">About</a></li>
             <li><a href="https://github.com/Complex-Portal/complex-portal-view/issues" target="_blank">Feedback</a></li>
-            <li><a routerLink="/basket">Basket
+            <li><a [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
               <i class="label" style="border-radius: 2px; background-color: white">
                 &nbsp;<strong>{{basketCount}}</strong>&nbsp;
               </i></a>

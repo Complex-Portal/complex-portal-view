@@ -23,10 +23,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _environmentName: string;
   private _basketCount = 0;
   private _EBI_BASE_URL = environment.ebi_base_url;
+  private _onChangeInBasket: boolean;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
               private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService: BasketService) {
-    this.basketService.onBasketCountChanged$.subscribe(count => this._basketCount = count);
+    this.basketService.onBasketCountChanged$.subscribe(count => {
+      this._basketCount = count;
+      this._onChangeInBasket = true;
+      let ctx = this;
+      setTimeout(function (){ ctx._onChangeInBasket = false; }, 1000);
+    });
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
@@ -115,5 +121,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   get EBI_BASE_URL(): string {
     return this._EBI_BASE_URL;
+  }
+
+
+  get onChangeInBasket(): boolean {
+    return this._onChangeInBasket;
   }
 }
