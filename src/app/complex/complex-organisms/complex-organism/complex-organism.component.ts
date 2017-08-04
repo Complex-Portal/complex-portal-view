@@ -27,12 +27,8 @@ export class ComplexOrganismComponent implements OnInit {
 
   search(specieName: string) {
     this.ga.invokeCustomEvent(Action.search, Category.organisms, specieName);
-    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: [specieName], page: 1}});
+    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: specieName, page: 1}});
 
-  }
-
-  featureNotAvailableYet() {
-    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
   }
 
   get name(): string {
