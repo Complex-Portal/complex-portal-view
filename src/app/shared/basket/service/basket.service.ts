@@ -5,6 +5,7 @@ import {NotificationService} from '../../notification/service/notification.servi
 import {GoogleAnalyticsService} from '../../google-analytics/google-analytics.service';
 import {Category} from '../../google-analytics/category.enum';
 import {Action} from '../../google-analytics/action.enum';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 const COMPLEX_STORE = 'cp_complex_store';
 
@@ -19,9 +20,9 @@ export class BasketService {
   }
 
   private initialiseBasket() {
-    const complexStore = this.getLocalStorage();
+    const complexStore = LocalStorageService.getLocalStorage(COMPLEX_STORE);
     if (!complexStore) {
-      this.saveInLocalStorage();
+      LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
       this.initialiseBasket();
     } else {
       const keys = this.getKeys(complexStore);
@@ -42,7 +43,7 @@ export class BasketService {
     const newBasketItem = new BasketItem(name, id, new Date(), organism);
     if (!this.isInBasket(id)) {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
-      this.saveInLocalStorage();
+      LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
       this.ga.invokeCustomEvent(Action.AddToBasket, Category.basket, id);
       this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
     }
@@ -52,18 +53,10 @@ export class BasketService {
   public deleteFromBasket(key: string): void {
     const id = this._complexBasket[key].id;
     delete this._complexBasket[key];
-    this.saveInLocalStorage();
+    LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
     this.ga.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, id);
     this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
     this.onBasketCountChanged$.emit(this.getBasketCount());
-  }
-
-  private saveInLocalStorage(): void {
-    localStorage.setItem(COMPLEX_STORE, JSON.stringify(this._complexBasket));
-  }
-
-  private getLocalStorage() {
-    return JSON.parse(localStorage.getItem(COMPLEX_STORE));
   }
 
   public isInBasket(id: string): boolean {

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 import {environment} from '../environments/environment';
@@ -31,21 +31,24 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._basketCount = count;
       this._onChangeInBasket = true;
       let ctx = this;
-      setTimeout(function (){ ctx._onChangeInBasket = false; }, 1000);
+      setTimeout(function () {
+        ctx._onChangeInBasket = false;
+      }, 1000);
     });
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
     toastrConfig.closeButton = true; // displayedElements close button
-    toastrConfig.timeOut = 0; // time to live
-    this.notificationService.addAnnouncementNotification('For reporting feedback or any request, please use the ' +
-      '\'Feeback\'-button in the top bar.', this.toastrConfig);
-    this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
+    toastrConfig.timeOut = 5000; // time to live
+    toastrConfig.preventDuplicates = true;
+    toastrConfig.progressBar = true;
+    toastrConfig.tapToDismiss = false;
+    toastrConfig.enableHtml = true;
+    this.notificationService.followOnTwitter();
     // this.basketService.initialiseBasket();
   }
 
   ngOnInit(): void {
-
     // For every router change, we load the ProgressBar by default.
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
