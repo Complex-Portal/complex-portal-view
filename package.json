@@ -28,7 +28,7 @@
     "angulartics2": "^1.6.3",
     "animate.css": "^3.5.2",
     "classlist.js": "^1.1.20150312",
-    "complexviewer": "/Users/maximiliankoch/interaction-viewer",
+    "complexviewer": "https://github.com/MICommunity/ComplexViewer/tarball/master",
     "core-js": "^2.4.1",
     "ebi_framework": "https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13",
     "expose-loader": "^0.7.1",

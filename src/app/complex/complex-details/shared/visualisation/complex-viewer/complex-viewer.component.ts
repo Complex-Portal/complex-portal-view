@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewEncapsulation} from '@angular/core';
 import {NotificationService} from '../../../../../shared/notification/service/notification.service';
 let xlv: any;
 const SvgSaver = require('svgsaver');
@@ -7,7 +7,8 @@ declare const $ : any;
 @Component({
   selector: 'cp-complex-viewer',
   templateUrl: 'complex-viewer.component.html',
-  styleUrls: ['complex-viewer.component.css']
+  styleUrls: ['complex-viewer.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ComplexViewerComponent implements AfterViewInit {
   private _complexAC: string;

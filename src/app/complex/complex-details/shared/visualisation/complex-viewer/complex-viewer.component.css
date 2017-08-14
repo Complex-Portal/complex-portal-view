@@ -5,6 +5,7 @@ div#networkContainer{
   /*!*top:0px;*!*/
   height: 500px;
   background: #fbfbfb;
+  position: relative;
   /*width: 150%;*/
   /*margin-left: auto;*/
   /*margin-right: auto;*/
@@ -22,3 +23,4 @@ div#networkContainer{
 /*float: left;*/
 /*margin-left: 5%;*/
 /*}*/
+#complexViewerSVG { height: 100%; width: 100%; display: block; }
