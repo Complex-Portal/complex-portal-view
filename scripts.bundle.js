@@ -1,4 +1,4 @@
-webpackJsonp([10],{
+webpackJsonp(["scripts"],{
 
 /***/ "../../../../raw-loader/index.js!../../../../ebi_framework/js/cookiebanner.js":
 /***/ (function(module, exports) {
@@ -115,7 +115,7 @@ __webpack_require__("../../../../script-loader/addScript.js")(__webpack_require_
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__("../../../../script-loader/index.js!../../../../jquery/dist/jquery.js");
@@ -129,5 +129,5 @@ module.exports = __webpack_require__("../../../../script-loader/index.js!../../.
 
 /***/ })
 
-},[3]);
+},[2]);
 //# sourceMappingURL=scripts.bundle.js.map
