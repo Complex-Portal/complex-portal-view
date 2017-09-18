@@ -157,6 +157,20 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             result[i].psi30 = 'lymst';
             result[i].complextab = 'lymnaea_stagnalis';
             break;
+          case 'Arabidopsis thaliana':
+            result[i].symbol = 'B';
+            result[i].type = 'plant';
+            result[i].psi25 = 'arabidopsis_thaliana';
+            result[i].psi30 = 'arath';
+            result[i].complextab = 'arabidopsis_thaliana';
+            break;
+          case 'Danio rerio':
+            result[i].symbol = 'Z';
+            result[i].type = 'animal';
+            result[i].psi25 = 'danio_rerio';
+            result[i].psi30 = 'danre';
+            result[i].complextab = 'danio_rerio';
+            break;
           default:
             result[i].symbol = 'x';
             result[i].type = 'none';
