@@ -29,7 +29,7 @@ export class LocalSearchComponent implements OnInit {
             this.route
               .queryParams
               .subscribe(queryParams => {
-                this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+                this._query = queryParams['query'];
               });
           } else if (this.location.path().startsWith('/complex/organisms')) {
             this._query = '';
