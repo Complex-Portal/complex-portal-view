@@ -33,7 +33,8 @@ export class NotificationService {
     if (LocalStorageService.getLocalStorage(CP_TWITTER_REMINDER) == null) {
       const context = this;
       setTimeout(function () {
-        context.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
+        context.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
+          'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
         LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true)
       }, 30000)
     }
