@@ -19,16 +19,15 @@ export class ComplexOrganismComponent implements OnInit {
   private _psi30: string;
   private _complextab: string;
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService, private notificationService: NotificationService) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
   }
 
   search(specieName: string) {
-    this.ga.invokeCustomEvent(Action.search, Category.organisms, specieName);
+    this.googleAnalyticsService.fireSearchTermEvent(Category.organisms, specieName);
     this.router.navigate(['complex/search'], {queryParams: {query: '*', species: specieName, page: 1}});
-
   }
 
   get name(): string {
@@ -86,17 +85,17 @@ export class ComplexOrganismComponent implements OnInit {
   }
 
   goToComplexPSI25(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML25');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML25');
     window.open(environment.complex_psi25 + this.psi25, '_blank');
   }
 
   goToComplexPSI30(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML30');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML30');
     window.open(environment.complex_psi30 + this.psi30, '_blank');
   }
 
   goToComplexTAB(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.organisms, 'ComplexTAB');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'ComplexTAB');
     window.open(environment.complex_tab + this.complextab + '.tsv', '_blank');
   }
 

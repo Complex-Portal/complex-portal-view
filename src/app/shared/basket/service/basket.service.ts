@@ -14,7 +14,7 @@ export class BasketService {
   private _complexBasket: { [name: string]: BasketItem } = {};
   public onBasketCountChanged$: EventEmitter<number>;
 
-  constructor(private notificationService: NotificationService, private ga: GoogleAnalyticsService) {
+  constructor(private notificationService: NotificationService, private googleAnalyticsService: GoogleAnalyticsService) {
     this.onBasketCountChanged$ = new EventEmitter<number>();
     this.initialiseBasket();
   }
@@ -44,7 +44,7 @@ export class BasketService {
     if (!this.isInBasket(id)) {
       this._complexBasket[this.toMd5(id)] = newBasketItem;
       LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-      this.ga.invokeCustomEvent(Action.AddToBasket, Category.basket, id);
+      this.googleAnalyticsService.fireAddToBasketEvent(id);
       this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
     }
     this.onBasketCountChanged$.emit(this.getBasketCount());
@@ -54,7 +54,7 @@ export class BasketService {
     const id = this._complexBasket[key].id;
     delete this._complexBasket[key];
     LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-    this.ga.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, id);
+    this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
     this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
     this.onBasketCountChanged$.emit(this.getBasketCount());
   }

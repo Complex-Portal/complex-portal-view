@@ -15,7 +15,7 @@ declare const $: any;
 })
 export class TileMenuComponent implements AfterViewInit {
 
-  constructor(private notificationService: NotificationService, private router: Router, private ga: GoogleAnalyticsService) {
+  constructor(private notificationService: NotificationService, private router: Router, private googleAnalyticsService : GoogleAnalyticsService) {
   }
 
   ngAfterViewInit(): void {
@@ -27,43 +27,43 @@ export class TileMenuComponent implements AfterViewInit {
   }
 
   public goToDownload(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'download');
+    this.googleAnalyticsService.fireClickHomeTileEvent('download');
     this.router.navigate(['download']);
   }
 
   public goToBasket(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'basket');
+    this.googleAnalyticsService.fireClickHomeTileEvent('basket');
     this.router.navigate(['basket']);
   }
 
   public goToOrganisms(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'organisms');
+    this.googleAnalyticsService.fireClickHomeTileEvent('organisms');
     this.router.navigate(['complex/organisms']);
   }
 
   public goToOntologies(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'ontologies');
+    this.googleAnalyticsService.fireClickHomeTileEvent('ontologies');
     this.featureNotAvailableYet();
     this.router.navigate(['ontologies']);
   }
 
   public goToRequestComplex(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'request complex');
+    this.googleAnalyticsService.fireClickHomeTileEvent('request complex');
     window.open(environment.intact_support_url, '_blank');
   }
 
   public goToTraining(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'training');
+    this.googleAnalyticsService.fireClickHomeTileEvent('training');
     window.open(environment.intact_training_url, '_blank');
   }
 
   public goToDocumentation(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'documentation');
+    this.googleAnalyticsService.fireClickHomeTileEvent('documentation');
     this.router.navigate(['documentation']);
   }
 
   public goToCitation(): void {
-    this.ga.invokeCustomEvent(Action.Tile, Category.home, 'citation');
+    this.googleAnalyticsService.fireClickHomeTileEvent('citation');
     this.featureNotAvailableYet();
     this.router.navigate(['home']);
   }

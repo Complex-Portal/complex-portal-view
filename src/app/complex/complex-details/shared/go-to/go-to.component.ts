@@ -26,7 +26,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
   private _sectionName: string;
 
   constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef, private pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) private document: any, private ga: GoogleAnalyticsService) {
+              @Inject(DOCUMENT) private document: any, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
 
@@ -59,7 +59,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
   }
 
   public scrollToElement(idReference: string) {
-    this.ga.invokeCustomEvent(Action.GoToMenu, Category.details, idReference);
+    this.googleAnalyticsService.fireGoToDetailsSectionEvent(idReference);
     const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
     this.pageScrollService.start(pageScrollInstance);
   }

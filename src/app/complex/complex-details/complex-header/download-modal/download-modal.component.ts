@@ -12,14 +12,14 @@ import {GoogleAnalyticsService} from '../../../../shared/google-analytics/google
 export class DownloadModalComponent implements OnInit {
   private _complexAC : string;
 
-  constructor(private ga: GoogleAnalyticsService) { }
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) { }
 
   ngOnInit() {
   }
 
 
   goToComplexWS(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.details, 'ComplexWS');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
     window.open(environment.complex_ws_base_url + '/details/' + this._complexAC, '_blank');
   }
 

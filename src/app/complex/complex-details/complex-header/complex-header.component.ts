@@ -4,8 +4,6 @@ import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {GoogleAnalyticsService} from '../../../shared/google-analytics/google-analytics.service';
-import {Action} from '../../../shared/google-analytics/action.enum';
-import {Category} from '../../../shared/google-analytics/category.enum';
 
 declare const $: any;
 
@@ -83,7 +81,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
     this._jsonURL = value;
   }
 
-  isInBasket() : boolean {
+  isInBasket(): boolean {
     return this.basketService.isInBasket(this._complexAC);
   }
 }

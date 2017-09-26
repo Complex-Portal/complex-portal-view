@@ -15,7 +15,7 @@ export class LocalSearchComponent implements OnInit {
   private _display: boolean;
   private _query: string;
 
-  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private ga: GoogleAnalyticsService) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private googleAnalyticsService: GoogleAnalyticsService) {
 
   }
 
@@ -43,13 +43,13 @@ export class LocalSearchComponent implements OnInit {
     );
   }
 
-  search(query: string, type: string) {
-    if (type === 'enter') {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+  search(query: string, typeOfButton: string) {
+    if (typeOfButton === 'enter') {
+      this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
     } else {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+      this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
     }
-    this.ga.invokeCustomEvent(Action.search, Category.header, query);
+    this.googleAnalyticsService.fireSearchTermEvent(Category.header, query);
     this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
   }
 

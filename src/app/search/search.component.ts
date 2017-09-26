@@ -11,7 +11,7 @@ import {Action} from '../shared/google-analytics/action.enum';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
@@ -19,11 +19,11 @@ export class SearchComponent implements OnInit {
 
   search(query: string, typeOfButton: string) {
     if (typeOfButton === 'enter') {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.home, typeOfButton);
+      this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
     } else {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.home, typeOfButton);
+      this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
     }
-    this.ga.invokeCustomEvent(Action.search, Category.home, query);
+    this.googleAnalyticsService.fireSearchTermEvent(Category.home, query);
     this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
   }
 }

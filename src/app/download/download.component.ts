@@ -14,7 +14,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class DownloadComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService, private titleService: Title) {
+  constructor(private router: Router, private googleAnalyticsService : GoogleAnalyticsService, private titleService: Title) {
   }
 
   ngOnInit() {
@@ -27,32 +27,32 @@ export class DownloadComponent implements OnInit, AfterViewInit {
   }
 
   goToComplexPSI25(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML25');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'PSIXML25');
     window.open(environment.complex_psi25, '_blank');
   }
 
   goToComplexPSI30(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML30');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'PSIXML30');
     window.open(environment.complex_psi30, '_blank');
   }
 
   goToComplexTAB(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexTAB');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'ComplexTAB');
     window.open(environment.complex_tab, '_blank');
   }
 
   goToComplexWS(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexWS');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'ComplexWS');
     window.open(environment.complex_ws_base_url, '_blank');
   }
 
   goToComplexTabeReadMe(): void {
-    this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexTABReadMe');
+    this.googleAnalyticsService.fireOpenExternalLinkEvent(Category.download, 'ComplexTABReadMe');
     window.open(environment.complex_tab_readme, '_blank');
   }
 
   goToComplexFTPCurrent(): void {
-    this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexCurrentFTP');
+    this.googleAnalyticsService.fireOpenExternalLinkEvent(Category.download, 'ComplexCurrentFTP');
     window.open(environment.complex_current, '_blank');
   }
 }
