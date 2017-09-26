@@ -2,7 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
-import {GoogleAnalyticsService} from '../../google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from '../../google-analytics/service/google-analytics.service';
 import {Category} from '../../google-analytics/category.enum';
 import {Action} from '../../google-analytics/action.enum';
 import {LocalStorageService} from '../../local-storage/local-storage.service';

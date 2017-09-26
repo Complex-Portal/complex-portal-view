@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Angulartics2} from 'angulartics2';
-import {Category} from './category.enum';
-import {Action} from './action.enum';
+import {Category} from '../category.enum';
+import {Action} from '../action.enum';
 
 @Injectable()
 export class GoogleAnalyticsService {
@@ -36,6 +36,8 @@ export class GoogleAnalyticsService {
     this.invokeCustomEvent(Action.search, site, type);
   }
 
+  // To identify if user use 'enter' or if they click with the mouse on the magnifier.
+  // 'site' is not the actual site, but if it is the homepage or the header search box
   public fireSearchInvokerEvent(site: Category, type: string): void {
     this.invokeCustomEvent(Action.searchInvoker, site, type)
   }

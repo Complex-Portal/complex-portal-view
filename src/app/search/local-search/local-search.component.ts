@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 import {Action} from '../../shared/google-analytics/action.enum';
 import {Category} from '../../shared/google-analytics/category.enum';
 

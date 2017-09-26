@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {Category} from '../../../../shared/google-analytics/category.enum';
 import {Action} from '../../../../shared/google-analytics/action.enum';
-import {GoogleAnalyticsService} from '../../../../shared/google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 
 @Component({
   selector: 'cp-download-modal',

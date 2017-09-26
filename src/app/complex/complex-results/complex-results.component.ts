@@ -30,7 +30,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+        this._query = queryParams['query'];//Forward to home at fire event
         this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
         this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
         this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];

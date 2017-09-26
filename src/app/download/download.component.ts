@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import {environment} from '../../environments/environment';
-import {GoogleAnalyticsService} from '../shared/google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from '../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
 import {Action} from '../shared/google-analytics/action.enum';
 import {Category} from '../shared/google-analytics/category.enum';
