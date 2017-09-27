@@ -39,7 +39,7 @@ export class GoogleAnalyticsService {
   // To identify if user use 'enter' or if they click with the mouse on the magnifier.
   // 'site' is not the actual site, but if it is the homepage or the header search box
   public fireSearchInvokerEvent(site: Category, type: string): void {
-    this.invokeCustomEvent(Action.searchInvoker, site, type)
+    this.invokeCustomEvent(Action.searchInvoker, site, type);
   }
 
   public fireAddToBasketEvent(type: string): void {
@@ -48,6 +48,29 @@ export class GoogleAnalyticsService {
 
   public fireRemoveFromBasketEvent(type: string): void {
     this.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, type);
+  }
 
+  public fireInteractionWithViewerEvent(viewer: Category, type: string) {
+    this.invokeCustomEvent(Action.VisualisationInteraction, viewer, type);
+  }
+
+  public fireAddedFilterEvent(type: string) {
+    this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
+  }
+
+  public fireRemovedFilterEvent(type: string) {
+    this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
+  }
+
+  public fireMultiFilterEvent(type: string) {
+    this.invokeCustomEvent(Action.IsAMultiFilterResult, Category.ResultFilter, type);
+  }
+
+  public fireUsePaginatorEvent(type: string) {
+    this.invokeCustomEvent(Action.ChangeResultPage, Category.Paginator, type);
+  }
+
+  public fireAPIRequestErrorEvent(api: Category, type: string) {
+    this.invokeCustomEvent(Action.APIResquestError, api, type);
   }
 }
