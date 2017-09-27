@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 
 import LiteMol from 'litemol';
 import {environment} from '../../../../../../environments/environment';
+import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
+import {Category} from '../../../../../shared/google-analytics/category.enum';
 
 const baseURL = environment.pdb_base_url;
 
@@ -13,8 +15,10 @@ const baseURL = environment.pdb_base_url;
 export class LitmolViewerComponent implements OnInit, OnChanges {
   private _plugin: any;
   private _selectedXRef: string;
+  private _hasInteracted: boolean;
 
-  constructor() {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+    this._hasInteracted = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -49,6 +53,14 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
       url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
       format: 'cif' // default
     });
+    this._hasInteracted = false;
+  }
+
+  interactedWithViewer(): void {
+    if (!this._hasInteracted) {
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer, this._selectedXRef);
+      this._hasInteracted = true;
+    }
   }
 
   get plugin(): any {
