@@ -24,9 +24,9 @@ export class NotificationService {
     this.toastrService.warning(hintNotification, 'Just to let you know!');
   }
 
-  public addStaticNotification(staticNotification: string): void {
-    this.toastrService.success('Hello world!', staticNotification);
-  }
+  // public addStaticNotification(staticNotification: string): void {
+  //   this.toastrService.success('Hello world!', staticNotification);
+  // }
 
   public followOnTwitter(): void {
     const CP_TWITTER_REMINDER = 'cp_twitter_reminder';
@@ -35,8 +35,8 @@ export class NotificationService {
       setTimeout(function () {
         context.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
           'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
-        LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true)
-      }, 30000)
+        LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true);
+      }, 30000);
     }
   }
 }
