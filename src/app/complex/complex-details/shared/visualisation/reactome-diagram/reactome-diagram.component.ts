@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
 import {ReactomeService} from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
+import {Category} from '../../../../../shared/google-analytics/category.enum';
+import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
 
 const baseURL = environment.reactome_base_url;
 
@@ -27,15 +29,17 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _reactomePathways = {};
   private _selectedComplex: string;
   private _selectedPathway: string;
+  private _hasInteracted: boolean;
   @ViewChild('diagramHolder') diagramHolder;
   @Output() onLoaded = new EventEmitter<boolean>();
 
 
-  constructor(private reactomeService: ReactomeService) {
+  constructor(private reactomeService: ReactomeService, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
     this.loadScript();
+    this._hasInteracted = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -87,6 +91,11 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.globelDiagram.onDiagramLoaded(function (loaded) {
       context.selectComplex(context.selectedComplex);
     });
+    this._hasInteracted = false;
+    this.globelDiagram.onObjectSelected(function (e) {
+      context.interactedWithViewer();
+      return;
+    });
   }
 
   public selectComplex(reactomeComplexId: string): void {
@@ -97,6 +106,13 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   public getReactomeURL(): string {
     return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
+  }
+
+  interactedWithViewer(): void {
+    if (!this._hasInteracted) {
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram, this._selectedComplex);
+      this._hasInteracted = true;
+    }
   }
 
   get reactomePathways(): any {
