@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Action} from '../../../shared/google-analytics/action.enum';
 import {Category} from '../../../shared/google-analytics/category.enum';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
 import {environment} from '../../../../environments/environment';
@@ -19,7 +18,8 @@ export class ComplexOrganismComponent implements OnInit {
   private _psi30: string;
   private _complextab: string;
 
-  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService, private notificationService: NotificationService) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {

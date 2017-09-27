@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Subscription} from 'rxjs/Subscription';
@@ -24,7 +24,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _query: string;
   private _gxa;
 
-  constructor(private route: ActivatedRoute,private notificationService: NotificationService,
+  constructor(private route: ActivatedRoute, private notificationService: NotificationService,
               private complexPortalService: ComplexPortalService, private sectionService: SectionService, private titleService: Title) {
     PageScrollConfig.defaultScrollOffset = 50;
 

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
-import {Action} from '../../shared/google-analytics/action.enum';
 import {Category} from '../../shared/google-analytics/category.enum';
 
 
@@ -15,7 +14,8 @@ export class LocalSearchComponent implements OnInit {
   private _display: boolean;
   private _query: string;
 
-  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute,
+              private googleAnalyticsService: GoogleAnalyticsService) {
 
   }
 

@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {Category} from '../../../../shared/google-analytics/category.enum';
-import {Action} from '../../../../shared/google-analytics/action.enum';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 
 @Component({
@@ -10,9 +9,10 @@ import {GoogleAnalyticsService} from '../../../../shared/google-analytics/servic
   styleUrls: ['./download-modal.component.css']
 })
 export class DownloadModalComponent implements OnInit {
-  private _complexAC : string;
+  private _complexAC: string;
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService) { }
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+  }
 
   ngOnInit() {
   }

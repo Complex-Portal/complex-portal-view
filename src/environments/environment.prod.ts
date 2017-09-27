@@ -2,7 +2,7 @@
  * Created by Maximilian Koch (mkoch@ebi.ac.uk) on 01/06/2017.
  */
 
-//Enivorment for production
+// Enivorment for production
 const EBI_BASE_URL = '//www.ebi.ac.uk/';
 const REACTOME_BASE_URL = '//reactome.org';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';

@@ -10,7 +10,7 @@ export class ComplexEvidenceComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _ecoXRef: CrossReference;
   private _intactXRefs: CrossReference[];
-  private _flaskSymbol : string;
+  private _flaskSymbol: string;
 
 
   constructor() {

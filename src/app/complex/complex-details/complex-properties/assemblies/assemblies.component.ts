@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./assemblies.component.css']
 })
 export class AssembliesComponent implements OnInit {
-  private _assemblies : string[];
+  private _assemblies: string[];
 
   constructor() {
   }

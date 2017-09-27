@@ -1,9 +1,7 @@
-import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {Action} from '../../shared/google-analytics/action.enum';
-import {Category} from '../../shared/google-analytics/category.enum';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 
 declare const $: any;
@@ -15,7 +13,8 @@ declare const $: any;
 })
 export class TileMenuComponent implements AfterViewInit {
 
-  constructor(private notificationService: NotificationService, private router: Router, private googleAnalyticsService : GoogleAnalyticsService) {
+  constructor(private notificationService: NotificationService, private router: Router,
+              private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngAfterViewInit(): void {

@@ -3,7 +3,6 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
 import {environment} from '../../environments/environment';
 import {GoogleAnalyticsService} from '../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Action} from '../shared/google-analytics/action.enum';
 import {Category} from '../shared/google-analytics/category.enum';
 import {Title} from '@angular/platform-browser';
 
@@ -14,7 +13,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class DownloadComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private googleAnalyticsService : GoogleAnalyticsService, private titleService: Title) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService, private titleService: Title) {
   }
 
   ngOnInit() {

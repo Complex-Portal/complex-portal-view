@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.basketService.onBasketCountChanged$.subscribe(count => {
       this._basketCount = count;
       this._onChangeInBasket = true;
-      let ctx = this;
+      const ctx = this;
       setTimeout(function () {
         ctx._onChangeInBasket = false;
       }, 1000);
