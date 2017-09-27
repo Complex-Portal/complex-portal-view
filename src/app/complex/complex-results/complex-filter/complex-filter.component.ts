@@ -25,6 +25,11 @@ export class ComplexFilterComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   *
+   * @param filter selected filter
+   * @param status status if selected filter has been added or removed
+   */
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
       this.spicesFilter.push(filter);
@@ -36,6 +41,11 @@ export class ComplexFilterComponent implements OnInit {
     this.onSpicesFilterChanged.emit(this.spicesFilter);
   }
 
+  /**
+   *
+   * @param filter selected filter
+   * @param status status if selected filter has been added or removed
+   */
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
     if (status) {
       this.bioRoleFilter.push(filter);
@@ -47,6 +57,11 @@ export class ComplexFilterComponent implements OnInit {
     this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter);
   }
 
+  /**
+   *
+   * @param filter selected filter
+   * @param status status if selected filter has been added or removed
+   */
   public changeInteractorTypeFilter(filter: string, status: boolean) {
     if (status) {
       this.interactorTypeFilter.push(filter);
@@ -58,16 +73,29 @@ export class ComplexFilterComponent implements OnInit {
     this.onInteractorTyoeFilterChanged.emit(this.interactorTypeFilter);
   }
 
+  /**
+   * Emit event to parent component to remove all filters
+   */
   public resetAllFilters() {
     this.onResetAllFilters.emit(true);
   }
 
+  /**
+   *
+   * @returns {boolean} true is any filter array contains an filter
+   */
   public anyFiltersSelected() {
-    return !!(this._spicesFilter.length !== 0 || this._bioRoleFilter.length !== 0 || this._interactorTypeFilter.length !== 0);
+    return (this._spicesFilter.length !== 0 || this._bioRoleFilter.length !== 0 || this._interactorTypeFilter.length !== 0);
   }
 
-  public isSelected(elmement: string, filter: string[]): boolean {
-    return filter.indexOf(elmement) !== -1;
+  /**
+   *
+   * @param element filter to check if already selected
+   * @param filter selected filters
+   * @returns {boolean} true if filter is already in selected filters
+   */
+  public isSelected(element: string, filter: string[]): boolean {
+    return filter.indexOf(element) !== -1;
   }
 
   get facets(): Facets {
