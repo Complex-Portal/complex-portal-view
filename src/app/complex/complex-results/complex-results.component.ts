@@ -4,6 +4,7 @@ import {ComplexSearchResult} from '../shared/model/complex-results/complex-searc
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
+import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./complex-results.component.css']
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  private _query;
+  private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
@@ -22,21 +23,26 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-              private complexPortalService: ComplexPortalService, private titleService: Title) {
+              private complexPortalService: ComplexPortalService, private titleService: Title,
+              private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
+
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this._query = queryParams['query'];//Forward to home at fire event
+        // Extract queryParams from URL
+        this._query = queryParams['query'];
         this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
         this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
         this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        // TODO This is out for now, but CP-84 should fix that!!
+        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
+
+        // Take query and filters and perform request to CP-WS
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
@@ -50,10 +56,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // ProgressBarComponent.hide();
   }
 
   private reloadPage(): void {
+    // To reload the page, we want to create the new queryParams. This means we have to concatenate all the filters
+    // together.
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
@@ -69,7 +76,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.router.navigate([], {
       queryParams
     });
+
     ProgressBarComponent.hide();
+
+    // This is a test case event for GA, to monitor if users ever use more then one filter.
+    const filterCount = this.getFilterCount();
+    if (1 < filterCount) {
+      this.googleAnalyticsService.fireMultiFilterEvent(filterCount.toString());
+    }
   }
 
   private prepareFiltersForParams(filter: string[]): string {
@@ -79,6 +93,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   public onPageChange(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
     this.reloadPage();
+
+    // This is a test case event for GA, to monitor if users ever go beyond the first result page.
+    this.googleAnalyticsService.fireUsePaginatorEvent(this._query);
   }
 
   public onResetAllFilters(): void {
@@ -107,7 +124,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  get query() {
+  private getFilterCount(): number {
+    return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
+  }
+
+  get query(): string {
     return this._query;
   }
 
