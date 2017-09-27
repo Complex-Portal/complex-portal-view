@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
+import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 
 @Component({
   selector: 'cp-complex-filter',
@@ -18,7 +19,7 @@ export class ComplexFilterComponent implements OnInit {
   @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
@@ -27,8 +28,10 @@ export class ComplexFilterComponent implements OnInit {
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
       this.spicesFilter.push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
       this.spicesFilter.splice(this.spicesFilter.indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
     this.onSpicesFilterChanged.emit(this.spicesFilter);
   }
@@ -36,17 +39,21 @@ export class ComplexFilterComponent implements OnInit {
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
     if (status) {
       this.bioRoleFilter.push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
       this.bioRoleFilter.splice(this.bioRoleFilter.indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
     this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter);
   }
 
-  public changeInteractorTyoeFilter(filter: string, status: boolean) {
+  public changeInteractorTypeFilter(filter: string, status: boolean) {
     if (status) {
       this.interactorTypeFilter.push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
       this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
     this.onInteractorTyoeFilterChanged.emit(this.interactorTypeFilter);
   }
