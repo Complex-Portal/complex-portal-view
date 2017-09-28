@@ -33,7 +33,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.route
       .queryParams
       .subscribe(queryParams => {
-        // Extract queryParams from URL
         this._query = queryParams['query'];
         this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
         this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
@@ -41,8 +40,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         // TODO This is out for now, but CP-84 (JIRA )should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-
-        // Take query and filters and perform request to CP-WS
         this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
           this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
           this.complexSearch = complexSearch;
@@ -58,9 +55,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
+  /**
+   * Prepare query params to build new URL after filter or pagination has changed
+   */
   private reloadPage(): void {
-    // To reload the page, we want to create the new queryParams. This means we have to concatenate all the filters
-    // together.
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
@@ -90,11 +88,17 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return filter.toString().replace(/,/g, '+');
   }
 
+  private getFilterCount(): number {
+    return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
+  }
+
+  /**
+   *
+   * @param pageIndex new page index after hitting the paginator to update the URL and reload content
+   */
   public onPageChange(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
     this.reloadPage();
-
-    // This is a test case event for GA, to monitor if users ever go beyond the first result page.
     this.googleAnalyticsService.fireUsePaginatorEvent(this._query);
   }
 
@@ -122,10 +126,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.interactorTypeFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
-  }
-
-  private getFilterCount(): number {
-    return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
 
   get query(): string {
