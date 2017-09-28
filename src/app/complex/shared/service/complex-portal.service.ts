@@ -5,6 +5,9 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import {ComplexDetails} from '../model/complex-details/complex-details.model';
+import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
+import {SpeciesFacet} from '../model/complex-results/facets/species_f.model';
 
 const baseURL = environment.complex_ws_base_url;
 
@@ -20,22 +23,28 @@ export class ComplexPortalService {
    * @param ac
    * @returns {Observable<R>}
    */
-  getComplex(ac: string) {
+  getComplex(ac: string): Observable<ComplexDetails> {
     return this.http.get(baseURL + '/details/' + ac)
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
-
-  getComplexOrganisms() {
-    return this.findComplex('*').map(res => res.facets.species_f);
+  /**
+   *
+   * @returns {Observable<R>}
+   */
+  getComplexOrganisms(): Observable<SpeciesFacet[]> {
+    return this.findComplex('*').map((complexSearchResult: ComplexSearchResult) => {
+      return complexSearchResult.facets['species_f'];
+    });
   }
 
   /**
    * Get a specif complex from the WS
    * @param ac
    * @returns {Observable<R>}
+   * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
    */
-  getComplexMIJSON(ac: string) {
+  getComplexMIJSON(ac: string): Observable<any> {
     return this.http.get(baseURL + '/export/' + ac)
       .map((res: Response) => res.json()).catch(this.handleError);
   }
@@ -54,7 +63,7 @@ export class ComplexPortalService {
    */
   findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [], currentPageIndex = 1, pageSize = 10,
-              format = 'json', facets = 'species_f,ptype_f,pbiorole_f') {
+              format = 'json', facets = 'species_f,ptype_f,pbiorole_f'): Observable<ComplexSearchResult> {
     const params = new URLSearchParams();
     let filters = '';
     params.set('first', ((currentPageIndex * pageSize) - pageSize).toString());
