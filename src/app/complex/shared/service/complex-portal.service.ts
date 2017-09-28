@@ -86,8 +86,6 @@ export class ComplexPortalService {
   }
 
   private handleError (error: Response | any) : Observable<Response> {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
     if (error instanceof Response) {
       return Observable.throw(error);
     } else {
