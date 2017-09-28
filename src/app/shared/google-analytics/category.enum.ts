@@ -1,4 +1,7 @@
 export enum Category {
+  complexportal_details,
+  complexportal_search,
+  complexportal_mi,
   europepmc,
   Paginator,
   ResultFilter,
