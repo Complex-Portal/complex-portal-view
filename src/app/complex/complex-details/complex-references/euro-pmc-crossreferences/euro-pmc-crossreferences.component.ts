@@ -44,11 +44,9 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
 
   private onError(error: any) {
     this._isDataLoaded = false;
-    if (error.status) {
-      this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. ' +
-        'Please let us know if error persists.');
-      this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.europepmc, error.status);
-    }
+    this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. ' +
+      'Please let us know if error persists.');
+    this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.europepmc, error.status ? error.status : 'unknown');
   }
 
   private publicationFactory(crossReference: CrossReference, euroPmcResponse: any): void {
