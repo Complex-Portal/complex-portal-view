@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
-import {SectionService} from '../shared/service/section/section.service';
 
 @Component({
   selector: 'cp-complex-participants',
@@ -13,7 +12,7 @@ export class ComplexParticipantsComponent implements OnInit {
   private _complexMIJSON: string;
   private _displayedElements = 5;
 
-  constructor(private sectionService: SectionService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -29,6 +28,7 @@ export class ComplexParticipantsComponent implements OnInit {
   }
 
   public getLegendURL(interactorType: string): string {
+    //TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. #172
     switch (interactorType) {
       case 'small molecule':
         return 'assets/images/legend/small-mol.png';
@@ -41,6 +41,7 @@ export class ComplexParticipantsComponent implements OnInit {
     }
   }
 
+  //TODO: WS should send Stochiometry in right format already #173
   public getConvertedStochiometry(stochiometry: string): string {
     return stochiometry.split(',')[0].split(':')[1].trim();
   }
