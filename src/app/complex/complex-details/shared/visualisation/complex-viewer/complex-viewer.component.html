@@ -2,7 +2,7 @@
      data-equalize-on="medium" id="large-button-grid">
   <div class="columns medium-12 no-pad-left">
     <div *ngIf="complexMIJSON">
-      <div id="networkContainer"></div>
+      <div (click)="interactedWithViewer()" id="networkContainer"></div>
     </div>
   </div>
   <div class="columns small-6 medium-3 no-pad-left">
