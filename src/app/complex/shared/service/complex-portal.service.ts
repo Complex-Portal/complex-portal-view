@@ -21,7 +21,7 @@ export class ComplexPortalService {
   /**
    * Get a specif complex from the WS
    * @param ac
-   * @returns {Observable<R>}
+   * @returns {Observable<ComplexDetails>}
    */
   getComplex(ac: string): Observable<ComplexDetails> {
     return this.http.get(baseURL + '/details/' + ac)
@@ -30,7 +30,7 @@ export class ComplexPortalService {
 
   /**
    *
-   * @returns {Observable<R>}
+   * @returns {Observable<SpeciesFacet[]>}
    */
   getComplexOrganisms(): Observable<SpeciesFacet[]> {
     return this.findComplex('*').map((complexSearchResult: ComplexSearchResult) => {
@@ -41,7 +41,7 @@ export class ComplexPortalService {
   /**
    * Get a specif complex from the WS
    * @param ac
-   * @returns {Observable<R>}
+   * @returns {Observable<any>}
    * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
    */
   getComplexMIJSON(ac: string): Observable<any> {
@@ -51,7 +51,6 @@ export class ComplexPortalService {
 
   /**
    * Find a complex based on indexed term
-   * @returns {Observable<R>}
    * @param query
    * @param speciesFilter
    * @param bioRoleFilter
@@ -60,6 +59,7 @@ export class ComplexPortalService {
    * @param pageSize
    * @param format
    * @param facets
+   * @returns {Observable<ComplexSearchResult>}
    */
   findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [], currentPageIndex = 1, pageSize = 10,
