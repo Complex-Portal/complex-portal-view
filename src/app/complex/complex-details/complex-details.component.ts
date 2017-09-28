@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ComplexDetails} from '../shared/model/complex-details/complex-details.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Subscription} from 'rxjs/Subscription';
@@ -8,6 +8,8 @@ import {NotificationService} from '../../shared/notification/service/notificatio
 import {SectionService} from './shared/service/section/section.service';
 import {PageScrollConfig} from 'ng2-page-scroll';
 import {Title} from '@angular/platform-browser';
+import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {Category} from '../../shared/google-analytics/category.enum';
 
 declare const expressionAtlasHeatmapHighcharts: any;
 
@@ -24,10 +26,13 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _query: string;
   private _gxa;
 
-  constructor(private route: ActivatedRoute, private notificationService: NotificationService,
-              private complexPortalService: ComplexPortalService, private sectionService: SectionService, private titleService: Title) {
+  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
+              private googleAnalyticsService: GoogleAnalyticsService, private complexPortalService: ComplexPortalService,
+              private sectionService: SectionService, private titleService: Title) {
+
     PageScrollConfig.defaultScrollOffset = 50;
 
+    //TODO Not needed when we properly use the gxa node module and not use the backed version.
     if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
       this._gxa = expressionAtlasHeatmapHighcharts;
     } else {
@@ -46,6 +51,8 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
           error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
               'Please try again later or contact us!');
+            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+            this.router.navigate(['home'])
           }
         );
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
@@ -53,6 +60,8 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
           error => {
             this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
               'Please try again later or contact us!');
+            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
+            this.router.navigate(['home'])
           }
         );
         document.body.scrollTop = 0;
