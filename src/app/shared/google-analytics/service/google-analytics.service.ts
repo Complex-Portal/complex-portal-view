@@ -51,26 +51,26 @@ export class GoogleAnalyticsService {
   }
 
   public fireInteractionWithViewerEvent(viewer: Category, type: string) {
-    this.invokeCustomEvent(Action.VisualisationInteraction, viewer, type);
+    // this.invokeCustomEvent(Action.VisualisationInteraction, viewer, type);
   }
 
   public fireAddedFilterEvent(type: string) {
-    this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
+    // this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
   }
 
   public fireRemovedFilterEvent(type: string) {
-    this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
+    // this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
   }
 
   public fireMultiFilterEvent(type: string) {
-    this.invokeCustomEvent(Action.IsAMultiFilterResult, Category.ResultFilter, type);
+    // this.invokeCustomEvent(Action.IsAMultiFilterResult, Category.ResultFilter, type);
   }
 
   public fireUsePaginatorEvent(type: string) {
-    this.invokeCustomEvent(Action.ChangeResultPage, Category.Paginator, type);
+    // this.invokeCustomEvent(Action.ChangeResultPage, Category.Paginator, type);
   }
 
   public fireAPIRequestErrorEvent(api: Category, type: string) {
-    this.invokeCustomEvent(Action.APIResquestError, api, type);
+    // this.invokeCustomEvent(Action.APIResquestError, api, type);
   }
 }
