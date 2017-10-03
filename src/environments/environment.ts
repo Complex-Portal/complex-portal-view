@@ -4,8 +4,8 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 // Enviorment for localhost
-const EBI_BASE_URL = '//wwwdev.ebi.ac.uk/';
-const REACTOME_BASE_URL = '//reactomedev.oicr.on.ca';
+const EBI_BASE_URL = 'https://www.ebi.ac.uk/';
+const REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 
