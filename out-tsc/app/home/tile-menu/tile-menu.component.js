@@ -11,14 +11,12 @@ import { Component } from '@angular/core';
 import { NotificationService } from '../../shared/notification/service/notification.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { Action } from '../../shared/google-analytics/action.enum';
-import { Category } from '../../shared/google-analytics/category.enum';
-import { GoogleAnalyticsService } from '../../shared/google-analytics/google-analytics.service';
+import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
 var TileMenuComponent = (function () {
-    function TileMenuComponent(notificationService, router, ga) {
+    function TileMenuComponent(notificationService, router, googleAnalyticsService) {
         this.notificationService = notificationService;
         this.router = router;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     TileMenuComponent.prototype.ngAfterViewInit = function () {
         $('cp-tile-menu').foundation();
@@ -27,36 +25,36 @@ var TileMenuComponent = (function () {
         this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     };
     TileMenuComponent.prototype.goToDownload = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'download');
+        this.googleAnalyticsService.fireClickHomeTileEvent('download');
         this.router.navigate(['download']);
     };
     TileMenuComponent.prototype.goToBasket = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'basket');
+        this.googleAnalyticsService.fireClickHomeTileEvent('basket');
         this.router.navigate(['basket']);
     };
     TileMenuComponent.prototype.goToOrganisms = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'organisms');
+        this.googleAnalyticsService.fireClickHomeTileEvent('organisms');
         this.router.navigate(['complex/organisms']);
     };
     TileMenuComponent.prototype.goToOntologies = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'ontologies');
+        this.googleAnalyticsService.fireClickHomeTileEvent('ontologies');
         this.featureNotAvailableYet();
         this.router.navigate(['ontologies']);
     };
     TileMenuComponent.prototype.goToRequestComplex = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'request complex');
+        this.googleAnalyticsService.fireClickHomeTileEvent('request complex');
         window.open(environment.intact_support_url, '_blank');
     };
     TileMenuComponent.prototype.goToTraining = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'training');
+        this.googleAnalyticsService.fireClickHomeTileEvent('training');
         window.open(environment.intact_training_url, '_blank');
     };
     TileMenuComponent.prototype.goToDocumentation = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'documentation');
+        this.googleAnalyticsService.fireClickHomeTileEvent('documentation');
         this.router.navigate(['documentation']);
     };
     TileMenuComponent.prototype.goToCitation = function () {
-        this.ga.invokeCustomEvent(Action.Tile, Category.home, 'citation');
+        this.googleAnalyticsService.fireClickHomeTileEvent('citation');
         this.featureNotAvailableYet();
         this.router.navigate(['home']);
     };
@@ -68,7 +66,8 @@ TileMenuComponent = __decorate([
         templateUrl: './tile-menu.component.html',
         styleUrls: ['./tile-menu.component.css']
     }),
-    __metadata("design:paramtypes", [NotificationService, Router, GoogleAnalyticsService])
+    __metadata("design:paramtypes", [NotificationService, Router,
+        GoogleAnalyticsService])
 ], TileMenuComponent);
 export { TileMenuComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/home/tile-menu/tile-menu.component.js.map

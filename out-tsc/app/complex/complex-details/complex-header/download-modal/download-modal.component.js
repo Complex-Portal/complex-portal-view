@@ -10,16 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { Category } from '../../../../shared/google-analytics/category.enum';
-import { Action } from '../../../../shared/google-analytics/action.enum';
-import { GoogleAnalyticsService } from '../../../../shared/google-analytics/google-analytics.service';
+import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
 var DownloadModalComponent = (function () {
-    function DownloadModalComponent(ga) {
-        this.ga = ga;
+    function DownloadModalComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     DownloadModalComponent.prototype.ngOnInit = function () {
     };
     DownloadModalComponent.prototype.goToComplexWS = function () {
-        this.ga.invokeCustomEvent(Action.download, Category.details, 'ComplexWS');
+        this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
         window.open(environment.complex_ws_base_url + '/details/' + this._complexAC, '_blank');
     };
     Object.defineProperty(DownloadModalComponent.prototype, "complexAC", {

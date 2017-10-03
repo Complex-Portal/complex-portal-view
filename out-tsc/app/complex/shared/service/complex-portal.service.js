@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -22,19 +22,26 @@ var ComplexPortalService = (function () {
     /**
      * Get a specif complex from the WS
      * @param ac
-     * @returns {Observable<R>}
+     * @returns {Observable<ComplexDetails>}
      */
     ComplexPortalService.prototype.getComplex = function (ac) {
         return this.http.get(baseURL + '/details/' + ac)
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
+    /**
+     *
+     * @returns {Observable<SpeciesFacet[]>}
+     */
     ComplexPortalService.prototype.getComplexOrganisms = function () {
-        return this.findComplex('*').map(function (res) { return res.facets.species_f; });
+        return this.findComplex('*').map(function (complexSearchResult) {
+            return complexSearchResult.facets['species_f'];
+        });
     };
     /**
      * Get a specif complex from the WS
      * @param ac
-     * @returns {Observable<R>}
+     * @returns {Observable<any>}
+     * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
      */
     ComplexPortalService.prototype.getComplexMIJSON = function (ac) {
         return this.http.get(baseURL + '/export/' + ac)
@@ -42,7 +49,6 @@ var ComplexPortalService = (function () {
     };
     /**
      * Find a complex based on indexed term
-     * @returns {Observable<R>}
      * @param query
      * @param speciesFilter
      * @param bioRoleFilter
@@ -51,6 +57,7 @@ var ComplexPortalService = (function () {
      * @param pageSize
      * @param format
      * @param facets
+     * @returns {Observable<ComplexSearchResult>}
      */
     ComplexPortalService.prototype.findComplex = function (query, speciesFilter, bioRoleFilter, interactorTypeFilter, currentPageIndex, pageSize, format, facets) {
         if (speciesFilter === void 0) { speciesFilter = []; }
@@ -81,12 +88,12 @@ var ComplexPortalService = (function () {
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     ComplexPortalService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        var errMsg = (error.message) ? error.message :
-            error.status ? error.status + " - " + error.statusText : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
+        if (error instanceof Response) {
+            return Observable.throw(error);
+        }
+        else {
+            console.error(error.message ? error.message : error.toString());
+        }
     };
     return ComplexPortalService;
 }());

@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { BasketService } from '../../../shared/basket/service/basket.service';
 import { NotificationService } from '../../../shared/notification/service/notification.service';
-import { GoogleAnalyticsService } from '../../../shared/google-analytics/google-analytics.service';
+import { GoogleAnalyticsService } from '../../../shared/google-analytics/service/google-analytics.service';
 var ComplexHeaderComponent = (function () {
     function ComplexHeaderComponent(basketService, ga, notificationService) {
         this.basketService = basketService;

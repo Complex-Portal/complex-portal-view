@@ -8,21 +8,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ComplexPortalService } from '../shared/service/complex-portal.service';
 import { ProgressBarComponent } from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import { NotificationService } from '../../shared/notification/service/notification.service';
 import { SectionService } from './shared/service/section/section.service';
 import { PageScrollConfig } from 'ng2-page-scroll';
 import { Title } from '@angular/platform-browser';
+import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
+import { Category } from '../../shared/google-analytics/category.enum';
 var ComplexDetailsComponent = (function () {
-    function ComplexDetailsComponent(route, notificationService, complexPortalService, sectionService, titleService) {
+    function ComplexDetailsComponent(route, router, notificationService, googleAnalyticsService, complexPortalService, sectionService, titleService) {
         this.route = route;
+        this.router = router;
         this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this.complexPortalService = complexPortalService;
         this.sectionService = sectionService;
         this.titleService = titleService;
         PageScrollConfig.defaultScrollOffset = 50;
+        //TODO Not needed when we properly use the gxa node module and not use the backed version.
         if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
             this._gxa = expressionAtlasHeatmapHighcharts;
         }
@@ -40,10 +45,14 @@ var ComplexDetailsComponent = (function () {
             _this.complexPortalService.getComplex(_this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
                 _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
                     'Please try again later or contact us!');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+                _this.router.navigate(['home']);
             });
             _this.complexPortalService.getComplexMIJSON(_this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
                 _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
                     'Please try again later or contact us!');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
+                _this.router.navigate(['home']);
             });
             document.body.scrollTop = 0;
         });
@@ -103,8 +112,9 @@ ComplexDetailsComponent = __decorate([
         templateUrl: './complex-details.component.html',
         styleUrls: ['./complex-details.component.css']
     }),
-    __metadata("design:paramtypes", [ActivatedRoute, NotificationService,
-        ComplexPortalService, SectionService, Title])
+    __metadata("design:paramtypes", [ActivatedRoute, Router, NotificationService,
+        GoogleAnalyticsService, ComplexPortalService,
+        SectionService, Title])
 ], ComplexDetailsComponent);
 export { ComplexDetailsComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-details.component.js.map

@@ -9,13 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { NotificationService } from '../../../../../shared/notification/service/notification.service';
+import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
+import { Category } from '../../../../../shared/google-analytics/category.enum';
 var xlv;
 var SvgSaver = require('svgsaver');
 var xiNET = require('expose-loader?xiNET!complexviewer');
 var ComplexViewerComponent = (function () {
-    function ComplexViewerComponent(notificationService) {
+    function ComplexViewerComponent(notificationService, googleAnalyticsService) {
         this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._svgsaver = new SvgSaver();
+        this._hasInteracted = false;
     }
     ComplexViewerComponent.prototype.ngAfterViewInit = function () {
         $('cp-complex-viewer').foundation();
@@ -23,17 +27,24 @@ var ComplexViewerComponent = (function () {
         xlv.readMIJSON(this._complexMIJSON, true);
         xlv.autoLayout();
     };
-    ComplexViewerComponent.prototype.featureNotAvailableYet = function () {
-        this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
-    };
     ComplexViewerComponent.prototype.onChangeAnnotation = function (value) {
         xlv.setAnnotations(value);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ChangeAnno, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_SelectedAnno, value);
     };
     ComplexViewerComponent.prototype.onReset = function () {
         xlv.reset();
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_Reset, this._complexAC);
     };
     ComplexViewerComponent.prototype.onExpandAll = function () {
         xlv.expandAll();
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ExpandAll, this._complexAC);
+    };
+    ComplexViewerComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer, this._complexAC);
+            this._hasInteracted = true;
+        }
     };
     Object.defineProperty(ComplexViewerComponent.prototype, "complexAC", {
         get: function () {
@@ -58,6 +69,7 @@ var ComplexViewerComponent = (function () {
     ComplexViewerComponent.prototype.downloadAsSVG = function () {
         var svg = document.querySelector('#networkContainer');
         this._svgsaver.asSvg(svg, this._complexAC + '.svg');
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ExportSVG, this._complexAC);
     };
     return ComplexViewerComponent;
 }());
@@ -78,7 +90,7 @@ ComplexViewerComponent = __decorate([
         styleUrls: ['complex-viewer.component.css'],
         encapsulation: ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [NotificationService])
+    __metadata("design:paramtypes", [NotificationService, GoogleAnalyticsService])
 ], ComplexViewerComponent);
 export { ComplexViewerComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.js.map

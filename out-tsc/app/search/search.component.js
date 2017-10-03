@@ -9,24 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleAnalyticsService } from '../shared/google-analytics/google-analytics.service';
+import { GoogleAnalyticsService } from '../shared/google-analytics/service/google-analytics.service';
 import { Category } from '../shared/google-analytics/category.enum';
-import { Action } from '../shared/google-analytics/action.enum';
 var SearchComponent = (function () {
-    function SearchComponent(router, ga) {
+    function SearchComponent(router, googleAnalyticsService) {
         this.router = router;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
     SearchComponent.prototype.search = function (query, typeOfButton) {
         if (typeOfButton === 'enter') {
-            this.ga.invokeCustomEvent(Action.searchInvoker, Category.home, typeOfButton);
+            this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
         }
         else {
-            this.ga.invokeCustomEvent(Action.searchInvoker, Category.home, typeOfButton);
+            this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
         }
-        this.ga.invokeCustomEvent(Action.search, Category.home, query);
+        this.googleAnalyticsService.fireSearchTermEvent(Category.home, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
     return SearchComponent;

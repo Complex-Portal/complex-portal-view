@@ -14,16 +14,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input } 
 import { SectionService } from '../service/section/section.service';
 import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
-import { GoogleAnalyticsService } from '../../../../shared/google-analytics/google-analytics.service';
-import { Action } from '../../../../shared/google-analytics/action.enum';
-import { Category } from '../../../../shared/google-analytics/category.enum';
+import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
 var GoToComponent = (function () {
-    function GoToComponent(_sectionService, cdr, pageScrollService, document, ga) {
+    function GoToComponent(_sectionService, cdr, pageScrollService, document, googleAnalyticsService) {
         this._sectionService = _sectionService;
         this.cdr = cdr;
         this.pageScrollService = pageScrollService;
         this.document = document;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     GoToComponent.prototype.ngOnInit = function () {
         switch (this._sectionName) {
@@ -51,7 +49,7 @@ var GoToComponent = (function () {
         $('.goToMenu').foundation();
     };
     GoToComponent.prototype.scrollToElement = function (idReference) {
-        this.ga.invokeCustomEvent(Action.GoToMenu, Category.details, idReference);
+        this.googleAnalyticsService.fireGoToDetailsSectionEvent(idReference);
         var pageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
         this.pageScrollService.start(pageScrollInstance);
     };

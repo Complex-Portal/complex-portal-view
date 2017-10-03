@@ -11,15 +11,13 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BasketItem } from '../model/basketItem';
 import { Md5 } from 'ts-md5/dist/md5';
 import { NotificationService } from '../../notification/service/notification.service';
-import { GoogleAnalyticsService } from '../../google-analytics/google-analytics.service';
-import { Category } from '../../google-analytics/category.enum';
-import { Action } from '../../google-analytics/action.enum';
+import { GoogleAnalyticsService } from '../../google-analytics/service/google-analytics.service';
 import { LocalStorageService } from '../../local-storage/local-storage.service';
 var COMPLEX_STORE = 'cp_complex_store';
 var BasketService = (function () {
-    function BasketService(notificationService, ga) {
+    function BasketService(notificationService, googleAnalyticsService) {
         this.notificationService = notificationService;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._complexBasket = {};
         this.onBasketCountChanged$ = new EventEmitter();
         this.initialiseBasket();
@@ -48,7 +46,7 @@ var BasketService = (function () {
         if (!this.isInBasket(id)) {
             this._complexBasket[this.toMd5(id)] = newBasketItem;
             LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-            this.ga.invokeCustomEvent(Action.AddToBasket, Category.basket, id);
+            this.googleAnalyticsService.fireAddToBasketEvent(id);
             this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
         }
         this.onBasketCountChanged$.emit(this.getBasketCount());
@@ -57,7 +55,7 @@ var BasketService = (function () {
         var id = this._complexBasket[key].id;
         delete this._complexBasket[key];
         LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-        this.ga.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, id);
+        this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
         this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
         this.onBasketCountChanged$.emit(this.getBasketCount());
     };

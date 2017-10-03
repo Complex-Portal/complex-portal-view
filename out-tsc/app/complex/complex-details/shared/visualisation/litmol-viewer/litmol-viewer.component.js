@@ -10,9 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input } from '@angular/core';
 import LiteMol from 'litemol';
 import { environment } from '../../../../../../environments/environment';
+import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
+import { Category } from '../../../../../shared/google-analytics/category.enum';
 var baseURL = environment.pdb_base_url;
 var LitmolViewerComponent = (function () {
-    function LitmolViewerComponent() {
+    function LitmolViewerComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._hasInteracted = false;
     }
     LitmolViewerComponent.prototype.ngOnChanges = function (changes) {
         if (this._plugin) {
@@ -44,6 +48,13 @@ var LitmolViewerComponent = (function () {
             url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
             format: 'cif' // default
         });
+        this._hasInteracted = false;
+    };
+    LitmolViewerComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer, this._selectedXRef);
+            this._hasInteracted = true;
+        }
     };
     Object.defineProperty(LitmolViewerComponent.prototype, "plugin", {
         get: function () {
@@ -78,7 +89,7 @@ LitmolViewerComponent = __decorate([
         templateUrl: 'litmol-viewer.component.html',
         styleUrls: ['litmol-viewer.component.css']
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [GoogleAnalyticsService])
 ], LitmolViewerComponent);
 export { LitmolViewerComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.js.map

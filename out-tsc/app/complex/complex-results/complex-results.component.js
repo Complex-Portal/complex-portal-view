@@ -12,12 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ComplexPortalService } from '../shared/service/complex-portal.service';
 import { ProgressBarComponent } from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import { Title } from '@angular/platform-browser';
+import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
 var ComplexResultsComponent = (function () {
-    function ComplexResultsComponent(route, router, complexPortalService, titleService) {
+    function ComplexResultsComponent(route, router, complexPortalService, titleService, googleAnalyticsService) {
         this.route = route;
         this.router = router;
         this.complexPortalService = complexPortalService;
         this.titleService = titleService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._pageSize = 10;
     }
     ComplexResultsComponent.prototype.ngOnInit = function () {
@@ -26,12 +28,12 @@ var ComplexResultsComponent = (function () {
         this.route
             .queryParams
             .subscribe(function (queryParams) {
-            _this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+            _this._query = queryParams['query'];
             _this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
             _this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
             _this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
             _this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-            // TODO This is out for now, but CP-84 should fix that!!
+            // TODO This is out for now, but CP-84 (JIRA )should fix that!!
             // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
             _this.complexPortalService.findComplex(_this.query, _this.spicesFilter, _this.bioRoleFilter, _this.interactorTypeFilter, _this.currentPageIndex, _this.pageSize).subscribe(function (complexSearch) {
                 _this.complexSearch = complexSearch;
@@ -44,8 +46,10 @@ var ComplexResultsComponent = (function () {
         });
     };
     ComplexResultsComponent.prototype.ngAfterViewInit = function () {
-        // ProgressBarComponent.hide();
     };
+    /**
+     * Prepare query params to build new URL after filter or pagination has changed
+     */
     ComplexResultsComponent.prototype.reloadPage = function () {
         var queryParams = {};
         queryParams['query'] = this._query;
@@ -63,13 +67,26 @@ var ComplexResultsComponent = (function () {
             queryParams: queryParams
         });
         ProgressBarComponent.hide();
+        // This is a test case event for GA, to monitor if users ever use more then one filter.
+        var filterCount = this.getFilterCount();
+        if (1 < filterCount) {
+            this.googleAnalyticsService.fireMultiFilterEvent(filterCount.toString());
+        }
     };
     ComplexResultsComponent.prototype.prepareFiltersForParams = function (filter) {
         return filter.toString().replace(/,/g, '+');
     };
+    ComplexResultsComponent.prototype.getFilterCount = function () {
+        return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
+    };
+    /**
+     *
+     * @param pageIndex new page index after hitting the paginator to update the URL and reload content
+     */
     ComplexResultsComponent.prototype.onPageChange = function (pageIndex) {
         this.currentPageIndex = pageIndex;
         this.reloadPage();
+        this.googleAnalyticsService.fireUsePaginatorEvent(this._query);
     };
     ComplexResultsComponent.prototype.onResetAllFilters = function () {
         this.spicesFilter = [];
@@ -182,7 +199,8 @@ ComplexResultsComponent = __decorate([
         styleUrls: ['./complex-results.component.css']
     }),
     __metadata("design:paramtypes", [ActivatedRoute, Router,
-        ComplexPortalService, Title])
+        ComplexPortalService, Title,
+        GoogleAnalyticsService])
 ], ComplexResultsComponent);
 export { ComplexResultsComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-results/complex-results.component.js.map

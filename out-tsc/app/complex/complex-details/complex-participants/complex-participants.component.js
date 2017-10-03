@@ -8,13 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input } from '@angular/core';
-import { SectionService } from '../shared/service/section/section.service';
 var ComplexParticipantsComponent = (function () {
-    function ComplexParticipantsComponent(sectionService) {
-        this.sectionService = sectionService;
+    function ComplexParticipantsComponent() {
         this._displayedElements = 5;
     }
     ComplexParticipantsComponent.prototype.ngOnInit = function () {
+        //TODO: Sort participants in WS - GH issue #174
         this.participants.sort(function (a, b) {
             if (a.interactorType < b.interactorType) {
                 return -1;
@@ -28,6 +27,7 @@ var ComplexParticipantsComponent = (function () {
         });
     };
     ComplexParticipantsComponent.prototype.getLegendURL = function (interactorType) {
+        //TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
         switch (interactorType) {
             case 'small molecule':
                 return 'assets/images/legend/small-mol.png';
@@ -39,6 +39,7 @@ var ComplexParticipantsComponent = (function () {
                 return 'assets/images/legend/rna.png';
         }
     };
+    //TODO: WS should send Stochiometry in right format already - GH issue #173
     ComplexParticipantsComponent.prototype.getConvertedStochiometry = function (stochiometry) {
         return stochiometry.split(',')[0].split(':')[1].trim();
     };
@@ -105,7 +106,7 @@ ComplexParticipantsComponent = __decorate([
         templateUrl: './complex-participants.component.html',
         styleUrls: ['./complex-participants.component.css']
     }),
-    __metadata("design:paramtypes", [SectionService])
+    __metadata("design:paramtypes", [])
 ], ComplexParticipantsComponent);
 export { ComplexParticipantsComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-participants/complex-participants.component.js.map

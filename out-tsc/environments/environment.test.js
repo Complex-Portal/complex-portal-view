@@ -2,12 +2,12 @@
  * Created by Maximilian Koch (mkoch@ebi.ac.uk) on 01/06/2017.
  */
 // Enviorment for GitHub Page
-var EBI_BASE_URL = '//www.ebi.ac.uk/';
-var REACTOME_BASE_URL = '//reactome.org';
+var EBI_BASE_URL = 'https://www.ebi.ac.uk/';
+var REACTOME_BASE_URL = 'https://reactome.org';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 export var environment = {
-    production: true,
+    production: false,
     evn: 'test',
     analytics_id: 'UA-672146-13',
     ebi_base_url: EBI_BASE_URL,

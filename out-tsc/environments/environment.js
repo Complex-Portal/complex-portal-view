@@ -3,8 +3,8 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
 // Enviorment for localhost
-var EBI_BASE_URL = '//wwwdev.ebi.ac.uk/';
-var REACTOME_BASE_URL = '//reactomedev.oicr.on.ca';
+var EBI_BASE_URL = 'https://www.ebi.ac.uk/';
+var REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 export var environment = {

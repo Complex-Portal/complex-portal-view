@@ -26,15 +26,16 @@ var NotificationService = (function () {
     NotificationService.prototype.addHintNotification = function (hintNotification) {
         this.toastrService.warning(hintNotification, 'Just to let you know!');
     };
-    NotificationService.prototype.addStaticNotification = function (staticNotification) {
-        this.toastrService.success('Hello world!', staticNotification);
-    };
+    // public addStaticNotification(staticNotification: string): void {
+    //   this.toastrService.success('Hello world!', staticNotification);
+    // }
     NotificationService.prototype.followOnTwitter = function () {
         var CP_TWITTER_REMINDER = 'cp_twitter_reminder';
         if (LocalStorageService.getLocalStorage(CP_TWITTER_REMINDER) == null) {
             var context_1 = this;
             setTimeout(function () {
-                context_1.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
+                context_1.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
+                    'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
                 LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true);
             }, 30000);
         }

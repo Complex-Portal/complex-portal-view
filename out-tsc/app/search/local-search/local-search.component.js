@@ -10,15 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { GoogleAnalyticsService } from '../../shared/google-analytics/google-analytics.service';
-import { Action } from '../../shared/google-analytics/action.enum';
+import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
 import { Category } from '../../shared/google-analytics/category.enum';
 var LocalSearchComponent = (function () {
-    function LocalSearchComponent(location, router, route, ga) {
+    function LocalSearchComponent(location, router, route, googleAnalyticsService) {
         this.location = location;
         this.router = router;
         this.route = route;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     LocalSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -32,7 +31,7 @@ var LocalSearchComponent = (function () {
                     _this.route
                         .queryParams
                         .subscribe(function (queryParams) {
-                        _this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+                        _this._query = queryParams['query'];
                     });
                 }
                 else if (_this.location.path().startsWith('/complex/organisms')) {
@@ -47,14 +46,14 @@ var LocalSearchComponent = (function () {
             }
         });
     };
-    LocalSearchComponent.prototype.search = function (query, type) {
-        if (type === 'enter') {
-            this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+    LocalSearchComponent.prototype.search = function (query, typeOfButton) {
+        if (typeOfButton === 'enter') {
+            this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
         }
         else {
-            this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
+            this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
         }
-        this.ga.invokeCustomEvent(Action.search, Category.header, query);
+        this.googleAnalyticsService.fireSearchTermEvent(Category.header, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
     Object.defineProperty(LocalSearchComponent.prototype, "display", {
@@ -79,7 +78,8 @@ LocalSearchComponent = __decorate([
         templateUrl: './local-search.component.html',
         styleUrls: ['./local-search.component.css']
     }),
-    __metadata("design:paramtypes", [Location, Router, ActivatedRoute, GoogleAnalyticsService])
+    __metadata("design:paramtypes", [Location, Router, ActivatedRoute,
+        GoogleAnalyticsService])
 ], LocalSearchComponent);
 export { LocalSearchComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/local-search/local-search.component.js.map

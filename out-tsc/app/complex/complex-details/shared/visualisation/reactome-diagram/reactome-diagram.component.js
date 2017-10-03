@@ -10,16 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
 import { ReactomeService } from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
+import { Category } from '../../../../../shared/google-analytics/category.enum';
+import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
 var baseURL = environment.reactome_base_url;
 var ReactomeDiagramComponent = (function () {
-    function ReactomeDiagramComponent(reactomeService) {
+    function ReactomeDiagramComponent(reactomeService, googleAnalyticsService) {
         this.reactomeService = reactomeService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._reactomeComplexe = {};
         this._reactomePathways = {};
         this.onLoaded = new EventEmitter();
     }
     ReactomeDiagramComponent.prototype.ngOnInit = function () {
         this.loadScript();
+        this._hasInteracted = false;
     };
     ReactomeDiagramComponent.prototype.ngOnChanges = function (changes) {
         if (this.diagramContext) {
@@ -62,6 +66,11 @@ var ReactomeDiagramComponent = (function () {
         this.globelDiagram.onDiagramLoaded(function (loaded) {
             context.selectComplex(context.selectedComplex);
         });
+        this._hasInteracted = false;
+        this.globelDiagram.onObjectSelected(function (e) {
+            context.interactedWithViewer();
+            return;
+        });
     };
     ReactomeDiagramComponent.prototype.selectComplex = function (reactomeComplexId) {
         this.selectedComplex = reactomeComplexId;
@@ -71,6 +80,12 @@ var ReactomeDiagramComponent = (function () {
     ;
     ReactomeDiagramComponent.prototype.getReactomeURL = function () {
         return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
+    };
+    ReactomeDiagramComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram, this._selectedComplex);
+            this._hasInteracted = true;
+        }
     };
     Object.defineProperty(ReactomeDiagramComponent.prototype, "reactomePathways", {
         get: function () {
@@ -160,7 +175,7 @@ ReactomeDiagramComponent = __decorate([
         templateUrl: 'reactome-diagram.component.html',
         styleUrls: ['reactome-diagram.component.css']
     }),
-    __metadata("design:paramtypes", [ReactomeService])
+    __metadata("design:paramtypes", [ReactomeService, GoogleAnalyticsService])
 ], ReactomeDiagramComponent);
 export { ReactomeDiagramComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.js.map

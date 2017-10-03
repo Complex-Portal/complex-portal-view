@@ -10,15 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { ProgressBarComponent } from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import { environment } from '../../environments/environment';
-import { GoogleAnalyticsService } from '../shared/google-analytics/google-analytics.service';
+import { GoogleAnalyticsService } from '../shared/google-analytics/service/google-analytics.service';
 import { Router } from '@angular/router';
-import { Action } from '../shared/google-analytics/action.enum';
 import { Category } from '../shared/google-analytics/category.enum';
 import { Title } from '@angular/platform-browser';
 var DownloadComponent = (function () {
-    function DownloadComponent(router, ga, titleService) {
+    function DownloadComponent(router, googleAnalyticsService, titleService) {
         this.router = router;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
         this.titleService = titleService;
     }
     DownloadComponent.prototype.ngOnInit = function () {
@@ -29,27 +28,27 @@ var DownloadComponent = (function () {
         ProgressBarComponent.hide();
     };
     DownloadComponent.prototype.goToComplexPSI25 = function () {
-        this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML25');
+        this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'PSIXML25');
         window.open(environment.complex_psi25, '_blank');
     };
     DownloadComponent.prototype.goToComplexPSI30 = function () {
-        this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML30');
+        this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'PSIXML30');
         window.open(environment.complex_psi30, '_blank');
     };
     DownloadComponent.prototype.goToComplexTAB = function () {
-        this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexTAB');
+        this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'ComplexTAB');
         window.open(environment.complex_tab, '_blank');
     };
     DownloadComponent.prototype.goToComplexWS = function () {
-        this.ga.invokeCustomEvent(Action.download, Category.download, 'ComplexWS');
+        this.googleAnalyticsService.fireDownloadResourceEvent(Category.download, 'ComplexWS');
         window.open(environment.complex_ws_base_url, '_blank');
     };
     DownloadComponent.prototype.goToComplexTabeReadMe = function () {
-        this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexTABReadMe');
+        this.googleAnalyticsService.fireOpenExternalLinkEvent(Category.download, 'ComplexTABReadMe');
         window.open(environment.complex_tab_readme, '_blank');
     };
     DownloadComponent.prototype.goToComplexFTPCurrent = function () {
-        this.ga.invokeCustomEvent(Action.externalLink, Category.download, 'ComplexCurrentFTP');
+        this.googleAnalyticsService.fireOpenExternalLinkEvent(Category.download, 'ComplexCurrentFTP');
         window.open(environment.complex_current, '_blank');
     };
     return DownloadComponent;

@@ -1,50 +1,50 @@
-webpackJsonp(["main"],{
+webpackJsonp([10],{
 
 /***/ "../../../../../package.json":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"complex-portal-view","version":"0.0.8-beta","license":"MIT","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^4.2.3","@angular/common":"^4.2.3","@angular/compiler":"^4.2.3","@angular/compiler-cli":"^4.2.3","@angular/core":"^4.2.3","@angular/forms":"^4.2.3","@angular/http":"^4.2.3","@angular/material":"2.0.0-beta.3","@angular/platform-browser":"^4.2.3","@angular/platform-browser-dynamic":"^4.2.3","@angular/platform-server":"^4.2.3","@angular/router":"^4.2.3","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angulartics2":"^1.6.3","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.4.1","ebi_framework":"https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13","expose-loader":"^0.7.1","jquery":"^3.1.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"^4.0.0-beta.8","ngx-toastr":"^5.0.6","react":"^15.6.1","rxjs":"^5.0.1","svgsaver":"^0.6.2","ts-helpers":"^1.1.1","ts-md5":"^1.2.0","zone.js":"^0.8.4"},"devDependencies":{"@angular/cli":"^1.1.2","@angular/compiler-cli":"^4.0.1","@types/jasmine":"2.5.38","@types/node":"^6.0.42","codelyzer":"~2.1.1","jasmine-core":"2.5.2","jasmine-spec-reporter":"2.5.0","karma":"1.2.0","karma-chrome-launcher":"^2.0.0","karma-cli":"^1.0.1","karma-jasmine":"^1.0.2","karma-remap-istanbul":"^0.2.1","protractor":"~4.0.13","ts-node":"1.2.1","tslint":"^4.3.0","typescript":"2.3.4"}}
+module.exports = {"name":"complex-portal-view","version":"0.0.8-beta","license":"MIT","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^4.0.0","@angular/common":"^4.0.0","@angular/compiler":"^4.0.0","@angular/core":"^4.0.0","@angular/forms":"^4.0.0","@angular/http":"^4.0.0","@angular/platform-browser":"^4.0.0","@angular/platform-browser-dynamic":"^4.0.0","@angular/router":"^4.0.0","rxjs":"^5.1.0","zone.js":"^0.8.4","@angular/material":"2.0.0-beta.3","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angulartics2":"^1.6.3","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.4.1","ebi_framework":"https://github.com/ebiwd/EBI-Framework/tarball/v1.1.13","expose-loader":"^0.7.1","jquery":"3.1.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"4.0.0-beta.8","ngx-toastr":"^5.0.6","react":"^15.6.1","svgsaver":"^0.6.2","ts-helpers":"^1.1.1","ts-md5":"^1.2.0"},"devDependencies":{"@angular/cli":"1.2.6","@angular/compiler-cli":"^4.0.0","@angular/language-service":"^4.0.0","@types/jasmine":"2.5.45","@types/node":"~6.0.60","codelyzer":"~3.0.1","jasmine-core":"~2.6.2","jasmine-spec-reporter":"~4.1.0","karma":"~1.7.0","karma-chrome-launcher":"~2.1.1","karma-cli":"~1.0.1","karma-jasmine":"~1.1.0","karma-jasmine-html-reporter":"^0.2.2","karma-coverage-istanbul-reporter":"^1.2.1","protractor":"~5.1.2","ts-node":"~3.0.4","tslint":"~5.3.2","typescript":"~2.3.3"}}
 
 /***/ }),
 
-/***/ "../../../../../src lazy recursive":
+/***/ "../../../../../src async recursive":
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"app/about/about.module": [
 		"../../../../../src/app/about/about.module.ts",
-		"about.module"
+		7
 	],
 	"app/basket/basket.module": [
 		"../../../../../src/app/basket/basket.module.ts",
-		"basket.module"
+		6
 	],
 	"app/complex/complex-details/complex-details.module": [
 		"../../../../../src/app/complex/complex-details/complex-details.module.ts",
-		"complex-details.module",
-		"common"
+		1,
+		0
 	],
 	"app/complex/complex-organisms/complex-organisms.module": [
 		"../../../../../src/app/complex/complex-organisms/complex-organisms.module.ts",
-		"complex-organisms.module",
-		"common"
+		4,
+		0
 	],
 	"app/complex/complex-results/complex-results.module": [
 		"../../../../../src/app/complex/complex-results/complex-results.module.ts",
-		"complex-results.module",
-		"common"
+		3,
+		0
 	],
 	"app/complex/complex.module": [
 		"../../../../../src/app/complex/complex.module.ts",
-		"complex.module"
+		8
 	],
 	"app/download/download.module": [
 		"../../../../../src/app/download/download.module.ts",
-		"download.module"
+		5
 	],
 	"app/home/home.module": [
 		"../../../../../src/app/home/home.module.ts",
-		"home.module"
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -59,7 +59,7 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
 module.exports = webpackAsyncContext;
-webpackAsyncContext.id = "../../../../../src lazy recursive";
+webpackAsyncContext.id = "../../../../../src async recursive";
 
 /***/ }),
 
@@ -92,7 +92,6 @@ module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angulartics2__ = __webpack_require__("../../../../angulartics2/dist/index.js");
@@ -102,6 +101,7 @@ module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__ = __webpack_require__("../../../../ngx-toastr/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__ = __webpack_require__("../../../../../src/app/shared/basket/service/basket.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -242,12 +242,12 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 AppComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["a" /* ToastrConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["a" /* ToastrConfig */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angulartics2__["Angulartics2GoogleAnalytics"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["c" /* ToastrConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_ngx_toastr__["c" /* ToastrConfig */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _e || Object])
 ], AppComponent);
 
 var _a, _b, _c, _d, _e;
@@ -259,7 +259,6 @@ var _a, _b, _c, _d, _e;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
@@ -286,8 +285,9 @@ var _a, _b, _c, _d, _e;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__documentation_query_syntax_query_syntax_component__ = __webpack_require__("../../../../../src/app/documentation/query-syntax/query-syntax.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__documentation_data_content_data_content_component__ = __webpack_require__("../../../../../src/app/documentation/data-content/data-content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ontologies_ontologies_component__ = __webpack_require__("../../../../../src/app/ontologies/ontologies.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__shared_local_storage_local_storage_service__ = __webpack_require__("../../../../../src/app/shared/local-storage/local-storage.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -327,7 +327,7 @@ var AppModule = (function () {
     return AppModule;
 }());
 AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_15__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */],
@@ -339,15 +339,15 @@ AppModule = __decorate([
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_router__["RouterModule"].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_routes__["a" /* rootRouterConfig */], { useHash: false }),
-            __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__["b" /* ToastrModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_16_ngx_toastr__["a" /* ToastrModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_9_angulartics2__["Angulartics2Module"].forRoot([__WEBPACK_IMPORTED_MODULE_9_angulartics2__["Angulartics2GoogleAnalytics"]]),
             __WEBPACK_IMPORTED_MODULE_19__angular_material__["a" /* MdProgressBarModule */],
             __WEBPACK_IMPORTED_MODULE_18__angular_platform_browser_animations__["a" /* NoopAnimationsModule */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_8__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_12__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_13__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_25__shared_local_storage_local_storage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_7__complex_shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_8__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_11__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_12__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_13__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_25__shared_local_storage_local_storage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_14_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_24__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -360,11 +360,11 @@ AppModule = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return rootRouterConfig; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__documentation_documentation_component__ = __webpack_require__("../../../../../src/app/documentation/documentation.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__documentation_query_syntax_query_syntax_component__ = __webpack_require__("../../../../../src/app/documentation/query-syntax/query-syntax.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__documentation_data_content_data_content_component__ = __webpack_require__("../../../../../src/app/documentation/data-content/data-content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ontologies_ontologies_component__ = __webpack_require__("../../../../../src/app/ontologies/ontologies.component.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return rootRouterConfig; });
 
 
 
@@ -389,7 +389,6 @@ var rootRouterConfig = [
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
@@ -399,6 +398,7 @@ var rootRouterConfig = [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -439,8 +439,8 @@ var ReactomeService = (function () {
     return ReactomeService;
 }());
 ReactomeService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ReactomeService);
 
 var _a;
@@ -452,7 +452,6 @@ var _a;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
@@ -462,6 +461,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -492,13 +492,13 @@ var EuroPmcService = (function () {
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
         console.error(errMsg); // log to console instead
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(errMsg);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(error);
     };
     return EuroPmcService;
 }());
 EuroPmcService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], EuroPmcService);
 
 var _a;
@@ -510,7 +510,6 @@ var _a;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPortalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
@@ -522,6 +521,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPortalService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -546,19 +546,26 @@ var ComplexPortalService = (function () {
     /**
      * Get a specif complex from the WS
      * @param ac
-     * @returns {Observable<R>}
+     * @returns {Observable<ComplexDetails>}
      */
     ComplexPortalService.prototype.getComplex = function (ac) {
         return this.http.get(baseURL + '/details/' + ac)
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
+    /**
+     *
+     * @returns {Observable<SpeciesFacet[]>}
+     */
     ComplexPortalService.prototype.getComplexOrganisms = function () {
-        return this.findComplex('*').map(function (res) { return res.facets.species_f; });
+        return this.findComplex('*').map(function (complexSearchResult) {
+            return complexSearchResult.facets['species_f'];
+        });
     };
     /**
      * Get a specif complex from the WS
      * @param ac
-     * @returns {Observable<R>}
+     * @returns {Observable<any>}
+     * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
      */
     ComplexPortalService.prototype.getComplexMIJSON = function (ac) {
         return this.http.get(baseURL + '/export/' + ac)
@@ -566,7 +573,6 @@ var ComplexPortalService = (function () {
     };
     /**
      * Find a complex based on indexed term
-     * @returns {Observable<R>}
      * @param query
      * @param speciesFilter
      * @param bioRoleFilter
@@ -575,6 +581,7 @@ var ComplexPortalService = (function () {
      * @param pageSize
      * @param format
      * @param facets
+     * @returns {Observable<ComplexSearchResult>}
      */
     ComplexPortalService.prototype.findComplex = function (query, speciesFilter, bioRoleFilter, interactorTypeFilter, currentPageIndex, pageSize, format, facets) {
         if (speciesFilter === void 0) { speciesFilter = []; }
@@ -605,18 +612,18 @@ var ComplexPortalService = (function () {
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     ComplexPortalService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        var errMsg = (error.message) ? error.message :
-            error.status ? error.status + " - " + error.statusText : 'Server error';
-        console.error(errMsg); // log to console instead
-        return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(errMsg);
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Response */]) {
+            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(error);
+        }
+        else {
+            console.error(error.message ? error.message : error.toString());
+        }
     };
     return ComplexPortalService;
 }());
 ComplexPortalService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ComplexPortalService);
 
 var _a;
@@ -653,12 +660,12 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataContentComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataContentComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -699,7 +706,7 @@ var DataContentComponent = (function () {
     return DataContentComponent;
 }());
 DataContentComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-data-content',
         template: __webpack_require__("../../../../../src/app/documentation/data-content/data-content.component.html"),
         styles: [__webpack_require__("../../../../../src/app/documentation/data-content/data-content.component.css")]
@@ -741,10 +748,10 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -770,7 +777,7 @@ var DocumentationComponent = (function () {
     return DocumentationComponent;
 }());
 DocumentationComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-documentation',
         template: __webpack_require__("../../../../../src/app/documentation/documentation.component.html"),
         styles: [__webpack_require__("../../../../../src/app/documentation/documentation.component.css")]
@@ -812,9 +819,9 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuerySyntaxComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuerySyntaxComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -836,7 +843,7 @@ var QuerySyntaxComponent = (function () {
     return QuerySyntaxComponent;
 }());
 QuerySyntaxComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-query-syntax',
         template: __webpack_require__("../../../../../src/app/documentation/query-syntax/query-syntax.component.html"),
         styles: [__webpack_require__("../../../../../src/app/documentation/query-syntax/query-syntax.component.css")]
@@ -878,10 +885,10 @@ module.exports = "<!--<input style=\"font-weight: normal\" size=\"35\" type=\"te
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OntologiesComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OntologiesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -906,7 +913,7 @@ var OntologiesComponent = (function () {
     return OntologiesComponent;
 }());
 OntologiesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-ontologies',
         template: __webpack_require__("../../../../../src/app/ontologies/ontologies.component.html"),
         styles: [__webpack_require__("../../../../../src/app/ontologies/ontologies.component.css")]
@@ -948,13 +955,12 @@ module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-se
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalSearchComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/action.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalSearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -969,13 +975,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var LocalSearchComponent = (function () {
-    function LocalSearchComponent(location, router, route, ga) {
+    function LocalSearchComponent(location, router, route, googleAnalyticsService) {
         this.location = location;
         this.router = router;
         this.route = route;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     LocalSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -989,7 +994,7 @@ var LocalSearchComponent = (function () {
                     _this.route
                         .queryParams
                         .subscribe(function (queryParams) {
-                        _this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+                        _this._query = queryParams['query'];
                     });
                 }
                 else if (_this.location.path().startsWith('/complex/organisms')) {
@@ -1004,14 +1009,14 @@ var LocalSearchComponent = (function () {
             }
         });
     };
-    LocalSearchComponent.prototype.search = function (query, type) {
-        if (type === 'enter') {
-            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, type);
+    LocalSearchComponent.prototype.search = function (query, typeOfButton) {
+        if (typeOfButton === 'enter') {
+            this.googleAnalyticsService.fireSearchInvokerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].header, typeOfButton);
         }
         else {
-            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].searchInvoker, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, type);
+            this.googleAnalyticsService.fireSearchInvokerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].header, typeOfButton);
         }
-        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_action_enum__["a" /* Action */].search, __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].header, query);
+        this.googleAnalyticsService.fireSearchTermEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].header, query);
         this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
     };
     Object.defineProperty(LocalSearchComponent.prototype, "display", {
@@ -1031,12 +1036,12 @@ var LocalSearchComponent = (function () {
     return LocalSearchComponent;
 }());
 LocalSearchComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-local-search',
         template: __webpack_require__("../../../../../src/app/search/local-search/local-search.component.html"),
         styles: [__webpack_require__("../../../../../src/app/search/local-search/local-search.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
 ], LocalSearchComponent);
 
 var _a, _b, _c, _d;
@@ -1107,16 +1112,14 @@ var BasketItem = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_basketItem__ = __webpack_require__("../../../../../src/app/shared/basket/model/basketItem.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__ = __webpack_require__("../../../../ts-md5/dist/md5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ts_md5_dist_md5__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/action.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__local_storage_local_storage_service__ = __webpack_require__("../../../../../src/app/shared/local-storage/local-storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__local_storage_local_storage_service__ = __webpack_require__("../../../../../src/app/shared/local-storage/local-storage.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasketService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1132,21 +1135,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
 var COMPLEX_STORE = 'cp_complex_store';
 var BasketService = (function () {
-    function BasketService(notificationService, ga) {
+    function BasketService(notificationService, googleAnalyticsService) {
         this.notificationService = notificationService;
-        this.ga = ga;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._complexBasket = {};
         this.onBasketCountChanged$ = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.initialiseBasket();
     }
     BasketService.prototype.initialiseBasket = function () {
-        var complexStore = __WEBPACK_IMPORTED_MODULE_7__local_storage_local_storage_service__["a" /* LocalStorageService */].getLocalStorage(COMPLEX_STORE);
+        var complexStore = __WEBPACK_IMPORTED_MODULE_5__local_storage_local_storage_service__["a" /* LocalStorageService */].getLocalStorage(COMPLEX_STORE);
         if (!complexStore) {
-            __WEBPACK_IMPORTED_MODULE_7__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
+            __WEBPACK_IMPORTED_MODULE_5__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
             this.initialiseBasket();
         }
         else {
@@ -1166,8 +1167,8 @@ var BasketService = (function () {
         var newBasketItem = new __WEBPACK_IMPORTED_MODULE_1__model_basketItem__["a" /* BasketItem */](name, id, new Date(), organism);
         if (!this.isInBasket(id)) {
             this._complexBasket[this.toMd5(id)] = newBasketItem;
-            __WEBPACK_IMPORTED_MODULE_7__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-            this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__["a" /* Action */].AddToBasket, __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__["a" /* Category */].basket, id);
+            __WEBPACK_IMPORTED_MODULE_5__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
+            this.googleAnalyticsService.fireAddToBasketEvent(id);
             this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
         }
         this.onBasketCountChanged$.emit(this.getBasketCount());
@@ -1175,8 +1176,8 @@ var BasketService = (function () {
     BasketService.prototype.deleteFromBasket = function (key) {
         var id = this._complexBasket[key].id;
         delete this._complexBasket[key];
-        __WEBPACK_IMPORTED_MODULE_7__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-        this.ga.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_6__google_analytics_action_enum__["a" /* Action */].RemoveFromBasket, __WEBPACK_IMPORTED_MODULE_5__google_analytics_category_enum__["a" /* Category */].basket, id);
+        __WEBPACK_IMPORTED_MODULE_5__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
+        this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
         this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
         this.onBasketCountChanged$.emit(this.getBasketCount());
     };
@@ -1200,8 +1201,8 @@ var BasketService = (function () {
     return BasketService;
 }());
 BasketService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__google_analytics_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
 ], BasketService);
 
 var _a, _b;
@@ -1216,15 +1217,21 @@ var _a, _b;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
 var Action;
 (function (Action) {
-    Action[Action["download"] = 0] = "download";
-    Action[Action["externalLink"] = 1] = "externalLink";
-    Action[Action["example"] = 2] = "example";
-    Action[Action["searchInvoker"] = 3] = "searchInvoker";
-    Action[Action["Tile"] = 4] = "Tile";
-    Action[Action["RemoveFromBasket"] = 5] = "RemoveFromBasket";
-    Action[Action["search"] = 6] = "search";
-    Action[Action["AddToBasket"] = 7] = "AddToBasket";
-    Action[Action["GoToMenu"] = 8] = "GoToMenu";
+    Action[Action["APIResquestError"] = 0] = "APIResquestError";
+    Action[Action["ChangeResultPage"] = 1] = "ChangeResultPage";
+    Action[Action["IsAMultiFilterResult"] = 2] = "IsAMultiFilterResult";
+    Action[Action["RemoveResultFilter"] = 3] = "RemoveResultFilter";
+    Action[Action["AddResultFilter"] = 4] = "AddResultFilter";
+    Action[Action["VisualisationInteraction"] = 5] = "VisualisationInteraction";
+    Action[Action["download"] = 6] = "download";
+    Action[Action["externalLink"] = 7] = "externalLink";
+    Action[Action["example"] = 8] = "example";
+    Action[Action["searchInvoker"] = 9] = "searchInvoker";
+    Action[Action["Tile"] = 10] = "Tile";
+    Action[Action["RemoveFromBasket"] = 11] = "RemoveFromBasket";
+    Action[Action["search"] = 12] = "search";
+    Action[Action["AddToBasket"] = 13] = "AddToBasket";
+    Action[Action["GoToMenu"] = 14] = "GoToMenu";
 })(Action || (Action = {}));
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/action.enum.js.map
 
@@ -1237,29 +1244,43 @@ var Action;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
 var Category;
 (function (Category) {
-    Category[Category["download"] = 0] = "download";
-    Category[Category["organisms"] = 1] = "organisms";
-    Category[Category["species"] = 2] = "species";
-    Category[Category["header"] = 3] = "header";
-    Category[Category["home"] = 4] = "home";
-    Category[Category["details"] = 5] = "details";
-    Category[Category["basket"] = 6] = "basket";
-    Category[Category["search"] = 7] = "search";
+    Category[Category["complexportal_details"] = 0] = "complexportal_details";
+    Category[Category["complexportal_search"] = 1] = "complexportal_search";
+    Category[Category["complexportal_mi"] = 2] = "complexportal_mi";
+    Category[Category["europepmc"] = 3] = "europepmc";
+    Category[Category["Paginator"] = 4] = "Paginator";
+    Category[Category["ResultFilter"] = 5] = "ResultFilter";
+    Category[Category["InteractionViewer_ExportSVG"] = 6] = "InteractionViewer_ExportSVG";
+    Category[Category["InteractionViewer_SelectedAnno"] = 7] = "InteractionViewer_SelectedAnno";
+    Category[Category["InteractionViewer_ChangeAnno"] = 8] = "InteractionViewer_ChangeAnno";
+    Category[Category["InteractionViewer_Reset"] = 9] = "InteractionViewer_Reset";
+    Category[Category["InteractionViewer_ExpandAll"] = 10] = "InteractionViewer_ExpandAll";
+    Category[Category["InteractionViewer"] = 11] = "InteractionViewer";
+    Category[Category["PathwayDiagram"] = 12] = "PathwayDiagram";
+    Category[Category["LiteMolViewer"] = 13] = "LiteMolViewer";
+    Category[Category["download"] = 14] = "download";
+    Category[Category["organisms"] = 15] = "organisms";
+    Category[Category["species"] = 16] = "species";
+    Category[Category["header"] = 17] = "header";
+    Category[Category["home"] = 18] = "home";
+    Category[Category["details"] = 19] = "details";
+    Category[Category["basket"] = 20] = "basket";
+    Category[Category["search"] = 21] = "search";
 })(Category || (Category = {}));
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/category.enum.js.map
 
 /***/ }),
 
-/***/ "../../../../../src/app/shared/google-analytics/google-analytics.service.ts":
+/***/ "../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2__ = __webpack_require__("../../../../angulartics2/dist/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angulartics2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angulartics2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/action.enum.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleAnalyticsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1283,10 +1304,54 @@ var GoogleAnalyticsService = (function () {
             properties: { category: __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */][category], label: label }
         });
     };
+    GoogleAnalyticsService.prototype.fireDownloadResourceEvent = function (site, type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].download, site, type);
+    };
+    GoogleAnalyticsService.prototype.fireOpenExternalLinkEvent = function (site, type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].externalLink, site, type);
+    };
+    GoogleAnalyticsService.prototype.fireClickHomeTileEvent = function (type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].Tile, __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */].home, type);
+    };
+    GoogleAnalyticsService.prototype.fireGoToDetailsSectionEvent = function (type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].GoToMenu, __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */].details, type);
+    };
+    GoogleAnalyticsService.prototype.fireSearchTermEvent = function (site, type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].search, site, type);
+    };
+    // To identify if user use 'enter' or if they click with the mouse on the magnifier.
+    // 'site' is not the actual site, but if it is the homepage or the header search box
+    GoogleAnalyticsService.prototype.fireSearchInvokerEvent = function (site, type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].searchInvoker, site, type);
+    };
+    GoogleAnalyticsService.prototype.fireAddToBasketEvent = function (type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].AddToBasket, __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */].basket, type);
+    };
+    GoogleAnalyticsService.prototype.fireRemoveFromBasketEvent = function (type) {
+        this.invokeCustomEvent(__WEBPACK_IMPORTED_MODULE_3__action_enum__["a" /* Action */].RemoveFromBasket, __WEBPACK_IMPORTED_MODULE_2__category_enum__["a" /* Category */].basket, type);
+    };
+    GoogleAnalyticsService.prototype.fireInteractionWithViewerEvent = function (viewer, type) {
+        // this.invokeCustomEvent(Action.VisualisationInteraction, viewer, type);
+    };
+    GoogleAnalyticsService.prototype.fireAddedFilterEvent = function (type) {
+        // this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
+    };
+    GoogleAnalyticsService.prototype.fireRemovedFilterEvent = function (type) {
+        // this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
+    };
+    GoogleAnalyticsService.prototype.fireMultiFilterEvent = function (type) {
+        // this.invokeCustomEvent(Action.IsAMultiFilterResult, Category.ResultFilter, type);
+    };
+    GoogleAnalyticsService.prototype.fireUsePaginatorEvent = function (type) {
+        // this.invokeCustomEvent(Action.ChangeResultPage, Category.Paginator, type);
+    };
+    GoogleAnalyticsService.prototype.fireAPIRequestErrorEvent = function (api, type) {
+        // this.invokeCustomEvent(Action.APIResquestError, api, type);
+    };
     return GoogleAnalyticsService;
 }());
 GoogleAnalyticsService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angulartics2__["Angulartics2"]) === "function" && _a || Object])
 ], GoogleAnalyticsService);
 
@@ -1324,8 +1389,8 @@ module.exports = "<md-progress-bar *ngIf=\"isDisplayed\"\n                 [colo
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressBarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgressBarComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1382,7 +1447,7 @@ var ProgressBarComponent = ProgressBarComponent_1 = (function () {
     return ProgressBarComponent;
 }());
 ProgressBarComponent = ProgressBarComponent_1 = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-progress-bar',
         template: __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.html"),
         styles: [__webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.css")]
@@ -1399,16 +1464,13 @@ var ProgressBarComponent_1;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalStorageService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocalStorageService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
 var LocalStorageService = (function () {
@@ -1423,8 +1485,7 @@ var LocalStorageService = (function () {
     return LocalStorageService;
 }());
 LocalStorageService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
 ], LocalStorageService);
 
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/local-storage.service.js.map
@@ -1435,10 +1496,10 @@ LocalStorageService = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__ = __webpack_require__("../../../../ngx-toastr/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__local_storage_local_storage_service__ = __webpack_require__("../../../../../src/app/shared/local-storage/local-storage.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1467,15 +1528,16 @@ var NotificationService = (function () {
     NotificationService.prototype.addHintNotification = function (hintNotification) {
         this.toastrService.warning(hintNotification, 'Just to let you know!');
     };
-    NotificationService.prototype.addStaticNotification = function (staticNotification) {
-        this.toastrService.success('Hello world!', staticNotification);
-    };
+    // public addStaticNotification(staticNotification: string): void {
+    //   this.toastrService.success('Hello world!', staticNotification);
+    // }
     NotificationService.prototype.followOnTwitter = function () {
         var CP_TWITTER_REMINDER = 'cp_twitter_reminder';
         if (__WEBPACK_IMPORTED_MODULE_2__local_storage_local_storage_service__["a" /* LocalStorageService */].getLocalStorage(CP_TWITTER_REMINDER) == null) {
             var context_1 = this;
             setTimeout(function () {
-                context_1.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
+                context_1.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
+                    'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
                 __WEBPACK_IMPORTED_MODULE_2__local_storage_local_storage_service__["a" /* LocalStorageService */].saveInLocalStorage(CP_TWITTER_REMINDER, true);
             }, 30000);
         }
@@ -1483,8 +1545,8 @@ var NotificationService = (function () {
     return NotificationService;
 }());
 NotificationService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__["c" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__["c" /* ToastrService */]) === "function" && _a || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__["b" /* ToastrService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ngx_toastr__["b" /* ToastrService */]) === "function" && _a || Object])
 ], NotificationService);
 
 var _a;
@@ -1496,7 +1558,6 @@ var _a;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OlsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
@@ -1506,6 +1567,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OlsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1550,8 +1612,8 @@ var OlsService = (function () {
     return OlsService;
 }());
 OlsService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], OlsService);
 
 var _a;
@@ -1569,8 +1631,8 @@ var _a;
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
 // Enviorment for localhost
-var EBI_BASE_URL = '//wwwdev.ebi.ac.uk/';
-var REACTOME_BASE_URL = '//reactomedev.oicr.on.ca';
+var EBI_BASE_URL = 'https://www.ebi.ac.uk/';
+var REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 var environment = {
@@ -1612,9 +1674,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
 }
-Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/main.js.map
 
 /***/ }),
