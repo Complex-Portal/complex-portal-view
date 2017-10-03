@@ -44,8 +44,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     toastrConfig.progressBar = true;
     toastrConfig.tapToDismiss = false;
     toastrConfig.enableHtml = true;
-    this.notificationService.followOnTwitter();
-    // this.basketService.initialiseBasket();
   }
 
   ngOnInit(): void {

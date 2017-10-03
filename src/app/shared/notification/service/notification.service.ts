@@ -28,15 +28,4 @@ export class NotificationService {
   //   this.toastrService.success('Hello world!', staticNotification);
   // }
 
-  public followOnTwitter(): void {
-    const CP_TWITTER_REMINDER = 'cp_twitter_reminder';
-    if (LocalStorageService.getLocalStorage(CP_TWITTER_REMINDER) == null) {
-      const context = this;
-      setTimeout(function () {
-        context.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
-          'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
-        LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true);
-      }, 30000);
-    }
-  }
 }
