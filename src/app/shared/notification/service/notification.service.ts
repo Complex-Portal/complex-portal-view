@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 @Injectable()
 export class NotificationService {
@@ -12,7 +11,7 @@ export class NotificationService {
     this.toastrService.success(successNotification);
   }
 
-  public addErrorNotification(errorNotification: string): void {
+  private addErrorNotification(errorNotification: string): void {
     this.toastrService.error(errorNotification, 'Something went wrong :(');
   }
 
@@ -22,6 +21,11 @@ export class NotificationService {
 
   public addHintNotification(hintNotification: string): void {
     this.toastrService.warning(hintNotification, 'Just to let you know!');
+  }
+
+  public onComplexPortalAPIRequestError(): void {
+    this.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
+      'Please try again later or contact us!');
   }
 
   // public addStaticNotification(staticNotification: string): void {

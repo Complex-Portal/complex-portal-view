@@ -46,11 +46,11 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(params => {
         this.query = params['id'];
         this.titleService.setTitle('Complex Portal - ' + this.query);
+
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails,
           error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-              'Please try again later or contact us!');
+            this.notificationService.onComplexPortalAPIRequestError();
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
             this.router.navigate(['home'])
           }
@@ -58,8 +58,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,
           error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-              'Please try again later or contact us!');
+            this.notificationService.onComplexPortalAPIRequestError();
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
             this.router.navigate(['home'])
           }
