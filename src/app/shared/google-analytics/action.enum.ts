@@ -1,10 +1,10 @@
 export enum Action {
   APIResquestError,
   ChangeResultPage,
-  IsAMultiFilterResult,
+  FilterByMultipleFields,
   RemoveResultFilter,
   AddResultFilter,
-  VisualisationInteraction,
+  ComplexVisualisation,
   download,
   externalLink,
   example,

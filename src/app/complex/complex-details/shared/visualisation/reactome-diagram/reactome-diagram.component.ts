@@ -110,7 +110,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   interactedWithViewer(): void {
     if (!this._hasInteracted) {
-      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram, this._selectedComplex);
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram_Interaction, this._selectedComplex);
       this._hasInteracted = true;
     }
   }

@@ -58,7 +58,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
 
   interactedWithViewer(): void {
     if (!this._hasInteracted) {
-      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer, this._selectedXRef);
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer_Interaction, this._selectedXRef);
       this._hasInteracted = true;
     }
   }

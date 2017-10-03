@@ -49,7 +49,7 @@ export class ComplexViewerComponent implements AfterViewInit {
 
   interactedWithViewer(): void {
     if (!this._hasInteracted) {
-      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer, this._complexAC);
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_Interaction, this._complexAC);
       this._hasInteracted = true;
     }
   }

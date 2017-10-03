@@ -99,7 +99,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   public onPageChange(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
     this.reloadPage();
-    this.googleAnalyticsService.fireUsePaginatorEvent(this._query);
   }
 
   public onResetAllFilters(): void {
