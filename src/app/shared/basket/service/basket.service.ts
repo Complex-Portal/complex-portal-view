@@ -3,8 +3,6 @@ import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
 import {GoogleAnalyticsService} from '../../google-analytics/service/google-analytics.service';
-import {Category} from '../../google-analytics/category.enum';
-import {Action} from '../../google-analytics/action.enum';
 import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 const COMPLEX_STORE = 'cp_complex_store';
@@ -25,7 +23,7 @@ export class BasketService {
       LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
       this.initialiseBasket();
     } else {
-      const keys = this.getKeys(complexStore);
+      const keys = Object.keys(complexStore);
       for (let i = 0; i < keys.length; i++) {
         const complex = complexStore[keys[i]];
         if (complex) {
@@ -35,37 +33,33 @@ export class BasketService {
     }
   }
 
-  public getKeys(object: Object): string[] {
-    return Object.keys(object);
-  }
-
   public saveInBasket(name: string, id: string, organism: string): void {
     const newBasketItem = new BasketItem(name, id, new Date(), organism);
+
     if (!this.isInBasket(id)) {
-      this._complexBasket[this.toMd5(id)] = newBasketItem;
+      this._complexBasket[Md5.hashStr(id).toString()] = newBasketItem;
       LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
+      this.onBasketCountChanged$.emit(this.getBasketCount());
+
       this.googleAnalyticsService.fireAddToBasketEvent(id);
-      this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
+      this.notificationService.onAddedComplexToBasket(id);
     }
-    this.onBasketCountChanged$.emit(this.getBasketCount());
   }
 
   public deleteFromBasket(key: string): void {
     const id = this._complexBasket[key].id;
+
     delete this._complexBasket[key];
     LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-    this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
-    this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
     this.onBasketCountChanged$.emit(this.getBasketCount());
+
+    this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
+    this.notificationService.onRemovedComplexFromBasket(id);
   }
 
   public isInBasket(id: string): boolean {
-    const key: string = this.toMd5(id);
+    const key: string = Md5.hashStr(id).toString();
     return !!this._complexBasket[key];
-  }
-
-  private toMd5(key: string): string {
-    return Md5.hashStr(key).toString();
   }
 
   get complexBasket() {
@@ -73,6 +67,6 @@ export class BasketService {
   }
 
   public getBasketCount(): number {
-    return this.getKeys(this._complexBasket).length;
+    return Object.keys(this._complexBasket).length;
   }
 }
