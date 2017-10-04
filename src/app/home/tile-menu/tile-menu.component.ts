@@ -22,10 +22,6 @@ export class TileMenuComponent implements AfterViewInit {
     $('cp-tile-menu').foundation();
   }
 
-  public featureNotAvailableYet() : void {
-    this.notificationService.onFeatureNotAvailableYet();
-  }
-
   public goToDownload(): void {
     this.googleAnalyticsService.fireClickHomeTileEvent('download');
     this.router.navigate(['download']);
@@ -43,7 +39,7 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToOntologies(): void {
     this.googleAnalyticsService.fireClickHomeTileEvent('ontologies');
-    this.featureNotAvailableYet();
+    this.notificationService.onFeatureNotAvailableYet();
     this.router.navigate(['ontologies']);
   }
 
@@ -64,7 +60,5 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToCitation(): void {
     this.googleAnalyticsService.fireClickHomeTileEvent('citation');
-    this.featureNotAvailableYet();
-    this.router.navigate(['home']);
   }
 }
