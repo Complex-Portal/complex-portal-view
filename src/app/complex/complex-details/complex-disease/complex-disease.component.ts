@@ -18,6 +18,15 @@ export class ComplexDiseaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findXRefs();
+  }
+
+  /**
+   * TODO: We shouldn't go through all XRefs on the client. The CP model should be adapted.
+   *
+   * Finding all efo and ChEMBL XRefs
+   */
+  private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;
