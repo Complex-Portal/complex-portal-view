@@ -10,7 +10,7 @@ import {rootRouterConfig} from './app.routes';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
-import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service';
+import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {OlsService} from './shared/ols/service/ols.service';
 import {BasketService} from './shared/basket/service/basket.service';
