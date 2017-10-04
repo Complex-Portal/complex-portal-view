@@ -13,23 +13,31 @@ export class ReactomeService {
   constructor(private http: Http) {
   }
 
-  findRelatedPathways(id: string) {
+  /**
+   * Returns all related pathways for a given complex stable identifier
+   * @param id - a reactome stable identifier
+   * @returns {Observable<R|T>}
+   */
+  public findRelatedPathways(id: string) {
     return this.http.get(baseURL + '/ContentService/data/pathways/low/entity/' + id)
       .map((res: Response) => res.json()).catch(this.handleError);
   }
 
-  getComplexName(id: string) {
+  /**
+   * Returns the name of a complex by a given complex stable identifier
+   * @param id - a complex stable identifier
+   * @returns {Observable<R|T>}
+   */
+  public getComplexName(id: string) {
     return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName')
       .map((res: Response) => res.text()).catch(this.handleError);
   }
 
-  private handleError(error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    console.log(error);
-    const errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+  private handleError (error: Response | any) : Observable<any> {
+    if (error instanceof Response) {
+      return Observable.throw(error);
+    } else {
+      console.error(error.message ? error.message : error.toString());
+    }
   }
 }
