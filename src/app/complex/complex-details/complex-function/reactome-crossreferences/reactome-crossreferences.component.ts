@@ -27,18 +27,21 @@ export class ReactomeCrossreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mapComplexsToPathways();
+    this.mapComplexeToPathways();
   }
 
-  private mapComplexsToPathways() {
-    // TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done in the WS (Either CP-WS or Reactome-WS)
-    // This request is doing the following:
-    // We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
-    // 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
-    // 1b. Ask Reactome for every XRefs we have for the corresponding name.
-    //  2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
-    //  3. Map pathways and complexes to each other.
-    // *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
+
+  /**
+   * TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done in the WS (Either CP-WS or Reactome-WS)
+   * This request is doing the following:
+   * We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
+   * 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
+   * 1b. Ask Reactome for every XRefs we have for the corresponding name.
+   * 2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
+   * 3. Map pathways and complexes to each other.
+   * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
+   */
+  private mapComplexeToPathways() : void{
     for (let i = 0; i < this._crossReferences.length; i++) {
       Observable.forkJoin(this.reactomeService.findRelatedPathways(this._crossReferences[i].identifier),
         this.reactomeService.getComplexName(this._crossReferences[i].identifier)).subscribe(response => {
