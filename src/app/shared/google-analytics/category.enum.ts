@@ -1,4 +1,6 @@
 export enum Category {
+  ols_orphanet,
+  ols_efo,
   complexportal_details,
   complexportal_mi,
   europepmc,
