@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 import {Category} from '../../shared/google-analytics/category.enum';
+import {SearchService} from '../service/search.service';
 
 
 @Component({
@@ -15,11 +15,12 @@ export class LocalSearchComponent implements OnInit {
   private _query: string;
 
   constructor(private location: Location, private router: Router, private route: ActivatedRoute,
-              private googleAnalyticsService: GoogleAnalyticsService) {
+              private searchService: SearchService) {
 
   }
 
   ngOnInit() {
+    //Retrieve query from URL. Would be nice to have it in the service.. but time etc.
     this.router.events.subscribe((val) => {
         if (this.location.path().startsWith('/home')) {
           this._display = false;
@@ -44,13 +45,7 @@ export class LocalSearchComponent implements OnInit {
   }
 
   search(query: string, typeOfButton: string) {
-    if (typeOfButton === 'enter') {
-      this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
-    } else {
-      this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
-    }
-    this.googleAnalyticsService.fireSearchTermEvent(Category.header, query);
-    this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
+    this.searchService.search(query, Category.header, typeOfButton)
   }
 
   get display(): boolean {

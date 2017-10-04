@@ -26,6 +26,7 @@ import {DataContentComponent} from './documentation/data-content/data-content.co
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
 import {LocalStorageService} from './shared/local-storage/local-storage.service';
+import {SearchService} from './search/service/search.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import {LocalStorageService} from './shared/local-storage/local-storage.service'
     MdProgressBarModule,
     NoopAnimationsModule,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
