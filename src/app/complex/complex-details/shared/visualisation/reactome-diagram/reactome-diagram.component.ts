@@ -10,7 +10,6 @@ import {
   ViewChild
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
-import {ReactomeService} from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
 import {Category} from '../../../../../shared/google-analytics/category.enum';
 import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
 
@@ -34,7 +33,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   @Output() onLoaded = new EventEmitter<boolean>();
 
 
-  constructor(private reactomeService: ReactomeService, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
@@ -104,11 +103,8 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.globelDiagram.flagItems(reactomeComplexId);
   };
 
-  public getReactomeURL(): string {
-    return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
-  }
 
-  interactedWithViewer(): void {
+  public interactedWithViewer(): void {
     if (!this._hasInteracted) {
       this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram_Interaction, this._selectedComplex);
       this._hasInteracted = true;
