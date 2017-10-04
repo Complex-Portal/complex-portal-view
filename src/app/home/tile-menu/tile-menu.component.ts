@@ -21,8 +21,8 @@ export class TileMenuComponent implements AfterViewInit {
     $('cp-tile-menu').foundation();
   }
 
-  featureNotAvailableYet() {
-    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
+  public featureNotAvailableYet() : void {
+    this.notificationService.onFeatureNotAvailableYet();
   }
 
   public goToDownload(): void {

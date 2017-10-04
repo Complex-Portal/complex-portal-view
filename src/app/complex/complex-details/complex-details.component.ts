@@ -50,7 +50,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         this.complexPortalService.getComplex(this._query).subscribe(
           complexDetails => this.complexDetails = complexDetails,
           error => {
-            this.notificationService.onComplexPortalAPIRequestError();
+            this.notificationService.onAPIRequestError('Complex Portal');
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
             this.router.navigate(['home'])
           }
@@ -58,7 +58,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         this.complexPortalService.getComplexMIJSON(this._query).subscribe(
           complexMIJSON => this.complexMIJSON = complexMIJSON,
           error => {
-            this.notificationService.onComplexPortalAPIRequestError();
+            this.notificationService.onAPIRequestError('Complex Portal');
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
             this.router.navigate(['home'])
           }

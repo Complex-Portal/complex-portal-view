@@ -34,19 +34,16 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
     for (let i = 0; i < this.crossReferences.length; i++) {
       this.euroPmcService.getPublicationInformation(this.crossReferences[i].identifier).subscribe(
         euroPmcResponse => this.publicationFactory(this.crossReferences[i], euroPmcResponse),
-        error => this.onError(error)
+        error => {
+          this._isDataLoaded = false;
+          this.notificationService.onAPIRequestError('Euro PMC');
+          this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+        }
       );
       if (i === this.crossReferences.length - 1) {
         this._isDataLoaded = true;
       }
     }
-  }
-
-  private onError(error: any) {
-    this._isDataLoaded = false;
-    this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. ' +
-      'Please let us know if error persists.');
-    this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.europepmc, error.status ? error.status : 'unknown');
   }
 
   private publicationFactory(crossReference: CrossReference, euroPmcResponse: any): void {
