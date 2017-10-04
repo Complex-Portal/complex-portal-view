@@ -17,6 +17,15 @@ export class ComplexEvidenceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findEvidenceXRefs();
+  }
+
+  /**
+   * TODO: Enrich the object from the response and may introduce a level for the flask symbol.
+   * Currently we do not store any further information in the evidence XRef, this is why we need to extend the object here.
+   * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
+   */
+  private findEvidenceXRefs() : void {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;
