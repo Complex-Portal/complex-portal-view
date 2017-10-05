@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {Category} from '../../shared/google-analytics/category.enum';
+import {Category} from '../../shared/google-analytics/types/category.enum';
 import {SearchService} from '../service/search.service';
 
 
@@ -20,7 +20,11 @@ export class LocalSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Retrieve query from URL. Would be nice to have it in the service.. but time etc.
+    this.extractQueryFromURL();
+  }
+
+  private extractQueryFromURL() {
+    // Retrieve query from URL. Would be nice to have it in the service.. but time etc.
     this.router.events.subscribe((val) => {
         if (this.location.path().startsWith('/home')) {
           this._display = false;
