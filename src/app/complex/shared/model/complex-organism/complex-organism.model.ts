@@ -1,5 +1,12 @@
 import {SpeciesFacet} from '../complex-results/facets/species_f.model';
-export class ComplexOrganisms extends SpeciesFacet{
+
+export class ComplexOrganisms extends SpeciesFacet {
+
+  private _symbol: string;
+  private _type: string;
+  private _psi25: string;
+  private _psi30: string;
+  private _complextab: string;
 
   constructor(name: string, count: number, symbol: string, type: string, psi25: string, psi30: string, complextab: string) {
     super(name, count);
@@ -9,13 +16,6 @@ export class ComplexOrganisms extends SpeciesFacet{
     this._psi30 = psi30;
     this._complextab = complextab;
   }
-
-  private _symbol: string;
-  private _type: string;
-  private _psi25: string;
-  private _psi30: string;
-  private _complextab: string;
-
 
   get symbol(): string {
     return this._symbol;
