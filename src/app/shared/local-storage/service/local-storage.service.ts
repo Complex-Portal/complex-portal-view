@@ -10,6 +10,4 @@ export class LocalStorageService {
   public static getLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
-
-
 }
