@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import {SectionService} from '../service/section/section.service';
 import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 
 declare const $: any;
@@ -51,7 +51,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //Important to apply foundation
+    // Important to apply foundation
     $('.goToMenu').foundation();
   }
 
