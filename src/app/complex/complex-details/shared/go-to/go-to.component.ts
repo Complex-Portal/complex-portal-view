@@ -27,7 +27,6 @@ export class GoToComponent implements OnInit, AfterViewInit {
               @Inject(DOCUMENT) private document: any, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
-
   ngOnInit() {
     switch (this._sectionName) {
       case 'Participants':
@@ -50,7 +49,6 @@ export class GoToComponent implements OnInit, AfterViewInit {
         break;
     }
   }
-
 
   ngAfterViewInit(): void {
     //Important to apply foundation
