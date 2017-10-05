@@ -1,7 +1,7 @@
 {
   "name": "complex-portal-view",
-  "version": "0.0.8-beta",
-  "license": "MIT",
+  "version": "1.0.0",
+  "license": "The Apache Software License, Version 2.0",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
