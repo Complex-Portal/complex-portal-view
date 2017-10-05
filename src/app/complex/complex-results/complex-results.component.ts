@@ -40,19 +40,23 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
         // TODO This is out for now, but CP-84 (JIRA )should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-        this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
-          this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
-          this.complexSearch = complexSearch;
-          if (this.complexSearch.totalNumberOfResults !== 0) {
-            this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
-          }
-          ProgressBarComponent.hide();
-        });
+        this.requestComplexResults();
         document.body.scrollTop = 0;
       });
   }
 
   ngAfterViewInit(): void {
+  }
+
+  private requestComplexResults() {
+    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
+      this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
+      this.complexSearch = complexSearch;
+      if (this.complexSearch.totalNumberOfResults !== 0) {
+        this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+      }
+      ProgressBarComponent.hide();
+    });
   }
 
   /**
