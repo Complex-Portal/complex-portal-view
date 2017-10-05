@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from '../../shared/google-analytics/category.enum';
+import {Category} from '../../shared/google-analytics/types/category.enum';
 import {SearchService} from '../service/search.service';
 
 @Component({
