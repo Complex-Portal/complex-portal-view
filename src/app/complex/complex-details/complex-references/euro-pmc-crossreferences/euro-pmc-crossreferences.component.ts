@@ -3,7 +3,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 import {EuroPmcService} from './service/euro-pmc.service';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
-import {Category} from '../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../shared/google-analytics/types/category.enum';
 
 
 interface Publication {
@@ -31,9 +31,13 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findXRefs();
+  }
+
+  private findXRefs() {
     for (let i = 0; i < this.crossReferences.length; i++) {
       this.euroPmcService.getPublicationInformation(this.crossReferences[i].identifier).subscribe(
-        euroPmcResponse => this.publicationFactory(this.crossReferences[i], euroPmcResponse),
+        response => this.publicationFactory(this.crossReferences[i], response),
         error => {
           this._isDataLoaded = false;
           this.notificationService.onAPIRequestError('Euro PMC');
