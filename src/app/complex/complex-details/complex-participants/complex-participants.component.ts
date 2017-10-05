@@ -16,7 +16,11 @@ export class ComplexParticipantsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO: Sort participants in WS - GH issue #174
+    this.sortParticipants();
+  }
+
+  private sortParticipants() {
+    // TODO: Sort participants in WS - GH issue #174
     this.participants.sort(function (a, b) {
       if (a.interactorType < b.interactorType) {
         return -1;
@@ -29,7 +33,7 @@ export class ComplexParticipantsComponent implements OnInit {
   }
 
   public getLegendURL(interactorType: string): string {
-    //TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
+    // TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
     switch (interactorType) {
       case 'small molecule':
         return 'assets/images/legend/small-mol.png';
@@ -42,8 +46,8 @@ export class ComplexParticipantsComponent implements OnInit {
     }
   }
 
-  //TODO: WS should send Stochiometry in right format already - GH issue #173
   public getConvertedStochiometry(stochiometry: string): string {
+    // TODO: WS should send Stochiometry in right format already - GH issue #173
     return stochiometry.split(',')[0].split(':')[1].trim();
   }
 
