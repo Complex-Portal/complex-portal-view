@@ -20,4 +20,4 @@ LocalStorageService = __decorate([
     Injectable()
 ], LocalStorageService);
 export { LocalStorageService };
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/shared/local-storage/local-storage.service.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/shared/local-storage/service/local-storage.service.js.map

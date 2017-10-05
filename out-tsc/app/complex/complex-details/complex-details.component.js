@@ -16,7 +16,7 @@ import { SectionService } from './shared/service/section/section.service';
 import { PageScrollConfig } from 'ng2-page-scroll';
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../../shared/google-analytics/category.enum';
+import { Category } from '../../shared/google-analytics/types/category.enum';
 var ComplexDetailsComponent = (function () {
     function ComplexDetailsComponent(route, router, notificationService, googleAnalyticsService, complexPortalService, sectionService, titleService) {
         this.route = route;
@@ -26,14 +26,9 @@ var ComplexDetailsComponent = (function () {
         this.complexPortalService = complexPortalService;
         this.sectionService = sectionService;
         this.titleService = titleService;
+        // This is to calculate the EBI menu bar into the scrolling
         PageScrollConfig.defaultScrollOffset = 50;
-        //TODO Not needed when we properly use the gxa node module and not use the backed version.
-        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
-            this._gxa = expressionAtlasHeatmapHighcharts;
-        }
-        else {
-            this._gxa = null;
-        }
+        this.checkIfGPAIsDefined();
     }
     ComplexDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -42,18 +37,8 @@ var ComplexDetailsComponent = (function () {
             .subscribe(function (params) {
             _this.query = params['id'];
             _this.titleService.setTitle('Complex Portal - ' + _this.query);
-            _this.complexPortalService.getComplex(_this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
-                _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-                    'Please try again later or contact us!');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
-                _this.router.navigate(['home']);
-            });
-            _this.complexPortalService.getComplexMIJSON(_this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
-                _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-                    'Please try again later or contact us!');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
-                _this.router.navigate(['home']);
-            });
+            _this.requestComplex();
+            _this.requestComplexMIJSON();
             document.body.scrollTop = 0;
         });
     };
@@ -63,6 +48,31 @@ var ComplexDetailsComponent = (function () {
     ComplexDetailsComponent.prototype.ngOnDestroy = function () {
         this._callSubscription.unsubscribe();
         this.sectionService.reset();
+    };
+    ComplexDetailsComponent.prototype.checkIfGPAIsDefined = function () {
+        // TODO: Not needed when we properly use the gxa node module and not use the backed version.
+        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+            this._gxa = expressionAtlasHeatmapHighcharts;
+        }
+        else {
+            this._gxa = null;
+        }
+    };
+    ComplexDetailsComponent.prototype.requestComplex = function () {
+        var _this = this;
+        this.complexPortalService.getComplex(this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
+    };
+    ComplexDetailsComponent.prototype.requestComplexMIJSON = function () {
+        var _this = this;
+        this.complexPortalService.getComplexMIJSON(this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
     };
     Object.defineProperty(ComplexDetailsComponent.prototype, "complexDetails", {
         get: function () {

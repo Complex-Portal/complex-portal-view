@@ -10,4 +10,4 @@ describe('LocalStorageService', function () {
         expect(service).toBeTruthy();
     }));
 });
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/shared/local-storage/local-storage.service.spec.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/shared/local-storage/service/local-storage.service.spec.js.map

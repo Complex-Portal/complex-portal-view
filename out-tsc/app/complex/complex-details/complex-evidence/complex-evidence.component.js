@@ -12,6 +12,14 @@ var ComplexEvidenceComponent = (function () {
     function ComplexEvidenceComponent() {
     }
     ComplexEvidenceComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: Enrich the object from the response and may introduce a level for the flask symbol.
+     * Currently we do not store any further information in the evidence XRef, this is why we need to extend the object here.
+     * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
+     */
+    ComplexEvidenceComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;

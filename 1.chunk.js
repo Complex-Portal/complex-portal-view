@@ -38,7 +38,7 @@ module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__ = __webpack_require__("../../../../ng2-page-scroll/ng2-page-scroll.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDetailsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -68,14 +68,9 @@ var ComplexDetailsComponent = (function () {
         this.complexPortalService = complexPortalService;
         this.sectionService = sectionService;
         this.titleService = titleService;
+        // This is to calculate the EBI menu bar into the scrolling
         __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__["d" /* PageScrollConfig */].defaultScrollOffset = 50;
-        //TODO Not needed when we properly use the gxa node module and not use the backed version.
-        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
-            this._gxa = expressionAtlasHeatmapHighcharts;
-        }
-        else {
-            this._gxa = null;
-        }
+        this.checkIfGPAIsDefined();
     }
     ComplexDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -84,18 +79,8 @@ var ComplexDetailsComponent = (function () {
             .subscribe(function (params) {
             _this.query = params['id'];
             _this.titleService.setTitle('Complex Portal - ' + _this.query);
-            _this.complexPortalService.getComplex(_this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
-                _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-                    'Please try again later or contact us!');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
-                _this.router.navigate(['home']);
-            });
-            _this.complexPortalService.getComplexMIJSON(_this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
-                _this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-                    'Please try again later or contact us!');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_category_enum__["a" /* Category */].complexportal_mi, error.status ? error.status : 'unknown');
-                _this.router.navigate(['home']);
-            });
+            _this.requestComplex();
+            _this.requestComplexMIJSON();
             document.body.scrollTop = 0;
         });
     };
@@ -105,6 +90,31 @@ var ComplexDetailsComponent = (function () {
     ComplexDetailsComponent.prototype.ngOnDestroy = function () {
         this._callSubscription.unsubscribe();
         this.sectionService.reset();
+    };
+    ComplexDetailsComponent.prototype.checkIfGPAIsDefined = function () {
+        // TODO: Not needed when we properly use the gxa node module and not use the backed version.
+        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+            this._gxa = expressionAtlasHeatmapHighcharts;
+        }
+        else {
+            this._gxa = null;
+        }
+    };
+    ComplexDetailsComponent.prototype.requestComplex = function () {
+        var _this = this;
+        this.complexPortalService.getComplex(this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
+    };
+    ComplexDetailsComponent.prototype.requestComplexMIJSON = function () {
+        var _this = this;
+        this.complexPortalService.getComplexMIJSON(this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_mi, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
     };
     Object.defineProperty(ComplexDetailsComponent.prototype, "complexDetails", {
         get: function () {
@@ -207,7 +217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__ = __webpack_require__("../../../../../src/app/shared/ols/service/ols.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__ = __webpack_require__("../../../../../src/app/complex/shared/service/complex-portal.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/service/section/section.service.ts");
@@ -318,7 +328,7 @@ ComplexDetailsModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_44__complex_references_external_resources_external_resources_component__["a" /* ExternalResourcesComponent */],
             __WEBPACK_IMPORTED_MODULE_45__complex_header_download_modal_download_modal_component__["a" /* DownloadModalComponent */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__["a" /* SectionService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__["a" /* SectionService */]],
     })
 ], ComplexDetailsModule);
 
@@ -458,6 +468,14 @@ var ComplexDiseaseComponent = (function () {
     function ComplexDiseaseComponent() {
     }
     ComplexDiseaseComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: We shouldn't go through all XRefs on the client. The CP model should be adapted.
+     *
+     * Finding all efo and ChEMBL XRefs
+     */
+    ComplexDiseaseComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
@@ -571,6 +589,9 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__ = __webpack_require__("../../../../../src/app/shared/ols/service/ols.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EfoCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -583,19 +604,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
 var EfoCrossreferencesComponent = (function () {
-    function EfoCrossreferencesComponent(olsService) {
+    function EfoCrossreferencesComponent(olsService, notificationService, googleAnalyticsService) {
         this.olsService = olsService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._displayedElements = 5;
     }
     EfoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * The OLS WS provides us some description to the found EFO and Orphanet XRefs.
+     */
+    EfoCrossreferencesComponent.prototype.findXRefs = function () {
         var _this = this;
         var _loop_1 = function (i) {
             if (this_1.crossReferences[i].identifier.split(':')[0] === 'EFO') {
-                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; });
+                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_efo, error.status ? error.status : 'unknown');
+                });
             }
             else if (this_1.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
-                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; });
+                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_orphanet, error.status ? error.status : 'unknown');
+                });
             }
         };
         var this_1 = this;
@@ -636,10 +674,10 @@ EfoCrossreferencesComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.html"),
         styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
 ], EfoCrossreferencesComponent);
 
-var _a;
+var _a, _b, _c;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/efo-crossreferences.component.js.map
 
 /***/ }),
@@ -689,6 +727,14 @@ var ComplexEvidenceComponent = (function () {
     function ComplexEvidenceComponent() {
     }
     ComplexEvidenceComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: Enrich the object from the response and may introduce a level for the flask symbol.
+     * Currently we do not store any further information in the evidence XRef, this is why we need to extend the object here.
+     * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
+     */
+    ComplexEvidenceComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
@@ -835,16 +881,10 @@ var ComplexExpressionComponent = (function () {
     function ComplexExpressionComponent() {
     }
     ComplexExpressionComponent.prototype.ngOnInit = function () {
-        for (var i = 0; i < this._participants.length; i++) {
-            if (this._participants[i].interactorType === 'protein') {
-                if (this._gxaParamsQueries === undefined) {
-                    this.gxaParamsQueries = this._participants[i].identifier;
-                }
-                else {
-                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
-                }
-            }
-        }
+        this.findXRefs();
+        this.findGXAQueryies();
+    };
+    ComplexExpressionComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
@@ -854,6 +894,18 @@ var ComplexExpressionComponent = (function () {
                     this.goCellularXRefs = [];
                 }
                 this.goCellularXRefs.push(crossRef);
+            }
+        }
+    };
+    ComplexExpressionComponent.prototype.findGXAQueryies = function () {
+        for (var i = 0; i < this._participants.length; i++) {
+            if (this._participants[i].interactorType === 'protein') {
+                if (this._gxaParamsQueries === undefined) {
+                    this.gxaParamsQueries = this._participants[i].identifier;
+                }
+                else {
+                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
+                }
             }
         }
     };
@@ -1354,6 +1406,9 @@ var ComplexFunctionComponent = (function () {
     function ComplexFunctionComponent() {
     }
     ComplexFunctionComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    ComplexFunctionComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var database = this.crossReferences[i].database;
@@ -1632,6 +1687,9 @@ var GoCrossreferencesComponent = (function () {
     function GoCrossreferencesComponent() {
     }
     GoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    GoCrossreferencesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var qualifier = this.crossReferences[i].qualifier;
@@ -1960,6 +2018,100 @@ LigandsComponent = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeComplex; });
+var ReactomeComplex = (function () {
+    function ReactomeComplex(id) {
+        this._pathways = [];
+        this._id = id;
+    }
+    Object.defineProperty(ReactomeComplex.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeComplex.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeComplex.prototype, "pathways", {
+        get: function () {
+            return this._pathways;
+        },
+        set: function (value) {
+            this._pathways = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ReactomeComplex;
+}());
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-complex.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomePathway; });
+var ReactomePathway = (function () {
+    function ReactomePathway(id) {
+        this._complexes = [];
+        this._id = id;
+    }
+    Object.defineProperty(ReactomePathway.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomePathway.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomePathway.prototype, "complexes", {
+        get: function () {
+            return this._complexes;
+        },
+        set: function (value) {
+            this._complexes = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ReactomePathway;
+}());
+
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-pathway.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1994,9 +2146,12 @@ module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"clo
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__("../../../../rxjs/add/observable/forkJoin.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/model/reactome-complex.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/model/reactome-pathway.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2013,9 +2168,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var ReactomeCrossreferencesComponent = (function () {
-    function ReactomeCrossreferencesComponent(reactomeService) {
+    function ReactomeCrossreferencesComponent(reactomeService, notificationService, googleAnalyticsService) {
         this.reactomeService = reactomeService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._reactomeComplexes = {};
         this._reactomePathways = {};
         this._isDataLoaded = false;
@@ -2023,6 +2183,20 @@ var ReactomeCrossreferencesComponent = (function () {
         this.diagramLoaded = false;
     }
     ReactomeCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.mapComplexeToPathways();
+    };
+    /**
+     * TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done...
+     * TODO: ...in the WS (Either CP-WS or Reactome-WS)
+     * This request is doing the following:
+     * We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
+     * 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
+     * 1b. Ask Reactome for every XRefs we have for the corresponding name.
+     * 2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
+     * 3. Map pathways and complexes to each other.
+     * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
+     */
+    ReactomeCrossreferencesComponent.prototype.mapComplexeToPathways = function () {
         var _this = this;
         var _loop_1 = function (i) {
             __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
@@ -2033,12 +2207,12 @@ var ReactomeCrossreferencesComponent = (function () {
                     var currentPathway = _this._reactomePathways[pathway.stId];
                     var currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier];
                     if (currentPathway === undefined) {
-                        currentPathway = _this._reactomePathways[pathway.stId] = new __WEBPACK_IMPORTED_MODULE_5__shared_model_reactome_pathway__["a" /* ReactomePathway */](pathway.stId);
+                        currentPathway = _this._reactomePathways[pathway.stId] = new __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__["a" /* ReactomePathway */](pathway.stId);
                         currentPathway.name = pathway.displayName;
                     }
                     if (currentComplex === undefined) {
                         currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier.toString()]
-                            = new __WEBPACK_IMPORTED_MODULE_4__shared_model_reactome_complex__["a" /* ReactomeComplex */](_this._crossReferences[i].identifier);
+                            = new __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__["a" /* ReactomeComplex */](_this._crossReferences[i].identifier);
                         currentComplex.name = complexName;
                     }
                     currentPathway.complexes.push(_this._crossReferences[i].identifier);
@@ -2048,6 +2222,9 @@ var ReactomeCrossreferencesComponent = (function () {
                         _this._isDataLoaded = true;
                     }
                 }
+            }, function (error) {
+                _this.notificationService.onAPIRequestError('Reactome');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__["a" /* Category */].reactome, error.status ? error.status : 'unknown');
             });
         };
         var this_1 = this;
@@ -2149,105 +2326,11 @@ ReactomeCrossreferencesComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.html"),
         styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
 ], ReactomeCrossreferencesComponent);
 
-var _a;
+var _a, _b, _c;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/model/reactome-complex.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeComplex; });
-var ReactomeComplex = (function () {
-    function ReactomeComplex(id) {
-        this._pathways = [];
-        this._id = id;
-    }
-    Object.defineProperty(ReactomeComplex.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeComplex.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        set: function (value) {
-            this._name = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeComplex.prototype, "pathways", {
-        get: function () {
-            return this._pathways;
-        },
-        set: function (value) {
-            this._pathways = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomeComplex;
-}());
-
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-complex.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/model/reactome-pathway.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomePathway; });
-var ReactomePathway = (function () {
-    function ReactomePathway(id) {
-        this._complexes = [];
-        this._id = id;
-    }
-    Object.defineProperty(ReactomePathway.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomePathway.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        set: function (value) {
-            this._name = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomePathway.prototype, "complexes", {
-        get: function () {
-            return this._complexes;
-        },
-        set: function (value) {
-            this._complexes = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomePathway;
-}());
-
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-pathway.js.map
 
 /***/ }),
 
@@ -2435,7 +2518,7 @@ module.exports = "<div class=\"reveal large\" id=\"downloadModal\" data-reveal>\
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadModalComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2458,7 +2541,7 @@ var DownloadModalComponent = (function () {
     DownloadModalComponent.prototype.ngOnInit = function () {
     };
     DownloadModalComponent.prototype.goToComplexWS = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_category_enum__["a" /* Category */].details, 'ComplexWS');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].details, 'ComplexWS');
         window.open(__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/details/' + this._complexAC, '_blank');
     };
     Object.defineProperty(DownloadModalComponent.prototype, "complexAC", {
@@ -2538,7 +2621,10 @@ var ComplexParticipantsComponent = (function () {
         this._displayedElements = 5;
     }
     ComplexParticipantsComponent.prototype.ngOnInit = function () {
-        //TODO: Sort participants in WS - GH issue #174
+        this.sortParticipants();
+    };
+    ComplexParticipantsComponent.prototype.sortParticipants = function () {
+        // TODO: Sort participants in WS - GH issue #174
         this.participants.sort(function (a, b) {
             if (a.interactorType < b.interactorType) {
                 return -1;
@@ -2552,7 +2638,7 @@ var ComplexParticipantsComponent = (function () {
         });
     };
     ComplexParticipantsComponent.prototype.getLegendURL = function (interactorType) {
-        //TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
+        // TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
         switch (interactorType) {
             case 'small molecule':
                 return 'assets/images/legend/small-mol.png';
@@ -2564,8 +2650,8 @@ var ComplexParticipantsComponent = (function () {
                 return 'assets/images/legend/rna.png';
         }
     };
-    //TODO: WS should send Stochiometry in right format already - GH issue #173
     ComplexParticipantsComponent.prototype.getConvertedStochiometry = function (stochiometry) {
+        // TODO: WS should send Stochiometry in right format already - GH issue #173
         return stochiometry.split(',')[0].split(':')[1].trim();
     };
     Object.defineProperty(ComplexParticipantsComponent.prototype, "participants", {
@@ -2759,12 +2845,10 @@ var ComplexPropertiesComponent = (function () {
     function ComplexPropertiesComponent() {
     }
     ComplexPropertiesComponent.prototype.ngOnInit = function () {
-        if (this._propertiesDescription.length === 0) {
-            this._propertiesDescription = null;
-        }
-        if (this._comments.length === 0) {
-            this._comments = null;
-        }
+        this.checkFreeTextContent();
+        this.findXRefs();
+    };
+    ComplexPropertiesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var database = this.crossReferences[i].database;
@@ -2780,6 +2864,14 @@ var ComplexPropertiesComponent = (function () {
                 }
                 this._emdbXRefs.push(crossRef);
             }
+        }
+    };
+    ComplexPropertiesComponent.prototype.checkFreeTextContent = function () {
+        if (this._propertiesDescription.length === 0) {
+            this._propertiesDescription = null;
+        }
+        if (this._comments.length === 0) {
+            this._comments = null;
         }
     };
     Object.defineProperty(ComplexPropertiesComponent.prototype, "propertiesDescription", {
@@ -3013,8 +3105,11 @@ var PdbCrossreferencesComponent = (function () {
         this._displayedElements = 5;
     }
     PdbCrossreferencesComponent.prototype.ngOnInit = function () {
-        this._selectedXRef = this._crossReferences[0].identifier;
-        if (this._selectedXRef) {
+        this.selectFirstXref();
+    };
+    PdbCrossreferencesComponent.prototype.selectFirstXref = function () {
+        if (this._crossReferences[0].identifier) {
+            this._selectedXRef = this._crossReferences[0].identifier;
             this._isDataLoaded = true;
         }
     };
@@ -3126,6 +3221,9 @@ var ComplexReferencesComponent = (function () {
     function ComplexReferencesComponent() {
     }
     ComplexReferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    ComplexReferencesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
@@ -3256,7 +3354,7 @@ module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"col
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3281,9 +3379,16 @@ var EuroPmcCrossreferencesComponent = (function () {
         this._isDataLoaded = false;
     }
     EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    EuroPmcCrossreferencesComponent.prototype.findXRefs = function () {
         var _this = this;
         var _loop_1 = function (i) {
-            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (euroPmcResponse) { return _this.publicationFactory(_this.crossReferences[i], euroPmcResponse); }, function (error) { return _this.onError(error); });
+            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this.publicationFactory(_this.crossReferences[i], response); }, function (error) {
+                _this._isDataLoaded = false;
+                _this.notificationService.onAPIRequestError('Euro PMC');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
+            });
             if (i === this_1.crossReferences.length - 1) {
                 this_1._isDataLoaded = true;
             }
@@ -3292,12 +3397,6 @@ var EuroPmcCrossreferencesComponent = (function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             _loop_1(i);
         }
-    };
-    EuroPmcCrossreferencesComponent.prototype.onError = function (error) {
-        this._isDataLoaded = false;
-        this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. ' +
-            'Please let us know if error persists.');
-        this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].europepmc, error.status ? error.status : 'unknown');
     };
     EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
         this.publications.push({
@@ -3629,7 +3728,7 @@ module.exports = "<ul class=\"goToMenu dropdown menu float-right\" data-disable-
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/service/section/section.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__ = __webpack_require__("../../../../ng2-page-scroll/ng2-page-scroll.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoToComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3680,6 +3779,7 @@ var GoToComponent = (function () {
         }
     };
     GoToComponent.prototype.ngAfterViewInit = function () {
+        // Important to apply foundation
         $('.goToMenu').foundation();
     };
     GoToComponent.prototype.scrollToElement = function (idReference) {
@@ -3724,7 +3824,7 @@ GoToComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/go-to/go-to.component.css")],
         changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
     }),
-    __param(3, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["DOCUMENT"])),
+    __param(3, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_common__["DOCUMENT"])),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["c" /* PageScrollService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["c" /* PageScrollService */]) === "function" && _c || Object, Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
 ], GoToComponent);
 
@@ -3861,9 +3961,8 @@ module.exports = "<div class=\"row button-grid small-up-12 medium-up-12 large-up
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexViewerComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3877,13 +3976,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var xlv;
 var SvgSaver = __webpack_require__("../../../../svgsaver/lib/svgsaver.js");
 var xiNET = __webpack_require__("../../../../expose-loader/index.js?xiNET!../../../../complexviewer/src/controller/Controller.js");
 var ComplexViewerComponent = (function () {
-    function ComplexViewerComponent(notificationService, googleAnalyticsService) {
-        this.notificationService = notificationService;
+    function ComplexViewerComponent(googleAnalyticsService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this._svgsaver = new SvgSaver();
         this._hasInteracted = false;
@@ -3896,20 +3993,20 @@ var ComplexViewerComponent = (function () {
     };
     ComplexViewerComponent.prototype.onChangeAnnotation = function (value) {
         xlv.setAnnotations(value);
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer_ChangeAnno, this._complexAC);
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer_SelectedAnno, value);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ChangeAnno, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_SelectedAnno, value);
     };
     ComplexViewerComponent.prototype.onReset = function () {
         xlv.reset();
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer_Reset, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Reset, this._complexAC);
     };
     ComplexViewerComponent.prototype.onExpandAll = function () {
         xlv.expandAll();
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer_ExpandAll, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExpandAll, this._complexAC);
     };
     ComplexViewerComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer, this._complexAC);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Interaction, this._complexAC);
             this._hasInteracted = true;
         }
     };
@@ -3936,7 +4033,7 @@ var ComplexViewerComponent = (function () {
     ComplexViewerComponent.prototype.downloadAsSVG = function () {
         var svg = document.querySelector('#networkContainer');
         this._svgsaver.asSvg(svg, this._complexAC + '.svg');
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].InteractionViewer_ExportSVG, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExportSVG, this._complexAC);
     };
     return ComplexViewerComponent;
 }());
@@ -3957,10 +4054,10 @@ ComplexViewerComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.css")],
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
 ], ComplexViewerComponent);
 
-var _a, _b;
+var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/complex-viewer.component.js.map
 
 /***/ }),
@@ -4167,7 +4264,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_litemol__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LitmolViewerComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4223,7 +4320,7 @@ var LitmolViewerComponent = (function () {
     };
     LitmolViewerComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_category_enum__["a" /* Category */].LiteMolViewer, this._selectedXRef);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].LiteMolViewer_Interaction, this._selectedXRef);
             this._hasInteracted = true;
         }
     };
@@ -4299,9 +4396,8 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-r
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeDiagramComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4316,11 +4412,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var baseURL = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].reactome_base_url;
 var ReactomeDiagramComponent = (function () {
-    function ReactomeDiagramComponent(reactomeService, googleAnalyticsService) {
-        this.reactomeService = reactomeService;
+    function ReactomeDiagramComponent(googleAnalyticsService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this._reactomeComplexe = {};
         this._reactomePathways = {};
@@ -4340,6 +4434,14 @@ var ReactomeDiagramComponent = (function () {
             }
         }
     };
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
+        this.diagramContext = event.detail;
+        this.initReactomeDiagram();
+    };
+    ReactomeDiagramComponent.prototype.onResize = function () {
+        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+        this.selectComplex(this.selectedComplex);
+    };
     ReactomeDiagramComponent.prototype.loadScript = function () {
         var node = document.createElement('script');
         node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
@@ -4347,10 +4449,6 @@ var ReactomeDiagramComponent = (function () {
         node.async = true;
         node.charset = 'utf-8';
         document.getElementsByTagName('head')[0].appendChild(node);
-    };
-    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
-        this.diagramContext = event.detail;
-        this.initReactomeDiagram();
     };
     ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
         this.globelDiagram = this.diagramContext.Diagram.create({
@@ -4360,10 +4458,6 @@ var ReactomeDiagramComponent = (function () {
             'height': this.diagramHolder.nativeElement.clientWidth * 0.5,
         });
         this.loadDiagram();
-    };
-    ReactomeDiagramComponent.prototype.onResize = function () {
-        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
-        this.selectComplex(this.selectedComplex);
     };
     ReactomeDiagramComponent.prototype.loadDiagram = function () {
         var context = this;
@@ -4383,12 +4477,9 @@ var ReactomeDiagramComponent = (function () {
         this.globelDiagram.flagItems(reactomeComplexId);
     };
     ;
-    ReactomeDiagramComponent.prototype.getReactomeURL = function () {
-        return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
-    };
     ReactomeDiagramComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].PathwayDiagram, this._selectedComplex);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].PathwayDiagram_Interaction, this._selectedComplex);
             this._hasInteracted = true;
         }
     };
@@ -4480,10 +4571,10 @@ ReactomeDiagramComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html"),
         styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__complex_function_reactome_crossreferences_shared_service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
 ], ReactomeDiagramComponent);
 
-var _a, _b;
+var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/reactome-diagram.component.js.map
 
 /***/ }),

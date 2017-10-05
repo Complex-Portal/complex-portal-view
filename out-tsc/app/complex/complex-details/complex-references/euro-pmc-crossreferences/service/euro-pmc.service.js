@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -23,12 +23,12 @@ var EuroPmcService = (function () {
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     EuroPmcService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        var errMsg = (error.message) ? error.message :
-            error.status ? error.status + " - " + error.statusText : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(error);
+        if (error instanceof Response) {
+            return Observable.throw(error);
+        }
+        else {
+            console.error(error.message ? error.message : error.toString());
+        }
     };
     return EuroPmcService;
 }());

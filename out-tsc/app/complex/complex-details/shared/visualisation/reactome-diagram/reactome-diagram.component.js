@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
-import { ReactomeService } from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
-import { Category } from '../../../../../shared/google-analytics/category.enum';
+import { Category } from '../../../../../shared/google-analytics/types/category.enum';
 import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
 var baseURL = environment.reactome_base_url;
 var ReactomeDiagramComponent = (function () {
-    function ReactomeDiagramComponent(reactomeService, googleAnalyticsService) {
-        this.reactomeService = reactomeService;
+    function ReactomeDiagramComponent(googleAnalyticsService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this._reactomeComplexe = {};
         this._reactomePathways = {};
@@ -35,6 +33,14 @@ var ReactomeDiagramComponent = (function () {
             }
         }
     };
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
+        this.diagramContext = event.detail;
+        this.initReactomeDiagram();
+    };
+    ReactomeDiagramComponent.prototype.onResize = function () {
+        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+        this.selectComplex(this.selectedComplex);
+    };
     ReactomeDiagramComponent.prototype.loadScript = function () {
         var node = document.createElement('script');
         node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
@@ -42,10 +48,6 @@ var ReactomeDiagramComponent = (function () {
         node.async = true;
         node.charset = 'utf-8';
         document.getElementsByTagName('head')[0].appendChild(node);
-    };
-    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
-        this.diagramContext = event.detail;
-        this.initReactomeDiagram();
     };
     ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
         this.globelDiagram = this.diagramContext.Diagram.create({
@@ -55,10 +57,6 @@ var ReactomeDiagramComponent = (function () {
             'height': this.diagramHolder.nativeElement.clientWidth * 0.5,
         });
         this.loadDiagram();
-    };
-    ReactomeDiagramComponent.prototype.onResize = function () {
-        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
-        this.selectComplex(this.selectedComplex);
     };
     ReactomeDiagramComponent.prototype.loadDiagram = function () {
         var context = this;
@@ -78,12 +76,9 @@ var ReactomeDiagramComponent = (function () {
         this.globelDiagram.flagItems(reactomeComplexId);
     };
     ;
-    ReactomeDiagramComponent.prototype.getReactomeURL = function () {
-        return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
-    };
     ReactomeDiagramComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram, this._selectedComplex);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram_Interaction, this._selectedComplex);
             this._hasInteracted = true;
         }
     };
@@ -175,7 +170,7 @@ ReactomeDiagramComponent = __decorate([
         templateUrl: 'reactome-diagram.component.html',
         styleUrls: ['reactome-diagram.component.css']
     }),
-    __metadata("design:paramtypes", [ReactomeService, GoogleAnalyticsService])
+    __metadata("design:paramtypes", [GoogleAnalyticsService])
 ], ReactomeDiagramComponent);
 export { ReactomeDiagramComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.js.map

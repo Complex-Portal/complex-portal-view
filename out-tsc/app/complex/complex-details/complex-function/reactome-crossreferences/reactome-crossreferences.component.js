@@ -10,12 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
-import { ReactomeService } from './shared/service/reactome.service';
-import { ReactomeComplex } from './shared/model/reactome-complex';
-import { ReactomePathway } from './shared/model/reactome-pathway';
+import { ReactomeService } from './service/reactome.service';
+import { ReactomeComplex } from './model/reactome-complex';
+import { ReactomePathway } from './model/reactome-pathway';
+import { NotificationService } from '../../../../shared/notification/service/notification.service';
+import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
+import { Category } from '../../../../shared/google-analytics/types/category.enum';
 var ReactomeCrossreferencesComponent = (function () {
-    function ReactomeCrossreferencesComponent(reactomeService) {
+    function ReactomeCrossreferencesComponent(reactomeService, notificationService, googleAnalyticsService) {
         this.reactomeService = reactomeService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._reactomeComplexes = {};
         this._reactomePathways = {};
         this._isDataLoaded = false;
@@ -23,6 +28,20 @@ var ReactomeCrossreferencesComponent = (function () {
         this.diagramLoaded = false;
     }
     ReactomeCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.mapComplexeToPathways();
+    };
+    /**
+     * TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done...
+     * TODO: ...in the WS (Either CP-WS or Reactome-WS)
+     * This request is doing the following:
+     * We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
+     * 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
+     * 1b. Ask Reactome for every XRefs we have for the corresponding name.
+     * 2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
+     * 3. Map pathways and complexes to each other.
+     * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
+     */
+    ReactomeCrossreferencesComponent.prototype.mapComplexeToPathways = function () {
         var _this = this;
         var _loop_1 = function (i) {
             Observable.forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
@@ -48,6 +67,9 @@ var ReactomeCrossreferencesComponent = (function () {
                         _this._isDataLoaded = true;
                     }
                 }
+            }, function (error) {
+                _this.notificationService.onAPIRequestError('Reactome');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.reactome, error.status ? error.status : 'unknown');
             });
         };
         var this_1 = this;
@@ -149,7 +171,8 @@ ReactomeCrossreferencesComponent = __decorate([
         templateUrl: './reactome-crossreferences.component.html',
         styleUrls: ['./reactome-crossreferences.component.css']
     }),
-    __metadata("design:paramtypes", [ReactomeService])
+    __metadata("design:paramtypes", [ReactomeService, NotificationService,
+        GoogleAnalyticsService])
 ], ReactomeCrossreferencesComponent);
 export { ReactomeCrossreferencesComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.js.map

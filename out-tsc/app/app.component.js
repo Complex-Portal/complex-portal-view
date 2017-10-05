@@ -8,54 +8,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NotificationService } from './shared/notification/service/notification.service';
-import { Angulartics2GoogleAnalytics } from 'angulartics2';
 import { environment } from '../environments/environment';
 import { ProgressBarComponent } from './shared/loading-indicators/progress-bar/progress-bar.component';
 import { NavigationEnd, Router } from '@angular/router';
-import { ToastrConfig } from 'ngx-toastr';
 import { BasketService } from './shared/basket/service/basket.service';
 var version = require('../../package.json').version;
 var environmentName = environment.evn;
 var AppComponent = (function () {
-    function AppComponent(angulartics2GoogleAnalytics, router, notificationService, toastrConfig, basketService) {
-        var _this = this;
-        this.angulartics2GoogleAnalytics = angulartics2GoogleAnalytics;
+    function AppComponent(router, basketService) {
         this.router = router;
-        this.notificationService = notificationService;
-        this.toastrConfig = toastrConfig;
         this.basketService = basketService;
         this._basketCount = 0;
         this._EBI_BASE_URL = environment.ebi_base_url;
-        this.basketService.onBasketCountChanged$.subscribe(function (count) {
-            _this._basketCount = count;
-            _this._onChangeInBasket = true;
-            var ctx = _this;
-            setTimeout(function () {
-                ctx._onChangeInBasket = false;
-            }, 1000);
-        });
         this._basketCount = this.basketService.getBasketCount();
         this._version = version;
         this._environmentName = environmentName;
-        toastrConfig.closeButton = true; // displayedElements close button
-        toastrConfig.timeOut = 5000; // time to live
-        toastrConfig.preventDuplicates = true;
-        toastrConfig.progressBar = true;
-        toastrConfig.tapToDismiss = false;
-        toastrConfig.enableHtml = true;
-        this.notificationService.followOnTwitter();
-        // this.basketService.initialiseBasket();
     }
     AppComponent.prototype.ngOnInit = function () {
-        // For every router change, we load the ProgressBar by default.
-        this.router.events.subscribe(function (evt) {
-            if (!(evt instanceof NavigationEnd)) {
-                ProgressBarComponent.display();
-                return;
-            }
-            window.scrollTo(0, 0);
-        });
+        this.observeRouteChange();
+        this.observeBasketChange();
     };
     AppComponent.prototype.ngAfterViewInit = function () {
         // Init some libs.
@@ -71,6 +42,27 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.initialiseGoogleAnalytics = function () {
         ga('create', environment.analytics_id, 'none');
+    };
+    AppComponent.prototype.observeRouteChange = function () {
+        // For every router change, we load the ProgressBar by default.
+        this.router.events.subscribe(function (evt) {
+            if (!(evt instanceof NavigationEnd)) {
+                ProgressBarComponent.display();
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
+    };
+    AppComponent.prototype.observeBasketChange = function () {
+        var _this = this;
+        this.basketService.onBasketCountChanged$.subscribe(function (count) {
+            _this._basketCount = count;
+            _this._onChangeInBasket = true;
+            var ctx = _this;
+            setTimeout(function () {
+                ctx._onChangeInBasket = false;
+            }, 1000);
+        });
     };
     AppComponent.prototype.initialiseFoundationHacks = function () {
         // copied from script.js (ebi framework)
@@ -143,8 +135,7 @@ AppComponent = __decorate([
         templateUrl: './app.component.html',
         styleUrls: ['./app.component.css']
     }),
-    __metadata("design:paramtypes", [Angulartics2GoogleAnalytics, Router,
-        NotificationService, ToastrConfig, BasketService])
+    __metadata("design:paramtypes", [Router, BasketService])
 ], AppComponent);
 export { AppComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/app.component.js.map

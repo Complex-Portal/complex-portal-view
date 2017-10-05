@@ -36,4 +36,4 @@ var ReactomePathway = (function () {
     return ReactomePathway;
 }());
 export { ReactomePathway };
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/model/reactome-pathway.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.js.map

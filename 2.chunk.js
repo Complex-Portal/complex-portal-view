@@ -85,7 +85,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tile_menu_tile_menu_component__ = __webpack_require__("../../../../../src/app/home/tile-menu/tile-menu.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__twitter_display_twitter_display_component__ = __webpack_require__("../../../../../src/app/home/twitter-display/twitter-display.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newsletter_subscription_newsletter_subscription_component__ = __webpack_require__("../../../../../src/app/home/newsletter-subscription/newsletter-subscription.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__search_search_component__ = __webpack_require__("../../../../../src/app/search/search.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__search_home_search_search_component__ = __webpack_require__("../../../../../src/app/search/home-search/search.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -113,7 +113,7 @@ HomeModule = __decorate([
             ]),
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"]
         ],
-        declarations: [__WEBPACK_IMPORTED_MODULE_3__home_component__["a" /* HomeComponent */], __WEBPACK_IMPORTED_MODULE_7__search_search_component__["a" /* SearchComponent */],
+        declarations: [__WEBPACK_IMPORTED_MODULE_3__home_component__["a" /* HomeComponent */], __WEBPACK_IMPORTED_MODULE_7__search_home_search_search_component__["a" /* SearchComponent */],
             __WEBPACK_IMPORTED_MODULE_6__newsletter_subscription_newsletter_subscription_component__["a" /* NewsletterSubscriptionComponent */],
             __WEBPACK_IMPORTED_MODULE_5__twitter_display_twitter_display_component__["a" /* TwitterDisplayComponent */],
             __WEBPACK_IMPORTED_MODULE_4__tile_menu_tile_menu_component__["a" /* TileMenuComponent */],
@@ -207,7 +207,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/tile-menu/tile-menu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToDownload()\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToBasket()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOrganisms()\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOntologies()\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch (click)=\"goToRequestComplex()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request Complex for Curation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToTraining()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToDocumentation()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch data-open=\"citationModal\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">How To Cite Us</h5>\n    </a>\n  </div>\n  <div class=\"reveal\" id=\"citationModal\" data-reveal>\n    <h3>Citing Complex Portal</h3>\n    <span class=\"lead\">The complex portal - an encyclopaedia of macromolecular complexes.</span>\n    <span>Meldal BH et al [PMID: 25313161]</span>\n    <p><i>Nucl. Acids Res. (2014) doi: 10.1093/nar/gku975</i></p>\n    <a class=\"button readmore\" href=\"//europepmc.org/abstract/MED/25313161\" target=\"_blank\">Abstract</a>\n    <a class=\"button readmore\"\n       href=\"//academic.oup.com/nar/article/43/D1/D479/2439561/The-complex-portal-an-encyclopaedia-of\" target=\"_blank\">Full\n      text</a>\n\n    <button class=\"close-button\" data-close aria-label=\"Close modal\" type=\"button\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToDownload()\">\n      <h3 class=\"icon icon-functional white-color\" data-icon=\"=\"></h3>\n      <h5 class=\"white-color\">Programmatic Access</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToBasket()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"b\"></h3>\n      <h5 class=\"white-color\">Basket</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOrganisms()\">\n      <h3 class=\"icon icon-species white-color\" data-icon=\"H\"></h3>\n      <h5 class=\"white-color\">Organisms</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns\" data-equalizer-watch (click)=\"goToOntologies()\">\n      <h3 class=\"icon icon-conceptual white-color\" data-icon=\"o\"></h3>\n      <h5 class=\"white-color\">Ontologies</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns training-background\" data-equalizer-watch (click)=\"goToRequestComplex()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"\\\"></h3>\n      <h5 class=\"white-color\">Request Complex for Curation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a\n      class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToTraining()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"t\"></h3>\n      <h5 class=\"white-color\">Training</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch (click)=\"goToDocumentation()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"?\"></h3>\n      <h5 class=\"white-color\">Documentation</h5>\n    </a>\n  </div>\n  <div class=\"column medium-3 small-6 text-center padding-bottom-large\">\n    <a class=\"button medium-12 columns industry-background\" data-equalizer-watch data-open=\"citationModal\" (click)=\"goToCitation()\">\n      <h3 class=\"icon icon-generic white-color\" data-icon=\"P\"></h3>\n      <h5 class=\"white-color\">How To Cite Us</h5>\n    </a>\n  </div>\n  <div class=\"reveal\" id=\"citationModal\" data-reveal>\n    <h3>Citing Complex Portal</h3>\n    <span class=\"lead\">The complex portal - an encyclopaedia of macromolecular complexes.</span>\n    <span>Meldal BH et al [PMID: 25313161]</span>\n    <p><i>Nucl. Acids Res. (2014) doi: 10.1093/nar/gku975</i></p>\n    <a class=\"button readmore\" href=\"//europepmc.org/abstract/MED/25313161\" target=\"_blank\">Abstract</a>\n    <a class=\"button readmore\"\n       href=\"//academic.oup.com/nar/article/43/D1/D479/2439561/The-complex-portal-an-encyclopaedia-of\" target=\"_blank\">Full\n      text</a>\n\n    <button class=\"close-button\" data-close aria-label=\"Close modal\" type=\"button\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -242,10 +242,8 @@ var TileMenuComponent = (function () {
         this.googleAnalyticsService = googleAnalyticsService;
     }
     TileMenuComponent.prototype.ngAfterViewInit = function () {
+        // Necessary for layout of tiles (equal size, etc.)
         $('cp-tile-menu').foundation();
-    };
-    TileMenuComponent.prototype.featureNotAvailableYet = function () {
-        this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     };
     TileMenuComponent.prototype.goToDownload = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('download');
@@ -261,7 +259,7 @@ var TileMenuComponent = (function () {
     };
     TileMenuComponent.prototype.goToOntologies = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('ontologies');
-        this.featureNotAvailableYet();
+        this.notificationService.onFeatureNotAvailableYet();
         this.router.navigate(['ontologies']);
     };
     TileMenuComponent.prototype.goToRequestComplex = function () {
@@ -278,8 +276,6 @@ var TileMenuComponent = (function () {
     };
     TileMenuComponent.prototype.goToCitation = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('citation');
-        this.featureNotAvailableYet();
-        this.router.navigate(['home']);
     };
     return TileMenuComponent;
 }());
@@ -343,6 +339,9 @@ var TwitterDisplayComponent = (function () {
     function TwitterDisplayComponent() {
     }
     TwitterDisplayComponent.prototype.ngOnInit = function () {
+        this.initTwitterWidget();
+    };
+    TwitterDisplayComponent.prototype.initTwitterWidget = function () {
         /* tslint:disable */
         window.twttr = (function (d, s, id, call) {
             var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
@@ -382,7 +381,7 @@ TwitterDisplayComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/search/search.component.css":
+/***/ "../../../../../src/app/search/home-search/search.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -400,21 +399,20 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/search/search.component.html":
+/***/ "../../../../../src/app/search/home-search/search.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <!-- local-search -->\n    <!-- if you do not have a local-search, delete the following form -->\n    <div id=\"content-search\" name=\"content-search\" >\n      <fieldset>\n        <div class=\"input-group margin-bottom-none\">\n          <input #query type=\"text\" name=\"first\" id=\"content-searchbox\" class=\"input-group-field\" (keydown.enter)=\"search(query.value, 'enter')\"\n                 placeholder=\"GO term(s), Gene name(s), UniProt AC(s), Protein name(s), Protein name(s), Complex AC\">\n          <div class=\"input-group-button\">\n            <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(query.value, 'button')\"\n                   class=\"button icon icon-functional\">\n          </div>\n        </div>\n      </fieldset>\n    </div>\n  </div>\n  <div class=\"columns callout medium-12 margin-bottom-none\">\n    <h5><i class=\"icon icon-generic padding-right-medium\" data-icon=\"?\"></i>Examples:</h5>\n    <div class=\"columns medium-6\">\n      <ul>\n        <li>GO term(s): <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a></li>\n        <li>Gene name(s): <a (click)=\"search('Ndc80', 'example')\">Ndc80</a></li>\n        <li>UniProt AC(s): <a (click)=\"search('Q05471', 'example')\">Q05471</a></li>\n        <li>Protein name(s): <a (click)=\"search('PCNA', 'example')\">PCNA</a></li>\n      </ul>\n    </div>\n    <div class=\"columns medium-6 no-pad-left\">\n      <ul>\n        <li>Complex AC: <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a></li>\n        <li>Complex Name: <a (click)=\"search('nuclear pore', 'example')\">nuclear pore</a></li>\n        <li>List of ACs: <a (click)=\"search('Q15554, P54274, Q96AP0', 'example')\">Q15554, P54274, Q96AP0</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/search/search.component.ts":
+/***/ "../../../../../src/app/search/home-search/search.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_search_service__ = __webpack_require__("../../../../../src/app/search/service/search.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -428,36 +426,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var SearchComponent = (function () {
-    function SearchComponent(router, googleAnalyticsService) {
-        this.router = router;
-        this.googleAnalyticsService = googleAnalyticsService;
+    function SearchComponent(searchService) {
+        this.searchService = searchService;
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
     SearchComponent.prototype.search = function (query, typeOfButton) {
-        if (typeOfButton === 'enter') {
-            this.googleAnalyticsService.fireSearchInvokerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, typeOfButton);
-        }
-        else {
-            this.googleAnalyticsService.fireSearchInvokerEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, typeOfButton);
-        }
-        this.googleAnalyticsService.fireSearchTermEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].home, query);
-        this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
+        this.searchService.search(query, __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_types_category_enum__["a" /* Category */].home, typeOfButton);
     };
     return SearchComponent;
 }());
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'cp-search',
-        template: __webpack_require__("../../../../../src/app/search/search.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/search/search.component.css")]
+        template: __webpack_require__("../../../../../src/app/search/home-search/search.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/search/home-search/search.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__service_search_service__["a" /* SearchService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__service_search_service__["a" /* SearchService */]) === "function" && _a || Object])
 ], SearchComponent);
 
-var _a, _b;
+var _a;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/search.component.js.map
 
 /***/ })

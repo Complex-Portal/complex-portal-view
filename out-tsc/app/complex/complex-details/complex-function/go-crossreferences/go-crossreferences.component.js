@@ -12,6 +12,9 @@ var GoCrossreferencesComponent = (function () {
     function GoCrossreferencesComponent() {
     }
     GoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    GoCrossreferencesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var qualifier = this.crossReferences[i].qualifier;

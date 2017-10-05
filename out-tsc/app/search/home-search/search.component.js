@@ -8,25 +8,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { GoogleAnalyticsService } from '../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../shared/google-analytics/category.enum';
+import { Category } from '../../shared/google-analytics/types/category.enum';
+import { SearchService } from '../service/search.service';
 var SearchComponent = (function () {
-    function SearchComponent(router, googleAnalyticsService) {
-        this.router = router;
-        this.googleAnalyticsService = googleAnalyticsService;
+    function SearchComponent(searchService) {
+        this.searchService = searchService;
     }
     SearchComponent.prototype.ngOnInit = function () {
     };
     SearchComponent.prototype.search = function (query, typeOfButton) {
-        if (typeOfButton === 'enter') {
-            this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
-        }
-        else {
-            this.googleAnalyticsService.fireSearchInvokerEvent(Category.home, typeOfButton);
-        }
-        this.googleAnalyticsService.fireSearchTermEvent(Category.home, query);
-        this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
+        this.searchService.search(query, Category.home, typeOfButton);
     };
     return SearchComponent;
 }());
@@ -36,7 +27,7 @@ SearchComponent = __decorate([
         templateUrl: './search.component.html',
         styleUrls: ['./search.component.css']
     }),
-    __metadata("design:paramtypes", [Router, GoogleAnalyticsService])
+    __metadata("design:paramtypes", [SearchService])
 ], SearchComponent);
 export { SearchComponent };
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/search.component.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/home-search/search.component.js.map

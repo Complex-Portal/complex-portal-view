@@ -12,16 +12,10 @@ var ComplexExpressionComponent = (function () {
     function ComplexExpressionComponent() {
     }
     ComplexExpressionComponent.prototype.ngOnInit = function () {
-        for (var i = 0; i < this._participants.length; i++) {
-            if (this._participants[i].interactorType === 'protein') {
-                if (this._gxaParamsQueries === undefined) {
-                    this.gxaParamsQueries = this._participants[i].identifier;
-                }
-                else {
-                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
-                }
-            }
-        }
+        this.findXRefs();
+        this.findGXAQueryies();
+    };
+    ComplexExpressionComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
@@ -31,6 +25,18 @@ var ComplexExpressionComponent = (function () {
                     this.goCellularXRefs = [];
                 }
                 this.goCellularXRefs.push(crossRef);
+            }
+        }
+    };
+    ComplexExpressionComponent.prototype.findGXAQueryies = function () {
+        for (var i = 0; i < this._participants.length; i++) {
+            if (this._participants[i].interactorType === 'protein') {
+                if (this._gxaParamsQueries === undefined) {
+                    this.gxaParamsQueries = this._participants[i].identifier;
+                }
+                else {
+                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
+                }
             }
         }
     };

@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
 import LiteMol from 'litemol';
 import { environment } from '../../../../../../environments/environment';
 import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../../../../../shared/google-analytics/category.enum';
+import { Category } from '../../../../../shared/google-analytics/types/category.enum';
 var baseURL = environment.pdb_base_url;
 var LitmolViewerComponent = (function () {
     function LitmolViewerComponent(googleAnalyticsService) {
@@ -52,7 +52,7 @@ var LitmolViewerComponent = (function () {
     };
     LitmolViewerComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer, this._selectedXRef);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer_Interaction, this._selectedXRef);
             this._hasInteracted = true;
         }
     };

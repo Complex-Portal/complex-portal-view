@@ -19,10 +19,8 @@ var TileMenuComponent = (function () {
         this.googleAnalyticsService = googleAnalyticsService;
     }
     TileMenuComponent.prototype.ngAfterViewInit = function () {
+        // Necessary for layout of tiles (equal size, etc.)
         $('cp-tile-menu').foundation();
-    };
-    TileMenuComponent.prototype.featureNotAvailableYet = function () {
-        this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     };
     TileMenuComponent.prototype.goToDownload = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('download');
@@ -38,7 +36,7 @@ var TileMenuComponent = (function () {
     };
     TileMenuComponent.prototype.goToOntologies = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('ontologies');
-        this.featureNotAvailableYet();
+        this.notificationService.onFeatureNotAvailableYet();
         this.router.navigate(['ontologies']);
     };
     TileMenuComponent.prototype.goToRequestComplex = function () {
@@ -55,8 +53,6 @@ var TileMenuComponent = (function () {
     };
     TileMenuComponent.prototype.goToCitation = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('citation');
-        this.featureNotAvailableYet();
-        this.router.navigate(['home']);
     };
     return TileMenuComponent;
 }());

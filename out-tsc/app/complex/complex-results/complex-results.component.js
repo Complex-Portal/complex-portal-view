@@ -35,17 +35,21 @@ var ComplexResultsComponent = (function () {
             _this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
             // TODO This is out for now, but CP-84 (JIRA )should fix that!!
             // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-            _this.complexPortalService.findComplex(_this.query, _this.spicesFilter, _this.bioRoleFilter, _this.interactorTypeFilter, _this.currentPageIndex, _this.pageSize).subscribe(function (complexSearch) {
-                _this.complexSearch = complexSearch;
-                if (_this.complexSearch.totalNumberOfResults !== 0) {
-                    _this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this.pageSize);
-                }
-                ProgressBarComponent.hide();
-            });
+            _this.requestComplexResults();
             document.body.scrollTop = 0;
         });
     };
     ComplexResultsComponent.prototype.ngAfterViewInit = function () {
+    };
+    ComplexResultsComponent.prototype.requestComplexResults = function () {
+        var _this = this;
+        this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(function (complexSearch) {
+            _this.complexSearch = complexSearch;
+            if (_this.complexSearch.totalNumberOfResults !== 0) {
+                _this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this.pageSize);
+            }
+            ProgressBarComponent.hide();
+        });
     };
     /**
      * Prepare query params to build new URL after filter or pagination has changed
@@ -86,7 +90,6 @@ var ComplexResultsComponent = (function () {
     ComplexResultsComponent.prototype.onPageChange = function (pageIndex) {
         this.currentPageIndex = pageIndex;
         this.reloadPage();
-        this.googleAnalyticsService.fireUsePaginatorEvent(this._query);
     };
     ComplexResultsComponent.prototype.onResetAllFilters = function () {
         this.spicesFilter = [];

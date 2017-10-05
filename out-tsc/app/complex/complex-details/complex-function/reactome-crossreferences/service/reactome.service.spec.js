@@ -11,4 +11,4 @@ describe('ReactomeService', function () {
         expect(service).toBeTruthy();
     }));
 });
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.spec.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.spec.js.map

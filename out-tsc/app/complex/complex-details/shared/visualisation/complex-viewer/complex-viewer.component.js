@@ -8,15 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { NotificationService } from '../../../../../shared/notification/service/notification.service';
 import { GoogleAnalyticsService } from '../../../../../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../../../../../shared/google-analytics/category.enum';
+import { Category } from '../../../../../shared/google-analytics/types/category.enum';
 var xlv;
 var SvgSaver = require('svgsaver');
 var xiNET = require('expose-loader?xiNET!complexviewer');
 var ComplexViewerComponent = (function () {
-    function ComplexViewerComponent(notificationService, googleAnalyticsService) {
-        this.notificationService = notificationService;
+    function ComplexViewerComponent(googleAnalyticsService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this._svgsaver = new SvgSaver();
         this._hasInteracted = false;
@@ -42,7 +40,7 @@ var ComplexViewerComponent = (function () {
     };
     ComplexViewerComponent.prototype.interactedWithViewer = function () {
         if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer, this._complexAC);
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_Interaction, this._complexAC);
             this._hasInteracted = true;
         }
     };
@@ -90,7 +88,7 @@ ComplexViewerComponent = __decorate([
         styleUrls: ['complex-viewer.component.css'],
         encapsulation: ViewEncapsulation.None
     }),
-    __metadata("design:paramtypes", [NotificationService, GoogleAnalyticsService])
+    __metadata("design:paramtypes", [GoogleAnalyticsService])
 ], ComplexViewerComponent);
 export { ComplexViewerComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.js.map

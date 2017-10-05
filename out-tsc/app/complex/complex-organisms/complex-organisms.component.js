@@ -18,11 +18,18 @@ var ComplexOrganismsComponent = (function () {
         this._query = 'organisms';
     }
     ComplexOrganismsComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.titleService.setTitle('Complex Portal - Organisms');
-        //TODO: This needs to be looked at, once ftp and WS are able to take care of this.
-        //TODO: When new species in CP, we need to add it here to at the image.
-        //TODO: Currently we the organism name and count from species facets doing a * search. The ComplexOrganisms object extends the facet object.
+        this.requestComplexOrganisms();
+    };
+    ComplexOrganismsComponent.prototype.ngAfterViewInit = function () {
+        ProgressBarComponent.hide();
+    };
+    ComplexOrganismsComponent.prototype.requestComplexOrganisms = function () {
+        var _this = this;
+        // TODO: This needs to be looked at, once ftp and WS are able to take care of this.
+        // TODO: When new species in CP, we need to add it here to at the image.
+        // TODO: Currently we the organism name and count from species facets doing a * search.
+        // TODO: The ComplexOrganisms object extends the facet object.
         this.complexPortalService.getComplexOrganisms().subscribe(function (speciesFacets) {
             var organisms = speciesFacets;
             for (var i = 0; i < organisms.length; i++) {
@@ -187,9 +194,6 @@ var ComplexOrganismsComponent = (function () {
             }
             _this._organisms = organisms;
         });
-    };
-    ComplexOrganismsComponent.prototype.ngAfterViewInit = function () {
-        ProgressBarComponent.hide();
     };
     Object.defineProperty(ComplexOrganismsComponent.prototype, "organisms", {
         get: function () {

@@ -9,19 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, Input } from '@angular/core';
 import { OlsService } from '../../../../shared/ols/service/ols.service';
+import { NotificationService } from '../../../../shared/notification/service/notification.service';
+import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
+import { Category } from '../../../../shared/google-analytics/types/category.enum';
 var EfoCrossreferencesComponent = (function () {
-    function EfoCrossreferencesComponent(olsService) {
+    function EfoCrossreferencesComponent(olsService, notificationService, googleAnalyticsService) {
         this.olsService = olsService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
         this._displayedElements = 5;
     }
     EfoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * The OLS WS provides us some description to the found EFO and Orphanet XRefs.
+     */
+    EfoCrossreferencesComponent.prototype.findXRefs = function () {
         var _this = this;
         var _loop_1 = function (i) {
             if (this_1.crossReferences[i].identifier.split(':')[0] === 'EFO') {
-                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; });
+                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_efo, error.status ? error.status : 'unknown');
+                });
             }
             else if (this_1.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
-                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; });
+                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_orphanet, error.status ? error.status : 'unknown');
+                });
             }
         };
         var this_1 = this;
@@ -62,7 +79,8 @@ EfoCrossreferencesComponent = __decorate([
         templateUrl: './efo-crossreferences.component.html',
         styleUrls: ['./efo-crossreferences.component.css']
     }),
-    __metadata("design:paramtypes", [OlsService])
+    __metadata("design:paramtypes", [OlsService, NotificationService,
+        GoogleAnalyticsService])
 ], EfoCrossreferencesComponent);
 export { EfoCrossreferencesComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.js.map

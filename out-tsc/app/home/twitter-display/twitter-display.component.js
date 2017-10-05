@@ -13,6 +13,9 @@ var TwitterDisplayComponent = (function () {
     function TwitterDisplayComponent() {
     }
     TwitterDisplayComponent.prototype.ngOnInit = function () {
+        this.initTwitterWidget();
+    };
+    TwitterDisplayComponent.prototype.initTwitterWidget = function () {
         /* tslint:disable */
         window.twttr = (function (d, s, id, call) {
             var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};

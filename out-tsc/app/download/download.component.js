@@ -11,12 +11,10 @@ import { Component } from '@angular/core';
 import { ProgressBarComponent } from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import { environment } from '../../environments/environment';
 import { GoogleAnalyticsService } from '../shared/google-analytics/service/google-analytics.service';
-import { Router } from '@angular/router';
-import { Category } from '../shared/google-analytics/category.enum';
+import { Category } from '../shared/google-analytics/types/category.enum';
 import { Title } from '@angular/platform-browser';
 var DownloadComponent = (function () {
-    function DownloadComponent(router, googleAnalyticsService, titleService) {
-        this.router = router;
+    function DownloadComponent(googleAnalyticsService, titleService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this.titleService = titleService;
     }
@@ -59,7 +57,7 @@ DownloadComponent = __decorate([
         templateUrl: './download.component.html',
         styleUrls: ['./download.component.css']
     }),
-    __metadata("design:paramtypes", [Router, GoogleAnalyticsService, Title])
+    __metadata("design:paramtypes", [GoogleAnalyticsService, Title])
 ], DownloadComponent);
 export { DownloadComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/download/download.component.js.map

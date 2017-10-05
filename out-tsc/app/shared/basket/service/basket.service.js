@@ -12,7 +12,7 @@ import { BasketItem } from '../model/basketItem';
 import { Md5 } from 'ts-md5/dist/md5';
 import { NotificationService } from '../../notification/service/notification.service';
 import { GoogleAnalyticsService } from '../../google-analytics/service/google-analytics.service';
-import { LocalStorageService } from '../../local-storage/local-storage.service';
+import { LocalStorageService } from '../../local-storage/service/local-storage.service';
 var COMPLEX_STORE = 'cp_complex_store';
 var BasketService = (function () {
     function BasketService(notificationService, googleAnalyticsService) {
@@ -29,7 +29,7 @@ var BasketService = (function () {
             this.initialiseBasket();
         }
         else {
-            var keys = this.getKeys(complexStore);
+            var keys = Object.keys(complexStore);
             for (var i = 0; i < keys.length; i++) {
                 var complex = complexStore[keys[i]];
                 if (complex) {
@@ -38,33 +38,27 @@ var BasketService = (function () {
             }
         }
     };
-    BasketService.prototype.getKeys = function (object) {
-        return Object.keys(object);
-    };
     BasketService.prototype.saveInBasket = function (name, id, organism) {
         var newBasketItem = new BasketItem(name, id, new Date(), organism);
         if (!this.isInBasket(id)) {
-            this._complexBasket[this.toMd5(id)] = newBasketItem;
+            this._complexBasket[Md5.hashStr(id).toString()] = newBasketItem;
             LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
+            this.onBasketCountChanged$.emit(this.getBasketCount());
             this.googleAnalyticsService.fireAddToBasketEvent(id);
-            this.notificationService.addSuccessNotification('Stored ' + id + ' in your basket!');
+            this.notificationService.onAddedComplexToBasket(id);
         }
-        this.onBasketCountChanged$.emit(this.getBasketCount());
     };
     BasketService.prototype.deleteFromBasket = function (key) {
         var id = this._complexBasket[key].id;
         delete this._complexBasket[key];
         LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
-        this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
-        this.notificationService.addSuccessNotification('Removed ' + id + ' in your basket!');
         this.onBasketCountChanged$.emit(this.getBasketCount());
+        this.googleAnalyticsService.fireRemoveFromBasketEvent(id);
+        this.notificationService.onRemovedComplexFromBasket(id);
     };
     BasketService.prototype.isInBasket = function (id) {
-        var key = this.toMd5(id);
+        var key = Md5.hashStr(id).toString();
         return !!this._complexBasket[key];
-    };
-    BasketService.prototype.toMd5 = function (key) {
-        return Md5.hashStr(key).toString();
     };
     Object.defineProperty(BasketService.prototype, "complexBasket", {
         get: function () {
@@ -74,7 +68,7 @@ var BasketService = (function () {
         configurable: true
     });
     BasketService.prototype.getBasketCount = function () {
-        return this.getKeys(this._complexBasket).length;
+        return Object.keys(this._complexBasket).length;
     };
     return BasketService;
 }());

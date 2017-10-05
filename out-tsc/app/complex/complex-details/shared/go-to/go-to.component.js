@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
 import { SectionService } from '../service/section/section.service';
 import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
 var GoToComponent = (function () {
     function GoToComponent(_sectionService, cdr, pageScrollService, document, googleAnalyticsService) {
@@ -46,6 +46,7 @@ var GoToComponent = (function () {
         }
     };
     GoToComponent.prototype.ngAfterViewInit = function () {
+        // Important to apply foundation
         $('.goToMenu').foundation();
     };
     GoToComponent.prototype.scrollToElement = function (idReference) {

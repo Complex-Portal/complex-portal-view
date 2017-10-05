@@ -43,7 +43,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { OlsService } from '../../shared/ols/service/ols.service';
 import { ComplexPortalService } from '../shared/service/complex-portal.service';
 import { NotificationService } from '../../shared/notification/service/notification.service';
-import { ReactomeService } from './complex-function/reactome-crossreferences/shared/service/reactome.service';
+import { ReactomeService } from './complex-function/reactome-crossreferences/service/reactome.service';
 import { EuroPmcService } from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import { ProgressSpinnerModule } from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import { SectionService } from './shared/service/section/section.service';

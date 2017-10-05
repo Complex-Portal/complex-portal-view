@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Angulartics2 } from 'angulartics2';
-import { Category } from '../category.enum';
-import { Action } from '../action.enum';
+import { Category } from '../types/category.enum';
+import { Action } from '../types/action.enum';
 var GoogleAnalyticsService = (function () {
     function GoogleAnalyticsService(angulartics2) {
         this.angulartics2 = angulartics2;
@@ -48,22 +48,19 @@ var GoogleAnalyticsService = (function () {
         this.invokeCustomEvent(Action.RemoveFromBasket, Category.basket, type);
     };
     GoogleAnalyticsService.prototype.fireInteractionWithViewerEvent = function (viewer, type) {
-        // this.invokeCustomEvent(Action.VisualisationInteraction, viewer, type);
+        this.invokeCustomEvent(Action.ComplexVisualisation, viewer, type);
     };
     GoogleAnalyticsService.prototype.fireAddedFilterEvent = function (type) {
-        // this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
+        this.invokeCustomEvent(Action.AddResultFilter, Category.ResultFilter, type);
     };
     GoogleAnalyticsService.prototype.fireRemovedFilterEvent = function (type) {
-        // this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
+        this.invokeCustomEvent(Action.RemoveResultFilter, Category.ResultFilter, type);
     };
     GoogleAnalyticsService.prototype.fireMultiFilterEvent = function (type) {
-        // this.invokeCustomEvent(Action.IsAMultiFilterResult, Category.ResultFilter, type);
-    };
-    GoogleAnalyticsService.prototype.fireUsePaginatorEvent = function (type) {
-        // this.invokeCustomEvent(Action.ChangeResultPage, Category.Paginator, type);
+        this.invokeCustomEvent(Action.FilterByMultipleFields, Category.ResultFilter, type);
     };
     GoogleAnalyticsService.prototype.fireAPIRequestErrorEvent = function (api, type) {
-        // this.invokeCustomEvent(Action.APIResquestError, api, type);
+        this.invokeCustomEvent(Action.APIResquestError, api, type);
     };
     return GoogleAnalyticsService;
 }());

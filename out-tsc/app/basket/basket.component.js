@@ -15,10 +15,10 @@ var BasketComponent = (function () {
     function BasketComponent(_basketService, titleService) {
         this._basketService = _basketService;
         this.titleService = titleService;
+        this._complexBasket = this._basketService.complexBasket;
     }
     BasketComponent.prototype.ngOnInit = function () {
         this.titleService.setTitle('Complex Portal - Basket');
-        this._complexBasket = this._basketService.complexBasket;
     };
     BasketComponent.prototype.ngAfterViewInit = function () {
         ProgressBarComponent.hide();

@@ -10,17 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { GoogleAnalyticsService } from '../../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../../shared/google-analytics/category.enum';
+import { Category } from '../../shared/google-analytics/types/category.enum';
+import { SearchService } from '../service/search.service';
 var LocalSearchComponent = (function () {
-    function LocalSearchComponent(location, router, route, googleAnalyticsService) {
+    function LocalSearchComponent(location, router, route, searchService) {
         this.location = location;
         this.router = router;
         this.route = route;
-        this.googleAnalyticsService = googleAnalyticsService;
+        this.searchService = searchService;
     }
     LocalSearchComponent.prototype.ngOnInit = function () {
+        this.extractQueryFromURL();
+    };
+    LocalSearchComponent.prototype.extractQueryFromURL = function () {
         var _this = this;
+        // Retrieve query from URL. Would be nice to have it in the service.. but time etc.
         this.router.events.subscribe(function (val) {
             if (_this.location.path().startsWith('/home')) {
                 _this._display = false;
@@ -47,14 +51,7 @@ var LocalSearchComponent = (function () {
         });
     };
     LocalSearchComponent.prototype.search = function (query, typeOfButton) {
-        if (typeOfButton === 'enter') {
-            this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
-        }
-        else {
-            this.googleAnalyticsService.fireSearchInvokerEvent(Category.header, typeOfButton);
-        }
-        this.googleAnalyticsService.fireSearchTermEvent(Category.header, query);
-        this.router.navigate(['complex/search'], { queryParams: { query: query, page: 1 } });
+        this.searchService.search(query, Category.header, typeOfButton);
     };
     Object.defineProperty(LocalSearchComponent.prototype, "display", {
         get: function () {
@@ -79,7 +76,7 @@ LocalSearchComponent = __decorate([
         styleUrls: ['./local-search.component.css']
     }),
     __metadata("design:paramtypes", [Location, Router, ActivatedRoute,
-        GoogleAnalyticsService])
+        SearchService])
 ], LocalSearchComponent);
 export { LocalSearchComponent };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/local-search/local-search.component.js.map

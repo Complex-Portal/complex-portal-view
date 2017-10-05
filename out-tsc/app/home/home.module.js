@@ -11,7 +11,7 @@ import { HomeComponent } from './home.component';
 import { TileMenuComponent } from './tile-menu/tile-menu.component';
 import { TwitterDisplayComponent } from './twitter-display/twitter-display.component';
 import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
-import { SearchComponent } from '../search/search.component';
+import { SearchComponent } from '../search/home-search/search.component';
 var HomeModule = (function () {
     function HomeModule() {
     }

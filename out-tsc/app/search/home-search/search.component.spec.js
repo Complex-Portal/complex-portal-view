@@ -19,4 +19,4 @@ describe('SearchComponent', function () {
         expect(component).toBeTruthy();
     });
 });
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/search.component.spec.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/search/home-search/search.component.spec.js.map

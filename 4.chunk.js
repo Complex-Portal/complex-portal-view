@@ -32,7 +32,7 @@ module.exports = "<div class=\"row\" *ngIf=\"organism.symbol\" style=\"text-alig
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__ = __webpack_require__("../../../../../src/app/complex/shared/model/complex-organism/complex-organism.model.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismComponent; });
@@ -57,10 +57,9 @@ var ComplexOrganismComponent = (function () {
         this.googleAnalyticsService = googleAnalyticsService;
     }
     ComplexOrganismComponent.prototype.ngOnInit = function () {
-        this._organism.name;
     };
     ComplexOrganismComponent.prototype.search = function (specieName) {
-        this.googleAnalyticsService.fireSearchTermEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].organisms, specieName);
+        this.googleAnalyticsService.fireSearchTermEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, specieName);
         this.router.navigate(['complex/search'], { queryParams: { query: '*', species: specieName, page: 1 } });
     };
     Object.defineProperty(ComplexOrganismComponent.prototype, "organism", {
@@ -74,15 +73,15 @@ var ComplexOrganismComponent = (function () {
         configurable: true
     });
     ComplexOrganismComponent.prototype.goToComplexPSI25 = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].organisms, 'PSIXML25');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML25');
         window.open(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].complex_psi25 + this.organism.psi25, '_blank');
     };
     ComplexOrganismComponent.prototype.goToComplexPSI30 = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].organisms, 'PSIXML30');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML30');
         window.open(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].complex_psi30 + this.organism.psi30, '_blank');
     };
     ComplexOrganismComponent.prototype.goToComplexTAB = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_category_enum__["a" /* Category */].organisms, 'ComplexTAB');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'ComplexTAB');
         window.open(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].complex_tab + this.organism.complextab + '.tsv', '_blank');
     };
     return ComplexOrganismComponent;
@@ -160,11 +159,18 @@ var ComplexOrganismsComponent = (function () {
         this._query = 'organisms';
     }
     ComplexOrganismsComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.titleService.setTitle('Complex Portal - Organisms');
-        //TODO: This needs to be looked at, once ftp and WS are able to take care of this.
-        //TODO: When new species in CP, we need to add it here to at the image.
-        //TODO: Currently we the organism name and count from species facets doing a * search. The ComplexOrganisms object extends the facet object.
+        this.requestComplexOrganisms();
+    };
+    ComplexOrganismsComponent.prototype.ngAfterViewInit = function () {
+        __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
+    };
+    ComplexOrganismsComponent.prototype.requestComplexOrganisms = function () {
+        var _this = this;
+        // TODO: This needs to be looked at, once ftp and WS are able to take care of this.
+        // TODO: When new species in CP, we need to add it here to at the image.
+        // TODO: Currently we the organism name and count from species facets doing a * search.
+        // TODO: The ComplexOrganisms object extends the facet object.
         this.complexPortalService.getComplexOrganisms().subscribe(function (speciesFacets) {
             var organisms = speciesFacets;
             for (var i = 0; i < organisms.length; i++) {
@@ -329,9 +335,6 @@ var ComplexOrganismsComponent = (function () {
             }
             _this._organisms = organisms;
         });
-    };
-    ComplexOrganismsComponent.prototype.ngAfterViewInit = function () {
-        __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
     };
     Object.defineProperty(ComplexOrganismsComponent.prototype, "organisms", {
         get: function () {

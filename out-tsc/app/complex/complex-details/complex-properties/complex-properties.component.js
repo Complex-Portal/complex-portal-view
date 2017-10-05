@@ -12,12 +12,10 @@ var ComplexPropertiesComponent = (function () {
     function ComplexPropertiesComponent() {
     }
     ComplexPropertiesComponent.prototype.ngOnInit = function () {
-        if (this._propertiesDescription.length === 0) {
-            this._propertiesDescription = null;
-        }
-        if (this._comments.length === 0) {
-            this._comments = null;
-        }
+        this.checkFreeTextContent();
+        this.findXRefs();
+    };
+    ComplexPropertiesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             var crossRef = this.crossReferences[i];
             var database = this.crossReferences[i].database;
@@ -33,6 +31,14 @@ var ComplexPropertiesComponent = (function () {
                 }
                 this._emdbXRefs.push(crossRef);
             }
+        }
+    };
+    ComplexPropertiesComponent.prototype.checkFreeTextContent = function () {
+        if (this._propertiesDescription.length === 0) {
+            this._propertiesDescription = null;
+        }
+        if (this._comments.length === 0) {
+            this._comments = null;
         }
     };
     Object.defineProperty(ComplexPropertiesComponent.prototype, "propertiesDescription", {

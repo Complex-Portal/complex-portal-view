@@ -33,9 +33,8 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -52,10 +51,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var DownloadComponent = (function () {
-    function DownloadComponent(router, googleAnalyticsService, titleService) {
-        this.router = router;
+    function DownloadComponent(googleAnalyticsService, titleService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this.titleService = titleService;
     }
@@ -67,27 +64,27 @@ var DownloadComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
     };
     DownloadComponent.prototype.goToComplexPSI25 = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'PSIXML25');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'PSIXML25');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_psi25, '_blank');
     };
     DownloadComponent.prototype.goToComplexPSI30 = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'PSIXML30');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'PSIXML30');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_psi30, '_blank');
     };
     DownloadComponent.prototype.goToComplexTAB = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'ComplexTAB');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'ComplexTAB');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_tab, '_blank');
     };
     DownloadComponent.prototype.goToComplexWS = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'ComplexWS');
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'ComplexWS');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_ws_base_url, '_blank');
     };
     DownloadComponent.prototype.goToComplexTabeReadMe = function () {
-        this.googleAnalyticsService.fireOpenExternalLinkEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'ComplexTABReadMe');
+        this.googleAnalyticsService.fireOpenExternalLinkEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'ComplexTABReadMe');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_tab_readme, '_blank');
     };
     DownloadComponent.prototype.goToComplexFTPCurrent = function () {
-        this.googleAnalyticsService.fireOpenExternalLinkEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_category_enum__["a" /* Category */].download, 'ComplexCurrentFTP');
+        this.googleAnalyticsService.fireOpenExternalLinkEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].download, 'ComplexCurrentFTP');
         window.open(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].complex_current, '_blank');
     };
     return DownloadComponent;
@@ -98,10 +95,10 @@ DownloadComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/download/download.component.html"),
         styles: [__webpack_require__("../../../../../src/app/download/download.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["Title"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["Title"]) === "function" && _b || Object])
 ], DownloadComponent);
 
-var _a, _b, _c;
+var _a, _b;
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/download.component.js.map
 
 /***/ }),

@@ -1153,7 +1153,7 @@ function toComment(sourceMap) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__toastr_toastr_service__ = __webpack_require__("../../../../ngx-toastr/toastr/toastr-service.js");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_6__toastr_toastr_service__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__toastr_toastr_config__ = __webpack_require__("../../../../ngx-toastr/toastr/toastr-config.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_7__toastr_toastr_config__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_7__toastr_toastr_config__["a"]; });
 /* unused harmony reexport ToastConfig */
 /* unused harmony reexport ToastData */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__toastr_toastr_module__ = __webpack_require__("../../../../ngx-toastr/toastr/toastr-module.js");
@@ -1643,7 +1643,7 @@ var Toast = (function () {
     /** @nocollapse */
     Toast.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_3__toastr_service__["a" /* ToastrService */], },
-        { type: __WEBPACK_IMPORTED_MODULE_2__toastr_config__["a" /* ToastData */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__toastr_config__["b" /* ToastData */], },
         { type: __WEBPACK_IMPORTED_MODULE_4__toast_injector__["a" /* ToastRef */], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ApplicationRef"], },
         { type: __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["DomSanitizer"], },
@@ -1780,7 +1780,7 @@ var ToastInjector = (function () {
         if (token === ToastRef) {
             return this._dialogRef;
         }
-        if (token === __WEBPACK_IMPORTED_MODULE_1__toastr_config__["a" /* ToastData */] && this._data) {
+        if (token === __WEBPACK_IMPORTED_MODULE_1__toastr_config__["b" /* ToastData */] && this._data) {
             return this._data;
         }
         return this._parentInjector.get(token, notFoundValue);
@@ -1800,8 +1800,8 @@ var ToastInjector = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toast_component__ = __webpack_require__("../../../../ngx-toastr/toastr/toast-component.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ToastConfig; });
 /* unused harmony export ToastrIconClasses */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ToastrConfig; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToastData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToastrConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ToastData; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1951,7 +1951,7 @@ var ToastData = (function () {
 
 var TOAST_CONFIG = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('ToastConfig');
 function provideToastrConfig(config) {
-    return new __WEBPACK_IMPORTED_MODULE_4__toastr_config__["b" /* ToastrConfig */](config);
+    return new __WEBPACK_IMPORTED_MODULE_4__toastr_config__["a" /* ToastrConfig */](config);
 }
 var ToastrModule = (function () {
     function ToastrModule() {
@@ -1961,7 +1961,7 @@ var ToastrModule = (function () {
             ngModule: ToastrModule,
             providers: [
                 { provide: TOAST_CONFIG, useValue: config },
-                { provide: __WEBPACK_IMPORTED_MODULE_4__toastr_config__["b" /* ToastrConfig */], useFactory: provideToastrConfig, deps: [TOAST_CONFIG] },
+                { provide: __WEBPACK_IMPORTED_MODULE_4__toastr_config__["a" /* ToastrConfig */], useFactory: provideToastrConfig, deps: [TOAST_CONFIG] },
                 __WEBPACK_IMPORTED_MODULE_5__overlay_overlay_container__["a" /* OverlayContainer */],
                 __WEBPACK_IMPORTED_MODULE_6__overlay_overlay__["a" /* Overlay */],
                 __WEBPACK_IMPORTED_MODULE_3__toastr_service__["a" /* ToastrService */]
@@ -2137,7 +2137,7 @@ var ToastrService = (function () {
         };
         ins.onShown = ins.toastRef.afterActivate();
         ins.onHidden = ins.toastRef.afterClosed();
-        var data = new __WEBPACK_IMPORTED_MODULE_4__toastr_config__["a" /* ToastData */]();
+        var data = new __WEBPACK_IMPORTED_MODULE_4__toastr_config__["b" /* ToastData */]();
         data.toastId = ins.toastId;
         data.optionsOverride = optionsOverride;
         data.message = message;
@@ -2164,7 +2164,7 @@ var ToastrService = (function () {
     ];
     /** @nocollapse */
     ToastrService.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_4__toastr_config__["b" /* ToastrConfig */], },
+        { type: __WEBPACK_IMPORTED_MODULE_4__toastr_config__["a" /* ToastrConfig */], },
         { type: __WEBPACK_IMPORTED_MODULE_2__overlay_overlay__["a" /* Overlay */], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"], },
     ]; };
@@ -68875,9 +68875,9 @@ ReactiveFormsModule.ctorParameters = function () { return []; };
 /* unused harmony export ConnectionBackend */
 /* unused harmony export XSRFStrategy */
 /* unused harmony export Request */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return Response; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Response; });
 /* unused harmony export QueryEncoder */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return URLSearchParams; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return URLSearchParams; });
 /* unused harmony export VERSION */
 /* unused harmony export ɵg */
 /* unused harmony export ɵa */

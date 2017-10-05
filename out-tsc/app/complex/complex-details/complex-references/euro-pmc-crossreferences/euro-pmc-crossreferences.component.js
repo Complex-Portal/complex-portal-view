@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
 import { EuroPmcService } from './service/euro-pmc.service';
 import { NotificationService } from '../../../../shared/notification/service/notification.service';
 import { GoogleAnalyticsService } from '../../../../shared/google-analytics/service/google-analytics.service';
-import { Category } from '../../../../shared/google-analytics/category.enum';
+import { Category } from '../../../../shared/google-analytics/types/category.enum';
 var EuroPmcCrossreferencesComponent = (function () {
     function EuroPmcCrossreferencesComponent(euroPmcService, notificationService, googleAnalyticsService) {
         this.euroPmcService = euroPmcService;
@@ -21,9 +21,16 @@ var EuroPmcCrossreferencesComponent = (function () {
         this._isDataLoaded = false;
     }
     EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    EuroPmcCrossreferencesComponent.prototype.findXRefs = function () {
         var _this = this;
         var _loop_1 = function (i) {
-            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (euroPmcResponse) { return _this.publicationFactory(_this.crossReferences[i], euroPmcResponse); }, function (error) { return _this.onError(error); });
+            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this.publicationFactory(_this.crossReferences[i], response); }, function (error) {
+                _this._isDataLoaded = false;
+                _this.notificationService.onAPIRequestError('Euro PMC');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+            });
             if (i === this_1.crossReferences.length - 1) {
                 this_1._isDataLoaded = true;
             }
@@ -32,12 +39,6 @@ var EuroPmcCrossreferencesComponent = (function () {
         for (var i = 0; i < this.crossReferences.length; i++) {
             _loop_1(i);
         }
-    };
-    EuroPmcCrossreferencesComponent.prototype.onError = function (error) {
-        this._isDataLoaded = false;
-        this.notificationService.addErrorNotification('Error whilst retrieving data from Euro PMC. ' +
-            'Please let us know if error persists.');
-        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.europepmc, error.status ? error.status : 'unknown');
     };
     EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
         this.publications.push({

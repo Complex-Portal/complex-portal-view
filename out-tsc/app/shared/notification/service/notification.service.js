@@ -8,11 +8,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { LocalStorageService } from '../../local-storage/local-storage.service';
+import { ToastrConfig, ToastrService } from 'ngx-toastr';
 var NotificationService = (function () {
-    function NotificationService(toastrService) {
+    function NotificationService(toastrService, toastrConfig) {
         this.toastrService = toastrService;
+        this.toastrConfig = toastrConfig;
+        toastrConfig.closeButton = true; // displayedElements close button
+        toastrConfig.timeOut = 5000; // time to live
+        toastrConfig.preventDuplicates = true;
+        toastrConfig.progressBar = true;
+        toastrConfig.tapToDismiss = false;
+        toastrConfig.enableHtml = true;
     }
     NotificationService.prototype.addSuccessNotification = function (successNotification) {
         this.toastrService.success(successNotification);
@@ -26,25 +32,24 @@ var NotificationService = (function () {
     NotificationService.prototype.addHintNotification = function (hintNotification) {
         this.toastrService.warning(hintNotification, 'Just to let you know!');
     };
-    // public addStaticNotification(staticNotification: string): void {
-    //   this.toastrService.success('Hello world!', staticNotification);
-    // }
-    NotificationService.prototype.followOnTwitter = function () {
-        var CP_TWITTER_REMINDER = 'cp_twitter_reminder';
-        if (LocalStorageService.getLocalStorage(CP_TWITTER_REMINDER) == null) {
-            var context_1 = this;
-            setTimeout(function () {
-                context_1.toastrService.info('Stay in touch and follow <b><a href="//twitter.com/complexportal" ' +
-                    'target="_blank">@complexportal</a></b> on Twitter!', 'Follow us on Twitter!');
-                LocalStorageService.saveInLocalStorage(CP_TWITTER_REMINDER, true);
-            }, 30000);
-        }
+    NotificationService.prototype.onAPIRequestError = function (resource) {
+        this.addErrorNotification('We couldn\'t reach the ' + resource + ' webservice. ' +
+            'Please try again later or contact us if issue persists!');
+    };
+    NotificationService.prototype.onAddedComplexToBasket = function (id) {
+        this.addSuccessNotification('Stored ' + id + ' in your basket!');
+    };
+    NotificationService.prototype.onRemovedComplexFromBasket = function (id) {
+        this.addSuccessNotification('Removed ' + id + ' in your basket!');
+    };
+    NotificationService.prototype.onFeatureNotAvailableYet = function () {
+        this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     };
     return NotificationService;
 }());
 NotificationService = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [ToastrService])
+    __metadata("design:paramtypes", [ToastrService, ToastrConfig])
 ], NotificationService);
 export { NotificationService };
 //# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/shared/notification/service/notification.service.js.map

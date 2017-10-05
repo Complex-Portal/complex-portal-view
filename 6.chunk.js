@@ -51,10 +51,10 @@ var BasketComponent = (function () {
     function BasketComponent(_basketService, titleService) {
         this._basketService = _basketService;
         this.titleService = titleService;
+        this._complexBasket = this._basketService.complexBasket;
     }
     BasketComponent.prototype.ngOnInit = function () {
         this.titleService.setTitle('Complex Portal - Basket');
-        this._complexBasket = this._basketService.complexBasket;
     };
     BasketComponent.prototype.ngAfterViewInit = function () {
         __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();

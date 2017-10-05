@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Input } from '@angular/core';
 import { GoogleAnalyticsService } from '../../../shared/google-analytics/service/google-analytics.service';
 import { Router } from '@angular/router';
-import { Category } from '../../../shared/google-analytics/category.enum';
+import { Category } from '../../../shared/google-analytics/types/category.enum';
 import { environment } from '../../../../environments/environment';
 import { ComplexOrganisms } from '../../shared/model/complex-organism/complex-organism.model';
 var ComplexOrganismComponent = (function () {
@@ -19,7 +19,6 @@ var ComplexOrganismComponent = (function () {
         this.googleAnalyticsService = googleAnalyticsService;
     }
     ComplexOrganismComponent.prototype.ngOnInit = function () {
-        this._organism.name;
     };
     ComplexOrganismComponent.prototype.search = function (specieName) {
         this.googleAnalyticsService.fireSearchTermEvent(Category.organisms, specieName);

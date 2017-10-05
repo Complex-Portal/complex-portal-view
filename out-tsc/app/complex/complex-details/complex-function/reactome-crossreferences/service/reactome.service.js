@@ -8,32 +8,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { environment } from '../../../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environment';
 var baseURL = environment.reactome_base_url;
 var ReactomeService = (function () {
     function ReactomeService(http) {
         this.http = http;
     }
+    /**
+     * Returns all related pathways for a given complex stable identifier
+     * @param id - a reactome stable identifier
+     * @returns {Observable<R|T>}
+     */
     ReactomeService.prototype.findRelatedPathways = function (id) {
         return this.http.get(baseURL + '/ContentService/data/pathways/low/entity/' + id)
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
+    /**
+     * Returns the name of a complex by a given complex stable identifier
+     * @param id - a complex stable identifier
+     * @returns {Observable<R|T>}
+     */
     ReactomeService.prototype.getComplexName = function (id) {
         return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName')
             .map(function (res) { return res.text(); }).catch(this.handleError);
     };
     ReactomeService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        console.log(error);
-        var errMsg = (error.message) ? error.message :
-            error.status ? error.status + " - " + error.statusText : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
+        if (error instanceof Response) {
+            return Observable.throw(error);
+        }
+        else {
+            console.error(error.message ? error.message : error.toString());
+        }
     };
     return ReactomeService;
 }());
@@ -42,4 +51,4 @@ ReactomeService = __decorate([
     __metadata("design:paramtypes", [Http])
 ], ReactomeService);
 export { ReactomeService };
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service.js.map
+//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.js.map

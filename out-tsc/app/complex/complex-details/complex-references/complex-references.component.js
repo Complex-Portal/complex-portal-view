@@ -12,6 +12,9 @@ var ComplexReferencesComponent = (function () {
     function ComplexReferencesComponent() {
     }
     ComplexReferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    ComplexReferencesComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;

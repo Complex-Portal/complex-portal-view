@@ -12,6 +12,14 @@ var ComplexDiseaseComponent = (function () {
     function ComplexDiseaseComponent() {
     }
     ComplexDiseaseComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: We shouldn't go through all XRefs on the client. The CP model should be adapted.
+     *
+     * Finding all efo and ChEMBL XRefs
+     */
+    ComplexDiseaseComponent.prototype.findXRefs = function () {
         for (var i = 0; i < this._crossReferences.length; i++) {
             var crossRef = this._crossReferences[i];
             var database = this._crossReferences[i].database;
