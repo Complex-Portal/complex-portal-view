@@ -30,6 +30,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
               private googleAnalyticsService: GoogleAnalyticsService, private complexPortalService: ComplexPortalService,
               private sectionService: SectionService, private titleService: Title) {
 
+    // This is to calculate the EBI menu bar into the scrolling
     PageScrollConfig.defaultScrollOffset = 50;
     this.checkIfGPAIsDefined();
   }
