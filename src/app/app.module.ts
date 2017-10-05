@@ -25,7 +25,7 @@ import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.co
 import {DataContentComponent} from './documentation/data-content/data-content.component';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
-import {LocalStorageService} from './shared/local-storage/local-storage.service';
+import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
 import {SearchService} from './search/service/search.service';
 
 @NgModule({
