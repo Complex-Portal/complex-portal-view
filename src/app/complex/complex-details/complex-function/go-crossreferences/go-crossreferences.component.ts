@@ -15,10 +15,10 @@ export class GoCrossreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.findGoXRefs();
+    this.findXRefs();
   }
 
-  private findGoXRefs() {
+  private findXRefs() {
     for (let i = 0; i < this.crossReferences.length; i++) {
       const crossRef = this.crossReferences[i];
       const qualifier = this.crossReferences[i].qualifier;
