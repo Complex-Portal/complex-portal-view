@@ -19,11 +19,11 @@ export class ComplexExpressionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.prepareGXAQueries();
-    this.prepareGoCellularXRefs();
+    this.findXRefs();
+    this.findGXAQueryies();
   }
 
-  private prepareGoCellularXRefs() {
+  private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;
@@ -38,7 +38,7 @@ export class ComplexExpressionComponent implements OnInit {
     }
   }
 
-  private prepareGXAQueries() {
+  private findGXAQueryies() {
     for (let i = 0; i < this._participants.length; i++) {
       if (this._participants[i].interactorType === 'protein') {
         if (this._gxaParamsQueries === undefined) {
