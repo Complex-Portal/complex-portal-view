@@ -1,9 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-
 import LiteMol from 'litemol';
 import {environment} from '../../../../../../environments/environment';
 import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
-import {Category} from '../../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../../shared/google-analytics/types/category.enum';
 
 const baseURL = environment.pdb_base_url;
 
