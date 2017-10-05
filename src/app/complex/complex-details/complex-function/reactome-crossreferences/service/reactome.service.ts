@@ -33,7 +33,7 @@ export class ReactomeService {
       .map((res: Response) => res.text()).catch(this.handleError);
   }
 
-  private handleError (error: Response | any) : Observable<any> {
+  private handleError(error: Response | any): Observable<any> {
     if (error instanceof Response) {
       return Observable.throw(error);
     } else {
