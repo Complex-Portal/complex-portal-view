@@ -1,4 +1,5 @@
 export enum Category {
+  reactome,
   ols_orphanet,
   ols_efo,
   complexportal_details,
