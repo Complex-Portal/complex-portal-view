@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Category} from '../../../shared/google-analytics/category.enum';
+import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {environment} from '../../../../environments/environment';
 import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-organism.model';
 
@@ -11,13 +11,12 @@ import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-orga
   styleUrls: ['./complex-organism.component.css']
 })
 export class ComplexOrganismComponent implements OnInit {
-  private _organism : ComplexOrganisms;
+  private _organism: ComplexOrganisms;
 
   constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
-    this._organism.name
   }
 
   search(specieName: string) {
