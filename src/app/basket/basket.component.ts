@@ -13,12 +13,11 @@ export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
 
   constructor(private _basketService: BasketService, private titleService: Title) {
-
+    this._complexBasket = this._basketService.complexBasket;
   }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Basket');
-    this._complexBasket = this._basketService.complexBasket;
   }
 
   ngAfterViewInit(): void {
