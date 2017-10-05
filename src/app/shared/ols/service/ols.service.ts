@@ -34,7 +34,6 @@ export class OlsService {
       .map((response: Response) => response).catch(this.handleError);
   }
 
-
   private handleError(error: Response | any): Observable<any> {
     if (error instanceof Response) {
       return Observable.throw(error);
