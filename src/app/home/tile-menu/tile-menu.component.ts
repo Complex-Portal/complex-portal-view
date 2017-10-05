@@ -18,7 +18,7 @@ export class TileMenuComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //Necessary for layout of tiles (equal size, etc.)
+    // Necessary for layout of tiles (equal size, etc.)
     $('cp-tile-menu').foundation();
   }
 
