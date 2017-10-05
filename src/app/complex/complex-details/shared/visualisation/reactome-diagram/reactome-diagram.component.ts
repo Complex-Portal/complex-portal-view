@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
-import {Category} from '../../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../../shared/google-analytics/types/category.enum';
 import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
 
 const baseURL = environment.reactome_base_url;
@@ -51,6 +51,18 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     }
   }
 
+  @HostListener('window:onReactomeDiagramReady', ['$event'])
+  onReactomeDiagramReadyListener(event) {
+    this.diagramContext = event.detail;
+    this.initReactomeDiagram();
+  }
+
+  @HostListener('window:resize', ['$event.target'])
+  onResize(): void {
+    this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+    this.selectComplex(this.selectedComplex);
+  }
+
   private loadScript(): void {
     const node = document.createElement('script');
     node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
@@ -58,12 +70,6 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     node.async = true;
     node.charset = 'utf-8';
     document.getElementsByTagName('head')[0].appendChild(node);
-  }
-
-  @HostListener('window:onReactomeDiagramReady', ['$event'])
-  onReactomeDiagramReadyListener(event) {
-    this.diagramContext = event.detail;
-    this.initReactomeDiagram();
   }
 
   public initReactomeDiagram(): void {
@@ -76,13 +82,6 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.loadDiagram();
 
   }
-
-  @HostListener('window:resize', ['$event.target'])
-  onResize(): void {
-    this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
-    this.selectComplex(this.selectedComplex);
-  }
-
 
   private loadDiagram(): void {
     const context = this;
