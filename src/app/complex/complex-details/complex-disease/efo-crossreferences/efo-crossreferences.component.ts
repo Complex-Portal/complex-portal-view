@@ -3,7 +3,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 import {OlsService} from '../../../../shared/ols/service/ols.service';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
-import {Category} from '../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../shared/google-analytics/types/category.enum';
 
 @Component({
   selector: 'cp-efo-crossreferences',
@@ -14,17 +14,18 @@ export class EfoCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _displayedElements = 5;
 
-  constructor(private olsService: OlsService, private notificationService: NotificationService, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private olsService: OlsService, private notificationService: NotificationService,
+              private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
-    this.findEfoXRefs();
+    this.findXRefs();
   }
 
   /**
    * The OLS WS provides us some description to the found EFO and Orphanet XRefs.
    */
-  private findEfoXRefs() {
+  private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       if (this.crossReferences[i].identifier.split(':')[0] === 'EFO') {
         this.olsService.getEfoName(this.crossReferences[i].identifier).subscribe(
