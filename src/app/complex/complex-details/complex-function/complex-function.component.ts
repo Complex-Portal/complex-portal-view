@@ -23,6 +23,10 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.findXRefs();
+  }
+
+  private findXRefs() {
     for (let i = 0; i < this.crossReferences.length; i++) {
       const crossRef = this.crossReferences[i];
       const database = this.crossReferences[i].database;
