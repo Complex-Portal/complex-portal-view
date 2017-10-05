@@ -11,8 +11,6 @@ import {SectionService} from '../service/section/section.service';
 import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
-import {Action} from '../../../../shared/google-analytics/action.enum';
-import {Category} from '../../../../shared/google-analytics/category.enum';
 
 declare const $: any;
 
@@ -55,6 +53,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
+    //Important to apply foundation
     $('.goToMenu').foundation();
   }
 
