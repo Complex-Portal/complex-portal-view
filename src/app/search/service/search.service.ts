@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Category} from '../../shared/google-analytics/category.enum';
+import {Category} from '../../shared/google-analytics/types/category.enum';
 
 @Injectable()
 export class SearchService {
