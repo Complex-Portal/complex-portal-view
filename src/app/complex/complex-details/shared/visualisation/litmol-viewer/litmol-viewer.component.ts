@@ -45,7 +45,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
     this.loadMolecule();
   }
 
-  loadMolecule(): void {
+  private loadMolecule(): void {
     this.plugin.clear();
     this._plugin.loadMolecule({
       id: this._selectedXRef,
@@ -55,7 +55,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
     this._hasInteracted = false;
   }
 
-  interactedWithViewer(): void {
+  public interactedWithViewer(): void {
     if (!this._hasInteracted) {
       this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer_Interaction, this._selectedXRef);
       this._hasInteracted = true;
