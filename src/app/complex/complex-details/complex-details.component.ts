@@ -9,7 +9,7 @@ import {SectionService} from './shared/service/section/section.service';
 import {PageScrollConfig} from 'ng2-page-scroll';
 import {Title} from '@angular/platform-browser';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
-import {Category} from '../../shared/google-analytics/category.enum';
+import {Category} from '../../shared/google-analytics/types/category.enum';
 
 declare const expressionAtlasHeatmapHighcharts: any;
 
@@ -31,13 +31,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
               private sectionService: SectionService, private titleService: Title) {
 
     PageScrollConfig.defaultScrollOffset = 50;
-
-    //TODO Not needed when we properly use the gxa node module and not use the backed version.
-    if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
-      this._gxa = expressionAtlasHeatmapHighcharts;
-    } else {
-      this._gxa = null;
-    }
+    this.checkIfGPAIsDefined();
   }
 
   ngOnInit(): void {
@@ -46,27 +40,11 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(params => {
         this.query = params['id'];
         this.titleService.setTitle('Complex Portal - ' + this.query);
-
-        this.complexPortalService.getComplex(this._query).subscribe(
-          complexDetails => this.complexDetails = complexDetails,
-          error => {
-            this.notificationService.onAPIRequestError('Complex Portal');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
-            this.router.navigate(['home'])
-          }
-        );
-        this.complexPortalService.getComplexMIJSON(this._query).subscribe(
-          complexMIJSON => this.complexMIJSON = complexMIJSON,
-          error => {
-            this.notificationService.onAPIRequestError('Complex Portal');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
-            this.router.navigate(['home'])
-          }
-        );
+        this.requestComplex();
+        this.requestComplexMIJSON();
         document.body.scrollTop = 0;
       });
   }
-
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
@@ -76,6 +54,37 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     this._callSubscription.unsubscribe();
     this.sectionService.reset();
+  }
+
+  private checkIfGPAIsDefined() {
+    // TODO: Not needed when we properly use the gxa node module and not use the backed version.
+    if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+      this._gxa = expressionAtlasHeatmapHighcharts;
+    } else {
+      this._gxa = null;
+    }
+  }
+
+  private requestComplex() {
+    this.complexPortalService.getComplex(this._query).subscribe(
+      complexDetails => this.complexDetails = complexDetails,
+      error => {
+        this.notificationService.onAPIRequestError('Complex Portal');
+        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+        this.router.navigate(['home'])
+      }
+    );
+  }
+
+  private requestComplexMIJSON() {
+    this.complexPortalService.getComplexMIJSON(this._query).subscribe(
+      complexMIJSON => this.complexMIJSON = complexMIJSON,
+      error => {
+        this.notificationService.onAPIRequestError('Complex Portal');
+        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
+        this.router.navigate(['home'])
+      }
+    );
   }
 
   get complexDetails(): ComplexDetails {
