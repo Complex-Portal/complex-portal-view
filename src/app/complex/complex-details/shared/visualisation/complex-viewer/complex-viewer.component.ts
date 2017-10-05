@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NotificationService} from '../../../../../shared/notification/service/notification.service';
 import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
-import {Category} from '../../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../../shared/google-analytics/types/category.enum';
+
 let xlv: any;
 const SvgSaver = require('svgsaver');
 const xiNET = require('expose-loader?xiNET!complexviewer');
@@ -19,7 +19,7 @@ export class ComplexViewerComponent implements AfterViewInit {
   private _svgsaver: any;
   private _hasInteracted: boolean;
 
-  constructor(private notificationService: NotificationService, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
     this._svgsaver = new SvgSaver();
     this._hasInteracted = false;
   }
