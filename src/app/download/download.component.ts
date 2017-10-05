@@ -3,7 +3,7 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
 import {environment} from '../../environments/environment';
 import {GoogleAnalyticsService} from '../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Category} from '../shared/google-analytics/category.enum';
+import {Category} from '../shared/google-analytics/types/category.enum';
 import {Title} from '@angular/platform-browser';
 
 @Component({
