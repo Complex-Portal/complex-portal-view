@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
-import {Category} from '../../../../shared/google-analytics/category.enum';
+import {Category} from '../../../../shared/google-analytics/types/category.enum';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 
 @Component({
