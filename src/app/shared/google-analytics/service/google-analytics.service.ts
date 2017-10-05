@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Angulartics2} from 'angulartics2';
-import {Category} from '../category.enum';
-import {Action} from '../action.enum';
-import {Label} from '../label.enum';
+import {Category} from '../types/category.enum';
+import {Action} from '../types/action.enum';
 
 @Injectable()
 export class GoogleAnalyticsService {
