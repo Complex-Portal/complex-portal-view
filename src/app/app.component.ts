@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {BasketService} from './shared/basket/service/basket.service';
+import {Angulartics2GoogleAnalytics} from 'angulartics2';
 
 declare const $: any;
 declare const ga: any;
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _EBI_BASE_URL = environment.ebi_base_url;
   private _onChangeInBasket: boolean;
 
-  constructor(private router: Router, private basketService: BasketService) {
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router, private basketService: BasketService) {
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
@@ -39,7 +40,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.initialiseFoundation();
     this.initialiseGoogleAnalytics();
     this.initialiseFoundationHacks();
-    // ProgressBarComponent.hide();
   }
 
   // Candidate for utils.

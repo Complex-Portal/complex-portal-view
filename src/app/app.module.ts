@@ -44,7 +44,7 @@ import {SearchService} from './search/service/search.service';
     HttpModule,
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     MdProgressBarModule,
     NoopAnimationsModule,
   ],
