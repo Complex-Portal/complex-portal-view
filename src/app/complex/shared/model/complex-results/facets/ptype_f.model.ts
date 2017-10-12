@@ -2,7 +2,7 @@ import {Facet} from './facet.model';
 /**
  * Created by mkoch on 31/10/2016.
  */
-export class InteractorTyoe implements Facet {
+export class InteractorTypeFacet implements Facet {
   private _name: string;
   private _count: number;
 

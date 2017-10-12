@@ -1,6 +1,6 @@
 import {Facet} from './facet.model';
 
-export class BiologicalRole implements Facet {
+export class BiologicalRoleFacet implements Facet {
   private _name: string;
   private _count: number;
 

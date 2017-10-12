@@ -2,11 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
-interface GXAQueryParams {
-  value: string;
-  category: string;
-}
-
 @Component({
   selector: 'cp-complex-expression',
   templateUrl: './complex-expression.component.html',
@@ -24,15 +19,11 @@ export class ComplexExpressionComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (let i = 0; i < this._participants.length; i++) {
-      if (this._participants[i].interactorType === 'protein') {
-        if (this._gxaParamsQueries === undefined) {
-          this.gxaParamsQueries = this._participants[i].identifier;
-        } else {
-          this.gxaParamsQueries += ' ' + this._participants[i].identifier;
-        }
-      }
-    }
+    this.findXRefs();
+    this.findGXAQueryies();
+  }
+
+  private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;
@@ -43,6 +34,18 @@ export class ComplexExpressionComponent implements OnInit {
           this.goCellularXRefs = [];
         }
         this.goCellularXRefs.push(crossRef);
+      }
+    }
+  }
+
+  private findGXAQueryies() {
+    for (let i = 0; i < this._participants.length; i++) {
+      if (this._participants[i].interactorType === 'protein') {
+        if (this._gxaParamsQueries === undefined) {
+          this.gxaParamsQueries = this._participants[i].identifier;
+        } else {
+          this.gxaParamsQueries += ' ' + this._participants[i].identifier;
+        }
       }
     }
   }

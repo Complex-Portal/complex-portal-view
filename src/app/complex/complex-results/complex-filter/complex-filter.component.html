@@ -53,12 +53,12 @@
           <div [ngSwitch]="isSelected(facet.name, interactorTypeFilter)">
             <div *ngSwitchCase="true">
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTyoeFilter(filter.value, filter.checked)" checked> {{facet.name}}
+                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)" checked> {{facet.name}}
               ({{facet.count}})
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTyoeFilter(filter.value, filter.checked)"> {{facet.name}}
+                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)"> {{facet.name}}
               ({{facet.count}})
             </div>
           </div>

@@ -34,6 +34,9 @@ export class GxaHeatmapComponent implements OnInit {
       case 'Caenorhabditis elegans; 6239':
         this._experimentId = 'E-MTAB-2812';
         break;
+      case 'Sus scrofa (Pig); 9823':
+        this._experimentId = 'E-MTAB-5895';
+        break;
       default:
         this._isLoaded = false;
     }

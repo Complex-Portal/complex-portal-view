@@ -4,6 +4,7 @@ import {ComplexSearchResult} from '../shared/model/complex-results/complex-searc
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
+import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./complex-results.component.css']
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  private _query;
+  private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
@@ -22,60 +23,83 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-              private complexPortalService: ComplexPortalService, private titleService: Title) {
+              private complexPortalService: ComplexPortalService, private titleService: Title,
+              private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
+
     this.route
       .queryParams
       .subscribe(queryParams => {
-        this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
-        this._spicesFilter = queryParams['species'] ? queryParams['species'] : [];
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'] : [];
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'] : [];
+        this._query = queryParams['query'];
+        this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
         this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        // TODO This is out for now, but CP-84 should fix that!!
+        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-        this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
-          this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
-          this.complexSearch = complexSearch;
-          if (this.complexSearch.totalNumberOfResults !== 0) {
-            this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
-          }
-          ProgressBarComponent.hide();
-        });
+        this.requestComplexResults();
         document.body.scrollTop = 0;
       });
   }
 
   ngAfterViewInit(): void {
-    // ProgressBarComponent.hide();
   }
 
+  private requestComplexResults() {
+    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
+      this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
+      this.complexSearch = complexSearch;
+      if (this.complexSearch.totalNumberOfResults !== 0) {
+        this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+      }
+      ProgressBarComponent.hide();
+    });
+  }
+
+  /**
+   * Prepare query params to build new URL after filter or pagination has changed
+   */
   private reloadPage(): void {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
     queryParams['page'] = this._currentPageIndex;
-    this.prepareFiltersForParams(queryParams);
+    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
+      queryParams['species'] = this.prepareFiltersForParams(this.spicesFilter);
+    }
+    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
+      queryParams['bioRole'] = this.prepareFiltersForParams(this._bioRoleFilter);
+    }
+    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
+      queryParams['interactorType'] = this.prepareFiltersForParams(this._interactorTypeFilter);
+    }
     this.router.navigate([], {
       queryParams
     });
+
     ProgressBarComponent.hide();
-  }
 
-  private prepareFiltersForParams(queryParams: NavigationExtras): void {
-    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
-      queryParams['species'] = this._spicesFilter;
-    }
-    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
-      queryParams['bioRole'] = this._bioRoleFilter;
-    }
-    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
-      queryParams['interactorType'] = this._interactorTypeFilter;
+    // This is a test case event for GA, to monitor if users ever use more then one filter.
+    const filterCount = this.getFilterCount();
+    if (1 < filterCount) {
+      this.googleAnalyticsService.fireMultiFilterEvent(filterCount.toString());
     }
   }
 
+  private prepareFiltersForParams(filter: string[]): string {
+    return filter.toString().replace(/,/g, '+');
+  }
+
+  private getFilterCount(): number {
+    return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
+  }
+
+  /**
+   *
+   * @param pageIndex new page index after hitting the paginator to update the URL and reload content
+   */
   public onPageChange(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
     this.reloadPage();
@@ -107,7 +131,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  get query() {
+  get query(): string {
     return this._query;
   }
 

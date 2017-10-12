@@ -8,9 +8,10 @@ import {NotificationService} from '../../shared/notification/service/notificatio
 import {SectionService} from './shared/service/section/section.service';
 import {PageScrollConfig} from 'ng2-page-scroll';
 import {Title} from '@angular/platform-browser';
+import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {Category} from '../../shared/google-analytics/types/category.enum';
 
 declare const expressionAtlasHeatmapHighcharts: any;
-declare const $: any;
 
 @Component({
   selector: 'cp-complex-details',
@@ -26,14 +27,12 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _gxa;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
-              private complexPortalService: ComplexPortalService, private sectionService: SectionService, private titleService: Title) {
-    PageScrollConfig.defaultScrollOffset = 50;
+              private googleAnalyticsService: GoogleAnalyticsService, private complexPortalService: ComplexPortalService,
+              private sectionService: SectionService, private titleService: Title) {
 
-    if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
-      this._gxa = expressionAtlasHeatmapHighcharts;
-    } else {
-      this._gxa = null;
-    }
+    // This is to calculate the EBI menu bar into the scrolling
+    PageScrollConfig.defaultScrollOffset = 50;
+    this.checkIfGPAIsDefined();
   }
 
   ngOnInit(): void {
@@ -42,24 +41,11 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(params => {
         this.query = params['id'];
         this.titleService.setTitle('Complex Portal - ' + this.query);
-        this.complexPortalService.getComplex(this._query).subscribe(
-          complexDetails => this.complexDetails = complexDetails,
-          error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-              'Please try again later or contact us!');
-          }
-        );
-        this.complexPortalService.getComplexMIJSON(this._query).subscribe(
-          complexMIJSON => this.complexMIJSON = complexMIJSON,
-          error => {
-            this.notificationService.addErrorNotification('We couldn\'t reach the Complex Portal Webservice. ' +
-              'Please try again later or contact us!');
-          }
-        );
+        this.requestComplex();
+        this.requestComplexMIJSON();
         document.body.scrollTop = 0;
       });
   }
-
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
@@ -69,6 +55,37 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     this._callSubscription.unsubscribe();
     this.sectionService.reset();
+  }
+
+  private checkIfGPAIsDefined() {
+    // TODO: Not needed when we properly use the gxa node module and not use the backed version.
+    if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+      this._gxa = expressionAtlasHeatmapHighcharts;
+    } else {
+      this._gxa = null;
+    }
+  }
+
+  private requestComplex() {
+    this.complexPortalService.getComplex(this._query).subscribe(
+      complexDetails => this.complexDetails = complexDetails,
+      error => {
+        this.notificationService.onAPIRequestError('Complex Portal');
+        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+        this.router.navigate(['home'])
+      }
+    );
+  }
+
+  private requestComplexMIJSON() {
+    this.complexPortalService.getComplexMIJSON(this._query).subscribe(
+      complexMIJSON => this.complexMIJSON = complexMIJSON,
+      error => {
+        this.notificationService.onAPIRequestError('Complex Portal');
+        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
+        this.router.navigate(['home'])
+      }
+    );
   }
 
   get complexDetails(): ComplexDetails {

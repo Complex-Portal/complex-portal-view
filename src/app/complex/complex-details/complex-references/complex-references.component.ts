@@ -17,7 +17,10 @@ export class ComplexReferencesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findXRefs();
+  }
 
+  private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
       const database = this._crossReferences[i].database;

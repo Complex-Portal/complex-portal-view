@@ -12,17 +12,18 @@ export class ComplexPropertiesComponent implements OnInit {
   private _pdbXRefs: CrossReference[];
   private _emdbXRefs: CrossReference[];
   private _comments: string[];
+  private _assemblies: string[];
+
 
   constructor() {
   }
 
   ngOnInit() {
-    if (this._propertiesDescription.length === 0) {
-      this._propertiesDescription = null;
-    }
-    if (this._comments.length === 0) {
-      this._comments = null;
-    }
+    this.checkFreeTextContent();
+    this.findXRefs();
+  }
+
+  private findXRefs() {
     for (let i = 0; i < this.crossReferences.length; i++) {
       const crossRef = this.crossReferences[i];
       const database = this.crossReferences[i].database;
@@ -39,6 +40,15 @@ export class ComplexPropertiesComponent implements OnInit {
         }
         this._emdbXRefs.push(crossRef);
       }
+    }
+  }
+
+  private checkFreeTextContent() {
+    if (this._propertiesDescription.length === 0) {
+      this._propertiesDescription = null;
+    }
+    if (this._comments.length === 0) {
+      this._comments = null;
     }
   }
 
@@ -84,5 +94,14 @@ export class ComplexPropertiesComponent implements OnInit {
   @Input()
   set comments(value: string[]) {
     this._comments = value;
+  }
+
+  get assemblies(): string[] {
+    return this._assemblies;
+  }
+
+  @Input()
+  set assemblies(value: string[]) {
+    this._assemblies = value;
   }
 }

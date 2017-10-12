@@ -18,6 +18,10 @@ export class TwitterDisplayComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initTwitterWidget();
+  }
+
+  private initTwitterWidget() {
     /* tslint:disable */
     window.twttr = (function (d, s, id, call) {
       let js, fjs = d.getElementsByTagName(s)[0],

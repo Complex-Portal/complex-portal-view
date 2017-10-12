@@ -1,7 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-
-import * as LiteMol from 'litemol';
+import LiteMol from 'litemol';
 import {environment} from '../../../../../../environments/environment';
+import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
+import {Category} from '../../../../../shared/google-analytics/types/category.enum';
 
 const baseURL = environment.pdb_base_url;
 
@@ -13,8 +14,10 @@ const baseURL = environment.pdb_base_url;
 export class LitmolViewerComponent implements OnInit, OnChanges {
   private _plugin: any;
   private _selectedXRef: string;
+  private _hasInteracted: boolean;
 
-  constructor() {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+    this._hasInteracted = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -26,9 +29,9 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this._plugin = LiteMol.default.Plugin.create({
+    this._plugin = LiteMol.Plugin.create({
       target: '#litemol',
-      viewportBackground: '#000000',
+      viewportBackground: '#fbfbfb',
       layoutState: {
         hideControls: true,
         isExpanded: false
@@ -42,13 +45,21 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
     this.loadMolecule();
   }
 
-  loadMolecule(): void {
+  private loadMolecule(): void {
     this.plugin.clear();
     this._plugin.loadMolecule({
       id: this._selectedXRef,
       url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
       format: 'cif' // default
     });
+    this._hasInteracted = false;
+  }
+
+  public interactedWithViewer(): void {
+    if (!this._hasInteracted) {
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.LiteMolViewer_Interaction, this._selectedXRef);
+      this._hasInteracted = true;
+    }
   }
 
   get plugin(): any {

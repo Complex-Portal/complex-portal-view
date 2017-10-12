@@ -24,18 +24,21 @@ export class OlsService {
       .map((response: Response) => response).catch(this.handleError);
   }
 
+  /**
+   * Get a name of efo xref
+   * @param id
+   * @returns {Observable<R>}
+   */
   getEfoName(id: string) {
     return this.http.get(baseURL + '/efo/terms?iri=http://www.ebi.ac.uk/efo/' + id.replace(':', '_'))
       .map((response: Response) => response).catch(this.handleError);
   }
 
-
-  private handleError(error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    const errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+  private handleError(error: Response | any): Observable<any> {
+    if (error instanceof Response) {
+      return Observable.throw(error);
+    } else {
+      console.error(error.message ? error.message : error.toString());
+    }
   }
 }

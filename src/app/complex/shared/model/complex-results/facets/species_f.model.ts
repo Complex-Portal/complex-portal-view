@@ -2,7 +2,7 @@ import {Facet} from './facet.model';
 /**
  * Created by mkoch on 31/10/2016.
  */
-export class Species implements Facet {
+export class SpeciesFacet implements Facet {
   private _name: string;
   private _count: number;
 
@@ -17,5 +17,13 @@ export class Species implements Facet {
 
   get count(): number {
     return this._count;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  set count(value: number) {
+    this._count = value;
   }
 }

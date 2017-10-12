@@ -1,15 +1,20 @@
-<div class="row no-pad-left" *ngIf="ecoXRef || intactXRefs">
-  <span class="icon icon-functional" attr.data-icon="{{flaskSymbol}}">
-    Evidence by
-    <a href="{{ecoXRef.searchURL}}"
-       target="_blank"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i
-      class="icon icon-generic small" data-icon="x"></i></a>
-    <ng-container *ngIf="intactXRefs">
-      in IntAct
-      <ng-container *ngFor="let crossReference of intactXRefs;let isLast=last">
-        <a href="{{crossReference.searchURL}}" target="_blank"> {{crossReference.identifier}} <i
-          class="icon icon-generic small" data-icon="x"></i></a>{{isLast ? '' : ', '}}
+<div class="row" *ngIf="ecoXRef || intactXRefs">
+  <div class="columns medium-6 medium-push-6">
+    <div class="columns medium-10">
+      Evidence by
+      <a href="{{ecoXRef.searchURL}}"
+         target="_blank"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i
+        class="icon icon-generic small" data-icon="x"></i></a>
+      <ng-container *ngIf="intactXRefs">
+        in IntAct
+        <ng-container *ngFor="let crossReference of intactXRefs;let isLast=last">
+          <a href="{{crossReference.searchURL}}" target="_blank"> {{crossReference.identifier}} <i
+            class="icon icon-generic small" data-icon="x"></i></a>{{isLast ? '' : ', '}}
+        </ng-container>
       </ng-container>
-    </ng-container>
-  </span>
+    </div>
+    <div class="column medium-2 padding-left-xsmall">
+      <h3 *ngIf="flaskSymbol" class="icon icon-functional float-left" attr.data-icon="{{flaskSymbol}}"></h3>
+    </div>
+  </div>
 </div>

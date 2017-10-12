@@ -10,10 +10,10 @@
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">
-            <cp-complex-participants *ngIf="complexDetails"
-                                     [participants]="complexDetails.participants"
-                                     [complexAC]="complexDetails.ac"
-                                     [complexMIJSON]="complexMIJSON"></cp-complex-participants>
+          <cp-complex-participants *ngIf="complexDetails"
+                                   [participants]="complexDetails.participants"
+                                   [complexAC]="complexDetails.ac"
+                                   [complexMIJSON]="complexMIJSON"></cp-complex-participants>
         </div>
         <div id="function" class="columns medium-12 " style="margin-bottom: 30px">
           <cp-complex-function *ngIf="complexDetails;"
@@ -27,7 +27,8 @@
           <cp-complex-properties *ngIf="complexDetails;"
                                  [propertiesDescription]="complexDetails.properties"
                                  [comments]="complexDetails.comments"
-                                 [crossReferences]="complexDetails.crossReferences"></cp-complex-properties>
+                                 [crossReferences]="complexDetails.crossReferences"
+                                 [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
         </div>
         <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
           <cp-complex-expression *ngIf="complexDetails && gxa;"

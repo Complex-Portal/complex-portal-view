@@ -1,30 +1,26 @@
 <div class="row">
   <div class="columns medium-12 callout">
-    <div class="columns medium-10 no-pad-left">
+    <div class="columns medium-12 no-pad-left float-left">
       <h2>{{complexName}}</h2>
       <h3><i>{{complexSpecies}}</i></h3>
     </div>
-    <div class="columns medium-2">
-      <div class="columns medium-12">
-        <div class="columns medium-6">
-          <a href="{{jsonURL}}" target="_blank"><h3 class="icon icon-fileformats hover" data-icon="J"></h3></a>
+    <div class="columns medium-4  float-left">
+      <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
+           data-equalize-on="medium" id="large-button-grid">
+        <div class="columns small-12 medium-6 no-pad-left">
+          <a class="button primary expanded" data-equalizer-watch data-open="downloadModal">
+            <span class="icon icon-functional " data-icon="="> Download</span></a>
         </div>
-        <div class="columns medium-6">
-          <a (click)="saveComplex()"><h3 class="icon icon-generic hover" style="color: black" data-icon="b"></h3></a>
-        </div>
-      </div>
-      <div class="columns medium-12">
-        <div class="columns medium-6">
-
-        </div>
-        <div class="columns medium-6">
-
+        <div class="columns small-12 medium-6 no-pad-left">
+          <a class="button primary expanded" data-equalizer-watch (click)="saveComplex()"
+             [ngClass]="{'disabled': isInBasket()}"><span class="icon icon-generic medium "
+                                                          data-icon="b"> Basket</span></a>
         </div>
       </div>
     </div>
-    <div class="columns medium-12">
+    <div class="columns medium-8  float-right">
       <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
     </div>
+    <cp-download-modal [complexAC]="complexAC"></cp-download-modal>
   </div>
-
 </div>

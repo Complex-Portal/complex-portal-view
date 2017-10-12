@@ -16,8 +16,12 @@ export class PdbCrossreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._selectedXRef = this._crossReferences[0].identifier;
-    if (this._selectedXRef) {
+    this.selectFirstXref();
+  }
+
+  private selectFirstXref() {
+    if (this._crossReferences[0].identifier) {
+      this._selectedXRef = this._crossReferences[0].identifier;
       this._isDataLoaded = true;
     }
   }

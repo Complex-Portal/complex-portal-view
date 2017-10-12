@@ -10,7 +10,7 @@ import {rootRouterConfig} from './app.routes';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
-import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/shared/service/reactome.service';
+import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {OlsService} from './shared/ols/service/ols.service';
 import {BasketService} from './shared/basket/service/basket.service';
@@ -24,7 +24,9 @@ import {DocumentationComponent} from './documentation/documentation.component';
 import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
 import {DataContentComponent} from './documentation/data-content/data-content.component';
 import {OntologiesComponent} from './ontologies/ontologies.component';
-import {GoogleAnalyticsService} from './shared/google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
+import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
+import {SearchService} from './search/service/search.service';
 
 @NgModule({
   declarations: [
@@ -42,11 +44,11 @@ import {GoogleAnalyticsService} from './shared/google-analytics/google-analytics
     HttpModule,
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     MdProgressBarModule,
     NoopAnimationsModule,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, Md5, GoogleAnalyticsService],
+  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

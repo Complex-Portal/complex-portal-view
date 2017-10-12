@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GoogleAnalyticsService} from '../../../shared/google-analytics/google-analytics.service';
+import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 import {Router} from '@angular/router';
-import {Action} from '../../../shared/google-analytics/action.enum';
-import {Category} from '../../../shared/google-analytics/category.enum';
-import {NotificationService} from '../../../shared/notification/service/notification.service';
+import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {environment} from '../../../../environments/environment';
+import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-organism.model';
 
 @Component({
   selector: 'cp-complex-organism',
@@ -12,96 +11,41 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./complex-organism.component.css']
 })
 export class ComplexOrganismComponent implements OnInit {
-  private _name: string;
-  private _symbol: string;
-  private _count: string;
-  private _psi25: string;
-  private _psi30: string;
-  private _complextab: string;
+  private _organism: ComplexOrganisms;
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService, private notificationService: NotificationService) {
+  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
   }
 
   search(specieName: string) {
-    this.ga.invokeCustomEvent(Action.search, Category.organisms, specieName);
-    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: [specieName], page: 1}});
-
+    this.googleAnalyticsService.fireSearchTermEvent(Category.organisms, specieName);
+    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: specieName, page: 1}});
   }
 
-  featureNotAvailableYet() {
-    this.notificationService.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
-  }
-
-  get name(): string {
-    return this._name;
+  get organism(): ComplexOrganisms {
+    return this._organism;
   }
 
   @Input()
-  set name(value: string) {
-    this._name = value;
-  }
-
-  get symbol(): string {
-    return this._symbol;
-  }
-
-  @Input()
-  set symbol(value: string) {
-    this._symbol = value;
-  }
-
-  get count(): string {
-    return this._count;
-  }
-
-  @Input()
-  set count(value: string) {
-    this._count = value;
-  }
-
-  get psi25(): string {
-    return this._psi25;
-  }
-
-  @Input()
-  set psi25(value: string) {
-    this._psi25 = value;
-  }
-
-  get psi30(): string {
-    return this._psi30;
-  }
-
-  @Input()
-  set psi30(value: string) {
-    this._psi30 = value;
-  }
-
-  get complextab(): string {
-    return this._complextab;
-  }
-
-  @Input()
-  set complextab(value: string) {
-    this._complextab = value;
+  set organism(value: ComplexOrganisms) {
+    this._organism = value;
   }
 
   goToComplexPSI25(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML25');
-    window.open(environment.complex_psi25 + this.psi25, '_blank');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML25');
+    window.open(environment.complex_psi25 + this.organism.psi25, '_blank');
   }
 
   goToComplexPSI30(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.download, 'PSIXML30');
-    window.open(environment.complex_psi30 + this.psi30, '_blank');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML30');
+    window.open(environment.complex_psi30 + this.organism.psi30, '_blank');
   }
 
   goToComplexTAB(): void {
-    this.ga.invokeCustomEvent(Action.download, Category.organisms, 'ComplexTAB');
-    window.open(environment.complex_tab + this.complextab + '.tsv', '_blank');
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'ComplexTAB');
+    window.open(environment.complex_tab + this.organism.complextab + '.tsv', '_blank');
   }
 
 }

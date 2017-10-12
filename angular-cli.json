@@ -22,7 +22,7 @@
         "styles.css",
         "../node_modules/ngx-toastr/toastr.css",
         "../src/assets/styles/scss/material.scss",
-        "../node_modules/mi-chord/public/css/circle.css"
+        "../node_modules/animate.css/animate.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery",

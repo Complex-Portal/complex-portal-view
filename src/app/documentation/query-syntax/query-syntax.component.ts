@@ -13,6 +13,5 @@ export class QuerySyntaxComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Query Syntax');
-
   }
 }

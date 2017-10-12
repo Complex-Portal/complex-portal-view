@@ -10,7 +10,8 @@ import {
   ViewChild
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
-import {ReactomeService} from '../../../complex-function/reactome-crossreferences/shared/service/reactome.service';
+import {Category} from '../../../../../shared/google-analytics/types/category.enum';
+import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
 
 const baseURL = environment.reactome_base_url;
 
@@ -27,15 +28,17 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _reactomePathways = {};
   private _selectedComplex: string;
   private _selectedPathway: string;
+  private _hasInteracted: boolean;
   @ViewChild('diagramHolder') diagramHolder;
   @Output() onLoaded = new EventEmitter<boolean>();
 
 
-  constructor(private reactomeService: ReactomeService) {
+  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
     this.loadScript();
+    this._hasInteracted = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,6 +51,18 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     }
   }
 
+  @HostListener('window:onReactomeDiagramReady', ['$event'])
+  onReactomeDiagramReadyListener(event) {
+    this.diagramContext = event.detail;
+    this.initReactomeDiagram();
+  }
+
+  @HostListener('window:resize', ['$event.target'])
+  onResize(): void {
+    this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+    this.selectComplex(this.selectedComplex);
+  }
+
   private loadScript(): void {
     const node = document.createElement('script');
     node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
@@ -55,12 +70,6 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     node.async = true;
     node.charset = 'utf-8';
     document.getElementsByTagName('head')[0].appendChild(node);
-  }
-
-  @HostListener('window:onReactomeDiagramReady', ['$event'])
-  onReactomeDiagramReadyListener(event) {
-    this.diagramContext = event.detail;
-    this.initReactomeDiagram();
   }
 
   public initReactomeDiagram(): void {
@@ -74,18 +83,16 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
 
   }
 
-  @HostListener('window:resize', ['$event.target'])
-  onResize(): void {
-    this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
-    this.selectComplex(this.selectedComplex);
-  }
-
-
   private loadDiagram(): void {
     const context = this;
     this.globelDiagram.loadDiagram(this.selectedPathway);
     this.globelDiagram.onDiagramLoaded(function (loaded) {
       context.selectComplex(context.selectedComplex);
+    });
+    this._hasInteracted = false;
+    this.globelDiagram.onObjectSelected(function (e) {
+      context.interactedWithViewer();
+      return;
     });
   }
 
@@ -95,8 +102,12 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.globelDiagram.flagItems(reactomeComplexId);
   };
 
-  public getReactomeURL(): string {
-    return baseURL + '/PathwayBrowser/#/' + this._selectedPathway + '&SEL=' + this._selectedComplex;
+
+  public interactedWithViewer(): void {
+    if (!this._hasInteracted) {
+      this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.PathwayDiagram_Interaction, this._selectedComplex);
+      this._hasInteracted = true;
+    }
   }
 
   get reactomePathways(): any {

@@ -1,12 +1,11 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {NotificationService} from './shared/notification/service/notification.service';
-import {Angulartics2GoogleAnalytics} from 'angulartics2';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {environment} from '../environments/environment';
 
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
-import {ToastrConfig} from 'ngx-toastr';
 import {BasketService} from './shared/basket/service/basket.service';
+import {Angulartics2GoogleAnalytics} from 'angulartics2';
+
 declare const $: any;
 declare const ga: any;
 
@@ -23,40 +22,24 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _environmentName: string;
   private _basketCount = 0;
   private _EBI_BASE_URL = environment.ebi_base_url;
+  private _onChangeInBasket: boolean;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router,
-              private notificationService: NotificationService, private toastrConfig: ToastrConfig, private basketService: BasketService) {
-    this.basketService.onBasketCountChanged$.subscribe(count => this._basketCount = count);
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router, private basketService: BasketService) {
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;
-    toastrConfig.closeButton = true; // displayedElements close button
-    toastrConfig.timeOut = 0; // time to live
-    this.notificationService.addAnnouncementNotification('For reporting feedback or any request, please use the ' +
-      '\'Feeback\'-button in the top bar.', this.toastrConfig);
-    this.notificationService.addAnnouncementNotification('This is a development page!', this.toastrConfig);
-    // this.basketService.initialiseBasket();
   }
 
   ngOnInit(): void {
-
-    // For every router change, we load the ProgressBar by default.
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        ProgressBarComponent.display();
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
+    this.observeRouteChange();
+    this.observeBasketChange();
   }
-
 
   ngAfterViewInit(): void {
     // Init some libs.
     this.initialiseFoundation();
     this.initialiseGoogleAnalytics();
     this.initialiseFoundationHacks();
-    // ProgressBarComponent.hide();
   }
 
   // Candidate for utils.
@@ -68,6 +51,29 @@ export class AppComponent implements OnInit, AfterViewInit {
   private initialiseGoogleAnalytics(): void {
     ga('create', environment.analytics_id, 'none');
   }
+
+  private observeRouteChange() {
+    // For every router change, we load the ProgressBar by default.
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        ProgressBarComponent.display();
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+  }
+
+  private observeBasketChange() {
+    this.basketService.onBasketCountChanged$.subscribe(count => {
+      this._basketCount = count;
+      this._onChangeInBasket = true;
+      const ctx = this;
+      setTimeout(function () {
+        ctx._onChangeInBasket = false;
+      }, 1000);
+    });
+  }
+
 
   private initialiseFoundationHacks(): void {
     // copied from script.js (ebi framework)
@@ -115,5 +121,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   get EBI_BASE_URL(): string {
     return this._EBI_BASE_URL;
+  }
+
+
+  get onChangeInBasket(): boolean {
+    return this._onChangeInBasket;
   }
 }

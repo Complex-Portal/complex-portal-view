@@ -1,15 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
+
+declare const $: any;
+
 
 @Component({
   selector: 'cp-complex-header',
   templateUrl: './complex-header.component.html',
   styleUrls: ['./complex-header.component.css']
 })
-export class ComplexHeaderComponent implements OnInit {
+export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
   private _complexAC: string;
   private _complexName: string;
@@ -17,11 +21,16 @@ export class ComplexHeaderComponent implements OnInit {
   private _crossReferences: CrossReference[];
   private _jsonURL: string;
 
-  constructor(private basketService: BasketService, private notificationService: NotificationService) {
+  constructor(private basketService: BasketService, private ga: GoogleAnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
     this._jsonURL = environment.complex_ws_base_url + '/details/' + this._complexAC;
+  }
+
+
+  ngAfterViewInit(): void {
+    $('cp-complex-header').foundation();
   }
 
   saveComplex() {
@@ -70,5 +79,9 @@ export class ComplexHeaderComponent implements OnInit {
 
   set jsonURL(value: string) {
     this._jsonURL = value;
+  }
+
+  isInBasket(): boolean {
+    return this.basketService.isInBasket(this._complexAC);
   }
 }

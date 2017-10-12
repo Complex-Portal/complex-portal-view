@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/google-analytics.service';
-import {Action} from '../../shared/google-analytics/action.enum';
-import {Category} from '../../shared/google-analytics/category.enum';
+import {Category} from '../../shared/google-analytics/types/category.enum';
+import {SearchService} from '../service/search.service';
 
 
 @Component({
@@ -15,11 +14,17 @@ export class LocalSearchComponent implements OnInit {
   private _display: boolean;
   private _query: string;
 
-  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private ga: GoogleAnalyticsService) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute,
+              private searchService: SearchService) {
 
   }
 
   ngOnInit() {
+    this.extractQueryFromURL();
+  }
+
+  private extractQueryFromURL() {
+    // Retrieve query from URL. Would be nice to have it in the service.. but time etc.
     this.router.events.subscribe((val) => {
         if (this.location.path().startsWith('/home')) {
           this._display = false;
@@ -29,7 +34,7 @@ export class LocalSearchComponent implements OnInit {
             this.route
               .queryParams
               .subscribe(queryParams => {
-                this._query = queryParams['query'] ? queryParams['query'] : console.log('Error');
+                this._query = queryParams['query'];
               });
           } else if (this.location.path().startsWith('/complex/organisms')) {
             this._query = '';
@@ -43,14 +48,8 @@ export class LocalSearchComponent implements OnInit {
     );
   }
 
-  search(query: string, type: string) {
-    if (type === 'enter') {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
-    } else {
-      this.ga.invokeCustomEvent(Action.searchInvoker, Category.header, type);
-    }
-    this.ga.invokeCustomEvent(Action.search, Category.header, query);
-    this.router.navigate(['complex/search'], {queryParams: {query: query, page: 1}});
+  search(query: string, typeOfButton: string) {
+    this.searchService.search(query, Category.header, typeOfButton)
   }
 
   get display(): boolean {
