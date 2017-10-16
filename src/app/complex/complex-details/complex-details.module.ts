@@ -31,7 +31,6 @@ import {EmdbCrossreferencesComponent} from './complex-properties/emdb-crossrefer
 import {ComplexEvidenceComponent} from './complex-evidence/complex-evidence.component';
 import {ComplexReferencesComponent} from './complex-references/complex-references.component';
 import {AssembliesComponent} from './complex-properties/assemblies/assemblies.component';
-import {GoToComponent} from './shared/go-to/go-to.component';
 import {RouterModule} from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';
 import {OlsService} from '../../shared/ols/service/ols.service';
@@ -41,8 +40,6 @@ import {ReactomeService} from './complex-function/reactome-crossreferences/servi
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {SectionService} from './shared/service/section/section.service';
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
-import {ScrollSpyModule, ScrollSpyService} from 'ngx-scrollspy';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
 
@@ -52,9 +49,7 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
       {path: '', component: ComplexDetailsComponent},
     ]),
     CommonModule,
-    ProgressSpinnerModule,
-    Ng2PageScrollModule.forRoot(),
-    ScrollSpyModule.forRoot()
+    ProgressSpinnerModule
   ],
   declarations: [
     ComplexDetailsComponent,
@@ -88,7 +83,6 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
     ComplexEvidenceComponent,
     EmdbCrossreferencesComponent,
     AssembliesComponent,
-    GoToComponent,
     ExternalResourcesComponent,
     DownloadModalComponent,
   ],
