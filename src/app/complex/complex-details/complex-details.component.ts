@@ -6,12 +6,15 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SectionService} from './shared/service/section/section.service';
-import {PageScrollConfig} from 'ng2-page-scroll';
 import {Title} from '@angular/platform-browser';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 import {Category} from '../../shared/google-analytics/types/category.enum';
+import {DOCUMENT} from '@angular/common';
+import {IntervalObservable} from 'rxjs/observable/IntervalObservable';
 
 declare const expressionAtlasHeatmapHighcharts: any;
+declare const $: any;
+declare const Foundation: any;
 
 @Component({
   selector: 'cp-complex-details',
@@ -29,9 +32,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
               private googleAnalyticsService: GoogleAnalyticsService, private complexPortalService: ComplexPortalService,
               private sectionService: SectionService, private titleService: Title) {
-
-    // This is to calculate the EBI menu bar into the scrolling
-    PageScrollConfig.defaultScrollOffset = 50;
     this.checkIfGPAIsDefined();
   }
 
@@ -43,12 +43,18 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         this.titleService.setTitle('Complex Portal - ' + this.query);
         this.requestComplex();
         this.requestComplexMIJSON();
-        document.body.scrollTop = 0;
       });
   }
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
+    $('#main-content-area').foundation();
+    // This is not pretty but necessary as foundation has to re-run once all the external widgets are loaded.
+    // Would be good to listen for events from every widget and re-run when all done.
+    IntervalObservable.create(1000).subscribe(() => {
+      $('.sticky').foundation('_calc', true);
+      $('#go-to-menu').foundation('reflow');
+    });
   }
 
 

@@ -42,6 +42,7 @@ import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/serv
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {SectionService} from './shared/service/section/section.service';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import {ScrollSpyModule, ScrollSpyService} from 'ngx-scrollspy';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
 
@@ -52,7 +53,8 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
     ]),
     CommonModule,
     ProgressSpinnerModule,
-    Ng2PageScrollModule.forRoot()
+    Ng2PageScrollModule.forRoot(),
+    ScrollSpyModule.forRoot()
   ],
   declarations: [
     ComplexDetailsComponent,

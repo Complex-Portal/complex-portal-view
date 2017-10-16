@@ -1,0 +1,18 @@
+.goToMenu a {
+    display: block;
+    padding:.2em .5em;
+    text-decoration: none;
+    border-bottom: none;
+    border-left: 2px solid white;
+}
+
+.goToMenu a:link,
+.goToMenu a:visited,
+.goToMenu a:hover,
+.goToMenu a:active {
+    color:#666;
+}
+
+.goToMenu .active {
+    border-left: 2px solid black;
+}

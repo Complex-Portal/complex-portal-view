@@ -1,57 +1,83 @@
 <section>
   <div id="main-content-area">
-    <div class="columns medium-12">
-      <div class="columns medium-12" style="margin-bottom: 30px">
+    <div class="columns medium-12" scrollSpy>
+      <div class="row columns medium-12" style="margin-bottom: 30px">
         <cp-complex-header *ngIf="complexDetails;else loadingSpinner"
                            [complexAC]="complexDetails.ac"
                            [complexName]="complexDetails.name"
                            [complexSpecies]="complexDetails.species"
                            [crossReferences]="complexDetails.crossReferences"></cp-complex-header>
       </div>
-      <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
-        <div id="participants" class="columns medium-12">
-          <cp-complex-participants *ngIf="complexDetails"
-                                   [participants]="complexDetails.participants"
-                                   [complexAC]="complexDetails.ac"
-                                   [complexMIJSON]="complexMIJSON"></cp-complex-participants>
+      <div class="row" id="main-content" >
+        <div class="columns medium-2 no-pad-left no-pad-right show-for-medium" data-sticky-container>
+          <div class="sticky" data-sticky data-top-anchor="main-content" data-margin-top="4">
+            <ul id="go-to-menu" class="goToMenu no-bullet" data-magellan>
+              <li>
+                <a href="#participants">Participants</a>
+              </li>
+              <li>
+                <a href="#function">Function</a>
+              </li>
+              <li>
+                <a href="#properties">Properties</a>
+              </li>
+              <li>
+                <a href="#expression">Expression and Cellular Location</a>
+              </li>
+              <li>
+                <a href="#disease">Diseases and Pathologies</a>
+              </li>
+              <li>
+                <a href="#references">Additional Information</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="function" class="columns medium-12 " style="margin-bottom: 30px">
-          <cp-complex-function *ngIf="complexDetails;"
-                               [functionDescription]="complexDetails.functions"
-                               [crossReferences]="complexDetails.crossReferences"
-                               [ligands]="complexDetails.ligands"
-                               [agonists]="complexDetails.agonists"
-                               [antagonists]="complexDetails.antagonists"></cp-complex-function>
+        <div class="columns small-12 medium-10 no-pad-left no-pad-right" style="margin-bottom: 30px">
+          <div id="participants" class="columns medium-12" data-magellan-target="participants">
+            <cp-complex-participants *ngIf="complexDetails"
+                                    [participants]="complexDetails.participants"
+                                    [complexAC]="complexDetails.ac"
+                                    [complexMIJSON]="complexMIJSON"></cp-complex-participants>
+          </div>
+          <div id="function" class="columns medium-12 " style="margin-bottom: 30px" data-magellan-target="function">
+            <cp-complex-function *ngIf="complexDetails;"
+                                [functionDescription]="complexDetails.functions"
+                                [crossReferences]="complexDetails.crossReferences"
+                                [ligands]="complexDetails.ligands"
+                                [agonists]="complexDetails.agonists"
+                                [antagonists]="complexDetails.antagonists"></cp-complex-function>
+          </div>
+          <div id="properties" class="columns medium-12" style="margin-bottom: 30px" data-magellan-target="properties">
+            <cp-complex-properties *ngIf="complexDetails;"
+                                  [propertiesDescription]="complexDetails.properties"
+                                  [comments]="complexDetails.comments"
+                                  [crossReferences]="complexDetails.crossReferences"
+                                  [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
+          </div>
+          <div id="expression" class="columns medium-12" style="margin-bottom: 30px" data-magellan-target="expression">
+            <cp-complex-expression *ngIf="complexDetails && gxa;"
+                                  [gxa]="gxa"
+                                  [participants]="complexDetails.participants"
+                                  [complexSpecies]="complexDetails.species"
+                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
+          </div>
+          <div id="disease" class="columns medium-12" style="margin-bottom: 30px" data-magellan-target="disease">
+            <cp-complex-disease *ngIf="complexDetails;"
+                                [diseaseDescriptions]="complexDetails.diseases"
+                                [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
+          </div>
+          <div id="references" class="columns medium-12" style="margin-bottom: 30px" data-magellan-target="references">
+            <cp-complex-references *ngIf="complexDetails;"
+                                  [crossReferences]="complexDetails.crossReferences"
+                                  [synonyms]="complexDetails.synonyms"
+                                  [systematicName]="complexDetails.systematicName"></cp-complex-references>
+          </div>
         </div>
-        <div id="properties" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-properties *ngIf="complexDetails;"
-                                 [propertiesDescription]="complexDetails.properties"
-                                 [comments]="complexDetails.comments"
-                                 [crossReferences]="complexDetails.crossReferences"
-                                 [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
+        <div id="complex-footer" class="row columns medium-12">
+          <cp-complex-footer *ngIf="complexDetails;"
+                            [institute]="complexDetails.institution"></cp-complex-footer>
         </div>
-        <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-expression *ngIf="complexDetails && gxa;"
-                                 [gxa]="gxa"
-                                 [participants]="complexDetails.participants"
-                                 [complexSpecies]="complexDetails.species"
-                                 [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
-        </div>
-        <div id="disease" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-disease *ngIf="complexDetails;"
-                              [diseaseDescriptions]="complexDetails.diseases"
-                              [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
-        </div>
-        <div id="references" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-references *ngIf="complexDetails;"
-                                 [crossReferences]="complexDetails.crossReferences"
-                                 [synonyms]="complexDetails.synonyms"
-                                 [systematicName]="complexDetails.systematicName"></cp-complex-references>
-        </div>
-      </div>
-      <div class="columns medium-12">
-        <cp-complex-footer *ngIf="complexDetails;"
-                           [institute]="complexDetails.institution"></cp-complex-footer>
       </div>
     </div>
     <ng-template #loadingSpinner>

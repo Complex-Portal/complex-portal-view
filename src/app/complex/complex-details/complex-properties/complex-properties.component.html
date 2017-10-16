@@ -1,7 +1,6 @@
 <div class="row no-pad-left">
   <div class="columns medium-12 no-pad-left" *ngIf="propertiesDescription || pdbXRefs || emdbXRefs">
     <h2 class="float-left">Properties</h2>
-    <cp-go-to class="float-right" [sectionName]="'Properties'"></cp-go-to>
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="propertiesDescription">
       {{propertiesDescription}}
     </div>
