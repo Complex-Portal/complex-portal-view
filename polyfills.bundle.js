@@ -1,4 +1,4 @@
-webpackJsonp([9],{
+webpackJsonp(["polyfills"],{
 
 /***/ "../../../../../src/polyfills.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -71,7 +71,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // NgClass on SVG elements
 // Needed for: IE10, IE11
 
-//# sourceMappingURL=/Users/maximiliankoch/IdeaProjects/Complex-Portal/complex-portal-view/src/polyfills.js.map
+//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/polyfills.js.map
 
 /***/ }),
 
