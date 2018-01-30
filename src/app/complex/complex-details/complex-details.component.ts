@@ -41,8 +41,9 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(params => {
         this.query = params['id'];
         this.titleService.setTitle('Complex Portal - ' + this.query);
-        this.requestComplex();
+        this.query.startsWith('EBI-') ? this.requestComplex() : this.requestComplexAc();
         this.requestComplexMIJSON();
+
         document.body.scrollTop = 0;
       });
   }
@@ -73,8 +74,21 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
         console.log('Details ComplexAc: ' + complexDetails.complexAc);
         // Check complexAC is not empty
         if (complexDetails.complexAc != null) {
-          // this.router.navigate(['/complex', complexDetails.complexAc]);
+          this.router.navigate(['/complex', complexDetails.complexAc]);
         }
+      },
+      error => {
+        this.notificationService.onAPIRequestError('Complex Portal');
+        this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
+        this.router.navigate(['home'])
+      }
+    );
+  }
+
+  private requestComplexAc() {
+    this.complexPortalService.getComplexAc(this._query).subscribe(
+      complexDetails => {
+        this.complexDetails = complexDetails;
       },
       error => {
         this.notificationService.onAPIRequestError('Complex Portal');

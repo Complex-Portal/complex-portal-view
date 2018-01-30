@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 
-import {Http, Response, URLSearchParams} from '@angular/http';
 import {HttpClient, HttpParams, HttpErrorResponse} from '@angular/common/http';
 
 import {environment} from '../../../../environments/environment';
@@ -27,6 +26,17 @@ export class ComplexPortalService {
    */
   getComplex(ac: string): Observable<ComplexDetails> {
     const url = `${baseURL}/details/${ac}`;
+    return this.http.get(url)
+      .catch(this.handleError);
+  }
+
+  /**
+   * Get a specific complex from the WS
+   * @param complexAc
+   * @returns {Observable<ComplexDetails>}
+   */
+  getComplexAc(complexAc: string): Observable<ComplexDetails> {
+    const url = `${baseURL}/complex/${complexAc}`;
     return this.http.get(url)
       .catch(this.handleError);
   }
