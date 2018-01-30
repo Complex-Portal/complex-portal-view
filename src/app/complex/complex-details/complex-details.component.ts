@@ -68,7 +68,14 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
 
   private requestComplex() {
     this.complexPortalService.getComplex(this._query).subscribe(
-      complexDetails => this.complexDetails = complexDetails,
+      complexDetails => {
+        this.complexDetails = complexDetails;
+        console.log('Details ComplexAc: ' + complexDetails.complexAc);
+        // Check complexAC is not empty
+        if (complexDetails.complexAc != null) {
+          // this.router.navigate(['/complex', complexDetails.complexAc]);
+        }
+      },
       error => {
         this.notificationService.onAPIRequestError('Complex Portal');
         this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');

@@ -2,11 +2,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-
+import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {RouterModule} from '@angular/router';
-import {rootRouterConfig} from './app.routes';
+import {AppRoutingModule} from './app-routing.module';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
 import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
@@ -41,8 +39,8 @@ import {SearchService} from './search/service/search.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    RouterModule.forRoot(rootRouterConfig, {useHash: false}),
+    HttpClientModule,
+    AppRoutingModule,
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     MdProgressBarModule,
@@ -51,5 +49,4 @@ import {SearchService} from './search/service/search.service';
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

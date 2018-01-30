@@ -1,10 +1,12 @@
-import {Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+
 import {DocumentationComponent} from './documentation/documentation.component';
 import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
 import {DataContentComponent} from './documentation/data-content/data-content.component';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 
-export const rootRouterConfig: Routes = [
+const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'complex', loadChildren: 'app/complex/complex.module#ComplexModule'},
   {path: 'home', loadChildren: 'app/home/home.module#HomeModule'},
@@ -16,3 +18,9 @@ export const rootRouterConfig: Routes = [
   {path: 'documentation/data_content', component: DataContentComponent},
   {path: 'ontologies', component: OntologiesComponent},
 ];
+
+@NgModule({
+  exports: [ RouterModule ],
+  imports: [ RouterModule.forRoot(routes, {useHash: false}) ]
+})
+export class AppRoutingModule {}

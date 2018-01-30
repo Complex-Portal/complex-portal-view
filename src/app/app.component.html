@@ -2,6 +2,7 @@
   <div id="local-masthead" data-sticky data-sticky-on="large" data-top-anchor="180" data-btm-anchor="300000">
     <header>
 
+      <!-- EBI GLOBAL MASTHEAD SECTION -->
       <div id="global-masthead" class="clearfix">
         <!--This has to be one line and no newline characters-->
         <a href="{{EBI_BASE_URL}}" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
@@ -49,7 +50,9 @@
         </nav>
 
       </div>
+      <!-- END OF EBI GLOBAL MASTHEAD -->
 
+      <!-- COMPLEX PORTAL HEADER SECTION -->
       <div class="masthead row">
 
         <!-- local-title -->
@@ -63,9 +66,11 @@
 
         </div>
         <!--/local-title -->
+
         <div class="columns medium-6">
           <cp-local-search></cp-local-search>
         </div>
+
         <!-- local-nav -->
         <nav>
           <ul class="dropdown menu float-left" data-description="navigational">
@@ -81,18 +86,22 @@
         </nav>
         <!-- /local-nav -->
       </div>
+      <!-- END COMPLEX PORTAL HEADER SECTION -->
+
     </header>
   </div>
+
   <cp-progress-bar></cp-progress-bar>
 </div>
+
 <!---->
 <div id="content" role="main" class="row">
   <!-- Suggested layout containers -->
   <section>
     <router-outlet></router-outlet>
+    <!-- Routed views go here -->
   </section>
   <!-- End suggested layout containers -->
-
 </div>
 
 <footer>

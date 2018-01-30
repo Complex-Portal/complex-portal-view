@@ -24,7 +24,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _EBI_BASE_URL = environment.ebi_base_url;
   private _onChangeInBasket: boolean;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private router: Router, private basketService: BasketService) {
+  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+              private router: Router,
+              private basketService: BasketService) {
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
     this._environmentName = environmentName;

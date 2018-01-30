@@ -3,7 +3,10 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
-// Enviorment for localhost
+// Environment for localhost
+const COMPLEX_LOCAL_BASE_URL = 'http://localhost:9090/';
+
+// Environment for production
 const EBI_BASE_URL = 'https://www.ebi.ac.uk/';
 const REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
@@ -16,6 +19,7 @@ export const environment = {
   analytics_id: 'UA-672146-11',
   ebi_base_url: EBI_BASE_URL,
   complex_ws_base_url: EBI_BASE_URL + 'intact/complex-ws',
+  complex_ws_local_base_url: COMPLEX_LOCAL_BASE_URL + 'complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
   ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',

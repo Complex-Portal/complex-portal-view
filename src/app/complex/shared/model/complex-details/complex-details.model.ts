@@ -3,6 +3,7 @@ import {CrossReference} from './cross-reference.model';
 
 export class ComplexDetails {
   private _ac: string;
+  private _complexAc: string;
   private _name: string;
   private _systematicName: string;
   private _species: string;
@@ -19,11 +20,12 @@ export class ComplexDetails {
   private _participants: Participant[];
   private _crossReferences: CrossReference[];
 
-  constructor(ac: string, name: string, systematicName: string, species: string, institution: string,
+  constructor(ac: string, complexAc: string, name: string, systematicName: string, species: string, institution: string,
               synonyms: string[], functions: string[], properties: string[], ligands: string[],
               complexAssemblies: string[], diseases: string[], agonists: string[], antagonists: string[],
               comments: string[], participants: Participant[], crossReferences: CrossReference[]) {
     this._ac = ac;
+    this._complexAc = complexAc;
     this._name = name;
     this._systematicName = systematicName;
     this._species = species;
@@ -47,6 +49,14 @@ export class ComplexDetails {
 
   set ac(value: string) {
     this._ac = value;
+  }
+
+  get complexAc(): string {
+    return this._complexAc;
+  }
+
+  set complexAc(value: string) {
+    this._complexAc = value;
   }
 
   get name(): string {
