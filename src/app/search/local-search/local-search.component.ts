@@ -23,6 +23,7 @@ export class LocalSearchComponent implements OnInit {
     this.extractQueryFromURL();
   }
 
+  // TODO: REVIEW THIS METHOD
   private extractQueryFromURL() {
     // Retrieve query from URL. Would be nice to have it in the service.. but time etc.
     this.router.events.subscribe((val) => {
@@ -39,7 +40,7 @@ export class LocalSearchComponent implements OnInit {
           } else if (this.location.path().startsWith('/complex/organisms')) {
             this._query = '';
           } else if (this.location.path().startsWith('/complex')) {
-            this._query = this.location.path().split('/')[2];
+            this._query = ''; // this.location.path().split('/')[2];
           } else {
             this._query = '';
           }

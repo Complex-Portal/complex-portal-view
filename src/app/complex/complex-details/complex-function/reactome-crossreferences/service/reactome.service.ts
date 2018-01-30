@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,7 +10,7 @@ const baseURL = environment.reactome_base_url;
 @Injectable()
 export class ReactomeService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   /**
@@ -20,7 +20,7 @@ export class ReactomeService {
    */
   public findRelatedPathways(id: string) {
     return this.http.get(baseURL + '/ContentService/data/pathways/low/entity/' + id)
-      .map((res: Response) => res.json()).catch(this.handleError);
+      .catch(this.handleError);
   }
 
   /**
@@ -29,15 +29,16 @@ export class ReactomeService {
    * @returns {Observable<R|T>}
    */
   public getComplexName(id: string) {
-    return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName')
-      .map((res: Response) => res.text()).catch(this.handleError);
+    return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName', {observe: 'response', responseType: 'text'})
+      // .map((res: HttpResponse) => res.body.text())
+      .catch(this.handleError);
   }
 
-  private handleError(error: Response | any): Observable<any> {
-    if (error instanceof Response) {
-      return Observable.throw(error);
+  private handleError(err: HttpErrorResponse | any): Observable<any> {
+    if (err.error instanceof Error) {
+      return Observable.throw(err);
     } else {
-      console.error(error.message ? error.message : error.toString());
+      console.error(err.message ? err.message : err.toString());
     }
   }
 }
