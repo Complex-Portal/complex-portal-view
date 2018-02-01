@@ -12,7 +12,7 @@ import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
 import {SpeciesFacet} from '../model/complex-results/facets/species_f.model';
 
-const baseURL = environment.complex_ws_local_base_url; // environment.complex_ws_base_url;
+const baseURL = environment.complex_ws_base_url;
 
 @Injectable()
 export class ComplexPortalService {

@@ -19,7 +19,6 @@ export const environment = {
   analytics_id: 'UA-672146-11',
   ebi_base_url: EBI_BASE_URL,
   complex_ws_base_url: EBI_BASE_URL + 'intact/complex-ws',
-  complex_ws_local_base_url: COMPLEX_LOCAL_BASE_URL + 'complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
   ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',
