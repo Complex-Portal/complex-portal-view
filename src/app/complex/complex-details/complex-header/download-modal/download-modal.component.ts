@@ -18,9 +18,25 @@ export class DownloadModalComponent implements OnInit {
   }
 
 
-  goToComplexWS(): void {
+  goToComplexWSJsonFormat(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
-    window.open(environment.complex_ws_base_url + '/details/' + this._complexAC, '_blank');
+
+    const complexURLjson = environment.complex_ws_base_url + '/export/' + this._complexAC;
+    window.open(complexURLjson, '_blank');
+  }
+
+  goToComplexWSXml25Format(): void {
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
+
+    const complexURLxml25 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=xml25';
+    window.open(complexURLxml25, '_blank');
+  }
+
+  goToComplexWSXml30Format(): void {
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
+
+    const complexURLxml30 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=xml30';
+    window.open(complexURLxml30, '_blank');
   }
 
   get complexAC(): string {

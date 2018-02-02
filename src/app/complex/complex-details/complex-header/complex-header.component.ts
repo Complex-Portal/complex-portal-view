@@ -25,7 +25,11 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this._jsonURL = environment.complex_ws_base_url + '/details/' + this._complexAC;
+    const urlAc = environment.complex_ws_base_url + '/details/' + this._complexAC;
+    const urlComplexAc = environment.complex_ws_base_url + '/complex/' + this._complexAC;
+
+    this._jsonURL = this._complexAC.startsWith('EBI-') ? urlAc : urlComplexAc;
+
   }
 
 

@@ -7,14 +7,16 @@
   <div class="row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right"
        data-equalize-on="medium" id="large-button-grid">
     <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center disabled">
+      <a class="button medium-12 columns text-center"
+         (click)="goToComplexWSXml25Format()">
         <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
         <h5 class="white-color">PSI-MI XML 2.5</h5>
       </a>
     </div>
     <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center disabled">
-        <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
+      <a class="button medium-12 columns text-center"
+         (click)="goToComplexWSXml30Format()">
+                <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
         <h5 class="white-color">PSI-MI XML 3.0</h5>
       </a>
     </div>
@@ -26,7 +28,7 @@
     </div>
     <div class="column  padding-bottom-large">
       <a class="button medium-12 columns text-center"
-         (click)="goToComplexWS()">
+         (click)="goToComplexWSJsonFormat()">
         <h3 class="icon icon-fileformats white-color" data-icon="J"></h3>
         <h5 class="white-color">PSI-MI JSON</h5>
       </a>
