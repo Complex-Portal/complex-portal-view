@@ -6,7 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
-import {NotificationService} from './shared/notification/service/notification.service';
+import { NotificationService } from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
 import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
@@ -17,7 +17,7 @@ import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/pro
 import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MdProgressBarModule} from '@angular/material';
+import {MatProgressBarModule} from '@angular/material';
 import {DocumentationComponent} from './documentation/documentation.component';
 import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
 import {DataContentComponent} from './documentation/data-content/data-content.component';
@@ -41,10 +41,10 @@ import {SearchService} from './search/service/search.service';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    NoopAnimationsModule,
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
-    MdProgressBarModule,
-    NoopAnimationsModule,
+    MatProgressBarModule,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
   bootstrap: [AppComponent]

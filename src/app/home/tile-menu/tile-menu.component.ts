@@ -6,7 +6,7 @@ import {GoogleAnalyticsService} from '../../shared/google-analytics/service/goog
 
 declare const $: any;
 
-@Component({
+@ Component({
   selector: 'cp-tile-menu',
   templateUrl: './tile-menu.component.html',
   styleUrls: ['./tile-menu.component.css']

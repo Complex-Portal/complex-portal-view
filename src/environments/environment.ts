@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 // Environment for localhost
-const COMPLEX_LOCAL_BASE_URL = 'http://localhost:9090/';
+const COMPLEX_LOCAL_BASE_URL = 'https://wwwdev.ebi.ac.uk/'; // 'http://localhost:9090/';
 
 // Environment for production
 const EBI_BASE_URL = 'https://www.ebi.ac.uk/';
@@ -18,7 +18,7 @@ export const environment = {
 
   analytics_id: 'UA-672146-11',
   ebi_base_url: EBI_BASE_URL,
-  complex_ws_base_url: EBI_BASE_URL + 'intact/complex-ws',
+  complex_ws_base_url: COMPLEX_LOCAL_BASE_URL + 'intact/complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
   ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',

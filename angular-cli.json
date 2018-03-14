@@ -25,13 +25,13 @@
         "../node_modules/animate.css/animate.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery",
-        "../node_modules/ebi_framework/js/cookiebanner",
-        "../src/assets/js/ebi-framework/foot",
-        "../src/assets/js/ebi-framework/script",
-        "../node_modules/ebi_framework/libraries/foundation-6/dist/foundation",
-        "../node_modules/ebi_framework/libraries/foundation-6/dist/plugins/foundation.dropdownMenu",
-        "../node_modules/ebi_framework/js/foundationExtendEBI"
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/ebi-framework/js/ebi-global-includes/script/5_ebiFrameworkCookieBanner.js",
+        "../src/assets/js/ebi-framework/foot.js",
+        "../src/assets/js/ebi-framework/script.js",
+        "../node_modules/ebi-framework/libraries/foundation-6/js/foundation.js",
+        "../node_modules/ebi-framework/libraries/foundation-6/js/foundation.dropdownMenu.js",
+        "../node_modules/ebi-framework/js/foundationExtendEBI.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

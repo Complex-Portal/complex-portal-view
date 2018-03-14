@@ -77,12 +77,6 @@ export class ComplexPortalService {
               interactorTypeFilter: string[] = [], currentPageIndex = 1, pageSize = 10,
               format = 'json', facets = 'species_f,ptype_f,pbiorole_f'): Observable<ComplexSearchResult> {
 
-    const params = new HttpParams();
-    params.set('first', ((currentPageIndex * pageSize) - pageSize).toString());
-    params.set('number', pageSize.toString());
-    params.set('format', format);
-    params.set('facets', facets);
-
     let filters = '';
     if (speciesFilter.length !== 0) {
       filters += 'species_f:(' + '"' + speciesFilter.join('"AND"') + '"' + '),';
@@ -93,12 +87,17 @@ export class ComplexPortalService {
     if (interactorTypeFilter.length !== 0) {
       filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
     }
-    params.set('filters', filters);
-    // console.log(baseURL + '/search/' + query, {search: params});
+
+    /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
+    const params = new HttpParams()
+      .set('first', ((currentPageIndex * pageSize) - pageSize).toString())
+      .set('number', pageSize.toString())
+      .set('format', format)
+      .set('facets', facets)
+      .set('filters', filters);
 
     return this.http.get(baseURL + '/search/' + query, {params: params})
       .catch(this.handleError);
-      // .map((res: Response) => res.json()).catch(this.handleError);
   }
 
   private handleError(err: HttpErrorResponse | any): Observable<any> {
