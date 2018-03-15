@@ -71,7 +71,6 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
     this.complexPortalService.getComplex(this._query).subscribe(
       complexDetails => {
         this.complexDetails = complexDetails;
-        console.log('Details ComplexAc: ' + complexDetails.complexAc);
         // Check complexAC is not empty
         if (complexDetails.complexAc != null) {
           this.router.navigate(['/complex', complexDetails.complexAc]);
