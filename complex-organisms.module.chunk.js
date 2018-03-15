@@ -1,41 +1,30 @@
 webpackJsonp(["complex-organisms.module"],{
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-organisms/complex-organism/complex-organism.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".icon {\n  font-size: 120px;\n  color: #808080;\n  ;\n}\n\n\n\na {\n  text-decoration:none;\n  border-width: 0;\n}\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ".icon {\n  font-size: 120px;\n  color: #808080;\n  ;\n}\n\n\n\na {\n  text-decoration:none;\n  border-width: 0;\n}\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.html":
+/***/ "./src/app/complex/complex-organisms/complex-organism/complex-organism.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\" *ngIf=\"organism.symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{organism.name}}</h5>\n\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"organism.symbol !== 'x'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-species\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"organism.symbol === 'x'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-functional\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\" (click)=\"goToComplexTAB()\">ComplexTab</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI25()\">PSI-XML2.5</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI30()\">PSI-XML3.0</a>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.ts":
+/***/ "./src/app/complex/complex-organisms/complex-organism/complex-organism.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__ = __webpack_require__("../../../../../src/app/complex/shared/model/complex-organism/complex-organism.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__ = __webpack_require__("./src/app/complex/shared/model/complex-organism/complex-organism.model.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,7 +40,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ComplexOrganismComponent = (function () {
+var ComplexOrganismComponent = /** @class */ (function () {
     function ComplexOrganismComponent(router, googleAnalyticsService) {
         this.router = router;
         this.googleAnalyticsService = googleAnalyticsService;
@@ -84,61 +73,49 @@ var ComplexOrganismComponent = (function () {
         this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'ComplexTAB');
         window.open(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].complex_tab + this.organism.complextab + '.tsv', '_blank');
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */]),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */]])
+    ], ComplexOrganismComponent.prototype, "organism", null);
+    ComplexOrganismComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-organism',
+            template: __webpack_require__("./src/app/complex/complex-organisms/complex-organism/complex-organism.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-organisms/complex-organism/complex-organism.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ComplexOrganismComponent);
     return ComplexOrganismComponent;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */]) === "function" && _a || Object),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_model_complex_organism_complex_organism_model__["a" /* ComplexOrganisms */]) === "function" && _b || Object])
-], ComplexOrganismComponent.prototype, "organism", null);
-ComplexOrganismComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-organism',
-        template: __webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object])
-], ComplexOrganismComponent);
 
-var _a, _b, _c, _d;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-organism.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organisms.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-organisms/complex-organisms.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ""
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organisms.component.html":
+/***/ "./src/app/complex/complex-organisms/complex-organisms.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <div class=\"column medium-12\">\n    <ng-container *ngIf=\"organisms;else loadingSpinner\">\n      <div  class=\"column medium-3\" *ngFor=\"let organism of organisms\">\n        <cp-complex-organism [organism]=\"organism\"></cp-complex-organism>\n      </div>\n    </ng-container>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organisms.component.ts":
+/***/ "./src/app/complex/complex-organisms/complex-organisms.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganismsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("../../../../../src/app/complex/shared/service/complex-portal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("./src/app/complex/shared/service/complex-portal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -152,7 +129,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ComplexOrganismsComponent = (function () {
+var ComplexOrganismsComponent = /** @class */ (function () {
     function ComplexOrganismsComponent(complexPortalService, titleService) {
         this.complexPortalService = complexPortalService;
         this.titleService = titleService;
@@ -350,34 +327,33 @@ var ComplexOrganismsComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    ComplexOrganismsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-organisms',
+            template: __webpack_require__("./src/app/complex/complex-organisms/complex-organisms.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-organisms/complex-organisms.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"]])
+    ], ComplexOrganismsComponent);
     return ComplexOrganismsComponent;
 }());
-ComplexOrganismsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-organisms',
-        template: __webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organisms.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organisms.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["Title"]) === "function" && _b || Object])
-], ComplexOrganismsComponent);
 
-var _a, _b;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-organisms.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-organisms/complex-organisms.module.ts":
+/***/ "./src/app/complex/complex-organisms/complex-organisms.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexOrganismsModule", function() { return ComplexOrganismsModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__ = __webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organism/complex-organism.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__ = __webpack_require__("../../../../../src/app/complex/complex-organisms/complex-organisms.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__ = __webpack_require__("./src/app/complex/complex-organisms/complex-organism/complex-organism.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__ = __webpack_require__("./src/app/complex/complex-organisms/complex-organisms.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("./src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -390,34 +366,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ComplexOrganismsModule = (function () {
+var ComplexOrganismsModule = /** @class */ (function () {
     function ComplexOrganismsModule() {
     }
+    ComplexOrganismsModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_4__angular_router__["RouterModule"].forChild([
+                    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__["a" /* ComplexOrganismsComponent */] }
+                ]),
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */]
+            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__["a" /* ComplexOrganismsComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__["a" /* ComplexOrganismComponent */]]
+        })
+    ], ComplexOrganismsModule);
     return ComplexOrganismsModule;
 }());
-ComplexOrganismsModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_4__angular_router__["RouterModule"].forChild([
-                { path: '', component: __WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__["a" /* ComplexOrganismsComponent */] }
-            ]),
-            __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_5__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */]
-        ],
-        declarations: [__WEBPACK_IMPORTED_MODULE_3__complex_organisms_component__["a" /* ComplexOrganismsComponent */],
-            __WEBPACK_IMPORTED_MODULE_2__complex_organism_complex_organism_component__["a" /* ComplexOrganismComponent */]]
-    })
-], ComplexOrganismsModule);
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-organisms.module.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/shared/model/complex-organism/complex-organism.model.ts":
+/***/ "./src/app/complex/shared/model/complex-organism/complex-organism.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexOrganisms; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_results_facets_species_f_model__ = __webpack_require__("../../../../../src/app/complex/shared/model/complex-results/facets/species_f.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_results_facets_species_f_model__ = __webpack_require__("./src/app/complex/shared/model/complex-results/facets/species_f.model.ts");
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -429,7 +405,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 
-var ComplexOrganisms = (function (_super) {
+var ComplexOrganisms = /** @class */ (function (_super) {
     __extends(ComplexOrganisms, _super);
     function ComplexOrganisms(name, count, symbol, type, psi25, psi30, complextab) {
         var _this = _super.call(this, name, count) || this;
@@ -493,11 +469,11 @@ var ComplexOrganisms = (function (_super) {
     return ComplexOrganisms;
 }(__WEBPACK_IMPORTED_MODULE_0__complex_results_facets_species_f_model__["a" /* SpeciesFacet */]));
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-organism.model.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/shared/model/complex-results/facets/species_f.model.ts":
+/***/ "./src/app/complex/shared/model/complex-results/facets/species_f.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -505,7 +481,7 @@ var ComplexOrganisms = (function (_super) {
 /**
  * Created by mkoch on 31/10/2016.
  */
-var SpeciesFacet = (function () {
+var SpeciesFacet = /** @class */ (function () {
     function SpeciesFacet(name, count) {
         this._name = name;
         this._count = count;
@@ -533,7 +509,7 @@ var SpeciesFacet = (function () {
     return SpeciesFacet;
 }());
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/species_f.model.js.map
+
 
 /***/ })
 

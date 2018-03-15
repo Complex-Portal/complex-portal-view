@@ -1,38 +1,27 @@
 webpackJsonp(["complex-results.module"],{
 
-/***/ "../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-results/complex-filter/complex-filter.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ""
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.html":
+/***/ "./src/app/complex/complex-results/complex-filter/complex-filter.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{facet.name}} ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\" checked> {{facet.name}}\n              ({{facet.count}})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\"> {{facet.name}}\n              ({{facet.count}})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.ts":
+/***/ "./src/app/complex/complex-results/complex-filter/complex-filter.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFilterComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__("../../../../../src/app/complex/shared/model/complex-results/facets.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__ = __webpack_require__("./src/app/complex/shared/model/complex-results/facets.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,7 +34,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ComplexFilterComponent = (function () {
+var ComplexFilterComponent = /** @class */ (function () {
     function ComplexFilterComponent(googleAnalyticsService) {
         this.googleAnalyticsService = googleAnalyticsService;
         this.onSpicesFilterChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
@@ -165,90 +154,78 @@ var ComplexFilterComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
+    ], ComplexFilterComponent.prototype, "onSpicesFilterChanged", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
+    ], ComplexFilterComponent.prototype, "onBiologicalRoleFilterChanged", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
+    ], ComplexFilterComponent.prototype, "onInteractorTyoeFilterChanged", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
+    ], ComplexFilterComponent.prototype, "onResetAllFilters", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */]),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */]])
+    ], ComplexFilterComponent.prototype, "facets", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFilterComponent.prototype, "spicesFilter", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFilterComponent.prototype, "bioRoleFilter", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFilterComponent.prototype, "interactorTypeFilter", null);
+    ComplexFilterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-filter',
+            template: __webpack_require__("./src/app/complex/complex-results/complex-filter/complex-filter.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-results/complex-filter/complex-filter.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ComplexFilterComponent);
     return ComplexFilterComponent;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _a || Object)
-], ComplexFilterComponent.prototype, "onSpicesFilterChanged", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _b || Object)
-], ComplexFilterComponent.prototype, "onBiologicalRoleFilterChanged", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _c || Object)
-], ComplexFilterComponent.prototype, "onInteractorTyoeFilterChanged", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _d || Object)
-], ComplexFilterComponent.prototype, "onResetAllFilters", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */]) === "function" && _e || Object),
-    __metadata("design:paramtypes", [typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_facets_model__["a" /* Facets */]) === "function" && _f || Object])
-], ComplexFilterComponent.prototype, "facets", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFilterComponent.prototype, "spicesFilter", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFilterComponent.prototype, "bioRoleFilter", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFilterComponent.prototype, "interactorTypeFilter", null);
-ComplexFilterComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-filter',
-        template: __webpack_require__("../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _g || Object])
-], ComplexFilterComponent);
 
-var _a, _b, _c, _d, _e, _f, _g;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-filter.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-list/complex-list.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-results/complex-list/complex-list.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ""
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-list/complex-list.component.html":
+/***/ "./src/app/complex/complex-results/complex-list/complex-list.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<ul class=\"no-bullet\">\n  <li *ngFor=\"let complex of complexSearch.elements\">\n    <h3><a [routerLink]=\"['/complex', complex.complexAC]\">{{complex.complexName}}</a></h3>\n    <div class=\"description\" style=\"background-color: white\">\n      <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>\n      <b>Description:</b>\n      <div *ngIf=\"complex.description.length <= 250\">\n        {{complex.description}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n      <div *ngIf=\"complex.description.length > 250\">\n        {{complex.description.substr(0,250)}}<a [routerLink]=\"['/complex', complex.complexAC]\">...</a>\n      </div>\n    </div>\n  </li>\n</ul>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-list/complex-list.component.ts":
+/***/ "./src/app/complex/complex-results/complex-list/complex-list.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexListComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__("../../../../../src/app/complex/shared/model/complex-results/complex-search.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__ = __webpack_require__("./src/app/complex/shared/model/complex-results/complex-search.model.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -260,62 +237,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ComplexListComponent = (function () {
+var ComplexListComponent = /** @class */ (function () {
     function ComplexListComponent() {
     }
     ComplexListComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__["a" /* ComplexSearchResult */])
+    ], ComplexListComponent.prototype, "complexSearch", void 0);
+    ComplexListComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-list',
+            template: __webpack_require__("./src/app/complex/complex-results/complex-list/complex-list.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-results/complex-list/complex-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexListComponent);
     return ComplexListComponent;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__["a" /* ComplexSearchResult */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_model_complex_results_complex_search_model__["a" /* ComplexSearchResult */]) === "function" && _a || Object)
-], ComplexListComponent.prototype, "complexSearch", void 0);
-ComplexListComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-list',
-        template: __webpack_require__("../../../../../src/app/complex/complex-results/complex-list/complex-list.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-results/complex-list/complex-list.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexListComponent);
 
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-list.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-results/complex-paginator/complex-paginator.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ""
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.html":
+/***/ "./src/app/complex/complex-results/complex-paginator/complex-paginator.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n  <h5 class=\"text-center\">{{currentPageIndex}} of {{lastPageIndex}}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{index[0]}}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{index[0]}}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.ts":
+/***/ "./src/app/complex/complex-results/complex-paginator/complex-paginator.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPaginatorComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -326,7 +291,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ComplexPaginatorComponent = (function () {
+var ComplexPaginatorComponent = /** @class */ (function () {
     function ComplexPaginatorComponent() {
         this.onPageChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
@@ -413,72 +378,60 @@ var ComplexPaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
+    ], ComplexPaginatorComponent.prototype, "onPageChange", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ComplexPaginatorComponent.prototype, "lastPageIndex", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ComplexPaginatorComponent.prototype, "currentPageIndex", null);
+    ComplexPaginatorComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-paginator',
+            template: __webpack_require__("./src/app/complex/complex-results/complex-paginator/complex-paginator.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-results/complex-paginator/complex-paginator.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexPaginatorComponent);
     return ComplexPaginatorComponent;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _a || Object)
-], ComplexPaginatorComponent.prototype, "onPageChange", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ComplexPaginatorComponent.prototype, "lastPageIndex", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ComplexPaginatorComponent.prototype, "currentPageIndex", null);
-ComplexPaginatorComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-paginator',
-        template: __webpack_require__("../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexPaginatorComponent);
 
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-paginator.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-results.component.css":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/complex/complex-results/complex-results.component.css":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = ""
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-results.component.html":
+/***/ "./src/app/complex/complex-results/complex-results.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n  <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n    <h2 class=\"padding-left-large\">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>\n    <div class=\"columns medium-4\">\n      <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                         [spicesFilter]=\"spicesFilter\"\n                         [bioRoleFilter]=\"bioRoleFilter\"\n                         [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                         (onResetAllFilters)=\"onResetAllFilters($event)\"\n                         (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                         (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                         (onInteractorTyoeFilterChanged)=\"onInteractorTyoeFilterChanged($event)\">\n      </cp-complex-filter>\n    </div>\n    <div class=\"columns medium-8\">\n      <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                            [lastPageIndex]=\"lastPageIndex\"\n                            (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      <cp-complex-list [complexSearch]=\"complexSearch\"></cp-complex-list>\n      <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                            [lastPageIndex]=\"lastPageIndex\"\n                            (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n    </div>\n  </div>\n  <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n    <h2>No Complex Portal results found</h2>\n    <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>\n    <h4>Please consider refining your terms:</h4>\n    <ul>\n      <li>Make sure all words are spelled correctly</li>\n      <li>Try different keywords</li>\n      <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n      <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results than\n        \"bike shed\"\n      </li>\n    </ul>\n  </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-results.component.ts":
+/***/ "./src/app/complex/complex-results/complex-results.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexResultsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("../../../../../src/app/complex/shared/service/complex-portal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("./src/app/complex/shared/service/complex-portal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -494,7 +447,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ComplexResultsComponent = (function () {
+var ComplexResultsComponent = /** @class */ (function () {
     function ComplexResultsComponent(route, router, complexPortalService, titleService, googleAnalyticsService) {
         this.route = route;
         this.router = router;
@@ -674,36 +627,37 @@ var ComplexResultsComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    ComplexResultsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-results',
+            template: __webpack_require__("./src/app/complex/complex-results/complex-results.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-results/complex-results.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"],
+            __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["Title"],
+            __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ComplexResultsComponent);
     return ComplexResultsComponent;
 }());
-ComplexResultsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-results',
-        template: __webpack_require__("../../../../../src/app/complex/complex-results/complex-results.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-results/complex-results.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["Title"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _e || Object])
-], ComplexResultsComponent);
 
-var _a, _b, _c, _d, _e;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-results.component.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/complex-results/complex-results.module.ts":
+/***/ "./src/app/complex/complex-results/complex-results.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexResultsModule", function() { return ComplexResultsModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_results_component__ = __webpack_require__("../../../../../src/app/complex/complex-results/complex-results.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__ = __webpack_require__("../../../../../src/app/complex/complex-results/complex-paginator/complex-paginator.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__ = __webpack_require__("../../../../../src/app/complex/complex-results/complex-filter/complex-filter.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__ = __webpack_require__("../../../../../src/app/complex/complex-results/complex-list/complex-list.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complex_results_component__ = __webpack_require__("./src/app/complex/complex-results/complex-results.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__ = __webpack_require__("./src/app/complex/complex-results/complex-paginator/complex-paginator.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__ = __webpack_require__("./src/app/complex/complex-results/complex-filter/complex-filter.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__ = __webpack_require__("./src/app/complex/complex-results/complex-list/complex-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("./src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -718,37 +672,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ComplexResultsModule = (function () {
+var ComplexResultsModule = /** @class */ (function () {
     function ComplexResultsModule() {
     }
+    ComplexResultsModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterModule"].forChild([
+                    { path: '', component: __WEBPACK_IMPORTED_MODULE_2__complex_results_component__["a" /* ComplexResultsComponent */] },
+                ]),
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */]
+            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__complex_results_component__["a" /* ComplexResultsComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__["a" /* ComplexListComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__["a" /* ComplexFilterComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__["a" /* ComplexPaginatorComponent */],
+            ]
+        })
+    ], ComplexResultsModule);
     return ComplexResultsModule;
 }());
-ComplexResultsModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterModule"].forChild([
-                { path: '', component: __WEBPACK_IMPORTED_MODULE_2__complex_results_component__["a" /* ComplexResultsComponent */] },
-            ]),
-            __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_7__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */]
-        ],
-        declarations: [__WEBPACK_IMPORTED_MODULE_2__complex_results_component__["a" /* ComplexResultsComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__complex_list_complex_list_component__["a" /* ComplexListComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__complex_filter_complex_filter_component__["a" /* ComplexFilterComponent */],
-            __WEBPACK_IMPORTED_MODULE_4__complex_paginator_complex_paginator_component__["a" /* ComplexPaginatorComponent */],
-        ]
-    })
-], ComplexResultsModule);
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-results.module.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/shared/model/complex-results/complex-search.model.ts":
+/***/ "./src/app/complex/shared/model/complex-results/complex-search.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexSearchResult; });
-var ComplexSearchResult = (function () {
+var ComplexSearchResult = /** @class */ (function () {
     function ComplexSearchResult(size, totalNumberOfResults, elements, facets) {
         this._size = size;
         this._totalNumberOfResults = totalNumberOfResults;
@@ -786,11 +740,11 @@ var ComplexSearchResult = (function () {
     return ComplexSearchResult;
 }());
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-search.model.js.map
+
 
 /***/ }),
 
-/***/ "../../../../../src/app/complex/shared/model/complex-results/facets.model.ts":
+/***/ "./src/app/complex/shared/model/complex-results/facets.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -798,7 +752,7 @@ var ComplexSearchResult = (function () {
 /**
  * Created by mkoch on 31/10/2016.
  */
-var Facets = (function () {
+var Facets = /** @class */ (function () {
     function Facets(ptype_f, species_f, pbiorole_f) {
         this._ptype_f = ptype_f;
         this._species_f = species_f;
@@ -828,7 +782,7 @@ var Facets = (function () {
     return Facets;
 }());
 
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/facets.model.js.map
+
 
 /***/ })
 

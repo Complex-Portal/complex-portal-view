@@ -1,4444 +1,6 @@
 webpackJsonp(["complex-details.module"],{
 
-/***/ "../../../../../src/app/complex/complex-details/complex-details.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".goToMenu a {\n    display: block;\n    padding:.2em .5em;\n    text-decoration: none;\n    border-bottom: none;\n    border-left: 2px solid white;\n}\n\n.goToMenu a:link,\n.goToMenu a:visited,\n.goToMenu a:hover,\n.goToMenu a:active {\n    color:#666;\n}\n\n.goToMenu .active {\n    border-left: 2px solid black;\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-details.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\" scrollSpy>\n      <div class=\"row columns medium-12\" style=\"margin-bottom: 30px\">\n        <cp-complex-header *ngIf=\"complexDetails;else loadingSpinner\"\n                           [complexAC]=\"complexDetails.ac\"\n                           [complexName]=\"complexDetails.name\"\n                           [complexSpecies]=\"complexDetails.species\"\n                           [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-header>\n      </div>\n      <div class=\"row\" id=\"main-content\" >\n        <div class=\"columns medium-2 no-pad-left no-pad-right show-for-medium\" data-sticky-container>\n          <div class=\"sticky\" data-sticky data-top-anchor=\"main-content\" data-margin-top=\"4\">\n            <ul id=\"go-to-menu\" class=\"goToMenu no-bullet\" data-magellan>\n              <li>\n                <a href=\"#participants\">Participants</a>\n              </li>\n              <li>\n                <a href=\"#function\">Function</a>\n              </li>\n              <li>\n                <a href=\"#properties\">Properties</a>\n              </li>\n              <li>\n                <a href=\"#expression\">Expression and Cellular Location</a>\n              </li>\n              <li>\n                <a href=\"#disease\">Diseases and Pathologies</a>\n              </li>\n              <li>\n                <a href=\"#references\">Additional Information</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n        <div class=\"columns small-12 medium-10 no-pad-left no-pad-right\" style=\"margin-bottom: 30px\">\n          <div id=\"participants\" class=\"columns medium-12\" data-magellan-target=\"participants\">\n            <cp-complex-participants *ngIf=\"complexDetails\"\n                                    [participants]=\"complexDetails.participants\"\n                                    [complexAC]=\"complexDetails.ac\"\n                                    [complexMIJSON]=\"complexMIJSON\"></cp-complex-participants>\n          </div>\n          <div id=\"function\" class=\"columns medium-12 \" style=\"margin-bottom: 30px\" data-magellan-target=\"function\">\n            <cp-complex-function *ngIf=\"complexDetails;\"\n                                [functionDescription]=\"complexDetails.functions\"\n                                [crossReferences]=\"complexDetails.crossReferences\"\n                                [ligands]=\"complexDetails.ligands\"\n                                [agonists]=\"complexDetails.agonists\"\n                                [antagonists]=\"complexDetails.antagonists\"></cp-complex-function>\n          </div>\n          <div id=\"properties\" class=\"columns medium-12\" style=\"margin-bottom: 30px\" data-magellan-target=\"properties\">\n            <cp-complex-properties *ngIf=\"complexDetails;\"\n                                  [propertiesDescription]=\"complexDetails.properties\"\n                                  [comments]=\"complexDetails.comments\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"\n                                  [assemblies]=\"complexDetails.complexAssemblies\"></cp-complex-properties>\n          </div>\n          <div id=\"expression\" class=\"columns medium-12\" style=\"margin-bottom: 30px\" data-magellan-target=\"expression\">\n            <cp-complex-expression *ngIf=\"complexDetails && gxa;\"\n                                  [gxa]=\"gxa\"\n                                  [participants]=\"complexDetails.participants\"\n                                  [complexSpecies]=\"complexDetails.species\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-expression>\n          </div>\n          <div id=\"disease\" class=\"columns medium-12\" style=\"margin-bottom: 30px\" data-magellan-target=\"disease\">\n            <cp-complex-disease *ngIf=\"complexDetails;\"\n                                [diseaseDescriptions]=\"complexDetails.diseases\"\n                                [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-disease>\n          </div>\n          <div id=\"references\" class=\"columns medium-12\" style=\"margin-bottom: 30px\" data-magellan-target=\"references\">\n            <cp-complex-references *ngIf=\"complexDetails;\"\n                                  [crossReferences]=\"complexDetails.crossReferences\"\n                                  [synonyms]=\"complexDetails.synonyms\"\n                                  [systematicName]=\"complexDetails.systematicName\"></cp-complex-references>\n          </div>\n        </div>\n        <div id=\"complex-footer\" class=\"row columns medium-12\">\n          <cp-complex-footer *ngIf=\"complexDetails;\"\n                            [institute]=\"complexDetails.institution\"></cp-complex-footer>\n        </div>\n      </div>\n    </div>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</section>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-details.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDetailsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("../../../../../src/app/complex/shared/service/complex-portal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/service/section/section.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_IntervalObservable__ = __webpack_require__("../../../../rxjs/_esm5/observable/IntervalObservable.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-var ComplexDetailsComponent = (function () {
-    function ComplexDetailsComponent(route, router, notificationService, googleAnalyticsService, complexPortalService, sectionService, titleService) {
-        this.route = route;
-        this.router = router;
-        this.notificationService = notificationService;
-        this.googleAnalyticsService = googleAnalyticsService;
-        this.complexPortalService = complexPortalService;
-        this.sectionService = sectionService;
-        this.titleService = titleService;
-        this.checkIfGPAIsDefined();
-    }
-    ComplexDetailsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._callSubscription = this.route
-            .params
-            .subscribe(function (params) {
-            _this.query = params['id'];
-            _this.titleService.setTitle('Complex Portal - ' + _this.query);
-            _this.requestComplex();
-            _this.requestComplexMIJSON();
-        });
-    };
-    ComplexDetailsComponent.prototype.ngAfterViewInit = function () {
-        __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
-        $('#main-content-area').foundation();
-        // This is not pretty but necessary as foundation has to re-run once all the external widgets are loaded.
-        // Would be good to listen for events from every widget and re-run when all done.
-        __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_IntervalObservable__["a" /* IntervalObservable */].create(1000).subscribe(function () {
-            $('.sticky').foundation('_calc', true);
-            $('#go-to-menu').foundation('reflow');
-        });
-    };
-    ComplexDetailsComponent.prototype.ngOnDestroy = function () {
-        this._callSubscription.unsubscribe();
-        this.sectionService.reset();
-    };
-    ComplexDetailsComponent.prototype.checkIfGPAIsDefined = function () {
-        // TODO: Not needed when we properly use the gxa node module and not use the backed version.
-        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
-            this._gxa = expressionAtlasHeatmapHighcharts;
-        }
-        else {
-            this._gxa = null;
-        }
-    };
-    ComplexDetailsComponent.prototype.requestComplex = function () {
-        var _this = this;
-        this.complexPortalService.getComplex(this._query).subscribe(function (complexDetails) { return _this.complexDetails = complexDetails; }, function (error) {
-            _this.notificationService.onAPIRequestError('Complex Portal');
-            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
-            _this.router.navigate(['home']);
-        });
-    };
-    ComplexDetailsComponent.prototype.requestComplexMIJSON = function () {
-        var _this = this;
-        this.complexPortalService.getComplexMIJSON(this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
-            _this.notificationService.onAPIRequestError('Complex Portal');
-            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_mi, error.status ? error.status : 'unknown');
-            _this.router.navigate(['home']);
-        });
-    };
-    Object.defineProperty(ComplexDetailsComponent.prototype, "complexDetails", {
-        get: function () {
-            return this._complexDetails;
-        },
-        set: function (value) {
-            this._complexDetails = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDetailsComponent.prototype, "complexMIJSON", {
-        get: function () {
-            return this._complexMIJSON;
-        },
-        set: function (value) {
-            this._complexMIJSON = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDetailsComponent.prototype, "query", {
-        get: function () {
-            return this._query;
-        },
-        set: function (value) {
-            this._query = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDetailsComponent.prototype, "gxa", {
-        get: function () {
-            return this._gxa;
-        },
-        set: function (value) {
-            this._gxa = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexDetailsComponent;
-}());
-ComplexDetailsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-details',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-details.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-details.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["Title"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["Title"]) === "function" && _g || Object])
-], ComplexDetailsComponent);
-
-var _a, _b, _c, _d, _e, _f, _g;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-details.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-details.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexDetailsModule", function() { return ComplexDetailsModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/complex-function.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-header/complex-header.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_details_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-details.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/complex-references.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_properties_assemblies_assemblies_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_ts_md5_dist_md5__ = __webpack_require__("../../../../ts-md5/dist/md5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34_ts_md5_dist_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__shared_ols_service_ols_service__ = __webpack_require__("../../../../../src/app/shared/ols/service/ols.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_service_complex_portal_service__ = __webpack_require__("../../../../../src/app/complex/shared/service/complex-portal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__complex_function_reactome_crossreferences_service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("../../../../../src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__shared_service_section_section_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/shared/service/section/section.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__complex_references_external_resources_external_resources_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__complex_header_download_modal_download_modal_component__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var ComplexDetailsModule = (function () {
-    function ComplexDetailsModule() {
-    }
-    return ComplexDetailsModule;
-}());
-ComplexDetailsModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_33__angular_router__["RouterModule"].forChild([
-                { path: '', component: __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */] },
-            ]),
-            __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_40__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */]
-        ],
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__["a" /* ComplexHeaderComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__["a" /* ComplexFunctionComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__["a" /* ComplexPropertiesComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__["a" /* ComplexExpressionComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__["a" /* ComplexDiseaseComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__["a" /* ComplexViewerComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__["a" /* ComplexParticipantsComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__["a" /* ReactomeDiagramComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__["a" /* ReactomeCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__["a" /* GoCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__["a" /* IntenzCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__["a" /* EuroPmcCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__["a" /* PdbCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__["a" /* LitmolViewerComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__["a" /* GxaHeatmapComponent */],
-            __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__["a" /* GoCelluarCrossreferenceComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__["a" /* ChemblCrossreferenceComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__["a" /* EfoCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__["a" /* SystematicNameComponent */],
-            __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__["a" /* SynonymsComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__["a" /* LigandsComponent */],
-            __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__["a" /* GoMolecularFunctionComponent */],
-            __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__["a" /* GoBiologicalProcessComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__["a" /* ComplexFooterComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__["a" /* AgonistsComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__["a" /* AntagonistsComponent */],
-            __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__["a" /* ComplexReferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__["a" /* ComplexEvidenceComponent */],
-            __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__["a" /* EmdbCrossreferencesComponent */],
-            __WEBPACK_IMPORTED_MODULE_32__complex_properties_assemblies_assemblies_component__["a" /* AssembliesComponent */],
-            __WEBPACK_IMPORTED_MODULE_42__complex_references_external_resources_external_resources_component__["a" /* ExternalResourcesComponent */],
-            __WEBPACK_IMPORTED_MODULE_43__complex_header_download_modal_download_modal_component__["a" /* DownloadModalComponent */],
-        ],
-        providers: [__WEBPACK_IMPORTED_MODULE_36__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_37__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_38__complex_function_reactome_crossreferences_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_39__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_35__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_34_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_41__shared_service_section_section_service__["a" /* SectionService */]],
-    })
-], ComplexDetailsModule);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-details.module.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>ChEMBL Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChemblCrossreferenceComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ChemblCrossreferenceComponent = (function () {
-    function ChemblCrossreferenceComponent() {
-        this._displayedElements = 5;
-    }
-    ChemblCrossreferenceComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(ChemblCrossreferenceComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ChemblCrossreferenceComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ChemblCrossreferenceComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ChemblCrossreferenceComponent.prototype, "crossReferences", null);
-ChemblCrossreferenceComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-chembl-crossreference',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ChemblCrossreferenceComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/chembl-crossreference.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs\">\n    <h2 class=\"float-left\">Diseases and Pathologies</h2>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions\">\n      <ul class=\"no-bullet\" *ngFor=\"let diseaseDescription of diseaseDescriptions\">\n        <li>{{diseaseDescription}}</li>\n      </ul>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"efoXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"efoXRefs\">\n        <cp-efo-crossreferences [crossReferences]=\"efoXRefs\"></cp-efo-crossreferences>\n      </div>\n      <div id=\"chemblXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"chemblXRefs\">\n        <cp-chembl-crossreference [crossReferences]=\"chemblXRefs\"></cp-chembl-crossreference>\n      </div>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDiseaseComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexDiseaseComponent = (function () {
-    function ComplexDiseaseComponent() {
-    }
-    ComplexDiseaseComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    /**
-     * TODO: We shouldn't go through all XRefs on the client. The CP model should be adapted.
-     *
-     * Finding all efo and ChEMBL XRefs
-     */
-    ComplexDiseaseComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            var crossRef = this._crossReferences[i];
-            var database = this._crossReferences[i].database;
-            if (database === 'efo') {
-                if (this._efoXRefs === undefined) {
-                    this._efoXRefs = [];
-                }
-                this._efoXRefs.push(crossRef);
-            }
-            if (database === 'ChEMBL target') {
-                if (this._chemblXRefs === undefined) {
-                    this._chemblXRefs = [];
-                }
-                this._chemblXRefs.push(crossRef);
-            }
-        }
-    };
-    Object.defineProperty(ComplexDiseaseComponent.prototype, "diseaseDescriptions", {
-        get: function () {
-            return this._diseaseDescriptions;
-        },
-        set: function (value) {
-            this._diseaseDescriptions = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDiseaseComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDiseaseComponent.prototype, "efoXRefs", {
-        get: function () {
-            return this._efoXRefs;
-        },
-        set: function (value) {
-            this._efoXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexDiseaseComponent.prototype, "chemblXRefs", {
-        get: function () {
-            return this._chemblXRefs;
-        },
-        set: function (value) {
-            this._chemblXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexDiseaseComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexDiseaseComponent.prototype, "diseaseDescriptions", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexDiseaseComponent.prototype, "crossReferences", null);
-ComplexDiseaseComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-disease',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/complex-disease.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexDiseaseComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-disease.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Disease Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Name</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n        <td>\n          {{crossReference.description}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EfoCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__ = __webpack_require__("../../../../../src/app/shared/ols/service/ols.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var EfoCrossreferencesComponent = (function () {
-    function EfoCrossreferencesComponent(olsService, notificationService, googleAnalyticsService) {
-        this.olsService = olsService;
-        this.notificationService = notificationService;
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._displayedElements = 5;
-    }
-    EfoCrossreferencesComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    /**
-     * The OLS WS provides us some description to the found EFO and Orphanet XRefs.
-     */
-    EfoCrossreferencesComponent.prototype.findXRefs = function () {
-        var _this = this;
-        var _loop_1 = function (i) {
-            if (this_1.crossReferences[i].identifier.split(':')[0] === 'EFO') {
-                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
-                    _this.notificationService.onAPIRequestError('OLS');
-                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_efo, error.status ? error.status : 'unknown');
-                });
-            }
-            else if (this_1.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
-                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
-                    _this.notificationService.onAPIRequestError('OLS');
-                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_orphanet, error.status ? error.status : 'unknown');
-                });
-            }
-        };
-        var this_1 = this;
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            _loop_1(i);
-        }
-    };
-    Object.defineProperty(EfoCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EfoCrossreferencesComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return EfoCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], EfoCrossreferencesComponent.prototype, "crossReferences", null);
-EfoCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-efo-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
-], EfoCrossreferencesComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/efo-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "h3\n{\n  padding: 5px 10px;\n  display: inline-block;\n  border-radius: 100px;\n  box-shadow: 0px 0px 2px #000000;\n}\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"ecoXRef || intactXRefs\">\n  <div class=\"columns medium-6 medium-push-6\">\n    <div class=\"columns medium-10\">\n      Evidence by\n      <a href=\"{{ecoXRef.searchURL}}\"\n         target=\"_blank\"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i\n        class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n      <ng-container *ngIf=\"intactXRefs\">\n        in IntAct\n        <ng-container *ngFor=\"let crossReference of intactXRefs;let isLast=last\">\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"> {{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>{{isLast ? '' : ', '}}\n        </ng-container>\n      </ng-container>\n    </div>\n    <div class=\"column medium-2 padding-left-xsmall\">\n      <h3 *ngIf=\"flaskSymbol\" class=\"icon icon-functional float-left\" attr.data-icon=\"{{flaskSymbol}}\"></h3>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexEvidenceComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexEvidenceComponent = (function () {
-    function ComplexEvidenceComponent() {
-    }
-    ComplexEvidenceComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    /**
-     * TODO: Enrich the object from the response and may introduce a level for the flask symbol.
-     * Currently we do not store any further information in the evidence XRef, this is why we need to extend the object here.
-     * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
-     */
-    ComplexEvidenceComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            var crossRef = this._crossReferences[i];
-            var database = this._crossReferences[i].database;
-            if (database === 'evidence ontology') {
-                this._ecoXRef = crossRef;
-                switch (this._ecoXRef.identifier) {
-                    case ('ECO:0000353'):
-                        this._ecoXRef.description = 'physical interaction evidence';
-                        this._flaskSymbol = 'E';
-                        break;
-                    case ('ECO:0005610'):
-                        this._ecoXRef.description = 'inferred by homology';
-                        this._flaskSymbol = 'C';
-                        break;
-                    case ('ECO:0005544'):
-                        this._ecoXRef.description = 'inferred by orthology';
-                        this._flaskSymbol = 'C';
-                        break;
-                    case ('ECO:0005546'):
-                        this._ecoXRef.description = 'inferred by paralogy';
-                        this._flaskSymbol = 'C';
-                        break;
-                    case ('ECO:0005547'):
-                        this._ecoXRef.description = 'inferred by curator';
-                        this._flaskSymbol = 'B';
-                        break;
-                    case ('ECO:0005543'):
-                        this._ecoXRef.description = 'inferred from mixed species evidence';
-                        this._flaskSymbol = 'E';
-                        break;
-                    case ('ECO:0005542'):
-                        this._ecoXRef.description = 'inferred from single species evidence';
-                        this._flaskSymbol = 'E';
-                        break;
-                }
-            }
-            if (database === 'intact') {
-                if (this._intactXRefs === undefined) {
-                    this._intactXRefs = [];
-                }
-                this._intactXRefs.push(crossRef);
-            }
-        }
-    };
-    Object.defineProperty(ComplexEvidenceComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexEvidenceComponent.prototype, "ecoXRef", {
-        get: function () {
-            return this._ecoXRef;
-        },
-        set: function (value) {
-            this._ecoXRef = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexEvidenceComponent.prototype, "intactXRefs", {
-        get: function () {
-            return this._intactXRefs;
-        },
-        set: function (value) {
-            this._intactXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexEvidenceComponent.prototype, "flaskSymbol", {
-        get: function () {
-            return this._flaskSymbol;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexEvidenceComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexEvidenceComponent.prototype, "crossReferences", null);
-ComplexEvidenceComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-evidence',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-evidence/complex-evidence.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexEvidenceComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-evidence.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(gxa && gxaParamsQueries) || goCellularXRefs\">\n    <h2 class=\"float-left\">Expression and Cellular Location</h2>\n    <div class=\"columns medium-12\">\n      <cp-gxa-heatmap *ngIf=\"gxa && gxaParamsQueries && complexSpecies\" [gxa]=\"gxa\" [gxaParamsQueries]=\"gxaParamsQueries\"\n                      [complexSpecies]=\"complexSpecies\"></cp-gxa-heatmap>\n    </div>\n    <div class=\"columns medium-12\">\n      <cp-go-celluar-crossreference *ngIf=\"goCellularXRefs\"\n                                    [crossReferences]=\"goCellularXRefs\"></cp-go-celluar-crossreference>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexExpressionComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexExpressionComponent = (function () {
-    function ComplexExpressionComponent() {
-    }
-    ComplexExpressionComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-        this.findGXAQueryies();
-    };
-    ComplexExpressionComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            var crossRef = this._crossReferences[i];
-            var database = this._crossReferences[i].database;
-            var qualifier = this._crossReferences[i].qualifier;
-            if (database === 'gene ontology' && qualifier === 'cellular component') {
-                if (this.goCellularXRefs === undefined) {
-                    this.goCellularXRefs = [];
-                }
-                this.goCellularXRefs.push(crossRef);
-            }
-        }
-    };
-    ComplexExpressionComponent.prototype.findGXAQueryies = function () {
-        for (var i = 0; i < this._participants.length; i++) {
-            if (this._participants[i].interactorType === 'protein') {
-                if (this._gxaParamsQueries === undefined) {
-                    this.gxaParamsQueries = this._participants[i].identifier;
-                }
-                else {
-                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
-                }
-            }
-        }
-    };
-    Object.defineProperty(ComplexExpressionComponent.prototype, "gxa", {
-        get: function () {
-            return this._gxa;
-        },
-        set: function (value) {
-            this._gxa = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexExpressionComponent.prototype, "participants", {
-        get: function () {
-            return this._participants;
-        },
-        set: function (value) {
-            this._participants = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexExpressionComponent.prototype, "complexSpecies", {
-        get: function () {
-            return this._complexSpecies;
-        },
-        set: function (value) {
-            this._complexSpecies = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexExpressionComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexExpressionComponent.prototype, "gxaParamsQueries", {
-        get: function () {
-            return this._gxaParamsQueries;
-        },
-        set: function (value) {
-            this._gxaParamsQueries = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexExpressionComponent.prototype, "goCellularXRefs", {
-        get: function () {
-            return this._goCellularXRefs;
-        },
-        set: function (value) {
-            this._goCellularXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexExpressionComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ComplexExpressionComponent.prototype, "gxa", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexExpressionComponent.prototype, "participants", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexExpressionComponent.prototype, "complexSpecies", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexExpressionComponent.prototype, "crossReferences", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexExpressionComponent.prototype, "gxaParamsQueries", null);
-ComplexExpressionComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-expression',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/complex-expression.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexExpressionComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-expression.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Cellular Component ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoCelluarCrossreferenceComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var GoCelluarCrossreferenceComponent = (function () {
-    function GoCelluarCrossreferenceComponent() {
-        this._displayedElements = 5;
-    }
-    GoCelluarCrossreferenceComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(GoCelluarCrossreferenceComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GoCelluarCrossreferenceComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GoCelluarCrossreferenceComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], GoCelluarCrossreferenceComponent.prototype, "crossReferences", null);
-GoCelluarCrossreferenceComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-go-celluar-crossreference',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], GoCelluarCrossreferenceComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/go-celluar-crossreference.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-7 no-pad-left\">\n    </div>\n    <div class=\"columns medium-4\">\n      <h3>Curated by:</h3> <h4>{{institute}}</h4>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFooterComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexFooterComponent = (function () {
-    function ComplexFooterComponent() {
-    }
-    ComplexFooterComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(ComplexFooterComponent.prototype, "institute", {
-        get: function () {
-            return this._institute;
-        },
-        set: function (value) {
-            this._institute = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFooterComponent.prototype, "comment", {
-        get: function () {
-            return this._comment;
-        },
-        set: function (value) {
-            this._comment = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexFooterComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ComplexFooterComponent.prototype, "institute", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ComplexFooterComponent.prototype, "comment", null);
-ComplexFooterComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-footer',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-footer/complex-footer.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexFooterComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-footer.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Agonists ({{agonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let agonist of agonists | slice:0:displayedElements\">\n        <td>\n          {{agonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < agonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = agonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AgonistsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AgonistsComponent = (function () {
-    function AgonistsComponent() {
-        this._displayedElements = 5;
-    }
-    AgonistsComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(AgonistsComponent.prototype, "agonists", {
-        get: function () {
-            return this._agonists;
-        },
-        set: function (value) {
-            this._agonists = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AgonistsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return AgonistsComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], AgonistsComponent.prototype, "agonists", null);
-AgonistsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-agonists',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/agonists/agonists.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], AgonistsComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/agonists.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Antagonists ({{antagonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let antagonist of antagonists | slice:0:displayedElements\">\n        <td>\n          {{antagonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < antagonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = antagonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AntagonistsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AntagonistsComponent = (function () {
-    function AntagonistsComponent() {
-        this._displayedElements = 5;
-    }
-    AntagonistsComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(AntagonistsComponent.prototype, "antagonists", {
-        get: function () {
-            return this._antagonists;
-        },
-        set: function (value) {
-            this._antagonists = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AntagonistsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return AntagonistsComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], AntagonistsComponent.prototype, "antagonists", null);
-AntagonistsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-antagonists',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/antagonists/antagonists.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], AntagonistsComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/antagonists.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/complex-function.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/complex-function.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row no-pad-left no-pad-right\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <div class=\"columns medium-12 clearfix no-pad-left\">\n      <h2 class=\"float-left\">Function</h2>\n    </div>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"functionDescription\">\n      <p>{{functionDescription}}</p>\n    </div>\n    <div id=\"ligands\" class=\"columns medium-6 no-pad-left\" *ngIf=\"ligands && ligands.length !== 0\">\n      <cp-ligands [ligands]=\"ligands\"></cp-ligands>\n    </div>\n    <div id=\"goXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"goXRefs\">\n      <cp-go-crossreferences [crossReferences]=\"goXRefs\"></cp-go-crossreferences>\n    </div>\n    <div id=\"agonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"agonists && agonists.length !== 0\">\n      <cp-agonists [agonists]=\"agonists\"></cp-agonists>\n    </div>\n    <div id=\"antagonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"antagonists && antagonists.length !== 0\">\n      <cp-antagonists [antagonists]=\"antagonists\"></cp-antagonists>\n    </div>\n    <div id=\"reactomeXRefs\" class=\"columns medium-12\" *ngIf=\"reactomeXRefs\">\n      <cp-reactome-crossreferences [crossReferences]=\"reactomeXRefs\"></cp-reactome-crossreferences>\n    </div>\n    <div id=\"intenzXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"intenzXRefs\">\n      <cp-intenz-crossreferences [crossReferences]=\"intenzXRefs\"></cp-intenz-crossreferences>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/complex-function.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFunctionComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexFunctionComponent = (function () {
-    function ComplexFunctionComponent() {
-    }
-    ComplexFunctionComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    ComplexFunctionComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this.crossReferences.length; i++) {
-            var crossRef = this.crossReferences[i];
-            var database = this.crossReferences[i].database;
-            if (database === 'gene ontology') {
-                if (this.goXRefs === undefined) {
-                    this.goXRefs = [];
-                }
-                this.goXRefs.push(crossRef);
-            }
-            if (database === 'intenz') {
-                if (this.intenzXRefs === undefined) {
-                    this.intenzXRefs = [];
-                }
-                this.intenzXRefs.push(crossRef);
-            }
-            if (database === 'reactome') {
-                if (this.reactomeXRefs === undefined) {
-                    this.reactomeXRefs = [];
-                }
-                this.reactomeXRefs.push(crossRef);
-            }
-        }
-    };
-    ComplexFunctionComponent.prototype.ngAfterViewInit = function () {
-        $('.goToMenu').foundation();
-    };
-    Object.defineProperty(ComplexFunctionComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "functionDescription", {
-        get: function () {
-            return this._functionDescription;
-        },
-        set: function (value) {
-            this._functionDescription = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "goXRefs", {
-        get: function () {
-            return this._goXRefs;
-        },
-        set: function (value) {
-            this._goXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "intenzXRefs", {
-        get: function () {
-            return this._intenzXRefs;
-        },
-        set: function (value) {
-            this._intenzXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "reactomeXRefs", {
-        get: function () {
-            return this._reactomeXRefs;
-        },
-        set: function (value) {
-            this._reactomeXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "ligands", {
-        get: function () {
-            return this._ligands;
-        },
-        set: function (value) {
-            this._ligands = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "agonists", {
-        get: function () {
-            return this._agonists;
-        },
-        set: function (value) {
-            this._agonists = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexFunctionComponent.prototype, "antagonists", {
-        get: function () {
-            return this._antagonists;
-        },
-        set: function (value) {
-            this._antagonists = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexFunctionComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "crossReferences", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexFunctionComponent.prototype, "functionDescription", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "ligands", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "agonists", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexFunctionComponent.prototype, "antagonists", null);
-ComplexFunctionComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-function',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/complex-function.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/complex-function.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexFunctionComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-function.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Biological Process ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoBiologicalProcessComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var GoBiologicalProcessComponent = (function () {
-    function GoBiologicalProcessComponent() {
-        this._displayedElements = 5;
-    }
-    GoBiologicalProcessComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(GoBiologicalProcessComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GoBiologicalProcessComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GoBiologicalProcessComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], GoBiologicalProcessComponent.prototype, "crossReferences", null);
-GoBiologicalProcessComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-go-biological-process',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], GoBiologicalProcessComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/go-biological-process.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"columns medium-6\">\n      <cp-go-molecular-function *ngIf=\"molecularFunctions\"\n                                [crossReferences]=\"molecularFunctions\"></cp-go-molecular-function>\n    </div>\n    <div class=\"columns medium-6\">\n      <cp-go-biological-process *ngIf=\"biologicalProcess\" [crossReferences]=\"biologicalProcess\"></cp-go-biological-process>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var GoCrossreferencesComponent = (function () {
-    function GoCrossreferencesComponent() {
-    }
-    GoCrossreferencesComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    GoCrossreferencesComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this.crossReferences.length; i++) {
-            var crossRef = this.crossReferences[i];
-            var qualifier = this.crossReferences[i].qualifier;
-            if (qualifier === 'biological process') {
-                if (this._biologicalProcess === undefined) {
-                    this._biologicalProcess = [];
-                }
-                this._biologicalProcess.push(crossRef);
-            }
-            if (qualifier === 'molecular function') {
-                if (this._molecularFunctions === undefined) {
-                    this._molecularFunctions = [];
-                }
-                this._molecularFunctions.push(crossRef);
-            }
-        }
-    };
-    Object.defineProperty(GoCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GoCrossreferencesComponent.prototype, "molecularFunctions", {
-        get: function () {
-            return this._molecularFunctions;
-        },
-        set: function (value) {
-            this._molecularFunctions = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GoCrossreferencesComponent.prototype, "biologicalProcess", {
-        get: function () {
-            return this._biologicalProcess;
-        },
-        set: function (value) {
-            this._biologicalProcess = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GoCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], GoCrossreferencesComponent.prototype, "crossReferences", null);
-GoCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-go-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], GoCrossreferencesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/go-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Molecular Function ({{crossReferences.length}})\n    </h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoMolecularFunctionComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var GoMolecularFunctionComponent = (function () {
-    function GoMolecularFunctionComponent() {
-        this._displayedElements = 5;
-    }
-    GoMolecularFunctionComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(GoMolecularFunctionComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GoMolecularFunctionComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GoMolecularFunctionComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], GoMolecularFunctionComponent.prototype, "crossReferences", null);
-GoMolecularFunctionComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-go-molecular-function',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], GoMolecularFunctionComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/go-molecular-function.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>IntEnz Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntenzCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var IntenzCrossreferencesComponent = (function () {
-    function IntenzCrossreferencesComponent() {
-        this._displayedElements = 5;
-    }
-    IntenzCrossreferencesComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(IntenzCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(IntenzCrossreferencesComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return IntenzCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], IntenzCrossreferencesComponent.prototype, "crossReferences", null);
-IntenzCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-intenz-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], IntenzCrossreferencesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/intenz-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Ligands ({{ligands.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let ligand of ligands | slice:0:displayedElements\">\n        <td>\n          {{ligand}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < ligands.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = ligands.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LigandsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var LigandsComponent = (function () {
-    function LigandsComponent() {
-        this._displayedElements = 5;
-    }
-    LigandsComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(LigandsComponent.prototype, "ligands", {
-        get: function () {
-            return this._ligands;
-        },
-        set: function (value) {
-            this._ligands = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LigandsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LigandsComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], LigandsComponent.prototype, "ligands", null);
-LigandsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-ligands',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/ligands/ligands.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], LigandsComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/ligands.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeComplex; });
-var ReactomeComplex = (function () {
-    function ReactomeComplex(id) {
-        this._pathways = [];
-        this._id = id;
-    }
-    Object.defineProperty(ReactomeComplex.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeComplex.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        set: function (value) {
-            this._name = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeComplex.prototype, "pathways", {
-        get: function () {
-            return this._pathways;
-        },
-        set: function (value) {
-            this._pathways = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomeComplex;
-}());
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/reactome-complex.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomePathway; });
-var ReactomePathway = (function () {
-    function ReactomePathway(id) {
-        this._complexes = [];
-        this._id = id;
-    }
-    Object.defineProperty(ReactomePathway.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomePathway.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        set: function (value) {
-            this._name = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomePathway.prototype, "complexes", {
-        get: function () {
-            return this._complexes;
-        },
-        set: function (value) {
-            this._complexes = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomePathway;
-}());
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/reactome-pathway.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>Pathways</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Complex Identifier</th>\n      <th>Complex Name</th>\n      <th>Pathway Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements\">\n        <td><a (click)=\"selectComplexWithFirstPathway(reactomeComplex)\">{{reactomeComplex}}</a></td>\n        <td>{{reactomeComplexes[reactomeComplex].name}}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements\">\n              <a (click)=\"selectComplexByPathway(reactomeComplex, reactomePathway)\">{{reactomePathway}}</a>\n            </li>\n            <li class=\"text-center no-bullet\" *ngIf=\"displayedElements < reactomeComplexes[reactomeComplex].pathways.length\">\n              <a class=\"label\" (click)=\"displayedElements = reactomeComplexes[reactomeComplex].pathways.length\">Show\n                all</a>\n            </li>\n          </ul>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < reactomeComplexes.length\">\n        <td></td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = reactomeComplexes.length\">Show all</a>\n        </td>\n        <td></td>\n      </tr>\n      </tbody>\n    </table>\n    <div class=\"columns medium-12 no-pad-left\" *ngIf=\"selectedComplex && selectedPathway\">\n      <cp-reactome-diagram [reactomeComplexe]=\"reactomeComplexes\" [reactomePathways]=\"reactomePathways\"\n                           [selectedComplex]=\"selectedComplex\"\n                           [selectedPathway]=\"selectedPathway\"></cp-reactome-diagram>\n    </div>\n  </div>\n</div>\n\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__("../../../../rxjs/_esm5/add/observable/forkJoin.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-var ReactomeCrossreferencesComponent = (function () {
-    function ReactomeCrossreferencesComponent(reactomeService, notificationService, googleAnalyticsService) {
-        this.reactomeService = reactomeService;
-        this.notificationService = notificationService;
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._reactomeComplexes = {};
-        this._reactomePathways = {};
-        this._isDataLoaded = false;
-        this._displayedElements = 5;
-        this.diagramLoaded = false;
-    }
-    ReactomeCrossreferencesComponent.prototype.ngOnInit = function () {
-        this.mapComplexeToPathways();
-    };
-    /**
-     * TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done...
-     * TODO: ...in the WS (Either CP-WS or Reactome-WS)
-     * This request is doing the following:
-     * We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
-     * 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
-     * 1b. Ask Reactome for every XRefs we have for the corresponding name.
-     * 2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
-     * 3. Map pathways and complexes to each other.
-     * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
-     */
-    ReactomeCrossreferencesComponent.prototype.mapComplexeToPathways = function () {
-        var _this = this;
-        var _loop_1 = function (i) {
-            __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */].forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
-                var relatedPathways = response[0];
-                var complexName = response[1];
-                for (var count = 0; count < relatedPathways.length; count++) {
-                    var pathway = relatedPathways[count];
-                    var currentPathway = _this._reactomePathways[pathway.stId];
-                    var currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier];
-                    if (currentPathway === undefined) {
-                        currentPathway = _this._reactomePathways[pathway.stId] = new __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__["a" /* ReactomePathway */](pathway.stId);
-                        currentPathway.name = pathway.displayName;
-                    }
-                    if (currentComplex === undefined) {
-                        currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier.toString()]
-                            = new __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__["a" /* ReactomeComplex */](_this._crossReferences[i].identifier);
-                        currentComplex.name = complexName;
-                    }
-                    currentPathway.complexes.push(_this._crossReferences[i].identifier);
-                    currentComplex.pathways.push(pathway.stId);
-                    if (i === _this._crossReferences.length - 1 && count === relatedPathways.length - 1) {
-                        _this.selectComplexWithFirstPathway(Object.keys(_this._reactomeComplexes).sort()[0]);
-                        _this._isDataLoaded = true;
-                    }
-                }
-            }, function (error) {
-                _this.notificationService.onAPIRequestError('Reactome');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__["a" /* Category */].reactome, error.status ? error.status : 'unknown');
-            });
-        };
-        var this_1 = this;
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            _loop_1(i);
-        }
-    };
-    ReactomeCrossreferencesComponent.prototype.onChildLoaded = function () {
-        this.diagramLoaded = true;
-    };
-    ReactomeCrossreferencesComponent.prototype.selectComplexByPathway = function (complexId, pathwayId) {
-        this.selectedComplex = complexId;
-        this.selectedPathway = pathwayId;
-    };
-    ReactomeCrossreferencesComponent.prototype.selectComplexWithFirstPathway = function (complexId) {
-        this.selectedComplex = complexId;
-        this.selectedPathway = this._reactomeComplexes[complexId].pathways.sort()[0];
-    };
-    ReactomeCrossreferencesComponent.prototype.getSortedKeys = function (object) {
-        return Object.keys(object).sort();
-    };
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "crossReferences", {
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "selectedComplex", {
-        get: function () {
-            return this._selectedComplex;
-        },
-        set: function (value) {
-            this._selectedComplex = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "selectedPathway", {
-        get: function () {
-            return this._selectedPathway;
-        },
-        set: function (value) {
-            this._selectedPathway = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "reactomeComplexes", {
-        get: function () {
-            return this._reactomeComplexes;
-        },
-        set: function (value) {
-            this._reactomeComplexes = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "reactomePathways", {
-        get: function () {
-            return this._reactomePathways;
-        },
-        set: function (value) {
-            this._reactomePathways = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "isDataLoaded", {
-        get: function () {
-            return this._isDataLoaded;
-        },
-        set: function (value) {
-            this._isDataLoaded = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomeCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ReactomeCrossreferencesComponent.prototype, "crossReferences", null);
-ReactomeCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-reactome-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__["a" /* ReactomeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__["a" /* ReactomeService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
-], ReactomeCrossreferencesComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/reactome-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/complex-header.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/complex-header.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-12 no-pad-left float-left\">\n      <h2>{{complexName}}</h2>\n      <h3><i>{{complexSpecies}}</i></h3>\n    </div>\n    <div class=\"columns medium-4  float-left\">\n      <div class=\"row button-grid small-up-12 medium-up-12 large-up-12\" data-equalizer\n           data-equalize-on=\"medium\" id=\"large-button-grid\">\n        <div class=\"columns small-12 medium-6 no-pad-left\">\n          <a class=\"button primary expanded\" data-equalizer-watch data-open=\"downloadModal\">\n            <span class=\"icon icon-functional \" data-icon=\"=\"> Download</span></a>\n        </div>\n        <div class=\"columns small-12 medium-6 no-pad-left\">\n          <a class=\"button primary expanded\" data-equalizer-watch (click)=\"saveComplex()\"\n             [ngClass]=\"{'disabled': isInBasket()}\"><span class=\"icon icon-generic medium \"\n                                                          data-icon=\"b\"> Basket</span></a>\n        </div>\n      </div>\n    </div>\n    <div class=\"columns medium-8  float-right\">\n      <cp-complex-evidence [crossReferences]=\"crossReferences\"></cp-complex-evidence>\n    </div>\n    <cp-download-modal [complexAC]=\"complexAC\"></cp-download-modal>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/complex-header.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexHeaderComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__("../../../../../src/app/shared/basket/service/basket.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var ComplexHeaderComponent = (function () {
-    function ComplexHeaderComponent(basketService, ga, notificationService) {
-        this.basketService = basketService;
-        this.ga = ga;
-        this.notificationService = notificationService;
-    }
-    ComplexHeaderComponent.prototype.ngOnInit = function () {
-        this._jsonURL = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/details/' + this._complexAC;
-    };
-    ComplexHeaderComponent.prototype.ngAfterViewInit = function () {
-        $('cp-complex-header').foundation();
-    };
-    ComplexHeaderComponent.prototype.saveComplex = function () {
-        this.basketService.saveInBasket(this._complexName, this._complexAC, this._complexSpecies);
-    };
-    Object.defineProperty(ComplexHeaderComponent.prototype, "complexAC", {
-        get: function () {
-            return this._complexAC;
-        },
-        set: function (value) {
-            this._complexAC = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexHeaderComponent.prototype, "complexName", {
-        get: function () {
-            return this._complexName;
-        },
-        set: function (value) {
-            this._complexName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexHeaderComponent.prototype, "complexSpecies", {
-        get: function () {
-            return this._complexSpecies;
-        },
-        set: function (value) {
-            this._complexSpecies = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexHeaderComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexHeaderComponent.prototype, "jsonURL", {
-        get: function () {
-            return this._jsonURL;
-        },
-        set: function (value) {
-            this._jsonURL = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ComplexHeaderComponent.prototype.isInBasket = function () {
-        return this.basketService.isInBasket(this._complexAC);
-    };
-    return ComplexHeaderComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexHeaderComponent.prototype, "complexAC", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexHeaderComponent.prototype, "complexName", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexHeaderComponent.prototype, "complexSpecies", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexHeaderComponent.prototype, "crossReferences", null);
-ComplexHeaderComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-header',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-header/complex-header.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-header/complex-header.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _c || Object])
-], ComplexHeaderComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-header.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"reveal large\" id=\"downloadModal\" data-reveal>\n  <h3>Download</h3>\n  <p class=\"lead\">\n    Download this complex in PSI-MI XML 2.5 & 3.0, ComplexTab or PSI-MI JSON. If you would like to learn more about our\n    download options, please have a look to our <a class=\"readmore\" routerLink=\"/download\">programmatic access section</a>.\n  </p>\n  <div class=\"row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right\"\n       data-equalize-on=\"medium\" id=\"large-button-grid\">\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center disabled\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 2.5</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center disabled\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 3.0</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center disabled\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"v\"></h3>\n        <h5 class=\"white-color\">ComplexTab</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\"\n         (click)=\"goToComplexWS()\">\n        <h3 class=\"icon icon-fileformats white-color\" data-icon=\"J\"></h3>\n        <h5 class=\"white-color\">PSI-MI JSON</h5>\n      </a>\n    </div>\n  </div>\n  <button class=\"close-button\" data-close aria-label=\"Close modal\" type=\"button\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadModalComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var DownloadModalComponent = (function () {
-    function DownloadModalComponent(googleAnalyticsService) {
-        this.googleAnalyticsService = googleAnalyticsService;
-    }
-    DownloadModalComponent.prototype.ngOnInit = function () {
-    };
-    DownloadModalComponent.prototype.goToComplexWS = function () {
-        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].details, 'ComplexWS');
-        window.open(__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/details/' + this._complexAC, '_blank');
-    };
-    Object.defineProperty(DownloadModalComponent.prototype, "complexAC", {
-        get: function () {
-            return this._complexAC;
-        },
-        set: function (value) {
-            this._complexAC = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return DownloadModalComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], DownloadModalComponent.prototype, "complexAC", null);
-DownloadModalComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-download-modal',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-header/download-modal/download-modal.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
-], DownloadModalComponent);
-
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/download-modal.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <h2 class=\"float-left\">Participants</h2>\n  <div class=\"columns medium-12 no-pad-right no-pad-left\">\n    <div class=\"columns medium-6 no-pad-right\">\n      <cp-complex-viewer *ngIf=\"complexMIJSON && complexAC\"\n      [complexAC]=\"complexAC\"\n      [complexMIJSON]=\"complexMIJSON\"></cp-complex-viewer>\n    </div>\n    <div class=\"columns medium-6 no-pad-right\">\n      <table class=\"hover\">\n        <thead>\n        <th>Legend</th>\n        <th>Description</th>\n        <th>Stoichiometry</th>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n            </div>\n          </td>\n          <td>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n              {{participant.name}} ({{participant.bioRole}})</b></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                       target=\"_blank\">{{participant.identifier}} <i\n              class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n          </td>\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <p class=\"badge\" *ngIf=\"participant.stochiometry\">\n                {{getConvertedStochiometry(participant.stochiometry)}}</p>\n            </div>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n          <td>\n            <!--empty placeholder-->\n          </td>\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n          </td>\n          <td>\n            <!--empty placeholder-->\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexParticipantsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexParticipantsComponent = (function () {
-    function ComplexParticipantsComponent() {
-        this._displayedElements = 5;
-    }
-    ComplexParticipantsComponent.prototype.ngOnInit = function () {
-        this.sortParticipants();
-    };
-    ComplexParticipantsComponent.prototype.sortParticipants = function () {
-        // TODO: Sort participants in WS - GH issue #174
-        this.participants.sort(function (a, b) {
-            if (a.interactorType < b.interactorType) {
-                return -1;
-            }
-            else if (a.interactorType > b.interactorType) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        });
-    };
-    ComplexParticipantsComponent.prototype.getLegendURL = function (interactorType) {
-        // TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
-        switch (interactorType) {
-            case 'small molecule':
-                return 'assets/images/legend/small-mol.png';
-            case 'protein':
-                return 'assets/images/legend/protein-blob.png';
-            case 'single stranded deoxyribonucleic acid':
-                return 'assets/images/legend/dna.png';
-            case 'ribonucleic acid':
-                return 'assets/images/legend/rna.png';
-        }
-    };
-    ComplexParticipantsComponent.prototype.getConvertedStochiometry = function (stochiometry) {
-        // TODO: WS should send Stochiometry in right format already - GH issue #173
-        return stochiometry.split(',')[0].split(':')[1].trim();
-    };
-    Object.defineProperty(ComplexParticipantsComponent.prototype, "participants", {
-        get: function () {
-            return this._participants;
-        },
-        set: function (value) {
-            this._participants = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexParticipantsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexAC", {
-        get: function () {
-            return this._complexAC;
-        },
-        set: function (value) {
-            this._complexAC = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexMIJSON", {
-        get: function () {
-            return this._complexMIJSON;
-        },
-        set: function (value) {
-            this._complexMIJSON = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexParticipantsComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexParticipantsComponent.prototype, "participants", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexParticipantsComponent.prototype, "complexAC", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexParticipantsComponent.prototype, "complexMIJSON", null);
-ComplexParticipantsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-participants',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-participants/complex-participants.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexParticipantsComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-participants.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Assembly</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let assembly of assemblies\">\n        <td>\n          {{assembly}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AssembliesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AssembliesComponent = (function () {
-    function AssembliesComponent() {
-    }
-    AssembliesComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(AssembliesComponent.prototype, "assemblies", {
-        get: function () {
-            return this._assemblies;
-        },
-        set: function (value) {
-            this._assemblies = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return AssembliesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], AssembliesComponent.prototype, "assemblies", null);
-AssembliesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-assemblies',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], AssembliesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/assemblies.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription || pdbXRefs || emdbXRefs\">\n    <h2 class=\"float-left\">Properties</h2>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription\">\n      {{propertiesDescription}}\n    </div>\n    <div id=\"comment\" class=\"columns medium-12 no-pad-left\" *ngIf=\"comments  && comments.length !== 0\">\n      <h3>Comments</h3>\n      <ul class=\"no-bullet\" *ngFor=\"let comment of comments\">\n        <li>{{comment}}</li>\n      </ul>\n    </div>\n    <div id=\"assemblies\" class=\"columns medium-12 no-pad-left\" *ngIf=\"assemblies && assemblies.length !== 0\">\n      <cp-assemblies [assemblies]=\"assemblies\"></cp-assemblies>\n    </div>\n    <div id=\"pdbXRefs\" class=\"columns medium-12\" *ngIf=\"pdbXRefs\">\n      <cp-pdb-crossreferences [crossReferences]=\"pdbXRefs\"></cp-pdb-crossreferences>\n    </div>\n    <div id=\"emdbXRefs\" class=\"columns medium-12\" *ngIf=\"emdbXRefs\">\n      <cp-emdb-crossreferences [crossReferences]=\"emdbXRefs\"></cp-emdb-crossreferences>\n    </div>\n  </div>\n</div>\n\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPropertiesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexPropertiesComponent = (function () {
-    function ComplexPropertiesComponent() {
-    }
-    ComplexPropertiesComponent.prototype.ngOnInit = function () {
-        this.checkFreeTextContent();
-        this.findXRefs();
-    };
-    ComplexPropertiesComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this.crossReferences.length; i++) {
-            var crossRef = this.crossReferences[i];
-            var database = this.crossReferences[i].database;
-            if (database === 'wwpdb') {
-                if (this._pdbXRefs === undefined) {
-                    this._pdbXRefs = [];
-                }
-                this._pdbXRefs.push(crossRef);
-            }
-            if (database === 'emdb') {
-                if (this._emdbXRefs === undefined) {
-                    this._emdbXRefs = [];
-                }
-                this._emdbXRefs.push(crossRef);
-            }
-        }
-    };
-    ComplexPropertiesComponent.prototype.checkFreeTextContent = function () {
-        if (this._propertiesDescription.length === 0) {
-            this._propertiesDescription = null;
-        }
-        if (this._comments.length === 0) {
-            this._comments = null;
-        }
-    };
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "propertiesDescription", {
-        get: function () {
-            return this._propertiesDescription;
-        },
-        set: function (value) {
-            this._propertiesDescription = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "pdbXRefs", {
-        get: function () {
-            return this._pdbXRefs;
-        },
-        set: function (value) {
-            this._pdbXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "emdbXRefs", {
-        get: function () {
-            return this._emdbXRefs;
-        },
-        set: function (value) {
-            this._emdbXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "comments", {
-        get: function () {
-            return this._comments;
-        },
-        set: function (value) {
-            this._comments = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexPropertiesComponent.prototype, "assemblies", {
-        get: function () {
-            return this._assemblies;
-        },
-        set: function (value) {
-            this._assemblies = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexPropertiesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexPropertiesComponent.prototype, "propertiesDescription", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexPropertiesComponent.prototype, "crossReferences", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexPropertiesComponent.prototype, "emdbXRefs", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexPropertiesComponent.prototype, "comments", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexPropertiesComponent.prototype, "assemblies", null);
-ComplexPropertiesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-properties',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/complex-properties.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexPropertiesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-properties.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>EMDB Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmdbCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var EmdbCrossreferencesComponent = (function () {
-    function EmdbCrossreferencesComponent() {
-        this._displayedElements = 5;
-    }
-    EmdbCrossreferencesComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(EmdbCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EmdbCrossreferencesComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return EmdbCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], EmdbCrossreferencesComponent.prototype, "crossReferences", null);
-EmdbCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-emdb-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], EmdbCrossreferencesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/emdb-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <cp-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></cp-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <h4>Curated structures ({{crossReferences.length}}):</h4>\n      <table class=\"hover\">\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n          <td>\n            <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"><img src=\"assets/images/pdbe_min_logo.png\"> <i\n              class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PdbCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PdbCrossreferencesComponent = (function () {
-    function PdbCrossreferencesComponent() {
-        this._isDataLoaded = false;
-        this._displayedElements = 5;
-    }
-    PdbCrossreferencesComponent.prototype.ngOnInit = function () {
-        this.selectFirstXref();
-    };
-    PdbCrossreferencesComponent.prototype.selectFirstXref = function () {
-        if (this._crossReferences[0].identifier) {
-            this._selectedXRef = this._crossReferences[0].identifier;
-            this._isDataLoaded = true;
-        }
-    };
-    Object.defineProperty(PdbCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PdbCrossreferencesComponent.prototype.selectXRef = function (id) {
-        this._selectedXRef = id;
-    };
-    Object.defineProperty(PdbCrossreferencesComponent.prototype, "selectedXRef", {
-        get: function () {
-            return this._selectedXRef;
-        },
-        set: function (value) {
-            this._selectedXRef = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PdbCrossreferencesComponent.prototype, "isDataLoaded", {
-        get: function () {
-            return this._isDataLoaded;
-        },
-        set: function (value) {
-            this._isDataLoaded = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PdbCrossreferencesComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PdbCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], PdbCrossreferencesComponent.prototype, "crossReferences", null);
-PdbCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-pdb-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], PdbCrossreferencesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/pdb-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/complex-references.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/complex-references.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Additional Information</h2>\n    <div id=\"externalResources\" class=\"columns medium-12 no-pad-left\" *ngIf=\"externalResources\">\n      <cp-external-resources [crossReferences]=\"externalResources\"></cp-external-resources>\n    </div>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms && synonyms.length !== 0\">\n        <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n      </div>\n      <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName.length !== 0\">\n        <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n      </div>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/complex-references.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexReferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ComplexReferencesComponent = (function () {
-    function ComplexReferencesComponent() {
-    }
-    ComplexReferencesComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    ComplexReferencesComponent.prototype.findXRefs = function () {
-        for (var i = 0; i < this._crossReferences.length; i++) {
-            var crossRef = this._crossReferences[i];
-            var database = this._crossReferences[i].database;
-            if (database === 'pubmed') {
-                if (this._pubmedXRefs === undefined) {
-                    this._pubmedXRefs = [];
-                }
-                this._pubmedXRefs.push(crossRef);
-            }
-            if (database === 'signor' || database === 'matrixdb') {
-                if (this._externalResources === undefined) {
-                    this._externalResources = [];
-                }
-                this._externalResources.push(crossRef);
-            }
-        }
-    };
-    Object.defineProperty(ComplexReferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexReferencesComponent.prototype, "pubmedXRefs", {
-        get: function () {
-            return this._pubmedXRefs;
-        },
-        set: function (value) {
-            this._pubmedXRefs = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexReferencesComponent.prototype, "externalResources", {
-        get: function () {
-            return this._externalResources;
-        },
-        set: function (value) {
-            this._externalResources = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexReferencesComponent.prototype, "synonyms", {
-        get: function () {
-            return this._synonyms;
-        },
-        set: function (value) {
-            this._synonyms = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexReferencesComponent.prototype, "systematicName", {
-        get: function () {
-            return this._systematicName;
-        },
-        set: function (value) {
-            this._systematicName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ComplexReferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexReferencesComponent.prototype, "crossReferences", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexReferencesComponent.prototype, "synonyms", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ComplexReferencesComponent.prototype, "systematicName", null);
-ComplexReferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-references',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/complex-references.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-references/complex-references.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ComplexReferencesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-references.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Further Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("../../../../../src/app/shared/notification/service/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var EuroPmcCrossreferencesComponent = (function () {
-    function EuroPmcCrossreferencesComponent(euroPmcService, notificationService, googleAnalyticsService) {
-        this.euroPmcService = euroPmcService;
-        this.notificationService = notificationService;
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._publications = [];
-        this._isDataLoaded = false;
-    }
-    EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
-        this.findXRefs();
-    };
-    EuroPmcCrossreferencesComponent.prototype.findXRefs = function () {
-        var _this = this;
-        var _loop_1 = function (i) {
-            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this.publicationFactory(_this.crossReferences[i], response); }, function (error) {
-                _this._isDataLoaded = false;
-                _this.notificationService.onAPIRequestError('Euro PMC');
-                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
-            });
-            if (i === this_1.crossReferences.length - 1) {
-                this_1._isDataLoaded = true;
-            }
-        };
-        var this_1 = this;
-        for (var i = 0; i < this.crossReferences.length; i++) {
-            _loop_1(i);
-        }
-    };
-    EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
-        this.publications.push({
-            id: crossReference.identifier,
-            title: euroPmcResponse.resultList.result[0].title,
-            authors: euroPmcResponse.resultList.result[0].authorString,
-            url: crossReference.searchURL
-        });
-    };
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "publications", {
-        get: function () {
-            return this._publications;
-        },
-        set: function (value) {
-            this._publications = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "isDataLoaded", {
-        get: function () {
-            return this._isDataLoaded;
-        },
-        set: function (value) {
-            this._isDataLoaded = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return EuroPmcCrossreferencesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], EuroPmcCrossreferencesComponent.prototype, "crossReferences", null);
-EuroPmcCrossreferencesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-euro-pmc-crossreferences',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _c || Object])
-], EuroPmcCrossreferencesComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/euro-pmc-crossreferences.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" *ngIf=\"crossReferences\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>External Resources</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences\">\n        <td><a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExternalResourcesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ExternalResourcesComponent = (function () {
-    function ExternalResourcesComponent() {
-    }
-    ExternalResourcesComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(ExternalResourcesComponent.prototype, "crossReferences", {
-        get: function () {
-            return this._crossReferences;
-        },
-        set: function (value) {
-            this._crossReferences = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ExternalResourcesComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], ExternalResourcesComponent.prototype, "crossReferences", null);
-ExternalResourcesComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-external-resources',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-references/external-resources/external-resources.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ExternalResourcesComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/external-resources.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynonymsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SynonymsComponent = (function () {
-    function SynonymsComponent() {
-        this._displayedElements = 5;
-    }
-    SynonymsComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(SynonymsComponent.prototype, "synonyms", {
-        get: function () {
-            return this._synonyms;
-        },
-        set: function (value) {
-            this._synonyms = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SynonymsComponent.prototype, "displayedElements", {
-        get: function () {
-            return this._displayedElements;
-        },
-        set: function (value) {
-            this._displayedElements = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return SynonymsComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], SynonymsComponent.prototype, "synonyms", null);
-SynonymsComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-synonyms',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-references/synonyms/synonyms.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], SynonymsComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/synonyms.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystematicNameComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SystematicNameComponent = (function () {
-    function SystematicNameComponent() {
-    }
-    SystematicNameComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(SystematicNameComponent.prototype, "systematicName", {
-        get: function () {
-            return this._systematicName;
-        },
-        set: function (value) {
-            this._systematicName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return SystematicNameComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], SystematicNameComponent.prototype, "systematicName", null);
-SystematicNameComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-systematic-name',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], SystematicNameComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/systematic-name.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/service/section/section.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SectionService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SectionService = (function () {
-    function SectionService() {
-    }
-    SectionService.prototype.reset = function () {
-        this._participantsSection = false;
-        this._functionSection = false;
-        this._propertiesSection = false;
-        this._expressionSection = false;
-        this._diseaseSection = false;
-        this._namesSection = false;
-    };
-    SectionService.prototype.participantsSectionAvailable = function () {
-        this._participantsSection = true;
-    };
-    SectionService.prototype.functionSectionAvailable = function () {
-        this._functionSection = true;
-    };
-    SectionService.prototype.propertiesSectionAvailable = function () {
-        this._propertiesSection = true;
-    };
-    SectionService.prototype.expressionSectionAvailable = function () {
-        this._expressionSection = true;
-    };
-    SectionService.prototype.diseaseSectionAvailable = function () {
-        this._diseaseSection = true;
-    };
-    SectionService.prototype.namesSectionAvailable = function () {
-        this._namesSection = true;
-    };
-    Object.defineProperty(SectionService.prototype, "participantsSection", {
-        get: function () {
-            return this._participantsSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SectionService.prototype, "functionSection", {
-        get: function () {
-            return this._functionSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SectionService.prototype, "propertiesSection", {
-        get: function () {
-            return this._propertiesSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SectionService.prototype, "expressionSection", {
-        get: function () {
-            return this._expressionSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SectionService.prototype, "diseaseSection", {
-        get: function () {
-            return this._diseaseSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SectionService.prototype, "namesSection", {
-        get: function () {
-            return this._namesSection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return SectionService;
-}());
-SectionService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [])
-], SectionService);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/section.service.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  background: #fbfbfb;\n  position: relative;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n#complexViewerSVG { height: 100%; width: 100%; display: block; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row button-grid small-up-12 medium-up-12 large-up-12\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div (click)=\"interactedWithViewer()\" id=\"networkContainer\"></div>\n    </div>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"onExpandAll()\">Expand All</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"onReset()\">Collapse all</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"downloadAsSVG()\">Export SVG</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>Binding Region</option>\n      <option value=\"UniprotKB\">UniProt Curated Features</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Unique Participants</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexViewerComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var xlv;
-var SvgSaver = __webpack_require__("../../../../svgsaver/lib/svgsaver.js");
-var xiNET = __webpack_require__("../../../../expose-loader/index.js?xiNET!../../../../complexviewer/src/controller/Controller.js-exposed");
-var ComplexViewerComponent = (function () {
-    function ComplexViewerComponent(googleAnalyticsService) {
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._svgsaver = new SvgSaver();
-        this._hasInteracted = false;
-    }
-    ComplexViewerComponent.prototype.ngAfterViewInit = function () {
-        $('cp-complex-viewer').foundation();
-        xlv = new xiNET('networkContainer');
-        xlv.readMIJSON(this._complexMIJSON, true);
-        xlv.autoLayout();
-    };
-    ComplexViewerComponent.prototype.onChangeAnnotation = function (value) {
-        xlv.setAnnotations(value);
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ChangeAnno, this._complexAC);
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_SelectedAnno, value);
-    };
-    ComplexViewerComponent.prototype.onReset = function () {
-        xlv.reset();
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Reset, this._complexAC);
-    };
-    ComplexViewerComponent.prototype.onExpandAll = function () {
-        xlv.expandAll();
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExpandAll, this._complexAC);
-    };
-    ComplexViewerComponent.prototype.interactedWithViewer = function () {
-        if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Interaction, this._complexAC);
-            this._hasInteracted = true;
-        }
-    };
-    Object.defineProperty(ComplexViewerComponent.prototype, "complexAC", {
-        get: function () {
-            return this._complexAC;
-        },
-        set: function (value) {
-            this._complexAC = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComplexViewerComponent.prototype, "complexMIJSON", {
-        get: function () {
-            return this._complexMIJSON;
-        },
-        set: function (value) {
-            this._complexMIJSON = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ComplexViewerComponent.prototype.downloadAsSVG = function () {
-        var svg = document.querySelector('#networkContainer');
-        this._svgsaver.asSvg(svg, this._complexAC + '.svg');
-        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExportSVG, this._complexAC);
-    };
-    return ComplexViewerComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexViewerComponent.prototype, "complexAC", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ComplexViewerComponent.prototype, "complexMIJSON", null);
-ComplexViewerComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-complex-viewer',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.css")],
-        encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
-], ComplexViewerComponent);
-
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/complex-viewer.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-exports.push([module.i, "@import url(https://wwwdev.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css);", ""]);
-
-// module
-exports.push([module.i, "\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12 margin-bottom-large\">\n    <div id=\"highchartsContainer\"></div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GxaHeatmapComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var GxaHeatmapComponent = (function () {
-    function GxaHeatmapComponent() {
-        this._isLoaded = true;
-    }
-    GxaHeatmapComponent.prototype.ngOnInit = function () {
-        switch (this._complexSpecies) {
-            case 'Homo sapiens; 9606':
-                this._experimentId = 'E-MTAB-5214';
-                break;
-            case 'Mus musculus; 10090':
-                this._experimentId = 'E-MTAB-4644';
-                break;
-            case 'Rattus norvegicus; 10116':
-                this._experimentId = 'E-GEOD-53960';
-                break;
-            case 'Gallus gallus (Chicken); 9031':
-                this._experimentId = 'E-MTAB-2797';
-                break;
-            case 'Caenorhabditis elegans; 6239':
-                this._experimentId = 'E-MTAB-2812';
-                break;
-            case 'Sus scrofa (Pig); 9823':
-                this._experimentId = 'E-MTAB-5895';
-                break;
-            default:
-                this._isLoaded = false;
-        }
-        if (this._experimentId) {
-            var context_1 = this;
-            this._gxa.render({
-                target: 'highchartsContainer',
-                experiment: this._experimentId,
-                atlasUrl: 'https://www.ebi.ac.uk/gxa/',
-                query: {
-                    gene: this.gxaParamsQueries
-                },
-                fail: function () {
-                    context_1._isLoaded = false;
-                }
-            });
-        }
-    };
-    Object.defineProperty(GxaHeatmapComponent.prototype, "gxa", {
-        get: function () {
-            return this._gxa;
-        },
-        set: function (value) {
-            this._gxa = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GxaHeatmapComponent.prototype, "participants", {
-        get: function () {
-            return this._participants;
-        },
-        set: function (value) {
-            this._participants = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GxaHeatmapComponent.prototype, "complexSpecies", {
-        get: function () {
-            return this._complexSpecies;
-        },
-        set: function (value) {
-            this._complexSpecies = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GxaHeatmapComponent.prototype, "gxaParamsQueries", {
-        get: function () {
-            return this._gxaParamsQueries;
-        },
-        set: function (value) {
-            this._gxaParamsQueries = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GxaHeatmapComponent.prototype, "isLoaded", {
-        get: function () {
-            return this._isLoaded;
-        },
-        set: function (value) {
-            this._isLoaded = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GxaHeatmapComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], GxaHeatmapComponent.prototype, "gxa", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], GxaHeatmapComponent.prototype, "participants", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], GxaHeatmapComponent.prototype, "complexSpecies", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], GxaHeatmapComponent.prototype, "gxaParamsQueries", null);
-GxaHeatmapComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-gxa-heatmap',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], GxaHeatmapComponent);
-
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/gxa-heatmap.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div (click)=\"interactedWithViewer()\" id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LitmolViewerComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__("../../../../litemol/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_litemol__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var baseURL = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].pdb_base_url;
-var LitmolViewerComponent = (function () {
-    function LitmolViewerComponent(googleAnalyticsService) {
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._hasInteracted = false;
-    }
-    LitmolViewerComponent.prototype.ngOnChanges = function (changes) {
-        if (this._plugin) {
-            if (changes['selectedXRef']) {
-                this.loadMolecule();
-            }
-        }
-    };
-    LitmolViewerComponent.prototype.ngOnInit = function () {
-        this._plugin = __WEBPACK_IMPORTED_MODULE_1_litemol___default.a.Plugin.create({
-            target: '#litemol',
-            viewportBackground: '#fbfbfb',
-            layoutState: {
-                hideControls: true,
-                isExpanded: false
-            },
-            // Knowing how often and how people use LiteMol
-            // gives us the motivation and data to futher improve it.
-            //
-            // This option is OFF by default!
-            allowAnalytics: true
-        });
-        this.loadMolecule();
-    };
-    LitmolViewerComponent.prototype.loadMolecule = function () {
-        this.plugin.clear();
-        this._plugin.loadMolecule({
-            id: this._selectedXRef,
-            url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
-            format: 'cif' // default
-        });
-        this._hasInteracted = false;
-    };
-    LitmolViewerComponent.prototype.interactedWithViewer = function () {
-        if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].LiteMolViewer_Interaction, this._selectedXRef);
-            this._hasInteracted = true;
-        }
-    };
-    Object.defineProperty(LitmolViewerComponent.prototype, "plugin", {
-        get: function () {
-            return this._plugin;
-        },
-        set: function (value) {
-            this._plugin = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LitmolViewerComponent.prototype, "selectedXRef", {
-        get: function () {
-            return this._selectedXRef;
-        },
-        set: function (value) {
-            this._selectedXRef = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LitmolViewerComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], LitmolViewerComponent.prototype, "selectedXRef", null);
-LitmolViewerComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-litmol-viewer',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
-], LitmolViewerComponent);
-
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/litmol-viewer.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeDiagramComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("../../../../../src/app/shared/google-analytics/types/category.enum.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("../../../../../src/app/shared/google-analytics/service/google-analytics.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var baseURL = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].reactome_base_url;
-var ReactomeDiagramComponent = (function () {
-    function ReactomeDiagramComponent(googleAnalyticsService) {
-        this.googleAnalyticsService = googleAnalyticsService;
-        this._reactomeComplexe = {};
-        this._reactomePathways = {};
-        this.onLoaded = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    ReactomeDiagramComponent.prototype.ngOnInit = function () {
-        this.loadScript();
-        this._hasInteracted = false;
-    };
-    ReactomeDiagramComponent.prototype.ngOnChanges = function (changes) {
-        if (this.diagramContext) {
-            if (changes['selectedPathway']) {
-                this.loadDiagram();
-            }
-            else if (changes['selectedComplex']) {
-                this.selectComplex(this.selectedComplex);
-            }
-        }
-    };
-    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
-        this.diagramContext = event.detail;
-        this.initReactomeDiagram();
-    };
-    ReactomeDiagramComponent.prototype.onResize = function () {
-        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
-        this.selectComplex(this.selectedComplex);
-    };
-    ReactomeDiagramComponent.prototype.loadScript = function () {
-        var node = document.createElement('script');
-        node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
-        node.type = 'text/javascript';
-        node.async = true;
-        node.charset = 'utf-8';
-        document.getElementsByTagName('head')[0].appendChild(node);
-    };
-    ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
-        this.globelDiagram = this.diagramContext.Diagram.create({
-            'proxyPrefix': baseURL,
-            'placeHolder': 'diagramHolder',
-            'width': this.diagramHolder.nativeElement.clientWidth,
-            'height': this.diagramHolder.nativeElement.clientWidth * 0.5,
-        });
-        this.loadDiagram();
-    };
-    ReactomeDiagramComponent.prototype.loadDiagram = function () {
-        var context = this;
-        this.globelDiagram.loadDiagram(this.selectedPathway);
-        this.globelDiagram.onDiagramLoaded(function (loaded) {
-            context.selectComplex(context.selectedComplex);
-        });
-        this._hasInteracted = false;
-        this.globelDiagram.onObjectSelected(function (e) {
-            context.interactedWithViewer();
-            return;
-        });
-    };
-    ReactomeDiagramComponent.prototype.selectComplex = function (reactomeComplexId) {
-        this.selectedComplex = reactomeComplexId;
-        this.globelDiagram.resetFlaggedItems();
-        this.globelDiagram.flagItems(reactomeComplexId);
-    };
-    ;
-    ReactomeDiagramComponent.prototype.interactedWithViewer = function () {
-        if (!this._hasInteracted) {
-            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].PathwayDiagram_Interaction, this._selectedComplex);
-            this._hasInteracted = true;
-        }
-    };
-    Object.defineProperty(ReactomeDiagramComponent.prototype, "reactomePathways", {
-        get: function () {
-            return this._reactomePathways;
-        },
-        set: function (value) {
-            this._reactomePathways = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeDiagramComponent.prototype, "reactomeComplexe", {
-        get: function () {
-            return this._reactomeComplexe;
-        },
-        set: function (value) {
-            this._reactomeComplexe = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeDiagramComponent.prototype, "selectedComplex", {
-        get: function () {
-            return this._selectedComplex;
-        },
-        set: function (value) {
-            this._selectedComplex = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ReactomeDiagramComponent.prototype, "selectedPathway", {
-        get: function () {
-            return this._selectedPathway;
-        },
-        set: function (value) {
-            this._selectedPathway = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ReactomeDiagramComponent;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('diagramHolder'),
-    __metadata("design:type", Object)
-], ReactomeDiagramComponent.prototype, "diagramHolder", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
-    __metadata("design:type", Object)
-], ReactomeDiagramComponent.prototype, "onLoaded", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:onReactomeDiagramReady', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListener", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:resize', ['$event.target']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ReactomeDiagramComponent.prototype, "onResize", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ReactomeDiagramComponent.prototype, "reactomePathways", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], ReactomeDiagramComponent.prototype, "reactomeComplexe", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ReactomeDiagramComponent.prototype, "selectedComplex", null);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ReactomeDiagramComponent.prototype, "selectedPathway", null);
-ReactomeDiagramComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'cp-reactome-diagram',
-        template: __webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]) === "function" && _a || Object])
-], ReactomeDiagramComponent);
-
-var _a;
-//# sourceMappingURL=/Users/ntoro/Code/Complex-Portal/complex-portal-view/src/reactome-diagram.component.js.map
-
-/***/ }),
-
-/***/ "../../../../colorbrewer/colorbrewer.js":
+/***/ "./node_modules/colorbrewer/colorbrewer.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
@@ -4764,15 +326,15 @@ if (true) {
 
 /***/ }),
 
-/***/ "../../../../colorbrewer/index.js":
+/***/ "./node_modules/colorbrewer/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("../../../../colorbrewer/colorbrewer.js");
+module.exports = __webpack_require__("./node_modules/colorbrewer/colorbrewer.js");
 
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/controller/Config.js":
+/***/ "./node_modules/complexviewer/src/controller/Config.js":
 /***/ (function(module, exports) {
 
 var Config = {
@@ -4796,7 +358,7 @@ module.exports = Config;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/controller/Controller.js":
+/***/ "./node_modules/complexviewer/src/controller/Controller.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4814,28 +376,28 @@ module.exports = Config;
 
 var xiNET = {}; //crosslinkviewer's javascript namespace
 //var RGBColor = require('rgbcolor');
-var d3 = __webpack_require__("../../../../d3/d3.js");
-var colorbrewer = __webpack_require__("../../../../colorbrewer/index.js");
-var Spinner = __webpack_require__("../../../../spin.js/spin.js");
-var xiNET_Storage = __webpack_require__("../../../../complexviewer/src/controller/xiNET_Storage.js");
-var Annotation = __webpack_require__("../../../../complexviewer/src/model/interactor/Annotation.js");
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Polymer = __webpack_require__("../../../../complexviewer/src/model/interactor/Polymer.js");
-var Protein = __webpack_require__("../../../../complexviewer/src/model/interactor/Protein.js");
-var BioactiveEntity = __webpack_require__("../../../../complexviewer/src/model/interactor/BioactiveEntity.js");
-var Gene = __webpack_require__("../../../../complexviewer/src/model/interactor/Gene.js");
-var DNA = __webpack_require__("../../../../complexviewer/src/model/interactor/DNA.js");
-var RNA = __webpack_require__("../../../../complexviewer/src/model/interactor/RNA.js");
-var Complex = __webpack_require__("../../../../complexviewer/src/model/interactor/Complex.js");
-var MoleculeSet = __webpack_require__("../../../../complexviewer/src/model/interactor/MoleculeSet.js");
-var Link = __webpack_require__("../../../../complexviewer/src/model/link/Link.js");
-var NaryLink = __webpack_require__("../../../../complexviewer/src/model/link/NaryLink.js");
-var SequenceLink = __webpack_require__("../../../../complexviewer/src/model/link/SequenceLink.js");
-var SequenceDatum = __webpack_require__("../../../../complexviewer/src/model/link/SequenceDatum.js");
-var BinaryLink = __webpack_require__("../../../../complexviewer/src/model/link/BinaryLink.js");
-var UnaryLink = __webpack_require__("../../../../complexviewer/src/model/link/UnaryLink.js");
-var Expand = __webpack_require__ ("../../../../complexviewer/src/controller/Expand.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var d3 = __webpack_require__("./node_modules/d3/d3.js");
+var colorbrewer = __webpack_require__("./node_modules/colorbrewer/index.js");
+var Spinner = __webpack_require__("./node_modules/spin.js/spin.js");
+var xiNET_Storage = __webpack_require__("./node_modules/complexviewer/src/controller/xiNET_Storage.js");
+var Annotation = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Annotation.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Polymer = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Polymer.js");
+var Protein = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Protein.js");
+var BioactiveEntity = __webpack_require__("./node_modules/complexviewer/src/model/interactor/BioactiveEntity.js");
+var Gene = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Gene.js");
+var DNA = __webpack_require__("./node_modules/complexviewer/src/model/interactor/DNA.js");
+var RNA = __webpack_require__("./node_modules/complexviewer/src/model/interactor/RNA.js");
+var Complex = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Complex.js");
+var MoleculeSet = __webpack_require__("./node_modules/complexviewer/src/model/interactor/MoleculeSet.js");
+var Link = __webpack_require__("./node_modules/complexviewer/src/model/link/Link.js");
+var NaryLink = __webpack_require__("./node_modules/complexviewer/src/model/link/NaryLink.js");
+var SequenceLink = __webpack_require__("./node_modules/complexviewer/src/model/link/SequenceLink.js");
+var SequenceDatum = __webpack_require__("./node_modules/complexviewer/src/model/link/SequenceDatum.js");
+var BinaryLink = __webpack_require__("./node_modules/complexviewer/src/model/link/BinaryLink.js");
+var UnaryLink = __webpack_require__("./node_modules/complexviewer/src/model/link/UnaryLink.js");
+var Expand = __webpack_require__ ("./node_modules/complexviewer/src/controller/Expand.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 var MouseEventCodes = {}
 MouseEventCodes.MOUSE_UP = 0;//start state, also set when mouse up on svgElement
@@ -6379,13 +1941,13 @@ module.exports = xiNET.Controller;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/controller/Expand.js":
+/***/ "./node_modules/complexviewer/src/controller/Expand.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var d3 = __webpack_require__("../../../../d3/d3.js");
+var d3 = __webpack_require__("./node_modules/d3/d3.js");
 
 var matrix = function(json) {
 	var startTime =  +new Date();
@@ -6520,7 +2082,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/controller/xiNET_Storage.js":
+/***/ "./node_modules/complexviewer/src/controller/xiNET_Storage.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6537,7 +2099,7 @@ module.exports = {
 
 
 function xiNET_Storage() {}
-var Annotation = __webpack_require__("../../../../complexviewer/src/model/interactor/Annotation.js");
+var Annotation = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Annotation.js");
 
 xiNET_Storage.ns = "xiNET.";
 
@@ -6713,7 +2275,7 @@ module.exports = xiNET_Storage;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Annotation.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Annotation.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6743,7 +2305,7 @@ module.exports = Annotation;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/BioactiveEntity.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/BioactiveEntity.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6759,8 +2321,8 @@ module.exports = Annotation;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 BioactiveEntity.prototype = new Molecule();
 
@@ -6866,7 +2428,7 @@ module.exports = BioactiveEntity;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Complex.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Complex.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6882,8 +2444,8 @@ module.exports = BioactiveEntity;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 Complex.prototype = new Molecule();
 
@@ -6927,7 +2489,7 @@ module.exports = Complex;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/DNA.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/DNA.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6943,8 +2505,8 @@ module.exports = Complex;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 DNA.prototype = new Molecule();
 
@@ -7050,7 +2612,7 @@ module.exports = DNA;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Gene.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Gene.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7066,8 +2628,8 @@ module.exports = DNA;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 Gene.prototype = new Molecule();
 
@@ -7192,7 +2754,7 @@ module.exports = Gene;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Molecule.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Molecule.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7208,8 +2770,8 @@ module.exports = Gene;
 
 
 
-var colorbrewer = __webpack_require__("../../../../colorbrewer/index.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var colorbrewer = __webpack_require__("./node_modules/colorbrewer/index.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 //josh - should these be moved to Config.js?
 Molecule.LABELMAXLENGTH = 90; // maximal width reserved for protein-labels
@@ -7462,7 +3024,7 @@ module.exports = Molecule;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/MoleculeSet.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/MoleculeSet.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7478,8 +3040,8 @@ module.exports = Molecule;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 MoleculeSet.prototype = new Molecule();
 
@@ -7611,7 +3173,7 @@ module.exports = MoleculeSet;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Polymer.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Polymer.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7627,9 +3189,9 @@ module.exports = MoleculeSet;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
 //var Rotator = require('../../controller/Rotator');
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 Polymer.STICKHEIGHT = 20;//height of stick in pixels
 Polymer.MAXSIZE = 0; // residue count of longest sequence
@@ -8229,7 +3791,7 @@ module.exports = Polymer;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/Protein.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/Protein.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8245,10 +3807,10 @@ module.exports = Polymer;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Polymer = __webpack_require__("../../../../complexviewer/src/model/interactor/Polymer.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Polymer = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Polymer.js");
 //~ var Rotator = require('../../controller/Rotator');
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 Protein.prototype = new Polymer();
 
@@ -8361,7 +3923,7 @@ module.exports = Protein;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/interactor/RNA.js":
+/***/ "./node_modules/complexviewer/src/model/interactor/RNA.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8377,8 +3939,8 @@ module.exports = Protein;
 
 
 
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 RNA.prototype = new Molecule();
 
@@ -8484,7 +4046,7 @@ module.exports = RNA;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/BinaryLink.js":
+/***/ "./node_modules/complexviewer/src/model/link/BinaryLink.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8496,13 +4058,13 @@ module.exports = RNA;
 
 
 
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
-var Link = __webpack_require__("../../../../complexviewer/src/model/link/Link.js");
-var SequenceLink = __webpack_require__("../../../../complexviewer/src/model/link/SequenceLink.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
+var Link = __webpack_require__("./node_modules/complexviewer/src/model/link/Link.js");
+var SequenceLink = __webpack_require__("./node_modules/complexviewer/src/model/link/SequenceLink.js");
 //josh - following are libraries and should be in 'vendor'?
 //  but I don't know how to set up the dependency if its there
-var Intersection = __webpack_require__("../../../../intersectionjs/intersection.js");
-var Point2D = __webpack_require__("../../../../point2d/index.js");
+var Intersection = __webpack_require__("./node_modules/intersectionjs/intersection.js");
+var Point2D = __webpack_require__("./node_modules/point2d/index.js");
 
 // BinaryLink.js
 // the class representing a binary interaction
@@ -8744,7 +4306,7 @@ module.exports = BinaryLink;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/Link.js":
+/***/ "./node_modules/complexviewer/src/model/link/Link.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8764,7 +4326,7 @@ module.exports = BinaryLink;
 
 
 
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 var Link = function (){};
 Link.maxNoEvidences = 0;
@@ -8903,7 +4465,7 @@ module.exports = Link;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/NaryLink.js":
+/***/ "./node_modules/complexviewer/src/model/link/NaryLink.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8920,11 +4482,11 @@ module.exports = Link;
 
 
 
-var colorbrewer = __webpack_require__("../../../../colorbrewer/index.js");
-var Link = __webpack_require__("../../../../complexviewer/src/model/link/Link.js");
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
-var Molecule = __webpack_require__("../../../../complexviewer/src/model/interactor/Molecule.js");
-var d3 = __webpack_require__("../../../../d3/d3.js");
+var colorbrewer = __webpack_require__("./node_modules/colorbrewer/index.js");
+var Link = __webpack_require__("./node_modules/complexviewer/src/model/link/Link.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
+var Molecule = __webpack_require__("./node_modules/complexviewer/src/model/interactor/Molecule.js");
+var d3 = __webpack_require__("./node_modules/d3/d3.js");
 
 NaryLink.naryColours = d3.scale.ordinal().range(colorbrewer.Paired[6]);//d3.scale.category20c();//d3.scale.ordinal().range(colorbrewer.Paired[12]);//
 NaryLink.orbitNodes = 16;
@@ -9054,7 +4616,7 @@ module.exports = NaryLink;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/SequenceDatum.js":
+/***/ "./node_modules/complexviewer/src/model/link/SequenceDatum.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9160,7 +4722,7 @@ module.exports = SequenceDatum;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/SequenceLink.js":
+/***/ "./node_modules/complexviewer/src/model/link/SequenceLink.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9172,11 +4734,11 @@ module.exports = SequenceDatum;
 
 
 
-var Link = __webpack_require__("../../../../complexviewer/src/model/link/Link.js");
-var SequenceDatum = __webpack_require__("../../../../complexviewer/src/model/link/SequenceDatum.js");
+var Link = __webpack_require__("./node_modules/complexviewer/src/model/link/Link.js");
+var SequenceDatum = __webpack_require__("./node_modules/complexviewer/src/model/link/SequenceDatum.js");
 //~ var BinaryLink = require('./BinaryLink');
 //~ var UnaryLink = require('./UnaryLink');
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
 
 SequenceLink.prototype = new Link();
 function SequenceLink(id, fromFeatPos, toFeatPos, xlvController) {
@@ -9511,7 +5073,7 @@ module.exports = SequenceLink;
 
 /***/ }),
 
-/***/ "../../../../complexviewer/src/model/link/UnaryLink.js":
+/***/ "./node_modules/complexviewer/src/model/link/UnaryLink.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9528,9 +5090,9 @@ module.exports = SequenceLink;
 
 
 
-var Config = __webpack_require__("../../../../complexviewer/src/controller/Config.js");
-var Link = __webpack_require__("../../../../complexviewer/src/model/link/Link.js");
-var SequenceLink = __webpack_require__("../../../../complexviewer/src/model/link/SequenceLink.js");
+var Config = __webpack_require__("./node_modules/complexviewer/src/controller/Config.js");
+var Link = __webpack_require__("./node_modules/complexviewer/src/model/link/Link.js");
+var SequenceLink = __webpack_require__("./node_modules/complexviewer/src/model/link/SequenceLink.js");
 
 UnaryLink.prototype = new Link();
 
@@ -9703,7 +5265,7 @@ module.exports = UnaryLink;
 
 /***/ }),
 
-/***/ "../../../../computed-styles/lib/index.js":
+/***/ "./node_modules/computed-styles/lib/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9778,7 +5340,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ "../../../../d3/d3.js":
+/***/ "./node_modules/d3/d3.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -19342,18 +14904,214 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 
 /***/ }),
 
-/***/ "../../../../expose-loader/index.js?xiNET!../../../../complexviewer/src/controller/Controller.js-exposed":
+/***/ "./node_modules/expose-loader/index.js?xiNET!./node_modules/complexviewer/src/controller/Controller.js-exposed":
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["xiNET"] = __webpack_require__("../../../../complexviewer/src/controller/Controller.js");
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../../webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["xiNET"] = __webpack_require__("./node_modules/complexviewer/src/controller/Controller.js");
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "../../../../intersectionjs/intersection.js":
+/***/ "./node_modules/file-saver/FileSaver.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-var Point2D = __webpack_require__("../../../../point2d/index.js");
+var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
+ * A saveAs() FileSaver implementation.
+ * 1.3.2
+ * 2016-06-16 18:25:19
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: MIT
+ *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ */
+
+/*global self */
+/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+var saveAs = saveAs || (function(view) {
+	"use strict";
+	// IE <10 is explicitly unsupported
+	if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+		return;
+	}
+	var
+		  doc = view.document
+		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		, get_URL = function() {
+			return view.URL || view.webkitURL || view;
+		}
+		, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+		, can_use_save_link = "download" in save_link
+		, click = function(node) {
+			var event = new MouseEvent("click");
+			node.dispatchEvent(event);
+		}
+		, is_safari = /constructor/i.test(view.HTMLElement) || view.safari
+		, is_chrome_ios =/CriOS\/[\d]+/.test(navigator.userAgent)
+		, throw_outside = function(ex) {
+			(view.setImmediate || view.setTimeout)(function() {
+				throw ex;
+			}, 0);
+		}
+		, force_saveable_type = "application/octet-stream"
+		// the Blob API is fundamentally broken as there is no "downloadfinished" event to subscribe to
+		, arbitrary_revoke_timeout = 1000 * 40 // in ms
+		, revoke = function(file) {
+			var revoker = function() {
+				if (typeof file === "string") { // file is an object URL
+					get_URL().revokeObjectURL(file);
+				} else { // file is a File
+					file.remove();
+				}
+			};
+			setTimeout(revoker, arbitrary_revoke_timeout);
+		}
+		, dispatch = function(filesaver, event_types, event) {
+			event_types = [].concat(event_types);
+			var i = event_types.length;
+			while (i--) {
+				var listener = filesaver["on" + event_types[i]];
+				if (typeof listener === "function") {
+					try {
+						listener.call(filesaver, event || filesaver);
+					} catch (ex) {
+						throw_outside(ex);
+					}
+				}
+			}
+		}
+		, auto_bom = function(blob) {
+			// prepend BOM for UTF-8 XML and text/* types (including HTML)
+			// note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+			if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+				return new Blob([String.fromCharCode(0xFEFF), blob], {type: blob.type});
+			}
+			return blob;
+		}
+		, FileSaver = function(blob, name, no_auto_bom) {
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			// First try a.download, then web filesystem, then object URLs
+			var
+				  filesaver = this
+				, type = blob.type
+				, force = type === force_saveable_type
+				, object_url
+				, dispatch_all = function() {
+					dispatch(filesaver, "writestart progress write writeend".split(" "));
+				}
+				// on any filesys errors revert to saving with object URLs
+				, fs_error = function() {
+					if ((is_chrome_ios || (force && is_safari)) && view.FileReader) {
+						// Safari doesn't allow downloading of blob urls
+						var reader = new FileReader();
+						reader.onloadend = function() {
+							var url = is_chrome_ios ? reader.result : reader.result.replace(/^data:[^;]*;/, 'data:attachment/file;');
+							var popup = view.open(url, '_blank');
+							if(!popup) view.location.href = url;
+							url=undefined; // release reference before dispatching
+							filesaver.readyState = filesaver.DONE;
+							dispatch_all();
+						};
+						reader.readAsDataURL(blob);
+						filesaver.readyState = filesaver.INIT;
+						return;
+					}
+					// don't create more object URLs than needed
+					if (!object_url) {
+						object_url = get_URL().createObjectURL(blob);
+					}
+					if (force) {
+						view.location.href = object_url;
+					} else {
+						var opened = view.open(object_url, "_blank");
+						if (!opened) {
+							// Apple does not allow window.open, see https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
+							view.location.href = object_url;
+						}
+					}
+					filesaver.readyState = filesaver.DONE;
+					dispatch_all();
+					revoke(object_url);
+				}
+			;
+			filesaver.readyState = filesaver.INIT;
+
+			if (can_use_save_link) {
+				object_url = get_URL().createObjectURL(blob);
+				setTimeout(function() {
+					save_link.href = object_url;
+					save_link.download = name;
+					click(save_link);
+					dispatch_all();
+					revoke(object_url);
+					filesaver.readyState = filesaver.DONE;
+				});
+				return;
+			}
+
+			fs_error();
+		}
+		, FS_proto = FileSaver.prototype
+		, saveAs = function(blob, name, no_auto_bom) {
+			return new FileSaver(blob, name || blob.name || "download", no_auto_bom);
+		}
+	;
+	// IE 10+ (native saveAs)
+	if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+		return function(blob, name, no_auto_bom) {
+			name = name || blob.name || "download";
+
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			return navigator.msSaveOrOpenBlob(blob, name);
+		};
+	}
+
+	FS_proto.abort = function(){};
+	FS_proto.readyState = FS_proto.INIT = 0;
+	FS_proto.WRITING = 1;
+	FS_proto.DONE = 2;
+
+	FS_proto.error =
+	FS_proto.onwritestart =
+	FS_proto.onprogress =
+	FS_proto.onwrite =
+	FS_proto.onabort =
+	FS_proto.onerror =
+	FS_proto.onwriteend =
+		null;
+
+	return saveAs;
+}(
+	   typeof self !== "undefined" && self
+	|| typeof window !== "undefined" && window
+	|| this.content
+));
+// `self` is undefined in Firefox for Android content script context
+// while `this` is nsIContentFrameMessageManager
+// with an attribute `content` that corresponds to the window
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.saveAs = saveAs;
+} else if (("function" !== "undefined" && __webpack_require__("./node_modules/webpack/buildin/amd-define.js") !== null) && (__webpack_require__("./node_modules/webpack/buildin/amd-options.js") !== null)) {
+  !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+    return saveAs;
+  }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/intersectionjs/intersection.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Point2D = __webpack_require__("./node_modules/point2d/index.js");
 
 /*****
 *
@@ -20981,7 +16739,7 @@ module.exports = Intersection
 
 /***/ }),
 
-/***/ "../../../../litemol/dist/js/LiteMol-plugin.js":
+/***/ "./node_modules/litemol/dist/js/LiteMol-plugin.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global, module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
@@ -102619,7 +98377,7 @@ var LiteMol;
 if (typeof module === 'object' && typeof module.exports === 'object') {
   module.exports = __LiteMol_Plugin();
 } else if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__], __WEBPACK_AMD_DEFINE_RESULT__ = function(require) { return __LiteMol_Plugin(); }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__], __WEBPACK_AMD_DEFINE_RESULT__ = (function(require) { return __LiteMol_Plugin(); }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
 } else {
   var __target = !!window ? window : this;
@@ -102627,11 +98385,11 @@ if (typeof module === 'object' && typeof module.exports === 'object') {
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../../process/browser.js"), __webpack_require__("../../../../webpack/buildin/global.js"), __webpack_require__("../../../../webpack/buildin/module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js"), __webpack_require__("./node_modules/webpack/buildin/global.js"), __webpack_require__("./node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
 
-/***/ "../../../../litemol/index.js":
+/***/ "./node_modules/litemol/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 // Provide support to 
@@ -102640,11 +98398,1016 @@ if (typeof module === 'object' && typeof module.exports === 'object') {
 //   import LiteMol from 'LiteMol'
 
 exports.__esModule = true;
-exports.default = __webpack_require__("../../../../litemol/dist/js/LiteMol-plugin.js")
+exports.default = __webpack_require__("./node_modules/litemol/dist/js/LiteMol-plugin.js")
 
 /***/ }),
 
-/***/ "../../../../point2d/index.js":
+/***/ "./node_modules/ng2-page-scroll/ng2-page-scroll.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_ng2_page_scroll_directive__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.directive.js");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_ng2_page_scroll_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.service.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_1__src_ng2_page_scroll_service__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-config.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__src_ng2_page_scroll_config__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_ng2_page_scroll_instance__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-instance.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__src_ng2_page_scroll_instance__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_ng2_page_scroll_util_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-util.service.js");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.module.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_5__src_ng2_page_scroll_module__["a"]; });
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll-config.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export EasingLogic */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScrollConfig; });
+var EasingLogic = (function () {
+    function EasingLogic() {
+    }
+    return EasingLogic;
+}());
+
+var PageScrollConfig = (function () {
+    function PageScrollConfig() {
+    }
+    Object.defineProperty(PageScrollConfig, "defaultEasingLogic", {
+        // Getter and setter to avoid auto completion to suggest calling the method
+        get: function () {
+            return PageScrollConfig._easingLogic;
+        },
+        set: function (easingLogic) {
+            PageScrollConfig._easingLogic = easingLogic;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * The number of milliseconds to wait till updating the scroll position again.
+     * Small amounts may produce smoother animations but require more processing power.
+     * @type {number}
+     * @private
+     */
+    PageScrollConfig._interval = 10;
+    /**
+     * The amount of pixels that need to be between the current scrollTop/scrollLeft position
+     * and the target position the cause a scroll animation. In case distance is below
+     * this threshold, an immediate jump will be performed.
+     * Due to dpi or rounding irregularities in browsers floating point numbers for scrollTop/scrollLeft values
+     * are possible, making a === comparison of current scrollTop or scrollLeft and target scrollPosition error-prone.
+     * @type {number}
+     * @private
+     */
+    PageScrollConfig._minScrollDistance = 2;
+    /**
+     * Name of the default namespace.
+     * @type {string}
+     * @private
+     */
+    PageScrollConfig._defaultNamespace = 'default';
+    /**
+     * Whether by default the scrolling should happen in vertical direction (by manipulating the scrollTop property)
+     * (= true; default) or in horizontal direction (by manipulating the scrollLeft property) (= false
+     * @type {boolean}
+     */
+    PageScrollConfig.defaultIsVerticalScrolling = true;
+    /**
+     * How many console logs should be emitted. Also influenced by angular mode (dev or prod mode)
+     * 0: No logs, neither in dev nor in prod mode
+     * 1: Animation errors in dev mode, no logs in prod mode
+     * 2: Animation errors in dev and prod mode
+     * 5: Animation errors in dev and all scroll position values that get set; animation errors in prod mode
+     * @type {boolean}
+     * @private
+     */
+    PageScrollConfig._logLevel = 2;
+    /**
+     * The duration how long a scrollTo animation should last by default.
+     * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
+     * @type {number}
+     */
+    PageScrollConfig.defaultDuration = 1250;
+    /**
+     * The distance in pixels above scroll target where the animation should stop. Setting a positive number results in
+     * the scroll target being more in the middle of the screen, negative numbers will produce scrolling "too far"
+     * @type {number}
+     */
+    PageScrollConfig.defaultScrollOffset = 0;
+    /**
+     * Whether by default for inline scroll animations the advanced offset calculation should take place (true) or
+     * not (false). Default is false.
+     * The advanced offset calculation will traverse the DOM tree upwards, starting at the scrollTarget, until it finds
+     * the scrollingView container element. Along the way the offset positions of the relative positioned
+     * (position: relative) elements will be taken into account for calculating the target elements position.
+     * @type {boolean}
+     */
+    PageScrollConfig.defaultAdvancedInlineOffsetCalculation = false;
+    /**
+     * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
+     * @type {string[]}
+     * @private
+     */
+    PageScrollConfig._interruptEvents = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+    /**
+     * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
+     * scroll animation.
+     * @type {number[]}
+     * @private
+     */
+    PageScrollConfig._interruptKeys = [33, 34, 35, 36, 38, 40];
+    /**
+     * Whether a scroll animation should be interruptible by user interaction (true) or not (false). If the user performs an
+     * interrupting event while a scroll animation takes place, the scroll animation stops.
+     * @type {boolean}
+     */
+    PageScrollConfig.defaultInterruptible = true;
+    PageScrollConfig._easingLogic = {
+        ease: function (t, b, c, d) {
+            // Linear easing
+            return c * t / d + b;
+        }
+    };
+    return PageScrollConfig;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll-instance.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScrollInstance; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-config.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-util.service.js");
+
+
+
+/**
+ * Represents a scrolling action
+ */
+var PageScrollInstance = (function () {
+    /**
+     * Private constructor, requires the properties assumed to be the bare minimum.
+     * Use the factory methods to create instances:
+     *      {@link PageScrollInstance#simpleInstance}
+     *      {@link PageScrollInstance#newInstance}
+     * @param namespace
+     * @param document
+     */
+    function PageScrollInstance(namespace, document) {
+        /**
+         * These properties will be set during instance construction and default to their defaults from PageScrollConfig
+         */
+        /* A namespace to "group" scroll animations together and stopping some does not stop others */
+        this._namespace = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._defaultNamespace;
+        /* Whether we scroll vertically (true) or horizontally (false) */
+        this._verticalScrolling = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultIsVerticalScrolling;
+        /* Offset in px that the animation should stop above that target element */
+        this._offset = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultScrollOffset;
+        /* Duration in milliseconds the scroll animation should last */
+        this._duration = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultDuration;
+        /* Easing function to manipulate the scrollTop/scrollLeft value over time */
+        this._easingLogic = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultEasingLogic;
+        /* Boolean whether the scroll animation should stop on user interruption or not */
+        this._interruptible = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultInterruptible;
+        /* Whether the advanded offset calculation for inline scrolling should be used */
+        this._advancedInlineOffsetCalculation = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultAdvancedInlineOffsetCalculation;
+        /* Event emitter to notify the world about the scrolling */
+        this._pageScrollFinish = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        /**
+         * These properties will be set/manipulated if the scroll animation starts
+         */
+        /* The initial value of the scrollTop or scrollLeft position when the animation starts */
+        this._startScrollPosition = 0;
+        /* Whether an interrupt listener is attached to the body or not */
+        this._interruptListenersAttached = false;
+        /* References to the timer instance that is used to perform the scroll animation to be
+         able to clear it on animation end*/
+        this._timer = null;
+        this._namespace = namespace;
+        this.document = document;
+    }
+    /*
+     * Factory methods for instance creation
+     */
+    PageScrollInstance.simpleInstance = function (document, scrollTarget, namespace) {
+        return PageScrollInstance.newInstance({
+            document: document,
+            scrollTarget: scrollTarget,
+            namespace: namespace
+        });
+    };
+    PageScrollInstance.newInstance = function (options) {
+        if (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.namespace) || options.namespace.length <= 0) {
+            options.namespace = __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._defaultNamespace;
+        }
+        var pageScrollInstance = new PageScrollInstance(options.namespace, document);
+        if (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
+            pageScrollInstance._isInlineScrolling = false;
+            pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
+        }
+        else {
+            pageScrollInstance._isInlineScrolling = true;
+            pageScrollInstance._scrollingViews = options.scrollingViews;
+        }
+        pageScrollInstance._scrollTarget = options.scrollTarget;
+        if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.verticalScrolling)) {
+            pageScrollInstance._verticalScrolling = options.verticalScrolling;
+        }
+        if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollOffset)) {
+            pageScrollInstance._offset = options.pageScrollOffset;
+        }
+        if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollEasingLogic)) {
+            pageScrollInstance._easingLogic = options.pageScrollEasingLogic;
+        }
+        if (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollDuration) && !__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollSpeed)) {
+            // No duration specified in the options, only in this case we use the speed option when present
+            pageScrollInstance._speed = options.pageScrollSpeed;
+            pageScrollInstance._duration = undefined;
+        }
+        else if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollDuration)) {
+            pageScrollInstance._duration = options.pageScrollDuration;
+        }
+        if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollFinishListener)) {
+            pageScrollInstance._pageScrollFinish = options.pageScrollFinishListener;
+        }
+        pageScrollInstance._interruptible = options.pageScrollInterruptible ||
+            (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.pageScrollInterruptible) && __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultInterruptible);
+        pageScrollInstance._advancedInlineOffsetCalculation = options.advancedInlineOffsetCalculation ||
+            (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
+                __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultAdvancedInlineOffsetCalculation);
+        return pageScrollInstance;
+    };
+    PageScrollInstance.prototype.getScrollPropertyValue = function (scrollingView) {
+        if (!this.verticalScrolling) {
+            return scrollingView.scrollLeft;
+        }
+        return scrollingView.scrollTop;
+    };
+    /**
+     * Extract the exact location of the scrollTarget element.
+     *
+     * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
+     * a string like "#heading2", then this method returns the corresponding DOM element for that id.
+     *
+     * @returns {HTMLElement}
+     */
+    PageScrollInstance.prototype.extractScrollTargetPosition = function () {
+        var scrollTargetElement;
+        if (typeof this._scrollTarget === 'string') {
+            var targetSelector = this._scrollTarget;
+            if (targetSelector.match(/^#[^\s]+$/g) !== null) {
+                // It's an id selector and a valid id, as it does not contain any white space characters
+                scrollTargetElement = this.document.getElementById(targetSelector.substr(1));
+            }
+            else {
+                scrollTargetElement = this.document.querySelector(targetSelector);
+            }
+        }
+        else {
+            scrollTargetElement = this._scrollTarget;
+        }
+        if (scrollTargetElement === null || scrollTargetElement === undefined) {
+            // Scroll target not found
+            return { top: NaN, left: NaN };
+        }
+        if (this._isInlineScrolling) {
+            var position = { top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft };
+            if (this._advancedInlineOffsetCalculation && this.scrollingViews.length === 1) {
+                var accumulatedParentsPos = { top: 0, left: 0 };
+                // not named window to make sure we're not getting the global window variable by accident
+                var theWindow = scrollTargetElement.ownerDocument.defaultView;
+                var parentFound = false;
+                // Start parent is the immediate parent
+                var parent_1 = scrollTargetElement.parentElement;
+                // Iterate upwards all parents
+                while (!parentFound && !__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(parent_1)) {
+                    if (theWindow.getComputedStyle(parent_1).getPropertyValue('position') === 'relative') {
+                        accumulatedParentsPos.top += parent_1.offsetTop;
+                        accumulatedParentsPos.left += parent_1.offsetLeft;
+                    }
+                    // Next iteration
+                    parent_1 = parent_1.parentElement;
+                    parentFound = parent_1 === this.scrollingViews[0];
+                }
+                if (parentFound) {
+                    // Only use the results if we found the parent, otherwise we accumulated too much anyway
+                    position.top += accumulatedParentsPos.top;
+                    position.left += accumulatedParentsPos.left;
+                }
+                else {
+                    if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 2 || (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 1 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])())) {
+                        console.warn('Unable to find nested scrolling targets parent!');
+                    }
+                }
+            }
+            return position;
+        }
+        return __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].extractElementPosition(this.document, scrollTargetElement);
+    };
+    /**
+     * Get the top offset of the scroll animation.
+     * This automatically takes the offset location of the scrolling container/scrolling view
+     * into account (for nested/inline scrolling).
+     *
+     * @returns {number}
+     */
+    PageScrollInstance.prototype.getCurrentOffset = function () {
+        return this._offset;
+    };
+    /**
+     * Sets the "scrollTop" or "scrollLeft" property for all scrollingViews to the provided value
+     * @param position
+     * @return true if at least for one ScrollTopSource the scrollTop/scrollLeft value could be set and it kept the new value.
+     *          false if it failed for all ScrollingViews, meaning that we should stop the animation
+     *          (probably because we're at the end of the scrolling region)
+     */
+    PageScrollInstance.prototype.setScrollPosition = function (position) {
+        var _this = this;
+        if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 5 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])()) {
+            console.warn('Scroll Position: ' + position);
+        }
+        // Set the new scrollTop/scrollLeft to all scrollingViews elements
+        return this.scrollingViews.reduce(function (oneAlreadyWorked, scrollingView) {
+            var startScrollPropertyValue = _this.getScrollPropertyValue(scrollingView);
+            if (scrollingView && !__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(startScrollPropertyValue)) {
+                var scrollDistance = Math.abs(startScrollPropertyValue - position);
+                // The movement we need to perform is less than 2px
+                // This we consider a small movement which some browser may not perform when
+                // changing the scrollTop/scrollLeft property
+                // Thus in this cases we do not stop the scroll animation, although setting the
+                // scrollTop/scrollLeft value "fails"
+                var isSmallMovement = scrollDistance < __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._minScrollDistance;
+                if (!_this.verticalScrolling) {
+                    scrollingView.scrollLeft = position;
+                }
+                else {
+                    scrollingView.scrollTop = position;
+                }
+                // Return true of setting the new scrollTop/scrollLeft value worked
+                // We consider that it worked if the new scrollTop/scrollLeft value is closer to the
+                // desired scrollTop/scrollLeft than before (it might not be exactly the value we
+                // set due to dpi or rounding irregularities)
+                if (isSmallMovement || scrollDistance > Math.abs(_this.getScrollPropertyValue(scrollingView) - position)) {
+                    return true;
+                }
+            }
+            return oneAlreadyWorked;
+        }, false);
+    };
+    /**
+     * Trigger firing a animation finish event
+     * @param value Whether the animation finished at the target (true) or got interrupted (false)
+     */
+    PageScrollInstance.prototype.fireEvent = function (value) {
+        if (this._pageScrollFinish) {
+            this._pageScrollFinish.emit(value);
+        }
+    };
+    /**
+     * Attach the interrupt listeners to the PageScrollInstance body. The given interruptReporter
+     * will be called if any of the attached events is fired.
+     *
+     * Possibly attached interruptListeners are automatically removed from the body before the new one will be attached.
+     *
+     * @param interruptReporter
+     */
+    PageScrollInstance.prototype.attachInterruptListeners = function (interruptReporter) {
+        var _this = this;
+        if (this._interruptListenersAttached) {
+            // Detach possibly existing listeners first
+            this.detachInterruptListeners();
+        }
+        this._interruptListener = function (event) {
+            interruptReporter.report(event, _this);
+        };
+        __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._interruptEvents.forEach(function (event) { return _this.document.body.addEventListener(event, _this._interruptListener); });
+        this._interruptListenersAttached = true;
+    };
+    /**
+     * Remove event listeners from the body and stop listening for events that might be treated as "animation
+     * interrupt" events.
+     */
+    PageScrollInstance.prototype.detachInterruptListeners = function () {
+        var _this = this;
+        __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._interruptEvents.forEach(function (event) { return _this.document.body.removeEventListener(event, _this._interruptListener); });
+        this._interruptListenersAttached = false;
+    };
+    Object.defineProperty(PageScrollInstance.prototype, "namespace", {
+        get: function () {
+            return this._namespace;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "scrollTarget", {
+        get: function () {
+            return this._scrollTarget;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "verticalScrolling", {
+        get: function () {
+            return this._verticalScrolling;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "scrollingViews", {
+        get: function () {
+            return this._scrollingViews;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "startScrollPosition", {
+        get: function () {
+            return this._startScrollPosition;
+        },
+        set: function (value) {
+            this._startScrollPosition = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "targetScrollPosition", {
+        get: function () {
+            return this._targetScrollPosition;
+        },
+        set: function (value) {
+            this._targetScrollPosition = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "distanceToScroll", {
+        get: function () {
+            return this._distanceToScroll;
+        },
+        set: function (value) {
+            this._distanceToScroll = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "executionDuration", {
+        get: function () {
+            return this._executionDuration;
+        },
+        set: function (value) {
+            this._executionDuration = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "duration", {
+        get: function () {
+            return this._duration;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "speed", {
+        get: function () {
+            return this._speed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "easingLogic", {
+        get: function () {
+            return this._easingLogic;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "interruptible", {
+        get: function () {
+            return this._interruptible;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "startTime", {
+        get: function () {
+            return this._startTime;
+        },
+        set: function (value) {
+            this._startTime = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "endTime", {
+        get: function () {
+            return this._endTime;
+        },
+        set: function (value) {
+            this._endTime = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "timer", {
+        get: function () {
+            return this._timer;
+        },
+        set: function (value) {
+            this._timer = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageScrollInstance.prototype, "interruptListenersAttached", {
+        get: function () {
+            return this._interruptListenersAttached;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return PageScrollInstance;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll-util.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScrollUtilService; });
+var PageScrollUtilService = (function () {
+    function PageScrollUtilService() {
+    }
+    /**
+     * Util method to check whether a given variable is either undefined or null
+     * @param variable
+     * @returns {boolean} true the variable is undefined or null
+     */
+    PageScrollUtilService.isUndefinedOrNull = function (variable) {
+        return (typeof variable === 'undefined') || variable === undefined || variable === null;
+    };
+    PageScrollUtilService.extractElementPosition = function (document, scrollTargetElement) {
+        var body = document.body;
+        var docEl = document.documentElement;
+        var windowPageYOffset = document.defaultView && document.defaultView.pageYOffset || undefined;
+        var windowPageXOffset = document.defaultView && document.defaultView.pageXOffset || undefined;
+        var scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
+        var scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
+        var clientTop = docEl.clientTop || body.clientTop || 0;
+        var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
+            // No element found, so return the current position to not cause any change in scroll position
+            return { top: scrollTop, left: scrollLeft };
+        }
+        var box = scrollTargetElement.getBoundingClientRect();
+        var top = box.top + scrollTop - clientTop;
+        var left = box.left + scrollLeft - clientLeft;
+        return { top: Math.round(top), left: Math.round(left) };
+    };
+    return PageScrollUtilService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll.directive.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageScroll; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-instance.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng2_page_scroll_util_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-util.service.js");
+
+
+
+
+
+
+var PageScroll = (function () {
+    function PageScroll(pageScrollService, router, document) {
+        this.pageScrollService = pageScrollService;
+        this.router = router;
+        this.pageScrollTarget = null;
+        this.pageScrollHorizontal = null;
+        this.pageScrollOffset = null;
+        this.pageScrollDuration = null;
+        this.pageScrollSpeed = null;
+        this.pageScrollEasing = null;
+        this.pageScrollAdjustHash = false;
+        this.pageScroll = null;
+        this.pageScrollFinish = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.document = document;
+    }
+    PageScroll.prototype.ngOnChanges = function (changes) {
+        // Some inputs changed, reset the pageScrollInstance
+        this.pageScrollInstance = undefined;
+    };
+    PageScroll.prototype.ngOnDestroy = function () {
+        if (this.pageScrollInstance) {
+            this.pageScrollService.stop(this.pageScrollInstance);
+        }
+        return undefined;
+    };
+    PageScroll.prototype.generatePageScrollInstance = function () {
+        if (__WEBPACK_IMPORTED_MODULE_5__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(this.pageScrollInstance)) {
+            this.pageScrollInstance = __WEBPACK_IMPORTED_MODULE_4__ng2_page_scroll_instance__["a" /* PageScrollInstance */].newInstance({
+                document: this.document,
+                scrollTarget: this.pageScrollTarget || this.href,
+                scrollingViews: null,
+                namespace: this.pageScroll,
+                verticalScrolling: !this.pageScrollHorizontal,
+                pageScrollOffset: this.pageScrollOffset,
+                pageScrollInterruptible: this.pageScrollInterruptible,
+                pageScrollEasingLogic: this.pageScrollEasing,
+                pageScrollDuration: this.pageScrollDuration,
+                pageScrollSpeed: this.pageScrollSpeed,
+                pageScrollFinishListener: this.pageScrollFinish
+            });
+        }
+        return this.pageScrollInstance;
+    };
+    PageScroll.prototype.pushRouterState = function () {
+        if (this.pageScrollAdjustHash && typeof this.pageScrollInstance.scrollTarget === 'string'
+            && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
+            // "Navigate" to the current route again and this time set the fragment/hash
+            this.router.navigate([], {
+                fragment: this.pageScrollInstance.scrollTarget.substr(1),
+                preserveQueryParams: true
+            });
+        }
+    };
+    PageScroll.prototype.scroll = function () {
+        var pageScrollInstance = this.generatePageScrollInstance();
+        this.pushRouterState();
+        this.pageScrollService.start(pageScrollInstance);
+    };
+    PageScroll.prototype.handleClick = function (clickEvent) {
+        var _this = this;
+        if (this.routerLink && this.router !== null && this.router !== undefined) {
+            var urlTree = void 0;
+            if (typeof this.routerLink === 'string') {
+                urlTree = this.router.parseUrl(this.routerLink);
+            }
+            else {
+                urlTree = this.router.createUrlTree(this.routerLink);
+            }
+            if (!this.router.isActive(urlTree, true)) {
+                // We need to navigate their first.
+                // Navigation is handled by the routerLink directive
+                // so we only need to listen for route change
+                var subscription_1 = this.router.events.subscribe(function (routerEvent) {
+                    if (routerEvent instanceof __WEBPACK_IMPORTED_MODULE_1__angular_router__["NavigationEnd"]) {
+                        subscription_1.unsubscribe();
+                        // use a timeout to start scrolling as soon as the stack is cleared
+                        setTimeout(function () {
+                            _this.scroll();
+                        }, 0);
+                    }
+                    else if (routerEvent instanceof __WEBPACK_IMPORTED_MODULE_1__angular_router__["NavigationError"] || routerEvent instanceof __WEBPACK_IMPORTED_MODULE_1__angular_router__["NavigationCancel"]) {
+                        subscription_1.unsubscribe();
+                    }
+                });
+                return false; // to preventDefault()
+            }
+        }
+        this.scroll();
+        return false; // to preventDefault()
+    };
+    PageScroll.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
+                    selector: '[pageScroll]',
+                    host: {
+                        '(click)': 'handleClick($event)',
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    PageScroll.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_service__["b" /* PageScrollService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__angular_common__["DOCUMENT"],] },] },
+    ]; };
+    PageScroll.propDecorators = {
+        'routerLink': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'href': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollTarget': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollHorizontal': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollOffset': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollDuration': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollSpeed': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollEasing': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollInterruptible': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollAdjustHash': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScroll': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'pageScrollFinish': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+    };
+    return PageScroll;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll.module.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ng2PageScrollModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll.directive.js");
+
+
+
+
+var Ng2PageScrollModule = (function () {
+    function Ng2PageScrollModule() {
+    }
+    /** @deprecated since v4.0.0-beta.10 (https://github.com/Nolanus/ng2-page-scroll/pull/190) */
+    Ng2PageScrollModule.forRoot = function () {
+        return {
+            ngModule: Ng2PageScrollModule,
+            providers: [
+                { provide: __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__["b" /* PageScrollService */], useClass: __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__["b" /* PageScrollService */] }
+            ]
+        };
+    };
+    Ng2PageScrollModule.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"], args: [{
+                    imports: [__WEBPACK_IMPORTED_MODULE_0__angular_common__["CommonModule"]],
+                    declarations: [__WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__["a" /* PageScroll */]],
+                    exports: [__WEBPACK_IMPORTED_MODULE_3__ng2_page_scroll_directive__["a" /* PageScroll */]],
+                    providers: [__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_service__["a" /* NG2PAGESCROLL_SERVICE_PROVIDER */]]
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2PageScrollModule.ctorParameters = function () { return []; };
+    return Ng2PageScrollModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/ng2-page-scroll/src/ng2-page-scroll.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return PageScrollService; });
+/* unused harmony export NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NG2PAGESCROLL_SERVICE_PROVIDER; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-config.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__ = __webpack_require__("./node_modules/ng2-page-scroll/src/ng2-page-scroll-util.service.js");
+
+
+
+var PageScrollService = (function () {
+    function PageScrollService() {
+        var _this = this;
+        this.runningInstances = [];
+        this.onInterrupted = {
+            report: function (event, pageScrollInstance) {
+                if (!pageScrollInstance.interruptible) {
+                    // Non-interruptible anyway, so do not stop anything
+                    return;
+                }
+                var shouldStop = true;
+                if (event.type === 'keyup') {
+                    // Only stop if specific keys have been pressed, for all others don't stop anything
+                    if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._interruptKeys.indexOf(event.keyCode) === -1) {
+                        // The pressed key is not in the list of interrupting keys
+                        shouldStop = false;
+                    }
+                }
+                else if (event.type === 'mousedown') {
+                    // For mousedown events we only stop the scroll animation of the mouse has
+                    // been clicked inside the scrolling container
+                    if (!pageScrollInstance.scrollingViews.some(function (scrollingView) { return scrollingView.contains(event.target); })) {
+                        // Mouse clicked an element which is not inside any of the the scrolling containers
+                        shouldStop = false;
+                    }
+                }
+                if (shouldStop) {
+                    _this.stopAll(pageScrollInstance.namespace);
+                }
+            }
+        };
+        if (PageScrollService.instanceCounter > 0 &&
+            (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 2 || (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 1 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])()))) {
+            console.warn('An instance of PageScrollService already exists, usually ' +
+                'including one provider should be enough, so double check.');
+        }
+        PageScrollService.instanceCounter++;
+    }
+    PageScrollService.prototype.stopInternal = function (interrupted, pageScrollInstance) {
+        var index = this.runningInstances.indexOf(pageScrollInstance);
+        if (index >= 0) {
+            this.runningInstances.splice(index, 1);
+        }
+        if (pageScrollInstance.interruptListenersAttached) {
+            pageScrollInstance.detachInterruptListeners();
+        }
+        if (pageScrollInstance.timer) {
+            // Clear/Stop the timer
+            clearInterval(pageScrollInstance.timer);
+            // Clear the reference to this timer
+            pageScrollInstance.timer = undefined;
+            pageScrollInstance.fireEvent(!interrupted);
+            return true;
+        }
+        return false;
+    };
+    /**
+     * Start a scroll animation. All properties of the animation are stored in the given {@link PageScrollInstance} object.
+     *
+     * This is the core functionality of the whole library.
+     *
+     * @param pageScrollInstance
+     */
+    PageScrollService.prototype.start = function (pageScrollInstance) {
+        var _this = this;
+        // Stop all possibly running scroll animations in the same namespace
+        this.stopAll(pageScrollInstance.namespace);
+        if (pageScrollInstance.scrollingViews === null || pageScrollInstance.scrollingViews.length === 0) {
+            // No scrollingViews specified, thus we can't animate anything
+            if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 2 || (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 1 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])())) {
+                console.warn('No scrollingViews specified, this ng2-page-scroll does not know which DOM elements to scroll');
+            }
+            return;
+        }
+        var startScrollPositionFound = false;
+        // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
+        pageScrollInstance.startScrollPosition = 0;
+        // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
+        pageScrollInstance.scrollingViews.forEach(function (scrollingView) {
+            if (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(scrollingView)) {
+                return;
+            }
+            // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
+            // or "scrollLeft" property that is not undefined and unequal to 0
+            var scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
+            if (!startScrollPositionFound && scrollPosition) {
+                // We found a scrollingView that does not have scrollTop or scrollLeft 0
+                // Return the scroll position value, as this will be our startScrollPosition
+                pageScrollInstance.startScrollPosition = scrollPosition;
+                startScrollPositionFound = true;
+            }
+        });
+        var pageScrollOffset = pageScrollInstance.getCurrentOffset();
+        // Calculate the target position that the scroll animation should go to
+        var scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
+        pageScrollInstance.targetScrollPosition = Math.round((pageScrollInstance.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
+        // Calculate the distance we need to go in total
+        pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
+        if (isNaN(pageScrollInstance.distanceToScroll)) {
+            // We weren't able to find the target position, maybe the element does not exist?
+            if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 2 || (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 1 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])())) {
+                console.log('Scrolling not possible, as we can\'t find the specified target');
+            }
+            pageScrollInstance.fireEvent(false);
+            return;
+        }
+        // We're at the final destination already
+        // OR we need to scroll down but are already at the end
+        // OR we need to scroll up but are at the top already
+        var allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._minScrollDistance;
+        // Check how long we need to scroll if a speed option is given
+        // Default executionDuration is the specified duration
+        pageScrollInstance.executionDuration = pageScrollInstance.duration;
+        // Maybe we need to pay attention to the speed option?
+        if (!__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(pageScrollInstance.speed) && __WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(pageScrollInstance.duration)) {
+            // Speed option is set and no duration => calculate duration based on speed and scroll distance
+            pageScrollInstance.executionDuration = Math.abs(pageScrollInstance.distanceToScroll) / pageScrollInstance.speed * 1000;
+        }
+        // We should go there directly, as our "animation" would have one big step
+        // only anyway and this way we save the interval stuff
+        var tooShortInterval = pageScrollInstance.executionDuration <= __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._interval;
+        if (allReadyAtDestination || tooShortInterval) {
+            if (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 2 || (__WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._logLevel >= 1 && Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["isDevMode"])())) {
+                if (allReadyAtDestination) {
+                    console.log('Scrolling not possible, as we can\'t get any closer to the destination');
+                }
+                else {
+                    console.log('Scroll duration shorter that interval length, jumping to target');
+                }
+            }
+            pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
+            pageScrollInstance.fireEvent(true);
+            return;
+        }
+        // Register the interrupt listeners if we want an interruptible scroll animation
+        if (pageScrollInstance.interruptible ||
+            (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(pageScrollInstance.interruptible) && __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */].defaultInterruptible)) {
+            pageScrollInstance.attachInterruptListeners(this.onInterrupted);
+        }
+        // Let's get started, get the start time...
+        pageScrollInstance.startTime = new Date().getTime();
+        // .. and calculate the end time (when we need to finish at last)
+        pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
+        pageScrollInstance.timer = setInterval(function (_pageScrollInstance) {
+            // Take the current time
+            var currentTime = new Date().getTime();
+            // Determine the new scroll position
+            var newScrollPosition;
+            var stopNow = false;
+            if (_pageScrollInstance.endTime <= currentTime) {
+                // We're over the time already, so go the targetScrollPosition (aka destination)
+                newScrollPosition = _pageScrollInstance.targetScrollPosition;
+                stopNow = true;
+            }
+            else {
+                // Calculate the scroll position based on the current time using the easing function
+                newScrollPosition = Math.round(_pageScrollInstance.easingLogic.ease(currentTime - _pageScrollInstance.startTime, _pageScrollInstance.startScrollPosition, _pageScrollInstance.distanceToScroll, _pageScrollInstance.executionDuration));
+            }
+            // Set the new scrollPosition to all scrollingViews elements
+            if (!_pageScrollInstance.setScrollPosition(newScrollPosition)) {
+                // Setting the new scrollTop/scrollLeft value failed for all ScrollingViews
+                // early stop the scroll animation to save resources
+                stopNow = true;
+            }
+            // At the end do the internal stop maintenance and fire the pageScrollFinish event
+            // (otherwise the event might arrive at "too early")
+            if (stopNow) {
+                _this.stopInternal(false, _pageScrollInstance);
+            }
+        }, __WEBPACK_IMPORTED_MODULE_1__ng2_page_scroll_config__["a" /* PageScrollConfig */]._interval, pageScrollInstance);
+        // Register the instance as running one
+        this.runningInstances.push(pageScrollInstance);
+    };
+    /**
+     * Stop all running scroll animations. Optionally limit to stop only the ones of specific namespace.
+     *
+     * @param namespace
+     * @returns {boolean}
+     */
+    PageScrollService.prototype.stopAll = function (namespace) {
+        if (this.runningInstances.length > 0) {
+            var stoppedSome = false;
+            for (var i = 0; i < this.runningInstances.length; ++i) {
+                var pageScrollInstance = this.runningInstances[i];
+                if (__WEBPACK_IMPORTED_MODULE_2__ng2_page_scroll_util_service__["a" /* PageScrollUtilService */].isUndefinedOrNull(namespace) || namespace.length === 0 ||
+                    pageScrollInstance.namespace === namespace) {
+                    stoppedSome = true;
+                    this.stopInternal(true, pageScrollInstance);
+                    // Decrease the counter, as we removed an item from the array we iterate over
+                    i--;
+                }
+            }
+            return stoppedSome;
+        }
+        return false;
+    };
+    PageScrollService.prototype.stop = function (pageScrollInstance) {
+        return this.stopInternal(true, pageScrollInstance);
+    };
+    PageScrollService.instanceCounter = 0;
+    PageScrollService.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+    ];
+    /** @nocollapse */
+    PageScrollService.ctorParameters = function () { return []; };
+    return PageScrollService;
+}());
+
+/* singleton pattern taken from https://github.com/angular/angular/issues/13854 */
+function NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY(parentDispatcher) {
+    return parentDispatcher || new PageScrollService();
+}
+var NG2PAGESCROLL_SERVICE_PROVIDER = {
+    provide: PageScrollService,
+    deps: [[new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"](), new __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"](), PageScrollService]],
+    useFactory: NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/point2d/index.js":
 /***/ (function(module, exports) {
 
 
@@ -102717,7 +99480,7 @@ module.exports = Point;
 
 /***/ }),
 
-/***/ "../../../../process/browser.js":
+/***/ "./node_modules/process/browser.js":
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -102908,116 +99671,22 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "../../../../rxjs/_esm5/observable/IntervalObservable.js":
+/***/ "./node_modules/rxjs/_esm5/add/observable/forkJoin.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntervalObservable; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_isNumeric__ = __webpack_require__("../../../../rxjs/_esm5/util/isNumeric.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__scheduler_async__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/async.js");
-/** PURE_IMPORTS_START .._util_isNumeric,.._Observable,.._scheduler_async PURE_IMPORTS_END */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b)
-        if (b.hasOwnProperty(p))
-            d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__observable_forkJoin__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/forkJoin.js");
+/** PURE_IMPORTS_START .._.._Observable,.._.._observable_forkJoin PURE_IMPORTS_END */
 
 
-
-/**
- * We need this JSDoc comment for affecting ESDoc.
- * @extends {Ignored}
- * @hide true
- */
-var IntervalObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
-    __extends(IntervalObservable, _super);
-    function IntervalObservable(period, scheduler) {
-        if (period === void 0) {
-            period = 0;
-        }
-        if (scheduler === void 0) {
-            scheduler = __WEBPACK_IMPORTED_MODULE_2__scheduler_async__["a" /* async */];
-        }
-        _super.call(this);
-        this.period = period;
-        this.scheduler = scheduler;
-        if (!Object(__WEBPACK_IMPORTED_MODULE_0__util_isNumeric__["a" /* isNumeric */])(period) || period < 0) {
-            this.period = 0;
-        }
-        if (!scheduler || typeof scheduler.schedule !== 'function') {
-            this.scheduler = __WEBPACK_IMPORTED_MODULE_2__scheduler_async__["a" /* async */];
-        }
-    }
-    /**
-     * Creates an Observable that emits sequential numbers every specified
-     * interval of time, on a specified IScheduler.
-     *
-     * <span class="informal">Emits incremental numbers periodically in time.
-     * </span>
-     *
-     * <img src="./img/interval.png" width="100%">
-     *
-     * `interval` returns an Observable that emits an infinite sequence of
-     * ascending integers, with a constant interval of time of your choosing
-     * between those emissions. The first emission is not sent immediately, but
-     * only after the first period has passed. By default, this operator uses the
-     * `async` IScheduler to provide a notion of time, but you may pass any
-     * IScheduler to it.
-     *
-     * @example <caption>Emits ascending numbers, one every second (1000ms)</caption>
-     * var numbers = Rx.Observable.interval(1000);
-     * numbers.subscribe(x => console.log(x));
-     *
-     * @see {@link timer}
-     * @see {@link delay}
-     *
-     * @param {number} [period=0] The interval size in milliseconds (by default)
-     * or the time unit determined by the scheduler's clock.
-     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-     * the emission of values, and providing a notion of "time".
-     * @return {Observable} An Observable that emits a sequential number each time
-     * interval.
-     * @static true
-     * @name interval
-     * @owner Observable
-     */
-    IntervalObservable.create = function (period, scheduler) {
-        if (period === void 0) {
-            period = 0;
-        }
-        if (scheduler === void 0) {
-            scheduler = __WEBPACK_IMPORTED_MODULE_2__scheduler_async__["a" /* async */];
-        }
-        return new IntervalObservable(period, scheduler);
-    };
-    IntervalObservable.dispatch = function (state) {
-        var index = state.index, subscriber = state.subscriber, period = state.period;
-        subscriber.next(index);
-        if (subscriber.closed) {
-            return;
-        }
-        state.index += 1;
-        this.schedule(state, period);
-    };
-    IntervalObservable.prototype._subscribe = function (subscriber) {
-        var index = 0;
-        var period = this.period;
-        var scheduler = this.scheduler;
-        subscriber.add(scheduler.schedule(IntervalObservable.dispatch, period, {
-            index: index, subscriber: subscriber, period: period
-        }));
-    };
-    return IntervalObservable;
-}(__WEBPACK_IMPORTED_MODULE_1__Observable__["a" /* Observable */]));
-//# sourceMappingURL=IntervalObservable.js.map 
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].forkJoin = __WEBPACK_IMPORTED_MODULE_1__observable_forkJoin__["a" /* forkJoin */];
+//# sourceMappingURL=forkJoin.js.map 
 
 
 /***/ }),
 
-/***/ "../../../../spin.js/spin.js":
+/***/ "./node_modules/spin.js/spin.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -103405,7 +100074,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "../../../../svgsaver/lib/svgsaver.js":
+/***/ "./node_modules/svgsaver/lib/svgsaver.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -103421,9 +100090,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _computedStyles = __webpack_require__("../../../../computed-styles/lib/index.js");
+var _computedStyles = __webpack_require__("./node_modules/computed-styles/lib/index.js");
 
 var _computedStyles2 = _interopRequireDefault(_computedStyles);
+
+var _fileSaver = __webpack_require__("./node_modules/file-saver/FileSaver.js");
+
+var _fileSaver2 = _interopRequireDefault(_fileSaver);
 
 var svgStyles = { // Whitelist of CSS styles and default values
   'alignment-baseline': 'auto',
@@ -103497,7 +100170,7 @@ var svgAttrs = [// white list of attributes
 'href', 'style', 'class', 'd', 'pathLength', // Path
 'x', 'y', 'dx', 'dy', 'glyphRef', 'format', 'x1', 'y1', 'x2', 'y2', 'rotate', 'textLength', 'cx', 'cy', 'r', 'rx', 'ry', 'fx', 'fy', 'width', 'height', 'refX', 'refY', 'orient', 'markerUnits', 'markerWidth', 'markerHeight', 'maskUnits', 'transform', 'viewBox', 'version', // Container
 'preserveAspectRatio', 'xmlns', 'points', // Polygons
-'offset'];
+'offset', 'xlink:href'];
 
 // http://www.w3.org/TR/SVG/propidx.html
 // via https://github.com/svg/svgo/blob/master/plugins/_collections.js
@@ -103586,12 +100259,12 @@ function cloneSvg(src, attrs, styles) {
   return clonedSvg;
 }
 
-/* global saveAs, Image, MouseEvent */
+/* global Image, MouseEvent */
 
 /* Some simple utilities for saving SVGs, including an alternative to saveAs */
 
 // detection
-var DownloadAttributeSupport = typeof document !== 'undefined' && 'download' in document.createElement('a');
+var DownloadAttributeSupport = typeof document !== 'undefined' && 'download' in document.createElement('a') && typeof MouseEvent === 'function';
 
 function saveUri(uri, name) {
   if (DownloadAttributeSupport) {
@@ -103610,7 +100283,7 @@ function saveUri(uri, name) {
   return false;
 }
 
-function savePng(uri, name) {
+function createCanvas(uri, name, cb) {
   var canvas = document.createElement('canvas');
   var context = canvas.getContext('2d');
 
@@ -103620,19 +100293,27 @@ function savePng(uri, name) {
     canvas.height = image.height;
     context.drawImage(image, 0, 0);
 
-    if (isDefined(window.saveAs) && isDefined(canvas.toBlob)) {
-      canvas.toBlob(function (blob) {
-        saveAs(blob, name);
-      });
-    } else {
-      saveUri(canvas.toDataURL('image/png'), name);
-    }
+    cb(canvas);
   };
   image.src = uri;
   return true;
 }
 
-/* global saveAs, Blob */
+function savePng(uri, name) {
+  return createCanvas(uri, name, function (canvas) {
+    if (isDefined(canvas.toBlob)) {
+      canvas.toBlob(function (blob) {
+        _fileSaver2['default'].saveAs(blob, name);
+      });
+    } else {
+      saveUri(canvas.toDataURL('image/png'), name);
+    }
+  });
+}
+
+/* global Blob */
+
+var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
 // inheritable styles may be overridden by parent, always copy for now
 inheritableAttrs.forEach(function (k) {
@@ -103641,40 +100322,43 @@ inheritableAttrs.forEach(function (k) {
   }
 });
 
-function getSvg(el) {
-  if (isUndefined(el) || el === '') {
-    el = document.body.querySelector('svg');
-  } else if (typeof el === 'string') {
-    el = document.body.querySelector(el);
-  }
-  if (el && el.tagName !== 'svg') {
-    el = el.querySelector('svg');
-  }
-  if (!isNode(el)) {
-    throw new Error('svgsaver: Can\'t find an svg element');
-  }
-  return el;
-}
-
-function getFilename(el, filename, ext) {
-  if (!filename || filename === '') {
-    filename = (el.getAttribute('title') || 'untitled') + '.' + ext;
-  }
-  return encodeURI(filename);
-}
-
 var SvgSaver = (function () {
+  _createClass(SvgSaver, null, [{
+    key: 'getSvg',
+    value: function getSvg(el) {
+      if (isUndefined(el) || el === '') {
+        el = document.body.querySelector('svg');
+      } else if (typeof el === 'string') {
+        el = document.body.querySelector(el);
+      }
+      if (el && el.tagName !== 'svg') {
+        el = el.querySelector('svg');
+      }
+      if (!isNode(el)) {
+        throw new Error('svgsaver: Can\'t find an svg element');
+      }
+      return el;
+    }
+  }, {
+    key: 'getFilename',
+    value: function getFilename(el, filename, ext) {
+      if (!filename || filename === '') {
+        filename = (el.getAttribute('title') || 'untitled') + '.' + ext;
+      }
+      return encodeURI(filename);
+    }
 
-  /**
-  * SvgSaver constructor.
-  * @constructs SvgSaver
-  * @api public
-  *
-  * @example
-  * var svgsaver = new SvgSaver();                      // creates a new instance
-  * var svg = document.querySelector('#mysvg');         // find the SVG element
-  * svgsaver.asSvg(svg);                                // save as SVG
-  */
+    /**
+    * SvgSaver constructor.
+    * @constructs SvgSaver
+    * @api public
+    *
+    * @example
+    * var svgsaver = new SvgSaver();                      // creates a new instance
+    * var svg = document.querySelector('#mysvg');         // find the SVG element
+    * svgsaver.asSvg(svg);                                // save as SVG
+    */
+  }]);
 
   function SvgSaver() {
     var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -103689,27 +100373,55 @@ var SvgSaver = (function () {
   }
 
   /**
-  * Return the SVG HTML text after cleaning
+  * Return the cloned SVG after cleaning
   *
   * @param {SVGElement} el The element to copy.
-  * @returns {String} SVG text after cleaning
+  * @returns {SVGElement} SVG text after cleaning
   * @api public
   */
 
   _createClass(SvgSaver, [{
-    key: 'getHTML',
-    value: function getHTML(el) {
-      el = getSvg(el);
+    key: 'cloneSVG',
+    value: function cloneSVG(el) {
+      el = SvgSaver.getSvg(el);
       var svg = cloneSvg(el, this.attrs, this.styles);
 
       svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
       svg.setAttribute('version', 1.1);
 
       // height and width needed to download in FireFox
       svg.setAttribute('width', svg.getAttribute('width') || '500');
       svg.setAttribute('height', svg.getAttribute('height') || '900');
 
-      return svg.outerHTML || new window.XMLSerializer().serializeToString(svg);
+      return svg;
+    }
+
+    /**
+    * Return the SVG HTML text after cleaning
+    *
+    * @param {SVGElement} el The element to copy.
+    * @returns {String} SVG text after cleaning
+    * @api public
+    */
+  }, {
+    key: 'getHTML',
+    value: function getHTML(el) {
+      var svg = this.cloneSVG(el);
+
+      var html = svg.outerHTML;
+      if (html) {
+        return html;
+      }
+
+      // see http://stackoverflow.com/questions/19610089/unwanted-namespaces-on-svg-markup-when-using-xmlserializer-in-javascript-with-ie
+      svg.removeAttribute('xmlns');
+      svg.removeAttribute('xmlns:xlink');
+
+      svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg');
+      svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+
+      return new window.XMLSerializer().serializeToString(svg);
     }
 
     /**
@@ -103755,13 +100467,32 @@ var SvgSaver = (function () {
   }, {
     key: 'asSvg',
     value: function asSvg(el, filename) {
-      el = getSvg(el);
-      filename = getFilename(el, filename, 'svg');
-      if (isDefined(window.saveAs) && isFunction(Blob)) {
-        return saveAs(this.getBlob(el), filename);
-      } else {
-        return saveUri(this.getUri(el), filename);
+      el = SvgSaver.getSvg(el);
+      filename = SvgSaver.getFilename(el, filename, 'svg');
+      if (isFunction(Blob)) {
+        return _fileSaver2['default'].saveAs(this.getBlob(el), filename);
       }
+      return saveUri(this.getUri(el), filename);
+    }
+
+    /**
+    * Gets the SVG as a PNG data URI.
+    *
+    * @param {SVGElement} el The element to copy.
+    * @param {Function} cb Call back called with the PNG data uri.
+    * @api public
+    */
+  }, {
+    key: 'getPngUri',
+    value: function getPngUri(el, cb) {
+      if (isIE11) {
+        console.error('svgsaver: getPngUri not supported on IE11');
+      }
+      el = SvgSaver.getSvg(el);
+      var filename = SvgSaver.getFilename(el, null, 'png');
+      return createCanvas(this.getUri(el), filename, function (canvas) {
+        cb(canvas.toDataURL('image/png'));
+      });
     }
 
     /**
@@ -103775,8 +100506,11 @@ var SvgSaver = (function () {
   }, {
     key: 'asPng',
     value: function asPng(el, filename) {
-      el = getSvg(el);
-      filename = getFilename(el, filename, 'png');
+      if (isIE11) {
+        console.error('svgsaver: asPng not supported on IE11');
+      }
+      el = SvgSaver.getSvg(el);
+      filename = SvgSaver.getFilename(el, filename, 'png');
       return savePng(this.getUri(el), filename);
     }
   }]);
@@ -103790,7 +100524,27 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ "../../../../webpack/buildin/module.js":
+/***/ "./node_modules/webpack/buildin/amd-define.js":
+/***/ (function(module, exports) {
+
+module.exports = function() {
+	throw new Error("define cannot be used indirect");
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/amd-options.js":
+/***/ (function(module, exports) {
+
+/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
+module.exports = __webpack_amd_options__;
+
+/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/module.js":
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -103815,6 +100569,4234 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-details.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-details.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"columns medium-12\">\n      <div class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n        <cp-complex-header *ngIf=\"complexDetails;else loadingSpinner\"\n                           [complexAC]=\"complexDetails.complexAc\"\n                           [complexName]=\"complexDetails.name\"\n                           [complexSpecies]=\"complexDetails.species\"\n                           [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-header>\n      </div>\n      <div class=\"columns medium-12 no-pad-left no-pad-right\" style=\"margin-bottom: 30px\">\n        <div id=\"participants\" class=\"columns medium-12\">\n          <cp-complex-participants *ngIf=\"complexDetails\"\n                                   [participants]=\"complexDetails.participants\"\n                                   [complexAC]=\"complexDetails.complexAc\"\n                                   [complexMIJSON]=\"complexMIJSON\"></cp-complex-participants>\n        </div>\n        <div id=\"function\" class=\"columns medium-12 \" style=\"margin-bottom: 30px\">\n          <cp-complex-function *ngIf=\"complexDetails;\"\n                               [functionDescription]=\"complexDetails.functions\"\n                               [crossReferences]=\"complexDetails.crossReferences\"\n                               [ligands]=\"complexDetails.ligands\"\n                               [agonists]=\"complexDetails.agonists\"\n                               [antagonists]=\"complexDetails.antagonists\"></cp-complex-function>\n        </div>\n        <div id=\"properties\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-properties *ngIf=\"complexDetails;\"\n                                 [propertiesDescription]=\"complexDetails.properties\"\n                                 [comments]=\"complexDetails.comments\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"\n                                 [assemblies]=\"complexDetails.complexAssemblies\"></cp-complex-properties>\n        </div>\n        <div id=\"expression\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-expression *ngIf=\"complexDetails && gxa;\"\n                                 [gxa]=\"gxa\"\n                                 [participants]=\"complexDetails.participants\"\n                                 [complexSpecies]=\"complexDetails.species\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-expression>\n        </div>\n        <div id=\"disease\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-disease *ngIf=\"complexDetails;\"\n                              [diseaseDescriptions]=\"complexDetails.diseases\"\n                              [crossReferences]=\"complexDetails.crossReferences\"></cp-complex-disease>\n        </div>\n        <div id=\"references\" class=\"columns medium-12\" style=\"margin-bottom: 30px\">\n          <cp-complex-references *ngIf=\"complexDetails;\"\n                                 [crossReferences]=\"complexDetails.crossReferences\"\n                                 [synonyms]=\"complexDetails.synonyms\"\n                                 [systematicName]=\"complexDetails.systematicName\"></cp-complex-references>\n        </div>\n      </div>\n      <div class=\"columns medium-12\">\n        <cp-complex-footer *ngIf=\"complexDetails;\"\n                           [institute]=\"complexDetails.institution\"></cp-complex-footer>\n      </div>\n    </div>\n    <ng-template #loadingSpinner>\n      <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n    </ng-template>\n  </div>\n</section>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-details.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDetailsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__ = __webpack_require__("./src/app/complex/shared/service/complex-portal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__ = __webpack_require__("./src/app/complex/complex-details/shared/service/section/section.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__ = __webpack_require__("./node_modules/ng2-page-scroll/ng2-page-scroll.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+var ComplexDetailsComponent = /** @class */ (function () {
+    function ComplexDetailsComponent(route, router, notificationService, googleAnalyticsService, complexPortalService, sectionService, titleService) {
+        this.route = route;
+        this.router = router;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
+        this.complexPortalService = complexPortalService;
+        this.sectionService = sectionService;
+        this.titleService = titleService;
+        // This is to calculate the EBI menu bar into the scrolling
+        __WEBPACK_IMPORTED_MODULE_6_ng2_page_scroll__["b" /* PageScrollConfig */].defaultScrollOffset = 50;
+        this.checkIfGPAIsDefined();
+    }
+    ComplexDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._callSubscription = this.route
+            .params
+            .subscribe(function (params) {
+            _this.query = params['id'];
+            _this.titleService.setTitle('Complex Portal - ' + _this.query);
+            _this.query.startsWith('EBI-') ? _this.requestComplex() : _this.requestComplexAc();
+            _this.requestComplexMIJSON();
+            document.body.scrollTop = 0;
+        });
+    };
+    ComplexDetailsComponent.prototype.ngAfterViewInit = function () {
+        __WEBPACK_IMPORTED_MODULE_3__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
+    };
+    ComplexDetailsComponent.prototype.ngOnDestroy = function () {
+        this._callSubscription.unsubscribe();
+        this.sectionService.reset();
+    };
+    ComplexDetailsComponent.prototype.checkIfGPAIsDefined = function () {
+        // TODO: Not needed when we properly use the gxa node module and not use the backed version.
+        if (typeof expressionAtlasHeatmapHighcharts !== 'undefined') {
+            this._gxa = expressionAtlasHeatmapHighcharts;
+        }
+        else {
+            this._gxa = null;
+        }
+    };
+    ComplexDetailsComponent.prototype.requestComplex = function () {
+        var _this = this;
+        this.complexPortalService.getComplex(this._query).subscribe(function (complexDetails) {
+            _this.complexDetails = complexDetails;
+            console.log('Details ComplexAc: ' + complexDetails.complexAc);
+            // Check complexAC is not empty
+            if (complexDetails.complexAc != null) {
+                _this.router.navigate(['/complex', complexDetails.complexAc]);
+            }
+        }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
+    };
+    ComplexDetailsComponent.prototype.requestComplexAc = function () {
+        var _this = this;
+        this.complexPortalService.getComplexAc(this._query).subscribe(function (complexDetails) {
+            _this.complexDetails = complexDetails;
+        }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
+    };
+    ComplexDetailsComponent.prototype.requestComplexMIJSON = function () {
+        var _this = this;
+        this.complexPortalService.getComplexMIJSON(this._query).subscribe(function (complexMIJSON) { return _this.complexMIJSON = complexMIJSON; }, function (error) {
+            _this.notificationService.onAPIRequestError('Complex Portal');
+            _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_9__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_mi, error.status ? error.status : 'unknown');
+            _this.router.navigate(['home']);
+        });
+    };
+    Object.defineProperty(ComplexDetailsComponent.prototype, "complexDetails", {
+        get: function () {
+            return this._complexDetails;
+        },
+        set: function (value) {
+            this._complexDetails = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDetailsComponent.prototype, "complexMIJSON", {
+        get: function () {
+            return this._complexMIJSON;
+        },
+        set: function (value) {
+            this._complexMIJSON = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDetailsComponent.prototype, "query", {
+        get: function () {
+            return this._query;
+        },
+        set: function (value) {
+            this._query = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDetailsComponent.prototype, "gxa", {
+        get: function () {
+            return this._gxa;
+        },
+        set: function (value) {
+            this._gxa = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ComplexDetailsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-details',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-details.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-details.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_4__shared_notification_service_notification_service__["a" /* NotificationService */],
+            __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */], __WEBPACK_IMPORTED_MODULE_2__shared_service_complex_portal_service__["a" /* ComplexPortalService */],
+            __WEBPACK_IMPORTED_MODULE_5__shared_service_section_section_service__["a" /* SectionService */], __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["Title"]])
+    ], ComplexDetailsComponent);
+    return ComplexDetailsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-details.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplexDetailsModule", function() { return ComplexDetailsModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__ = __webpack_require__("./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__ = __webpack_require__("./src/app/complex/complex-details/complex-properties/complex-properties.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/complex-function.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__ = __webpack_require__("./src/app/complex/complex-details/complex-header/complex-header.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_details_component__ = __webpack_require__("./src/app/complex/complex-details/complex-details.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__ = __webpack_require__("./src/app/complex/complex-details/complex-expression/complex-expression.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__ = __webpack_require__("./src/app/complex/complex-details/complex-disease/complex-disease.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__ = __webpack_require__("./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__ = __webpack_require__("./src/app/complex/complex-details/complex-participants/complex-participants.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__ = __webpack_require__("./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/agonists/agonists.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__ = __webpack_require__("./src/app/complex/complex-details/complex-footer/complex-footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/ligands/ligands.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__ = __webpack_require__("./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__ = __webpack_require__("./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__ = __webpack_require__("./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__ = __webpack_require__("./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__ = __webpack_require__("./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__ = __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__ = __webpack_require__("./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__ = __webpack_require__("./src/app/complex/complex-details/complex-evidence/complex-evidence.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__ = __webpack_require__("./src/app/complex/complex-details/complex-references/complex-references.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__complex_properties_assemblies_assemblies_component__ = __webpack_require__("./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__ = __webpack_require__("./src/app/complex/complex-details/shared/go-to/go-to.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__ = __webpack_require__("./node_modules/ts-md5/dist/md5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__ = __webpack_require__("./src/app/shared/ols/service/ols.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__ = __webpack_require__("./src/app/complex/shared/service/complex-portal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_service_reactome_service__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__ = __webpack_require__("./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__shared_loading_indicators_progress_spinner_progress_spinner_module__ = __webpack_require__("./src/app/shared/loading-indicators/progress-spinner/progress-spinner.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__ = __webpack_require__("./src/app/complex/complex-details/shared/service/section/section.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43_ng2_page_scroll__ = __webpack_require__("./node_modules/ng2-page-scroll/ng2-page-scroll.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__complex_references_external_resources_external_resources_component__ = __webpack_require__("./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__complex_header_download_modal_download_modal_component__ = __webpack_require__("./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ComplexDetailsModule = /** @class */ (function () {
+    function ComplexDetailsModule() {
+    }
+    ComplexDetailsModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_34__angular_router__["RouterModule"].forChild([
+                    { path: '', component: __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */] },
+                ]),
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                __WEBPACK_IMPORTED_MODULE_41__shared_loading_indicators_progress_spinner_progress_spinner_module__["a" /* ProgressSpinnerModule */],
+                __WEBPACK_IMPORTED_MODULE_43_ng2_page_scroll__["a" /* Ng2PageScrollModule */].forRoot()
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_10__complex_details_component__["a" /* ComplexDetailsComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__complex_header_complex_header_component__["a" /* ComplexHeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__complex_function_complex_function_component__["a" /* ComplexFunctionComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__complex_properties_complex_properties_component__["a" /* ComplexPropertiesComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__complex_expression_complex_expression_component__["a" /* ComplexExpressionComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__complex_disease_complex_disease_component__["a" /* ComplexDiseaseComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__shared_visualisation_complex_viewer_complex_viewer_component__["a" /* ComplexViewerComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__complex_participants_complex_participants_component__["a" /* ComplexParticipantsComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__shared_visualisation_reactome_diagram_reactome_diagram_component__["a" /* ReactomeDiagramComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__complex_function_reactome_crossreferences_reactome_crossreferences_component__["a" /* ReactomeCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__complex_function_go_crossreferences_go_crossreferences_component__["a" /* GoCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__complex_function_intenz_crossreferences_intenz_crossreferences_component__["a" /* IntenzCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__complex_references_euro_pmc_crossreferences_euro_pmc_crossreferences_component__["a" /* EuroPmcCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_3__complex_properties_pdb_crossreferences_pdb_crossreferences_component__["a" /* PdbCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__shared_visualisation_litmol_viewer_litmol_viewer_component__["a" /* LitmolViewerComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__shared_visualisation_gxa_heatmap_gxa_heatmap_component__["a" /* GxaHeatmapComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__complex_expression_go_celluar_crossreference_go_celluar_crossreference_component__["a" /* GoCelluarCrossreferenceComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__complex_disease_chembl_crossreference_chembl_crossreference_component__["a" /* ChemblCrossreferenceComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__complex_disease_efo_crossreferences_efo_crossreferences_component__["a" /* EfoCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__complex_references_systematic_name_systematic_name_component__["a" /* SystematicNameComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__complex_references_synonyms_synonyms_component__["a" /* SynonymsComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__complex_function_ligands_ligands_component__["a" /* LigandsComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__complex_function_go_crossreferences_go_molecular_function_go_molecular_function_component__["a" /* GoMolecularFunctionComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__complex_function_go_crossreferences_go_biological_process_go_biological_process_component__["a" /* GoBiologicalProcessComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__complex_footer_complex_footer_component__["a" /* ComplexFooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__complex_function_agonists_agonists_component__["a" /* AgonistsComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__complex_function_antagonists_antagonists_component__["a" /* AntagonistsComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__complex_references_complex_references_component__["a" /* ComplexReferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__complex_evidence_complex_evidence_component__["a" /* ComplexEvidenceComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__complex_properties_emdb_crossreferences_emdb_crossreferences_component__["a" /* EmdbCrossreferencesComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__complex_properties_assemblies_assemblies_component__["a" /* AssembliesComponent */],
+                __WEBPACK_IMPORTED_MODULE_33__shared_go_to_go_to_component__["a" /* GoToComponent */],
+                __WEBPACK_IMPORTED_MODULE_44__complex_references_external_resources_external_resources_component__["a" /* ExternalResourcesComponent */],
+                __WEBPACK_IMPORTED_MODULE_45__complex_header_download_modal_download_modal_component__["a" /* DownloadModalComponent */],
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_37__shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_38__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_39__complex_function_reactome_crossreferences_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_40__complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_36__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_35_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_42__shared_service_section_section_service__["a" /* SectionService */]],
+        })
+    ], ComplexDetailsModule);
+    return ComplexDetailsModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>ChEMBL Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChemblCrossreferenceComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ChemblCrossreferenceComponent = /** @class */ (function () {
+    function ChemblCrossreferenceComponent() {
+        this._displayedElements = 5;
+    }
+    ChemblCrossreferenceComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(ChemblCrossreferenceComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChemblCrossreferenceComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ChemblCrossreferenceComponent.prototype, "crossReferences", null);
+    ChemblCrossreferenceComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-chembl-crossreference',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-disease/chembl-crossreference/chembl-crossreference.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChemblCrossreferenceComponent);
+    return ChemblCrossreferenceComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/complex-disease.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/complex-disease.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs\">\n    <h2 class=\"float-left\">Diseases and Pathologies</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Diseases and Pathologies'\"></cp-go-to>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"diseaseDescriptions\">\n      <ul class=\"no-bullet\" *ngFor=\"let diseaseDescription of diseaseDescriptions\">\n        <li>{{diseaseDescription}}</li>\n      </ul>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"efoXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"efoXRefs\">\n        <cp-efo-crossreferences [crossReferences]=\"efoXRefs\"></cp-efo-crossreferences>\n      </div>\n      <div id=\"chemblXRefs\" class=\"columns medium-6 no-pad-left\" *ngIf=\"chemblXRefs\">\n        <cp-chembl-crossreference [crossReferences]=\"chemblXRefs\"></cp-chembl-crossreference>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/complex-disease.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexDiseaseComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexDiseaseComponent = /** @class */ (function () {
+    function ComplexDiseaseComponent() {
+    }
+    ComplexDiseaseComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: We shouldn't go through all XRefs on the client. The CP model should be adapted.
+     *
+     * Finding all efo and ChEMBL XRefs
+     */
+    ComplexDiseaseComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            if (database === 'efo') {
+                if (this._efoXRefs === undefined) {
+                    this._efoXRefs = [];
+                }
+                this._efoXRefs.push(crossRef);
+            }
+            if (database === 'ChEMBL target') {
+                if (this._chemblXRefs === undefined) {
+                    this._chemblXRefs = [];
+                }
+                this._chemblXRefs.push(crossRef);
+            }
+        }
+    };
+    Object.defineProperty(ComplexDiseaseComponent.prototype, "diseaseDescriptions", {
+        get: function () {
+            return this._diseaseDescriptions;
+        },
+        set: function (value) {
+            this._diseaseDescriptions = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDiseaseComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDiseaseComponent.prototype, "efoXRefs", {
+        get: function () {
+            return this._efoXRefs;
+        },
+        set: function (value) {
+            this._efoXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexDiseaseComponent.prototype, "chemblXRefs", {
+        get: function () {
+            return this._chemblXRefs;
+        },
+        set: function (value) {
+            this._chemblXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexDiseaseComponent.prototype, "diseaseDescriptions", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexDiseaseComponent.prototype, "crossReferences", null);
+    ComplexDiseaseComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-disease',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-disease/complex-disease.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-disease/complex-disease.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexDiseaseComponent);
+    return ComplexDiseaseComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Disease Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Name</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n        <td>\n          {{crossReference.description}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EfoCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__ = __webpack_require__("./src/app/shared/ols/service/ols.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var EfoCrossreferencesComponent = /** @class */ (function () {
+    function EfoCrossreferencesComponent(olsService, notificationService, googleAnalyticsService) {
+        this.olsService = olsService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._displayedElements = 5;
+    }
+    EfoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * The OLS WS provides us some description to the found EFO and Orphanet XRefs.
+     */
+    EfoCrossreferencesComponent.prototype.findXRefs = function () {
+        var _this = this;
+        var _loop_1 = function (i) {
+            if (this_1.crossReferences[i].identifier.split(':')[0] === 'EFO') {
+                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_efo, error.status ? error.status : 'unknown');
+                });
+            }
+            else if (this_1.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
+                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                    _this.notificationService.onAPIRequestError('OLS');
+                    _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_orphanet, error.status ? error.status : 'unknown');
+                });
+            }
+        };
+        var this_1 = this;
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            _loop_1(i);
+        }
+    };
+    Object.defineProperty(EfoCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EfoCrossreferencesComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], EfoCrossreferencesComponent.prototype, "crossReferences", null);
+    EfoCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-efo-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-disease/efo-crossreferences/efo-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */],
+            __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], EfoCrossreferencesComponent);
+    return EfoCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-evidence/complex-evidence.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "h3\n{\n  padding: 5px 10px;\n  display: inline-block;\n  border-radius: 100px;\n  -webkit-box-shadow: 0px 0px 2px #000000;\n  box-shadow: 0px 0px 2px #000000;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-evidence/complex-evidence.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"ecoXRef || intactXRefs\">\n  <div class=\"columns medium-6 medium-push-6\">\n    <div class=\"columns medium-10\">\n      Evidence by\n      <a href=\"{{ecoXRef.searchURL}}\"\n         target=\"_blank\"> {{ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i\n        class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n      <ng-container *ngIf=\"intactXRefs\">\n        in IntAct\n        <ng-container *ngFor=\"let crossReference of intactXRefs;let isLast=last\">\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"> {{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>{{isLast ? '' : ', '}}\n        </ng-container>\n      </ng-container>\n    </div>\n    <div class=\"column medium-2 padding-left-xsmall\">\n      <h3 *ngIf=\"flaskSymbol\" class=\"icon icon-functional float-left\" attr.data-icon=\"{{flaskSymbol}}\"></h3>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-evidence/complex-evidence.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexEvidenceComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexEvidenceComponent = /** @class */ (function () {
+    function ComplexEvidenceComponent() {
+    }
+    ComplexEvidenceComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    /**
+     * TODO: Enrich the object from the response and may introduce a level for the flask symbol.
+     * Currently we do not store any further information in the evidence XRef, this is why we need to extend the object here.
+     * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
+     */
+    ComplexEvidenceComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            if (database === 'evidence ontology') {
+                this._ecoXRef = crossRef;
+                switch (this._ecoXRef.identifier) {
+                    case ('ECO:0000353'):
+                        this._ecoXRef.description = 'physical interaction evidence';
+                        this._flaskSymbol = 'E';
+                        break;
+                    case ('ECO:0005610'):
+                        this._ecoXRef.description = 'inferred by homology';
+                        this._flaskSymbol = 'C';
+                        break;
+                    case ('ECO:0005544'):
+                        this._ecoXRef.description = 'inferred by orthology';
+                        this._flaskSymbol = 'C';
+                        break;
+                    case ('ECO:0005546'):
+                        this._ecoXRef.description = 'inferred by paralogy';
+                        this._flaskSymbol = 'C';
+                        break;
+                    case ('ECO:0005547'):
+                        this._ecoXRef.description = 'inferred by curator';
+                        this._flaskSymbol = 'B';
+                        break;
+                    case ('ECO:0005543'):
+                        this._ecoXRef.description = 'inferred from mixed species evidence';
+                        this._flaskSymbol = 'E';
+                        break;
+                    case ('ECO:0005542'):
+                        this._ecoXRef.description = 'inferred from single species evidence';
+                        this._flaskSymbol = 'E';
+                        break;
+                }
+            }
+            if (database === 'intact') {
+                if (this._intactXRefs === undefined) {
+                    this._intactXRefs = [];
+                }
+                this._intactXRefs.push(crossRef);
+            }
+        }
+    };
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "ecoXRef", {
+        get: function () {
+            return this._ecoXRef;
+        },
+        set: function (value) {
+            this._ecoXRef = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "intactXRefs", {
+        get: function () {
+            return this._intactXRefs;
+        },
+        set: function (value) {
+            this._intactXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexEvidenceComponent.prototype, "flaskSymbol", {
+        get: function () {
+            return this._flaskSymbol;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexEvidenceComponent.prototype, "crossReferences", null);
+    ComplexEvidenceComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-evidence',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-evidence/complex-evidence.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-evidence/complex-evidence.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexEvidenceComponent);
+    return ComplexEvidenceComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/complex-expression.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/complex-expression.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"(gxa && gxaParamsQueries) || goCellularXRefs\">\n    <h2 class=\"float-left\">Expression and Cellular Location</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Expression and Cellular Location'\"></cp-go-to>\n    <div class=\"columns medium-12\">\n      <cp-gxa-heatmap *ngIf=\"gxa && gxaParamsQueries && complexSpecies\" [gxa]=\"gxa\" [gxaParamsQueries]=\"gxaParamsQueries\"\n                      [complexSpecies]=\"complexSpecies\"></cp-gxa-heatmap>\n    </div>\n    <div class=\"columns medium-12\">\n      <cp-go-celluar-crossreference *ngIf=\"goCellularXRefs\"\n                                    [crossReferences]=\"goCellularXRefs\"></cp-go-celluar-crossreference>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/complex-expression.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexExpressionComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexExpressionComponent = /** @class */ (function () {
+    function ComplexExpressionComponent() {
+    }
+    ComplexExpressionComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+        this.findGXAQueryies();
+    };
+    ComplexExpressionComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            var qualifier = this._crossReferences[i].qualifier;
+            if (database === 'gene ontology' && qualifier === 'cellular component') {
+                if (this.goCellularXRefs === undefined) {
+                    this.goCellularXRefs = [];
+                }
+                this.goCellularXRefs.push(crossRef);
+            }
+        }
+    };
+    ComplexExpressionComponent.prototype.findGXAQueryies = function () {
+        for (var i = 0; i < this._participants.length; i++) {
+            if (this._participants[i].interactorType === 'protein') {
+                if (this._gxaParamsQueries === undefined) {
+                    this.gxaParamsQueries = this._participants[i].identifier;
+                }
+                else {
+                    this.gxaParamsQueries += ' ' + this._participants[i].identifier;
+                }
+            }
+        }
+    };
+    Object.defineProperty(ComplexExpressionComponent.prototype, "gxa", {
+        get: function () {
+            return this._gxa;
+        },
+        set: function (value) {
+            this._gxa = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexExpressionComponent.prototype, "participants", {
+        get: function () {
+            return this._participants;
+        },
+        set: function (value) {
+            this._participants = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexExpressionComponent.prototype, "complexSpecies", {
+        get: function () {
+            return this._complexSpecies;
+        },
+        set: function (value) {
+            this._complexSpecies = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexExpressionComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexExpressionComponent.prototype, "gxaParamsQueries", {
+        get: function () {
+            return this._gxaParamsQueries;
+        },
+        set: function (value) {
+            this._gxaParamsQueries = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexExpressionComponent.prototype, "goCellularXRefs", {
+        get: function () {
+            return this._goCellularXRefs;
+        },
+        set: function (value) {
+            this._goCellularXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ComplexExpressionComponent.prototype, "gxa", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexExpressionComponent.prototype, "participants", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexExpressionComponent.prototype, "complexSpecies", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexExpressionComponent.prototype, "crossReferences", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexExpressionComponent.prototype, "gxaParamsQueries", null);
+    ComplexExpressionComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-expression',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-expression/complex-expression.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-expression/complex-expression.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexExpressionComponent);
+    return ComplexExpressionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Cellular Component ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoCelluarCrossreferenceComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GoCelluarCrossreferenceComponent = /** @class */ (function () {
+    function GoCelluarCrossreferenceComponent() {
+        this._displayedElements = 5;
+    }
+    GoCelluarCrossreferenceComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(GoCelluarCrossreferenceComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoCelluarCrossreferenceComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], GoCelluarCrossreferenceComponent.prototype, "crossReferences", null);
+    GoCelluarCrossreferenceComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-go-celluar-crossreference',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-expression/go-celluar-crossreference/go-celluar-crossreference.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], GoCelluarCrossreferenceComponent);
+    return GoCelluarCrossreferenceComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-footer/complex-footer.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-footer/complex-footer.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-7 no-pad-left\">\n    </div>\n    <div class=\"columns medium-4\">\n      <h3>Curated by:</h3> <h4>{{institute}}</h4>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-footer/complex-footer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFooterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexFooterComponent = /** @class */ (function () {
+    function ComplexFooterComponent() {
+    }
+    ComplexFooterComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(ComplexFooterComponent.prototype, "institute", {
+        get: function () {
+            return this._institute;
+        },
+        set: function (value) {
+            this._institute = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFooterComponent.prototype, "comment", {
+        get: function () {
+            return this._comment;
+        },
+        set: function (value) {
+            this._comment = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ComplexFooterComponent.prototype, "institute", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ComplexFooterComponent.prototype, "comment", null);
+    ComplexFooterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-footer',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-footer/complex-footer.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-footer/complex-footer.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexFooterComponent);
+    return ComplexFooterComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/agonists/agonists.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/agonists/agonists.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Agonists ({{agonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let agonist of agonists | slice:0:displayedElements\">\n        <td>\n          {{agonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < agonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = agonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/agonists/agonists.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AgonistsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AgonistsComponent = /** @class */ (function () {
+    function AgonistsComponent() {
+        this._displayedElements = 5;
+    }
+    AgonistsComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(AgonistsComponent.prototype, "agonists", {
+        get: function () {
+            return this._agonists;
+        },
+        set: function (value) {
+            this._agonists = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AgonistsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], AgonistsComponent.prototype, "agonists", null);
+    AgonistsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-agonists',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/agonists/agonists.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/agonists/agonists.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], AgonistsComponent);
+    return AgonistsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Antagonists ({{antagonists.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let antagonist of antagonists | slice:0:displayedElements\">\n        <td>\n          {{antagonist}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < antagonists.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = antagonists.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AntagonistsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AntagonistsComponent = /** @class */ (function () {
+    function AntagonistsComponent() {
+        this._displayedElements = 5;
+    }
+    AntagonistsComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(AntagonistsComponent.prototype, "antagonists", {
+        get: function () {
+            return this._antagonists;
+        },
+        set: function (value) {
+            this._antagonists = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AntagonistsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], AntagonistsComponent.prototype, "antagonists", null);
+    AntagonistsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-antagonists',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/antagonists/antagonists.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], AntagonistsComponent);
+    return AntagonistsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/complex-function.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/complex-function.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row no-pad-left no-pad-right\">\n  <div class=\"columns medium-12 no-pad-left no-pad-right\">\n    <div class=\"columns medium-12 clearfix no-pad-left\">\n      <h2 class=\"float-left\">Function</h2>\n      <cp-go-to class=\"float-right\" [sectionName]=\"'Function'\"></cp-go-to>\n    </div>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"functionDescription\">\n      <p>{{functionDescription}}</p>\n    </div>\n    <div id=\"ligands\" class=\"columns medium-6 no-pad-left\" *ngIf=\"ligands && ligands.length !== 0\">\n      <cp-ligands [ligands]=\"ligands\"></cp-ligands>\n    </div>\n    <div id=\"goXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"goXRefs\">\n      <cp-go-crossreferences [crossReferences]=\"goXRefs\"></cp-go-crossreferences>\n    </div>\n    <div id=\"agonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"agonists && agonists.length !== 0\">\n      <cp-agonists [agonists]=\"agonists\"></cp-agonists>\n    </div>\n    <div id=\"antagonists\" class=\"columns medium-6 no-pad-left\" *ngIf=\"antagonists && antagonists.length !== 0\">\n      <cp-antagonists [antagonists]=\"antagonists\"></cp-antagonists>\n    </div>\n    <div id=\"reactomeXRefs\" class=\"columns medium-12\" *ngIf=\"reactomeXRefs\">\n      <cp-reactome-crossreferences [crossReferences]=\"reactomeXRefs\"></cp-reactome-crossreferences>\n    </div>\n    <div id=\"intenzXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"intenzXRefs\">\n      <cp-intenz-crossreferences [crossReferences]=\"intenzXRefs\"></cp-intenz-crossreferences>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/complex-function.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexFunctionComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexFunctionComponent = /** @class */ (function () {
+    function ComplexFunctionComponent() {
+    }
+    ComplexFunctionComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    ComplexFunctionComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this.crossReferences.length; i++) {
+            var crossRef = this.crossReferences[i];
+            var database = this.crossReferences[i].database;
+            if (database === 'gene ontology') {
+                if (this.goXRefs === undefined) {
+                    this.goXRefs = [];
+                }
+                this.goXRefs.push(crossRef);
+            }
+            if (database === 'intenz') {
+                if (this.intenzXRefs === undefined) {
+                    this.intenzXRefs = [];
+                }
+                this.intenzXRefs.push(crossRef);
+            }
+            if (database === 'reactome') {
+                if (this.reactomeXRefs === undefined) {
+                    this.reactomeXRefs = [];
+                }
+                this.reactomeXRefs.push(crossRef);
+            }
+        }
+    };
+    ComplexFunctionComponent.prototype.ngAfterViewInit = function () {
+        $('.goToMenu').foundation();
+    };
+    Object.defineProperty(ComplexFunctionComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "functionDescription", {
+        get: function () {
+            return this._functionDescription;
+        },
+        set: function (value) {
+            this._functionDescription = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "goXRefs", {
+        get: function () {
+            return this._goXRefs;
+        },
+        set: function (value) {
+            this._goXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "intenzXRefs", {
+        get: function () {
+            return this._intenzXRefs;
+        },
+        set: function (value) {
+            this._intenzXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "reactomeXRefs", {
+        get: function () {
+            return this._reactomeXRefs;
+        },
+        set: function (value) {
+            this._reactomeXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "ligands", {
+        get: function () {
+            return this._ligands;
+        },
+        set: function (value) {
+            this._ligands = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "agonists", {
+        get: function () {
+            return this._agonists;
+        },
+        set: function (value) {
+            this._agonists = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexFunctionComponent.prototype, "antagonists", {
+        get: function () {
+            return this._antagonists;
+        },
+        set: function (value) {
+            this._antagonists = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFunctionComponent.prototype, "crossReferences", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexFunctionComponent.prototype, "functionDescription", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFunctionComponent.prototype, "ligands", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFunctionComponent.prototype, "agonists", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexFunctionComponent.prototype, "antagonists", null);
+    ComplexFunctionComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-function',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/complex-function.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/complex-function.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexFunctionComponent);
+    return ComplexFunctionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Biological Process ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoBiologicalProcessComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GoBiologicalProcessComponent = /** @class */ (function () {
+    function GoBiologicalProcessComponent() {
+        this._displayedElements = 5;
+    }
+    GoBiologicalProcessComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(GoBiologicalProcessComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoBiologicalProcessComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], GoBiologicalProcessComponent.prototype, "crossReferences", null);
+    GoBiologicalProcessComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-go-biological-process',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-biological-process/go-biological-process.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], GoBiologicalProcessComponent);
+    return GoBiologicalProcessComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div class=\"columns medium-6\">\n      <cp-go-molecular-function *ngIf=\"molecularFunctions\"\n                                [crossReferences]=\"molecularFunctions\"></cp-go-molecular-function>\n    </div>\n    <div class=\"columns medium-6\">\n      <cp-go-biological-process *ngIf=\"biologicalProcess\" [crossReferences]=\"biologicalProcess\"></cp-go-biological-process>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GoCrossreferencesComponent = /** @class */ (function () {
+    function GoCrossreferencesComponent() {
+    }
+    GoCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    GoCrossreferencesComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this.crossReferences.length; i++) {
+            var crossRef = this.crossReferences[i];
+            var qualifier = this.crossReferences[i].qualifier;
+            if (qualifier === 'biological process') {
+                if (this._biologicalProcess === undefined) {
+                    this._biologicalProcess = [];
+                }
+                this._biologicalProcess.push(crossRef);
+            }
+            if (qualifier === 'molecular function') {
+                if (this._molecularFunctions === undefined) {
+                    this._molecularFunctions = [];
+                }
+                this._molecularFunctions.push(crossRef);
+            }
+        }
+    };
+    Object.defineProperty(GoCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoCrossreferencesComponent.prototype, "molecularFunctions", {
+        get: function () {
+            return this._molecularFunctions;
+        },
+        set: function (value) {
+            this._molecularFunctions = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoCrossreferencesComponent.prototype, "biologicalProcess", {
+        get: function () {
+            return this._biologicalProcess;
+        },
+        set: function (value) {
+            this._biologicalProcess = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], GoCrossreferencesComponent.prototype, "crossReferences", null);
+    GoCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-go-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], GoCrossreferencesComponent);
+    return GoCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>GO - Molecular Function ({{crossReferences.length}})\n    </h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.description}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoMolecularFunctionComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GoMolecularFunctionComponent = /** @class */ (function () {
+    function GoMolecularFunctionComponent() {
+        this._displayedElements = 5;
+    }
+    GoMolecularFunctionComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(GoMolecularFunctionComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoMolecularFunctionComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], GoMolecularFunctionComponent.prototype, "crossReferences", null);
+    GoMolecularFunctionComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-go-molecular-function',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/go-crossreferences/go-molecular-function/go-molecular-function.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], GoMolecularFunctionComponent);
+    return GoMolecularFunctionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>IntEnz Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i\n            class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntenzCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var IntenzCrossreferencesComponent = /** @class */ (function () {
+    function IntenzCrossreferencesComponent() {
+        this._displayedElements = 5;
+    }
+    IntenzCrossreferencesComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(IntenzCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IntenzCrossreferencesComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], IntenzCrossreferencesComponent.prototype, "crossReferences", null);
+    IntenzCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-intenz-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/intenz-crossreferences/intenz-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], IntenzCrossreferencesComponent);
+    return IntenzCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/ligands/ligands.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/ligands/ligands.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Ligands ({{ligands.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let ligand of ligands | slice:0:displayedElements\">\n        <td>\n          {{ligand}}\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < ligands.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = ligands.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/ligands/ligands.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LigandsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LigandsComponent = /** @class */ (function () {
+    function LigandsComponent() {
+        this._displayedElements = 5;
+    }
+    LigandsComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(LigandsComponent.prototype, "ligands", {
+        get: function () {
+            return this._ligands;
+        },
+        set: function (value) {
+            this._ligands = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LigandsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], LigandsComponent.prototype, "ligands", null);
+    LigandsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-ligands',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/ligands/ligands.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/ligands/ligands.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], LigandsComponent);
+    return LigandsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeComplex; });
+var ReactomeComplex = /** @class */ (function () {
+    function ReactomeComplex(id) {
+        this._pathways = [];
+        this._id = id;
+    }
+    Object.defineProperty(ReactomeComplex.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeComplex.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeComplex.prototype, "pathways", {
+        get: function () {
+            return this._pathways;
+        },
+        set: function (value) {
+            this._pathways = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ReactomeComplex;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomePathway; });
+var ReactomePathway = /** @class */ (function () {
+    function ReactomePathway(id) {
+        this._complexes = [];
+        this._id = id;
+    }
+    Object.defineProperty(ReactomePathway.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomePathway.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (value) {
+            this._name = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomePathway.prototype, "complexes", {
+        get: function () {
+            return this._complexes;
+        },
+        set: function (value) {
+            this._complexes = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ReactomePathway;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12 no-pad-left\">\n    <h3>Pathways</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Complex Identifier</th>\n      <th>Complex Name</th>\n      <th>Pathway Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements\">\n        <td><a (click)=\"selectComplexWithFirstPathway(reactomeComplex)\">{{reactomeComplex}}</a></td>\n        <td>{{reactomeComplexes[reactomeComplex].name}}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements\">\n              <a (click)=\"selectComplexByPathway(reactomeComplex, reactomePathway)\">{{reactomePathway}}</a>\n            </li>\n            <li class=\"text-center no-bullet\" *ngIf=\"displayedElements < reactomeComplexes[reactomeComplex].pathways.length\">\n              <a class=\"label\" (click)=\"displayedElements = reactomeComplexes[reactomeComplex].pathways.length\">Show\n                all</a>\n            </li>\n          </ul>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < reactomeComplexes.length\">\n        <td></td>\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = reactomeComplexes.length\">Show all</a>\n        </td>\n        <td></td>\n      </tr>\n      </tbody>\n    </table>\n    <div class=\"columns medium-12 no-pad-left\" *ngIf=\"selectedComplex && selectedPathway\">\n      <cp-reactome-diagram [reactomeComplexe]=\"reactomeComplexes\" [reactomePathways]=\"reactomePathways\"\n                           [selectedComplex]=\"selectedComplex\"\n                           [selectedPathway]=\"selectedPathway\"></cp-reactome-diagram>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_forkJoin__ = __webpack_require__("./node_modules/rxjs/_esm5/add/observable/forkJoin.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_reactome_service__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-complex.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__ = __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/model/reactome-pathway.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var ReactomeCrossreferencesComponent = /** @class */ (function () {
+    function ReactomeCrossreferencesComponent(reactomeService, notificationService, googleAnalyticsService) {
+        this.reactomeService = reactomeService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._reactomeComplexes = {};
+        this._reactomePathways = {};
+        this._isDataLoaded = false;
+        this._displayedElements = 5;
+        this.diagramLoaded = false;
+    }
+    ReactomeCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.mapComplexeToPathways();
+    };
+    /**
+     * TODO: If possible, this should be removed. This is very heavy lifting for the front end and should be done...
+     * TODO: ...in the WS (Either CP-WS or Reactome-WS)
+     * This request is doing the following:
+     * We have Reactome XRefs in the CP, but Reactome doesn't provide CP XRefs.
+     * 1a. Ask Reactome for every XRefs we have for all pathways in Reactome.
+     * 1b. Ask Reactome for every XRefs we have for the corresponding name.
+     * 2. Create arrays (reactomePathways & reactomeComplexes) to create m:n relationship
+     * 3. Map pathways and complexes to each other.
+     * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
+     */
+    ReactomeCrossreferencesComponent.prototype.mapComplexeToPathways = function () {
+        var _this = this;
+        var _loop_1 = function (i) {
+            __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */].forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
+                var relatedPathways = response[0];
+                var complexName = response[1];
+                for (var count = 0; count < relatedPathways.length; count++) {
+                    var pathway = relatedPathways[count];
+                    var currentPathway = _this._reactomePathways[pathway.stId];
+                    var currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier];
+                    if (currentPathway === undefined) {
+                        currentPathway = _this._reactomePathways[pathway.stId] = new __WEBPACK_IMPORTED_MODULE_5__model_reactome_pathway__["a" /* ReactomePathway */](pathway.stId);
+                        currentPathway.name = pathway.displayName;
+                    }
+                    if (currentComplex === undefined) {
+                        currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier.toString()]
+                            = new __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__["a" /* ReactomeComplex */](_this._crossReferences[i].identifier);
+                        currentComplex.name = complexName;
+                    }
+                    currentPathway.complexes.push(_this._crossReferences[i].identifier);
+                    currentComplex.pathways.push(pathway.stId);
+                    if (i === _this._crossReferences.length - 1 && count === relatedPathways.length - 1) {
+                        _this.selectComplexWithFirstPathway(Object.keys(_this._reactomeComplexes).sort()[0]);
+                        _this._isDataLoaded = true;
+                    }
+                }
+            }, function (error) {
+                _this.notificationService.onAPIRequestError('Reactome');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_8__shared_google_analytics_types_category_enum__["a" /* Category */].reactome, error.status ? error.status : 'unknown');
+            });
+        };
+        var this_1 = this;
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            _loop_1(i);
+        }
+    };
+    ReactomeCrossreferencesComponent.prototype.onChildLoaded = function () {
+        this.diagramLoaded = true;
+    };
+    ReactomeCrossreferencesComponent.prototype.selectComplexByPathway = function (complexId, pathwayId) {
+        this.selectedComplex = complexId;
+        this.selectedPathway = pathwayId;
+    };
+    ReactomeCrossreferencesComponent.prototype.selectComplexWithFirstPathway = function (complexId) {
+        this.selectedComplex = complexId;
+        this.selectedPathway = this._reactomeComplexes[complexId].pathways.sort()[0];
+    };
+    ReactomeCrossreferencesComponent.prototype.getSortedKeys = function (object) {
+        return Object.keys(object).sort();
+    };
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "crossReferences", {
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "selectedComplex", {
+        get: function () {
+            return this._selectedComplex;
+        },
+        set: function (value) {
+            this._selectedComplex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "selectedPathway", {
+        get: function () {
+            return this._selectedPathway;
+        },
+        set: function (value) {
+            this._selectedPathway = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "reactomeComplexes", {
+        get: function () {
+            return this._reactomeComplexes;
+        },
+        set: function (value) {
+            this._reactomeComplexes = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "reactomePathways", {
+        get: function () {
+            return this._reactomePathways;
+        },
+        set: function (value) {
+            this._reactomePathways = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "isDataLoaded", {
+        get: function () {
+            return this._isDataLoaded;
+        },
+        set: function (value) {
+            this._isDataLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeCrossreferencesComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ReactomeCrossreferencesComponent.prototype, "crossReferences", null);
+    ReactomeCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-reactome-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-function/reactome-crossreferences/reactome-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_6__shared_notification_service_notification_service__["a" /* NotificationService */],
+            __WEBPACK_IMPORTED_MODULE_7__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ReactomeCrossreferencesComponent);
+    return ReactomeCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/complex-header.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/complex-header.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 callout\">\n    <div class=\"columns medium-12 no-pad-left float-left\">\n      <h2>{{complexName}}</h2>\n      <h3>ComplexAc: {{complexAC}}</h3>\n      <h3><i>{{complexSpecies}}</i></h3>\n    </div>\n    <div class=\"columns medium-4  float-left\">\n      <div class=\"row button-grid small-up-12 medium-up-12 large-up-12\" data-equalizer\n           data-equalize-on=\"medium\" id=\"large-button-grid\">\n        <div class=\"columns small-12 medium-6 no-pad-left\">\n          <a class=\"button primary expanded\" data-equalizer-watch data-open=\"downloadModal\">\n            <span class=\"icon icon-functional \" data-icon=\"=\"> Download</span></a>\n        </div>\n        <div class=\"columns small-12 medium-6 no-pad-left\">\n          <a class=\"button primary expanded\" data-equalizer-watch (click)=\"saveComplex()\"\n             [ngClass]=\"{'disabled': isInBasket()}\"><span class=\"icon icon-generic medium \"\n                                                          data-icon=\"b\"> Basket</span></a>\n        </div>\n      </div>\n    </div>\n    <div class=\"columns medium-8  float-right\">\n      <cp-complex-evidence [crossReferences]=\"crossReferences\"></cp-complex-evidence>\n    </div>\n    <cp-download-modal [complexAC]=\"complexAC\"></cp-download-modal>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/complex-header.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexHeaderComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__ = __webpack_require__("./src/app/shared/basket/service/basket.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ComplexHeaderComponent = /** @class */ (function () {
+    function ComplexHeaderComponent(basketService, ga, notificationService) {
+        this.basketService = basketService;
+        this.ga = ga;
+        this.notificationService = notificationService;
+    }
+    ComplexHeaderComponent.prototype.ngOnInit = function () {
+        var urlAc = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/details/' + this._complexAC;
+        var urlComplexAc = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/complex/' + this._complexAC;
+        this._jsonURL = this._complexAC.startsWith('EBI-') ? urlAc : urlComplexAc;
+    };
+    ComplexHeaderComponent.prototype.ngAfterViewInit = function () {
+        $('cp-complex-header').foundation();
+    };
+    ComplexHeaderComponent.prototype.saveComplex = function () {
+        this.basketService.saveInBasket(this._complexName, this._complexAC, this._complexSpecies);
+    };
+    Object.defineProperty(ComplexHeaderComponent.prototype, "complexAC", {
+        get: function () {
+            return this._complexAC;
+        },
+        set: function (value) {
+            this._complexAC = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexHeaderComponent.prototype, "complexName", {
+        get: function () {
+            return this._complexName;
+        },
+        set: function (value) {
+            this._complexName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexHeaderComponent.prototype, "complexSpecies", {
+        get: function () {
+            return this._complexSpecies;
+        },
+        set: function (value) {
+            this._complexSpecies = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexHeaderComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexHeaderComponent.prototype, "jsonURL", {
+        get: function () {
+            return this._jsonURL;
+        },
+        set: function (value) {
+            this._jsonURL = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ComplexHeaderComponent.prototype.isInBasket = function () {
+        return this.basketService.isInBasket(this._complexAC);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexHeaderComponent.prototype, "complexAC", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexHeaderComponent.prototype, "complexName", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexHeaderComponent.prototype, "complexSpecies", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexHeaderComponent.prototype, "crossReferences", null);
+    ComplexHeaderComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-header',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-header/complex-header.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-header/complex-header.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */], __WEBPACK_IMPORTED_MODULE_3__shared_notification_service_notification_service__["a" /* NotificationService */]])
+    ], ComplexHeaderComponent);
+    return ComplexHeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"reveal large\" id=\"downloadModal\" data-reveal>\n  <h3>Download</h3>\n  <p class=\"lead\">\n    Download this complex in PSI-MI XML 2.5 & 3.0, ComplexTab or PSI-MI JSON. If you would like to learn more about our\n    download options, please have a look to our <a class=\"readmore\" routerLink=\"/download\">programmatic access section</a>.\n  </p>\n  <div class=\"row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right\"\n       data-equalize-on=\"medium\" id=\"large-button-grid\">\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\"\n         (click)=\"goToComplexWSXml25Format()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 2.5</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\"\n         (click)=\"goToComplexWSXml30Format()\">\n                <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 3.0</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center disabled\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"v\"></h3>\n        <h5 class=\"white-color\">ComplexTab</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\"\n         (click)=\"goToComplexWSJsonFormat()\">\n        <h3 class=\"icon icon-fileformats white-color\" data-icon=\"J\"></h3>\n        <h5 class=\"white-color\">PSI-MI JSON</h5>\n      </a>\n    </div>\n  </div>\n  <button class=\"close-button\" data-close aria-label=\"Close modal\" type=\"button\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadModalComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DownloadModalComponent = /** @class */ (function () {
+    function DownloadModalComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
+    }
+    DownloadModalComponent.prototype.ngOnInit = function () {
+    };
+    DownloadModalComponent.prototype.goToComplexWSJsonFormat = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].details, 'ComplexWS');
+        var complexURLjson = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/export/' + this._complexAC;
+        window.open(complexURLjson, '_blank');
+    };
+    DownloadModalComponent.prototype.goToComplexWSXml25Format = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].details, 'ComplexWS');
+        var complexURLxml25 = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/export/' + this._complexAC + '?format=xml25';
+        window.open(complexURLxml25, '_blank');
+    };
+    DownloadModalComponent.prototype.goToComplexWSXml30Format = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].details, 'ComplexWS');
+        var complexURLxml30 = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].complex_ws_base_url + '/export/' + this._complexAC + '?format=xml30';
+        window.open(complexURLxml30, '_blank');
+    };
+    Object.defineProperty(DownloadModalComponent.prototype, "complexAC", {
+        get: function () {
+            return this._complexAC;
+        },
+        set: function (value) {
+            this._complexAC = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], DownloadModalComponent.prototype, "complexAC", null);
+    DownloadModalComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-download-modal',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-header/download-modal/download-modal.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], DownloadModalComponent);
+    return DownloadModalComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-participants/complex-participants.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-participants/complex-participants.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"participants\">\n  <h2 class=\"float-left\">Participants</h2>\n  <cp-go-to class=\"float-right\" [sectionName]=\"'Participants'\"></cp-go-to>\n  <div class=\"columns medium-12 no-pad-right no-pad-left\">\n    <div class=\"columns medium-6 no-pad-right\">\n      <cp-complex-viewer *ngIf=\"complexMIJSON && complexAC\"\n      [complexAC]=\"complexAC\"\n      [complexMIJSON]=\"complexMIJSON\"></cp-complex-viewer>\n    </div>\n    <div class=\"columns medium-6 no-pad-right\">\n      <table class=\"hover\">\n        <thead>\n        <th>Legend</th>\n        <th>Description</th>\n        <th>Stoichiometry</th>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let participant of participants | slice:0:displayedElements\">\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <img style=\"max-width: 50%; min-width: 30px\" src=\"{{getLegendURL(participant.interactorType)}}\">\n            </div>\n          </td>\n          <td>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><b>{{participant.interactorType}} -\n              {{participant.name}} ({{participant.bioRole}})</b></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\"><a href=\"{{participant.identifierLink}}\"\n                                                                       target=\"_blank\">{{participant.identifier}} <i\n              class=\"icon icon-generic small\" data-icon=\"x\"></i></a></div>\n            <div class=\"columns medium-12 no-pad-right no-pad-left\">{{participant.description}}</div>\n          </td>\n          <td>\n            <div class=\"columns medium-12\" style=\"text-align: center; vertical-align: middle;\">\n              <p class=\"badge\" *ngIf=\"participant.stochiometry\">\n                {{getConvertedStochiometry(participant.stochiometry)}}</p>\n            </div>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < participants.length\">\n          <td>\n            <!--empty placeholder-->\n          </td>\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = participants.length\">Show all</a>\n          </td>\n          <td>\n            <!--empty placeholder-->\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-participants/complex-participants.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexParticipantsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexParticipantsComponent = /** @class */ (function () {
+    function ComplexParticipantsComponent() {
+        this._displayedElements = 5;
+    }
+    ComplexParticipantsComponent.prototype.ngOnInit = function () {
+        this.sortParticipants();
+    };
+    ComplexParticipantsComponent.prototype.sortParticipants = function () {
+        // TODO: Sort participants in WS - GH issue #174
+        this.participants.sort(function (a, b) {
+            if (a.interactorType < b.interactorType) {
+                return -1;
+            }
+            else if (a.interactorType > b.interactorType) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+    };
+    ComplexParticipantsComponent.prototype.getLegendURL = function (interactorType) {
+        // TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
+        switch (interactorType) {
+            case 'small molecule':
+                return 'assets/images/legend/small-mol.png';
+            case 'protein':
+                return 'assets/images/legend/protein-blob.png';
+            case 'single stranded deoxyribonucleic acid':
+                return 'assets/images/legend/dna.png';
+            case 'ribonucleic acid':
+                return 'assets/images/legend/rna.png';
+        }
+    };
+    ComplexParticipantsComponent.prototype.getConvertedStochiometry = function (stochiometry) {
+        // TODO: WS should send Stochiometry in right format already - GH issue #173
+        return stochiometry.split(',')[0].split(':')[1].trim();
+    };
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "participants", {
+        get: function () {
+            return this._participants;
+        },
+        set: function (value) {
+            this._participants = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexAC", {
+        get: function () {
+            return this._complexAC;
+        },
+        set: function (value) {
+            this._complexAC = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexParticipantsComponent.prototype, "complexMIJSON", {
+        get: function () {
+            return this._complexMIJSON;
+        },
+        set: function (value) {
+            this._complexMIJSON = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexParticipantsComponent.prototype, "participants", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexParticipantsComponent.prototype, "complexAC", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexParticipantsComponent.prototype, "complexMIJSON", null);
+    ComplexParticipantsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-participants',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-participants/complex-participants.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-participants/complex-participants.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexParticipantsComponent);
+    return ComplexParticipantsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Assembly</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let assembly of assemblies\">\n        <td>\n          {{assembly}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AssembliesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AssembliesComponent = /** @class */ (function () {
+    function AssembliesComponent() {
+    }
+    AssembliesComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(AssembliesComponent.prototype, "assemblies", {
+        get: function () {
+            return this._assemblies;
+        },
+        set: function (value) {
+            this._assemblies = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], AssembliesComponent.prototype, "assemblies", null);
+    AssembliesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-assemblies',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-properties/assemblies/assemblies.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], AssembliesComponent);
+    return AssembliesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/complex-properties.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/complex-properties.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row no-pad-left\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription || pdbXRefs || emdbXRefs\">\n    <h2 class=\"float-left\">Properties</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Properties'\"></cp-go-to>\n    <div id=\"description\" class=\"columns medium-12 no-pad-left\" *ngIf=\"propertiesDescription\">\n      {{propertiesDescription}}\n    </div>\n    <div id=\"comment\" class=\"columns medium-12 no-pad-left\" *ngIf=\"comments  && comments.length !== 0\">\n      <h3>Comments</h3>\n      <ul class=\"no-bullet\" *ngFor=\"let comment of comments\">\n        <li>{{comment}}</li>\n      </ul>\n    </div>\n    <div id=\"assemblies\" class=\"columns medium-12 no-pad-left\" *ngIf=\"assemblies && assemblies.length !== 0\">\n      <cp-assemblies [assemblies]=\"assemblies\"></cp-assemblies>\n    </div>\n    <div id=\"pdbXRefs\" class=\"columns medium-12\" *ngIf=\"pdbXRefs\">\n      <cp-pdb-crossreferences [crossReferences]=\"pdbXRefs\"></cp-pdb-crossreferences>\n    </div>\n    <div id=\"emdbXRefs\" class=\"columns medium-12\" *ngIf=\"emdbXRefs\">\n      <cp-emdb-crossreferences [crossReferences]=\"emdbXRefs\"></cp-emdb-crossreferences>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/complex-properties.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexPropertiesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexPropertiesComponent = /** @class */ (function () {
+    function ComplexPropertiesComponent() {
+    }
+    ComplexPropertiesComponent.prototype.ngOnInit = function () {
+        this.checkFreeTextContent();
+        this.findXRefs();
+    };
+    ComplexPropertiesComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this.crossReferences.length; i++) {
+            var crossRef = this.crossReferences[i];
+            var database = this.crossReferences[i].database;
+            if (database === 'wwpdb') {
+                if (this._pdbXRefs === undefined) {
+                    this._pdbXRefs = [];
+                }
+                this._pdbXRefs.push(crossRef);
+            }
+            if (database === 'emdb') {
+                if (this._emdbXRefs === undefined) {
+                    this._emdbXRefs = [];
+                }
+                this._emdbXRefs.push(crossRef);
+            }
+        }
+    };
+    ComplexPropertiesComponent.prototype.checkFreeTextContent = function () {
+        if (this._propertiesDescription.length === 0) {
+            this._propertiesDescription = null;
+        }
+        if (this._comments.length === 0) {
+            this._comments = null;
+        }
+    };
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "propertiesDescription", {
+        get: function () {
+            return this._propertiesDescription;
+        },
+        set: function (value) {
+            this._propertiesDescription = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "pdbXRefs", {
+        get: function () {
+            return this._pdbXRefs;
+        },
+        set: function (value) {
+            this._pdbXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "emdbXRefs", {
+        get: function () {
+            return this._emdbXRefs;
+        },
+        set: function (value) {
+            this._emdbXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "comments", {
+        get: function () {
+            return this._comments;
+        },
+        set: function (value) {
+            this._comments = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexPropertiesComponent.prototype, "assemblies", {
+        get: function () {
+            return this._assemblies;
+        },
+        set: function (value) {
+            this._assemblies = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexPropertiesComponent.prototype, "propertiesDescription", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexPropertiesComponent.prototype, "crossReferences", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexPropertiesComponent.prototype, "emdbXRefs", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexPropertiesComponent.prototype, "comments", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexPropertiesComponent.prototype, "assemblies", null);
+    ComplexPropertiesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-properties',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-properties/complex-properties.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-properties/complex-properties.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexPropertiesComponent);
+    return ComplexPropertiesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <h3>EMDB Cross References ({{crossReferences.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n        <td>\n          <a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}}\n            <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n        </td>\n      </tr>\n      <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmdbCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var EmdbCrossreferencesComponent = /** @class */ (function () {
+    function EmdbCrossreferencesComponent() {
+        this._displayedElements = 5;
+    }
+    EmdbCrossreferencesComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(EmdbCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EmdbCrossreferencesComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], EmdbCrossreferencesComponent.prototype, "crossReferences", null);
+    EmdbCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-emdb-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-properties/emdb-crossreferences/emdb-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], EmdbCrossreferencesComponent);
+    return EmdbCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"cloumns medium-12\">\n    <h3>3D Structure</h3>\n    <div class=\"columns medium-8 no-pad-left\">\n      <cp-litmol-viewer *ngIf=\"selectedXRef\" [selectedXRef]=\"selectedXRef\"></cp-litmol-viewer>\n    </div>\n    <div class=\"columns medium-4\">\n      <h4>Curated structures ({{crossReferences.length}}):</h4>\n      <table class=\"hover\">\n        <tbody style=\"height: 400px; overflow-y: scroll;\">\n        <tr *ngFor=\"let crossReference of crossReferences | slice:0:displayedElements\">\n          <td>\n            <a (click)=\"selectXRef(crossReference.identifier)\">{{crossReference.identifier}}</a>\n          </td>\n          <td>\n            <a href=\"{{crossReference.searchURL}}\" target=\"_blank\"><img src=\"assets/images/pdbe_min_logo.png\"> <i\n              class=\"icon icon-generic small\" data-icon=\"x\"></i></a>\n          </td>\n        </tr>\n        <tr class=\"text-center\" style=\"background: white\" *ngIf=\"displayedElements < crossReferences.length\">\n          <td>\n            <a class=\"label\" (click)=\"displayedElements = crossReferences.length\">Show all</a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PdbCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PdbCrossreferencesComponent = /** @class */ (function () {
+    function PdbCrossreferencesComponent() {
+        this._isDataLoaded = false;
+        this._displayedElements = 5;
+    }
+    PdbCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.selectFirstXref();
+    };
+    PdbCrossreferencesComponent.prototype.selectFirstXref = function () {
+        if (this._crossReferences[0].identifier) {
+            this._selectedXRef = this._crossReferences[0].identifier;
+            this._isDataLoaded = true;
+        }
+    };
+    Object.defineProperty(PdbCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PdbCrossreferencesComponent.prototype.selectXRef = function (id) {
+        this._selectedXRef = id;
+    };
+    Object.defineProperty(PdbCrossreferencesComponent.prototype, "selectedXRef", {
+        get: function () {
+            return this._selectedXRef;
+        },
+        set: function (value) {
+            this._selectedXRef = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PdbCrossreferencesComponent.prototype, "isDataLoaded", {
+        get: function () {
+            return this._isDataLoaded;
+        },
+        set: function (value) {
+            this._isDataLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PdbCrossreferencesComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], PdbCrossreferencesComponent.prototype, "crossReferences", null);
+    PdbCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-pdb-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-properties/pdb-crossreferences/pdb-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PdbCrossreferencesComponent);
+    return PdbCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/complex-references.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/complex-references.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Additional Information</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Additional Information'\"></cp-go-to>\n    <div id=\"externalResources\" class=\"columns medium-12 no-pad-left\" *ngIf=\"externalResources\">\n      <cp-external-resources [crossReferences]=\"externalResources\"></cp-external-resources>\n    </div>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms && synonyms.length !== 0\">\n        <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n      </div>\n      <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName.length !== 0\">\n        <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/complex-references.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexReferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ComplexReferencesComponent = /** @class */ (function () {
+    function ComplexReferencesComponent() {
+    }
+    ComplexReferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    ComplexReferencesComponent.prototype.findXRefs = function () {
+        for (var i = 0; i < this._crossReferences.length; i++) {
+            var crossRef = this._crossReferences[i];
+            var database = this._crossReferences[i].database;
+            if (database === 'pubmed') {
+                if (this._pubmedXRefs === undefined) {
+                    this._pubmedXRefs = [];
+                }
+                this._pubmedXRefs.push(crossRef);
+            }
+            if (database === 'signor' || database === 'matrixdb') {
+                if (this._externalResources === undefined) {
+                    this._externalResources = [];
+                }
+                this._externalResources.push(crossRef);
+            }
+        }
+    };
+    Object.defineProperty(ComplexReferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "pubmedXRefs", {
+        get: function () {
+            return this._pubmedXRefs;
+        },
+        set: function (value) {
+            this._pubmedXRefs = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "externalResources", {
+        get: function () {
+            return this._externalResources;
+        },
+        set: function (value) {
+            this._externalResources = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "synonyms", {
+        get: function () {
+            return this._synonyms;
+        },
+        set: function (value) {
+            this._synonyms = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexReferencesComponent.prototype, "systematicName", {
+        get: function () {
+            return this._systematicName;
+        },
+        set: function (value) {
+            this._systematicName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexReferencesComponent.prototype, "crossReferences", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexReferencesComponent.prototype, "synonyms", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ComplexReferencesComponent.prototype, "systematicName", null);
+    ComplexReferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-references',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-references/complex-references.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-references/complex-references.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ComplexReferencesComponent);
+    return ComplexReferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"isDataLoaded\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>Further Reading</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      <th>Title</th>\n      <th>Author(s)</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let publication of publications\">\n        <td><a href=\"{{publication.url}}\" target=\"_blank\">{{publication.id}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n        <td>{{publication.title}}</td>\n        <td>{{publication.authors}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EuroPmcCrossreferencesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__ = __webpack_require__("./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__ = __webpack_require__("./src/app/shared/notification/service/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var EuroPmcCrossreferencesComponent = /** @class */ (function () {
+    function EuroPmcCrossreferencesComponent(euroPmcService, notificationService, googleAnalyticsService) {
+        this.euroPmcService = euroPmcService;
+        this.notificationService = notificationService;
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._publications = [];
+        this._isDataLoaded = false;
+    }
+    EuroPmcCrossreferencesComponent.prototype.ngOnInit = function () {
+        this.findXRefs();
+    };
+    EuroPmcCrossreferencesComponent.prototype.findXRefs = function () {
+        var _this = this;
+        var _loop_1 = function (i) {
+            this_1.euroPmcService.getPublicationInformation(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this.publicationFactory(_this.crossReferences[i], response); }, function (error) {
+                _this._isDataLoaded = false;
+                _this.notificationService.onAPIRequestError('Euro PMC');
+                _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].complexportal_details, error.status ? error.status : 'unknown');
+            });
+            if (i === this_1.crossReferences.length - 1) {
+                this_1._isDataLoaded = true;
+            }
+        };
+        var this_1 = this;
+        for (var i = 0; i < this.crossReferences.length; i++) {
+            _loop_1(i);
+        }
+    };
+    EuroPmcCrossreferencesComponent.prototype.publicationFactory = function (crossReference, euroPmcResponse) {
+        this.publications.push({
+            id: crossReference.identifier,
+            title: euroPmcResponse.resultList.result[0].title,
+            authors: euroPmcResponse.resultList.result[0].authorString,
+            url: crossReference.searchURL
+        });
+    };
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "publications", {
+        get: function () {
+            return this._publications;
+        },
+        set: function (value) {
+            this._publications = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EuroPmcCrossreferencesComponent.prototype, "isDataLoaded", {
+        get: function () {
+            return this._isDataLoaded;
+        },
+        set: function (value) {
+            this._isDataLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], EuroPmcCrossreferencesComponent.prototype, "crossReferences", null);
+    EuroPmcCrossreferencesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-euro-pmc-crossreferences',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_2__shared_notification_service_notification_service__["a" /* NotificationService */],
+            __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], EuroPmcCrossreferencesComponent);
+    return EuroPmcCrossreferencesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" *ngIf=\"crossReferences\">\n  <div class=\"columns medium-12 margin-top-medium\">\n    <h3>External Resources</h3>\n    <table class=\"hover\">\n      <thead>\n      <th>Identifier</th>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let crossReference of crossReferences\">\n        <td><a href=\"{{crossReference.searchURL}}\" target=\"_blank\">{{crossReference.identifier}} <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a></td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExternalResourcesComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ExternalResourcesComponent = /** @class */ (function () {
+    function ExternalResourcesComponent() {
+    }
+    ExternalResourcesComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(ExternalResourcesComponent.prototype, "crossReferences", {
+        get: function () {
+            return this._crossReferences;
+        },
+        set: function (value) {
+            this._crossReferences = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], ExternalResourcesComponent.prototype, "crossReferences", null);
+    ExternalResourcesComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-external-resources',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-references/external-resources/external-resources.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ExternalResourcesComponent);
+    return ExternalResourcesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynonymsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SynonymsComponent = /** @class */ (function () {
+    function SynonymsComponent() {
+        this._displayedElements = 5;
+    }
+    SynonymsComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(SynonymsComponent.prototype, "synonyms", {
+        get: function () {
+            return this._synonyms;
+        },
+        set: function (value) {
+            this._synonyms = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SynonymsComponent.prototype, "displayedElements", {
+        get: function () {
+            return this._displayedElements;
+        },
+        set: function (value) {
+            this._displayedElements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], SynonymsComponent.prototype, "synonyms", null);
+    SynonymsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-synonyms',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], SynonymsComponent);
+    return SynonymsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystematicNameComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SystematicNameComponent = /** @class */ (function () {
+    function SystematicNameComponent() {
+    }
+    SystematicNameComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(SystematicNameComponent.prototype, "systematicName", {
+        get: function () {
+            return this._systematicName;
+        },
+        set: function (value) {
+            this._systematicName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], SystematicNameComponent.prototype, "systematicName", null);
+    SystematicNameComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-systematic-name',
+            template: __webpack_require__("./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], SystematicNameComponent);
+    return SystematicNameComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/go-to/go-to.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".selected {\n  font-weight: bold;\n  cursor: not-allowed;\n}\n\n/*.default {*/\n\n/*font-weight: normal;*/\n\n/*}*/\n\n/*.hidden {*/\n\n/*visibility: hidden;*/\n\n/*}*/\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/go-to/go-to.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<ul class=\"goToMenu dropdown menu float-right\" data-disable-hover=\"true\" data-click-open=\"true\"\n    data-close-on-click-inside=\"true\" data-dropdown-menu>\n  <li>\n    <a class=\"label\" style=\"font-size: 1.1rem\" (click)=\"doCheckSection()\"><i class=\"icon icon-functional\" data-icon=\"M\"></i>Go to</a>\n    <ul class=\"menu\">\n      <li>\n        <a (click)=\"scrollToElement('participants')\"\n           [ngClass]=\"{'selected': isSelected('Participants')}\"\n           *ngIf=\"sectionService.participantsSection\">Participants</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('function')\"\n           [ngClass]=\"{'selected': isSelected('Function')}\"\n           *ngIf=\"sectionService.functionSection\">Function</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('properties')\"\n           [ngClass]=\"{'selected': isSelected('Properties')}\"\n           *ngIf=\"sectionService.propertiesSection\">Properties</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('expression')\"\n           [ngClass]=\"{'selected': isSelected('Expression and Cellular Location')}\"\n           *ngIf=\"sectionService.expressionSection\">Expression and Cellular Location</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('disease')\"\n           [ngClass]=\"{'selected': isSelected('Diseases and Pathologies')}\"\n           *ngIf=\"sectionService.diseaseSection\">Diseases and Pathologies</a>\n      </li>\n      <li>\n        <a (click)=\"scrollToElement('references')\"\n           [ngClass]=\"{'selected': isSelected('Additional Information')}\"\n           *ngIf=\"sectionService.namesSection\">Additional Information</a>\n      </li>\n    </ul>\n  </li>\n</ul>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/go-to/go-to.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoToComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_section_section_service__ = __webpack_require__("./src/app/complex/complex-details/shared/service/section/section.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__ = __webpack_require__("./node_modules/ng2-page-scroll/ng2-page-scroll.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+var GoToComponent = /** @class */ (function () {
+    function GoToComponent(_sectionService, cdr, pageScrollService, document, googleAnalyticsService) {
+        this._sectionService = _sectionService;
+        this.cdr = cdr;
+        this.pageScrollService = pageScrollService;
+        this.document = document;
+        this.googleAnalyticsService = googleAnalyticsService;
+    }
+    GoToComponent.prototype.ngOnInit = function () {
+        switch (this._sectionName) {
+            case 'Participants':
+                this._sectionService.participantsSectionAvailable();
+                break;
+            case 'Function':
+                this._sectionService.functionSectionAvailable();
+                break;
+            case 'Properties':
+                this._sectionService.propertiesSectionAvailable();
+                break;
+            case 'Diseases and Pathologies':
+                this._sectionService.diseaseSectionAvailable();
+                break;
+            case 'Expression and Cellular Location':
+                this._sectionService.expressionSectionAvailable();
+                break;
+            case 'Additional Information':
+                this._sectionService.namesSectionAvailable();
+                break;
+        }
+    };
+    GoToComponent.prototype.ngAfterViewInit = function () {
+        // Important to apply foundation
+        $('.goToMenu').foundation();
+    };
+    GoToComponent.prototype.scrollToElement = function (idReference) {
+        this.googleAnalyticsService.fireGoToDetailsSectionEvent(idReference);
+        var pageScrollInstance = __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["c" /* PageScrollInstance */].simpleInstance(this.document, '#' + idReference);
+        this.pageScrollService.start(pageScrollInstance);
+    };
+    GoToComponent.prototype.doCheckSection = function () {
+        this.cdr.detectChanges();
+    };
+    GoToComponent.prototype.isSelected = function (sectionName) {
+        return this._sectionName === sectionName;
+    };
+    Object.defineProperty(GoToComponent.prototype, "sectionName", {
+        get: function () {
+            return this._sectionName;
+        },
+        set: function (value) {
+            this._sectionName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GoToComponent.prototype, "sectionService", {
+        get: function () {
+            return this._sectionService;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], GoToComponent.prototype, "sectionName", null);
+    GoToComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-go-to',
+            template: __webpack_require__("./src/app/complex/complex-details/shared/go-to/go-to.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/shared/go-to/go-to.component.css")],
+            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
+        }),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_common__["DOCUMENT"])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__service_section_section_service__["a" /* SectionService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], __WEBPACK_IMPORTED_MODULE_2_ng2_page_scroll__["d" /* PageScrollService */], Object, __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], GoToComponent);
+    return GoToComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/service/section/section.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SectionService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SectionService = /** @class */ (function () {
+    function SectionService() {
+    }
+    SectionService.prototype.reset = function () {
+        this._participantsSection = false;
+        this._functionSection = false;
+        this._propertiesSection = false;
+        this._expressionSection = false;
+        this._diseaseSection = false;
+        this._namesSection = false;
+    };
+    SectionService.prototype.participantsSectionAvailable = function () {
+        this._participantsSection = true;
+    };
+    SectionService.prototype.functionSectionAvailable = function () {
+        this._functionSection = true;
+    };
+    SectionService.prototype.propertiesSectionAvailable = function () {
+        this._propertiesSection = true;
+    };
+    SectionService.prototype.expressionSectionAvailable = function () {
+        this._expressionSection = true;
+    };
+    SectionService.prototype.diseaseSectionAvailable = function () {
+        this._diseaseSection = true;
+    };
+    SectionService.prototype.namesSectionAvailable = function () {
+        this._namesSection = true;
+    };
+    Object.defineProperty(SectionService.prototype, "participantsSection", {
+        get: function () {
+            return this._participantsSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionService.prototype, "functionSection", {
+        get: function () {
+            return this._functionSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionService.prototype, "propertiesSection", {
+        get: function () {
+            return this._propertiesSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionService.prototype, "expressionSection", {
+        get: function () {
+            return this._expressionSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionService.prototype, "diseaseSection", {
+        get: function () {
+            return this._diseaseSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SectionService.prototype, "namesSection", {
+        get: function () {
+            return this._namesSection;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SectionService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], SectionService);
+    return SectionService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "div#networkContainer{\n  /*clear: both;*/\n  /*!*position:absolute;*!*/\n  /*!*bottom:0px;*!*/\n  /*!*top:0px;*!*/\n  height: 500px;\n  background: #fbfbfb;\n  position: relative;\n  /*width: 150%;*/\n  /*margin-left: auto;*/\n  /*margin-right: auto;*/\n  /*overflow: hidden;*/\n  /*!*margin: 8px;*!*/\n  /*!*margin-right:35%;*!*/\n  /*!*width: 150px;*!*/\n  /*background: #ddd;*/\n  /*!*padding: 10px;*!*/\n  /*display: table-cell;*/\n  /*vertical-align: top;*/\n}\n/*div#networkControls {*/\n/*clear: both;*/\n/*float: left;*/\n/*margin-left: 5%;*/\n/*}*/\n#complexViewerSVG { height: 100%; width: 100%; display: block; }\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row button-grid small-up-12 medium-up-12 large-up-12\" data-equalizer\n     data-equalize-on=\"medium\" id=\"large-button-grid\">\n  <div class=\"columns medium-12 no-pad-left\">\n    <div *ngIf=\"complexMIJSON\">\n      <div (click)=\"interactedWithViewer()\" id=\"networkContainer\"></div>\n    </div>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"onExpandAll()\">Expand All</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"onReset()\">Collapse all</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <a class=\"button secondary expanded\" data-equalizer-watch (click)=\"downloadAsSVG()\">Export SVG</a>\n  </div>\n  <div class=\"columns small-6 medium-3 no-pad-left\">\n    <select (change)=\"onChangeAnnotation($event.target.value)\">\n      <option value=\"MI features\" selected='selected'>Binding Region</option>\n      <option value=\"UniprotKB\">UniProt Curated Features</option>\n      <option value=\"SuperFamily\">SuperFamily</option>\n      <option value=\"Interactor\">Unique Participants</option>\n      <option value=\"None\">None</option>\n    </select>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexViewerComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var xlv;
+var SvgSaver = __webpack_require__("./node_modules/svgsaver/lib/svgsaver.js");
+var xiNET = __webpack_require__("./node_modules/expose-loader/index.js?xiNET!./node_modules/complexviewer/src/controller/Controller.js-exposed");
+var ComplexViewerComponent = /** @class */ (function () {
+    function ComplexViewerComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._svgsaver = new SvgSaver();
+        this._hasInteracted = false;
+    }
+    ComplexViewerComponent.prototype.ngAfterViewInit = function () {
+        $('cp-complex-viewer').foundation();
+        xlv = new xiNET('networkContainer');
+        xlv.readMIJSON(this._complexMIJSON, true);
+        xlv.autoLayout();
+    };
+    ComplexViewerComponent.prototype.onChangeAnnotation = function (value) {
+        xlv.setAnnotations(value);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ChangeAnno, this._complexAC);
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_SelectedAnno, value);
+    };
+    ComplexViewerComponent.prototype.onReset = function () {
+        xlv.reset();
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Reset, this._complexAC);
+    };
+    ComplexViewerComponent.prototype.onExpandAll = function () {
+        xlv.expandAll();
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExpandAll, this._complexAC);
+    };
+    ComplexViewerComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_Interaction, this._complexAC);
+            this._hasInteracted = true;
+        }
+    };
+    Object.defineProperty(ComplexViewerComponent.prototype, "complexAC", {
+        get: function () {
+            return this._complexAC;
+        },
+        set: function (value) {
+            this._complexAC = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComplexViewerComponent.prototype, "complexMIJSON", {
+        get: function () {
+            return this._complexMIJSON;
+        },
+        set: function (value) {
+            this._complexMIJSON = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ComplexViewerComponent.prototype.downloadAsSVG = function () {
+        var svg = document.querySelector('#networkContainer');
+        this._svgsaver.asSvg(svg, this._complexAC + '.svg');
+        this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].InteractionViewer_ExportSVG, this._complexAC);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexViewerComponent.prototype, "complexAC", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ComplexViewerComponent.prototype, "complexMIJSON", null);
+    ComplexViewerComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-complex-viewer',
+            template: __webpack_require__("./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/shared/visualisation/complex-viewer/complex-viewer.component.css")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ComplexViewerComponent);
+    return ComplexViewerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "@import \"https://wwwdev.ebi.ac.uk/gxa/resources/css/alt-customized-bootstrap-3.3.5.css\";\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" [hidden]=\"!isLoaded\">\n  <h3>Gene Expression Map</h3>\n  <div class=\"column medium-12 margin-bottom-large\">\n    <div id=\"highchartsContainer\"></div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GxaHeatmapComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GxaHeatmapComponent = /** @class */ (function () {
+    function GxaHeatmapComponent() {
+        this._isLoaded = true;
+    }
+    GxaHeatmapComponent.prototype.ngOnInit = function () {
+        switch (this._complexSpecies) {
+            case 'Homo sapiens; 9606':
+                this._experimentId = 'E-MTAB-5214';
+                break;
+            case 'Mus musculus; 10090':
+                this._experimentId = 'E-MTAB-4644';
+                break;
+            case 'Rattus norvegicus; 10116':
+                this._experimentId = 'E-GEOD-53960';
+                break;
+            case 'Gallus gallus (Chicken); 9031':
+                this._experimentId = 'E-MTAB-2797';
+                break;
+            case 'Caenorhabditis elegans; 6239':
+                this._experimentId = 'E-MTAB-2812';
+                break;
+            case 'Sus scrofa (Pig); 9823':
+                this._experimentId = 'E-MTAB-5895';
+                break;
+            default:
+                this._isLoaded = false;
+        }
+        if (this._experimentId) {
+            var context_1 = this;
+            this._gxa.render({
+                target: 'highchartsContainer',
+                experiment: this._experimentId,
+                atlasUrl: 'https://www.ebi.ac.uk/gxa/',
+                query: {
+                    gene: this.gxaParamsQueries
+                },
+                fail: function () {
+                    context_1._isLoaded = false;
+                }
+            });
+        }
+    };
+    Object.defineProperty(GxaHeatmapComponent.prototype, "gxa", {
+        get: function () {
+            return this._gxa;
+        },
+        set: function (value) {
+            this._gxa = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GxaHeatmapComponent.prototype, "participants", {
+        get: function () {
+            return this._participants;
+        },
+        set: function (value) {
+            this._participants = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GxaHeatmapComponent.prototype, "complexSpecies", {
+        get: function () {
+            return this._complexSpecies;
+        },
+        set: function (value) {
+            this._complexSpecies = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GxaHeatmapComponent.prototype, "gxaParamsQueries", {
+        get: function () {
+            return this._gxaParamsQueries;
+        },
+        set: function (value) {
+            this._gxaParamsQueries = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GxaHeatmapComponent.prototype, "isLoaded", {
+        get: function () {
+            return this._isLoaded;
+        },
+        set: function (value) {
+            this._isLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], GxaHeatmapComponent.prototype, "gxa", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], GxaHeatmapComponent.prototype, "participants", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], GxaHeatmapComponent.prototype, "complexSpecies", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], GxaHeatmapComponent.prototype, "gxaParamsQueries", null);
+    GxaHeatmapComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-gxa-heatmap',
+            template: __webpack_require__("./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/shared/visualisation/gxa-heatmap/gxa-heatmap.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], GxaHeatmapComponent);
+    return GxaHeatmapComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <div (click)=\"interactedWithViewer()\" id=\"litemol\" style=\"width: 100%; height: 427px; margin-top: 10px; position: relative\"></div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LitmolViewerComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol__ = __webpack_require__("./node_modules/litemol/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_litemol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_litemol__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var baseURL = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].pdb_base_url;
+var LitmolViewerComponent = /** @class */ (function () {
+    function LitmolViewerComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._hasInteracted = false;
+    }
+    LitmolViewerComponent.prototype.ngOnChanges = function (changes) {
+        if (this._plugin) {
+            if (changes['selectedXRef']) {
+                this.loadMolecule();
+            }
+        }
+    };
+    LitmolViewerComponent.prototype.ngOnInit = function () {
+        this._plugin = __WEBPACK_IMPORTED_MODULE_1_litemol___default.a.Plugin.create({
+            target: '#litemol',
+            viewportBackground: '#fbfbfb',
+            layoutState: {
+                hideControls: true,
+                isExpanded: false
+            },
+            // Knowing how often and how people use LiteMol
+            // gives us the motivation and data to futher improve it.
+            //
+            // This option is OFF by default!
+            allowAnalytics: true
+        });
+        this.loadMolecule();
+    };
+    LitmolViewerComponent.prototype.loadMolecule = function () {
+        this.plugin.clear();
+        this._plugin.loadMolecule({
+            id: this._selectedXRef,
+            url: baseURL + '/static/entry/' + this._selectedXRef.toLowerCase() + '_updated.cif',
+            format: 'cif' // default
+        });
+        this._hasInteracted = false;
+    };
+    LitmolViewerComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].LiteMolViewer_Interaction, this._selectedXRef);
+            this._hasInteracted = true;
+        }
+    };
+    Object.defineProperty(LitmolViewerComponent.prototype, "plugin", {
+        get: function () {
+            return this._plugin;
+        },
+        set: function (value) {
+            this._plugin = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LitmolViewerComponent.prototype, "selectedXRef", {
+        get: function () {
+            return this._selectedXRef;
+        },
+        set: function (value) {
+            this._selectedXRef = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], LitmolViewerComponent.prototype, "selectedXRef", null);
+    LitmolViewerComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-litmol-viewer',
+            template: __webpack_require__("./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/shared/visualisation/litmol-viewer/litmol-viewer.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], LitmolViewerComponent);
+    return LitmolViewerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-right\">\n    <div class=\"columns medium-12 callout\">\n      <div class=\"columns medium-6\">\n        <h5>Selected Complex:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomeComplexe[selectedComplex].id}}\" target=\"_blank\">{{reactomeComplexe[selectedComplex].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomeComplexe[selectedComplex].name}}\n        </p>\n      </div>\n      <div class=\"columns medium-6\">\n        <h5>Selected Pathway:</h5>\n        <p>\n          <b>Stable Identifier: </b><a\n          href=\"http://www.reactome.org/content/detail/{{reactomePathways[selectedPathway].id}}\" target=\"_blank\">{{reactomePathways[selectedPathway].id}}\n          <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a><br>\n          <b>Name: </b>{{reactomePathways[selectedPathway].name}}\n        </p>\n      </div>\n    </div>\n    <div #diagramHolder class=\"columns medium-12\">\n      <div id=\"diagramHolder\"></div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactomeDiagramComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var baseURL = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].reactome_base_url;
+var ReactomeDiagramComponent = /** @class */ (function () {
+    function ReactomeDiagramComponent(googleAnalyticsService) {
+        this.googleAnalyticsService = googleAnalyticsService;
+        this._reactomeComplexe = {};
+        this._reactomePathways = {};
+        this.onLoaded = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    ReactomeDiagramComponent.prototype.ngOnInit = function () {
+        this.loadScript();
+        this._hasInteracted = false;
+    };
+    ReactomeDiagramComponent.prototype.ngOnChanges = function (changes) {
+        if (this.diagramContext) {
+            if (changes['selectedPathway']) {
+                this.loadDiagram();
+            }
+            else if (changes['selectedComplex']) {
+                this.selectComplex(this.selectedComplex);
+            }
+        }
+    };
+    ReactomeDiagramComponent.prototype.onReactomeDiagramReadyListener = function (event) {
+        this.diagramContext = event.detail;
+        this.initReactomeDiagram();
+    };
+    ReactomeDiagramComponent.prototype.onResize = function () {
+        this.globelDiagram.resize(this.diagramHolder.nativeElement.clientWidth, this.diagramHolder.nativeElement.clientWidth * 0.8);
+        this.selectComplex(this.selectedComplex);
+    };
+    ReactomeDiagramComponent.prototype.loadScript = function () {
+        var node = document.createElement('script');
+        node.src = baseURL + '/DiagramJs/diagram/diagram.nocache.js';
+        node.type = 'text/javascript';
+        node.async = true;
+        node.charset = 'utf-8';
+        document.getElementsByTagName('head')[0].appendChild(node);
+    };
+    ReactomeDiagramComponent.prototype.initReactomeDiagram = function () {
+        this.globelDiagram = this.diagramContext.Diagram.create({
+            'proxyPrefix': baseURL,
+            'placeHolder': 'diagramHolder',
+            'width': this.diagramHolder.nativeElement.clientWidth,
+            'height': this.diagramHolder.nativeElement.clientWidth * 0.5,
+        });
+        this.loadDiagram();
+    };
+    ReactomeDiagramComponent.prototype.loadDiagram = function () {
+        var context = this;
+        this.globelDiagram.loadDiagram(this.selectedPathway);
+        this.globelDiagram.onDiagramLoaded(function (loaded) {
+            context.selectComplex(context.selectedComplex);
+        });
+        this._hasInteracted = false;
+        this.globelDiagram.onObjectSelected(function (e) {
+            context.interactedWithViewer();
+            return;
+        });
+    };
+    ReactomeDiagramComponent.prototype.selectComplex = function (reactomeComplexId) {
+        this.selectedComplex = reactomeComplexId;
+        this.globelDiagram.resetFlaggedItems();
+        this.globelDiagram.flagItems(reactomeComplexId);
+    };
+    ;
+    ReactomeDiagramComponent.prototype.interactedWithViewer = function () {
+        if (!this._hasInteracted) {
+            this.googleAnalyticsService.fireInteractionWithViewerEvent(__WEBPACK_IMPORTED_MODULE_2__shared_google_analytics_types_category_enum__["a" /* Category */].PathwayDiagram_Interaction, this._selectedComplex);
+            this._hasInteracted = true;
+        }
+    };
+    Object.defineProperty(ReactomeDiagramComponent.prototype, "reactomePathways", {
+        get: function () {
+            return this._reactomePathways;
+        },
+        set: function (value) {
+            this._reactomePathways = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeDiagramComponent.prototype, "reactomeComplexe", {
+        get: function () {
+            return this._reactomeComplexe;
+        },
+        set: function (value) {
+            this._reactomeComplexe = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeDiagramComponent.prototype, "selectedComplex", {
+        get: function () {
+            return this._selectedComplex;
+        },
+        set: function (value) {
+            this._selectedComplex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ReactomeDiagramComponent.prototype, "selectedPathway", {
+        get: function () {
+            return this._selectedPathway;
+        },
+        set: function (value) {
+            this._selectedPathway = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('diagramHolder'),
+        __metadata("design:type", Object)
+    ], ReactomeDiagramComponent.prototype, "diagramHolder", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], ReactomeDiagramComponent.prototype, "onLoaded", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:onReactomeDiagramReady', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], ReactomeDiagramComponent.prototype, "onReactomeDiagramReadyListener", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:resize', ['$event.target']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], ReactomeDiagramComponent.prototype, "onResize", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ReactomeDiagramComponent.prototype, "reactomePathways", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], ReactomeDiagramComponent.prototype, "reactomeComplexe", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ReactomeDiagramComponent.prototype, "selectedComplex", null);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ReactomeDiagramComponent.prototype, "selectedPathway", null);
+    ReactomeDiagramComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'cp-reactome-diagram',
+            template: __webpack_require__("./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.html"),
+            styles: [__webpack_require__("./src/app/complex/complex-details/shared/visualisation/reactome-diagram/reactome-diagram.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
+    ], ReactomeDiagramComponent);
+    return ReactomeDiagramComponent;
+}());
+
 
 
 /***/ })
