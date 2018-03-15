@@ -29,14 +29,18 @@ export class EfoCrossreferencesComponent implements OnInit {
     for (let i = 0; i < this._crossReferences.length; i++) {
       if (this.crossReferences[i].identifier.split(':')[0] === 'EFO') {
         this.olsService.getEfoName(this.crossReferences[i].identifier).subscribe(
-          response => this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label,
+          response => {
+            this._crossReferences[i].description = response._embedded.terms[0].label
+          },
           error => {
             this.notificationService.onAPIRequestError('OLS');
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_efo, error.status ? error.status : 'unknown');
           });
       } else if (this.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
         this.olsService.getOrphaNetName(this.crossReferences[i].identifier).subscribe(
-          response => this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label,
+          response => {
+            this._crossReferences[i].description = response._embedded.terms[0].label
+          },
           error => {
             this.notificationService.onAPIRequestError('OLS');
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_orphanet, error.status ? error.status : 'unknown');
