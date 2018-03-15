@@ -2,8 +2,9 @@
  * Created by Maximilian Koch (mkoch@ebi.ac.uk) on 01/06/2017.
  */
 
-// Enviorment for GitHub Page
+// Environment for GitHub Page
 const EBI_BASE_URL = 'https://www.ebi.ac.uk/';
+const COMPLEX_BASE_URL = 'https://wwwdev.ebi.ac.uk/';
 const REACTOME_BASE_URL = 'https://reactome.org';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
@@ -14,7 +15,7 @@ export const environment = {
 
   analytics_id: 'UA-672146-13',
   ebi_base_url: EBI_BASE_URL,
-  complex_ws_base_url: EBI_BASE_URL + 'intact/complex-ws',
+  complex_ws_base_url: COMPLEX_BASE_URL + 'intact/complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
   ols_base_url: EBI_BASE_URL + 'ols/api/ontologies',
