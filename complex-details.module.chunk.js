@@ -100666,7 +100666,6 @@ var ComplexDetailsComponent = /** @class */ (function () {
         var _this = this;
         this.complexPortalService.getComplex(this._query).subscribe(function (complexDetails) {
             _this.complexDetails = complexDetails;
-            console.log('Details ComplexAc: ' + complexDetails.complexAc);
             // Check complexAC is not empty
             if (complexDetails.complexAc != null) {
                 _this.router.navigate(['/complex', complexDetails.complexAc]);
@@ -101171,13 +101170,17 @@ var EfoCrossreferencesComponent = /** @class */ (function () {
         var _this = this;
         var _loop_1 = function (i) {
             if (this_1.crossReferences[i].identifier.split(':')[0] === 'EFO') {
-                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                this_1.olsService.getEfoName(this_1.crossReferences[i].identifier).subscribe(function (response) {
+                    _this._crossReferences[i].description = response._embedded.terms[0].label;
+                }, function (error) {
                     _this.notificationService.onAPIRequestError('OLS');
                     _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_efo, error.status ? error.status : 'unknown');
                 });
             }
             else if (this_1.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
-                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) { return _this._crossReferences[i].description = JSON.parse(response._body)._embedded.terms[0].label; }, function (error) {
+                this_1.olsService.getOrphaNetName(this_1.crossReferences[i].identifier).subscribe(function (response) {
+                    _this._crossReferences[i].description = response._embedded.terms[0].label;
+                }, function (error) {
                     _this.notificationService.onAPIRequestError('OLS');
                     _this.googleAnalyticsService.fireAPIRequestErrorEvent(__WEBPACK_IMPORTED_MODULE_4__shared_google_analytics_types_category_enum__["a" /* Category */].ols_orphanet, error.status ? error.status : 'unknown');
                 });
