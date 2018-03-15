@@ -103522,7 +103522,7 @@ module.exports = ""
 /***/ "./src/app/complex/complex-details/complex-references/complex-references.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Additional Information</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Additional Information'\"></cp-go-to>\n    <div id=\"externalResources\" class=\"columns medium-12 no-pad-left\" *ngIf=\"externalResources\">\n      <cp-external-resources [crossReferences]=\"externalResources\"></cp-external-resources>\n    </div>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms && synonyms.length !== 0\">\n        <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n      </div>\n      <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName.length !== 0\">\n        <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs || synonyms || systematicName\">\n    <h2 class=\"float-left\">Additional Information</h2>\n    <cp-go-to class=\"float-right\" [sectionName]=\"'Additional Information'\"></cp-go-to>\n    <div id=\"externalResources\" class=\"columns medium-12 no-pad-left\" *ngIf=\"externalResources\">\n      <cp-external-resources [crossReferences]=\"externalResources\"></cp-external-resources>\n    </div>\n    <div id=\"pubmedXRefs\" class=\"columns medium-12 no-pad-left\" *ngIf=\"pubmedXRefs\">\n      <cp-euro-pmc-crossreferences [crossReferences]=\"pubmedXRefs\"></cp-euro-pmc-crossreferences>\n    </div>\n    <div class=\"columns medium-12 no-pad-left\">\n      <div id=\"synonyms\" class=\"columns medium-6 no-pad-left\" *ngIf=\"synonyms\">\n        <cp-synonyms [synonyms]=\"synonyms\"></cp-synonyms>\n      </div>\n      <div id=\"systematicName\" class=\"columns medium-6 no-pad-left\" *ngIf=\"systematicName\">\n        <cp-systematic-name [systematicName]=\"systematicName\"></cp-systematic-name>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -103846,7 +103846,7 @@ module.exports = ""
 /***/ "./src/app/complex/complex-details/complex-references/synonyms/synonyms.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\" *ngIf=\"synonyms.length !== 0\">\n    <h3>Synonyms ({{synonyms.length}})</h3>\n    <table class=\"hover\">\n      <tbody>\n      <tr *ngFor=\"let synonym of synonyms | slice:0:displayedElements\">\n        <td>\n          {{synonym}}\n        </td>\n      </tr>\n      <tr class=\"text-center\"  style=\"background: white\" *ngIf=\"displayedElements < synonyms.length\">\n        <td>\n          <a class=\"label\" (click)=\"displayedElements = synonyms.length\">Show all</a>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -103922,7 +103922,7 @@ module.exports = "\n"
 /***/ "./src/app/complex/complex-details/complex-references/systematic-name/systematic-name.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\" *ngIf=\"systematicName.length !== 0\">\n    <h3>Systematic Name</h3>\n    <table class=\"hover\" style=\"word-wrap:break-word;\n              table-layout: fixed;\">\n      <tbody>\n      <tr>\n        <td>\n          {{systematicName}}\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
