@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,7 +11,7 @@ const baseURL = environment.ols_base_url;
 @Injectable()
 export class OlsService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -21,7 +22,8 @@ export class OlsService {
    */
   getOrphaNetName(id: string) {
     return this.http.get(baseURL + '/ordo/terms?iri=http://www.orpha.net/ORDO/' + id.replace(':', '_'))
-      .map((response: Response) => response).catch(this.handleError);
+      .map((response: Response) => response)
+      .catch(this.handleError);
   }
 
   /**
@@ -31,14 +33,14 @@ export class OlsService {
    */
   getEfoName(id: string) {
     return this.http.get(baseURL + '/efo/terms?iri=http://www.ebi.ac.uk/efo/' + id.replace(':', '_'))
-      .map((response: Response) => response).catch(this.handleError);
+      .catch(this.handleError);
   }
 
-  private handleError(error: Response | any): Observable<any> {
-    if (error instanceof Response) {
-      return Observable.throw(error);
+  private handleError(err: HttpErrorResponse | any): Observable<any> {
+    if (err.error instanceof Error) {
+      return Observable.throw(err);
     } else {
-      console.error(error.message ? error.message : error.toString());
+      console.error(err.message ? err.message : err.toString());
     }
   }
 }
