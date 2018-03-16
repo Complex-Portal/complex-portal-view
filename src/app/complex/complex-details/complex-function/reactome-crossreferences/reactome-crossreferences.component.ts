@@ -64,7 +64,7 @@ export class ReactomeCrossreferencesComponent implements OnInit {
             if (currentComplex === undefined) {
               currentComplex = this._reactomeComplexes[this._crossReferences[i].identifier.toString()]
                 = new ReactomeComplex(this._crossReferences[i].identifier);
-              currentComplex.name = complexName;
+              currentComplex.name = complexName.body;
             }
             currentPathway.complexes.push(this._crossReferences[i].identifier);
             currentComplex.pathways.push(pathway.stId);
