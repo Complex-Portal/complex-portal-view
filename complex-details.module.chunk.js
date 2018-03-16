@@ -102618,7 +102618,7 @@ var ReactomeCrossreferencesComponent = /** @class */ (function () {
                     if (currentComplex === undefined) {
                         currentComplex = _this._reactomeComplexes[_this._crossReferences[i].identifier.toString()]
                             = new __WEBPACK_IMPORTED_MODULE_4__model_reactome_complex__["a" /* ReactomeComplex */](_this._crossReferences[i].identifier);
-                        currentComplex.name = complexName;
+                        currentComplex.name = complexName.body;
                     }
                     currentPathway.complexes.push(_this._crossReferences[i].identifier);
                     currentComplex.pathways.push(pathway.stId);
