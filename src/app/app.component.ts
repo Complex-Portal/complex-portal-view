@@ -35,13 +35,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.observeRouteChange();
     this.observeBasketChange();
+    this.initialiseFoundation();
   }
 
   ngAfterViewInit(): void {
     // Init some libs.
-    this.initialiseFoundation();
+    // this.initialiseFoundation();
     this.initialiseGoogleAnalytics();
-    this.initialiseFoundationHacks();
+    // this.initialiseFoundationHacks();
   }
 
   // Candidate for utils.
@@ -77,28 +78,28 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
 
-  private initialiseFoundationHacks(): void {
-    // copied from script.js (ebi framework)
-    // Assign global nav background images through meta tags
-    (function assignImageByMetaTags() {
-      const localMasthead = document.getElementById('local-masthead');
-      // check for both ebi: and ebi- formatted meta tags
-      // tslint:disable
-      let localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']")
-        || document.querySelector("meta[name='ebi-localmasthead-color']");
-      let localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']")
-        || document.querySelector("meta[name='ebi-localmasthead-image']");
-      if (localMastheadColor != null) {
-        localMasthead.style.backgroundColor = localMastheadColor.getAttribute("content");
-        localMasthead.className += ' meta-background-color';
-      }
-      if (localMastheadImage != null) {
-        localMasthead.style.backgroundImage = 'url(' + localMastheadImage.getAttribute("content") + ')';
-        localMasthead.className += ' meta-background-image';
-      }
-      // tslint:enable
-    })();
-  }
+  // private initialiseFoundationHacks(): void {
+  //   // copied from script.js (ebi framework)
+  //   // Assign global nav background images through meta tags
+  //   (function assignImageByMetaTags() {
+  //     const localMasthead = document.getElementById('local-masthead');
+  //     // check for both ebi: and ebi- formatted meta tags
+  //     // tslint:disable
+  //     let localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']")
+  //       || document.querySelector("meta[name='ebi-localmasthead-color']");
+  //     let localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']")
+  //       || document.querySelector("meta[name='ebi-localmasthead-image']");
+  //     if (localMastheadColor != null) {
+  //       localMasthead.style.backgroundColor = localMastheadColor.getAttribute("content");
+  //       localMasthead.className += ' meta-background-color';
+  //     }
+  //     if (localMastheadImage != null) {
+  //       localMasthead.style.backgroundImage = 'url(' + localMastheadImage.getAttribute("content") + ')';
+  //       localMasthead.className += ' meta-background-image';
+  //     }
+  //     // tslint:enable
+  //   })();
+  // }
 
   get version(): string {
     return this._version;

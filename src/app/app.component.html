@@ -1,95 +1,37 @@
+
 <div data-sticky-container>
-  <div id="local-masthead" data-sticky data-sticky-on="large" data-top-anchor="180" data-btm-anchor="300000">
-    <header>
-
-      <!-- EBI GLOBAL MASTHEAD SECTION -->
-      <div id="global-masthead" class="clearfix">
-        <!--This has to be one line and no newline characters-->
-        <a href="{{EBI_BASE_URL}}" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
-
-        <nav>
-          <div class="row">
-            <ul id="global-nav" class="menu">
-              <!-- set active class as appropriate -->
-              <li id="home-mobile" class=""><a href="{{EBI_BASE_URL}}"></a></li>
-              <li id="home" class="active"><a href="{{EBI_BASE_URL}}"><i class="icon icon-generic" data-icon="H"></i>
-                EMBL-EBI</a></li>
-              <li id="services"><a href="//www.ebi.ac.uk/services"><i class="icon icon-generic" data-icon="("></i>
-                Services</a></li>
-              <li id="research"><a href="//www.ebi.ac.uk/research"><i class="icon icon-generic" data-icon=")"></i>
-                Research</a></li>
-              <li id="training"><a href="//www.ebi.ac.uk/training"><i class="icon icon-generic" data-icon="t"></i>
-                Training</a></li>
-              <li id="about"><a href="//www.ebi.ac.uk/about"><i class="icon icon-generic" data-icon="i"></i> About
-                us</a></li>
-              <li id="search">
-                <a data-toggle="search-global-dropdown"><i class="icon icon-functional" data-icon="1"></i>
-                  <span class="show-for-small-only">Search</span></a>
-                <div id="search-global-dropdown" class="dropdown-pane" data-dropdown data-options="closeOnClick:true;">
-                  <form id="global-search" name="global-search" action="/ebisearch/search.ebi" method="GET">
-                    <fieldset>
-                      <div class="input-group">
-                        <input type="text" name="query" id="global-searchbox" class="input-group-field"
-                               placeholder="Search all of EMBL-EBI">
-                        <div class="input-group-button">
-                          <input type="submit" name="submit" value="Search" class="button">
-                          <input type="hidden" name="db" value="allebi" checked="checked">
-                          <input type="hidden" name="requestFrom" value="global-masthead" checked="checked">
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-                </div>
-              </li>
-              <li class="float-right show-for-medium embl-selector">
-                <button class="button float-right" type="button" data-toggle="embl-dropdown">Hinxton</button>
-                <!-- The dropdown menu will be programatically added by script.js -->
-              </li>
-            </ul>
-          </div>
-        </nav>
-
+  <header id="masthead" class="masthead" data-sticky data-sticky-on="large" data-top-anchor="content:top" data-btm-anchor="content:bottom">
+    <!-- COMPLEX PORTAL HEADER SECTION -->
+    <div class="masthead-inner row"> <!-- expanded -->
+      <!-- local-title -->
+      <div class="columns medium-6" id="local-title">
+        <h1><a routerLink="/home" title="Back to Complex Portal homepage">
+            <img src="assets/images/logo.png" style="width: 43px; height: 63px;">Complex Portal</a>
+        </h1>
       </div>
-      <!-- END OF EBI GLOBAL MASTHEAD -->
+      <!--/local-title -->
 
-      <!-- COMPLEX PORTAL HEADER SECTION -->
-      <div class="masthead row">
-
-        <!-- local-title -->
-        <div class="columns medium-6" id="local-title">
-          <h1>
-            <a routerLink="/home" title="Back to Complex Portal homepage">
-              <img src="assets/images/logo.png" style="width: 43px; height: 63px;">
-              Complex Portal
-            </a>
-          </h1>
-
-        </div>
-        <!--/local-title -->
-
-        <div class="columns medium-6">
-          <cp-local-search></cp-local-search>
-        </div>
-
-        <!-- local-nav -->
-        <nav>
-          <ul class="dropdown menu float-left" data-description="navigational">
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/about">About</a></li>
-            <li><a href="https://github.com/Complex-Portal/complex-portal-view/issues" target="_blank">Feedback</a></li>
-            <li><a [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
-              <i class="label" style="border-radius: 2px; background-color: white">
-                &nbsp;<strong>{{basketCount}}</strong>&nbsp;
-              </i></a>
-            </li>
-          </ul>
-        </nav>
-        <!-- /local-nav -->
+      <div class="columns medium-6">
+        <cp-local-search></cp-local-search>
       </div>
-      <!-- END COMPLEX PORTAL HEADER SECTION -->
 
-    </header>
-  </div>
+      <!-- local-nav -->
+      <nav>
+        <ul id="local-nav" class="dropdown menu float-left" data-description="navigational">
+          <li><a routerLink="/home">Home</a></li>
+          <li><a routerLink="/about">About</a></li>
+          <li><a href="https://github.com/Complex-Portal/complex-portal-view/issues" target="_blank">Feedback</a></li>
+          <li><a [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
+            <i class="label" style="border-radius: 2px; background-color: white">
+              &nbsp;<strong>{{basketCount}}</strong>&nbsp;
+            </i></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /local-nav -->
+    </div>
+  </header>
+  <!-- END COMPLEX PORTAL HEADER SECTION -->
 
   <cp-progress-bar></cp-progress-bar>
 </div>
@@ -104,54 +46,36 @@
   <!-- End suggested layout containers -->
 </div>
 
-<footer>
-  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->
-  <!--
-        <div id="local-footer">
-          <div class="row">
-            <span class="reference">How to reference this page: ...</span>
-          </div>
+
+<!-- Local footer -->
+
+<div class="row margin-top-medium expanded">
+
+  <footer id="local-footer" class="local-footer row expanded" role="local-footer">
+      <div class="row padding-top-large padding-bottom-large">
+        <div class="columns medium-12">
+          <p class="label secondary-color padding-left-large columns small-10">Our contributors </p>
+          <p class="label secondary-color padding-left-large columns small-2">{{version}}-{{environmentName}}</p>
+          <table>
+            <tbody>
+            <tr>
+              <td><a href="//www.ceitec.eu" target="_blank"><img src="assets/images/contributors/Ceitec.png"></a></td>
+              <td><a href="//www.evidenceontology.org/" target="_blank"><img src="assets/images/contributors/eco.png"></a>
+              </td>
+              <td><a href="//www.ucl.ac.uk/functional-gene-annotation/cardiovascular" target="_blank"><img
+                src="assets/images/contributors/imex_acg_s.png"></a></td>
+              <td><a href="//matrixdb.univ-lyon1.fr" target="_blank"><img
+                src="assets/images/contributors/matrixdb.png"></a></td>
+              <td><a href="//mint.bio.uniroma2.it" target="_blank"><img src="assets/images/contributors/Mint.png"></a>
+              <td><a href="//www.ebi.ac.uk/pdbe/" target="_blank"><img src="assets/images/contributors/PDBe.png"></a>
+              <td><a href="//www.yeastgenome.org" target="_blank"><img src="assets/images/contributors/SGD.png"></a></td>
+              <td><a href="//www.sib.swiss" target="_blank"><img src="assets/images/contributors/sib.png"></a></td>
+              <td><a href="//www.uniprot.org" target="_blank"><img src="assets/images/contributors/uniprot.png"></a></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-   -->
-  <!-- End optional local footer -->
-  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->
-  <div id="local-footer">
-    <div class="row padding-top-large padding-bottom-large">
-      <div class="columns medium-12">
-        <p class="label secondary-color padding-left-large columns small-10">Our contributors </p>
-        <p class="label secondary-color padding-left-large columns small-2">{{version}}-{{environmentName}}</p>
-        <table>
-          <tbody>
-          <tr>
-            <td><a href="//www.ceitec.eu" target="_blank"><img src="assets/images/contributors/Ceitec.png"></a></td>
-            <td><a href="//www.evidenceontology.org/" target="_blank"><img src="assets/images/contributors/eco.png"></a>
-            </td>
-            <td><a href="//www.ucl.ac.uk/functional-gene-annotation/cardiovascular" target="_blank"><img
-              src="assets/images/contributors/imex_acg_s.png"></a></td>
-            <td><a href="//matrixdb.univ-lyon1.fr" target="_blank"><img
-              src="assets/images/contributors/matrixdb.png"></a></td>
-            <td><a href="//mint.bio.uniroma2.it" target="_blank"><img src="assets/images/contributors/Mint.png"></a>
-            <td><a href="//www.ebi.ac.uk/pdbe/" target="_blank"><img src="assets/images/contributors/PDBe.png"></a>
-            <td><a href="//www.yeastgenome.org" target="_blank"><img src="assets/images/contributors/SGD.png"></a></td>
-            <td><a href="//www.sib.swiss" target="_blank"><img src="assets/images/contributors/sib.png"></a></td>
-            <td><a href="//www.uniprot.org" target="_blank"><img src="assets/images/contributors/uniprot.png"></a></td>
-          </tr>
-          </tbody>
-        </table>
       </div>
-    </div>
-  </div>
+  </footer>
 
-  <div id="global-footer">
-
-    <nav id="global-nav-expanded" class="row">
-      <!-- Footer will be automatically inserted by footer.js -->
-    </nav>
-
-    <section id="ebi-footer-meta" class="row">
-      <!-- Footer meta will be automatically inserted by footer.js -->
-    </section>
-
-  </div>
-
-</footer>
+</div>
