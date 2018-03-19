@@ -56,13 +56,14 @@
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
+  <!-- CSS: implied media=all -->
   <link rel="stylesheet"
-        href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/libraries/foundation-6/css/foundation.min.css"
-        type="text/css" media="all">
-  <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/css/ebi-global.min.css"
-        type="text/css" media="all">
-  <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css"
-        media="all">
+        href="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/libraries/foundation-6/css/foundation.css"
+        type="text/css" media="all"/>
+  <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/css/ebi-global.css" type="text/css"
+        media="all"/>
+  <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css"
+        media="all"/>
 
   <!-- Use this CSS file for any custom styling -->
   <!--
@@ -70,15 +71,14 @@
   -->
 
   <!-- If you have a custom header image or colour -->
-  <!--
-  <meta name="ebi:localmasthead-color" content="#000">
-  <meta name="ebi:localmasthead-image" content="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/images/backgrounds/embl-ebi-background.jpg">
-  -->
+  <meta name="ebi:masthead-color" content="#000"/>
+  <meta name="ebi:masthead-image" content="assets/images/embl-ebi-background-4.jpg"/>
+
 
   <!-- you can replace this with theme-[projectname].css. See http://www.ebi.ac.uk/web/style/colour for details of how to do this -->
   <!-- also inform ES so we can host your colour palette file -->
-  <link rel="stylesheet" href="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/css/theme-embl-petrol.css"
-        type="text/css" media="all">
+  <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/css/theme-embl-petrol.css"
+        type="text/css" media="all"/>
 
   <!-- for production the above can be replaced with -->
   <!--
@@ -87,23 +87,10 @@
 
   <!-- end CSS-->
 
-
   <!-- All JavaScript at the bottom, except for Modernizr -->
   <script async
           src="https://www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.1/libraries/modernizr/modernizr.custom.49274.js"></script>
-  <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-  </script>
+
 </head>
 
 <body class="level2"><!-- add any of your classes or IDs -->
@@ -116,19 +103,107 @@
   </ul>
 </div>
 
+<!-- EBI GLOBAL MASTHEAD SECTION -->
+<header id="masthead-black-bar" class="clearfix masthead-black-bar">
+  <!--This has to be one line and no newline characters-->
+  <a href="{{EBI_BASE_URL}}" title="Go to the EMBL-EBI homepage"><span class="ebi-logo"></span></a>
+  <nav class="row"> <!-- row expanded -->
+    <!--<div class="row">-->
+    <ul id="global-nav" class="menu">
+      <!-- set active class as appropriate -->
+      <li id="home-mobile" class=""><a href="{{EBI_BASE_URL}}"></a></li>
+      <li id="home" class="active"><a href="{{EBI_BASE_URL}}">
+        <i class="icon icon-generic" data-icon="H"></i>EMBL-EBI</a></li>
+      <li id="services"><a href="//www.ebi.ac.uk/services"><i class="icon icon-generic" data-icon="("></i>Services</a>
+      </li>
+      <li id="research"><a href="//www.ebi.ac.uk/research"><i class="icon icon-generic" data-icon=")"></i>Research</a>
+      </li>
+      <li id="training"><a href="//www.ebi.ac.uk/training"><i class="icon icon-generic" data-icon="t"></i>Training</a>
+      </li>
+      <li id="about"><a href="//www.ebi.ac.uk/about"><i class="icon icon-generic" data-icon="i"></i> About us</a></li>
+      <li id="search">
+        <a data-toggle="search-global-dropdown"><i class="icon icon-functional" data-icon="1"></i>
+          <span class="show-for-small-only">Search</span>
+        </a>
+
+        <div id="search-global-dropdown" class="dropdown-pane" data-dropdown data-options="closeOnClick:true;">
+          <form id="global-search" name="global-search" action="/ebisearch/search.ebi" method="GET">
+            <fieldset>
+              <div class="input-group">
+                <input type="text" name="query" id="global-searchbox" class="input-group-field"
+                       placeholder="Search all of EMBL-EBI">
+                <div class="input-group-button">
+                  <input type="submit" name="submit" value="Search" class="button">
+                  <input type="hidden" name="db" value="allebi" checked="checked">
+                  <input type="hidden" name="requestFrom" value="global-masthead" checked="checked">
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </li>
+      <li class="float-right show-for-medium embl-selector">
+        <button class="button float-right" type="button" data-toggle="embl-dropdown">Hinxton</button>
+        <!-- The dropdown menu will be programatically added by script.js -->
+      </li>
+    </ul>
+  </nav>
+</header>
+<!-- END OF EBI GLOBAL MASTHEAD -->
 
 <!-- Suggested layout containers -->
 <cp-root></cp-root>
 <!-- End suggested layout containers -->
 
-<script async src="assets/js/reactome-event.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- footer here -->
+<footer>
+  <!--<script src="assets/html/global-footer.html"></script>-->
+  <div id="global-footer" class="global-footer">
+    <nav id="global-nav-expanded" class="global-nav-expanded row">
+      <!-- Footer will be automatically inserted by footer.js -->
+    </nav>
 
-<!--<link rel="stylesheet" href="">-->
+    <section id="ebi-footer-meta" class="ebi-footer-meta row">
+      <!-- Footer meta will be automatically inserted by footer.js -->
+      <p class="address">EMBL-EBI, Wellcome Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, UK &nbsp; &nbsp; +44
+        (0)1223 49 44 44</p>
+      <p>Copyright © EMBL-EBI 2016 | EBI is an outstation of the <a href="http://www.embl.org/">European Molecular
+        Biology Laboratory</a> | <a href="https://ebiwd.github.io/about/terms-of-use">Terms of use</a></p>
+    </section>
+  </div>
+
+</footer>
+
+<!-- JavaScript -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script defer="defer" src="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/js/script.js"></script>
+
+<!-- The Foundation theme JavaScript -->
+<script src="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/libraries/foundation-6/js/foundation.js"></script>
+<script src="//www.ebi.ac.uk/web_guidelines/EBI-Framework/v1.2/js/foundationExtendEBI.js"></script>
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+</script>
+
+<script async src="assets/js/reactome-event.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+
 <script language="JavaScript" type="text/javascript"
         src="https://www.ebi.ac.uk/gxa/resources/js-bundles/vendorCommons.bundle.js"></script>
 <script language="JavaScript" type="text/javascript"
         src="https://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
 
-<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>

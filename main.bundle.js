@@ -124,7 +124,7 @@ module.exports = "a {\n  text-decoration:none;\n  border-width: 0;\n}\n"
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div data-sticky-container>\n  <div id=\"local-masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"180\" data-btm-anchor=\"300000\">\n    <header>\n\n      <!-- EBI GLOBAL MASTHEAD SECTION -->\n      <div id=\"global-masthead\" class=\"clearfix\">\n        <!--This has to be one line and no newline characters-->\n        <a href=\"{{EBI_BASE_URL}}\" title=\"Go to the EMBL-EBI homepage\"><span class=\"ebi-logo\"></span></a>\n\n        <nav>\n          <div class=\"row\">\n            <ul id=\"global-nav\" class=\"menu\">\n              <!-- set active class as appropriate -->\n              <li id=\"home-mobile\" class=\"\"><a href=\"{{EBI_BASE_URL}}\"></a></li>\n              <li id=\"home\" class=\"active\"><a href=\"{{EBI_BASE_URL}}\"><i class=\"icon icon-generic\" data-icon=\"H\"></i>\n                EMBL-EBI</a></li>\n              <li id=\"services\"><a href=\"//www.ebi.ac.uk/services\"><i class=\"icon icon-generic\" data-icon=\"(\"></i>\n                Services</a></li>\n              <li id=\"research\"><a href=\"//www.ebi.ac.uk/research\"><i class=\"icon icon-generic\" data-icon=\")\"></i>\n                Research</a></li>\n              <li id=\"training\"><a href=\"//www.ebi.ac.uk/training\"><i class=\"icon icon-generic\" data-icon=\"t\"></i>\n                Training</a></li>\n              <li id=\"about\"><a href=\"//www.ebi.ac.uk/about\"><i class=\"icon icon-generic\" data-icon=\"i\"></i> About\n                us</a></li>\n              <li id=\"search\">\n                <a data-toggle=\"search-global-dropdown\"><i class=\"icon icon-functional\" data-icon=\"1\"></i>\n                  <span class=\"show-for-small-only\">Search</span></a>\n                <div id=\"search-global-dropdown\" class=\"dropdown-pane\" data-dropdown data-options=\"closeOnClick:true;\">\n                  <form id=\"global-search\" name=\"global-search\" action=\"/ebisearch/search.ebi\" method=\"GET\">\n                    <fieldset>\n                      <div class=\"input-group\">\n                        <input type=\"text\" name=\"query\" id=\"global-searchbox\" class=\"input-group-field\"\n                               placeholder=\"Search all of EMBL-EBI\">\n                        <div class=\"input-group-button\">\n                          <input type=\"submit\" name=\"submit\" value=\"Search\" class=\"button\">\n                          <input type=\"hidden\" name=\"db\" value=\"allebi\" checked=\"checked\">\n                          <input type=\"hidden\" name=\"requestFrom\" value=\"global-masthead\" checked=\"checked\">\n                        </div>\n                      </div>\n                    </fieldset>\n                  </form>\n                </div>\n              </li>\n              <li class=\"float-right show-for-medium embl-selector\">\n                <button class=\"button float-right\" type=\"button\" data-toggle=\"embl-dropdown\">Hinxton</button>\n                <!-- The dropdown menu will be programatically added by script.js -->\n              </li>\n            </ul>\n          </div>\n        </nav>\n\n      </div>\n      <!-- END OF EBI GLOBAL MASTHEAD -->\n\n      <!-- COMPLEX PORTAL HEADER SECTION -->\n      <div class=\"masthead row\">\n\n        <!-- local-title -->\n        <div class=\"columns medium-6\" id=\"local-title\">\n          <h1>\n            <a routerLink=\"/home\" title=\"Back to Complex Portal homepage\">\n              <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">\n              Complex Portal\n            </a>\n          </h1>\n\n        </div>\n        <!--/local-title -->\n\n        <div class=\"columns medium-6\">\n          <cp-local-search></cp-local-search>\n        </div>\n\n        <!-- local-nav -->\n        <nav>\n          <ul class=\"dropdown menu float-left\" data-description=\"navigational\">\n            <li><a routerLink=\"/home\">Home</a></li>\n            <li><a routerLink=\"/about\">About</a></li>\n            <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Feedback</a></li>\n            <li><a [ngClass]=\"{'animated flash': onChangeInBasket}\" routerLink=\"/basket\">Basket\n              <i class=\"label\" style=\"border-radius: 2px; background-color: white\">\n                &nbsp;<strong>{{basketCount}}</strong>&nbsp;\n              </i></a>\n            </li>\n          </ul>\n        </nav>\n        <!-- /local-nav -->\n      </div>\n      <!-- END COMPLEX PORTAL HEADER SECTION -->\n\n    </header>\n  </div>\n\n  <cp-progress-bar></cp-progress-bar>\n</div>\n\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n    <!-- Routed views go here -->\n  </section>\n  <!-- End suggested layout containers -->\n</div>\n\n<footer>\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <!--\n        <div id=\"local-footer\">\n          <div class=\"row\">\n            <span class=\"reference\">How to reference this page: ...</span>\n          </div>\n        </div>\n   -->\n  <!-- End optional local footer -->\n  <!-- Optional local footer (insert citation / project-specific copyright / etc here -->\n  <div id=\"local-footer\">\n    <div class=\"row padding-top-large padding-bottom-large\">\n      <div class=\"columns medium-12\">\n        <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n        <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n        <table>\n          <tbody>\n          <tr>\n            <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n            <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a>\n            </td>\n            <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n              src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n            <td><a href=\"//matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n              src=\"assets/images/contributors/matrixdb.png\"></a></td>\n            <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n            <td><a href=\"//www.ebi.ac.uk/pdbe/\" target=\"_blank\"><img src=\"assets/images/contributors/PDBe.png\"></a>\n            <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a></td>\n            <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n            <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a></td>\n          </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"global-footer\">\n\n    <nav id=\"global-nav-expanded\" class=\"row\">\n      <!-- Footer will be automatically inserted by footer.js -->\n    </nav>\n\n    <section id=\"ebi-footer-meta\" class=\"row\">\n      <!-- Footer meta will be automatically inserted by footer.js -->\n    </section>\n\n  </div>\n\n</footer>\n"
+module.exports = "\n<div data-sticky-container>\n  <header id=\"masthead\" class=\"masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"content:top\" data-btm-anchor=\"content:bottom\">\n    <!-- COMPLEX PORTAL HEADER SECTION -->\n    <div class=\"masthead-inner row\"> <!-- expanded -->\n      <!-- local-title -->\n      <div class=\"columns medium-6\" id=\"local-title\">\n        <h1><a routerLink=\"/home\" title=\"Back to Complex Portal homepage\">\n            <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\">Complex Portal</a>\n        </h1>\n      </div>\n      <!--/local-title -->\n\n      <div class=\"columns medium-6\">\n        <cp-local-search></cp-local-search>\n      </div>\n\n      <!-- local-nav -->\n      <nav>\n        <ul id=\"local-nav\" class=\"dropdown menu float-left\" data-description=\"navigational\">\n          <li><a routerLink=\"/home\">Home</a></li>\n          <li><a routerLink=\"/about\">About</a></li>\n          <li><a href=\"https://github.com/Complex-Portal/complex-portal-view/issues\" target=\"_blank\">Feedback</a></li>\n          <li><a [ngClass]=\"{'animated flash': onChangeInBasket}\" routerLink=\"/basket\">Basket\n            <i class=\"label\" style=\"border-radius: 2px; background-color: white\">\n              &nbsp;<strong>{{basketCount}}</strong>&nbsp;\n            </i></a>\n          </li>\n        </ul>\n      </nav>\n      <!-- /local-nav -->\n    </div>\n  </header>\n  <!-- END COMPLEX PORTAL HEADER SECTION -->\n\n  <cp-progress-bar></cp-progress-bar>\n</div>\n\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n    <!-- Routed views go here -->\n  </section>\n  <!-- End suggested layout containers -->\n</div>\n\n\n<!-- Local footer -->\n\n<div class=\"row margin-top-medium expanded\">\n\n  <footer id=\"local-footer\" class=\"local-footer row expanded\" role=\"local-footer\">\n      <div class=\"row padding-top-large padding-bottom-large\">\n        <div class=\"columns medium-12\">\n          <p class=\"label secondary-color padding-left-large columns small-10\">Our contributors </p>\n          <p class=\"label secondary-color padding-left-large columns small-2\">{{version}}-{{environmentName}}</p>\n          <table>\n            <tbody>\n            <tr>\n              <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n              <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a>\n              </td>\n              <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n                src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n              <td><a href=\"//matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n                src=\"assets/images/contributors/matrixdb.png\"></a></td>\n              <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n              <td><a href=\"//www.ebi.ac.uk/pdbe/\" target=\"_blank\"><img src=\"assets/images/contributors/PDBe.png\"></a>\n              <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a></td>\n              <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n              <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a></td>\n            </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n  </footer>\n\n</div>\n"
 
 /***/ }),
 
@@ -171,12 +171,13 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.observeRouteChange();
         this.observeBasketChange();
+        this.initialiseFoundation();
     };
     AppComponent.prototype.ngAfterViewInit = function () {
         // Init some libs.
-        this.initialiseFoundation();
+        // this.initialiseFoundation();
         this.initialiseGoogleAnalytics();
-        this.initialiseFoundationHacks();
+        // this.initialiseFoundationHacks();
     };
     // Candidate for utils.
     AppComponent.prototype.initialiseFoundation = function () {
@@ -207,29 +208,29 @@ var AppComponent = /** @class */ (function () {
             }, 1000);
         });
     };
-    AppComponent.prototype.initialiseFoundationHacks = function () {
-        // copied from script.js (ebi framework)
-        // Assign global nav background images through meta tags
-        (function assignImageByMetaTags() {
-            var localMasthead = document.getElementById('local-masthead');
-            // check for both ebi: and ebi- formatted meta tags
-            // tslint:disable
-            var localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']")
-                || document.querySelector("meta[name='ebi-localmasthead-color']");
-            var localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']")
-                || document.querySelector("meta[name='ebi-localmasthead-image']");
-            if (localMastheadColor != null) {
-                localMasthead.style.backgroundColor = localMastheadColor.getAttribute("content");
-                localMasthead.className += ' meta-background-color';
-            }
-            if (localMastheadImage != null) {
-                localMasthead.style.backgroundImage = 'url(' + localMastheadImage.getAttribute("content") + ')';
-                localMasthead.className += ' meta-background-image';
-            }
-            // tslint:enable
-        })();
-    };
     Object.defineProperty(AppComponent.prototype, "version", {
+        // private initialiseFoundationHacks(): void {
+        //   // copied from script.js (ebi framework)
+        //   // Assign global nav background images through meta tags
+        //   (function assignImageByMetaTags() {
+        //     const localMasthead = document.getElementById('local-masthead');
+        //     // check for both ebi: and ebi- formatted meta tags
+        //     // tslint:disable
+        //     let localMastheadColor = document.querySelector("meta[name='ebi:localmasthead-color']")
+        //       || document.querySelector("meta[name='ebi-localmasthead-color']");
+        //     let localMastheadImage = document.querySelector("meta[name='ebi:localmasthead-image']")
+        //       || document.querySelector("meta[name='ebi-localmasthead-image']");
+        //     if (localMastheadColor != null) {
+        //       localMasthead.style.backgroundColor = localMastheadColor.getAttribute("content");
+        //       localMasthead.className += ' meta-background-color';
+        //     }
+        //     if (localMastheadImage != null) {
+        //       localMasthead.style.backgroundImage = 'url(' + localMastheadImage.getAttribute("content") + ')';
+        //       localMasthead.className += ' meta-background-image';
+        //     }
+        //     // tslint:enable
+        //   })();
+        // }
         get: function () {
             return this._version;
         },
@@ -897,7 +898,7 @@ module.exports = ""
 /***/ "./src/app/search/local-search/local-search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\" (keydown.enter)=\"search(searchTerm.value, 'enter')\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value, 'button')\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      Examples:\n      <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n      <a (click)=\"search('Ndc80', 'example')\">Ndc80</a>\n      <a (click)=\"search('Q05471', 'example')\">Q05471</a>\n      <a (click)=\"search('PCNA', 'example')\">PCNA</a>\n      <a (click)=\"search('EBI-9008420', 'example')\">EBI-9008420</a>\n      <a (click)=\"search('nuclear pore', 'example')\">nuclear pore</a>\n      <a (click)=\"search('Q15554, P54274, Q96AP0', 'example')\">Q15554, P54274, Q96AP0</a>\n    </small>\n  </fieldset>\n</div>\n<!-- /local-search -->\n"
+module.exports = "<div [hidden]=\"!display\" id=\"local-search\" name=\"local-search\">\n  <fieldset>\n    <div class=\"input-group margin-bottom-none\">\n      <input #searchTerm type=\"text\" name=\"first\" id=\"local-searchbox\" placeholder=\"Search this service\"\n             value=\"{{query}}\"\n             class=\"input-group-field\" (keydown.enter)=\"search(searchTerm.value, 'enter')\">\n      <div class=\"input-group-button\">\n        <input type=\"button\" name=\"submit\" value=\"1\" (click)=\"search(searchTerm.value, 'button')\"\n               class=\"button icon icon-functional\"></div>\n    </div>\n    <small class=\"\">\n      <!-- If your search is more complex than just a keyword search, you can link to an Advanced Search -->\n      <!-- <span class=\"adv\"><a href=\"../search\" id=\"adv-search\" title=\"Advanced\">Advanced</a></span> | -->\n      <!-- Include some example searchterms - keep them short and few. -->\n      Examples:\n      <a (click)=\"search('GO:0016491', 'example')\">GO:0016491</a>\n      <a (click)=\"search('Ndc80', 'example')\">Ndc80</a>\n      <a (click)=\"search('Q05471', 'example')\">Q05471</a>\n      <a (click)=\"search('PCNA', 'example')\">PCNA</a>\n      <a (click)=\"search('CPX-2158', 'example')\">CPX-2158</a>\n      <a (click)=\"search('nuclear pore', 'example')\">nuclear pore</a>\n      <a (click)=\"search('Q15554, P54274, Q96AP0', 'example')\">Q15554, P54274, Q96AP0</a>\n    </small>\n  </fieldset>\n</div>\n<!-- /local-search -->\n"
 
 /***/ }),
 
@@ -1616,7 +1617,7 @@ var OlsService = /** @class */ (function () {
 // The list of which env maps to which file can be found in `angular-cli.json`.
 // Environment for production
 var EBI_BASE_URL = 'https://www.ebi.ac.uk/';
-var COMPLEX_LOCAL_BASE_URL = 'https://wwwdev.ebi.ac.uk/';
+var COMPLEX_LOCAL_BASE_URL = 'http://localhost:9090/'; // 'https://wwwdev.ebi.ac.uk/';
 var REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
