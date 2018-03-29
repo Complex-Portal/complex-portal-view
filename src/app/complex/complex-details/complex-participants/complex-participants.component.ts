@@ -39,8 +39,19 @@ export class ComplexParticipantsComponent implements OnInit {
         return 'assets/images/legend/small-mol.png';
       case 'protein':
         return 'assets/images/legend/protein-blob.png';
+      case 'stable complex':
+        return 'assets/images/legend/complex.png';
+      case 'molecule set':
+        return 'assets/images/legend/int-set.png';
       case 'single stranded deoxyribonucleic acid':
+      case 'double stranded deoxyribonucleic acid':
         return 'assets/images/legend/dna.png';
+      case 'small nuclear rna':
+      case 'small nucleolar rna':
+      case 'ribosomal rna':
+      case 'messenger rna':
+      case 'transfer rna':
+      case 'signal recognition particle rna':
       case 'ribonucleic acid':
         return 'assets/images/legend/rna.png';
     }
