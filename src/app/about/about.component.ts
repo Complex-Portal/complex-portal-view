@@ -11,6 +11,7 @@ import {Title} from '@angular/platform-browser';
 export class AboutComponent implements OnInit, AfterViewInit {
   private _INTACT_BASE_URL = environment.intact_base_url;
   private _INTACT_SUPPORT_URL = environment.intact_support_url;
+  private _LICENSE_URL = environment.license_url;
 
   constructor(private titleService: Title) {
   }
@@ -29,5 +30,9 @@ export class AboutComponent implements OnInit, AfterViewInit {
 
   get INTACT_SUPPORT_URL(): any {
     return this._INTACT_SUPPORT_URL;
+  }
+
+  get LICENSE_URL(): any {
+    return this._LICENSE_URL;
   }
 }
