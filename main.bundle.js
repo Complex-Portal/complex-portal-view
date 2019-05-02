@@ -3,7 +3,7 @@ webpackJsonp(["main"],{
 /***/ "./package.json":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.5.3","ebi-framework":"^1.2.7","expose-loader":"^0.7.5","jquery":"3.3.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"4.0.0-beta.12","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","svgsaver":"^0.9.0","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","typescript":"^2.6.2","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/jasmine":"2.8.6","@types/node":"^9.4.7","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^1.0.1","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1"}}
+module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.5.3","ebi-framework":"^1.2.7","expose-loader":"^0.7.5","jquery":"3.3.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"4.0.0-beta.12","ngx-page-scroll":"^6.0.0-beta.1","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","svgsaver":"^0.9.0","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","typescript":"^2.6.2","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/jasmine":"2.8.6","@types/node":"^9.4.7","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^1.0.1","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1"}}
 
 /***/ }),
 
@@ -436,6 +436,7 @@ var ReactomeService = /** @class */ (function () {
      */
     ReactomeService.prototype.getComplexName = function (id) {
         return this.http.get(baseURL + '/ContentService/data/query/' + id + '/displayName', { observe: 'response', responseType: 'text' })
+            // .map((res: HttpResponse) => res.body.text())
             .catch(this.handleError);
     };
     ReactomeService.prototype.handleError = function (err) {
@@ -1425,6 +1426,7 @@ var ProgressBarComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    var ProgressBarComponent_1;
     ProgressBarComponent = ProgressBarComponent_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'cp-progress-bar',
@@ -1434,7 +1436,6 @@ var ProgressBarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], ProgressBarComponent);
     return ProgressBarComponent;
-    var ProgressBarComponent_1;
 }());
 
 
@@ -1641,7 +1642,7 @@ var environment = {
     complex_psi25: COMPLEX__FTP_BASE_URL + 'current/psi25/',
     complex_psi30: COMPLEX__FTP_BASE_URL + 'current/psi30/',
     intact_base_url: EBI_BASE_URL + 'intact',
-    intact_support_url: EBI_BASE_URL + 'support/intact',
+    complex_portal_support_url: EBI_BASE_URL + 'support/complexportal',
     intact_training_url: EBI_BASE_URL + 'intact/resources/training',
 };
 

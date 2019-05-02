@@ -438,6 +438,15 @@ xiNET.Controller = function(targetDiv) {
     this.container = document.createElementNS(Config.svgns, "g");
     this.container.setAttribute("id", "container");
 
+    this.acknowledgement =  document.createElementNS(Config.svgns, "g");
+    var ackText = document.createElementNS(Config.svgns, "text");
+    ackText.innerHTML = "<a xlink:href='https://academic.oup.com/bioinformatics/article/33/22/3673/4061280' target='_blank'><tspan x='0' dy='1.2em' style='text-decoration: underline'>ComplexViewer</tspan></a><tspan x='0' dy='1.2em'>by <a xlink:href='http://rappsilberlab.org/' target='_blank'>Rappsilber Laboratory</a></tspan>"
+
+    this.acknowledgement.appendChild(ackText);
+    ackText.setAttribute("font-size", "12px");
+    this.container.appendChild(this.acknowledgement);
+
+
     this.naryLinks = document.createElementNS(Config.svgns, "g");
     this.naryLinks.setAttribute("id", "naryLinks");
     this.container.appendChild(this.naryLinks);
@@ -1157,6 +1166,8 @@ xiNET.Controller.prototype.autoLayout = function() {
 
     var width = this.svgElement.parentNode.clientWidth;
     var height = this.svgElement.parentNode.clientHeight;
+
+    this.acknowledgement.setAttribute("transform", "translate(5, "+ (height - 40)+")");
 
     var molCount = this.molecules.keys().length;
     var self = this;
@@ -26377,7 +26388,7 @@ var CIFTools;
                 }
             }
             var fst = val.charCodeAt(0);
-            if (!escape && (fst === 35 /* # */ || fst === 59 /* ; */ || hasWhitespace)) {
+            if (!escape && (fst === 35 /* # */|| fst === 36 /* $ */ || fst === 59 /* ; */ || fst === 91 /* [ */ || fst === 93 /* ] */ || hasWhitespace)) {
                 escapeCharStart = '\'';
                 escapeCharEnd = '\' ';
                 escape = true;
@@ -73022,7 +73033,7 @@ var LiteMol;
 (function (LiteMol) {
     var Core;
     (function (Core) {
-        Core.VERSION = { number: "3.2.2", date: "Nov 14 2017" };
+        Core.VERSION = { number: "3.2.3", date: "Feb 1 2019" };
     })(Core = LiteMol.Core || (LiteMol.Core = {}));
 })(LiteMol || (LiteMol = {}));
 /*
@@ -73204,7 +73215,7 @@ var LiteMol;
             }
             var immediateActions = (function () {
                 if (typeof setImmediate !== 'undefined') {
-                    if (typeof window !== 'undefined') {
+                    if (typeof window !== 'undefined' && typeof window.setImmediate !== 'undefined') {
                         // this is because of IE
                         return { setImmediate: function (handler) {
                                 var args = [];
@@ -73247,8 +73258,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -75184,12 +75195,18 @@ var LiteMol;
                             models.push(model);
                             startRow = endRow;
                         }
-                        var experimentMethod = void 0;
+                        var experimentMethods = void 0;
                         var _exptl = data.getCategory('_exptl');
                         if (_exptl) {
-                            experimentMethod = _exptl.getColumn('method').getString(0) || void 0;
+                            experimentMethods = [];
+                            var method = _exptl.getColumn('method');
+                            for (var i = 0; i < _exptl.rowCount; i++) {
+                                if (method.getValuePresence(i) !== 0 /* Present */)
+                                    continue;
+                                experimentMethods.push(method.getString(i));
+                            }
                         }
-                        return Core.Structure.Molecule.create(id, models, { experimentMethod: experimentMethod });
+                        return Core.Structure.Molecule.create(id, models, { experimentMethods: experimentMethods });
                     }
                     mmCIF.ofDataBlock = ofDataBlock;
                 })(mmCIF = Molecule.mmCIF || (Molecule.mmCIF = {}));
@@ -77084,9 +77101,17 @@ var LiteMol;
                     var rotTemp = zero();
                     function makeRotation(mat, a, b) {
                         var by = angle(a, b);
-                        if (Math.abs(by) < 0.0001)
+                        if (Math.abs(by) < 0.0001) {
                             return Matrix4.fromIdentity(mat);
+                        }
                         var axis = cross(rotTemp, a, b);
+                        var m = squaredMagnitude(axis);
+                        if (m < 0.0001) {
+                            if (Math.abs(angleTempA[0] - 1) < 0.000001 /* Value */)
+                                set(axis, 0, 1, 0);
+                            else
+                                set(axis, 1, 0, 0);
+                        }
                         return Matrix4.fromRotation(mat, by, axis);
                     }
                     Vector3.makeRotation = makeRotation;
@@ -81380,6 +81405,7 @@ var LiteMol;
                     state.entityCount += entityCount;
                 }
                 function buildAssemblyEntry(model, entry, state) {
+                    var _a;
                     var ops = [], currentOp = [];
                     for (var i_2 = 0; i_2 < entry.operators.length; i_2++)
                         currentOp[i_2] = '';
@@ -81396,7 +81422,6 @@ var LiteMol;
                         mask[i] = asymIds.has(residueAsymIds[i]);
                     }
                     getAssemblyParts(model, mask, transforms, state, transformOffset);
-                    var _a;
                 }
                 SymmetryHelpers.buildAssemblyEntry = buildAssemblyEntry;
                 function buildAssembly(model, assembly) {
@@ -82223,27 +82248,35 @@ var LiteMol;
                     Compiler.compileAtomRanges = compileAtomRanges;
                     function compileSequence(seqEntityId, seqAsymId, start, end) {
                         return function (ctx) {
-                            var _a = ctx.structure.data, residues = _a.residues, chains = _a.chains, seqNumber = residues.seqNumber, atomStartIndex = residues.atomStartIndex, atomEndIndex = residues.atomEndIndex, entityId = chains.entityId, count = chains.count, residueStartIndex = chains.residueStartIndex, residueEndIndex = chains.residueEndIndex, fragments = new Query.FragmentSeqBuilder(ctx);
+                            var _a = ctx.structure.data, residues = _a.residues, chains = _a.chains, seqNumber = residues.seqNumber, authSeqNumber = residues.authSeqNumber, insCode = residues.insCode, atomStartIndex = residues.atomStartIndex, atomEndIndex = residues.atomEndIndex, entityId = chains.entityId, count = chains.count, residueStartIndex = chains.residueStartIndex, residueEndIndex = chains.residueEndIndex, fragments = new Query.FragmentSeqBuilder(ctx);
                             var parent = ctx.structure.parent, sourceChainIndex = chains.sourceChainIndex, isComputed = parent && sourceChainIndex;
                             var targetAsymId = typeof seqAsymId === 'string' ? { asymId: seqAsymId } : seqAsymId;
                             var optTargetAsymId = new OptimizedId(targetAsymId, isComputed ? parent.data.chains : chains);
+                            var isAuth = typeof targetAsymId.authAsymId === 'string';
+                            var seqSource = isAuth ? authSeqNumber : seqNumber;
+                            var startSeqNumber = isAuth ? start.authSeqNumber : start.seqNumber;
+                            var endSeqNumber = isAuth ? end.authSeqNumber : end.seqNumber;
                             //optAsymId.isSatisfied();
                             for (var cI = 0; cI < count; cI++) {
-                                if (entityId[cI] !== seqEntityId
+                                if ((!!seqEntityId && entityId[cI] !== seqEntityId)
                                     || !optTargetAsymId.isSatisfied(isComputed ? sourceChainIndex[cI] : cI)) {
                                     continue;
                                 }
                                 var i = residueStartIndex[cI], last = residueEndIndex[cI], startIndex = -1, endIndex = -1;
                                 for (; i < last; i++) {
-                                    if (seqNumber[i] >= start.seqNumber) {
+                                    if (seqSource[i] >= startSeqNumber && seqSource[i] <= endSeqNumber) {
+                                        if (!!start.insCode && insCode[i] !== start.insCode)
+                                            continue;
                                         startIndex = i;
                                         break;
                                     }
                                 }
-                                if (i === last)
+                                if (i < 0 || i === last)
                                     continue;
                                 for (i = startIndex; i < last; i++) {
-                                    if (seqNumber[i] >= end.seqNumber) {
+                                    if (seqSource[i] >= endSeqNumber) {
+                                        if (!!end.insCode && seqSource[i] === endSeqNumber && insCode[i] !== end.insCode)
+                                            continue;
                                         break;
                                     }
                                 }
@@ -82398,6 +82431,8 @@ var LiteMol;
                     Compiler.compileComplement = compileComplement;
                     function compileOr(queries) {
                         var _qs = queries.map(function (q) { return Builder.toQuery(q); });
+                        if (_qs.length === 1)
+                            return _qs[0];
                         return function (ctx) {
                             var fragments = new Query.HashFragmentSeqBuilder(ctx);
                             for (var _i = 0, _qs_1 = _qs; _i < _qs_1.length; _i++) {
@@ -82642,7 +82677,7 @@ var LiteMol;
 (function (LiteMol) {
     var Visualization;
     (function (Visualization) {
-        Visualization.VERSION = { number: "1.7.7", date: "Feb 27 2018" };
+        Visualization.VERSION = { number: "1.7.8", date: "Oct 26 2018" };
     })(Visualization = LiteMol.Visualization || (LiteMol.Visualization = {}));
 })(LiteMol || (LiteMol = {}));
 var LiteMol;
@@ -86619,11 +86654,9 @@ var LiteMol;
                     function BondModelState(bondTemplate, builder) {
                         this.bondTemplate = bondTemplate;
                         this.builder = builder;
-                        this.rotationAxis = Vec3.zero();
                         this.bondUpVector = Vec3.fromValues(1, 0, 0);
                         this.dir = Vec3.zero();
                         this.scale = Vec3.zero();
-                        this.translation = Vec3.zero();
                         this.rotation = Mat4.zero();
                         this.offset = Vec3.zero();
                         this.a = Vec3.zero();
@@ -86796,9 +86829,9 @@ var LiteMol;
                                 break;
                             case 3 /* Triple */:
                                 BallsAndSticksGeometryBuilder.addBondPart(h, 0, o, bondState);
-                                var c = Math.cos(Math.PI / 3) * o, s = Math.sin(Math.PI / 3) * o;
+                                var c = Math.cos(Math.PI / 6) * o, s = Math.sin(Math.PI / 6) * o;
                                 BallsAndSticksGeometryBuilder.addBondPart(h, -c, -s, bondState);
-                                BallsAndSticksGeometryBuilder.addBondPart(h, -c, s, bondState);
+                                BallsAndSticksGeometryBuilder.addBondPart(h, c, -s, bondState);
                                 break;
                             case 4 /* Aromatic */:
                                 BallsAndSticksGeometryBuilder.addBondPart(h / 2, o, o, bondState);
@@ -87166,15 +87199,21 @@ var LiteMol;
                         };
                         CartoonAsymUnit.prototype.initPositions = function (builder) {
                             var residues = this.model.data.residues, atoms = this.model.data.atoms, positions = this.model.positions, arrays = { atomStartIndex: residues.atomStartIndex, atomEndIndex: residues.atomEndIndex, name: atoms.name, x: positions.x, y: positions.y, z: positions.z }, residueType = [], offset = 0, i = 0;
+                            var bbOnlyCount = 0, residueCount = 0;
                             for (var _i = 0, _a = this.elements; _i < _a.length; _i++) {
                                 var e = _a[_i];
                                 this.structureStarts.add(e.startResidueIndex);
                                 this.structureEnds.add(e.endResidueIndex - 1);
                                 for (i = e.startResidueIndex; i < e.endResidueIndex; i++) {
-                                    this.backboneOnly = builder.addResidue(i, arrays, e.type);
+                                    residueCount++;
+                                    var bbOnly = builder.addResidue(i, arrays, e.type);
+                                    if (bbOnly && (e.type === 1 /* Helix */ || e.type === 3 /* Sheet */ || e.type === 5 /* Strand */)) {
+                                        bbOnlyCount++;
+                                    }
                                     residueType[residueType.length] = e.type;
                                 }
                             }
+                            this.backboneOnly = bbOnlyCount > (residueCount / 4 - 1);
                             this.residueIndex = new Int32Array(this.residueCount);
                             for (var _d = 0, _e = this.elements; _d < _e.length; _d++) {
                                 var e = _e[_d];
@@ -87876,7 +87915,7 @@ var LiteMol;
                                         builder.addStrandLine(unit, state, ctx.strandTemplate, ctx.strandArrays, unit.residueIndex[index]);
                                         break;
                                     default:
-                                        builder.addTube(unit, state, params.turnWidth, params.turnWidth, params.turnWidth);
+                                        builder.addTube(unit, state, params.turnWidth, params.turnWidth, 1);
                                         if (start || end) {
                                             builder.addTubeCap(unit, state, params.turnWidth, params.turnWidth, start, end);
                                         }
@@ -88802,7 +88841,7 @@ var LiteMol;
 (function (LiteMol) {
     var Bootstrap;
     (function (Bootstrap) {
-        Bootstrap.VERSION = { number: "1.4.3", date: "Nov 28 2017" };
+        Bootstrap.VERSION = { number: "1.4.4", date: "May 31 2018" };
     })(Bootstrap = LiteMol.Bootstrap || (LiteMol.Bootstrap = {}));
 })(LiteMol || (LiteMol = {}));
 /*
@@ -89095,9 +89134,9 @@ var LiteMol;
                 }
                 function parseAuthResidueId(ids, separator) {
                     if (separator === void 0) { separator = ','; }
+                    var _a;
                     var parts = ids.split(separator).map(function (p) { return getAuthResidueIdParams(p); }).filter(function (p) { return !!p; });
                     return LiteMol.Core.Structure.Query.Builder.toQuery((_a = LiteMol.Core.Structure.Query).residues.apply(_a, parts));
-                    var _a;
                 }
                 Query.parseAuthResidueId = parseAuthResidueId;
             })(Query = Utils.Query || (Utils.Query = {}));
@@ -91198,6 +91237,7 @@ var LiteMol;
                     });
                     Bootstrap.Command.Entity.Focus.getStream(context)
                         .subscribe(function (e) {
+                        var _a;
                         if (e.data.length === 1) {
                             var t = e.data[0];
                             if (Bootstrap.Entity.isMoleculeSelection(t)) {
@@ -91210,7 +91250,6 @@ var LiteMol;
                         else {
                             (_a = _this.scene.camera).focusOnModel.apply(_a, e.data.filter(function (e) { return Bootstrap.Entity.isClass(e, Bootstrap.Entity.VisualClass); }).map(function (e) { return e.props.model; }));
                         }
-                        var _a;
                     });
                     Bootstrap.Command.Entity.Highlight.getStream(context)
                         .subscribe(function (e) {
@@ -91441,14 +91480,14 @@ var LiteMol;
                     return RainbowMapping;
                 }());
                 Molecule.RainbowPalette = [
-                    Vis.Color.fromHex(0xCC2200),
-                    Vis.Color.fromHex(0xCC7700),
-                    Vis.Color.fromHex(0xCCAA00),
-                    Vis.Color.fromHex(0x00CC00),
-                    Vis.Color.fromHex(0x00AACC),
-                    Vis.Color.fromHex(0x0000CC),
+                    Vis.Color.fromHex(0xB77CE3),
                     Vis.Color.fromHex(0x892AD2),
-                    Vis.Color.fromHex(0xB77CE3)
+                    Vis.Color.fromHex(0x0000CC),
+                    Vis.Color.fromHex(0x00AACC),
+                    Vis.Color.fromHex(0x00CC00),
+                    Vis.Color.fromHex(0xCCAA00),
+                    Vis.Color.fromHex(0xCC7700),
+                    Vis.Color.fromHex(0xCC2200)
                 ];
                 var RainbowBaseColors = Bootstrap.Immutable.Map({
                     'Bond': Vis.Molecule.Colors.DefaultBondColor,
@@ -91674,6 +91713,10 @@ var LiteMol;
                     };
                 }
                 function makeRadiusFunc(model, parameters) {
+                    if (typeof parameters.vdwScaling === 'undefined')
+                        parameters.vdwScaling = Molecule.Default.BallsAndSticksParams.vdwScaling;
+                    if (typeof parameters.atomRadius === 'undefined')
+                        parameters.atomRadius = Molecule.Default.BallsAndSticksParams.atomRadius;
                     if (!parameters.useVDW) {
                         return function (r) {
                             return function () { return r; };
@@ -92393,6 +92436,7 @@ var LiteMol;
                     return void 0;
                 };
                 Cache.prototype.set = function (e, prop, value) {
+                    var _a;
                     var c = this.data.get(e.id);
                     if (c) {
                         c[prop] = value;
@@ -92401,7 +92445,6 @@ var LiteMol;
                         this.data.set(e.id, (_a = {}, _a[prop] = value, _a));
                     }
                     return value;
-                    var _a;
                 };
                 return Cache;
             }());
@@ -94640,6 +94683,7 @@ var LiteMol;
                             var c = manager.getController(t, e);
                             if (c)
                                 transforms.push(c);
+                            //this.setParams(c);                
                         }
                         this.setState({ update: update, transforms: transforms });
                     };
@@ -94779,8 +94823,8 @@ var LiteMol;
                         return this.latestState.params[prop || 'style'];
                     };
                     DensityVisual.prototype.setStyle = function (style, prop) {
-                        this.autoUpdateParams((_a = {}, _a[prop || 'style'] = style, _a));
                         var _a;
+                        this.autoUpdateParams((_a = {}, _a[prop || 'style'] = style, _a));
                     };
                     DensityVisual.prototype.updateStyleParams = function (params, styleProp) {
                         var s = this.cloneStyle(styleProp);
@@ -96196,19 +96240,20 @@ var LiteMol;
                 };
                 SliderBase.prototype.render = function () {
                     var _this = this;
-                    var _a = this.state, handle = _a.handle, bounds = _a.bounds;
-                    var _b = this.props, className = _b.className, prefixCls = _b.prefixCls, disabled = _b.disabled, vertical = _b.vertical, dots = _b.dots, included = _b.included, range = _b.range, step = _b.step, marks = _b.marks, max = _b.max, min = _b.min, tipFormatter = _b.tipFormatter, children = _b.children;
+                    var _a;
+                    var _b = this.state, handle = _b.handle, bounds = _b.bounds;
+                    var _c = this.props, className = _c.className, prefixCls = _c.prefixCls, disabled = _c.disabled, vertical = _c.vertical, dots = _c.dots, included = _c.included, range = _c.range, step = _c.step, marks = _c.marks, max = _c.max, min = _c.min, tipFormatter = _c.tipFormatter, children = _c.children;
                     var customHandle = this.props.handle;
                     var offsets = bounds.map(function (v) { return _this.calcOffset(v); });
                     var handleClassName = prefixCls + "-handle";
                     var handlesClassNames = bounds.map(function (v, i) {
+                        var _a;
                         return classNames((_a = {},
                             _a[handleClassName] = true,
                             _a[handleClassName + "-" + (i + 1)] = true,
                             _a[handleClassName + "-lower"] = i === 0,
                             _a[handleClassName + "-upper"] = i === bounds.length - 1,
                             _a));
-                        var _a;
                     });
                     var isNoTip = (step === null) || (tipFormatter === null);
                     var commonHandleProps = {
@@ -96236,13 +96281,13 @@ var LiteMol;
                     //             />
                     //     );
                     // }
-                    var sliderClassName = classNames((_c = {},
-                        _c[prefixCls] = true,
-                        _c[prefixCls + "-with-marks"] = Object.keys(marks).length,
-                        _c[prefixCls + "-disabled"] = disabled,
-                        _c[prefixCls + "-vertical"] = this.props.vertical,
-                        _c[className] = !!className,
-                        _c));
+                    var sliderClassName = classNames((_a = {},
+                        _a[prefixCls] = true,
+                        _a[prefixCls + "-with-marks"] = Object.keys(marks).length,
+                        _a[prefixCls + "-disabled"] = disabled,
+                        _a[prefixCls + "-vertical"] = this.props.vertical,
+                        _a[className] = !!className,
+                        _a));
                     return (Plugin.React.createElement("div", { ref: function (e) { return _this.sliderElement = e; }, className: sliderClassName, onTouchStart: disabled ? noop : this.onTouchStart.bind(this), onMouseDown: disabled ? noop : this.onMouseDown.bind(this) },
                         Plugin.React.createElement("div", { className: prefixCls + "-rail" }),
                         tracks,
@@ -96250,7 +96295,6 @@ var LiteMol;
                         handles,
                         Plugin.React.createElement(Marks, { className: prefixCls + "-mark", vertical: vertical, marks: marks, included: isIncluded, lowerBound: bounds[0], upperBound: bounds[bounds.length - 1], max: max, min: min }),
                         children));
-                    var _c;
                 };
                 SliderBase.defaultProps = {
                     prefixCls: 'lm-slider-base',
@@ -96283,6 +96327,7 @@ var LiteMol;
                 var markWidth = unit * 0.9;
                 var range = max - min;
                 var elements = marksKeys.map(parseFloat).sort(function (a, b) { return a - b; }).map(function (point) {
+                    var _a;
                     var isActived = (!included && point === upperBound) ||
                         (included && point <= upperBound && point >= lowerBound);
                     var markClassName = classNames((_a = {},
@@ -96305,7 +96350,6 @@ var LiteMol;
                     var markLabel = markPointIsObject ? markPoint.label : markPoint;
                     var markStyle = markPointIsObject ? __assign({}, style, markPoint.style) : style;
                     return (Plugin.React.createElement("span", { className: markClassName, style: markStyle, key: point }, markLabel));
-                    var _a;
                 });
                 return Plugin.React.createElement("div", { className: className }, elements);
             };
@@ -96324,6 +96368,7 @@ var LiteMol;
                 var prefixCls = _a.prefixCls, vertical = _a.vertical, marks = _a.marks, dots = _a.dots, step = _a.step, included = _a.included, lowerBound = _a.lowerBound, upperBound = _a.upperBound, max = _a.max, min = _a.min;
                 var range = max - min;
                 var elements = calcPoints(vertical, marks, dots, step, min, max).map(function (point) {
+                    var _a;
                     var offset = Math.abs(point - min) / range * 100 + "%";
                     var style = vertical ? { bottom: offset } : { left: offset };
                     var isActived = (!included && point === upperBound) ||
@@ -96333,7 +96378,6 @@ var LiteMol;
                         _a[prefixCls + "-dot-active"] = isActived,
                         _a));
                     return Plugin.React.createElement("span", { className: pointClassName, style: style, key: point });
-                    var _a;
                 });
                 return Plugin.React.createElement("div", { className: prefixCls + "-step" }, elements);
             };

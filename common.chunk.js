@@ -95,6 +95,7 @@ var ProgressSpinnerComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    var ProgressSpinnerComponent_1;
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", String),
@@ -109,7 +110,6 @@ var ProgressSpinnerComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], ProgressSpinnerComponent);
     return ProgressSpinnerComponent;
-    var ProgressSpinnerComponent_1;
 }());
 
 
