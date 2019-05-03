@@ -6,7 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
-import { NotificationService } from './shared/notification/service/notification.service';
+import {NotificationService} from './shared/notification/service/notification.service';
 import {Angulartics2GoogleAnalytics, Angulartics2Module} from 'angulartics2';
 import {ReactomeService} from './complex/complex-details/complex-function/reactome-crossreferences/service/reactome.service';
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
@@ -25,6 +25,7 @@ import {OntologiesComponent} from './ontologies/ontologies.component';
 import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
 import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
 import {SearchService} from './search/service/search.service';
+import {MarkdownModule} from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {SearchService} from './search/service/search.service';
     ToastrModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     MatProgressBarModule,
+    MarkdownModule.forRoot(),
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
   bootstrap: [AppComponent]

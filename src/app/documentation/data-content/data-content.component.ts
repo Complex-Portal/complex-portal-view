@@ -9,15 +9,12 @@ import {Title} from '@angular/platform-browser';
   templateUrl: './data-content.component.html',
   styleUrls: ['./data-content.component.css']
 })
-export class DataContentComponent implements OnInit, AfterViewInit {
+export class DataContentComponent implements OnInit {
 
   constructor(private router: Router, private titleService: Title) {
   }
 
-  ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.titleService.setTitle('Complex Portal - Data Content');
     ProgressBarComponent.hide();
   }
