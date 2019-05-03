@@ -45,7 +45,7 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToRequestComplex(): void {
     this.googleAnalyticsService.fireClickHomeTileEvent('request complex');
-    window.open(environment.intact_support_url, '_blank');
+    window.open(environment.complex_portal_support_url, '_blank');
   }
 
   public goToTraining(): void {
