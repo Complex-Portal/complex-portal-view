@@ -31,6 +31,7 @@ export const environment = {
   complex_psi25: COMPLEX__FTP_BASE_URL + 'current/psi25/',
   complex_psi30: COMPLEX__FTP_BASE_URL + 'current/psi30/',
   intact_base_url: EBI_BASE_URL + 'intact',
-  intact_support_url: EBI_BASE_URL + 'support/intact',
+  complex_portal_support_url: EBI_BASE_URL + 'support/complexportal',
   intact_training_url: EBI_BASE_URL + 'intact/resources/training',
+  complex_portal_documentation_url: 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/'
 };
