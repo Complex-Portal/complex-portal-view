@@ -3,7 +3,7 @@ webpackJsonp(["main"],{
 /***/ "./package.json":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.5.3","ebi-framework":"^1.2.7","expose-loader":"^0.7.5","jquery":"3.3.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"4.0.0-beta.12","ngx-page-scroll":"^6.0.0-beta.1","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","svgsaver":"^0.9.0","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","typescript":"^2.6.2","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/jasmine":"2.8.6","@types/node":"^9.4.7","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^1.0.1","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1"}}
+module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","EBI-Icon-fonts":"https://github.com/ebiwd/EBI-Icon-fonts/tarball/v1.1","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"https://github.com/MICommunity/ComplexViewer/tarball/master","core-js":"^2.5.3","ebi-framework":"^1.2.7","expose-loader":"^0.7.5","jquery":"3.3.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ng2-page-scroll":"4.0.0-beta.12","ngx-page-scroll":"^6.0.0-beta.1","ngx-markdown":"^1.5.2","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","svgsaver":"^0.9.0","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","typescript":"^2.6.2","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/jasmine":"2.8.6","@types/node":"^9.4.7","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^1.0.1","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1"}}
 
 /***/ }),
 
@@ -321,6 +321,8 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_local_storage_service_local_storage_service__ = __webpack_require__("./src/app/shared/local-storage/service/local-storage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__search_service_search_service__ = __webpack_require__("./src/app/search/service/search.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_ngx_markdown__ = __webpack_require__("./node_modules/ngx-markdown/dist/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_ngx_markdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26_ngx_markdown__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -328,6 +330,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /* tslint:disable:max-line-length */
+
 
 
 
@@ -377,6 +380,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15_ngx_toastr__["a" /* ToastrModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_8_angulartics2__["Angulartics2Module"].forRoot([__WEBPACK_IMPORTED_MODULE_8_angulartics2__["Angulartics2GoogleAnalytics"]]),
                 __WEBPACK_IMPORTED_MODULE_18__angular_material__["a" /* MatProgressBarModule */],
+                __WEBPACK_IMPORTED_MODULE_26_ngx_markdown__["MarkdownModule"].forRoot(),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_6__complex_shared_service_complex_portal_service__["a" /* ComplexPortalService */], __WEBPACK_IMPORTED_MODULE_7__shared_notification_service_notification_service__["a" /* NotificationService */], __WEBPACK_IMPORTED_MODULE_9__complex_complex_details_complex_function_reactome_crossreferences_service_reactome_service__["a" /* ReactomeService */], __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */], __WEBPACK_IMPORTED_MODULE_11__shared_ols_service_ols_service__["a" /* OlsService */], __WEBPACK_IMPORTED_MODULE_12__shared_basket_service_basket_service__["a" /* BasketService */], __WEBPACK_IMPORTED_MODULE_24__shared_local_storage_service_local_storage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_13_ts_md5_dist_md5__["Md5"], __WEBPACK_IMPORTED_MODULE_23__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */], __WEBPACK_IMPORTED_MODULE_25__search_service_search_service__["a" /* SearchService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
@@ -441,7 +445,7 @@ var ReactomeService = /** @class */ (function () {
     };
     ReactomeService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -495,7 +499,7 @@ var EuroPmcService = /** @class */ (function () {
     };
     EuroPmcService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -625,7 +629,7 @@ var ComplexPortalService = /** @class */ (function () {
     };
     ComplexPortalService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["a" /* Observable */].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -686,8 +690,6 @@ var DataContentComponent = /** @class */ (function () {
         this.titleService = titleService;
     }
     DataContentComponent.prototype.ngOnInit = function () {
-    };
-    DataContentComponent.prototype.ngAfterViewInit = function () {
         this.titleService.setTitle('Complex Portal - Data Content');
         __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
     };
@@ -787,7 +789,7 @@ module.exports = ""
 /***/ "./src/app/documentation/query-syntax/query-syntax.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    <h2>Query Syntax</h2>\n    <div class=\"medium-12\">\n      <p>\n        To do a search you can use the Complex Query Language (CQL), which is based on Lucene's syntax.\n      </p>\n      <p>\n        Free text search will look by default for:\n      </p>\n      <ul>\n        <li>\n          Identifiers, names and synonyms of molecules (protein, gene, small molecule)\n        </li>\n        <li>\n          Identifiers, names and synonyms of complexes\n        </li>\n        <li>\n          Cross-references of complexes\n        </li>\n        <li>\n          Species\n        </li>\n      </ul>\n      <p>\n        Search for groups of complexes by using the Gene Ontology. For example, GO:0016491 will search for all\n        complexes annotated with \"oxidoreductase activity\" and all downstream child terms of this.\n      </p>\n      <p>\n        Narrow your initial search result by using the filters on the results page for:\n      </p>\n      <ul>\n        <li>Species</li>\n        <li>Molecule type</li>\n        <li>Biological role</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div>\n  <markdown [src]=source (load)=\"onLoad($event)\" (error)=\"onError($event)\"></markdown>\n</div>\n"
 
 /***/ }),
 
@@ -798,6 +800,8 @@ module.exports = "<div class=\"row\">\n  <div class=\"columns medium-12\">\n    
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuerySyntaxComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -809,12 +813,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var QuerySyntaxComponent = /** @class */ (function () {
     function QuerySyntaxComponent(titleService) {
         this.titleService = titleService;
+        this.source = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'cql.md';
     }
     QuerySyntaxComponent.prototype.ngOnInit = function () {
         this.titleService.setTitle('Complex Portal - Query Syntax');
+        __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
     };
     QuerySyntaxComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1590,7 +1598,7 @@ var OlsService = /** @class */ (function () {
     };
     OlsService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -1623,12 +1631,14 @@ var LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 var REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
+var COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/';
 var environment = {
     production: false,
     evn: 'dev',
     analytics_id: 'UA-672146-11',
     ebi_base_url: EBI_BASE_URL,
     license_url: LICENSE_URL,
+    complex_portal_documentation_url: COMPLEX_PORTAL_DOCUMENTATION_URL,
     complex_ws_base_url: COMPLEX_LOCAL_BASE_URL + 'intact/complex-ws',
     europepmc_base_url: EBI_BASE_URL + 'europepmc',
     pdb_base_url: EBI_BASE_URL + 'pdbe',
