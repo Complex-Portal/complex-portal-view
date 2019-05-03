@@ -10,6 +10,7 @@ const LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 const REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
+const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/';
 
 export const environment = {
   production: false,
@@ -18,6 +19,7 @@ export const environment = {
   analytics_id: 'UA-672146-11',
   ebi_base_url: EBI_BASE_URL,
   license_url: LICENSE_URL,
+  complex_portal_documentation_url: COMPLEX_PORTAL_DOCUMENTATION_URL,
   complex_ws_base_url: COMPLEX_LOCAL_BASE_URL + 'intact/complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
@@ -33,5 +35,4 @@ export const environment = {
   intact_base_url: EBI_BASE_URL + 'intact',
   complex_portal_support_url: EBI_BASE_URL + 'support/complexportal',
   intact_training_url: EBI_BASE_URL + 'intact/resources/training',
-  complex_portal_documentation_url: 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/'
 };
