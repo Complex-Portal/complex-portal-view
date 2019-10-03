@@ -4,10 +4,10 @@
 
   </div>
   <div class="columns medium-12" style="text-align: center">
-    <ng-container *ngIf="organism.symbol !== 'x'">
+    <ng-container *ngIf="organism.symbol !== '?'">
       <a (click)="search(organism.name)"><span class="icon icon-species" attr.data-icon="{{organism.symbol}}"></span><br>{{organism.count}}</a>
     </ng-container>
-    <ng-container *ngIf="organism.symbol === 'x'">
+    <ng-container *ngIf="organism.symbol === '?'">
       <a (click)="search(organism.name)"><span class="icon icon-functional" attr.data-icon="{{organism.symbol}}"></span><br>{{organism.count}}</a>
     </ng-container>
   </div>

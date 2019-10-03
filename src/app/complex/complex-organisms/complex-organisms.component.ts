@@ -105,6 +105,13 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].psi30 = 'rabit';
             organisms[i].complextab = 'oryctolagus_cuniculus';
             break;
+          case 'Ovis aries':
+            organisms[i].symbol = 'x';
+            organisms[i].type = 'animal';
+            organisms[i].psi25 = 'Ovis_aries';
+            organisms[i].psi30 = 'sheep';
+            organisms[i].complextab = 'ovis_aries';
+            break;
           case 'Xenopus laevis':
             organisms[i].symbol = 'f';
             organisms[i].type = 'animal';
@@ -186,7 +193,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].complextab = 'danio_rerio';
             break;
           default:
-            organisms[i].symbol = 'x';
+            organisms[i].symbol = '?';
             organisms[i].type = 'none';
             organisms[i].psi25 = '';
             organisms[i].psi30 = '';
