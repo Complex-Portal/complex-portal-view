@@ -374,7 +374,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["HttpClientModule"],
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_17__angular_platform_browser_animations__["a" /* NoopAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_15_ngx_toastr__["a" /* ToastrModule */].forRoot(),
@@ -445,7 +445,7 @@ var ReactomeService = /** @class */ (function () {
     };
     ReactomeService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -453,7 +453,7 @@ var ReactomeService = /** @class */ (function () {
     };
     ReactomeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["HttpClient"]])
     ], ReactomeService);
     return ReactomeService;
 }());
@@ -499,7 +499,7 @@ var EuroPmcService = /** @class */ (function () {
     };
     EuroPmcService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -507,7 +507,7 @@ var EuroPmcService = /** @class */ (function () {
     };
     EuroPmcService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["HttpClient"]])
     ], EuroPmcService);
     return EuroPmcService;
 }());
@@ -618,7 +618,7 @@ var ComplexPortalService = /** @class */ (function () {
             filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
         }
         /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
-        var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]()
+        var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["HttpParams"]()
             .set('first', ((currentPageIndex * pageSize) - pageSize).toString())
             .set('number', pageSize.toString())
             .set('format', format)
@@ -629,7 +629,7 @@ var ComplexPortalService = /** @class */ (function () {
     };
     ComplexPortalService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["a" /* Observable */].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -637,7 +637,7 @@ var ComplexPortalService = /** @class */ (function () {
     };
     ComplexPortalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["HttpClient"]])
     ], ComplexPortalService);
     return ComplexPortalService;
 }());
@@ -789,7 +789,7 @@ module.exports = ""
 /***/ "./src/app/documentation/query-syntax/query-syntax.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <markdown [src]=source (load)=\"onLoad($event)\" (error)=\"onError($event)\"></markdown>\n</div>\n"
+module.exports = "<div>\n  <markdown [src]=source></markdown>\n</div>\n"
 
 /***/ }),
 
@@ -1598,7 +1598,7 @@ var OlsService = /** @class */ (function () {
     };
     OlsService.prototype.handleError = function (err) {
         if (err.error instanceof Error) {
-            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(err);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -1606,7 +1606,7 @@ var OlsService = /** @class */ (function () {
     };
     OlsService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["HttpClient"]])
     ], OlsService);
     return OlsService;
 }());

@@ -10,7 +10,7 @@ module.exports = ".icon {\n  font-size: 120px;\n  color: #808080;\n  ;\n}\n\n\n\
 /***/ "./src/app/complex/complex-organisms/complex-organism/complex-organism.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf=\"organism.symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{organism.name}}</h5>\n\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"organism.symbol !== 'x'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-species\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"organism.symbol === 'x'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-functional\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\" (click)=\"goToComplexTAB()\">ComplexTab</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI25()\">PSI-XML2.5</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI30()\">PSI-XML3.0</a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\" *ngIf=\"organism.symbol\" style=\"text-align: center; padding-top: 20px\">\n  <div class=\"columns medium-12\" style=\"height: 60px\">\n    <h5>{{organism.name}}</h5>\n\n  </div>\n  <div class=\"columns medium-12\" style=\"text-align: center\">\n    <ng-container *ngIf=\"organism.symbol !== '?'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-species\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n    <ng-container *ngIf=\"organism.symbol === '?'\">\n      <a (click)=\"search(organism.name)\"><span class=\"icon icon-functional\" attr.data-icon=\"{{organism.symbol}}\"></span><br>{{organism.count}}</a>\n    </ng-container>\n  </div>\n  <div class=\"\" style=\"text-align: center\">\n    <a class=\"tag\" (click)=\"goToComplexTAB()\">ComplexTab</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI25()\">PSI-XML2.5</a>\n    <a class=\"tag\" (click)=\"goToComplexPSI30()\">PSI-XML3.0</a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -222,6 +222,13 @@ var ComplexOrganismsComponent = /** @class */ (function () {
                         organisms[i].psi30 = 'rabit';
                         organisms[i].complextab = 'oryctolagus_cuniculus';
                         break;
+                    case 'Ovis aries':
+                        organisms[i].symbol = 'x';
+                        organisms[i].type = 'animal';
+                        organisms[i].psi25 = 'Ovis_aries';
+                        organisms[i].psi30 = 'sheep';
+                        organisms[i].complextab = 'ovis_aries';
+                        break;
                     case 'Xenopus laevis':
                         organisms[i].symbol = 'f';
                         organisms[i].type = 'animal';
@@ -303,7 +310,7 @@ var ComplexOrganismsComponent = /** @class */ (function () {
                         organisms[i].complextab = 'danio_rerio';
                         break;
                     default:
-                        organisms[i].symbol = 'x';
+                        organisms[i].symbol = '?';
                         organisms[i].type = 'none';
                         organisms[i].psi25 = '';
                         organisms[i].psi30 = '';

@@ -99908,7 +99908,7 @@ process.umask = function() { return 0; };
 /** PURE_IMPORTS_START .._.._Observable,.._.._observable_forkJoin PURE_IMPORTS_END */
 
 
-__WEBPACK_IMPORTED_MODULE_0__Observable__["Observable"].forkJoin = __WEBPACK_IMPORTED_MODULE_1__observable_forkJoin__["a" /* forkJoin */];
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].forkJoin = __WEBPACK_IMPORTED_MODULE_1__observable_forkJoin__["a" /* forkJoin */];
 //# sourceMappingURL=forkJoin.js.map
 
 
@@ -102832,7 +102832,7 @@ var ReactomeCrossreferencesComponent = /** @class */ (function () {
     ReactomeCrossreferencesComponent.prototype.mapComplexeToPathways = function () {
         var _this = this;
         var _loop_1 = function (i) {
-            __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
+            __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */].forkJoin(this_1.reactomeService.findRelatedPathways(this_1._crossReferences[i].identifier), this_1.reactomeService.getComplexName(this_1._crossReferences[i].identifier)).subscribe(function (response) {
                 var relatedPathways = response[0];
                 var complexName = response[1];
                 for (var count = 0; count < relatedPathways.length; count++) {
