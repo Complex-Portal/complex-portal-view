@@ -309,6 +309,20 @@ var ComplexOrganismsComponent = /** @class */ (function () {
                         organisms[i].psi30 = 'danre';
                         organisms[i].complextab = 'danio_rerio';
                         break;
+                    case 'Human SARS coronavirus':
+                        organisms[i].symbol = 'v';
+                        organisms[i].type = 'virus';
+                        organisms[i].psi25 = 'Human_SARS_coronavirus';
+                        organisms[i].psi30 = 'sars-cov';
+                        organisms[i].complextab = 'human_sars';
+                        break;
+                    case 'SARS-CoV-2':
+                        organisms[i].symbol = 'v';
+                        organisms[i].type = 'virus';
+                        organisms[i].psi25 = 'SARS-CoV-2';
+                        organisms[i].psi30 = 'SARS-CoV-2';
+                        organisms[i].complextab = 'sars-cov-2';
+                        break;
                     default:
                         organisms[i].symbol = '?';
                         organisms[i].type = 'none';
