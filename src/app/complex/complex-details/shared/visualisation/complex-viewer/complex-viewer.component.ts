@@ -38,7 +38,7 @@ export class ComplexViewerComponent implements AfterViewInit {
   }
 
   onReset(): void {
-    xlv.reset();
+    xlv.collapseAll();
     this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_Reset, this._complexAC);
   }
 
