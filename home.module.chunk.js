@@ -3,14 +3,14 @@ webpackJsonp(["home.module"],{
 /***/ "./src/app/home/home.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "/* Custom tag for COVID banner */\n.banner-tag {\n  /*background: #dabc3d;*/\n  background: #ffa232;\n  padding: 0.3rem 0.3rem;\n  line-height: 0.6rem;\n  font-size: 0.8rem;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 intro-unit no-pad-left padding-top-xsmall padding-bottom-small\">\n          <h2>Explore the Complex Portal</h2>\n          <p class=\"lead\">\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of key model organisms. The majority of complexes are made up of proteins but may also include nucleic acids\n            or small molecules. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below. Read more <a class=\"readmore\" routerLink=\"/about\">here</a>.\n          </p>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section>\n  <div id=\"main-content-area\">\n    <!-- Start COVID banner-->\n    <div class=\"row padding-bottom-xlarge padding-top-xlarge\">\n      <div id=\"covid_panel\"\n           style=\"background: #fcefa1; border-color: gold; border-style: solid; border-width: 2px; vertical-align: middle; padding: 6px\">\n        <div class=\"grid_20 push_2\" style=\"text-align: center; padding: 4px\">\n          <b>COVID19-related complexes at Complex Portal</b><br/>\n          <div class=\"padding-top-medium\" style=\"text-align: center\">\n            <a (click)=\"search('SARS-CoV-2')\">Browse</a> or download SARS-CoV2 complexes\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSCoV2TAB()\">ComplexTab</a>\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSCoV2PSI25()\">PSI-XML2.5</a>\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSCoV2PSI30()\">PSI-XML3.0</a>\n          </div>\n\n          <div class=\"\" style=\"text-align: center\">\n            <a (click)=\"search('Human SARS coronavirus')\">Browse</a> or download SARS complexes\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSTAB()\">ComplexTab</a>\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSPSI25()\">PSI-XML2.5</a>\n            <a class=\"tag banner-tag\" (click)=\"goToComplexSARSPSI30()\">PSI-XML3.0</a>\n          </div>\n        </div>\n      </div>\n    </div>\n    <!-- End COVID banner-->\n    <div class=\"row\">\n      <div class=\"columns medium-9\">\n        <div class=\"columns medium-12 intro-unit no-pad-left padding-top-xsmall padding-bottom-small\">\n          <h2>Explore the Complex Portal</h2>\n          <p class=\"lead\">\n            The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number\n            of key model organisms. The majority of complexes are made up of proteins but may also include nucleic acids\n            or small molecules. All data is freely available for search and download. To perform a search for\n            macromolecular complexes use the search box below. Read more <a class=\"readmore\" routerLink=\"/about\">here</a>.\n          </p>\n        </div>\n        <div class=\"columns medium-12 \">\n          <cp-search></cp-search>\n        </div>\n        <div class=\"columns medium-12 no-pad-left no-pad-right\">\n          <cp-tile-menu></cp-tile-menu>\n        </div>\n      </div>\n      <div class=\"columns medium-3\">\n        <div class=\"columns medium-12\">\n          <cp-newsletter-subscription></cp-newsletter-subscription>\n        </div>\n        <div class=\"columns medium-12\">\n          <cp-twitter-display></cp-twitter-display>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 
@@ -22,6 +22,10 @@ module.exports = "<section>\n  <div id=\"main-content-area\">\n    <div class=\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__ = __webpack_require__("./src/app/shared/google-analytics/types/category.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,9 +38,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(titleService) {
+    function HomeComponent(titleService, router, googleAnalyticsService) {
         this.titleService = titleService;
+        this.router = router;
+        this.googleAnalyticsService = googleAnalyticsService;
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.titleService.setTitle('Complex Portal');
@@ -46,13 +56,42 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.ngAfterViewInit = function () {
         __WEBPACK_IMPORTED_MODULE_1__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
     };
+    /* Start COVID banner */
+    HomeComponent.prototype.search = function (specieName) {
+        this.googleAnalyticsService.fireSearchTermEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, specieName);
+        this.router.navigate(['complex/search'], { queryParams: { query: '*', species: specieName, page: 1 } });
+    };
+    HomeComponent.prototype.goToComplexSARSCoV2PSI25 = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML25');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_psi25 + 'SARS-CoV-2', '_blank');
+    };
+    HomeComponent.prototype.goToComplexSARSPSI25 = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML25');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_psi25 + 'Human_SARS_coronavirus', '_blank');
+    };
+    HomeComponent.prototype.goToComplexSARSCoV2PSI30 = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML30');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_psi30 + 'SARS-CoV-2', '_blank');
+    };
+    HomeComponent.prototype.goToComplexSARSPSI30 = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'PSIXML30');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_psi30 + 'sars-cov', '_blank');
+    };
+    HomeComponent.prototype.goToComplexSARSCoV2TAB = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'ComplexTAB');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_tab + 'sars-cov-2' + '.tsv', '_blank');
+    };
+    HomeComponent.prototype.goToComplexSARSTAB = function () {
+        this.googleAnalyticsService.fireDownloadResourceEvent(__WEBPACK_IMPORTED_MODULE_5__shared_google_analytics_types_category_enum__["a" /* Category */].organisms, 'ComplexTAB');
+        window.open(__WEBPACK_IMPORTED_MODULE_6__environments_environment__["a" /* environment */].complex_tab + 'human_sars' + '.tsv', '_blank');
+    };
     HomeComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'cp-home',
             template: __webpack_require__("./src/app/home/home.component.html"),
             styles: [__webpack_require__("./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["Title"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["Title"], __WEBPACK_IMPORTED_MODULE_4__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */]])
     ], HomeComponent);
     return HomeComponent;
 }());
