@@ -1,0 +1,8 @@
+/* Custom tag for COVID banner */
+.banner-tag {
+  /*background: #dabc3d;*/
+  background: #ffa232;
+  padding: 0.3rem 0.3rem;
+  line-height: 0.6rem;
+  font-size: 0.8rem;
+}
