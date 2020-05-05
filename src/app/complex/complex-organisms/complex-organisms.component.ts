@@ -199,12 +199,26 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].psi30 = 'sars-cov';
             organisms[i].complextab = 'human_sars';
             break;
-          case 'SARS-CoV-2':
+          case 'Severe acute respiratory syndrome coronavirus 2':
             organisms[i].symbol = 'v';
             organisms[i].type = 'virus';
             organisms[i].psi25 = 'SARS-CoV-2';
             organisms[i].psi30 = 'SARS-CoV-2';
             organisms[i].complextab = 'sars-cov-2';
+            break;
+          case 'Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012)':
+            organisms[i].symbol = 'v';
+            organisms[i].type = 'virus';
+            organisms[i].psi25 = 'Middle_East_respiratory_syndrome-related_coronavirus';
+            organisms[i].psi30 = 'cvemc';
+            organisms[i].complextab = 'middle_east';
+            break;
+          case 'Human betacoronavirus 2c EMC/2012':
+            organisms[i].symbol = 'v';
+            organisms[i].type = 'virus';
+            organisms[i].psi25 = 'Human_betacoronavirus_2c_EMC_2012';
+            organisms[i].psi30 = 'cv2ce';
+            organisms[i].complextab = 'human_betacoronavirus';
             break;
           default:
             organisms[i].symbol = '?';
