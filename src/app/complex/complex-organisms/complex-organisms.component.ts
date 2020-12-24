@@ -40,105 +40,112 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Homo_sapiens';
             organisms[i].psi30 = 'human';
-            organisms[i].complextab = 'homo_sapiens';
+            organisms[i].complextab = '9606';
             break;
           case 'Mus musculus':
             organisms[i].symbol = 'M';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Mus_musculus';
             organisms[i].psi30 = 'mouse';
-            organisms[i].complextab = 'mus_musculus';
+            organisms[i].complextab = '10090';
             break;
           case 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)':
             organisms[i].symbol = 'Y';
             organisms[i].type = 'plant';
             organisms[i].psi25 = 'Saccharomyces_cerevisiae';
             organisms[i].psi30 = 'yeast';
-            organisms[i].complextab = 'saccharomyces_cerevisiae';
+            organisms[i].complextab = '559292';
             break;
           case 'Escherichia coli (strain K12)':
             organisms[i].symbol = 'L';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Escherichia_coli';
             organisms[i].psi30 = 'ecoli';
-            organisms[i].complextab = 'escherichia_coli';
+            organisms[i].complextab = '83333';
+            break;
+          case 'Escherichia coli':
+            organisms[i].symbol = 'L';
+            organisms[i].type = 'animal';
+            organisms[i].psi25 = 'Escherichia_coli';
+            organisms[i].psi30 = 'ecolx';
+            organisms[i].complextab = '562';
             break;
           case 'Rattus norvegicus':
             organisms[i].symbol = 'R';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Rattus_norvegicus';
             organisms[i].psi30 = 'rat';
-            organisms[i].complextab = 'rattus_norvegicus';
+            organisms[i].complextab = '10116';
             break;
           case 'Caenorhabditis elegans':
             organisms[i].symbol = 'W';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Caenorhabditis_elegans';
             organisms[i].psi30 = 'caeel';
-            organisms[i].complextab = 'caenorhabditis_elegans';
+            organisms[i].complextab = '6239';
             break;
           case 'Gallus gallus':
             organisms[i].symbol = 'k';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Gallus_gallus';
             organisms[i].psi30 = 'chick';
-            organisms[i].complextab = 'gallus_gallus';
+            organisms[i].complextab = '9031';
             break;
           case 'Drosophila melanogaster':
             organisms[i].symbol = 'F';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Drosophila_melanogaster';
             organisms[i].psi30 = 'drome';
-            organisms[i].complextab = 'drosophila_melanogaster';
+            organisms[i].complextab = '7227';
             break;
           case 'Bos taurus':
             organisms[i].symbol = 'C';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Bos_taurus';
             organisms[i].psi30 = 'bovin';
-            organisms[i].complextab = 'bos_taurus';
+            organisms[i].complextab = '9913';
             break;
           case 'Oryctolagus cuniculus':
             organisms[i].symbol = 't';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Oryctolagus_cuniculus';
             organisms[i].psi30 = 'rabit';
-            organisms[i].complextab = 'oryctolagus_cuniculus';
+            organisms[i].complextab = '9986';
             break;
           case 'Ovis aries':
             organisms[i].symbol = 'x';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Ovis_aries';
             organisms[i].psi30 = 'sheep';
-            organisms[i].complextab = 'ovis_aries';
+            organisms[i].complextab = '9940';
             break;
           case 'Xenopus laevis':
             organisms[i].symbol = 'f';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Xenopus_laevis';
             organisms[i].psi30 = 'xenla';
-            organisms[i].complextab = 'xenopus_laevis';
+            organisms[i].complextab = '8355';
             break;
           case 'Canis lupus familiaris':
             organisms[i].symbol = 'd';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Canis_familiaris';
             organisms[i].psi30 = 'canlf';
-            organisms[i].complextab = 'canis_familiaris';
+            organisms[i].complextab = '9615';
             break;
           case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
             organisms[i].symbol = 'Y';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Schizosaccharomyces_pombe';
             organisms[i].psi30 = 'schpo';
-            organisms[i].complextab = 'schizosaccharomyces_pombe';
+            organisms[i].complextab = '284812';
             break;
           case 'Sus scrofa':
             organisms[i].symbol = 'p';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Sus_scrofa';
             organisms[i].psi30 = 'pig';
-            organisms[i].complextab = 'sus_scrofa';
+            organisms[i].complextab = '9823';
             break;
           case 'Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 ' +
           '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
@@ -147,78 +154,70 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Pseudomonas_aeruginosa';
             organisms[i].psi30 = 'pseae';
-            organisms[i].complextab = 'pseudomonas_aeruginosa';
-            break;
-          case 'Pseudomonas aeruginosa (strain ATCC 15692 / PAO1 / 1C / PRS 101 / LMG 12228)':
-            organisms[i].name = 'Pseudomonas aeruginosa (strain ATCC 15692)';
-            organisms[i].symbol = 'L';
-            organisms[i].type = 'animal';
-            organisms[i].psi25 = 'Pseudomonas_aeruginosa';
-            organisms[i].psi30 = 'pseae';
-            organisms[i].complextab = 'pseudomonas_aeruginosa';
+            organisms[i].complextab = '208964';
             break;
           case 'Torpedo marmorata':
             organisms[i].symbol = '+';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Torpedo_marmorata';
             organisms[i].psi30 = 'torma';
-            organisms[i].complextab = 'torpedo_marmorata';
+            organisms[i].complextab = '7788';
             break;
           case 'Tetronarce californica':
             organisms[i].symbol = '+';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Torpedo_californica';
             organisms[i].psi30 = 'torca';
-            organisms[i].complextab = 'torpedo_californica';
+            organisms[i].complextab = '7787';
             break;
           case 'Lymnaea stagnalis':
             organisms[i].symbol = '\'';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Lymnaea_stagnalis';
             organisms[i].psi30 = 'lymst';
-            organisms[i].complextab = 'lymnaea_stagnalis';
+            organisms[i].complextab = '6523';
             break;
           case 'Arabidopsis thaliana':
             organisms[i].symbol = 'B';
             organisms[i].type = 'plant';
             organisms[i].psi25 = 'arabidopsis_thaliana';
             organisms[i].psi30 = 'arath';
-            organisms[i].complextab = 'arabidopsis_thaliana';
+            organisms[i].complextab = '3702';
             break;
           case 'Danio rerio':
             organisms[i].symbol = 'Z';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'danio_rerio';
             organisms[i].psi30 = 'danre';
-            organisms[i].complextab = 'danio_rerio';
+            organisms[i].complextab = '7955';
             break;
-          case 'Human SARS coronavirus':
+          case 'Severe acute respiratory syndrome coronavirus':
             organisms[i].symbol = 'v';
             organisms[i].type = 'virus';
             organisms[i].psi25 = 'Human_SARS_coronavirus';
             organisms[i].psi30 = 'sars-cov';
-            organisms[i].complextab = 'human_sars';
+            organisms[i].complextab = '694009';
             break;
           case 'Severe acute respiratory syndrome coronavirus 2':
             organisms[i].symbol = 'v';
             organisms[i].type = 'virus';
             organisms[i].psi25 = 'SARS-CoV-2';
             organisms[i].psi30 = 'SARS-CoV-2';
-            organisms[i].complextab = 'sars-cov-2';
+            organisms[i].complextab = '2697049';
             break;
           case 'Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012)':
             organisms[i].symbol = 'v';
             organisms[i].type = 'virus';
             organisms[i].psi25 = 'Middle_East_respiratory_syndrome-related_coronavirus';
             organisms[i].psi30 = 'cvemc';
-            organisms[i].complextab = 'middle_east';
+            organisms[i].complextab = '1263720';
             break;
           case 'Human betacoronavirus 2c EMC/2012':
             organisms[i].symbol = 'v';
             organisms[i].type = 'virus';
             organisms[i].psi25 = 'Human_betacoronavirus_2c_EMC_2012';
             organisms[i].psi30 = 'cv2ce';
-            organisms[i].complextab = 'human_betacoronavirus';
+            organisms[i].complextab = '1235996';
             break;
           default:
             organisms[i].symbol = '?';
