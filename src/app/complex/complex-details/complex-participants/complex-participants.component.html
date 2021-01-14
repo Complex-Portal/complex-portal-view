@@ -3,14 +3,68 @@
   <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
   <div class="columns medium-12 no-pad-right no-pad-left">
     <div class="columns medium-6 no-pad-right">
-      <cp-complex-viewer *ngIf="complexMIJSON && complexAC"
-      [complexAC]="complexAC"
-      [complexMIJSON]="complexMIJSON"></cp-complex-viewer>
+      <!-- complex viewer -->
+      <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
+           data-equalize-on="medium" id="large-button-grid">
+        <div class="columns medium-12 no-pad-left margin-bottom-xlarge">
+          <div *ngIf="complexMIJSON" (click)="interactedWithViewer()" id="networkContainer"></div>
+
+          <div class="small expanded button-group margin-bottom-none">
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
+              <input type="checkbox" #features id="mifeatures" name="mifeatures" value="MI Features" checked
+                     autocomplete="off"
+                     (change)="onChangeAnnotation(features.value, features.checked);">
+              <label [ngClass]="{'icon icon-common icon-spacer icon-check': features.checked == true,
+                         'hollow': features.checked == false}"
+                     class="button expanded" for="mifeatures">MI Features</label>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
+              <input type="checkbox" #uniprot id="uniprotkb" name="uniprotkb" value="UniprotKB"
+                     autocomplete="off"
+                     (change)="onChangeAnnotation(uniprot.value, uniprot.checked);">
+              <label [ngClass]="{'icon icon-common icon-spacer icon-check ': uniprot.checked == true,
+                         'hollow': uniprot.checked == false}"
+                     class="button expanded" for="uniprotkb">Uniprot Features</label>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
+              <input type="checkbox" #superfamily id="superfamily" name="superfamily" value="Superfamily"
+                     autocomplete="off"
+                     (change)="onChangeAnnotation(superfamily.value, superfamily.checked);">
+              <label [ngClass]="{'icon icon-common icon-spacer icon-check ': superfamily.checked == true,
+                         'hollow': superfamily.checked == false}"
+                     class="button expanded" for="superfamily">SuperFamily</label>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
+              <input type="checkbox" #annotations id="interactor" name="interactor" value="Interactor"
+                     autocomplete="off"
+                     (change)="onChangeAnnotation(annotations.value, annotations.checked);">
+              <label [ngClass]="{'icon icon-common icon-spacer icon-check ': annotations.checked == true,
+                         'hollow': annotations.checked == false}"
+                     class="button expanded" for="interactor">Proteins</label>
+            </div>
+          </div>
+          <div class="small expanded button-group">
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right">
+              <a class="button secondary" (click)="onExpandAll()">Expand All</a>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right">
+              <a class="button secondary" (click)="onReset()">Collapse all</a>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right">
+              <a class="button secondary" (click)="resetLayout()">Reset Layout</a>
+            </div>
+            <div class="columns small-6 medium-3 no-pad-left no-pad-right">
+              <a class="button secondary" (click)="downloadAsSVG()">Export SVG</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="columns medium-6 no-pad-right">
       <table class="hover">
         <thead>
         <th>Legend</th>
+        <th>Colour</th>
         <th>Description</th>
         <th>Stoichiometry</th>
         </thead>
@@ -20,6 +74,8 @@
             <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
               <img style="max-width: 50%; min-width: 30px" src="{{getLegendURL(participant.interactorType)}}">
             </div>
+          </td>
+          <td [style.background]="participant.interactorColour">
           </td>
           <td>
             <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
@@ -52,6 +108,8 @@
         </tr>
         </tbody>
       </table>
+      <!-- legend -->
+      <div id="colours"></div>
     </div>
   </div>
 </div>

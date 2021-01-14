@@ -16,7 +16,7 @@ export class DownloadComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Complex Portal - Programmatic Access');
+    this.titleService.setTitle('Complex Portal - Downloads');
     ProgressBarComponent.display();
   }
 

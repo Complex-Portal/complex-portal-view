@@ -1,6 +1,6 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.26",
     "name": "complex-portal-view"
   },
   "apps": [
@@ -25,6 +25,10 @@
         "../node_modules/animate.css/animate.css"
       ],
       "scripts": [
+        "../node_modules/ebi-framework/libraries/foundation-6/js/foundation.js",
+        "../node_modules/ebi-framework/js/foundationExtendEBI.js",
+        "../node_modules/ebi-framework/js/script.js",
+        "../node_modules/complexviewer/dist/complexviewer.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

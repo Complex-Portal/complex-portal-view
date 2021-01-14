@@ -11,7 +11,6 @@ import {ComplexHeaderComponent} from './complex-header/complex-header.component'
 import {ComplexDetailsComponent} from './complex-details.component';
 import {ComplexExpressionComponent} from './complex-expression/complex-expression.component';
 import {ComplexDiseaseComponent} from './complex-disease/complex-disease.component';
-import {ComplexViewerComponent} from './shared/visualisation/complex-viewer/complex-viewer.component';
 import {ComplexParticipantsComponent} from './complex-participants/complex-participants.component';
 import {ReactomeDiagramComponent} from './shared/visualisation/reactome-diagram/reactome-diagram.component';
 import {ReactomeCrossreferencesComponent} from './complex-function/reactome-crossreferences/reactome-crossreferences.component';
@@ -61,7 +60,6 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
     ComplexPropertiesComponent,
     ComplexExpressionComponent,
     ComplexDiseaseComponent,
-    ComplexViewerComponent,
     ComplexParticipantsComponent,
     ReactomeDiagramComponent,
     ReactomeCrossreferencesComponent,

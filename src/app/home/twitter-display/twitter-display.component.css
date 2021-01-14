@@ -1,3 +1,8 @@
+#twitter {
+  max-height: 400px;
+}
+
 h3 {
-  border-bottom:2px solid black;
+  border-bottom:solid;
+  border-color: #5ca23561;
 }

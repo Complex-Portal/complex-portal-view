@@ -14,6 +14,7 @@ export class Participant {
   private _interactorType: string;
   private _interactorTypeMI: string;
   private _interactorTypeDefinition: string;
+  private _interactorColour: string;
 
   constructor(interactorAC: string, identifier: string, identifierLink: string, name: string, description: string,
               stochiometry: string, bioRole: string, bioRoleMI: string, bioRoleDefinition: string,
@@ -30,6 +31,7 @@ export class Participant {
     this._interactorType = interactorType;
     this._interactorTypeMI = interactorTypeMI;
     this._interactorTypeDefinition = interactorTypeDefinition;
+    this._interactorColour = '#b02e2e'; // Default colour
   }
 
   get interactorAC(): string {
@@ -126,5 +128,14 @@ export class Participant {
 
   set interactorTypeDefinition(value: string) {
     this._interactorTypeDefinition = value;
+  }
+
+
+  get interactorColour(): string {
+    return this._interactorColour;
+  }
+
+  set interactorColour(value: string) {
+    this._interactorColour = value;
   }
 }

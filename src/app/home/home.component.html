@@ -2,8 +2,7 @@
   <div id="main-content-area">
     <!-- Start COVID banner-->
     <div class="row padding-bottom-xlarge padding-top-xlarge">
-      <div id="covid_panel"
-           style="background: #fcefa1; border-color: gold; border-style: solid; border-width: 2px; vertical-align: middle; padding: 6px">
+      <div id="covid_panel" class="covid-banner">
         <div class="grid_20 push_2" style="text-align: center; padding: 4px">
           <b>COVID19-related complexes at Complex Portal</b><br/>
           <div class="padding-top-medium" style="text-align: center">
@@ -14,7 +13,7 @@
           </div>
 
           <div class="" style="text-align: center">
-            <a (click)="search('Human SARS coronavirus')">Browse</a> or download SARS complexes
+            <a (click)="search('Severe acute respiratory syndrome coronavirus')">Browse</a> or download SARS complexes
             <a class="tag banner-tag" (click)="goToComplexSARSTAB()">ComplexTab</a>
             <a class="tag banner-tag" (click)="goToComplexSARSPSI25()">PSI-XML2.5</a>
             <a class="tag banner-tag" (click)="goToComplexSARSPSI30()">PSI-XML3.0</a>
@@ -25,22 +24,30 @@
     <!-- End COVID banner-->
     <div class="row">
       <div class="columns medium-9">
-        <div class="columns medium-12 intro-unit no-pad-left padding-top-xsmall padding-bottom-small">
-          <h2>Explore the Complex Portal</h2>
-          <p class="lead">
+        <div class="columns medium-12 intro-unit no-pad-left no-pad-right padding-top-xsmall padding-bottom-small">
+          <h1 class="main-color">Explore the Complex Portal</h1>
+          <p>
             The Complex Portal is a manually curated, encyclopaedic resource of macromolecular complexes from a number
             of key model organisms. The majority of complexes are made up of proteins but may also include nucleic acids
-            or small molecules. All data is freely available for search and download. To perform a search for
-            macromolecular complexes use the search box below. Read more <a class="readmore" routerLink="/about">here</a>.
+            or small molecules. All data is freely available for search and <a class="readmore" routerLink="/download">download</a>.
+          </p>
+          <div id="cp-definition" class="definition padding-bottom-xlarge padding-top-xlarge">
+            <i>Complexes are defined as an assembly of any two or more proteins and/or nucleic acids that are stable enough
+            in vitro to be reconstituted and have been demonstrated to have a specific molecular function.</i>
+          </div>
+          <p class="padding-top-large">
+            To perform a search for macromolecular complexes use the search box below. Read more
+            <a class="readmore" routerLink="/about">here</a>.
           </p>
         </div>
-        <div class="columns medium-12 ">
+        <div class="columns medium-12">
           <cp-search></cp-search>
         </div>
-        <div class="columns medium-12 no-pad-left no-pad-right">
+        <div class="columns medium-12 margin-top-xlarge">
           <cp-tile-menu></cp-tile-menu>
         </div>
       </div>
+
       <div class="columns medium-3">
         <div class="columns medium-12">
           <cp-newsletter-subscription></cp-newsletter-subscription>

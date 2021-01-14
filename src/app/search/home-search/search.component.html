@@ -15,22 +15,25 @@
       </fieldset>
     </div>
   </div>
-  <div class="columns callout medium-12 margin-bottom-none">
+  <div class="columns callout medium-12 margin-bottom-none" style="font-size: smaller">
     <h5><i class="icon icon-generic padding-right-medium" data-icon="?"></i>Examples:</h5>
-    <div class="columns medium-6">
+    <div class="columns medium-4">
       <ul>
-        <li>GO term(s): <a (click)="search('GO:0016491', 'example')">GO:0016491</a></li>
         <li>Gene name(s): <a (click)="search('Ndc80', 'example')">Ndc80</a></li>
         <li>UniProt AC(s): <a (click)="search('Q05471', 'example')">Q05471</a></li>
-        <li>Protein name(s): <a (click)="search('PCNA', 'example')">PCNA</a></li>
       </ul>
     </div>
-    <div class="columns medium-6 no-pad-left">
+    <div class="columns medium-4">
       <ul>
         <li>Complex AC: <a (click)="search('CPX-2158', 'example')">CPX-2158</a></li>
         <li>Complex Name: <a (click)="search('nuclear pore', 'example')">nuclear pore</a></li>
-        <li>List of ACs: <a (click)="search('Q15554, P54274, Q96AP0', 'example')">Q15554, P54274, Q96AP0</a></li>
       </ul>
+    </div>
+    <div class="columns medium-4">
+      <ul>
+        <li>GO term(s): <a (click)="search('GO:0016491', 'example')">GO:0016491</a></li>
+        <li>List of ACs: <a (click)="search('Q15554, P54274, Q96AP0', 'example')">Q15554, P54274, Q96AP0</a></li>
+       </ul>
     </div>
   </div>
 </div>

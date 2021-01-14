@@ -1,53 +1,32 @@
-<div class="row button-grid small-up-1 medium-up-2 large-up-4 margin-top-xlarge no-pad-right" data-equalizer
-     data-equalize-on="medium" id="large-button-grid">
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
+<div class="row button-grid" data-equalizer id="large-button-grid">
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
     <a class="button medium-12 columns" data-equalizer-watch (click)="goToDownload()">
       <h3 class="icon icon-functional white-color" data-icon="="></h3>
-      <h5 class="white-color" style="white-space: normal">Programmatic Access</h5>
+      <h5 class="white-color" style="white-space: normal">Downloads</h5>
     </a>
   </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
     <a class="button medium-12 columns" data-equalizer-watch (click)="goToBasket()">
       <h3 class="icon icon-generic white-color" data-icon="b"></h3>
       <h5 class="white-color">Basket</h5>
     </a>
   </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
     <a class="button medium-12 columns" data-equalizer-watch (click)="goToOrganisms()">
-      <h3 class="icon icon-species white-color" data-icon="H"></h3>
+      <h3 class="icon icon-species white-color" data-icon="M"></h3>
       <h5 class="white-color">Organisms</h5>
     </a>
   </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
     <a class="button medium-12 columns" data-equalizer-watch (click)="goToOntologies()">
       <h3 class="icon icon-conceptual white-color" data-icon="o"></h3>
       <h5 class="white-color">Ontologies</h5>
     </a>
   </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a
-      class="button medium-12 columns training-background" data-equalizer-watch (click)="goToRequestComplex()">
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
+    <a class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToRequestComplex()">
       <h3 class="icon icon-generic white-color" data-icon="\"></h3>
-      <h5 class="white-color" style="white-space: normal">Request Complex for Curation</h5>
-    </a>
-  </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a
-      class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToTraining()">
-      <h3 class="icon icon-generic white-color" data-icon="t"></h3>
-      <h5 class="white-color">Training</h5>
-    </a>
-  </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToDocumentation()">
-      <h3 class="icon icon-generic white-color" data-icon="?"></h3>
-      <h5 class="white-color">Documentation</h5>
-    </a>
-  </div>
-  <div class="column medium-3 small-6 text-center padding-bottom-large">
-    <a class="button medium-12 columns industry-background" data-equalizer-watch data-open="citationModal" (click)="goToCitation()">
-      <h3 class="icon icon-generic white-color" data-icon="P"></h3>
-      <h5 class="white-color">How To Cite Us</h5>
+      <h5 class="white-color" style="white-space: normal">Request Complex</h5>
     </a>
   </div>
   <div class="reveal" id="citationModal" data-reveal>
@@ -63,5 +42,23 @@
     <button class="close-button" data-close aria-label="Close modal" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
+  </div>
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
+    <a class="button medium-12 columns industry-background" data-equalizer-watch (click)="goToDocumentation()">
+      <h3 class="icon icon-common white-color" data-icon="&#xf283;"></h3>
+      <h5 class="white-color">Documentation</h5>
+    </a>
+  </div>
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
+    <a class="button medium-12 columns industry-background" data-equalizer-watch data-open="citationModal" (click)="goToCitation()">
+      <h3 class="icon icon-generic white-color" data-icon="P"></h3>
+      <h5 class="white-color">How To Cite Us</h5>
+    </a>
+  </div>
+  <div class="columns large-3 medium-6 text-center padding-bottom-large">
+    <a class="button medium-12 columns training-background" data-equalizer-watch (click)="goToTraining()">
+      <h3 class="icon icon-generic white-color" data-icon="t"></h3>
+      <h5 class="white-color">Training</h5>
+    </a>
   </div>
 </div>

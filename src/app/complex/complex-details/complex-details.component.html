@@ -10,7 +10,8 @@
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">
-          <cp-complex-participants *ngIf="complexDetails"
+        <!-- Noe: If I don't have here complexMIJSON it is failing loading -->
+          <cp-complex-participants *ngIf="complexDetails && complexMIJSON"
                                    [participants]="complexDetails.participants"
                                    [complexAC]="complexDetails.complexAc"
                                    [complexMIJSON]="complexMIJSON"></cp-complex-participants>

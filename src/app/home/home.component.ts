@@ -26,16 +26,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   /* Start COVID banner */
-  search(specieName: string) {
-    this.googleAnalyticsService.fireSearchTermEvent(Category.organisms, specieName);
-    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: specieName, page: 1}});
+  search(speciesName: string) {
+    this.googleAnalyticsService.fireSearchTermEvent(Category.organisms, speciesName);
+    this.router.navigate(['complex/search'], {queryParams: {query: '*', species: speciesName, page: 1}});
   }
 
   goToComplexSARSCoV2PSI25(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML25');
     window.open(environment.complex_psi25 + 'SARS-CoV-2', '_blank');
   }
-
 
   goToComplexSARSPSI25(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'PSIXML25');
@@ -54,12 +53,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   goToComplexSARSCoV2TAB(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'ComplexTAB');
-    window.open(environment.complex_tab + 'sars-cov-2' + '.tsv', '_blank');
+    window.open(environment.complex_tab + '2697049' + '.tsv', '_blank');
   }
 
   goToComplexSARSTAB(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.organisms, 'ComplexTAB');
-    window.open(environment.complex_tab + 'human_sars' + '.tsv', '_blank');
+    window.open(environment.complex_tab + '694009' + '.tsv', '_blank');
   }
   /* End COVID banner */
 

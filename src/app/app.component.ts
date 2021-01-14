@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;
   private _environmentName: string;
   private _basketCount = 0;
-  private _EBI_BASE_URL = environment.ebi_base_url;
+  private _complexPortalSupportUrl = environment.complex_portal_support_url;
   private _onChangeInBasket: boolean;
 
   constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
@@ -122,10 +122,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this._basketCount;
   }
 
-  get EBI_BASE_URL(): string {
-    return this._EBI_BASE_URL;
+  get complexPortalSupportUrl(): string {
+    return this._complexPortalSupportUrl;
   }
-
 
   get onChangeInBasket(): boolean {
     return this._onChangeInBasket;
