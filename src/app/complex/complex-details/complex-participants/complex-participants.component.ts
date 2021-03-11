@@ -46,7 +46,9 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
 
-    this.updateColorLegend(viewer.getColorKeyJson());
+    setTimeout(() => {
+      this.updateColorLegend(viewer.getColorKeyJson());
+    }, 0);
   }
 
   private sortParticipants() {
