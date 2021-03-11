@@ -7,7 +7,7 @@
   font-size: 0.8rem;
 }
 
-.covid-banner{
+.covid-banner {
   background: #fcefa1;
   border-color: gold;
   border-style: solid;
@@ -16,16 +16,19 @@
   padding: 6px
 }
 
-.definition {
-  border-radius: 4px;
-  background: #c8e5d4;
-  border-color: #007C82;
+.survey-banner {
+  background: #d3dfff;
+  border-color: #1f77b4;
   border-style: solid;
   border-width: 2px;
   vertical-align: middle;
-  padding: 10px
+  padding: 6px
 }
 
-.main-color {
-  color: #007C82;
+.definition {
+  background: #cde4e5;
+  font-family: "Lato-Regular", Helvetica, Arial, sans-serif;
+  border-radius: 4px;
+  vertical-align: middle;
+  padding: 15px
 }

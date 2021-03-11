@@ -1,4 +1,4 @@
-a {
+footer a {
   text-decoration:none;
   border-width: 0;
 }
@@ -13,4 +13,21 @@ a {
   color: #007c82;
   background-color: white;
   display: inline;
+}
+
+.basket.active {
+  padding: 0.2rem 0;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: default;
+  color: white;
+  background-color: #007c82;
+  display: inline;
+}
+
+/* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */
+.no-border-submenu {
+  border-right: 0 !important ;
 }

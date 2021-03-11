@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {environment} from '../environments/environment';
-
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {BasketService} from './shared/basket/service/basket.service';

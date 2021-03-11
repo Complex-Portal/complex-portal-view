@@ -6,7 +6,7 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SectionService} from './shared/service/section/section.service';
-import {PageScrollConfig} from 'ng2-page-scroll';
+import {PageScrollConfig} from 'ngx-page-scroll';
 import {Title} from '@angular/platform-browser';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 import {Category} from '../../shared/google-analytics/types/category.enum';

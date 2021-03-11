@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
-import {environment} from '../../../environments/environment';
+import {ProgressBarComponent} from '../../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'cp-query-syntax',

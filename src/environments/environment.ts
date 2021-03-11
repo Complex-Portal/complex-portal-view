@@ -5,7 +5,7 @@
 
 // Environment for production
 const EBI_BASE_URL = 'https://www.ebi.ac.uk/';
-const COMPLEX_LOCAL_BASE_URL = 'https://wwwdev.ebi.ac.uk/';
+const COMPLEX_LOCAL_BASE_URL = 'http://localhost:4200/';
 const LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 const REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 const INTACT_FTP_BASE_URL = 'http://ftp.ebi.ac.uk/pub/databases/intact/';

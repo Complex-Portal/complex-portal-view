@@ -6,14 +6,16 @@ import {TileMenuComponent} from './tile-menu/tile-menu.component';
 import {TwitterDisplayComponent} from './twitter-display/twitter-display.component';
 import {NewsletterSubscriptionComponent} from './newsletter-subscription/newsletter-subscription.component';
 import {SearchComponent} from '../search/home-search/search.component';
+import {HomeRoutingModule} from './home-routing.module';
 
 @NgModule({
-  imports: [RouterModule.forChild([
-    {path: '', component: HomeComponent}
-  ]),
-    CommonModule
+  imports: [
+    CommonModule,
+    HomeRoutingModule
   ],
-  declarations: [HomeComponent, SearchComponent,
+  declarations: [
+    HomeComponent,
+    SearchComponent,
     NewsletterSubscriptionComponent,
     TwitterDisplayComponent,
     TileMenuComponent,

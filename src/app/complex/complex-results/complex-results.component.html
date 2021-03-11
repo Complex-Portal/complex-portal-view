@@ -1,4 +1,4 @@
-<div class="row">
+<div class="margin-top-large margin-bottom-large row">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
   <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
     <h2 class="padding-left-large">Total number of results: {{complexSearch.totalNumberOfResults}} </h2>
@@ -7,7 +7,7 @@
                          [spicesFilter]="spicesFilter"
                          [bioRoleFilter]="bioRoleFilter"
                          [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
-                         (onResetAllFilters)="onResetAllFilters($event)"
+                         (onResetAllFilters)="onResetAllFilters()"
                          (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
                          (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
                          (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">

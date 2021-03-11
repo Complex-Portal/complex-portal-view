@@ -8,7 +8,7 @@ import {
   OnInit
 } from '@angular/core';
 import {SectionService} from '../service/section/section.service';
-import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
+import {PageScrollInstance, PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 

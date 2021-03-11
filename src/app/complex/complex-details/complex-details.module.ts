@@ -40,7 +40,7 @@ import {ReactomeService} from './complex-function/reactome-crossreferences/servi
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {SectionService} from './shared/service/section/section.service';
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import {NgxPageScrollModule} from 'ngx-page-scroll';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
 
@@ -51,7 +51,7 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
     ]),
     CommonModule,
     ProgressSpinnerModule,
-    Ng2PageScrollModule.forRoot()
+    NgxPageScrollModule
   ],
   declarations: [
     ComplexDetailsComponent,

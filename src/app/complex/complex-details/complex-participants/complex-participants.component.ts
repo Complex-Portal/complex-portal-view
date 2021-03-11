@@ -19,9 +19,17 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   private _complexAC: string;
   private _complexMIJSON: string;
   private _interactorChecked: boolean;
+  private _colorLegendGroups: Map<string, string> = new Map<string, string>();
   private _displayedElements = 5;
   private _hasInteracted: boolean;
   private _svgsaver: any;
+
+  annotations = {
+    'MI Features': true,
+    'UniprotKB': false,
+    'Superfamily': false,
+    'Interactor': false,
+  };
 
   constructor(private googleAnalyticsService: GoogleAnalyticsService) {
     this._svgsaver = new SvgSaver();
@@ -38,15 +46,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
 
-    // this.legendColours();
-    // Complex colors legend
-    // TODO Review error in console: ExpressionChangedAfterItHasBeenCheckedError
-    for (const participant of this.participants) {
-      if (participant.interactorType === 'stable complex') {
-        participant.interactorColour =
-          this.retrieveComplexViewerColor(participant.name, participant.identifier, participant.interactorType);
-      }
-    }
+    this.updateColorLegend(viewer.getColorKeyJson());
   }
 
   private sortParticipants() {
@@ -63,7 +63,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   }
 
   public getLegendURL(interactorType: string): string {
-    // TODO: maybe talk to OLS WS on some point, but it was easier to do it like this at the time. - GH issue #172
+    // TODO: maybe talk to OLS WS at some point, but it was easier to do it like this at the time. - GH issue #172
     switch (interactorType) {
       case 'small molecule':
         return 'assets/images/legend/small-mol.png';
@@ -92,43 +92,38 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     return stochiometry.split(',')[0].split(':')[1].trim();
   }
 
-  public retrieveComplexViewerColor(interactorLabel: string, interactorIdentifier: string, interactorType: string): string {
-    if (viewer !== undefined) {
-      if (interactorType === 'stable complex') {
-        // complex colours
-        const complexColorScheme = viewer.getComplexColors();
-        if (complexColorScheme) {
-          console.log('complex portal_' + interactorIdentifier + ' ' + complexColorScheme('complex portal_' + interactorIdentifier));
-          return complexColorScheme('complex portal_' + interactorIdentifier);
-        }
-      } else if (interactorType === 'protein') {
+  onChangeAnnotation(value: string) {
+    const display = !this.annotations[value];
 
-        // protein colours
-        const featureColorScheme = viewer.getFeatureColors();
-        if (featureColorScheme) {
-          console.log(interactorLabel + ' ' + featureColorScheme(interactorLabel));
-          return featureColorScheme(interactorLabel);
+    this.annotations[value] = display;
+    this.updateColorLegend(viewer.showAnnotations(value, display));
+
+    this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ChangeAnno, this._complexAC);
+    this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_SelectedAnno, value);
+  }
+
+  private updateColorLegend(legendData: { [p: string]: ColorLegend[] }) {
+    this.colorLegendGroups.clear();
+    for (const group of Object.keys(legendData)) {
+      if (group === 'Complex') {
+        for (const legendDatum of legendData[group]) {
+          // Because we only display interactors and complexes colors, we now that are certain.
+          // If features are shown in the feature follow the same way that IntAct Portal
+          this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color)
+          console.log(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color);
+        }
+      }
+      if (group === 'Interactor') {
+        for (const legendDatum of legendData[group]) {
+          // Because we only display interactors and complexes colors, we now that are certain.
+          // If features are shown in the feature follow the same way that IntAct Portal
+          this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color)
+          console.log(legendDatum.name.toUpperCase(), legendDatum.certain.color);
         }
       }
     }
   }
 
-  onChangeAnnotation(value: string, checked: boolean): void {
-    viewer.showAnnotations(value, checked);
-    if (value === 'Interactor' && !checked) {
-      this.interactorChecked = false;
-      this.resetLegend();
-    } else if (value === 'Interactor' && checked) {
-      this.interactorChecked = true;
-    }
-
-    if (this.interactorChecked) {
-      this.adjustLegend();
-    }
-
-    this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ChangeAnno, this._complexAC);
-    this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_SelectedAnno, value);
-  }
 
   onReset(): void {
     viewer.collapseAll();
@@ -138,24 +133,6 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   onExpandAll(): void {
     viewer.expandAll();
     this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_ExpandAll, this._complexAC);
-  }
-
-  private adjustLegend(): void {
-    for (const participant of this.participants) {
-      participant.interactorColour = this.retrieveComplexViewerColor(participant.name, participant.identifier, participant.interactorType);
-    }
-  }
-
-  private resetLegend() {
-    for (const participant of this.participants) {
-      if (participant.interactorType === 'protein') {
-        participant.interactorColour = 'unset';
-      }
-    }
-  }
-
-  private legendColours(): void {
-    viewer.addColorSchemeKey(document.getElementById('colours'));
   }
 
   public resetLayout() {
@@ -217,5 +194,35 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
   set interactorChecked(value: boolean) {
     this._interactorChecked = value;
+  }
+
+
+  get colorLegendGroups(): Map<string, string> {
+    return this._colorLegendGroups;
+  }
+
+  set colorLegendGroups(value: Map<string, string>) {
+    this._colorLegendGroups = value;
+  }
+}
+
+// These classes are needed to map the json coming from the viewer to the object
+class ColorLegend {
+  public name: string;
+  public certain?: Color;
+  public uncertain?: Color;
+
+  constructor(name: string, certain?: Color, uncertain?: Color) {
+    this.name = name;
+    this.certain = certain;
+    this.uncertain = uncertain;
+  }
+}
+
+class Color {
+  public color: string;
+
+  constructor(color: string) {
+    this.color = color;
   }
 }

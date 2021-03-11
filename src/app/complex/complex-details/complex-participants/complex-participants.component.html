@@ -13,7 +13,7 @@
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #features id="mifeatures" name="mifeatures" value="MI Features" checked
                      autocomplete="off"
-                     (change)="onChangeAnnotation(features.value, features.checked);">
+                     (change)="onChangeAnnotation('MI Features')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check': features.checked == true,
                          'hollow': features.checked == false}"
                      class="button expanded" for="mifeatures">MI Features</label>
@@ -21,7 +21,7 @@
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #uniprot id="uniprotkb" name="uniprotkb" value="UniprotKB"
                      autocomplete="off"
-                     (change)="onChangeAnnotation(uniprot.value, uniprot.checked);">
+                     (change)="onChangeAnnotation('UniprotKB')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check ': uniprot.checked == true,
                          'hollow': uniprot.checked == false}"
                      class="button expanded" for="uniprotkb">Uniprot Features</label>
@@ -29,7 +29,7 @@
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #superfamily id="superfamily" name="superfamily" value="Superfamily"
                      autocomplete="off"
-                     (change)="onChangeAnnotation(superfamily.value, superfamily.checked);">
+                     (change)="onChangeAnnotation('Superfamily')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check ': superfamily.checked == true,
                          'hollow': superfamily.checked == false}"
                      class="button expanded" for="superfamily">SuperFamily</label>
@@ -37,7 +37,7 @@
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #annotations id="interactor" name="interactor" value="Interactor"
                      autocomplete="off"
-                     (change)="onChangeAnnotation(annotations.value, annotations.checked);">
+                     (change)="onChangeAnnotation('Interactor')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check ': annotations.checked == true,
                          'hollow': annotations.checked == false}"
                      class="button expanded" for="interactor">Proteins</label>
@@ -75,8 +75,20 @@
               <img style="max-width: 50%; min-width: 30px" src="{{getLegendURL(participant.interactorType)}}">
             </div>
           </td>
-          <td [style.background]="participant.interactorColour">
-          </td>
+            <ng-template [ngIf]="participant.interactorType == 'stable complex'">
+              <td [style.background]="colorLegendGroups.get(participant.identifier)">
+                <!-- for debugging-->
+                <!-- {{participant.identifier}}-->
+                <!-- {{colorLegendGroups.get(participant.identifier)}}-->
+              </td>
+            </ng-template>
+            <ng-template [ngIf]="participant.interactorType != 'stable complex'">
+              <td [style.background]="colorLegendGroups.get(participant.name)">
+                <!-- for debugging-->
+                <!-- {{participant.name}}-->
+                <!-- {{colorLegendGroups.get(participant.name)}}-->
+              </td>
+            </ng-template>
           <td>
             <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
               {{participant.name}} ({{participant.bioRole}})</b>
@@ -108,8 +120,10 @@
         </tr>
         </tbody>
       </table>
-      <!-- legend -->
-      <div id="colours"></div>
     </div>
+
+
   </div>
+
+
 </div>

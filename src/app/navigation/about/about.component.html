@@ -1,0 +1,42 @@
+<div class="columns margin-top-large margin-bottom-large">
+  <h1>About</h1>
+  <ul class="tabs" data-tabs data-deep-link="true" data-update-history="false" id="about-tabs">
+    <li class="tabs-title is-active"><a href="about#overview" aria-selected="true">Overview</a></li>
+    <li class="tabs-title"><a href="about#requests">Requests</a></li>
+    <li class="tabs-title"><a href="about#license_privacy">License and Privacy</a></li>
+    <li class="tabs-title"><a href="about#code">Code Repository</a></li>
+    <li class="tabs-title"><a href="about#funding">Funding</a></li>
+    <li class="tabs-title"><a href="about#publications">Publications</a></li>
+    <li class="tabs-title"><a href="about#sab">SAB</a></li>
+  </ul>
+
+  <div class="tabs-content" data-tabs-content="about-tabs">
+    <div class="tabs-panel is-active" id="overview">
+      <markdown [src]=overview></markdown>
+    </div>
+
+    <div class="tabs-panel" id="requests">
+      <markdown [src]=requests></markdown>
+    </div>
+
+    <div class="tabs-panel" id="license_privacy">
+      <markdown [src]=license_privacy></markdown>
+    </div>
+
+    <div class="tabs-panel" id="code">
+      <markdown [src]=code></markdown>
+    </div>
+
+    <div class="tabs-panel" id="funding">
+      <markdown [src]=funding></markdown>
+    </div>
+
+    <div class="tabs-panel" id="publications">
+      <markdown [src]=publications></markdown>
+    </div>
+
+    <div class="tabs-panel" id="sab">
+      <markdown [src]=sab></markdown>
+    </div>
+  </div>
+</div>

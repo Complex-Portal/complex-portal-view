@@ -17,15 +17,22 @@
 
       <!-- local-nav -->
       <nav>
-        <ul id="local-nav" class="dropdown menu float-left" data-description="navigational">
-          <li><a routerLink="/home">Home</a></li>
-          <li><a routerLink="/about">About</a></li>
-          <li><a href="{{complexPortalSupportUrl}}" target="_blank">Support</a></li>
-          <li><a [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
-            <div class="basket">
+        <ul id="local-nav" class="dropdown menu float-left" data-dropdown-menu="true" data-description="navigational">
+          <li routerLinkActive="active"><a routerLink="/home" routerLinkActive="active">Home</a></li>
+          <li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active">About</a></li>
+          <li class="extra-items-menu is-dropdown-submenu-parent opens-right">
+            <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
+            <ul class="menu submenu is-dropdown-submenu first-sub vertical" role="menu" >
+              <li class="no-border-submenu" routerLinkActive="active"><a routerLink="/documentation/data_content">Data Content</a></li>
+              <li class="no-border-submenu" routerLinkActive="active"><a routerLink="/documentation/query_syntax">Query syntax</a></li>
+            </ul>
+          </li>
+          <li routerLinkActive="active"><a routerLinkActive="active" [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
+            <div routerLinkActive="active" routerLink="/basket" class="basket">
               &nbsp;<strong>{{basketCount}}</strong>&nbsp;
             </div></a>
           </li>
+          <li routerLinkActive="active"><a href="{{complexPortalSupportUrl}}">Support <i class="icon icon-generic" data-icon="x"></i></a></li>
         </ul>
       </nav>
       <!-- /local-nav -->
@@ -33,7 +40,7 @@
   </header>
   <!-- END COMPLEX PORTAL HEADER SECTION -->
 
-  <cp-progress-bar></cp-progress-bar>
+<!--  <cp-progress-bar></cp-progress-bar>-->
 </div>
 
 <!---->
@@ -48,37 +55,35 @@
 
 
 <!-- Local footer -->
-
-<div class="row margin-top-medium expanded">
-
-  <footer id="local-footer" class="local-footer row expanded" role="local-footer">
-    <div class="row padding-top-large padding-bottom-large">
-      <div class="columns medium-12">
-        <p class="label secondary-color padding-left-large columns small-10">Our contributors </p>
-        <p class="label secondary-color padding-left-large columns small-2">{{version}}-{{environmentName}}</p>
-        <table>
-          <tbody>
-          <tr>
-            <td><a href="//www.ceitec.eu" target="_blank"><img src="assets/images/contributors/Ceitec.png"></a></td>
-            <td><a href="//www.evidenceontology.org/" target="_blank"><img src="assets/images/contributors/eco.png"></a>
-            </td>
-            <td><a href="//www.ucl.ac.uk/functional-gene-annotation/cardiovascular" target="_blank"><img
-              src="assets/images/contributors/imex_acg_s.png"></a></td>
-            <td><a href="http://matrixdb.univ-lyon1.fr" target="_blank"><img
-              src="assets/images/contributors/matrixdb.png"></a></td>
-            <!-- We need the protocol, matrixdb don't support https-->
-            <td><a href="//mint.bio.uniroma2.it" target="_blank"><img src="assets/images/contributors/Mint.png"></a>
-            <td><a href="//www.ebi.ac.uk/pdbe/" target="_blank"><img src="assets/images/contributors/PDBe.png"></a>
-            <td><a href="//www.yeastgenome.org" target="_blank"><img src="assets/images/contributors/SGD.png"></a>
-            </td>
-            <td><a href="//www.sib.swiss" target="_blank"><img src="assets/images/contributors/sib.png"></a></td>
-            <td><a href="//www.uniprot.org" target="_blank"><img src="assets/images/contributors/uniprot.png"></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+<footer id="local-footer" class="local-footer" role="local-footer">
+  <div class="row margin-top-medium">
+    <div id="contributors" class="margin-top-large" style="text-align: center">
+      <h4><p class="icon icon-generic" data-icon="}"> Our Contributors</p></h4>
     </div>
-  </footer>
 
-</div>
+    <div class="columns">
+      <table style="border-collapse: unset">
+        <tbody>
+        <tr>
+          <td><a href="//www.ceitec.eu" target="_blank"><img src="assets/images/contributors/Ceitec.png"></a></td>
+          <td><a href="//www.evidenceontology.org/" target="_blank"><img src="assets/images/contributors/eco.png"></a>
+          </td>
+          <td><a href="//www.ucl.ac.uk/functional-gene-annotation/cardiovascular" target="_blank"><img
+            src="assets/images/contributors/imex_acg_s.png"></a></td>
+          <td><a href="http://matrixdb.univ-lyon1.fr" target="_blank"><img
+            src="assets/images/contributors/matrixdb.png"></a></td>
+          <!-- We need the protocol, matrixdb don't support https-->
+          <td><a href="//mint.bio.uniroma2.it" target="_blank"><img src="assets/images/contributors/Mint.png"></a>
+          <td><a href="//www.ebi.ac.uk/pdbe/" target="_blank"><img src="assets/images/contributors/PDBe.png"></a>
+          <td><a href="//www.yeastgenome.org" target="_blank"><img src="assets/images/contributors/SGD.png"></a>
+          </td>
+          <td><a href="//www.sib.swiss" target="_blank"><img src="assets/images/contributors/sib.png"></a></td>
+          <td><a href="//www.uniprot.org" target="_blank"><img src="assets/images/contributors/uniprot.png"></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="label secondary-color float-right">{{version}}-{{environmentName}}</div>
+    </div>
+  </div>
+</footer>

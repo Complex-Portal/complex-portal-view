@@ -18,37 +18,59 @@ import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material';
-import {DocumentationComponent} from './documentation/documentation.component';
-import {QuerySyntaxComponent} from './documentation/query-syntax/query-syntax.component';
-import {DataContentComponent} from './documentation/data-content/data-content.component';
+import {DocumentationModule} from './navigation/documentation/documentation.module';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
 import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
 import {SearchService} from './search/service/search.service';
 import {MarkdownModule} from 'ngx-markdown';
+import {HomeModule} from './home/home.module';
+import {Router, RouterModule} from '@angular/router';
+import {AboutComponent} from './navigation/about/about.component';
+import {DownloadComponent} from './download/download.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressBarComponent,
     LocalSearchComponent,
-    DocumentationComponent,
-    QuerySyntaxComponent,
-    DataContentComponent,
     OntologiesComponent,
+    AboutComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     NoopAnimationsModule,
     ToastrModule.forRoot(),
-    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     MatProgressBarModule,
     MarkdownModule.forRoot(),
+    HomeModule,
+    DocumentationModule,
+    AppRoutingModule,
   ],
-  providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, BasketService, LocalStorageService, Md5, GoogleAnalyticsService, SearchService],
+  providers: [
+    ComplexPortalService,
+    NotificationService,
+    ReactomeService,
+    EuroPmcService,
+    OlsService,
+    BasketService,
+    LocalStorageService,
+    Md5,
+    GoogleAnalyticsService,
+    SearchService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+
+export class AppModule {
+  // To debug routing problems uncomment following code
+  // constructor(private readonly router: Router) {
+  //   router.events
+  //     .subscribe(console.log)
+  // }
+}
