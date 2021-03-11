@@ -1,0 +1,248 @@
+/*
+  Colour palette: Complex-Portal
+*/
+
+a {
+  color: #222;
+}
+
+dl dt a,
+a.label,
+.label,
+a:hover,
+a:focus,
+a:active {
+  color: #007c82;
+}
+
+h1 {
+  color: #0a494c;
+}
+
+h2 {
+  color: #007c82;
+}
+
+h3 {
+  color: #444444;
+}
+
+a.special {
+  background-color: #accdcf;
+}
+
+a.icon-link {
+  border-bottom: none;
+}
+
+a.icon-link:hover {
+  border-bottom: none;
+}
+
+.menu .active > a,
+.tag,
+.tabs-title > a:hover,
+.button,
+.button.primary {
+  background-color: #007c82;
+}
+
+a.tag:hover {
+  color: #fff;
+}
+
+.tabs-title > a:hover,
+.button.hover,
+.button.primary:hover,
+.button.primary:focus {
+  background: rgba(0, 124, 130, .9);
+}
+
+.tabs-title > a:focus,
+.tabs-title > a[aria-selected='true'] {
+  color: #fff;
+  background: rgb(0, 124, 130);
+}
+
+.tabs-title > a {
+  color: #0a494c;
+}
+
+.masthead {
+  background-image: linear-gradient(#000000, #007c82);
+}
+
+/* end */
+
+/*IntAct tiles and buttons styling*/
+a.intact-background,
+.intact-background,
+.intact-background.button,
+.intact-background.button:hover,
+.intact-background.tag {
+  background: #007c82;
+}
+
+a.button {
+  color: #ffffff !important;
+  background: #007c82;
+}
+
+.button:focus,
+.button:hover,
+.button.hover {
+  background-color: #007c82;
+  opacity: 0.9;
+}
+
+.button.disabled,
+.button.disabled:hover,
+.button.disabled:focus,
+.button[disabled],
+.button[disabled]:hover,
+.button[disabled]:focus {
+  background-color: #007c82;
+  color: #fefefe;
+  opacity: 0.25;
+}
+
+/* Accordion */
+.accordion-title {
+  position: relative;
+  display: block;
+  padding: 1.25rem 1rem;
+  border: 1px solid #e6e6e6;
+  border-bottom: 0;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #0a494c;
+}
+
+.accordion-item.is-active > .accordion-title {
+  background-color: #007c82;
+  color: #ffffff;
+}
+
+.accordion-item.is-active > .accordion-title:hover, .accordion-title:hover {
+  background-color: #007c82;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.accordion-menu .is-accordion-submenu-parent:not(.has-submenu-toggle) > a::after {
+  display: block;
+  width: 0;
+  height: 0;
+  border: inset 6px;
+  content: '';
+  border-bottom-width: 0;
+  border-top-style: solid;
+  border-color: #007c82 transparent transparent;
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  right: 1rem;
+}
+
+a:visited {
+  color: #0a494c;
+}
+
+.legend-label {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: normal;
+  line-height: 1.6;
+  color: #0a0a0a;
+}
+
+/* Progress bar */
+.progress-meter {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 100%;
+  background-color: #007c82;
+}
+
+.progress {
+  height: 1rem;
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: #b7b8b8;
+}
+
+/***************** Alert **********************/
+.alert-panel {
+  font-size: 16px;
+  font-style: italic;
+  background-color: #007c823d;
+  padding: 1em;
+}
+
+.alert-panel h3 {
+  color: #007c82;
+}
+/***************** Tool tips **********************/
+/* Tooltip container */
+.tool-tip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tool-tip .tool-tip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(0,0,0,0.85);
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+  margin-left: 5px;
+  top: -25%;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tool-tip:hover .tool-tip-text {
+  visibility: visible;
+}
+
+/************** Feature Dataset SECTION *******************************/
+
+.archive a {
+  border-bottom-style: none;
+}
+
+/************** HOME PAGE SECTION *******************************/
+
+
+/* LOCAL NAVIGATION DROPDOWN */
+
+.dropdown.menu > li.is-active > a {
+  background-color: rgba(34, 34, 34, 0.9);
+  color: #f8f8f8;
+}
+
+.masthead nav ul li.active a,
+.masthead nav ul li a:active,
+.masthead ul li.active-trail a,
+.masthead ul li.active a:visited,
+.masthead ul li.active-trail a:visited {
+  font-weight: bold;
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent a.active {
+  background-color: #f8f8f8;
+  color: #555;
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a.active::after {
+  border-color: #555 transparent transparent;
+}
+
+/*********** END HOME PAGE SECTION *******************************/
