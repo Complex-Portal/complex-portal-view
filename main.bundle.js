@@ -2367,7 +2367,7 @@ var OlsService = /** @class */ (function () {
 // The list of which env maps to which file can be found in `angular-cli.json`.
 // Environment for production
 var EBI_BASE_URL = 'https://www.ebi.ac.uk/';
-var COMPLEX_LOCAL_BASE_URL = 'http://localhost:4200/';
+var COMPLEX_LOCAL_BASE_URL = 'https://wwwdev.ebi.ac.uk/';
 var LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 var REACTOME_BASE_URL = 'https://reactomedev.oicr.on.ca';
 var INTACT_FTP_BASE_URL = 'http://ftp.ebi.ac.uk/pub/databases/intact/';
