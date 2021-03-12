@@ -4,8 +4,6 @@ import {environment} from '../../../environments/environment';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Router} from '@angular/router';
 
-declare const $: any;
-
 @Component({
   selector: 'cp-about',
   templateUrl: './about.component.html',

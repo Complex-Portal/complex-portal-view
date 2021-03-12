@@ -5,7 +5,6 @@ import {NavigationEnd, Router} from '@angular/router';
 import {BasketService} from './shared/basket/service/basket.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2';
 
-declare const $: any;
 declare const ga: any;
 
 const {version: version} = require('../../package.json');
@@ -47,6 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   // Candidate for utils.
   private initialiseFoundation(): void {
     $(document).foundation();
+    // @ts-ignore
     $(document).foundationExtendEBI();
   }
 

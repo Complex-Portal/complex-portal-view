@@ -5,9 +5,6 @@ import {NotificationService} from '../../../shared/notification/service/notifica
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 
-declare const $: any;
-
-
 @Component({
   selector: 'cp-complex-header',
   templateUrl: './complex-header.component.html',

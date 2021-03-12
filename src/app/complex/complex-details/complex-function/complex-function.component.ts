@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
-declare const $: any;
-
 @Component({
   selector: 'cp-complex-function',
   templateUrl: './complex-function.component.html',

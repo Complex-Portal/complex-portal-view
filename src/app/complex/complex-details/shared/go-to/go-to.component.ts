@@ -12,8 +12,6 @@ import {PageScrollInstance, PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
 
-declare const $: any;
-
 @Component({
   selector: 'cp-go-to',
   templateUrl: './go-to.component.html',

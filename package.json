@@ -50,6 +50,7 @@
     "@angular/cli": "^1.7.3",
     "@angular/compiler-cli": "^5.2.8",
     "@angular/language-service": "^5.2.8",
+    "@types/foundation": "~5.5.30",
     "@types/jasmine": "2.8.6",
     "@types/jquery": "~3.3.36",
     "@types/node": "~14.0.1",

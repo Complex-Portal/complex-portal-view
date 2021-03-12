@@ -7,7 +7,6 @@ import {NodeShape} from '../shared/visualisation/node-diagram/node-diagram.compo
 import {TextEncoder} from 'util';
 
 let viewer: any;
-declare const $: any;
 
 @Component({
   selector: 'cp-complex-participants',

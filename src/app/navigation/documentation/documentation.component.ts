@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 
-declare const $: any;
-
 @Component({
   selector: 'cp-documentation',
   templateUrl: './documentation.component.html',

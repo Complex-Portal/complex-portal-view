@@ -4,8 +4,6 @@ import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
 
-declare const $: any;
-
 @ Component({
   selector: 'cp-tile-menu',
   templateUrl: './tile-menu.component.html',
