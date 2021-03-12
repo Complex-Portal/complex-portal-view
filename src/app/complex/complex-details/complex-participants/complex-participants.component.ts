@@ -28,7 +28,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     'MI Features': true,
     'UniprotKB': false,
     'Superfamily': false,
-    'Interactor': false,
+    'Interactor': true,
   };
 
   constructor(private googleAnalyticsService: GoogleAnalyticsService) {
@@ -46,7 +46,8 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
 
-    this.updateColorLegend(viewer.getColorKeyJson());
+    // We need the timeout to avoid that gets checked and changed after because it throws an error
+    setTimeout(() => this.updateColorLegend(viewer.getColorKeyJson()), 0);
   }
 
   private sortParticipants() {
@@ -110,7 +111,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
           this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color)
-          console.log(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color);
+          console.log(legendDatum.name.replace(/.*_/, '').toUpperCase(), legendDatum.certain.color);
         }
       }
       if (group === 'Interactor') {

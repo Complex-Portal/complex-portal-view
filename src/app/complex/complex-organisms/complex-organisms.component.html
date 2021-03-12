@@ -1,11 +1,14 @@
-<div class="row columns margin-top-large margin-bottom-xlarge">
-  <h1>Complex Portal Organisms</h1>
-  <div class="columns medium-12" style="display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  grid-gap: 1rem;">
-    <div class="medium-12" *ngFor="let organism of organisms" style="break-inside: avoid-column">
-      <cp-complex-organism [organism]="organism"></cp-complex-organism>
+<div class="columns margin-top-large margin-bottom-xlarge">
+  <h1>Organisms</h1>
+  <ng-container *ngIf="organisms;else loadingSpinner">
+    <div class="columns medium-12" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); grid-gap: 1rem;">
+      <div class="medium-12" *ngFor="let organism of organisms" style="break-inside: avoid-column">
+        <cp-complex-organism [organism]="organism"></cp-complex-organism>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #loadingSpinner>
+    <cp-progress-spinner [query]="query"></cp-progress-spinner>
+  </ng-template>
 </div>
 
