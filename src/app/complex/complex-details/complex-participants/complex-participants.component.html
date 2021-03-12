@@ -76,14 +76,14 @@
             </div>
           </td>
             <ng-template [ngIf]="participant.interactorType == 'stable complex'">
-              <td [style.background]="colorLegendGroups.get(participant.identifier)">
+              <td [style.background]="colorLegendGroups.get(participant.identifier.toUpperCase())">
                 <!-- for debugging-->
                 <!-- {{participant.identifier}}-->
                 <!-- {{colorLegendGroups.get(participant.identifier)}}-->
               </td>
             </ng-template>
             <ng-template [ngIf]="participant.interactorType != 'stable complex'">
-              <td [style.background]="colorLegendGroups.get(participant.name)">
+              <td [style.background]="colorLegendGroups.get(participant.name.toUpperCase())">
                 <!-- for debugging-->
                 <!-- {{participant.name}}-->
                 <!-- {{colorLegendGroups.get(participant.name)}}-->
