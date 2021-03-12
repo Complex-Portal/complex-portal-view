@@ -1,0 +1,8 @@
+.node-diagram {
+  vertical-align: middle;
+  height: 20pt;
+}
+
+.node-diagram text {
+  user-select: text;
+}

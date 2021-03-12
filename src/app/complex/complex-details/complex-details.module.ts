@@ -43,6 +43,7 @@ import {SectionService} from './shared/service/section/section.service';
 import {NgxPageScrollModule} from 'ngx-page-scroll';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
+import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-diagram.component';
 
 @NgModule({
   imports: [
@@ -87,9 +88,11 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
     GoToComponent,
     ExternalResourcesComponent,
     DownloadModalComponent,
+    NodeDiagramComponent,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, Md5, SectionService],
 
+  exports: [NodeDiagramComponent],
 })
 export class ComplexDetailsModule {
 }

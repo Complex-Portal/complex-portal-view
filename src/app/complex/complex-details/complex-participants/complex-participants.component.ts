@@ -3,6 +3,7 @@ import {Participant} from '../../shared/model/complex-details/participant.model'
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
 import * as complexviewer from 'complexviewer';
+import {NodeShape} from '../shared/visualisation/node-diagram/node-diagram.component';
 
 let viewer: any;
 const SvgSaver = require('svgsaver');
@@ -45,7 +46,9 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     viewer = new complexviewer.App(document.getElementById('networkContainer'));
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
-
+    for (const key of Object.keys(this.annotations)) {
+      viewer.showAnnotations(key, this.annotations[key])
+    }
     // We need the timeout to avoid that gets checked and changed after because it throws an error
     setTimeout(() => this.updateColorLegend(viewer.getColorKeyJson()), 0);
   }
@@ -63,20 +66,21 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public getLegendURL(interactorType: string): string {
+  public getLegendShape(interactorType: string): NodeShape {
     // TODO: maybe talk to OLS WS at some point, but it was easier to do it like this at the time. - GH issue #172
     switch (interactorType) {
       case 'small molecule':
-        return 'assets/images/legend/small-mol.png';
+        return NodeShape.TRIANGLE;
       case 'protein':
-        return 'assets/images/legend/protein-blob.png';
+      case 'peptide':
+        return NodeShape.ELLIPSE;
       case 'stable complex':
-        return 'assets/images/legend/complex.png';
+        return NodeShape.HEXAGON;
       case 'molecule set':
-        return 'assets/images/legend/int-set.png';
+        return NodeShape.OCTAGON;
       case 'single stranded deoxyribonucleic acid':
       case 'double stranded deoxyribonucleic acid':
-        return 'assets/images/legend/dna.png';
+        return NodeShape.PARALLELOGRAM;
       case 'small nuclear rna':
       case 'small nucleolar rna':
       case 'ribosomal rna':
@@ -84,8 +88,19 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
       case 'transfer rna':
       case 'signal recognition particle rna':
       case 'ribonucleic acid':
-        return 'assets/images/legend/rna.png';
+        return NodeShape.DIAMOND;
     }
+  }
+
+  public getLegendColor(participant: Participant): string {
+    let color;
+    if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide') && participant.name) {
+      color = this.colorLegendGroups.get(participant.name.toUpperCase());
+    } else {
+      color = this.colorLegendGroups.get(participant.identifier.toUpperCase())
+    }
+    if (!color) { color = '#ffffff'; }
+    return color;
   }
 
   public getConvertedStochiometry(stochiometry: string): string {

@@ -36,7 +36,7 @@
             </div>
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #annotations id="interactor" name="interactor" value="Interactor"
-                     autocomplete="off"
+                     autocomplete="off" checked
                      (change)="onChangeAnnotation('Interactor')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check ': annotations.checked == true,
                          'hollow': annotations.checked == false}"
@@ -64,38 +64,29 @@
       <table class="hover">
         <thead>
         <th>Legend</th>
-        <th>Colour</th>
         <th>Description</th>
         <th>Stoichiometry</th>
         </thead>
         <tbody>
         <tr *ngFor="let participant of participants | slice:0:displayedElements">
-          <td>
+          <td style="background-color: #daf1e7">
             <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
-              <img style="max-width: 50%; min-width: 30px" src="{{getLegendURL(participant.interactorType)}}">
+              <cp-node-diagram [shape]="getLegendShape(participant.interactorType)"
+                               [color]="getLegendColor(participant)"
+                               [height]="participant.interactorType === 'stable complex' ? '35pt' : '30pt'"
+                               [borderColor]="participant.interactorType === 'stable complex' ? '#ffffff' : '#000000'"
+                               [borderWidth]="participant.interactorType === 'stable complex' ? 8 : 3"
+              ></cp-node-diagram>
             </div>
           </td>
-            <ng-template [ngIf]="participant.interactorType == 'stable complex'">
-              <td [style.background]="colorLegendGroups.get(participant.identifier.toUpperCase())">
-                <!-- for debugging-->
-                <!-- {{participant.identifier}}-->
-                <!-- {{colorLegendGroups.get(participant.identifier)}}-->
-              </td>
-            </ng-template>
-            <ng-template [ngIf]="participant.interactorType != 'stable complex'">
-              <td [style.background]="colorLegendGroups.get(participant.name.toUpperCase())">
-                <!-- for debugging-->
-                <!-- {{participant.name}}-->
-                <!-- {{colorLegendGroups.get(participant.name)}}-->
-              </td>
-            </ng-template>
           <td>
             <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
               {{participant.name}} ({{participant.bioRole}})</b>
             </div>
             <div class="columns medium-12 no-pad-right no-pad-left">
-              <a  *ngIf="participant.identifierLink" href="{{participant.identifierLink}}" target="_blank">{{participant.identifier}}
-              <i class="icon icon-generic small" data-icon="x"></i>
+              <a *ngIf="participant.identifierLink" href="{{participant.identifierLink}}"
+                 target="_blank">{{participant.identifier}}
+                <i class="icon icon-generic small" data-icon="x"></i>
               </a>
             </div>
             <div class="columns medium-12 no-pad-right no-pad-left">{{participant.description}}</div>
