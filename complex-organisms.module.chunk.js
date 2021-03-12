@@ -103,7 +103,7 @@ module.exports = ""
 /***/ "./src/app/complex/complex-organisms/complex-organisms.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"columns margin-top-large margin-bottom-xlarge\">\n  <h1>Organisms</h1>\n  <ng-container *ngIf=\"organisms;else loadingSpinner\">\n    <div class=\"columns medium-12\" style=\"display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); grid-gap: 1rem;\">\n      <div class=\"medium-12\" *ngFor=\"let organism of organisms\" style=\"break-inside: avoid-column\">\n        <cp-complex-organism [organism]=\"organism\"></cp-complex-organism>\n      </div>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n\n"
+module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Organisms</h1>\n  <ng-container *ngIf=\"organisms;else loadingSpinner\">\n    <div class=\"columns medium-12\" style=\"display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); grid-gap: 1rem;\">\n      <div class=\"medium-12\" *ngFor=\"let organism of organisms\" style=\"break-inside: avoid-column\">\n        <cp-complex-organism [organism]=\"organism\"></cp-complex-organism>\n      </div>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n\n"
 
 /***/ }),
 
