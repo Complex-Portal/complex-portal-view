@@ -11,12 +11,12 @@
 
           <div class="small expanded button-group margin-bottom-none">
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
-              <input type="checkbox" #features id="mifeatures" name="mifeatures" value="MI Features" checked
+              <input type="checkbox" #features id="mifeatures" name="mifeatures" value="Binding Region" checked
                      autocomplete="off"
                      (change)="onChangeAnnotation('MI Features')">
               <label [ngClass]="{'icon icon-common icon-spacer icon-check': features.checked == true,
                          'hollow': features.checked == false}"
-                     class="button expanded" for="mifeatures">MI Features</label>
+                     class="button expanded" for="mifeatures">Binding Region</label>
             </div>
             <div class="columns small-6 medium-3 no-pad-left no-pad-right annotations">
               <input type="checkbox" #uniprot id="uniprotkb" name="uniprotkb" value="UniprotKB"

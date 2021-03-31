@@ -91,7 +91,9 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
   public getLegendColor(participant: Participant): string {
     let color;
-    if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide') && participant.name) {
+    // TODO Talk to Colin to try a simple way to retrieve the colors .e.g. only by identifier
+    if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide')
+      && !participant.identifier.includes('-PRO') && participant.name) {
       color = this.colorLegendGroups.get(participant.name.toUpperCase());
     } else {
       color = this.colorLegendGroups.get(participant.identifier.toUpperCase())

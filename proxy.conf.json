@@ -1,0 +1,8 @@
+{
+  "/intact/complex-ws/*": {
+    "target": "http://localhost:9090",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
