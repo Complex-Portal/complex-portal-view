@@ -127,7 +127,6 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
           this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color)
-          console.log(legendDatum.name.replace(/.*_/, '').toUpperCase(), legendDatum.certain.color);
         }
       }
       if (group === 'Interactor') {
@@ -135,7 +134,6 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
           this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color)
-          console.log(legendDatum.name.toUpperCase(), legendDatum.certain.color);
         }
       }
     }

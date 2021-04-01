@@ -119,3 +119,8 @@ text.tooltip {
 .button-group input{
   display: none;
 }
+
+.button-group > .button {
+  font-size: small;
+  white-space: nowrap;
+}
