@@ -4,7 +4,7 @@
   <div class="columns medium-12 no-pad-right no-pad-left">
     <div class="columns medium-6 no-pad-right">
       <!-- complex viewer -->
-      <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
+      <div class="row small-up-12 medium-up-12 large-up-12" data-equalizer
            data-equalize-on="medium" id="large-button-grid">
         <div class="columns medium-12 no-pad-left margin-bottom-xlarge">
           <div *ngIf="complexMIJSON" (click)="interactedWithViewer()" id="networkContainer"></div>
@@ -42,8 +42,6 @@
                          'hollow': annotations.checked == false}"
                      class="button expanded" for="interactor">Proteins</label>
             </div>
-          </div>
-          <div class="small expanded button-group">
             <div class="columns small-6 medium-3 no-pad-left no-pad-right">
               <a class="button secondary" (click)="onExpandAll()">Expand All</a>
             </div>
