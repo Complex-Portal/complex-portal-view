@@ -83,7 +83,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].psi25 = 'Escherichia_coli';
             organisms[i].psi30 = 'ecolx';
             organisms[i].complextab = '562';
-            organisms[i].complextab = '562';
+            organisms[i].taxid = '562';
             break;
           case 'Rattus norvegicus':
             organisms[i].scientificName = organisms[i].name;
@@ -123,7 +123,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].psi25 = 'Drosophila_melanogaster';
             organisms[i].psi30 = 'drome';
             organisms[i].complextab = '7227';
-            organisms[i].complextab = '7227';
+            organisms[i].taxid = '7227';
             break;
           case 'Bos taurus':
             organisms[i].scientificName = organisms[i].name;
@@ -143,7 +143,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].psi25 = 'Oryctolagus_cuniculus';
             organisms[i].psi30 = 'rabit';
             organisms[i].complextab = '9986';
-            organisms[i].complextab = '9986';
+            organisms[i].taxid = '9986';
             break;
           case 'Ovis aries':
             organisms[i].scientificName = organisms[i].name;
@@ -176,7 +176,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].taxid = '9615';
             break;
           case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
-            organisms[i].scientificName = 'Homo sapiens';
+            organisms[i].scientificName = 'Schizosaccharomyces pombe';
             organisms[i].nameDetails = 'strain 972 / ATCC 24843';
             organisms[i].symbol = 'Y';
             organisms[i].type = 'animal';
