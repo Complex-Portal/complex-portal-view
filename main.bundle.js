@@ -3,7 +3,7 @@ webpackJsonp(["main"],{
 /***/ "./package.json":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","start-with-proxy":"ng serve --proxy-config proxy.conf.json","publish-gh-pages":"rm -rf dist; ng build --output-path=dist --dev --base-href \"https://complex-portal.github.io/complex-portal-view/\"; sudo ngh","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","@ebi-gene-expression-group/anatomogram":"^2.4.0","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"^2.1.6","core-js":"^2.5.3","ebi-framework":"1.3.8","expose-loader":"^0.7.5","jquery":"^3.4.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ngx-markdown":"^1.5.2","ngx-page-scroll":"^4.0.2","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/foundation":"~5.5.30","@types/jasmine":"2.8.6","@types/jquery":"~3.3.36","@types/node":"~14.0.1","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^2.0.0","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1","typescript":"~2.9.2"}}
+module.exports = {"name":"complex-portal-view","version":"1.0.2","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng":"ng","start":"ng serve","start-with-proxy":"ng serve --proxy-config proxy.conf.json","publish-gh-pages":"rm -rf dist; ng build --output-path=dist --dev --base-href \"https://complex-portal.github.io/complex-portal-view/\"; sudo ngh","build-prod":"rm -rf dist; ng build --prod --build-optimizer=false --base-href \"/complexportal/\"","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^5.2.8","@angular/cdk":"^5.2.4","@angular/common":"^5.2.8","@angular/compiler":"^5.2.8","@angular/core":"^5.2.8","@angular/forms":"^5.2.8","@angular/http":"^5.2.8","@angular/material":"^5.2.4","@angular/platform-browser":"^5.2.8","@angular/platform-browser-dynamic":"^5.2.8","@angular/router":"^5.2.8","@ebi-gene-expression-group/anatomogram":"^2.4.0","angular-cli-ghpages":"^0.5.2","angulartics2":"^2.4.0","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"^2.1.6","core-js":"^2.5.3","ebi-framework":"1.3.8","expose-loader":"^0.7.5","jquery":"^3.4.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ngx-markdown":"^1.5.2","ngx-page-scroll":"^4.0.2","ngx-toastr":"^8.3.0","npm":"^5.7.1","react":"^15.6.1","rxjs":"^5.5.6","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","zone.js":"^0.8.20"},"devDependencies":{"@angular/cli":"^1.7.3","@angular/compiler-cli":"^5.2.8","@angular/language-service":"^5.2.8","@types/foundation":"~5.5.30","@types/jasmine":"2.8.6","@types/jquery":"~3.3.36","@types/node":"~14.0.1","codelyzer":"^4.2.1","jasmine-core":"^3.1.0","jasmine-spec-reporter":"^4.2.1","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-cli":"^2.0.0","karma-coverage-istanbul-reporter":"^1.4.2","karma-jasmine":"^1.1.1","karma-jasmine-html-reporter":"^0.2.2","protractor":"^5.3.0","ts-node":"^5.0.1","tslint":"^5.9.1","typescript":"~2.9.2"}}
 
 /***/ }),
 
@@ -61,12 +61,14 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ontologies_ontologies_component__ = __webpack_require__("./src/app/ontologies/ontologies.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navigation_about_about_component__ = __webpack_require__("./src/app/navigation/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__download_download_component__ = __webpack_require__("./src/app/download/download.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__navigation_documentation_documentation_component__ = __webpack_require__("./src/app/navigation/documentation/documentation.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -92,6 +94,10 @@ var routes = [
     {
         path: 'ontologies',
         component: __WEBPACK_IMPORTED_MODULE_2__ontologies_ontologies_component__["a" /* OntologiesComponent */]
+    },
+    {
+        path: 'documentation',
+        component: __WEBPACK_IMPORTED_MODULE_5__navigation_documentation_documentation_component__["a" /* DocumentationComponent */]
     },
     {
         path: '**',
@@ -124,7 +130,7 @@ module.exports = "footer a {\n  text-decoration:none;\n  border-width: 0;\n}\n\n
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div data-sticky-container>\n  <header id=\"masthead\" class=\"masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"content:top\"\n          data-btm-anchor=\"content:bottom\">\n    <!-- COMPLEX PORTAL HEADER SECTION -->\n    <div class=\"masthead-inner row\"> <!-- expanded -->\n      <!-- local-title -->\n      <div class=\"columns medium-6\" id=\"local-title\">\n        <h1><a routerLink=\"/home\" title=\"Back to Complex Portal homepage\">\n          <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\"> Complex Portal</a>\n        </h1>\n      </div>\n      <!--/local-title -->\n\n      <div class=\"columns medium-6\">\n        <cp-local-search></cp-local-search>\n      </div>\n\n      <!-- local-nav -->\n      <nav>\n        <ul id=\"local-nav\" class=\"dropdown menu float-left\" data-dropdown-menu=\"true\" data-description=\"navigational\">\n          <li routerLinkActive=\"active\"><a routerLink=\"/home\" routerLinkActive=\"active\">Home</a></li>\n          <li routerLinkActive=\"active\"><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n          <li class=\"extra-items-menu is-dropdown-submenu-parent opens-right\">\n            <a routerLinkActive=\"active\" routerLink=\"/documentation\">Documentation</a>\n            <ul class=\"menu submenu is-dropdown-submenu first-sub vertical\" role=\"menu\" >\n              <li class=\"no-border-submenu\" routerLinkActive=\"active\"><a routerLink=\"/documentation/data_content\">Data Content</a></li>\n              <li class=\"no-border-submenu\" routerLinkActive=\"active\"><a routerLink=\"/documentation/query_syntax\">Query syntax</a></li>\n            </ul>\n          </li>\n          <li routerLinkActive=\"active\"><a routerLinkActive=\"active\" [ngClass]=\"{'animated flash': onChangeInBasket}\" routerLink=\"/basket\">Basket\n            <div routerLinkActive=\"active\" routerLink=\"/basket\" class=\"basket\">\n              &nbsp;<strong>{{basketCount}}</strong>&nbsp;\n            </div></a>\n          </li>\n          <li routerLinkActive=\"active\"><a href=\"{{complexPortalSupportUrl}}\">Support <i class=\"icon icon-generic\" data-icon=\"x\"></i></a></li>\n        </ul>\n      </nav>\n      <!-- /local-nav -->\n    </div>\n  </header>\n  <!-- END COMPLEX PORTAL HEADER SECTION -->\n\n<!--  <cp-progress-bar></cp-progress-bar>-->\n</div>\n\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n    <!-- Routed views go here -->\n  </section>\n  <!-- End suggested layout containers -->\n</div>\n\n\n<!-- Local footer -->\n<footer id=\"local-footer\" class=\"local-footer\" role=\"local-footer\">\n  <div class=\"row margin-top-medium\">\n    <div id=\"contributors\" class=\"margin-top-large\" style=\"text-align: center\">\n      <h4><p class=\"icon icon-generic\" data-icon=\"}\"> Our Contributors</p></h4>\n    </div>\n\n    <div class=\"columns\">\n      <table style=\"border-collapse: unset\">\n        <tbody>\n        <tr>\n          <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n          <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a>\n          </td>\n          <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n            src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n          <td><a href=\"http://matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n            src=\"assets/images/contributors/matrixdb.png\"></a></td>\n          <!-- We need the protocol, matrixdb don't support https-->\n          <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n          <td><a href=\"//www.ebi.ac.uk/pdbe/\" target=\"_blank\"><img src=\"assets/images/contributors/PDBe.png\"></a>\n          <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a>\n          </td>\n          <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n          <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n      <div class=\"label secondary-color float-right\">{{version}}-{{environmentName}}</div>\n    </div>\n  </div>\n</footer>\n"
+module.exports = "<div data-sticky-container>\n  <header id=\"masthead\" class=\"masthead\" data-sticky data-sticky-on=\"large\" data-top-anchor=\"content:top\"\n          data-btm-anchor=\"content:bottom\">\n    <!-- COMPLEX PORTAL HEADER SECTION -->\n    <div class=\"masthead-inner row\"> <!-- expanded -->\n      <!-- local-title -->\n      <div class=\"columns medium-6\" id=\"local-title\">\n        <h1><a routerLink=\"/home\" title=\"Back to Complex Portal homepage\">\n          <img src=\"assets/images/logo.png\" style=\"width: 43px; height: 63px;\"> Complex Portal</a>\n        </h1>\n      </div>\n      <!--/local-title -->\n\n      <div class=\"columns medium-6\">\n        <cp-local-search></cp-local-search>\n      </div>\n\n      <!-- local-nav -->\n      <nav>\n        <ul id=\"local-nav\" class=\"dropdown menu float-left\" data-dropdown-menu=\"true\" data-description=\"navigational\">\n          <li routerLinkActive=\"active\"><a routerLink=\"/home\" routerLinkActive=\"active\">Home</a></li>\n          <li routerLinkActive=\"active\"><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n          <li routerLinkActive=\"active\"><a routerLink=\"/documentation\" routerLinkActive=\"active\">Documentation</a></li>\n          <li routerLinkActive=\"active\"><a routerLink=\"/basket\" routerLinkActive=\"active\" [ngClass]=\"{'animated flash': onChangeInBasket}\" >Basket\n            <div routerLink=\"/basket\" routerLinkActive=\"active\" class=\"basket\">\n              &nbsp;<strong>{{basketCount}}</strong>&nbsp;\n            </div></a>\n          </li>\n          <li routerLinkActive=\"active\"><a href=\"{{complexPortalSupportUrl}}\">Support <i class=\"icon icon-generic\" data-icon=\"x\"></i></a></li>\n        </ul>\n      </nav>\n      <!-- /local-nav -->\n    </div>\n  </header>\n  <!-- END COMPLEX PORTAL HEADER SECTION -->\n\n<!--  <cp-progress-bar></cp-progress-bar>-->\n</div>\n\n<!---->\n<div id=\"content\" role=\"main\" class=\"row\">\n  <!-- Suggested layout containers -->\n  <section>\n    <router-outlet></router-outlet>\n    <!-- Routed views go here -->\n  </section>\n  <!-- End suggested layout containers -->\n</div>\n\n\n<!-- Local footer -->\n<footer id=\"local-footer\" class=\"local-footer\" role=\"local-footer\">\n  <div class=\"row margin-top-medium\">\n    <div id=\"contributors\" class=\"margin-top-large\" style=\"text-align: center\">\n      <h4><p class=\"icon icon-generic\" data-icon=\"}\"> Our Contributors</p></h4>\n    </div>\n\n    <div class=\"columns\">\n      <table style=\"border-collapse: unset\">\n        <tbody>\n        <tr>\n          <td><a href=\"//www.ceitec.eu\" target=\"_blank\"><img src=\"assets/images/contributors/Ceitec.png\"></a></td>\n          <td><a href=\"//www.evidenceontology.org/\" target=\"_blank\"><img src=\"assets/images/contributors/eco.png\"></a>\n          </td>\n          <td><a href=\"//www.ucl.ac.uk/functional-gene-annotation/cardiovascular\" target=\"_blank\"><img\n            src=\"assets/images/contributors/imex_acg_s.png\"></a></td>\n          <td><a href=\"http://matrixdb.univ-lyon1.fr\" target=\"_blank\"><img\n            src=\"assets/images/contributors/matrixdb.png\"></a></td>\n          <!-- We need the protocol, matrixdb don't support https-->\n          <td><a href=\"//mint.bio.uniroma2.it\" target=\"_blank\"><img src=\"assets/images/contributors/Mint.png\"></a>\n          <td><a href=\"//www.ebi.ac.uk/pdbe/\" target=\"_blank\"><img src=\"assets/images/contributors/PDBe.png\"></a>\n          <td><a href=\"//www.yeastgenome.org\" target=\"_blank\"><img src=\"assets/images/contributors/SGD.png\"></a>\n          </td>\n          <td><a href=\"//www.sib.swiss\" target=\"_blank\"><img src=\"assets/images/contributors/sib.png\"></a></td>\n          <td><a href=\"//www.uniprot.org\" target=\"_blank\"><img src=\"assets/images/contributors/uniprot.png\"></a>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n      <div class=\"label secondary-color float-right\">{{version}}-{{environmentName}}</div>\n    </div>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -315,17 +321,17 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__search_local_search_local_search_component__ = __webpack_require__("./src/app/search/local-search/local-search.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_platform_browser_animations__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__navigation_documentation_documentation_module__ = __webpack_require__("./src/app/navigation/documentation/documentation.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ontologies_ontologies_component__ = __webpack_require__("./src/app/ontologies/ontologies.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__shared_local_storage_service_local_storage_service__ = __webpack_require__("./src/app/shared/local-storage/service/local-storage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__search_service_search_service__ = __webpack_require__("./src/app/search/service/search.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_markdown__ = __webpack_require__("./node_modules/ngx-markdown/dist/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_markdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_ngx_markdown__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__home_home_module__ = __webpack_require__("./src/app/home/home.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__navigation_about_about_component__ = __webpack_require__("./src/app/navigation/about/about.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__download_download_component__ = __webpack_require__("./src/app/download/download.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ontologies_ontologies_component__ = __webpack_require__("./src/app/ontologies/ontologies.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_google_analytics_service_google_analytics_service__ = __webpack_require__("./src/app/shared/google-analytics/service/google-analytics.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_local_storage_service_local_storage_service__ = __webpack_require__("./src/app/shared/local-storage/service/local-storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__search_service_search_service__ = __webpack_require__("./src/app/search/service/search.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_ngx_markdown__ = __webpack_require__("./node_modules/ngx-markdown/dist/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_ngx_markdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23_ngx_markdown__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__home_home_module__ = __webpack_require__("./src/app/home/home.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__navigation_about_about_component__ = __webpack_require__("./src/app/navigation/about/about.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__download_download_component__ = __webpack_require__("./src/app/download/download.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__navigation_documentation_documentation_component__ = __webpack_require__("./src/app/navigation/documentation/documentation.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -371,22 +377,22 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__search_local_search_local_search_component__["a" /* LocalSearchComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__ontologies_ontologies_component__["a" /* OntologiesComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__navigation_about_about_component__["a" /* AboutComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__download_download_component__["a" /* DownloadComponent */]
+                __WEBPACK_IMPORTED_MODULE_19__ontologies_ontologies_component__["a" /* OntologiesComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__navigation_about_about_component__["a" /* AboutComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__download_download_component__["a" /* DownloadComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__navigation_documentation_documentation_component__["a" /* DocumentationComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
-                __WEBPACK_IMPORTED_MODULE_26__angular_router__["RouterModule"].forRoot([]),
+                __WEBPACK_IMPORTED_MODULE_25__angular_router__["RouterModule"].forRoot([]),
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["HttpClientModule"],
                 __WEBPACK_IMPORTED_MODULE_17__angular_platform_browser_animations__["a" /* NoopAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_15_ngx_toastr__["a" /* ToastrModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_8_angulartics2__["Angulartics2Module"].forRoot([__WEBPACK_IMPORTED_MODULE_8_angulartics2__["Angulartics2GoogleAnalytics"]]),
                 __WEBPACK_IMPORTED_MODULE_18__angular_material__["a" /* MatProgressBarModule */],
-                __WEBPACK_IMPORTED_MODULE_24_ngx_markdown__["MarkdownModule"].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_25__home_home_module__["a" /* HomeModule */],
-                __WEBPACK_IMPORTED_MODULE_19__navigation_documentation_documentation_module__["a" /* DocumentationModule */],
+                __WEBPACK_IMPORTED_MODULE_23_ngx_markdown__["MarkdownModule"].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_24__home_home_module__["a" /* HomeModule */],
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
             ],
             providers: [
@@ -396,10 +402,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__complex_complex_details_complex_references_euro_pmc_crossreferences_service_euro_pmc_service__["a" /* EuroPmcService */],
                 __WEBPACK_IMPORTED_MODULE_11__shared_ols_service_ols_service__["a" /* OlsService */],
                 __WEBPACK_IMPORTED_MODULE_12__shared_basket_service_basket_service__["a" /* BasketService */],
-                __WEBPACK_IMPORTED_MODULE_22__shared_local_storage_service_local_storage_service__["a" /* LocalStorageService */],
+                __WEBPACK_IMPORTED_MODULE_21__shared_local_storage_service_local_storage_service__["a" /* LocalStorageService */],
                 __WEBPACK_IMPORTED_MODULE_13_ts_md5_dist_md5__["Md5"],
-                __WEBPACK_IMPORTED_MODULE_21__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */],
-                __WEBPACK_IMPORTED_MODULE_23__search_service_search_service__["a" /* SearchService */]
+                __WEBPACK_IMPORTED_MODULE_20__shared_google_analytics_service_google_analytics_service__["a" /* GoogleAnalyticsService */],
+                __WEBPACK_IMPORTED_MODULE_22__search_service_search_service__["a" /* SearchService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         })
@@ -674,7 +680,7 @@ module.exports = ""
 /***/ "./src/app/download/download.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Downloads</h1>\n  <p>The Complex Portal is released monthly and data on individual complexes is available for download in both PSI-MI\n    XML2.5 and XML3.0 formats (see the PSI website for a detailed format description). The files are grouped by\n    species. We have now also developed ComplexTAB, a flatfile format to enable simpler parsing or loading into\n    Microsoft Excel. A separate ComplexTAB file has been produced for each species - details on the format are\n    available <a (click)=\"goToComplexTabeReadMe()\">here <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>. All\n    files are available from the <a\n      (click)=\"goToComplexFTPCurrent()\">ftp site <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a> and will be\n    updated as we add new complexes with every data release.</p>\n  <ul>\n    <li class=\"icon-bullet\"><span class=\"icon icon-generic\" data-icon=\"*\"></span> All Complex Portal data and software\n      is freely available to all users, academic or commercial, under the terms of the Apache License, Version 2.0\n    </li>\n  </ul>\n  <div class=\"row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n       data-equalize-on=\"medium\" id=\"large-button-grid\">\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch (click)=\"goToComplexPSI25()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 2.5</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexPSI30()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 3.0</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexTAB()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"v\"></h3>\n        <h5 class=\"white-color\">ComplexTab</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexWS()\">\n        <h3 class=\"icon icon-fileformats white-color\" data-icon=\"J\"></h3>\n        <h5 class=\"white-color\">Web Service</h5>\n      </a>\n    </div>\n  </div>\n</div>\n\n\n\n"
+module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Downloads</h1>\n  <p>The Complex Portal is released monthly and data on individual complexes is available for download in both PSI-MI\n    XML2.5 and XML3.0 formats (see the PSI website for a detailed format description). The files are grouped by\n    species. We have now also developed ComplexTAB, a flatfile format to enable simpler parsing or loading into\n    Microsoft Excel. A separate ComplexTAB file has been produced for each species - details on the format are\n    available <a (click)=\"goToComplexTabeReadMe()\">here <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a>. All\n    files are available from the <a\n      (click)=\"goToComplexFTPCurrent()\">ftp site <i class=\"icon icon-generic small\" data-icon=\"x\"></i></a> and will be\n    updated as we add new complexes with every data release.</p>\n  <ul>\n    <li class=\"icon-bullet\"><span class=\"icon icon-generic\" data-icon=\"*\"></span> For license details, please visit our\n      <a routerLink=\"/about\" fragment=\"license_privacy\">About section.</a>\n    </li>\n  </ul>\n  <div class=\"row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right\" data-equalizer\n       data-equalize-on=\"medium\" id=\"large-button-grid\">\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch (click)=\"goToComplexPSI25()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 2.5</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexPSI30()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">PSI-MI XML 3.0</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexTAB()\">\n        <h3 class=\"icon icon-fileformats  white-color\" data-icon=\"v\"></h3>\n        <h5 class=\"white-color\">ComplexTab</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch\n         (click)=\"goToComplexWS()\">\n        <h3 class=\"icon icon-fileformats white-color\" data-icon=\"J\"></h3>\n        <h5 class=\"white-color\">Web Service</h5>\n      </a>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1244,25 +1250,25 @@ var AboutComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/navigation/documentation/data-content/data-content.component.css":
+/***/ "./src/app/navigation/documentation/documentation.component.css":
 /***/ (function(module, exports) {
 
 module.exports = "/* See this issue to understand why we need ng-deep https://github.com/jfcere/ngx-markdown/issues/56*/\nmarkdown ::ng-deep h1 {\n  font-size: xx-large;\n}\nmarkdown ::ng-deep h2 {\n  font-size: x-large;\n}\nmarkdown ::ng-deep h3 {\n  font-size: large;\n}\nmarkdown ::ng-deep img {\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  height: 100px;\n}\n"
 
 /***/ }),
 
-/***/ "./src/app/navigation/documentation/data-content/data-content.component.html":
+/***/ "./src/app/navigation/documentation/documentation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Data Content</h1>\n  <ul class=\"tabs\" data-tabs data-deep-link=\"true\" data-update-history=\"false\" id=\"data-content-tabs\">\n    <li class=\"tabs-title is-active\"><a href=\"documentation/data_content#overview\" aria-selected=\"true\">Overview</a>\n    </li>\n  </ul>\n\n  <div class=\"tabs-content\" data-tabs-content=\"data-content-tabs\">\n    <div class=\"tabs-panel is-active\" id=\"overview\">\n      <markdown [src]=source></markdown>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Documentation</h1>\n  <ul class=\"tabs\" data-tabs data-deep-link=\"true\" data-update-history=\"false\" id=\"documentation-tabs\">\n    <li class=\"tabs-title is-active\"><a href=\"documentation#data_content\" aria-selected=\"true\">Data Content</a>\n    <li class=\"tabs-title\"><a href=\"documentation#file_formats\">File Formats</a></li>\n    <li class=\"tabs-title\"><a href=\"documentation#query_syntax\">Query Syntax</a></li>\n  </ul>\n\n  <div class=\"tabs-content\" data-tabs-content=\"documentation-tabs\">\n    <div class=\"tabs-panel is-active\" id=\"data_content\">\n      <markdown [src]=data_content></markdown>\n    </div>\n\n    <div class=\"tabs-panel\" id=\"file_formats\">\n      <markdown [src]=file_formats></markdown>\n    </div>\n\n    <div class=\"tabs-panel\" id=\"query_syntax\">\n      <markdown [src]=query_syntax></markdown>\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "./src/app/navigation/documentation/data-content/data-content.component.ts":
+/***/ "./src/app/navigation/documentation/documentation.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataContentComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
@@ -1280,118 +1286,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DataContentComponent = /** @class */ (function () {
-    function DataContentComponent(titleService) {
-        this.titleService = titleService;
-        this.source = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'cp_content.md';
-    }
-    DataContentComponent.prototype.ngOnInit = function () {
-        this.titleService.setTitle('Complex Portal - Data Content');
-        __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
-    };
-    DataContentComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'cp-data-content',
-            template: __webpack_require__("./src/app/navigation/documentation/data-content/data-content.component.html"),
-            styles: [__webpack_require__("./src/app/navigation/documentation/data-content/data-content.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["Title"]])
-    ], DataContentComponent);
-    return DataContentComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/documentation-routing.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationRoutingModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__documentation_component__ = __webpack_require__("./src/app/navigation/documentation/documentation.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_content_data_content_component__ = __webpack_require__("./src/app/navigation/documentation/data-content/data-content.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__query_syntax_query_syntax_component__ = __webpack_require__("./src/app/navigation/documentation/query-syntax/query-syntax.component.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-var documentationRoutes = [
-    {
-        path: 'documentation',
-        component: __WEBPACK_IMPORTED_MODULE_2__documentation_component__["a" /* DocumentationComponent */],
-    },
-    {
-        path: 'documentation/data_content',
-        component: __WEBPACK_IMPORTED_MODULE_3__data_content_data_content_component__["a" /* DataContentComponent */],
-    },
-    {
-        path: 'documentation/query_syntax',
-        component: __WEBPACK_IMPORTED_MODULE_4__query_syntax_query_syntax_component__["a" /* QuerySyntaxComponent */],
-    },
-];
-var DocumentationRoutingModule = /** @class */ (function () {
-    function DocumentationRoutingModule() {
-    }
-    DocumentationRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["RouterModule"]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["RouterModule"].forChild(documentationRoutes)],
-        })
-    ], DocumentationRoutingModule);
-    return DocumentationRoutingModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/documentation.component.css":
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/documentation.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Documentation</h1>\n  <div class=\"row button-grid small-up-1 medium-up-2 large-up-2 margin-top-xlarge no-pad-right\" data-equalizer\n       data-equalize-on=\"medium\" id=\"large-button-grid\">\n    <div class=\"column  padding-bottom-large\">\n      <p>Data Content documents the type of data and features that are captured for each complex.</p>\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch routerLink=\"./data_content\">\n        <h3 class=\"icon icon-generic  white-color\" data-icon=\";\"></h3>\n        <h5 class=\"white-color\">Data Content</h5>\n      </a>\n    </div>\n    <div class=\"column  padding-bottom-large\">\n      <p>Query Syntax contains details about the types of search that can be performed and the syntax required.</p>\n      <a class=\"button medium-12 columns text-center\" data-equalizer-watch routerLink=\"./query_syntax\">\n        <h3 class=\"icon icon-functional white-color\" data-icon=\"1\"></h3>\n        <h5 class=\"white-color\">Query Syntax</h5>\n      </a>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/documentation.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
 var DocumentationComponent = /** @class */ (function () {
     function DocumentationComponent(titleService) {
         this.titleService = titleService;
+        this.data_content = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'documentation/cp_content.md';
+        this.file_formats = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'documentation/file_formats.md';
+        this.query_syntax = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'documentation/cql.md';
     }
     DocumentationComponent.prototype.ngOnInit = function () {
         this.titleService.setTitle('Complex Portal - Documentation');
@@ -1407,116 +1307,6 @@ var DocumentationComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["Title"]])
     ], DocumentationComponent);
     return DocumentationComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/documentation.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocumentationModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__documentation_component__ = __webpack_require__("./src/app/navigation/documentation/documentation.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__documentation_routing_module__ = __webpack_require__("./src/app/navigation/documentation/documentation-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_content_data_content_component__ = __webpack_require__("./src/app/navigation/documentation/data-content/data-content.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__query_syntax_query_syntax_component__ = __webpack_require__("./src/app/navigation/documentation/query-syntax/query-syntax.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_markdown__ = __webpack_require__("./node_modules/ngx-markdown/dist/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_markdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ngx_markdown__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-var DocumentationModule = /** @class */ (function () {
-    function DocumentationModule() {
-    }
-    DocumentationModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_3__documentation_routing_module__["a" /* DocumentationRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_6_ngx_markdown__["MarkdownModule"].forChild(),
-            ],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__documentation_component__["a" /* DocumentationComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__data_content_data_content_component__["a" /* DataContentComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__query_syntax_query_syntax_component__["a" /* QuerySyntaxComponent */]
-            ]
-        })
-    ], DocumentationModule);
-    return DocumentationModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/query-syntax/query-syntax.component.css":
-/***/ (function(module, exports) {
-
-module.exports = "/* See this issue to understand why we need ng-deep https://github.com/jfcere/ngx-markdown/issues/56*/\nmarkdown ::ng-deep h1 {\n  font-size: xx-large;\n}\nmarkdown ::ng-deep h2 {\n  font-size: x-large;\n}\nmarkdown ::ng-deep h3 {\n  font-size: large;\n}\nmarkdown ::ng-deep img {\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  height: 100px;\n}\n"
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/query-syntax/query-syntax.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"columns margin-top-large margin-bottom-large\">\n  <h1>Querying Complex Portal</h1>\n  <ul class=\"tabs\" data-tabs data-deep-link=\"true\" data-update-history=\"false\" id=\"query-tabs\">\n    <li class=\"tabs-title is-active\"><a href=\"documentation/query_syntax#overview\" aria-selected=\"true\">Overview</a>\n    </li>\n  </ul>\n\n  <div class=\"tabs-content\" data-tabs-content=\"query-tabs\">\n    <div class=\"tabs-panel is-active\" id=\"overview\">\n      <markdown [src]=source></markdown>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/navigation/documentation/query-syntax/query-syntax.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuerySyntaxComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__ = __webpack_require__("./src/app/shared/loading-indicators/progress-bar/progress-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var QuerySyntaxComponent = /** @class */ (function () {
-    function QuerySyntaxComponent(titleService) {
-        this.titleService = titleService;
-        this.source = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].complex_portal_documentation_url + 'cql.md';
-    }
-    QuerySyntaxComponent.prototype.ngOnInit = function () {
-        this.titleService.setTitle('Complex Portal - Query Syntax');
-        __WEBPACK_IMPORTED_MODULE_2__shared_loading_indicators_progress_bar_progress_bar_component__["a" /* ProgressBarComponent */].hide();
-    };
-    QuerySyntaxComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'cp-query-syntax',
-            template: __webpack_require__("./src/app/navigation/documentation/query-syntax/query-syntax.component.html"),
-            styles: [__webpack_require__("./src/app/navigation/documentation/query-syntax/query-syntax.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["Title"]])
-    ], QuerySyntaxComponent);
-    return QuerySyntaxComponent;
 }());
 
 
