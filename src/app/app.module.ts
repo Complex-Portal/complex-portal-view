@@ -18,7 +18,6 @@ import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material';
-import {DocumentationModule} from './navigation/documentation/documentation.module';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {GoogleAnalyticsService} from './shared/google-analytics/service/google-analytics.service';
 import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
@@ -28,6 +27,7 @@ import {HomeModule} from './home/home.module';
 import {Router, RouterModule} from '@angular/router';
 import {AboutComponent} from './navigation/about/about.component';
 import {DownloadComponent} from './download/download.component';
+import {DocumentationComponent} from './navigation/documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import {DownloadComponent} from './download/download.component';
     LocalSearchComponent,
     OntologiesComponent,
     AboutComponent,
-    DownloadComponent
+    DownloadComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,6 @@ import {DownloadComponent} from './download/download.component';
     MatProgressBarModule,
     MarkdownModule.forRoot(),
     HomeModule,
-    DocumentationModule,
     AppRoutingModule,
   ],
   providers: [

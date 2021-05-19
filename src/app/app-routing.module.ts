@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {AboutComponent} from './navigation/about/about.component';
 import {DownloadComponent} from './download/download.component';
+import {DocumentationComponent} from './navigation/documentation/documentation.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'ontologies',
     component: OntologiesComponent
+  },
+  {
+    path: 'documentation',
+    component: DocumentationComponent
   },
   {
     path: '**',
