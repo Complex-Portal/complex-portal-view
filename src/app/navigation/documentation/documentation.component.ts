@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'cp-documentation',
@@ -8,6 +9,10 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
   styleUrls: ['./documentation.component.css']
 })
 export class DocumentationComponent implements OnInit {
+
+  data_content = environment.complex_portal_documentation_url + 'documentation/cp_content.md';
+  file_formats = environment.complex_portal_documentation_url + 'documentation/file_formats.md';
+  query_syntax = environment.complex_portal_documentation_url + 'documentation/cql.md';
 
   constructor(private titleService: Title) {
   }
@@ -17,5 +22,4 @@ export class DocumentationComponent implements OnInit {
     $('cp-documentation').foundation();
     ProgressBarComponent.hide();
   }
-
 }

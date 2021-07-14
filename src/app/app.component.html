@@ -20,15 +20,9 @@
         <ul id="local-nav" class="dropdown menu float-left" data-dropdown-menu="true" data-description="navigational">
           <li routerLinkActive="active"><a routerLink="/home" routerLinkActive="active">Home</a></li>
           <li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active">About</a></li>
-          <li class="extra-items-menu is-dropdown-submenu-parent opens-right">
-            <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
-            <ul class="menu submenu is-dropdown-submenu first-sub vertical" role="menu" >
-              <li class="no-border-submenu" routerLinkActive="active"><a routerLink="/documentation/data_content">Data Content</a></li>
-              <li class="no-border-submenu" routerLinkActive="active"><a routerLink="/documentation/query_syntax">Query syntax</a></li>
-            </ul>
-          </li>
-          <li routerLinkActive="active"><a routerLinkActive="active" [ngClass]="{'animated flash': onChangeInBasket}" routerLink="/basket">Basket
-            <div routerLinkActive="active" routerLink="/basket" class="basket">
+          <li routerLinkActive="active"><a routerLink="/documentation" routerLinkActive="active">Documentation</a></li>
+          <li routerLinkActive="active"><a routerLink="/basket" routerLinkActive="active" [ngClass]="{'animated flash': onChangeInBasket}" >Basket
+            <div routerLink="/basket" routerLinkActive="active" class="basket">
               &nbsp;<strong>{{basketCount}}</strong>&nbsp;
             </div></a>
           </li>
