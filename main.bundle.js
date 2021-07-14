@@ -1078,7 +1078,7 @@ var TileMenuComponent = /** @class */ (function () {
     };
     TileMenuComponent.prototype.goToTraining = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('training');
-        window.open(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].intact_training_url, '_blank');
+        window.open(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].training_url, '_blank');
     };
     TileMenuComponent.prototype.goToDocumentation = function () {
         this.googleAnalyticsService.fireClickHomeTileEvent('documentation');
@@ -2185,7 +2185,7 @@ var environment = {
     complex_psi30: COMPLEX__FTP_BASE_URL + 'current/psi30/',
     intact_base_url: EBI_BASE_URL + 'intact',
     complex_portal_support_url: EBI_BASE_URL + 'support/complexportal',
-    intact_training_url: EBI_BASE_URL + 'intact/resources/training',
+    training_url: EBI_BASE_URL + 'training/search-results?query=complex%20portal',
 };
 
 
