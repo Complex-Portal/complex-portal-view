@@ -48,7 +48,7 @@ export class TileMenuComponent implements AfterViewInit {
 
   public goToTraining(): void {
     this.googleAnalyticsService.fireClickHomeTileEvent('training');
-    window.open(environment.intact_training_url, '_blank');
+    window.open(environment.training_url, '_blank');
   }
 
   public goToDocumentation(): void {
