@@ -1,0 +1,38 @@
+/*!
+     * @overview es6-promise - a tiny implementation of Promises/A+.
+     * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+     * @license   Licensed under MIT license
+     *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
+     * @version   3.2.1
+     */
+
+/*!
+ * Sizzle CSS Selector Engine v2.3.6
+ * https://sizzlejs.com/
+ *
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
+ * https://js.foundation/
+ *
+ * Date: 2021-02-16
+ */
+
+/*!
+ * jQuery JavaScript Library v3.6.0
+ * https://jquery.com/
+ *
+ * Includes Sizzle.js
+ * https://sizzlejs.com/
+ *
+ * Copyright OpenJS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.org/license
+ *
+ * Date: 2021-03-02T17:08Z
+ */
+
+/*!!!.vertexOffset*/
+
+/** @license zlib.js 2012 - imaya [ https://github.com/imaya/zlib.js ] The MIT License */
+
+//!!!.vertexOffset;
