@@ -2,8 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 import {EuroPmcService} from './service/euro-pmc.service';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
-import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
 import {Category} from '../../../../shared/google-analytics/types/category.enum';
+import {EuroPMCResponse} from './model/EuroPMCResponse';
 
 
 interface Publication {
@@ -27,7 +28,7 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
 
 
   constructor(private euroPmcService: EuroPmcService, private notificationService: NotificationService,
-              private googleAnalyticsService: GoogleAnalyticsService) {
+              private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -50,7 +51,7 @@ export class EuroPmcCrossreferencesComponent implements OnInit {
     }
   }
 
-  private publicationFactory(crossReference: CrossReference, euroPmcResponse: any): void {
+  private publicationFactory(crossReference: CrossReference, euroPmcResponse: EuroPMCResponse): void {
     this.publications.push({
       id: crossReference.identifier,
       title: euroPmcResponse.resultList.result[0].title,

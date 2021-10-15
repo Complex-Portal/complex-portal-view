@@ -3,9 +3,7 @@ import {environment} from '../environments/environment';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {BasketService} from './shared/basket/service/basket.service';
-import {Angulartics2GoogleAnalytics} from 'angulartics2';
 
-declare const ga: any;
 
 const {version: version} = require('../../package.json');
 const environmentName: string = environment.evn;
@@ -22,8 +20,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private _complexPortalSupportUrl = environment.complex_portal_support_url;
   private _onChangeInBasket: boolean;
 
-  constructor(private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-              private router: Router,
+  constructor(private router: Router,
               private basketService: BasketService) {
     this._basketCount = this.basketService.getBasketCount();
     this._version = version;
@@ -39,7 +36,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Init some libs.
     // this.initialiseFoundation();
-    this.initialiseGoogleAnalytics();
     // this.initialiseFoundationHacks();
   }
 
@@ -48,10 +44,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     $(document).foundation();
     // @ts-ignore
     $(document).foundationExtendEBI();
-  }
-
-  private initialiseGoogleAnalytics(): void {
-    ga('create', environment.analytics_id, 'none');
   }
 
   private observeRouteChange() {

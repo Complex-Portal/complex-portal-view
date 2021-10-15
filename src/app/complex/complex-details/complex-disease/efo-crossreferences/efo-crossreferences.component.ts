@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 import {OlsService} from '../../../../shared/ols/service/ols.service';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
-import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
 import {Category} from '../../../../shared/google-analytics/types/category.enum';
 
 @Component({
@@ -15,7 +15,7 @@ export class EfoCrossreferencesComponent implements OnInit {
   private _displayedElements = 5;
 
   constructor(private olsService: OlsService, private notificationService: NotificationService,
-              private googleAnalyticsService: GoogleAnalyticsService) {
+              private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class EfoCrossreferencesComponent implements OnInit {
       if (this.crossReferences[i].identifier.split(':')[0] === 'EFO') {
         this.olsService.getEfoName(this.crossReferences[i].identifier).subscribe(
           response => {
-            this._crossReferences[i].description = response._embedded.terms[0].label
+            this._crossReferences[i].description = response._embedded.terms[0].label;
           },
           error => {
             this.notificationService.onAPIRequestError('OLS');
@@ -39,7 +39,7 @@ export class EfoCrossreferencesComponent implements OnInit {
       } else if (this.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
         this.olsService.getOrphaNetName(this.crossReferences[i].identifier).subscribe(
           response => {
-            this._crossReferences[i].description = response._embedded.terms[0].label
+            this._crossReferences[i].description = response._embedded.terms[0].label;
           },
           error => {
             this.notificationService.onAPIRequestError('OLS');

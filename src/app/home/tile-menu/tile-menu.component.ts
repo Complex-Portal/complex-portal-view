@@ -2,7 +2,7 @@ import {AfterViewInit, Component} from '@angular/core';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 
 @ Component({
   selector: 'cp-tile-menu',
@@ -12,7 +12,7 @@ import {GoogleAnalyticsService} from '../../shared/google-analytics/service/goog
 export class TileMenuComponent implements AfterViewInit {
 
   constructor(private notificationService: NotificationService, private router: Router,
-              private googleAnalyticsService: GoogleAnalyticsService) {
+              private googleAnalyticsService: AnalyticsService) {
   }
 
   ngAfterViewInit(): void {

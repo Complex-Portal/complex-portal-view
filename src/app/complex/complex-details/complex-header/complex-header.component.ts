@@ -3,7 +3,7 @@ import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
-import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 
 @Component({
   selector: 'cp-complex-header',
@@ -18,7 +18,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   private _crossReferences: CrossReference[];
   private _jsonURL: string;
 
-  constructor(private basketService: BasketService, private ga: GoogleAnalyticsService, private notificationService: NotificationService) {
+  constructor(private basketService: BasketService, private ga: AnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {

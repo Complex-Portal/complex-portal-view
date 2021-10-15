@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import LiteMol from 'litemol';
 import {environment} from '../../../../../../environments/environment';
-import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../../../shared/google-analytics/service/analytics.service';
 import {Category} from '../../../../../shared/google-analytics/types/category.enum';
 
 const baseURL = environment.pdb_base_url;
@@ -16,7 +16,7 @@ export class LitmolViewerComponent implements OnInit, OnChanges {
   private _selectedXRef: string;
   private _hasInteracted: boolean;
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: AnalyticsService) {
     this._hasInteracted = false;
   }
 

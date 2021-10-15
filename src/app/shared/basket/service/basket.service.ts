@@ -2,7 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
 import {Md5} from 'ts-md5/dist/md5';
 import {NotificationService} from '../../notification/service/notification.service';
-import {GoogleAnalyticsService} from '../../google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../google-analytics/service/analytics.service';
 import {LocalStorageService} from '../../local-storage/service/local-storage.service';
 
 const COMPLEX_STORE = 'cp_complex_store';
@@ -12,7 +12,7 @@ export class BasketService {
   private _complexBasket: { [name: string]: BasketItem } = {};
   public onBasketCountChanged$: EventEmitter<number>;
 
-  constructor(private notificationService: NotificationService, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private notificationService: NotificationService, private googleAnalyticsService: AnalyticsService) {
     this.onBasketCountChanged$ = new EventEmitter<number>();
     this.initialiseBasket();
   }

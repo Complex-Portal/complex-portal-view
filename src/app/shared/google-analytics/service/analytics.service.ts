@@ -1,19 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Angulartics2} from 'angulartics2';
 import {Category} from '../types/category.enum';
 import {Action} from '../types/action.enum';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Injectable()
-export class GoogleAnalyticsService {
+export class AnalyticsService {
 
-  constructor(private angulartics2: Angulartics2) {
+  constructor(private analytics: GoogleAnalyticsService) {
   }
 
   private invokeCustomEvent(value: Action, category: Category, label: string): void {
-    this.angulartics2.eventTrack.next({
-      action: Action[value],
-      properties: {category: Category[category], label: label}
-    });
+    this.analytics.event(Action[value],  Category[category], label);
   }
 
   public fireDownloadResourceEvent(site: Category, type: string): void {

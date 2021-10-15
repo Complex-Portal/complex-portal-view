@@ -4,7 +4,7 @@ import {ComplexSearchResult} from '../shared/model/complex-results/complex-searc
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
-              private googleAnalyticsService: GoogleAnalyticsService) {
+              private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {

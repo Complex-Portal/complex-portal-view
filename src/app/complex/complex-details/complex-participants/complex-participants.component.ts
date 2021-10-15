@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
-import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import * as complexviewer from 'complexviewer';
 import {NodeShape} from '../shared/visualisation/node-diagram/node-diagram.component';
 import {TextEncoder} from 'util';
@@ -30,7 +30,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     'Interactor': true,
   };
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: AnalyticsService) {
     this._hasInteracted = false;
   }
 
@@ -44,7 +44,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
     for (const key of Object.keys(this.annotations)) {
-      viewer.showAnnotations(key, this.annotations[key])
+      viewer.showAnnotations(key, this.annotations[key]);
     }
     // We need the timeout to avoid that gets checked and changed after because it throws an error
     setTimeout(() => this.updateColorLegend(viewer.getColorKeyJson()), 0);
@@ -96,7 +96,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
       && !participant.identifier.includes('-PRO') && participant.name) {
       color = this.colorLegendGroups.get(participant.name.toUpperCase());
     } else {
-      color = this.colorLegendGroups.get(participant.identifier.toUpperCase())
+      color = this.colorLegendGroups.get(participant.identifier.toUpperCase());
     }
     if (!color) {
       color = '#ffffff';
@@ -126,14 +126,14 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
         for (const legendDatum of legendData[group]) {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color)
+          this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color);
         }
       }
       if (group === 'Interactor') {
         for (const legendDatum of legendData[group]) {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color)
+          this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color);
         }
       }
     }

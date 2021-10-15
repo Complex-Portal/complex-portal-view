@@ -8,11 +8,11 @@ import {DocumentationComponent} from './navigation/documentation/documentation.c
 const routes: Routes = [
   {
     path: 'complex',
-    loadChildren: 'app/complex/complex.module#ComplexModule'
+    loadChildren: () => import('app/complex/complex.module').then(m => m.ComplexModule)
   },
   {
     path: 'basket',
-    loadChildren: 'app/basket/basket.module#BasketModule'
+    loadChildren: () => import('app/basket/basket.module').then(m => m.BasketModule)
   },
   {
     path: 'about',

@@ -1,16 +1,8 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  Input,
-  OnInit
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
 import {SectionService} from '../service/section/section.service';
-import {PageScrollInstance, PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
-import {GoogleAnalyticsService} from '../../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
+import {PageScrollService} from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'cp-go-to',
@@ -22,7 +14,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
   private _sectionName: string;
 
   constructor(private _sectionService: SectionService, private cdr: ChangeDetectorRef, private pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) private document: any, private googleAnalyticsService: GoogleAnalyticsService) {
+              @Inject(DOCUMENT) private document: any, private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -55,8 +47,7 @@ export class GoToComponent implements OnInit, AfterViewInit {
 
   public scrollToElement(idReference: string) {
     this.googleAnalyticsService.fireGoToDetailsSectionEvent(idReference);
-    const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#' + idReference);
-    this.pageScrollService.start(pageScrollInstance);
+    this.pageScrollService.scroll({document: this.document, scrollTarget: '#' + idReference});
   }
 
   public doCheckSection(): void {

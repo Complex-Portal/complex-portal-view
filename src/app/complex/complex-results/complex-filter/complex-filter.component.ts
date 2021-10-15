@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
-import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 
 @Component({
   selector: 'cp-complex-filter',
@@ -19,7 +19,7 @@ export class ComplexFilterComponent implements OnInit {
   @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {

@@ -3,12 +3,11 @@ import {ComplexDetails} from '../shared/model/complex-details/complex-details.mo
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SectionService} from './shared/service/section/section.service';
-import {PageScrollConfig} from 'ngx-page-scroll';
 import {Title} from '@angular/platform-browser';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Category} from '../../shared/google-analytics/types/category.enum';
 
 declare const expressionAtlasHeatmapHighcharts: any;
@@ -27,11 +26,10 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _gxa;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
-              private googleAnalyticsService: GoogleAnalyticsService, private complexPortalService: ComplexPortalService,
+              private googleAnalyticsService: AnalyticsService, private complexPortalService: ComplexPortalService,
               private sectionService: SectionService, private titleService: Title) {
 
     // This is to calculate the EBI menu bar into the scrolling
-    PageScrollConfig.defaultScrollOffset = 50;
     this.checkIfGPAIsDefined();
   }
 
@@ -79,7 +77,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       error => {
         this.notificationService.onAPIRequestError('Complex Portal');
         this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
-        this.router.navigate(['home'])
+        this.router.navigate(['home']);
       }
     );
   }
@@ -92,7 +90,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       error => {
         this.notificationService.onAPIRequestError('Complex Portal');
         this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_details, error.status ? error.status : 'unknown');
-        this.router.navigate(['home'])
+        this.router.navigate(['home']);
       }
     );
   }
@@ -103,7 +101,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
       error => {
         this.notificationService.onAPIRequestError('Complex Portal');
         this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.complexportal_mi, error.status ? error.status : 'unknown');
-        this.router.navigate(['home'])
+        this.router.navigate(['home']);
       }
     );
   }

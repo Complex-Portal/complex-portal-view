@@ -1,32 +1,37 @@
 <div class="row" *ngIf="isDataLoaded">
-  <div class="cloumns medium-12 no-pad-left">
+  <div class="columns medium-12 no-pad-left">
     <h3>Pathways</h3>
     <table class="hover">
       <thead>
-      <th>Complex Identifier</th>
-      <th>Complex Name</th>
-      <th>Pathway Identifier</th>
+      <tr>
+        <th>Complex Identifier</th>
+        <th>Complex Name</th>
+        <th>Pathway Identifier</th>
+      </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let reactomeComplex of  getSortedKeys(reactomeComplexes) | slice:0:displayedElements">
+      <tr *ngFor="let reactomeComplex of getSortedKeys(reactomeComplexes) | slice:0:displayedCrossReferences">
         <td><a (click)="selectComplexWithFirstPathway(reactomeComplex)">{{reactomeComplex}}</a></td>
         <td>{{reactomeComplexes[reactomeComplex].name}}</td>
         <td>
           <ul>
-            <li *ngFor="let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedElements">
+            <li
+              *ngFor="let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedRelatedPathways">
               <a (click)="selectComplexByPathway(reactomeComplex, reactomePathway)">{{reactomePathway}}</a>
             </li>
-            <li class="text-center no-bullet" *ngIf="displayedElements < reactomeComplexes[reactomeComplex].pathways.length">
-              <a class="label" (click)="displayedElements = reactomeComplexes[reactomeComplex].pathways.length">Show
+            <li class="text-center no-bullet"
+                *ngIf="displayedRelatedPathways < reactomeComplexes[reactomeComplex].pathways.length">
+              <a class="label" (click)="displayedRelatedPathways = reactomeComplexes[reactomeComplex].pathways.length">Show
                 all</a>
             </li>
           </ul>
         </td>
       </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < reactomeComplexes.length">
+      <tr class="text-center" style="background: white"
+          *ngIf="displayedCrossReferences < getObjectLength(reactomeComplexes)">
         <td></td>
         <td>
-          <a class="label" (click)="displayedElements = reactomeComplexes.length">Show all</a>
+          <a class="label" (click)="displayedCrossReferences = getObjectLength(reactomeComplexes)">Show all ({{getObjectLength(reactomeComplexes)}})</a>
         </td>
         <td></td>
       </tr>

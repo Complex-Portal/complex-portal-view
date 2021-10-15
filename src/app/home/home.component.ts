@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
-import {GoogleAnalyticsService} from '../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../shared/google-analytics/service/analytics.service';
 import {Router} from '@angular/router';
 import {Category} from '../shared/google-analytics/types/category.enum';
 import {environment} from '../../environments/environment';
@@ -13,7 +13,7 @@ import {environment} from '../../environments/environment';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(private titleService: Title, private router: Router, private googleAnalyticsService: GoogleAnalyticsService) { }
+  constructor(private titleService: Title, private router: Router, private googleAnalyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal');

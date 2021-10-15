@@ -1,23 +1,24 @@
+import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
-import {HttpClient, HttpParams, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 
 import {environment} from '../../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+
 
 import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
 import {SpeciesFacet} from '../model/complex-results/facets/species_f.model';
+import {Observable} from 'rxjs/Observable';
+import {throwError} from 'rxjs/internal/observable/throwError';
 
 const baseURL = environment.complex_ws_base_url;
 
 @Injectable()
 export class ComplexPortalService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * Get a specific complex from the WS
@@ -26,8 +27,8 @@ export class ComplexPortalService {
    */
   getComplex(ac: string): Observable<ComplexDetails> {
     const url = `${baseURL}/details/${ac}`;
-    return this.http.get(url)
-      .catch(this.handleError);
+    return this.http.get(url).pipe(
+      catchError(this.handleError));
   }
 
   /**
@@ -37,8 +38,8 @@ export class ComplexPortalService {
    */
   getComplexAc(complexAc: string): Observable<ComplexDetails> {
     const url = `${baseURL}/complex/${complexAc}`;
-    return this.http.get(url)
-      .catch(this.handleError);
+    return this.http.get(url).pipe(
+      catchError(this.handleError));
   }
 
   /**
@@ -46,9 +47,9 @@ export class ComplexPortalService {
    * @returns {Observable<SpeciesFacet[]>}
    */
   getComplexOrganisms(): Observable<SpeciesFacet[]> {
-    return this.findComplex('*').map((complexSearchResult: ComplexSearchResult) => {
+    return this.findComplex('*').pipe(map((complexSearchResult: ComplexSearchResult) => {
       return complexSearchResult.facets['species_f'];
-    });
+    }));
   }
 
   /**
@@ -58,7 +59,7 @@ export class ComplexPortalService {
    * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
    */
   getComplexMIJSON(ac: string): Observable<any> {
-    return this.http.get(baseURL + '/export/' + ac).catch(this.handleError);
+    return this.http.get(baseURL + '/export/' + ac).pipe(catchError(this.handleError));
   }
 
   /**
@@ -96,13 +97,13 @@ export class ComplexPortalService {
       .set('facets', facets)
       .set('filters', filters);
 
-    return this.http.get(baseURL + '/search/' + query, {params: params})
-      .catch(this.handleError);
+    return this.http.get(baseURL + '/search/' + query, {params: params}).pipe(
+      catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse | any): Observable<any> {
     if (err.error instanceof Error) {
-      return Observable.throw(err);
+      return throwError(err);
     } else {
       console.error(err.message ? err.message : err.toString());
     }

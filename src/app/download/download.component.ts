@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import {environment} from '../../environments/environment';
-import {GoogleAnalyticsService} from '../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../shared/google-analytics/service/analytics.service';
 import {Category} from '../shared/google-analytics/types/category.enum';
 import {Title} from '@angular/platform-browser';
 
@@ -12,7 +12,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class DownloadComponent implements OnInit, AfterViewInit {
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService, private titleService: Title) {
+  constructor(private googleAnalyticsService: AnalyticsService, private titleService: Title) {
   }
 
   ngOnInit() {

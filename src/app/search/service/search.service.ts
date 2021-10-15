@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GoogleAnalyticsService} from '../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Router} from '@angular/router';
 import {Category} from '../../shared/google-analytics/types/category.enum';
 
@@ -7,7 +7,7 @@ import {Category} from '../../shared/google-analytics/types/category.enum';
 export class SearchService {
   private _query: string;
 
-  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private router: Router, private googleAnalyticsService: AnalyticsService) {
   }
 
   search(query: string, category: Category, typeOfButton: string) {

@@ -12,9 +12,9 @@ export class NodeDiagramComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() borderWidth = 3;
   @Input() label: string;
   @Input() height: string;
-  @ViewChild('labelElt') labelElt: ElementRef;
-  @ViewChild('svg') svgElt: ElementRef;
-  @ViewChild('shapeGroup') shapeGroupElt: ElementRef;
+  @ViewChild('labelElt', { static: false }) labelElt: ElementRef;
+  @ViewChild('svg', { static: true }) svgElt: ElementRef;
+  @ViewChild('shapeGroup', { static: true }) shapeGroupElt: ElementRef;
   NodeShape = NodeShape;
 
   constructor() {
@@ -28,7 +28,7 @@ export class NodeDiagramComponent implements OnInit, AfterViewInit, OnChanges {
       this.color = '#d6d6d6';
     }
     if (!this.height) {
-      this.height = '30pt'
+      this.height = '30pt';
     }
   }
 
@@ -53,7 +53,7 @@ export class NodeDiagramComponent implements OnInit, AfterViewInit, OnChanges {
         if (box.width >= 100) {
           $(this.svgElt.nativeElement).attr('viewBox', `0 0 ${box.width + 5} 100`);
           if (this.shape !== NodeShape.ELLIPSE) {
-            shapeElt.setAttribute('transform', `translate(${box.width / 2 - 49})`)
+            shapeElt.setAttribute('transform', `translate(${box.width / 2 - 49})`);
           }
         }
       }

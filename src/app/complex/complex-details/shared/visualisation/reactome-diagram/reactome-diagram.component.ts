@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
 import {Category} from '../../../../../shared/google-analytics/types/category.enum';
-import {GoogleAnalyticsService} from '../../../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../../../shared/google-analytics/service/analytics.service';
 
 const baseURL = environment.reactome_base_url;
 
@@ -29,11 +29,11 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _selectedComplex: string;
   private _selectedPathway: string;
   private _hasInteracted: boolean;
-  @ViewChild('diagramHolder') diagramHolder;
+  @ViewChild('diagramHolder', { static: true }) diagramHolder;
   @Output() onLoaded = new EventEmitter<boolean>();
 
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -86,7 +86,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private loadDiagram(): void {
     const context = this;
     this.globelDiagram.loadDiagram(this.selectedPathway);
-    this.globelDiagram.onDiagramLoaded(function (loaded) {
+    this.globelDiagram.onDiagramLoaded(function () {
       context.selectComplex(context.selectedComplex);
     });
     this._hasInteracted = false;
@@ -100,8 +100,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
     this.selectedComplex = reactomeComplexId;
     this.globelDiagram.resetFlaggedItems();
     this.globelDiagram.flagItems(reactomeComplexId);
-  };
-
+  }
 
   public interactedWithViewer(): void {
     if (!this._hasInteracted) {

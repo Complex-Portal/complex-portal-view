@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GoogleAnalyticsService} from '../../../shared/google-analytics/service/google-analytics.service';
+import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {Router} from '@angular/router';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {environment} from '../../../../environments/environment';
@@ -13,7 +13,7 @@ import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-orga
 export class ComplexOrganismComponent implements OnInit {
   private _organism: ComplexOrganisms;
 
-  constructor(private router: Router, private googleAnalyticsService: GoogleAnalyticsService) {
+  constructor(private router: Router, private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {

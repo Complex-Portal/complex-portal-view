@@ -13,7 +13,7 @@ import {ComplexExpressionComponent} from './complex-expression/complex-expressio
 import {ComplexDiseaseComponent} from './complex-disease/complex-disease.component';
 import {ComplexParticipantsComponent} from './complex-participants/complex-participants.component';
 import {ReactomeDiagramComponent} from './shared/visualisation/reactome-diagram/reactome-diagram.component';
-import {ReactomeCrossreferencesComponent} from './complex-function/reactome-crossreferences/reactome-crossreferences.component';
+import {ReactomeCrossReferencesComponent} from './complex-function/reactome-crossreferences/reactome-cross-references.component';
 import {AntagonistsComponent} from './complex-function/antagonists/antagonists.component';
 import {AgonistsComponent} from './complex-function/agonists/agonists.component';
 import {ComplexFooterComponent} from './complex-footer/complex-footer.component';
@@ -40,20 +40,20 @@ import {ReactomeService} from './complex-function/reactome-crossreferences/servi
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {SectionService} from './shared/service/section/section.service';
-import {NgxPageScrollModule} from 'ngx-page-scroll';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
 import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-diagram.component';
+import {ComplexModule} from '../complex.module';
 
 @NgModule({
-  imports: [
-    RouterModule.forChild([
-      {path: '', component: ComplexDetailsComponent},
-    ]),
-    CommonModule,
-    ProgressSpinnerModule,
-    NgxPageScrollModule
-  ],
+    imports: [
+        RouterModule.forChild([
+            {path: '', component: ComplexDetailsComponent},
+        ]),
+        CommonModule,
+        ProgressSpinnerModule,
+        ComplexModule
+    ],
   declarations: [
     ComplexDetailsComponent,
     ComplexHeaderComponent,
@@ -63,7 +63,7 @@ import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-dia
     ComplexDiseaseComponent,
     ComplexParticipantsComponent,
     ReactomeDiagramComponent,
-    ReactomeCrossreferencesComponent,
+    ReactomeCrossReferencesComponent,
     GoCrossreferencesComponent,
     IntenzCrossreferencesComponent,
     EuroPmcCrossreferencesComponent,
