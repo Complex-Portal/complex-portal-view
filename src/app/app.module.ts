@@ -43,7 +43,7 @@ import {environment} from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
