@@ -12,6 +12,11 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
+            "allowedCommonJsDependencies": [
+              "litemol",
+              "util",
+              "intersectionjs"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.json",
