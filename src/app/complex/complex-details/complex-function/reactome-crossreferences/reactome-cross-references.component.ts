@@ -7,7 +7,7 @@ import {ReactomePathway} from './model/reactome-pathway';
 import {NotificationService} from '../../../../shared/notification/service/notification.service';
 import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
 import {Category} from '../../../../shared/google-analytics/types/category.enum';
-import {forkJoin} from 'rxjs/internal/observable/forkJoin';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'cp-reactome-cross-references',
