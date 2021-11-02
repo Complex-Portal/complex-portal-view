@@ -4,7 +4,6 @@ import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import * as complexviewer from 'complexviewer';
 import {NodeShape} from '../shared/visualisation/node-diagram/node-diagram.component';
-import {TextEncoder} from 'util';
 
 let viewer: any;
 
