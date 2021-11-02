@@ -37,7 +37,14 @@
               "node_modules/ebi-framework/js/foundationExtendEBI.js",
               "node_modules/ebi-framework/js/script.js",
               "node_modules/complexviewer/dist/complexviewer.js"
-            ]
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -64,7 +71,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
