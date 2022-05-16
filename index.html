@@ -1,65 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <base href="https://complex-portal.github.io/complex-portal-view/">  <meta charset="utf-8">
+<!DOCTYPE html><html lang="en"><head>
+  <base href="https://complex-portal.github.io/complex-portal-view/">
+  <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Complex Portal</title>
   <meta name="description" content="EMBL-EBI"><!-- Describe what this page is about -->
-  <meta name="keywords"
-        content="bioinformatics, europe, institute, interactions, complex, molecular interactions, protein, psi, psi-mi">
+  <meta name="keywords" content="bioinformatics, europe, institute, interactions, complex, molecular interactions, protein, psi, psi-mi">
   <!-- A few keywords that relate to the content of THIS PAGE (not the whol project) -->
   <meta name="author" content="EMBL-EBI"><!-- Your [project-name] here -->
-  <meta name="HandheldFriendly" content="true"/>
-  <meta name="MobileOptimized" content="width"/>
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="width">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#70BDBD"> <!-- Android Chrome mobile browser tab color -->
 
   <!-- Add information on the life cycle of this page -->
-  <meta name="ebi:owner" content="Molecular Interactions-Team (intact-help@ebi.ac.uk)"/>
+  <meta name="ebi:owner" content="Molecular Interactions-Team (intact-help@ebi.ac.uk)">
   <!-- Who should be contacted about changes -->
-  <meta name="ebi:review-cycle" content="30"/> <!-- In days, how often should the content be reviewed -->
-  <meta name="ebi:last-review" content="2015-12-20"/> <!-- The last time the content was reviewed -->
-  <meta name="ebi:expiry" content="2016-01-20"/> <!-- When this content is no longer relevant -->
+  <meta name="ebi:review-cycle" content="30"> <!-- In days, how often should the content be reviewed -->
+  <meta name="ebi:last-review" content="2015-12-20"> <!-- The last time the content was reviewed -->
+  <meta name="ebi:expiry" content="2016-01-20"> <!-- When this content is no longer relevant -->
 
   <!-- If you link to any other sites frequently, consider optimising performance with a DNS prefetch -->
-  <link rel="dns-prefetch" href="//www.ebi.ac.uk"/>
+  <link rel="dns-prefetch" href="//www.ebi.ac.uk">
 
   <!-- If you have custom icon, replace these as appropriate.
        You can generate them at realfavicongenerator.net -->
-  <link rel="icon" type="image/x-icon"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/favicon.ico"/>
-  <link rel="icon" type="image/png"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/favicon-32x32.png"/>
-  <link rel="icon" type="image/png" sizes="192×192"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/android-chrome-192x192.png"/>
+  <link rel="icon" type="image/x-icon" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/favicon.ico">
+  <link rel="icon" type="image/png" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192×192" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/android-chrome-192x192.png">
   <!-- Android (192px) -->
-  <link rel="apple-touch-icon-precomposed" sizes="114x114"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-114x114.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-114x114.png">
   <!-- For iPhone 4 Retina display (114px) -->
-  <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-72x72.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-72x72.png">
   <!-- For iPad (72px) -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-144x144.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-144x144.png">
   <!-- For iPad retinat (144px) -->
-  <link rel="apple-touch-icon-precomposed"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-57x57.png"/>
+  <link rel="apple-touch-icon-precomposed" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/apple-icon-57x57.png">
   <!-- For iPhone (57px) -->
-  <link rel="mask-icon"
-        href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/safari-pinned-tab.svg"
-        color="#ffffff"/> <!-- Safari icon for pinned tab -->
-  <meta name="msapplication-TileColor" content="#2b5797"/> <!-- MS Icons -->
-  <meta name="msapplication-TileImage"
-        content="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/mstile-144x144.png"/>
+  <link rel="mask-icon" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/safari-pinned-tab.svg" color="#ffffff"> <!-- Safari icon for pinned tab -->
+  <meta name="msapplication-TileColor" content="#2b5797"> <!-- MS Icons -->
+  <meta name="msapplication-TileImage" content="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/images/logos/EMBL-EBI/favicons/mstile-144x144.png">
   <!-- CSS concatenated and minified via ant build script-->
 
-  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/css/ebi-global.css" type="text/css" media="all"/>
-  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.3/fonts.css" type="text/css" media="all"/>
+  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/css/ebi-global.css" type="text/css" media="all">
+  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.3/fonts.css" type="text/css" media="all">
   <!-- you can replace this with theme-[projectname].css. See http://www.ebi.ac.uk/web/style/colour for details of how to do this -->
   <!-- also inform ES so we can host your colour palette file -->
-  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/css/theme-embl-petrol.css" type="text/css" media="all"/>
-  <link rel="stylesheet" href="assets/styles/css/complex-portal-theme.css">
+  <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/css/theme-embl-petrol.css" type="text/css" media="all">
+  <style>a{color:#222}a:hover,a:focus,a:active{color:#007c82}.menu .active > a,.button{background-color:#007c82}.button:focus,.button:hover{background-color:#007c82;opacity:0.9}a:visited{color:#0a494c}</style><link rel="stylesheet" href="assets/styles/css/complex-portal-theme.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="assets/styles/css/complex-portal-theme.css"></noscript>
 
   <!-- If you have a custom header image or colour -->
   <!-- for production the above can be replaced with -->
@@ -68,7 +56,7 @@
   -->
 
   <!-- end CSS-->
-<link rel="stylesheet" href="styles.1d1c07395761a94f72a8.css"></head>
+<style>@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700);@-webkit-keyframes cdk-text-field-autofill-start{}@-webkit-keyframes cdk-text-field-autofill-end{}</style><link rel="stylesheet" href="styles.99b0cd514f4fa7185027.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.99b0cd514f4fa7185027.css"></noscript></head>
 
 <body class="level2"><!-- add any of your classes or IDs -->
 <div id="skip-to">
@@ -104,12 +92,11 @@
           <span class="show-for-small-only">Search</span>
         </a>
 
-        <div id="search-global-dropdown" class="dropdown-pane" data-dropdown data-options="closeOnClick:true;">
+        <div id="search-global-dropdown" class="dropdown-pane" data-dropdown="" data-options="closeOnClick:true;">
           <form id="global-search" name="global-search" action="/ebisearch/search.ebi" method="GET">
             <fieldset>
               <div class="input-group">
-                <input type="text" name="query" id="global-searchbox" class="input-group-field"
-                       placeholder="Search all of EMBL-EBI">
+                <input type="text" name="query" id="global-searchbox" class="input-group-field" placeholder="Search all of EMBL-EBI">
                 <div class="input-group-button">
                   <input type="submit" name="submit" value="Search" class="button">
                   <input type="hidden" name="db" value="allebi" checked="checked">
@@ -134,12 +121,10 @@
 <!-- End suggested layout containers -->
 
 <!-- EBI data protection banner -->
-<div id="data-protection-message-configuration"
-     data-message="This website requires cookies, and the limited processing of your personal data in order to function.
+<div id="data-protection-message-configuration" data-message="This website requires cookies, and the limited processing of your personal data in order to function.
       By using the site you are agreeing to this as outlined in our
       <a class='white-color' href='https://www.ebi.ac.uk/data-protection/privacy-notice/intact-and-complex-portal-websites'>Privacy Notice</a>
-      and <a class='white-color' href='https://www.ebi.ac.uk/about/terms-of-use'>Terms of Use</a>."
-     data-service-id="intact-and-complex-portal-websites" data-data-protection-version="0.1">
+      and <a class='white-color' href='https://www.ebi.ac.uk/about/terms-of-use'>Terms of Use</a>." data-service-id="intact-and-complex-portal-websites" data-data-protection-version="0.1">
 </div>
 
 <!-- footer here -->
@@ -178,13 +163,12 @@
   })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 </script>
 
-<script async src="assets/js/reactome-event.js"></script>
+<script async="" src="assets/js/reactome-event.js"></script>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
 
-<script language="JavaScript" type="text/javascript"
-        src="https://www.ebi.ac.uk/gxa/resources/js-bundles/vendorCommons.bundle.js"></script>
-<script language="JavaScript" type="text/javascript"
-        src="https://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
+<script language="JavaScript" type="text/javascript" src="https://www.ebi.ac.uk/gxa/resources/js-bundles/vendorCommons.bundle.js"></script>
+<script language="JavaScript" type="text/javascript" src="https://www.ebi.ac.uk/gxa/resources/js-bundles/expressionAtlasHeatmapHighcharts.bundle.js"></script>
 
-<script src="runtime-es2015.0698abea57aa0619c119.js" type="module"></script><script src="runtime-es5.0698abea57aa0619c119.js" nomodule defer></script><script src="polyfills-es5.d9f408c35681850b0818.js" nomodule defer></script><script src="polyfills-es2015.66cd56a6b9a5a83e4cdd.js" type="module"></script><script src="scripts.a0095c7947b4ca476ef4.js" defer></script><script src="main-es2015.4660f26436cb597854ad.js" type="module"></script><script src="main-es5.4660f26436cb597854ad.js" nomodule defer></script></body>
-</html>
+<script src="runtime-es2015.dd427b9542c370a0b620.js" type="module"></script><script src="runtime-es5.dd427b9542c370a0b620.js" nomodule defer></script><script src="polyfills-es5.4277b33d0bd60769b484.js" nomodule defer></script><script src="polyfills-es2015.51013aa03d07a08a59ec.js" type="module"></script><script src="scripts.ecfc81ff134e0cfb4c0c.js" defer></script><script src="main-es2015.663e89aa4208220ab0f5.js" type="module"></script><script src="main-es5.663e89aa4208220ab0f5.js" nomodule defer></script>
+
+</body></html>
