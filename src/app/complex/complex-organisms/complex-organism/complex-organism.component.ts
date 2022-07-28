@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {Router} from '@angular/router';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {environment} from '../../../../environments/environment';
 import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-organism.model';
+import {APP_BASE_HREF} from '@angular/common';
 
 @Component({
   selector: 'cp-complex-organism',
@@ -13,7 +14,7 @@ import {ComplexOrganisms} from '../../shared/model/complex-organism/complex-orga
 export class ComplexOrganismComponent implements OnInit {
   private _organism: ComplexOrganisms;
 
-  constructor(private router: Router, private googleAnalyticsService: AnalyticsService) {
+  constructor(private router: Router, private googleAnalyticsService: AnalyticsService, @Inject(APP_BASE_HREF) private _baseHref: string) {
   }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class ComplexOrganismComponent implements OnInit {
   }
 
   get maskStyle(): string {
-    return `mask: url(${this._organism.symbol}) no-repeat center; -webkit-mask: url(${this._organism.symbol}) no-repeat center`;
+    return `mask: url(${this._baseHref}${this._organism.symbol}) no-repeat center; -webkit-mask: url(${this._baseHref}${this._organism.symbol}) no-repeat center`;
   }
 
 }

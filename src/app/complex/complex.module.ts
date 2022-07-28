@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {APP_BASE_HREF, CommonModule, PlatformLocation} from '@angular/common';
 import {RouterModule} from '@angular/router';
 
 @NgModule({
@@ -18,6 +18,13 @@ import {RouterModule} from '@angular/router';
     },
   ]),
     CommonModule,
+  ],
+  providers: [
+    {
+      provide: APP_BASE_HREF,
+      useFactory: (s: PlatformLocation) => s.getBaseHrefFromDOM(),
+      deps: [PlatformLocation]
+    }
   ]
 })
 export class ComplexModule {

@@ -188,7 +188,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
           case 'Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)':
             organisms[i].scientificName = 'Vibrio cholerae serotype O1';
             organisms[i].nameDetails = 'strain ATCC 39315 / El Tor Inaba N16961';
-            organisms[i].symbol = '/assets/images/EMBL_Species_Vibrio_cholerae.svg';
+            organisms[i].symbol = 'assets/images/EMBL_Species_Vibrio_cholerae.svg';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Vibrio_cholerae';
             organisms[i].psi30 = 'vibch';
@@ -198,7 +198,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             case 'Crotalus durissus terrificus':
             organisms[i].scientificName = 'Crotalus durissus terrificus';
             organisms[i].nameDetails = '';
-            organisms[i].symbol = '/assets/images/EMBL_Species_RattleSnake.svg';
+            organisms[i].symbol = 'assets/images/EMBL_Species_RattleSnake.svg';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Crotalus_durissus_terrificus';
             organisms[i].psi30 = 'crodu';
