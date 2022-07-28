@@ -1,6 +1,12 @@
 .icon {
   font-size: 100px;
-  color: #accdcf;
+  color: #007c82;
+}
+
+.asset-icon {
+  width: 100px;
+  height: 101px;
+  background-color: #007c82;
 }
 
 a {

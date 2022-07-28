@@ -48,4 +48,8 @@ export class ComplexOrganismComponent implements OnInit {
     window.open(environment.complex_tab + this.organism.complextab + '.tsv', '_blank');
   }
 
+  get maskStyle(): string {
+    return `mask: url(${this._organism.symbol}) no-repeat center; -webkit-mask: url(${this._organism.symbol}) no-repeat center`;
+  }
+
 }

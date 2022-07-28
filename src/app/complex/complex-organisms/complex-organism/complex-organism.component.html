@@ -9,9 +9,16 @@
 
   <div class="medium-12" style="text-align: center">
     <button (click)="search(organism.name)" class="species-button">
-        <span attr.data-icon="{{organism.symbol}}" style="color: #007c82"
+      <div class="icon asset-icon" *ngIf="organism.symbol.startsWith('/assets'); else fontIcon"
+           [style]="maskStyle">
+
+      </div>
+      <ng-template #fontIcon style="mask: 5px; accent-color: #0a0a0a">
+        <span [attr.data-icon]="organism.symbol" style="color: #007c82"
               [ngClass]="{'icon ': true,'icon-species': organism.symbol !== '?', 'icon-functional': organism.symbol === '?'}">
         </span>
+      </ng-template>
+
       <br>{{organism.count}}
     </button>
   </div>

@@ -185,6 +185,26 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
             organisms[i].complextab = '284812';
             organisms[i].taxid = '284812';
             break;
+          case 'Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)':
+            organisms[i].scientificName = 'Vibrio cholerae serotype O1';
+            organisms[i].nameDetails = 'strain ATCC 39315 / El Tor Inaba N16961';
+            organisms[i].symbol = '/assets/images/EMBL_Species_Vibrio_cholerae.svg';
+            organisms[i].type = 'animal';
+            organisms[i].psi25 = 'Vibrio_cholerae';
+            organisms[i].psi30 = 'vibch';
+            organisms[i].complextab = '243277';
+            organisms[i].taxid = '243277';
+            break;
+            case 'Crotalus durissus terrificus':
+            organisms[i].scientificName = 'Crotalus durissus terrificus';
+            organisms[i].nameDetails = '';
+            organisms[i].symbol = '/assets/images/EMBL_Species_RattleSnake.svg';
+            organisms[i].type = 'animal';
+            organisms[i].psi25 = 'Crotalus_durissus_terrificus';
+            organisms[i].psi30 = 'crodu';
+            organisms[i].complextab = '8732';
+            organisms[i].taxid = '8732';
+            break;
           case 'Sus scrofa':
             organisms[i].scientificName = organisms[i].name;
             organisms[i].nameDetails = '';
