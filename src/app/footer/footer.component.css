@@ -1,0 +1,8 @@
+footer a {
+  text-decoration:none;
+  border-width: 0;
+}
+
+a, a:visited {
+  border: none;
+}

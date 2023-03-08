@@ -30,6 +30,7 @@ import {DocumentationComponent} from './navigation/documentation/documentation.c
 import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 import {environment} from '../environments/environment';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {environment} from '../environments/environment';
     OntologiesComponent,
     AboutComponent,
     DownloadComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
