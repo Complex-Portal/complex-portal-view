@@ -5,4 +5,10 @@ footer a {
 
 a, a:visited {
   border: none;
+  padding: 5px;
+}
+
+a img {
+  max-height: 50px;
+  max-width: 175px;
 }
