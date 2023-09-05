@@ -5,6 +5,7 @@ import {PdbCrossreferencesComponent} from './complex-properties/pdb-crossreferen
 import {EuroPmcCrossreferencesComponent} from './complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
 import {IntenzCrossreferencesComponent} from './complex-function/intenz-crossreferences/intenz-crossreferences.component';
 import {GoCrossreferencesComponent} from './complex-function/go-crossreferences/go-crossreferences.component';
+import {RheaCrossreferencesComponent} from './complex-function/rhea-crossreferences/rhea-crossreferences.component';
 import {ComplexPropertiesComponent} from './complex-properties/complex-properties.component';
 import {ComplexFunctionComponent} from './complex-function/complex-function.component';
 import {ComplexHeaderComponent} from './complex-header/complex-header.component';
@@ -66,6 +67,7 @@ import {ComplexModule} from '../complex.module';
     ReactomeCrossReferencesComponent,
     GoCrossreferencesComponent,
     IntenzCrossreferencesComponent,
+    RheaCrossreferencesComponent,
     EuroPmcCrossreferencesComponent,
     PdbCrossreferencesComponent,
     LitmolViewerComponent,

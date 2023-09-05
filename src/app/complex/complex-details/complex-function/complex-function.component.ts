@@ -12,6 +12,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _goXRefs: CrossReference[];
   private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
+  private _rheaXRefs: CrossReference[];
 
   private _ligands: string[];
   private _agonists: string[];
@@ -46,6 +47,12 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
           this.reactomeXRefs = [];
         }
         this.reactomeXRefs.push(crossRef);
+      }
+      if (database === 'rhea') {
+        if (this.rheaXRefs === undefined) {
+          this.rheaXRefs = [];
+        }
+        this.rheaXRefs.push(crossRef);
       }
     }
   }
@@ -95,6 +102,14 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
 
   set reactomeXRefs(value: CrossReference[]) {
     this._reactomeXRefs = value;
+  }
+
+  get rheaXRefs(): CrossReference[] {
+    return this._rheaXRefs;
+  }
+
+  set rheaXRefs(value: CrossReference[]) {
+    this._rheaXRefs = value;
   }
 
   get ligands(): string[] {
