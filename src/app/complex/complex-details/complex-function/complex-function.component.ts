@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {RheaCrossReference} from '../../shared/model/complex-details/rhea-cross-reference.model';
-import {IntenzCrossReference} from '../../shared/model/complex-details/intenz-cross-reference.model';
 
 @Component({
   selector: 'cp-complex-function',
@@ -12,7 +11,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _crossReferences: CrossReference[];
   private _functionDescription: string;
   private _goXRefs: CrossReference[];
-  private _intenzXRefs: IntenzCrossReference[];
+  private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
   private _rheaXRefs: RheaCrossReference[];
 
@@ -42,7 +41,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
         if (this.intenzXRefs === undefined) {
           this.intenzXRefs = [];
         }
-        this.intenzXRefs.push(new IntenzCrossReference(crossRef));
+        this.intenzXRefs.push(crossRef);
       }
       if (database === 'reactome') {
         if (this.reactomeXRefs === undefined) {
@@ -90,11 +89,11 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
     this._goXRefs = value;
   }
 
-  get intenzXRefs(): IntenzCrossReference[] {
+  get intenzXRefs(): CrossReference[] {
     return this._intenzXRefs;
   }
 
-  set intenzXRefs(value: IntenzCrossReference[]) {
+  set intenzXRefs(value: CrossReference[]) {
     this._intenzXRefs = value;
   }
 

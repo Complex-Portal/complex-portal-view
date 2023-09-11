@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IntenzCrossReference} from '../../../shared/model/complex-details/intenz-cross-reference.model';
+import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 @Component({
   selector: 'cp-intenz-crossreferences',
@@ -7,7 +7,7 @@ import {IntenzCrossReference} from '../../../shared/model/complex-details/intenz
   styleUrls: ['./intenz-crossreferences.component.css']
 })
 export class IntenzCrossreferencesComponent implements OnInit {
-  private _crossReferences: IntenzCrossReference[];
+  private _crossReferences: CrossReference[];
   private _displayedElements = 5;
 
   constructor() {
@@ -16,12 +16,12 @@ export class IntenzCrossreferencesComponent implements OnInit {
   ngOnInit() {
   }
 
-  get crossReferences(): IntenzCrossReference[] {
+  get crossReferences(): CrossReference[] {
     return this._crossReferences;
   }
 
   @Input()
-  set crossReferences(value: IntenzCrossReference[]) {
+  set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
   }
 
