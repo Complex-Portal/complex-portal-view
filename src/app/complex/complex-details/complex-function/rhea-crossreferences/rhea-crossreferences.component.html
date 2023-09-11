@@ -8,8 +8,9 @@
           <div>
             <a href="{{crossReference.crossReference.searchURL}}" target="_blank">{{crossReference.crossReference.identifier}} <i
               class="icon icon-generic small" data-icon="x"></i></a>
-            <button class="button float-right" *ngIf="crossReference.displayed" (click)="toggleDisplayedProperty(i)">Hide Rhea reaction</button>
-            <button class="button float-right" *ngIf="!crossReference.displayed" (click)="toggleDisplayedProperty(i)">Show Rhea reaction</button>
+            <button class="button float-right"  (click)="toggleDisplayedProperty(i)">
+              {{crossReference.displayed ? 'Hide' : 'Show'}} Rhea reaction
+            </button>
           </div>
           <div *ngIf="crossReference.displayed">
             <rhea-reaction rheaid="{{crossReference.identifier}}" showids nosource="true"></rhea-reaction>
