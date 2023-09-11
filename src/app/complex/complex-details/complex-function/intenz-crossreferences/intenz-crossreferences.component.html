@@ -5,7 +5,7 @@
       <tbody>
       <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
         <td>
-          <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}} <i
+          <a href="{{crossReference.enzymeUrl}}" target="_blank">{{crossReference.crossReference.identifier}} <i
             class="icon icon-generic small" data-icon="x"></i></a>
         </td>
       </tr>
