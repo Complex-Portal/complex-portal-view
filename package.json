@@ -48,7 +48,8 @@
     "ts-helpers": "^1.1.2",
     "ts-md5": "^1.2.4",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@swissprot/rhea-reaction-visualizer": "0.0.23"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.12",

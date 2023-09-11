@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+import {RheaCrossReference} from '../../shared/model/complex-details/rhea-cross-reference.model';
 
 @Component({
   selector: 'cp-complex-function',
@@ -12,7 +13,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _goXRefs: CrossReference[];
   private _intenzXRefs: CrossReference[];
   private _reactomeXRefs: CrossReference[];
-  private _rheaXRefs: CrossReference[];
+  private _rheaXRefs: RheaCrossReference[];
 
   private _ligands: string[];
   private _agonists: string[];
@@ -52,7 +53,7 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
         if (this.rheaXRefs === undefined) {
           this.rheaXRefs = [];
         }
-        this.rheaXRefs.push(crossRef);
+        this.rheaXRefs.push(new RheaCrossReference(crossRef));
       }
     }
   }
@@ -104,11 +105,11 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
     this._reactomeXRefs = value;
   }
 
-  get rheaXRefs(): CrossReference[] {
+  get rheaXRefs(): RheaCrossReference[] {
     return this._rheaXRefs;
   }
 
-  set rheaXRefs(value: CrossReference[]) {
+  set rheaXRefs(value: RheaCrossReference[]) {
     this._rheaXRefs = value;
   }
 

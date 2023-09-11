@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
+import {RheaCrossReference} from '../../../shared/model/complex-details/rhea-cross-reference.model';
+
+import '../../../../../../node_modules/@swissprot/rhea-reaction-visualizer';
 
 @Component({
   selector: 'cp-rhea-crossreferences',
@@ -7,8 +9,11 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
   styleUrls: ['./rhea-crossreferences.component.css']
 })
 export class RheaCrossreferencesComponent implements OnInit {
-  private _crossReferences: CrossReference[];
-  private _displayedElements = 5;
+
+  private rheaIdRegularExp = /rhea:/gi;
+
+  private _crossReferences: RheaCrossReference[];
+  private _displayedElements = 3;
 
   constructor() {
   }
@@ -16,13 +21,16 @@ export class RheaCrossreferencesComponent implements OnInit {
   ngOnInit() {
   }
 
-  get crossReferences(): CrossReference[] {
+  get crossReferences(): RheaCrossReference[] {
     return this._crossReferences;
   }
 
   @Input()
-  set crossReferences(value: CrossReference[]) {
+  set crossReferences(value: RheaCrossReference[]) {
     this._crossReferences = value;
+    if (this._crossReferences.length > 0) {
+      this._crossReferences[0].displayed = true;
+    }
   }
 
   get displayedElements(): number {
@@ -31,5 +39,9 @@ export class RheaCrossreferencesComponent implements OnInit {
 
   set displayedElements(value: number) {
     this._displayedElements = value;
+  }
+
+  toggleDisplayedProperty(index: number): void {
+    this._crossReferences[index].displayed = !this._crossReferences[index].displayed;
   }
 }

@@ -3,15 +3,17 @@
     <h3>Rhea Cross References ({{crossReferences.length}})</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
+      <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements; let i = index">
         <td>
-          <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}} <i
-            class="icon icon-generic small" data-icon="x"></i></a>
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
-        <td>
-          <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
+          <div>
+            <a href="{{crossReference.crossReference.searchURL}}" target="_blank">{{crossReference.crossReference.identifier}} <i
+              class="icon icon-generic small" data-icon="x"></i></a>
+            <button class="button float-right" *ngIf="crossReference.displayed" (click)="toggleDisplayedProperty(i)">Hide Rhea reaction</button>
+            <button class="button float-right" *ngIf="!crossReference.displayed" (click)="toggleDisplayedProperty(i)">Show Rhea reaction</button>
+          </div>
+          <div *ngIf="crossReference.displayed">
+            <rhea-reaction rheaid="{{crossReference.identifier}}" showids nosource="true"></rhea-reaction>
+          </div>
         </td>
       </tr>
       <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
