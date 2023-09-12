@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 import {RheaCrossReference} from '../../../shared/model/complex-details/rhea-cross-reference.model';
 
+import '../../../../../../node_modules/@swissprot/rhea-reaction-visualizer';
+
 @Component({
   selector: 'cp-catalytic-activity',
   templateUrl: './catalytic-activity.component.html',
@@ -35,6 +37,9 @@ export class CatalyticActivityComponent implements OnInit {
   @Input()
   set rheaCrossReferences(value: RheaCrossReference[]) {
     this._rheaCrossReferences = value;
+    if (this._rheaCrossReferences.length > 0) {
+      this._rheaCrossReferences[0].displayed = true;
+    }
   }
 
   get displayedIntenzElements(): number {
