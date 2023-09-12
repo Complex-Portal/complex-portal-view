@@ -7,19 +7,15 @@
     <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
       <p>{{functionDescription}}</p>
     </div>
-    <div id="intenzXRefs" class="columns medium-12 no-pad-left" *ngIf="intenzXRefs || rheaXRefs">
-      <div class="row">
-        <div class="columns medium-12">
-          <h3>Catalytic activity</h3>
-          <cp-intenz-crossreferences *ngIf="intenzXRefs" [crossReferences]="intenzXRefs"></cp-intenz-crossreferences>
-          <cp-rhea-crossreferences *ngIf="rheaXRefs" [crossReferences]="rheaXRefs"></cp-rhea-crossreferences>
-        </div>
-      </div>
+    <div id="catalyticActivity"
+         class="columns medium-12 no-pad-left"
+         *ngIf="(intenzXRefs && intenzXRefs.length !== 0) || (rheaXRefs && rheaXRefs.length !== 0)">
+      <cp-catalytic-activity [intenzCrossReferences]="intenzXRefs" [rheaCrossReferences]="rheaXRefs"></cp-catalytic-activity>
     </div>
     <div id="ligands" class="columns medium-6 no-pad-left" *ngIf="ligands && ligands.length !== 0">
       <cp-ligands [ligands]="ligands"></cp-ligands>
     </div>
-    <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs">
+    <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs && goXRefs.length !== 0">
       <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>
     </div>
     <div id="agonists" class="columns medium-6 no-pad-left" *ngIf="agonists && agonists.length !== 0">
@@ -28,7 +24,7 @@
     <div id="antagonists" class="columns medium-6 no-pad-left" *ngIf="antagonists && antagonists.length !== 0">
       <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
     </div>
-    <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs">
+    <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs && reactomeXRefs.length !== 0">
       <cp-reactome-cross-references [crossReferences]="reactomeXRefs"></cp-reactome-cross-references>
     </div>
   </div>

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="columns medium-12">
+    <h3>Catalytic activity</h3>
+    <div *ngIf="intenzCrossReferences && intenzCrossReferences.length !== 0">
+      <h4>IntEnz Cross References ({{intenzCrossReferences.length}})</h4>
+      <table class="hover">
+        <tbody>
+        <tr *ngFor="let intenzCrossReference of intenzCrossReferences | slice:0:displayedIntenzElements">
+          <td>
+            <a href="{{intenzCrossReference.searchURL}}" target="_blank">{{intenzCrossReference.identifier}} <i
+              class="icon icon-generic small" data-icon="x"></i></a>
+          </td>
+        </tr>
+        <tr class="text-center" style="background: white" *ngIf="displayedIntenzElements < intenzCrossReferences.length">
+          <td>
+            <a class="label" (click)="displayedIntenzElements = intenzCrossReferences.length">Show all</a>
+          </td>
+        </tr>
+        <tr class="text-center" style="background: white" *ngIf="displayedIntenzElements < intenzCrossReferences.length">
+          <td>
+            <a class="label" (click)="displayedIntenzElements = intenzCrossReferences.length">Show all</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="rheaCrossReferences && rheaCrossReferences.length !== 0">
+    <h4>Rhea Cross References ({{rheaCrossReferences.length}})</h4>
+      <table class="hover">
+        <tbody>
+        <tr *ngFor="let rheaCrossReference of rheaCrossReferences | slice:0:displayedRheaElements; let i = index">
+          <td>
+            <div>
+              <a href="{{rheaCrossReference.crossReference.searchURL}}" target="_blank">{{rheaCrossReference.crossReference.identifier}} <i
+                class="icon icon-generic small" data-icon="x"></i></a>
+              <button class="button float-right"  (click)="toggleRheaDisplayedProperty(i)">
+                {{rheaCrossReference.displayed ? 'Hide' : 'Show'}} Rhea reaction
+              </button>
+            </div>
+            <div *ngIf="rheaCrossReference.displayed">
+              <rhea-reaction rheaid="{{rheaCrossReference.identifier}}" showids nosource="true"></rhea-reaction>
+            </div>
+          </td>
+        </tr>
+        <tr class="text-center" style="background: white" *ngIf="displayedRheaElements < rheaCrossReferences.length">
+          <td>
+            <a class="label" (click)="displayedRheaElements = rheaCrossReferences.length">Show all</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

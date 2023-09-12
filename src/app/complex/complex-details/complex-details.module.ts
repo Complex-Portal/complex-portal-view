@@ -3,9 +3,8 @@ import {CommonModule} from '@angular/common';
 import {LitmolViewerComponent} from './shared/visualisation/litmol-viewer/litmol-viewer.component';
 import {PdbCrossreferencesComponent} from './complex-properties/pdb-crossreferences/pdb-crossreferences.component';
 import {EuroPmcCrossreferencesComponent} from './complex-references/euro-pmc-crossreferences/euro-pmc-crossreferences.component';
-import {IntenzCrossreferencesComponent} from './complex-function/intenz-crossreferences/intenz-crossreferences.component';
+import {CatalyticActivityComponent} from './complex-function/catalytic-activity/catalytic-activity.component';
 import {GoCrossreferencesComponent} from './complex-function/go-crossreferences/go-crossreferences.component';
-import {RheaCrossreferencesComponent} from './complex-function/rhea-crossreferences/rhea-crossreferences.component';
 import {ComplexPropertiesComponent} from './complex-properties/complex-properties.component';
 import {ComplexFunctionComponent} from './complex-function/complex-function.component';
 import {ComplexHeaderComponent} from './complex-header/complex-header.component';
@@ -66,8 +65,7 @@ import {ComplexModule} from '../complex.module';
     ReactomeDiagramComponent,
     ReactomeCrossReferencesComponent,
     GoCrossreferencesComponent,
-    IntenzCrossreferencesComponent,
-    RheaCrossreferencesComponent,
+    CatalyticActivityComponent,
     EuroPmcCrossreferencesComponent,
     PdbCrossreferencesComponent,
     LitmolViewerComponent,
