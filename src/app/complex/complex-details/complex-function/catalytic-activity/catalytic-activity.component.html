@@ -1,8 +1,8 @@
 <div class="row">
   <div class="columns medium-12">
-    <h3>Catalytic activity</h3>
+    <h3>Catalytic Activity</h3>
     <div *ngIf="intenzCrossReferences && intenzCrossReferences.length !== 0">
-      <h4>IntEnz Cross References ({{intenzCrossReferences.length}})</h4>
+      <h4>EC Numbers ({{intenzCrossReferences.length}})</h4>
       <table class="hover">
         <tbody>
         <tr *ngFor="let intenzCrossReference of intenzCrossReferences | slice:0:displayedIntenzElements">
