@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
+import {IntEnzCrossReference} from '../../../shared/model/complex-details/intenz-cross-reference.model';
 import {RheaCrossReference} from '../../../shared/model/complex-details/rhea-cross-reference.model';
 
 import '../../../../../../node_modules/@swissprot/rhea-reaction-visualizer';
@@ -10,7 +10,7 @@ import '../../../../../../node_modules/@swissprot/rhea-reaction-visualizer';
   styleUrls: ['./catalytic-activity.component.css']
 })
 export class CatalyticActivityComponent implements OnInit {
-  private _intenzCrossReferences: CrossReference[];
+  private _intenzCrossReferences: IntEnzCrossReference[];
   private _rheaCrossReferences: RheaCrossReference[];
   private _displayedIntenzElements = 5;
   private _displayedRheaElements = 5;
@@ -21,12 +21,12 @@ export class CatalyticActivityComponent implements OnInit {
   ngOnInit() {
   }
 
-  get intenzCrossReferences(): CrossReference[] {
+  get intenzCrossReferences(): IntEnzCrossReference[] {
     return this._intenzCrossReferences;
   }
 
   @Input()
-  set intenzCrossReferences(value: CrossReference[]) {
+  set intenzCrossReferences(value: IntEnzCrossReference[]) {
     this._intenzCrossReferences = value;
   }
 
@@ -37,7 +37,7 @@ export class CatalyticActivityComponent implements OnInit {
   @Input()
   set rheaCrossReferences(value: RheaCrossReference[]) {
     this._rheaCrossReferences = value;
-    if (this._rheaCrossReferences.length > 0) {
+    if (!!this._rheaCrossReferences && this._rheaCrossReferences.length > 0) {
       this._rheaCrossReferences[0].displayed = true;
     }
   }
