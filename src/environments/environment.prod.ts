@@ -8,7 +8,7 @@ const REACTOME_BASE_URL = 'https://reactome.org';
 const LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 const INTACT_FTP_BASE_URL = 'http://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
-const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/';
+const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/update-sab-members/';
 
 export const environment = {
   production: true,
