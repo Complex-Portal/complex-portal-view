@@ -16,7 +16,8 @@ export class AboutComponent implements OnInit {
   code = environment.complex_portal_documentation_url + 'about/code-repository.md';
   license_privacy = environment.complex_portal_documentation_url + 'about/license.md';
   publications = environment.complex_portal_documentation_url + 'about/publications.md';
-  sab = environment.complex_portal_documentation_url + 'about/scientific-advisory-board.md';
+  // We use the Intact Portal documentation for the SAB page to keep it in sync between Intact and Complex Portal
+  sab = environment.intact_portal_documentation_url + 'about/scientific-advisory-board.md';
   requests = environment.complex_portal_documentation_url + 'about/requests.md';
 
   constructor(private titleService: Title, private router: Router) {

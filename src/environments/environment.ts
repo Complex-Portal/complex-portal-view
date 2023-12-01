@@ -11,6 +11,7 @@ const REACTOME_BASE_URL = 'https://reactome.org';
 const INTACT_FTP_BASE_URL = 'http://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
 const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/update-sab-members/';
+const INTACT_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Intact-Portal/intact-portal-documentation/update-sab-members/';
 
 export const environment = {
   production: false,
@@ -20,6 +21,7 @@ export const environment = {
   ebi_base_url: EBI_BASE_URL,
   license_url: LICENSE_URL,
   complex_portal_documentation_url: COMPLEX_PORTAL_DOCUMENTATION_URL,
+  intact_portal_documentation_url: INTACT_PORTAL_DOCUMENTATION_URL,
   complex_ws_base_url: COMPLEX_LOCAL_BASE_URL + 'intact/complex-ws',
   europepmc_base_url: EBI_BASE_URL + 'europepmc',
   pdb_base_url: EBI_BASE_URL + 'pdbe',
