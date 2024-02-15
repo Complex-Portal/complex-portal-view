@@ -121,6 +121,7 @@ export class ComplexPortalService {
               // With the results for each complex (in ComplexDetails), we retrieve the participant identifiers, and
               // assign those to the componentIds member of Element
               searchResultElement.componentIds = complexDetails.participants.map(participant => participant.identifier);
+              // If we want to add any other details, apart from the components, this would be the place to do so
               return searchResultElement;
             })));
 
