@@ -3,6 +3,7 @@ export class Element {
   private _complexName: string;
   private _organismName: string;
   private _description: string;
+  private _componentIds: string[];
 
   constructor(complexAC: string, complexName: string, organismName: string, description: string) {
     this._complexAC = complexAC;
@@ -25,5 +26,13 @@ export class Element {
 
   get description(): string {
     return this._description;
+  }
+
+  get componentIds(): string[] {
+    return this._componentIds;
+  }
+
+  set componentIds(componentIds: string[]) {
+    this._componentIds = componentIds;
   }
 }

@@ -49,7 +49,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   private requestComplexResults() {
-    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
+    // Calling new HACKY method to get also the components of each complex
+    this.complexPortalService.findComplexWithComponents(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       if (this.complexSearch.totalNumberOfResults !== 0) {
