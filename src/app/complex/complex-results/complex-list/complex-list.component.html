@@ -1,3 +1,46 @@
+<div class="Complex-navigator">
+  <table id="CN-table">
+    <thead>
+    <tr>
+      <th>Components/complexes</th>
+      <th *ngFor="let complex of complexSearch.elements">
+        <div class="complexInTable">
+          <a [routerLink]="['/complex', complex.complexAC]">
+            {{complex.complexAC}}
+            <span class="ComplexNameSpan">{{complex.complexName}}</span>
+          </a>
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let complex of complexSearch.elements">
+    <tr *ngFor="let component of complex.componentIds">
+      <td>{{component}}</td>
+      <td *ngFor="let complex of complexSearch.elements">
+        <ng-container *ngFor="let component of complex.componentIds">
+          x
+        </ng-container>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div class="testZone">
+  <h3>Test zone: display of all components</h3>
+  <ul>
+    <li *ngFor="let component of complexResultsComponent.allComponentsInComplexSearch">Components: {{ component }}</li>
+  </ul>
+</div>
+
+
+
+
+
+
 <ul class="no-bullet">
   <li *ngFor="let complex of complexSearch.elements">
     <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
