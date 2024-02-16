@@ -48,7 +48,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.requestComplexResults();
         document.body.scrollTop = 0;
-
+        console.log("test" + this._allComponentsInComplexSearch);
       });
 
   }
@@ -63,14 +63,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.complexSearch = complexSearch;
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+        for (let i = 0; i < complexSearch.elements.length; i++) {
+          complexSearch.elements[i].componentIds.forEach(id => this._allComponentsInComplexSearch.push(id));
+        }
+        console.log(this._allComponentsInComplexSearch);
       }
       ProgressBarComponent.hide();
-
-      for (let i = 0; i < complexSearch.elements.length; i++) {
-        complexSearch.elements[i].componentIds.forEach(id => this._allComponentsInComplexSearch.push(id));
-      }
-      console.log(this._allComponentsInComplexSearch);
-
     });
 
   }
