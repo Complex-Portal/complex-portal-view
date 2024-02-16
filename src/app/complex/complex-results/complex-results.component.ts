@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
+import {Element} from '../shared/model/complex-results/element.model';
 
 
 @Component({
@@ -13,6 +14,7 @@ import {AnalyticsService} from '../../shared/google-analytics/service/analytics.
   styleUrls: ['./complex-results.component.css']
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
+  complexResultsComponent: ComplexResultsComponent;
   private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
@@ -21,10 +23,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
+  private _allComponentsInComplexSearch: string[] = [];
+
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
-              private googleAnalyticsService: AnalyticsService) {
+              private googleAnalyticsService: AnalyticsService,
+              ) {
+    this._allComponentsInComplexSearch = [];
   }
 
   ngOnInit() {
@@ -42,21 +48,31 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.requestComplexResults();
         document.body.scrollTop = 0;
+
       });
+
   }
 
   ngAfterViewInit(): void {
   }
 
   private requestComplexResults() {
-    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
+    // Calling new HACKY method to get also the components of each complex
+    this.complexPortalService.findComplexWithComponents(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
       }
       ProgressBarComponent.hide();
+
+      for (let i = 0; i < complexSearch.elements.length; i++) {
+        complexSearch.elements[i].componentIds.forEach(id => this._allComponentsInComplexSearch.push(id));
+      }
+      console.log(this._allComponentsInComplexSearch);
+
     });
+
   }
 
   /**
@@ -96,6 +112,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
 
+  private doesComplexHaveComponent (complex, component): boolean{
+    return complex.componentIds === component;
+  }
+
   /**
    *
    * @param pageIndex new page index after hitting the paginator to update the URL and reload content
@@ -125,7 +145,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  public onInteractorTyoeFilterChanged(filter: string[]): void {
+  public onInteractorTypeFilterChanged(filter: string[]): void {
     this.interactorTypeFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
@@ -194,4 +214,13 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   set interactorTypeFilter(value: string[]) {
     this._interactorTypeFilter = value;
   }
+
+  get allComponentsInComplexSearch(): string[] {
+    return this._allComponentsInComplexSearch;
+  }
+
+  set allComponentsInComplexSearch(value: string[]) {
+    this._allComponentsInComplexSearch = value;
+  }
+
 }
