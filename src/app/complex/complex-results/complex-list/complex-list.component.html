@@ -29,18 +29,6 @@
 
 
 
-<div class="testZone">
-  <h3>Test zone: display of all components</h3>
-  <ul>
-    <li *ngFor="let component of complexResultsComponent.allComponentsInComplexSearch">Components: {{ component }}</li>
-  </ul>
-</div>
-
-
-
-
-
-
 <ul class="no-bullet">
   <li *ngFor="let complex of complexSearch.elements">
     <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
