@@ -22,5 +22,5 @@ export enum Category {
   details,
   basket,
   search,
-  ols_mondo
+  ols_obo
 }

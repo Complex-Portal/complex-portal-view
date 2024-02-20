@@ -1,7 +1,7 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {catchError, map} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
 
@@ -15,34 +15,24 @@ export class OlsService {
   }
 
   /**
-   * Get a name of orphanet xref
-   * @param id
+   * Get the name of a xref from OLS
+   * @param ontology xref intology
+   * @param id xref identifier
    * @returns {Observable<R>}
    */
-  getOrphaNetName(id: string) {
-    return this.http.get(baseURL + '/ordo/terms?iri=http://www.orpha.net/ORDO/' + id.replace(':', '_')).pipe(
-      map((response: Response) => response),
+  getXrefName(ontology: string, id: string) {
+    return this.http.get(baseURL + '/efo/terms?iri=' + this.getOntologyUrl(ontology) + id.replace(':', '_')).pipe(
       catchError(this.handleError));
   }
 
-  /**
-   * Get a name of efo xref
-   * @param id
-   * @returns {Observable<R>}
-   */
-  getEfoName(id: string) {
-    return this.http.get(baseURL + '/efo/terms?iri=http://www.ebi.ac.uk/efo/' + id.replace(':', '_')).pipe(
-      catchError(this.handleError));
-  }
-
-  /**
-   * Get a name of mondo xref
-   * @param id
-   * @returns {Observable<R>}
-   */
-  getMondoName(id: string) {
-    return this.http.get(baseURL + '/mondo/terms?iri=http://purl.obolibrary.org/obo/' + id.replace(':', '_')).pipe(
-      catchError(this.handleError));
+  private getOntologyUrl(ontology: string): string {
+    if (ontology === 'EFO') {
+      return 'http://www.ebi.ac.uk/efo/';
+    } else if (ontology === 'Orphanet') {
+      return 'http://www.orpha.net/ORDO/';
+    } else {
+      return 'http://purl.obolibrary.org/obo/';
+    }
   }
 
   private handleError(err: HttpErrorResponse | any): Observable<any> {
