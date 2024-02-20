@@ -1,6 +1,7 @@
-<div class="Complex-navigator">
+<div class="Complex-navigator" *ngIf="navigatorView">
+  <input type="submit" name="submit" value="View list" class="button"
+         (click)="listView = true; navigatorView=false" >
   <table id="CN-table">
-    <thead>
     <tr>
       <th>Components/complexes</th>
       <th *ngFor="let complex of complexSearch.elements">
@@ -12,24 +13,22 @@
         </div>
       </th>
     </tr>
-    </thead>
-    <tbody *ngFor="let complex of complexSearch.elements">
-    <tr *ngFor="let component of complex.componentIds">
-      <td>{{component}}</td>
+    <tr *ngFor="let component of componentIds">
+      <td>
+        {{component}}
+      </td>
       <td *ngFor="let complex of complexSearch.elements">
-        <ng-container *ngFor="let component of complex.componentIds">
-          x
-        </ng-container>
+        <div *ngIf="doesComplexHaveComponent(complex,component)">
+          {{(stochiometryOfComponentInComplex(complex, component))}}
+        </div>
       </td>
     </tr>
-    </tbody>
   </table>
 </div>
 
-
-
-
-<ul class="no-bullet">
+<div class ="listOfResults" *ngIf="listView">
+  <input type="submit" name="submit" value="View Navigator" class="button" (click)="navigatorView = true; listView=false" >
+  <ul class="no-bullet">
   <li *ngFor="let complex of complexSearch.elements">
     <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
     <div class="description" style="background-color: white">
@@ -44,3 +43,4 @@
     </div>
   </li>
 </ul>
+</div>
