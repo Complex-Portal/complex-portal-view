@@ -27,6 +27,8 @@
     "@angular/platform-browser-dynamic": "^12.2.12",
     "@angular/router": "^12.2.12",
     "@ebi-gene-expression-group/anatomogram": "^2.4.0",
+    "@swissprot/rhea-reaction-visualizer": "0.0.23",
+    "@types/estree": "^1.0.0",
     "angular-cli-ghpages": "^0.5.2",
     "animate.css": "^3.5.2",
     "classlist.js": "^1.1.20150312",
@@ -42,14 +44,14 @@
     "ngx-page-scroll-core": "^7.0.6",
     "ngx-toastr": "^12.1.0",
     "npm": "^5.7.1",
+    "primeng": "^17.7.0",
     "react": "^15.6.1",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "ts-helpers": "^1.1.2",
     "ts-md5": "^1.2.4",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4",
-    "@swissprot/rhea-reaction-visualizer": "0.0.23"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.12",

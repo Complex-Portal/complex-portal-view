@@ -16,7 +16,7 @@ export class ComplexFilterComponent implements OnInit {
 
   @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
@@ -70,7 +70,7 @@ export class ComplexFilterComponent implements OnInit {
       this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onInteractorTyoeFilterChanged.emit(this.interactorTypeFilter);
+    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter);
   }
 
   /**

@@ -22,6 +22,9 @@ export class ComplexSearchResult {
     return this._totalNumberOfResults;
   }
 
+  set elements(elements:Element[]) {
+    this._elements=elements;
+  }
   get elements(): Element[] {
     return this._elements;
   }
@@ -29,4 +32,5 @@ export class ComplexSearchResult {
   get facets(): Facets[] {
     return this._facets;
   }
+
 }

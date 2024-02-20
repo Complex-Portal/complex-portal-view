@@ -10,19 +10,22 @@
                          (onResetAllFilters)="onResetAllFilters()"
                          (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
                          (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                         (onInteractorTyoeFilterChanged)="onInteractorTyoeFilterChanged($event)">
+                         (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
       </cp-complex-filter>
     </div>
     <div class="columns medium-8">
       <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                             [lastPageIndex]="lastPageIndex"
                             (onPageChange)="onPageChange($event)"></cp-complex-paginator>
-      <cp-complex-list [complexSearch]="complexSearch"></cp-complex-list>
+      <cp-complex-list [complexSearch]="complexSearch"
+                       [componentIds]="allComponentsInComplexSearch">
+      </cp-complex-list>
       <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                             [lastPageIndex]="lastPageIndex"
                             (onPageChange)="onPageChange($event)"></cp-complex-paginator>
     </div>
   </div>
+
   <div class="columns medium-12 callout alert" *ngIf="complexSearch.totalNumberOfResults === 0">
     <h2>No Complex Portal results found</h2>
     <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{query}}</b></h3>

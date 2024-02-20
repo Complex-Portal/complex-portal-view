@@ -17,6 +17,7 @@ import {flatMap} from 'rxjs/internal/operators';
 
 
 import {Participant} from '../model/complex-details/participant.model';
+import {ComplexComponent} from '../model/complex-results/complex-component.model';
 
 const baseURL = environment.complex_ws_base_url;
 
@@ -123,7 +124,8 @@ export class ComplexPortalService {
             .pipe(map((complexDetails: ComplexDetails) => {
               // With the results for each complex (in ComplexDetails), we retrieve the participant identifiers, and
               // assign those to the componentIds member of Element
-              searchResultElement.componentIds = complexDetails.participants.map(participant => participant.identifier);
+              searchResultElement.components = complexDetails.participants
+                .map(participant => new ComplexComponent(participant.identifier, participant.stochiometry, participant.interactorType));
               // If we want to add any other details, apart from the components, this would be the place to do so
               return searchResultElement;
             })));

@@ -5,32 +5,32 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
-import {Element} from '../shared/model/complex-results/element.model';
+import Record = __LiteMolImmutable.Record;
+
+
 
 
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
-  styleUrls: ['./complex-results.component.css']
+  styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  complexResultsComponent: ComplexResultsComponent;
   private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
-  private _pageSize = 10;
+  private _pageSize = 15;
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-  private _allComponentsInComplexSearch: string[] = [];
+  private _allComponentsInComplexSearch = new Set<string>();
 
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
               private googleAnalyticsService: AnalyticsService,
               ) {
-    this._allComponentsInComplexSearch = [];
   }
 
   ngOnInit() {
@@ -48,7 +48,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.requestComplexResults();
         document.body.scrollTop = 0;
-        console.log("test" + this._allComponentsInComplexSearch);
       });
 
   }
@@ -57,16 +56,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   private requestComplexResults() {
-    // Calling new HACKY method to get also the components of each complex
     this.complexPortalService.findComplexWithComponents(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
+      this._allComponentsInComplexSearch = new Set();
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
-          complexSearch.elements[i].componentIds.forEach(id => this._allComponentsInComplexSearch.push(id));
+          complexSearch.elements[i].components
+            .forEach(component => this._allComponentsInComplexSearch.add(component.id));
         }
-        console.log(this._allComponentsInComplexSearch);
       }
       ProgressBarComponent.hide();
     });
@@ -110,9 +109,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
 
-  private doesComplexHaveComponent (complex, component): boolean{
-    return complex.componentIds === component;
-  }
+
 
   /**
    *
@@ -148,6 +145,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.currentPageIndex = 1;
     this.reloadPage();
   }
+
 
   get query(): string {
     return this._query;
@@ -213,11 +211,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this._interactorTypeFilter = value;
   }
 
-  get allComponentsInComplexSearch(): string[] {
-    return this._allComponentsInComplexSearch;
-  }
+  public get allComponentsInComplexSearch(): Set<string> {
+  return this._allComponentsInComplexSearch;
+}
 
-  set allComponentsInComplexSearch(value: string[]) {
+  set allComponentsInComplexSearch( value: Set<string>) {
     this._allComponentsInComplexSearch = value;
   }
 
