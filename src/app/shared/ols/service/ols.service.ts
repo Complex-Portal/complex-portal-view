@@ -15,7 +15,7 @@ export class OlsService {
   }
 
   /**
-   * Get a name of efo xref
+   * Get a name of orphanet xref
    * @param id
    * @returns {Observable<R>}
    */
@@ -32,6 +32,16 @@ export class OlsService {
    */
   getEfoName(id: string) {
     return this.http.get(baseURL + '/efo/terms?iri=http://www.ebi.ac.uk/efo/' + id.replace(':', '_')).pipe(
+      catchError(this.handleError));
+  }
+
+  /**
+   * Get a name of mondo xref
+   * @param id
+   * @returns {Observable<R>}
+   */
+  getMondoName(id: string) {
+    return this.http.get(baseURL + '/mondo/terms?iri=http://purl.obolibrary.org/obo/' + id.replace(':', '_')).pipe(
       catchError(this.handleError));
   }
 
