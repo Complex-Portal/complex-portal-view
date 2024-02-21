@@ -21,7 +21,7 @@
             <i class="icon icon-functional small" data-icon="1"></i>
           </a>
         </div>
-        <div class="interactorType">
+        <div *ngIf="showExternalLink(component)" class="interactorType">
           <a href="{{externalLink(component)}}" target="_blank">{{externalLinkName(component)}}
             <i class="icon icon-generic small" data-icon="x"></i>
           </a>

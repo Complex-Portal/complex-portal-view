@@ -57,6 +57,12 @@ export class ComplexListComponent implements OnInit {
     return false;
   }
 
+  public showExternalLink(component: Interactor): boolean {
+    return (component.interactorType === 'protein' ||
+      component.interactorType === 'ribonucleic acid' ||
+      component.interactorType === 'small molecule');
+  }
+
   public externalLink(component: Interactor): string {
     if (component.interactorType === 'protein') {
       return 'https://www.uniprot.org/uniprotkb/' + component.id;
