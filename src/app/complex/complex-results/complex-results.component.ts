@@ -6,6 +6,7 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import Record = __LiteMolImmutable.Record;
+import {Interactor} from '../shared/model/complex-results/interactor.model';
 
 
 
@@ -24,7 +25,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-  private _allComponentsInComplexSearch = new Set<string>();
+  private _allComponentsInComplexSearch = new Set<Interactor>();
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -64,7 +65,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
           complexSearch.elements[i].components
-            .forEach(component => this._allComponentsInComplexSearch.add(component.id));
+            .forEach(component => this._allComponentsInComplexSearch.add(
+              new Interactor(component.id, component.interactorType)));
         }
       }
       ProgressBarComponent.hide();
@@ -211,11 +213,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this._interactorTypeFilter = value;
   }
 
-  public get allComponentsInComplexSearch(): Set<string> {
+  public get allComponentsInComplexSearch(): Set<Interactor> {
   return this._allComponentsInComplexSearch;
 }
 
-  set allComponentsInComplexSearch( value: Set<string>) {
+  set allComponentsInComplexSearch( value: Set<Interactor>) {
     this._allComponentsInComplexSearch = value;
   }
 

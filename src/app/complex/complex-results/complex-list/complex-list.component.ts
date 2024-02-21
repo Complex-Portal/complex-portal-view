@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
+import {Interactor} from '../../shared/model/complex-results/interactor.model';
+import {Router} from '@angular/router';
+import {Category} from '../../../shared/google-analytics/types/category.enum';
 
 @Component({
   selector: 'cp-complex-list',
@@ -8,23 +11,23 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
 })
 export class ComplexListComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  _componentIds;
+  _components: Set<Interactor>;
 
   listView = false;
   navigatorView = true;
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  get componentIds(): Set<string> {
-    return this._componentIds;
+  get components(): Set<Interactor> {
+    return this._components;
   }
 
   @Input()
-  set componentIds( value: Set<string>) {
-    this._componentIds = value;
+  set components( value: Set<Interactor>) {
+    this._components = value;
   }
 
   public doesComplexHaveComponent(complex, componentId): boolean {
@@ -52,6 +55,35 @@ export class ComplexListComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  public externalLink(component: Interactor): string {
+    if (component.interactorType === 'protein') {
+      return 'https://www.uniprot.org/uniprotkb/' + component.id;
+    } else if (component.interactorType === 'ribonucleic acid') {
+      return 'https://rnacentral.org/rna/' + component.id;
+    } else if (component.interactorType === 'small molecule') {
+      return 'https://www.ebi.ac.uk/chebi/searchId.do?chebiId=' + component.id;
+    }
+    return '';
+  }
+
+  public externalLinkName(component: Interactor): string {
+    if (component.interactorType === 'protein') {
+      return 'Uniprot';
+    } else if (component.interactorType === 'ribonucleic acid') {
+      return 'RNA central';
+    } else if (component.interactorType === 'small molecule') {
+      return 'ChEMBL';
+    }
+    return '';
+  }
+
+  search(componentId: string) {
+    const url = this.router.serializeUrl(this.router.createUrlTree(
+      ['complex/search'],
+      {queryParams: {query: componentId, page: 1}}));
+    window.open(url, '_blank');
   }
 
 }

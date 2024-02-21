@@ -13,13 +13,23 @@
         </div>
       </th>
     </tr>
-    <tr *ngFor="let component of componentIds">
+    <tr *ngFor="let component of components">
       <td>
-        {{component}}
+        <div>
+          {{component.id}}
+          <a (click)="search(component.id)">
+            <i class="icon icon-functional small" data-icon="1"></i>
+          </a>
+        </div>
+        <div class="interactorType">
+          <a href="{{externalLink(component)}}" target="_blank">{{externalLinkName(component)}}
+            <i class="icon icon-generic small" data-icon="x"></i>
+          </a>
+        </div>
       </td>
       <td *ngFor="let complex of complexSearch.elements">
-        <div *ngIf="doesComplexHaveComponent(complex,component)">
-          {{(stochiometryOfComponentInComplex(complex, component))}}
+        <div *ngIf="doesComplexHaveComponent(complex,component.id)">
+          {{(stochiometryOfComponentInComplex(complex, component.id))}}
         </div>
       </td>
     </tr>

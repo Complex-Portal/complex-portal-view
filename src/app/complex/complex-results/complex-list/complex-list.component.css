@@ -21,7 +21,7 @@ table, th, td {
   width:100%;
   z-index: 1;
   margin: auto;
-  height: 350px;
+  height: 850px;
   border-collapse: separate;
   overflow: auto;
   text-align: center;
@@ -74,4 +74,8 @@ th:first-child{
 
 .checkForSubComplexTrue{
   background-color: #6dab49;
+}
+
+.interactorType {
+  font-size: small;
 }
