@@ -21,18 +21,16 @@ table, th, td {
   width:100%;
   z-index: 1;
   margin: auto;
-  height: 850px;
+  height: 350px;
   border-collapse: separate;
   overflow: auto;
   text-align: center;
-
 }
 
 .Complex-navigator th {
   position: sticky;
   top: 0;
   text-align: center;
-
 }
 
 
@@ -72,10 +70,10 @@ th:first-child{
 }
 
 
-.checkForSubComplexTrue{
-  background-color: #6dab49;
-}
-
 .interactorType {
   font-size: small;
+}
+
+[data-toggle="toggle"] {
+  display: none;
 }

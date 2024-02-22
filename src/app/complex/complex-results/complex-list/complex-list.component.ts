@@ -3,6 +3,8 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {Router} from '@angular/router';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
+import {Element} from '../../shared/model/complex-results/element.model';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'cp-complex-list',
@@ -15,6 +17,7 @@ export class ComplexListComponent implements OnInit {
 
   listView = false;
   navigatorView = true;
+  SCInteractorView = false;
   constructor(private router: Router) {
   }
 
@@ -55,6 +58,10 @@ export class ComplexListComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  public componentToComplex(component, ComplexSearch): Element {
+    return ComplexSearch.find(complex => complex.complexAC === component.id);
   }
 
   public showExternalLink(component: Interactor): boolean {

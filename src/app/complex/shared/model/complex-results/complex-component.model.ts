@@ -20,7 +20,7 @@ export class ComplexComponent {
     return this._stochiometry;
   }
 
-  get interactorType(): string{
+  get interactorType(): string {
     return this._interactorType;
   }
 }

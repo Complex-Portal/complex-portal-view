@@ -26,6 +26,17 @@
             <i class="icon icon-generic small" data-icon="x"></i>
           </a>
         </div>
+        <div *ngIf="isComponentASubcomplex(component)">
+          <input type="submit" name="submit" value="more" class="button"
+                 (click)="SCInteractorView= true">
+          <div *ngIf="SCInteractorView">
+            <tr *ngFor="let el of ((componentToComplex(component, complexSearch.elements)).components)">
+              <td>
+                {{el.id}}
+              </td>
+            </tr>
+          </div>
+        </div>
       </td>
       <td *ngFor="let complex of complexSearch.elements">
         <div *ngIf="doesComplexHaveComponent(complex,component.id)">
