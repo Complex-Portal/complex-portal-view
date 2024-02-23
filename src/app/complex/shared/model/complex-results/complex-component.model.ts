@@ -1,6 +1,3 @@
-import {Participant} from '../complex-details/participant.model';
-import Record = __LiteMolImmutable.Record;
-
 export class ComplexComponent {
   private _id: string;
   private _stochiometry: string;

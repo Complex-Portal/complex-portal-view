@@ -1,4 +1,3 @@
-
 export class Interactor {
   private _id: string;
   private _interactorType: string;

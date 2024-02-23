@@ -1,65 +1,83 @@
 <div class="Complex-navigator" *ngIf="navigatorView">
   <input type="submit" name="submit" value="View list" class="button"
-         (click)="listView = true; navigatorView=false" >
+         (click)="listView = true; navigatorView=false">
   <table id="CN-table">
+    <!-- Complexes' row (table's header) -->
     <tr>
-      <th>Components/complexes</th>
-      <th *ngFor="let complex of complexSearch.elements">
+      <th class="intHeader" rowspan="2">Interactors</th>
+      <th class="compHeader" colspan="15">Complexes</th>
+      <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts) -->
+    </tr>
+    <tr>
+      <th *ngFor="let complex of complexSearch.elements" style="width: 200px">
         <div class="complexInTable">
           <a [routerLink]="['/complex', complex.complexAC]">
-            {{complex.complexAC}}
-            <span class="ComplexNameSpan">{{complex.complexName}}</span>
+            {{ complex.complexName }}
           </a>
         </div>
       </th>
     </tr>
-    <tr *ngFor="let component of components">
-      <td>
-        <div>
-          {{component.id}}
-          <a (click)="search(component.id)">
-            <i class="icon icon-functional small" data-icon="1"></i>
-          </a>
-        </div>
-        <div *ngIf="showExternalLink(component)" class="interactorType">
-          <a href="{{externalLink(component)}}" target="_blank">{{externalLinkName(component)}}
-            <i class="icon icon-generic small" data-icon="x"></i>
-          </a>
-        </div>
-        <div *ngIf="isComponentASubcomplex(component)">
-          <input type="submit" name="submit" value="more" class="button"
-                 (click)="SCInteractorView= true">
-          <div *ngIf="SCInteractorView">
-            <tr *ngFor="let el of ((componentToComplex(component, complexSearch.elements)).components)">
-              <td>
-                {{el.id}}
-              </td>
-            </tr>
+    <!-- Interactors' column -->
+    <ng-container *ngFor="let interactor of components">
+      <tr>
+        <td style="width: 200px">
+          <div>
+            {{ interactor.id }}
+            <!-- Adding of the icons to access details -->
+            <a (click)="search(interactor.id)">
+              <i class="icon icon-functional small" data-icon="1"></i>
+            </a>
           </div>
+          <div class="container" *ngIf="isComponentASubcomplex(interactor)">
+            <input type="submit" name="expander" value="Subcomplex's interactors" class="button"
+                   (click)="toggleSCInteractorView()"
+                   style="background: none; color: #0a0a0a; padding:0px; text-decoration: underline;">
+          </div>
+          <div *ngIf="showExternalLink(interactor)" class="interactorType">
+            <a href="{{externalLink(interactor)}}" target="_blank">{{ externalLinkName(interactor) }}
+              <i class="icon icon-generic small" data-icon="x"></i>
+            </a>
+          </div>
+        </td>
+        <!-- Interactors' stoichiometry -->
+        <td *ngFor="let complex of complexSearch.elements">
+          <div *ngIf="doesComplexHaveComponent(complex,interactor.id)">
+            {{ (stochiometryOfComponentInComplex(complex, interactor.id)) }}
+          </div>
+        </td>
+      </tr>
+      <!-- Expandable menu for subcomplexes -->
+      <tr *ngIf="SCInteractorView">
+        <div *ngFor="let el of ((componentToComplex(interactor, complexSearch.elements)).components)">
+          <td style="width: 205px">
+            {{ el.id }}
+          </td>
+          <td *ngFor="let complex of complexSearch.elements">
+            <div *ngIf="doesComplexHaveComponent(complex,el.id)">
+              {{ (stochiometryOfComponentInComplex(complex, el.id)) }}
+            </div>
+          </td>
         </div>
-      </td>
-      <td *ngFor="let complex of complexSearch.elements">
-        <div *ngIf="doesComplexHaveComponent(complex,component.id)">
-          {{(stochiometryOfComponentInComplex(complex, component.id))}}
-        </div>
-      </td>
-    </tr>
+      </tr>
+    </ng-container>
   </table>
 </div>
 
-<div class ="listOfResults" *ngIf="listView">
-  <input type="submit" name="submit" value="View Navigator" class="button" (click)="navigatorView = true; listView=false" >
+
+<div class="listOfResults" *ngIf="listView">
+  <input type="submit" name="submit" value="View Navigator" class="button"
+         (click)="navigatorView = true; listView=false">
   <ul class="no-bullet">
     <li *ngFor="let complex of complexSearch.elements">
-      <h3><a [routerLink]="['/complex', complex.complexAC]">{{complex.complexName}}</a></h3>
+      <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
       <div class="description" style="background-color: white">
-        <b>Complex AC:</b> {{complex.complexAC}} / <b>Organism:</b> ({{complex.organismName}})<br>
+        <b>Complex AC:</b> {{ complex.complexAC }} / <b>Organism:</b> ({{ complex.organismName }})<br>
         <b>Description:</b>
         <div *ngIf="complex.description.length <= 250">
-          {{complex.description}}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+          {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
         </div>
         <div *ngIf="complex.description.length > 250">
-          {{complex.description.substr(0,250)}}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+          {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
         </div>
       </div>
     </li>

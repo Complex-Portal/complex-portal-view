@@ -2,9 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {Router} from '@angular/router';
-import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {Element} from '../../shared/model/complex-results/element.model';
-import * as $ from 'jquery';
+
 
 @Component({
   selector: 'cp-complex-list',
@@ -18,6 +17,7 @@ export class ComplexListComponent implements OnInit {
   listView = false;
   navigatorView = true;
   SCInteractorView = false;
+
   constructor(private router: Router) {
   }
 
@@ -29,7 +29,7 @@ export class ComplexListComponent implements OnInit {
   }
 
   @Input()
-  set components( value: Set<Interactor>) {
+  set components(value: Set<Interactor>) {
     this._components = value;
   }
 
@@ -41,7 +41,7 @@ export class ComplexListComponent implements OnInit {
     const match = complex.components.find(component => component.id === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        return (match.stochiometry).substring(22,24); //.substring to only select the maxValue
+        return (match.stochiometry).substring(22, 24); //.substring to only select the maxValue
       } else {
         return '1'; //sometimes we don't have the stochiometry value, we put default to 1
       }
@@ -49,12 +49,12 @@ export class ComplexListComponent implements OnInit {
     return null;
   }
 
-  public checkForSubcomplexes(complex,complexId):boolean {
+  public checkForSubcomplexes(complex, complexId): boolean {
     return complex.components.some(component => component.id === complexId);
   }
 
-  public isComponentASubcomplex(component):boolean{
-    if ((component.interactorType) === "stable complex"){
+  public isComponentASubcomplex(component): boolean {
+    if ((component.interactorType) === 'stable complex') {
       return true;
     }
     return false;
@@ -97,6 +97,10 @@ export class ComplexListComponent implements OnInit {
       ['complex/search'],
       {queryParams: {query: componentId, page: 1}}));
     window.open(url, '_blank');
+  }
+
+  toggleSCInteractorView() {
+    this.SCInteractorView = !this.SCInteractorView;
   }
 
 }

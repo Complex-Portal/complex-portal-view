@@ -1,4 +1,3 @@
-import {Participant} from '../complex-details/participant.model';
 import {ComplexComponent} from './complex-component.model';
 
 export class Element {
