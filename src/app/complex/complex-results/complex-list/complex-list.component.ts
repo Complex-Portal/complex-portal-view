@@ -49,13 +49,11 @@ export class ComplexListComponent implements OnInit {
     return null;
   }
 
-  public stoichiometryOfMainComplex(complex, componentId): string {
+  public stoichiometryOfMainComplex(complex, interactor): string {
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
-    const match = complex.components.find(component => component.id === componentId);
-    console.log(matchSub);
     if (!!matchSub) {
-      if (!!matchSub.stochiometry) {
-        return (match.stochiometry).substring(22, 24); // .substring to only select the maxValue
+      if (!!interactor.stochiometry) {
+        return (interactor.stochiometry).substring(22, 24); // .substring to only select the maxValue
       } else {
         return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
       }

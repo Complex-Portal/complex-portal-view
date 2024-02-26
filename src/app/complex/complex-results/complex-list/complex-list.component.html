@@ -4,12 +4,12 @@
   <table id="CN-table">
     <!-- Complexes' row (table's header) -->
     <tr>
-      <th class="intHeader" rowspan="2">Interactors</th>
+      <th class="intHeader" rowspan="2" style="width:200px;">Interactors</th>
       <th class="compHeader" colspan="15">Complexes</th>
       <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts) -->
     </tr>
     <tr>
-      <th *ngFor="let complex of complexSearch.elements" style="width: 200px">
+      <th *ngFor="let complex of complexSearch.elements" style="width:200px; height: 100px;">
         <div class="complexInTable">
           <a [routerLink]="['/complex', complex.complexAC]">
             {{ complex.complexName }}
@@ -19,17 +19,18 @@
     </tr>
     <!-- Interactors' column -->
     <ng-container *ngFor="let interactor of components">
-      <tr>
-        <td style="width: 200px">
+      <tr style="height:60px;">
+        <td>
           <div>
-            {{ interactor.id }}
+            {{ interactor.interactorType }}
+            {{ interactor.interactorName }}
             <!-- Adding of the icons to access details -->
             <a (click)="search(interactor.id)">
               <i class="icon icon-functional small" data-icon="1"></i>
             </a>
           </div>
           <div class="container" *ngIf="isComponentASubcomplex(interactor)">
-            <input type="submit" name="expander" value="Subcomplex's interactors" class="button"
+            <input type="submit" value="Subcomplex's interactors" class="button"
                    (click)="toggleSubCompInteractorDisplay()"
                    style="background: none; color: #0a0a0a; padding:0px; text-decoration: underline;">
           </div>
@@ -48,13 +49,15 @@
       </tr>
       <!-- Expandable menu for subcomplexes -->
       <ng-container *ngIf="SubCompInteractorDisplay">
-        <tr *ngFor="let el of ((componentToComplex(interactor, complexSearch.elements)).components)">
-          <td style="width: 205px; background: darkcyan;">
-            {{ el.id }}
+        <tr *ngFor="let el of (componentToComplex(interactor, complexSearch.elements)).components" style="height:60px;">
+          <!-- Create an error when the components are not in the search results -->
+          <td style="background: #6d8f94;">
+            {{ el.interactorType }}
+            {{ el.interactorName }}
           </td>
-          <td *ngFor="let complex of complexSearch.elements" style="background: darkcyan;">
+          <td *ngFor="let complex of complexSearch.elements" style="background: #6d8f94;">
             {{ (stochiometryOfComponentInComplex(complex, el.id)) }}
-            {{ stoichiometryOfMainComplex(complex, el.id) }}
+            {{ stoichiometryOfMainComplex(complex, el) }}
           </td>
         </tr>
       </ng-container>

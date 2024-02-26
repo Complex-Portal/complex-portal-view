@@ -9,8 +9,6 @@ import Record = __LiteMolImmutable.Record;
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 
 
-
-
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
@@ -31,7 +29,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
               private googleAnalyticsService: AnalyticsService,
-              ) {
+  ) {
   }
 
   ngOnInit() {
@@ -66,7 +64,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < complexSearch.elements.length; i++) {
           complexSearch.elements[i].components
             .forEach(component => this._allComponentsInComplexSearch.add(
-              new Interactor(component.id, component.interactorType)));
+              new Interactor(component.id, component.interactorType, component.interactorName)));
         }
       }
       ProgressBarComponent.hide();
@@ -110,7 +108,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private getFilterCount(): number {
     return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
-
 
 
   /**
@@ -214,10 +211,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   public get allComponentsInComplexSearch(): Set<Interactor> {
-  return this._allComponentsInComplexSearch;
-}
+    return this._allComponentsInComplexSearch;
+  }
 
-  set allComponentsInComplexSearch( value: Set<Interactor>) {
+  set allComponentsInComplexSearch(value: Set<Interactor>) {
     this._allComponentsInComplexSearch = value;
   }
 
