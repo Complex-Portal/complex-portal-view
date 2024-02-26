@@ -19,8 +19,7 @@ table, th, td {
   border: 1px solid black;
 }
 
-th,
-td {
+th, td {
   top: 0;
   text-align: center;
   padding-left: 15px;
@@ -33,7 +32,8 @@ td {
 .compHeader {
   left: 0;
   z-index: 3;
-
+  position: sticky;
+  top: 0;
 }
 
 /* "Interactors" Header */
@@ -49,7 +49,8 @@ th {
   position: sticky;
 }
 
-/* interactors column */
+
+/* interactors column*/
 td:first-child {
   left: 0;
   background-color: #b7b8b8;
@@ -70,7 +71,6 @@ td:first-child {
 .interactorType {
   font-size: small;
 }
-
 
 /*
 

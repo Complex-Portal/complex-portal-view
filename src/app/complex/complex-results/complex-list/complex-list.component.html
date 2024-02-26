@@ -30,7 +30,7 @@
           </div>
           <div class="container" *ngIf="isComponentASubcomplex(interactor)">
             <input type="submit" name="expander" value="Subcomplex's interactors" class="button"
-                   (click)="toggleSCInteractorView()"
+                   (click)="toggleSubCompInteractorDisplay()"
                    style="background: none; color: #0a0a0a; padding:0px; text-decoration: underline;">
           </div>
           <div *ngIf="showExternalLink(interactor)" class="interactorType">
@@ -47,18 +47,17 @@
         </td>
       </tr>
       <!-- Expandable menu for subcomplexes -->
-      <tr *ngIf="SCInteractorView">
-        <div *ngFor="let el of ((componentToComplex(interactor, complexSearch.elements)).components)">
-          <td style="width: 205px">
+      <ng-container *ngIf="SubCompInteractorDisplay">
+        <tr *ngFor="let el of ((componentToComplex(interactor, complexSearch.elements)).components)">
+          <td style="width: 205px; background: darkcyan;">
             {{ el.id }}
           </td>
-          <td *ngFor="let complex of complexSearch.elements">
-            <div *ngIf="doesComplexHaveComponent(complex,el.id)">
-              {{ (stochiometryOfComponentInComplex(complex, el.id)) }}
-            </div>
+          <td *ngFor="let complex of complexSearch.elements" style="background: darkcyan;">
+            {{ (stochiometryOfComponentInComplex(complex, el.id)) }}
+            {{ stoichiometryOfMainComplex(complex, el.id) }}
           </td>
-        </div>
-      </tr>
+        </tr>
+      </ng-container>
     </ng-container>
   </table>
 </div>

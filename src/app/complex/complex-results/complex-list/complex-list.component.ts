@@ -16,7 +16,7 @@ export class ComplexListComponent implements OnInit {
 
   listView = false;
   navigatorView = true;
-  SCInteractorView = false;
+  SubCompInteractorDisplay = false;
 
   constructor(private router: Router) {
   }
@@ -41,23 +41,30 @@ export class ComplexListComponent implements OnInit {
     const match = complex.components.find(component => component.id === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        return (match.stochiometry).substring(22, 24); //.substring to only select the maxValue
+        return (match.stochiometry).substring(22, 24); // .substring to only select the maxValue
       } else {
-        return '1'; //sometimes we don't have the stochiometry value, we put default to 1
+        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
       }
     }
     return null;
   }
 
-  public checkForSubcomplexes(complex, complexId): boolean {
-    return complex.components.some(component => component.id === complexId);
+  public stoichiometryOfMainComplex(complex, componentId): string {
+    const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
+    const match = complex.components.find(component => component.id === componentId);
+    console.log(matchSub);
+    if (!!matchSub) {
+      if (!!matchSub.stochiometry) {
+        return (match.stochiometry).substring(22, 24); // .substring to only select the maxValue
+      } else {
+        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+      }
+    }
+    return null;
   }
 
   public isComponentASubcomplex(component): boolean {
-    if ((component.interactorType) === 'stable complex') {
-      return true;
-    }
-    return false;
+    return (component.interactorType) === 'stable complex';
   }
 
   public componentToComplex(component, ComplexSearch): Element {
@@ -99,8 +106,8 @@ export class ComplexListComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  toggleSCInteractorView() {
-    this.SCInteractorView = !this.SCInteractorView;
+  toggleSubCompInteractorDisplay() {
+    this.SubCompInteractorDisplay = !this.SubCompInteractorDisplay;
   }
 
 }
