@@ -14,8 +14,7 @@ export class ComplexListComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _components: Set<Interactor>;
 
-  listView = false;
-  navigatorView = true;
+  DisplayType = true;
   SubCompInteractorDisplay = false;
 
   constructor(private router: Router) {
@@ -108,4 +107,7 @@ export class ComplexListComponent implements OnInit {
     this.SubCompInteractorDisplay = !this.SubCompInteractorDisplay;
   }
 
+  toggleDisplayType() {
+    this.DisplayType = !this.DisplayType;
+  }
 }

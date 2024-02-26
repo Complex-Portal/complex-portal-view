@@ -1,6 +1,8 @@
-<div class="Complex-navigator" *ngIf="navigatorView">
+<div class="displayButton">
   <input type="submit" name="submit" value="View list" class="button"
-         (click)="listView = true; navigatorView=false">
+         (click)="toggleDisplayType()">
+</div>
+<div class="Complex-navigator" *ngIf="DisplayType">
   <table id="CN-table">
     <!-- Complexes' row (table's header) -->
     <tr>
@@ -66,9 +68,7 @@
 </div>
 
 
-<div class="listOfResults" *ngIf="listView">
-  <input type="submit" name="submit" value="View Navigator" class="button"
-         (click)="navigatorView = true; listView=false">
+<div class="listOfResults" *ngIf="DisplayType==false">
   <ul class="no-bullet">
     <li *ngFor="let complex of complexSearch.elements">
       <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
