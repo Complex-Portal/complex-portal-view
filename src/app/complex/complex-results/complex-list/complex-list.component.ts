@@ -32,15 +32,13 @@ export class ComplexListComponent implements OnInit {
     this._components = value;
   }
 
-  public doesComplexHaveComponent(complex, componentId): boolean {
-    return complex.components.some(component => component.id === componentId);
-  }
-
-  public stochiometryOfComponentInComplex(complex, componentId): string {
+  public stochiometryOfInteractors(complex, componentId): string {
     const match = complex.components.find(component => component.id === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        return (match.stochiometry).substring(22, 24); // .substring to only select the maxValue
+        const stochiometry = (match.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        // selection of the maxvalue
+        return stochiometry; // .substring to only select the maxValue
       } else {
         return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
       }
@@ -48,13 +46,38 @@ export class ComplexListComponent implements OnInit {
     return null;
   }
 
-  public stoichiometryOfMainComplex(complex, interactor): string {
+  public stoichiometryOfInteractorsExpandable(complex, interactor): string {
+    /* Retrieve the stoichiometry of the interactors of subcomplexes to display them in the main complex */
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
     if (!!matchSub) {
       if (!!interactor.stochiometry) {
-        return (interactor.stochiometry).substring(22, 24); // .substring to only select the maxValue
+        const stochiometry = (interactor.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        // selection of the maxvalue
+        return stochiometry;
       } else {
         return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+      }
+    }
+    return null;
+  }
+
+  public stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch): string {
+    const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
+    if (!!subcomplexesArray) {
+      for (const subcomplex of subcomplexesArray) {
+        const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
+        // convert the elements of the subcomplexes' array into compplexes
+        for (const el of subComplexToComplex.components) {
+          if (el.id === interactor.id) {
+            if (!!el.stochiometry) {
+              const stochiometry = (el.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+              // selection of the maxvalue
+              return stochiometry;
+            } else {
+              return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+            }
+          }
+        }
       }
     }
     return null;
@@ -65,6 +88,7 @@ export class ComplexListComponent implements OnInit {
   }
 
   public componentToComplex(component, ComplexSearch): Element {
+    // this function convert a interactor (subcomplexes) into a complex in order to retrieve its components
     return ComplexSearch.find(complex => complex.complexAC === component.id);
   }
 
