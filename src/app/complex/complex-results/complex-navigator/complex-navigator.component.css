@@ -1,0 +1,95 @@
+/* Changing display button */
+.displayButton {
+  text-align: center;
+}
+
+/* Matrix parameters */
+.Complex-navigator {
+  height: 600px;
+  border-collapse: collapse;
+  overflow: scroll;
+  text-align: center;
+}
+
+table {
+  background-color: #e6e6e6;
+  text-align: center;
+  color: #0a0a0a;
+  border: 1px solid black;
+}
+
+th, td {
+  /* Size of the cells styled in the html */
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid black;
+}
+
+/****** Header ******/
+
+/* "Complexes" Header */
+.compHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 45%; /* Does not seem to work */
+  z-index: 3;
+  height: 30px;
+  text-align: left;
+  font-size: large;
+  border: 1px solid black;
+}
+
+/* "Interactors" Header */
+.intHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  left: 0;
+  z-index: 4;
+  width: 25%;
+  font-size: large;
+  border: 1px solid black;
+}
+
+/* "Complexes from results Header */
+th {
+  background-color: #389198;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 29px;
+  z-index: 3;
+  border: 1px solid black;
+}
+
+
+/* interactors column*/
+td:first-child {
+  left: 0;
+  background-color: #b7b8b8;
+  z-index: 2;
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+
+/*
+
+///this part is here if we want to add a description of complexes while hovering with the mouse
+.ComplexNameSpan{
+  visibility: hidden;
+  background-color: #b7b8b8;
+  color: #0a0a0a;
+  text-align: center;
+  padding: 5px;
+  position: absolute;
+  border: 1px solid black;
+  z-index: 5;
+}
+
+.complexInTable:hover .ComplexNameSpan{
+  visibility: visible;
+  z-index: 5;
+}
+*/
