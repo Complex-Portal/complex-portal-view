@@ -3,6 +3,7 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {Router} from '@angular/router';
 import {Element} from '../../shared/model/complex-results/element.model';
+import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class ComplexListComponent implements OnInit {
   _components: Set<Interactor>;
 
   DisplayType = true;
-  SubCompInteractorDisplay = false;
+  buttonContainers = [];
+  SubcomplexExpander: boolean;
 
   constructor(private router: Router) {
   }
@@ -30,6 +32,18 @@ export class ComplexListComponent implements OnInit {
   @Input()
   set components(value: Set<Interactor>) {
     this._components = value;
+  }
+
+  public doesComplexHasSubcomplexes(complex): boolean {
+    for (const interactor of complex.components) {
+      if (interactor.interactorType === 'stable complex') {
+        console.log(complex.complexAC);
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return null;
   }
 
   public stochiometryOfInteractors(complex, componentId): string {
@@ -127,11 +141,18 @@ export class ComplexListComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  toggleSubCompInteractorDisplay() {
-    this.SubCompInteractorDisplay = !this.SubCompInteractorDisplay;
+  toggleSubcomplexExpandable(i) {
+    this.buttonContainers[i] = !this.buttonContainers[i];
+  }
+
+  public givesIdToToggle(): any[] {
+    this.buttonContainers.push(false);
+    return this.buttonContainers;
   }
 
   toggleDisplayType() {
     this.DisplayType = !this.DisplayType;
   }
+
+  protected readonly ComplexComponent = ComplexComponent;
 }
