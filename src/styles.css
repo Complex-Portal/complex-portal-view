@@ -12,3 +12,6 @@
 .button.white-background:hover { background: white; }
 .button.secondary-background:hover { background: #666; }
 .button.medium-gray-background:hover { background: #999; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

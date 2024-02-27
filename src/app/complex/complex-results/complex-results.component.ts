@@ -24,6 +24,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
   private _allComponentsInComplexSearch = new Set<Interactor>();
+  DisplayType = true;
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -216,6 +217,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   set allComponentsInComplexSearch(value: Set<Interactor>) {
     this._allComponentsInComplexSearch = value;
+  }
+
+  toggleDisplayType() {
+    this.DisplayType = !this.DisplayType;
   }
 
 }

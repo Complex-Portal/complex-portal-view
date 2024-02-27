@@ -6,6 +6,8 @@ import { ComplexPaginatorComponent } from './complex-paginator/complex-paginator
 import { ComplexFilterComponent } from './complex-filter/complex-filter.component';
 import { ComplexListComponent } from './complex-list/complex-list.component';
 import { ProgressSpinnerModule } from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
+import { ComplexNavigatorComponent } from './complex-navigator/complex-navigator.component';
+import { TableStructureComponent } from './complex-navigator/table-structure/table-structure.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -18,6 +20,8 @@ import { ProgressSpinnerModule } from '../../shared/loading-indicators/progress-
     ComplexListComponent,
     ComplexFilterComponent,
     ComplexPaginatorComponent,
+    ComplexNavigatorComponent,
+    TableStructureComponent,
   ]
 })
 export class ComplexResultsModule {

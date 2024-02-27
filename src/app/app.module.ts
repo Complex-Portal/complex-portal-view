@@ -31,6 +31,7 @@ import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 import {environment} from '../environments/environment';
 import {FooterComponent} from './footer/footer.component';
+import {ComplexNavigatorComponent} from './complex/complex-results/complex-navigator/complex-navigator.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +43,11 @@ import {FooterComponent} from './footer/footer.component';
     DownloadComponent,
     DocumentationComponent,
     FooterComponent,
+    ComplexNavigatorComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot([], {relativeLinkResolution: 'legacy'}),
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
