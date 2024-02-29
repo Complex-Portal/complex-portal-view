@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
-import {Interactor} from '../../../shared/model/complex-results/interactor.model';
-import {Element} from '../../../shared/model/complex-results/element.model';
+import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
+import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
+import {Element} from '../../../../shared/model/complex-results/element.model';
 import {Router} from '@angular/router';
-import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
+import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 
 @Component({
-  selector: 'cp-table-structure',
-  templateUrl: './table-structure.component.html',
-  styleUrls: ['./table-structure.component.css']
+  selector: 'cp-table-interactor-column',
+  templateUrl: './table-interactor-column.component.html',
+  styleUrls: ['./table-interactor-column.component.css']
 })
-export class TableStructureComponent implements OnInit {
+export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _components: Set<Interactor>;
+
   DisplayType = true;
   buttonContainers = [];
   SubcomplexExpander: boolean;
@@ -20,7 +21,7 @@ export class TableStructureComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   get components(): Set<Interactor> {

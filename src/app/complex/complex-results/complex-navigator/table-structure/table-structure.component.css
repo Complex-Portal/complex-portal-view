@@ -1,0 +1,19 @@
+.complexNavigatorTable {
+  height: 600px;
+  border-collapse: separate;
+  overflow: scroll;
+  width: 100%;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+.interactors {
+  width: 100%;
+  top: -20px;
+  position: relative;
+}

@@ -1,0 +1,49 @@
+/* "Complexes" Header */
+.compHeader {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 40px;
+  text-align: left;
+  font-size: large;
+  border: 1px solid black;
+}
+
+/* "Interactors" Header */
+.intHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 4;
+
+  font-size: large;
+  border: 1px solid black;
+
+  padding-left: 28px;
+  padding-right: 28px;
+
+}
+
+/* "Complexes from results Header */
+th {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+
+  background-color: #389198;
+  border: 1px solid black;
+
+  padding-left: 29px;
+  padding-right: 29px;
+
+  min-width: 150px;
+  max-width: 150px;
+  height: 100px;
+  overflow: hidden;
+
+  text-align: center;
+}
+
+#CN-table {
+  width: 100%;
+}
