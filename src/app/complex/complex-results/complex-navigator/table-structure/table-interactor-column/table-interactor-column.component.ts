@@ -151,4 +151,5 @@ export class TableInteractorColumnComponent implements OnInit {
 
   protected readonly ComplexComponent = ComplexComponent;
 
+
 }

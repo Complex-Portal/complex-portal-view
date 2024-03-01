@@ -10,17 +10,27 @@
               {{ interactor.interactorName }}
               <!-- Adding of the icons to access details -->
               <a (click)="search(interactor.id)">
-                <i class="icon icon-functional small" data-icon="1"></i>
+                <i class="icon icon-functional small" data-icon="1"
+                   title="More complexes containing this interactor"></i>
               </a>
             </div>
-            <div class="container" *ngIf="isComponentASubcomplex(interactor)">
-              <input id="SubcomplexExpandable{{i}}" type="submit" value="Subcomplex's interactors" class="button"
-                     (click)="toggleSubcomplexExpandable(i)"
-                     style="background: none; color: #0a0a0a; padding:0px; text-decoration: underline;">
+            <div class="container" *ngIf="isComponentASubcomplex(interactor);">
+              <label>
+                <input id="SubcomplexExpandable{{i}}" type="submit" class="button"
+                       value="Subcomplex's interactors"
+                       (click)="toggleSubcomplexExpandable(i)"
+                       style="background: none; color: #0a0a0a; margin-right: -15px; margin-bottom: 2px;  text-decoration: underline; text-decoration-style: dotted;"
+                       title="Subcomplex's interactors">
+                <i class="icon icon-common" data-icon="&#xf078;"
+                   (click)="toggleSubcomplexExpandable(i)"
+                   style="font-size:small; text-decoration: underline; text-decoration-style: dotted; margin-top: 2px"></i>
+              </label>
             </div>
             <div *ngIf="showExternalLink(interactor)" class="interactorType">
-              <a href="{{externalLink(interactor)}}" target="_blank">{{ externalLinkName(interactor) }}
-                <i class="icon icon-generic small" data-icon="x"></i>
+              <a href="{{externalLink(interactor)}}" target="_blank"
+                 title="More informations">{{ externalLinkName(interactor) }}
+                <i class="icon icon-generic small" data-icon="x"
+                   title="More informations"></i>
               </a>
             </div>
           </td>
@@ -42,10 +52,13 @@
             <td style="background: #6d8f94;">
               {{ el.interactorType }}
               {{ el.interactorName }}
-              <i class="icon icon-functional small" data-icon="1"></i>
+              <a (click)="search(el.id)">
+                <i class="icon icon-functional small" data-icon="1"
+                   title="More complexes containing this interactor"></i>
+              </a>
               <div *ngIf="showExternalLink(el)" class="interactorType">
-                <a href="{{externalLink(el)}}" target="_blank">{{ externalLinkName(el) }}
-                  <i class="icon icon-generic small" data-icon="x"></i>
+                <a href="{{externalLink(el)}}" target="_blank" title="More informations">{{ externalLinkName(el) }}
+                  <i class="icon icon-generic small" data-icon="x" title="More informations"></i>
                 </a>
               </div>
             </td>

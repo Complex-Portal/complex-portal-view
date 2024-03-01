@@ -9,18 +9,10 @@
     <tr>
       <th *ngFor="let complex of complexSearch.elements">
         <div class="complexInTable">
-          <div *ngIf="complex.complexName.length <= 20">
-            <a [routerLink]="['/complex', complex.complexAC]">
-              {{ complex.complexName }}
-              <i class="icon icon-generic small" data-icon="x"></i>
-            </a>
-          </div>
-          <div *ngIf="complex.complexName.length > 20">
-            <a [routerLink]="['/complex', complex.complexAC]">
-              {{ complex.complexName.substring(0, 20) }}...
-              <i class="icon icon-generic small" data-icon="x"></i>
-            </a>
-          </div>
+          <a [routerLink]="['/complex', complex.complexAC]" title="{{complex.complexName}}">
+            {{ complex.complexName }}
+            <i class="icon icon-generic small" data-icon="x"></i>
+          </a>
         </div>
       </th>
     </tr>
