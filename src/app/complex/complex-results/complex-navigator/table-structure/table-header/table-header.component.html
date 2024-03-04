@@ -9,7 +9,9 @@
     <tr>
       <th *ngFor="let complex of complexSearch.elements">
         <div class="complexInTable">
-          <a [routerLink]="['/complex', complex.complexAC]" title="{{complex.complexName}}">
+          <a [routerLink]="['/complex', complex.complexAC]"
+             title="{{complex.complexName}}"
+             target="_blank">
             {{ complex.complexName }}
             <i class="icon icon-generic small" data-icon="x"></i>
           </a>

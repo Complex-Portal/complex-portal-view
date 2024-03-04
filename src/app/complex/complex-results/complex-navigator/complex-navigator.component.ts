@@ -50,11 +50,25 @@ export class ComplexNavigatorComponent implements OnInit {
     const match = complex.components.find(component => component.id === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        const stochiometry = (match.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        const stochiometry = (match.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
         // selection of the maxvalue
         return stochiometry; // .substring to only select the maxValue
       } else {
-        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+        return ' '; // sometimes we don't have the stoichiometry value, we put default to 1
+      }
+    }
+    return null;
+  }
+
+  public getStochiometry(complex, componentId): string {
+    const match = complex.components.find(component => component.id === componentId);
+    if (!!match) {
+      if (!!match.stochiometry) {
+        const stochiometry = (match.stochiometry);
+        // selection of the maxvalue
+        return stochiometry; // .substring to only select the maxValue
+      } else {
+        return ' '; // sometimes we don't have the stoichiometry value, we put default to 1
       }
     }
     return null;
@@ -65,11 +79,11 @@ export class ComplexNavigatorComponent implements OnInit {
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
     if (!!matchSub) {
       if (!!interactor.stochiometry) {
-        const stochiometry = (interactor.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        const stochiometry = (interactor.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
         // selection of the maxvalue
         return stochiometry;
       } else {
-        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+        return ' '; // sometimes we don't have the stoichiometry value, we put default to 1
       }
     }
     return null;
@@ -84,11 +98,11 @@ export class ComplexNavigatorComponent implements OnInit {
         for (const el of subComplexToComplex.components) {
           if (el.id === interactor.id) {
             if (!!el.stochiometry) {
-              const stochiometry = (el.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+              const stochiometry = (el.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
               // selection of the maxvalue
               return stochiometry;
             } else {
-              return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+              return ' '; // sometimes we don't have the stoichiometry value, we put default to 1
             }
           }
         }

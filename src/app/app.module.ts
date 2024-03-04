@@ -31,7 +31,6 @@ import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 import {environment} from '../environments/environment';
 import {FooterComponent} from './footer/footer.component';
-import {ComplexNavigatorComponent} from './complex/complex-results/complex-navigator/complex-navigator.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +41,7 @@ import {ComplexNavigatorComponent} from './complex/complex-results/complex-navig
     AboutComponent,
     DownloadComponent,
     DocumentationComponent,
-    FooterComponent,
-    ComplexNavigatorComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

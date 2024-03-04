@@ -3,8 +3,8 @@ td:first-child {
   position: sticky;
   left: 0;
   z-index: 3;
-  border: 1px solid black;
-  background-color: #b7b8b8;
+  border: 1px solid #0a494c;
+  background-color: #CCCCCC;
   height: 100px;
   min-width: 160px;
   max-width: 160px;
@@ -13,7 +13,7 @@ td:first-child {
 /* cells */
 td {
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #0a494c;
   height: 100px;
   min-width: 160px;
   max-width: 160px;
@@ -23,4 +23,13 @@ td {
   width: 100%;
 }
 
-
+.stoichNum {
+  text-align: center;
+  width: 5ch;
+  height: 5ch;
+  background-color: #389198;
+  color: #e6e6e6;
+  border-radius: 3ch;
+  margin: auto;
+  padding-top: 1ch;
+}

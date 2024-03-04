@@ -1,47 +1,57 @@
 <div class="Complex-navigator">
   <table class="interactors-table">
     <!-- Interactors' column -->
-    <ng-container *ngFor="let interactor of components; let i=index; givesIdToToggle(i)">
+    <ng-container *ngFor="let interactor of components; let i=index">
       <ng-container>
         <tr>
           <td>
-            <div>
-              {{ interactor.interactorType }}
+            <div style="font-weight: bold">
+              {{ interactor.interactorType }} -
               {{ interactor.interactorName }}
               <!-- Adding of the icons to access details -->
-              <a (click)="search(interactor.id)">
+              <a [routerLink]="['/complex/search']"
+                 [queryParams]="{query: interactor.id, page: 1}"
+                 target="_blank">
                 <i class="icon icon-functional small" data-icon="1"
-                   title="More complexes containing this interactor"></i>
+                   title="Complexes containing this interactor"></i>
               </a>
             </div>
             <div class="container" *ngIf="isComponentASubcomplex(interactor);">
-              <label>
+              <label style="text-decoration: underline; text-decoration-style: dotted;">
                 <input id="SubcomplexExpandable{{i}}" type="submit" class="button"
-                       value="Subcomplex's interactors"
+                       value="{{interactor.id}}"
                        (click)="toggleSubcomplexExpandable(i)"
-                       style="background: none; color: #0a0a0a; margin-right: -15px; margin-bottom: 2px;  text-decoration: underline; text-decoration-style: dotted;"
+                       style="background: none; color: #0a0a0a; margin-right: -15px; margin-bottom: 2px; font-size: medium; text-decoration: underline; text-decoration-style: dotted;"
                        title="Subcomplex's interactors">
                 <i class="icon icon-common" data-icon="&#xf078;"
                    (click)="toggleSubcomplexExpandable(i)"
-                   style="font-size:small; text-decoration: underline; text-decoration-style: dotted; margin-top: 2px"></i>
+                   style="font-size:small; margin-top: 2px"></i>
               </label>
             </div>
             <div *ngIf="showExternalLink(interactor)" class="interactorType">
               <a href="{{externalLink(interactor)}}" target="_blank"
-                 title="More informations">{{ externalLinkName(interactor) }}
+                 title="{{externalLinkName(interactor)}}">{{ interactor.id }}
                 <i class="icon icon-generic small" data-icon="x"
-                   title="More informations"></i>
+                   title="{{externalLinkName(interactor)}}"></i>
               </a>
             </div>
           </td>
           <!-- Interactors' stoichiometry -->
           <ng-container *ngFor="let complex of complexSearch.elements">
             <td>
-              {{ (stochiometryOfInteractors(complex, interactor.id)) }}
-              <ng-container *ngIf="(stochiometryOfInteractors(complex, interactor.id))==null">
+              <div class="stoichNum" *ngIf="(stochiometryOfInteractors(complex, interactor.id))"
+                   title="{{ (getStochiometry(complex, interactor.id)) }}">
+                {{ (stochiometryOfInteractors(complex, interactor.id)) }}
+              </div>
+              <ng-container
+                *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) ">
                 <!-- subcomplexes' interactors' stoichiometry -->
-                {{ stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) }}
+                <div class="stoichNum"
+                     title="{{ (getStoichiometrySubComplex(complex, interactor, complexSearch.elements)) }}">
+                  {{ stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) }}
+                </div>
               </ng-container>
+
             </td>
           </ng-container>
         </tr>
@@ -49,23 +59,31 @@
         <ng-container *ngIf="buttonContainers[i]">
           <tr *ngFor="let el of (componentToComplex(interactor, complexSearch.elements)).components">
             <!-- Create an error when the components are not in the search results -->
-            <td style="background: #6d8f94;">
-              {{ el.interactorType }}
-              {{ el.interactorName }}
-              <a (click)="search(el.id)">
+            <td style="background: #7e9394">
+              <div style="font-weight: bold">
+                {{ el.interactorType }} -
+                {{ el.interactorName }}
+              </div>
+              <a [routerLink]="['/complex/search']"
+                 [queryParams]="{query: el.id, page: 1}"
+                 target="_blank">
                 <i class="icon icon-functional small" data-icon="1"
                    title="More complexes containing this interactor"></i>
               </a>
               <div *ngIf="showExternalLink(el)" class="interactorType">
-                <a href="{{externalLink(el)}}" target="_blank" title="More informations">{{ externalLinkName(el) }}
+                <a href="{{externalLink(el)}}" target="_blank" title="{{externalLinkName(el)}}">{{ el.id }}
                   <i class="icon icon-generic small" data-icon="x" title="More informations"></i>
                 </a>
               </div>
             </td>
             <ng-container *ngFor="let complex of complexSearch.elements">
-              <td style="background: #6d8f94;">
-                {{ stochiometryOfInteractors(complex, el.id) }}
-                {{ stoichiometryOfInteractorsExpandable(complex, el) }}
+              <td style="background: #7e9394;">
+                <div class="stoichNum"
+                     *ngIf="stochiometryOfInteractors(complex, el.id) || stoichiometryOfInteractorsExpandable(complex, el)"
+                     title="{{ (getStochiometry(complex, el.id)) }}">
+                  {{ stochiometryOfInteractors(complex, el.id) }}
+                  {{ stoichiometryOfInteractorsExpandable(complex, el) }}
+                </div>
               </td>
             </ng-container>
           </tr>

@@ -6,7 +6,7 @@
   height: 40px;
   text-align: left;
   font-size: large;
-  border: 1px solid black;
+  border: 1px solid #0a494c;
 }
 
 /* "Interactors" Header */
@@ -17,7 +17,7 @@
   z-index: 4;
 
   font-size: large;
-  border: 1px solid black;
+  border: 1px solid #0a494c;
 
   padding-left: 28px;
   padding-right: 28px;
@@ -29,18 +29,14 @@ th {
   position: sticky;
   z-index: 3;
   top: 0;
-
   background-color: #389198;
-  border: 1px solid black;
-
+  border: 1px solid #0a494c;
   padding-left: 29px;
   padding-right: 29px;
-
   min-width: 160px;
   max-width: 160px;
   height: 100px;
   overflow: hidden;
-
   text-align: center;
 }
 

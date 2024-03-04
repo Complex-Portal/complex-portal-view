@@ -3,7 +3,6 @@ import {ComplexSearchResult} from '../../../../shared/model/complex-results/comp
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {Router} from '@angular/router';
-import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-table-interactor-column',
@@ -30,30 +29,23 @@ export class TableInteractorColumnComponent implements OnInit {
 
   @Input()
   set components(value: Set<Interactor>) {
+    this.buttonContainers = [];
     this._components = value;
-  }
-
-  public doesComplexHasSubcomplexes(complex): boolean {
-    for (const interactor of complex.components) {
-      if (interactor.interactorType === 'stable complex') {
-        console.log(complex.complexAC);
-        return true;
-      } else {
-        return false;
-      }
+    for (let i = 0; i < this._components.size; i++) {
+      this.buttonContainers.push(false);
     }
-    return null;
   }
 
   public stochiometryOfInteractors(complex, componentId): string {
     const match = complex.components.find(component => component.id === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        const stochiometry = (match.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        const stochiometry = (match.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
+        console.log(stochiometry);
         // selection of the maxvalue
         return stochiometry; // .substring to only select the maxValue
       } else {
-        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+        return ' '; // sometimes we don't have the stoichiometry value
       }
     }
     return null;
@@ -64,11 +56,11 @@ export class TableInteractorColumnComponent implements OnInit {
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
     if (!!matchSub) {
       if (!!interactor.stochiometry) {
-        const stochiometry = (interactor.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+        const stochiometry = (interactor.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
         // selection of the maxvalue
         return stochiometry;
       } else {
-        return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+        return ' '; // sometimes we don't have the stoichiometry value
       }
     }
     return null;
@@ -83,11 +75,48 @@ export class TableInteractorColumnComponent implements OnInit {
         for (const el of subComplexToComplex.components) {
           if (el.id === interactor.id) {
             if (!!el.stochiometry) {
-              const stochiometry = (el.stochiometry).replace('minValue: ', '').replace(/[0-9]/, '').replace(', maxValue: ', '');
+              const stochiometry = (el.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
               // selection of the maxvalue
               return stochiometry;
             } else {
-              return '1'; // sometimes we don't have the stoichiometry value, we put default to 1
+              return ' '; // sometimes we don't have the stoichiometry value
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  public getStochiometry(complex, componentId): string {
+    const match = complex.components.find(component => component.id === componentId);
+    if (!!match) {
+      if (!!match.stochiometry) {
+        const stochiometry = 'Stoichiometry values: ' + (match.stochiometry);
+        console.log(stochiometry);
+        // selection of the maxvalue
+        return stochiometry; // .substring to only select the maxValue
+      } else {
+        return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
+      }
+    }
+    return null;
+  }
+
+  public getStoichiometrySubComplex(complex, interactor, complexSearch) {
+    const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
+    if (!!subcomplexesArray) {
+      for (const subcomplex of subcomplexesArray) {
+        const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
+        // convert the elements of the subcomplexes' array into complexes
+        for (const el of subComplexToComplex.components) {
+          if (el.id === interactor.id) {
+            if (!!el.stochiometry) {
+              const stochiometry = el.stochiometry;
+              // selection of the maxvalue
+              return stochiometry;
+            } else {
+              return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
             }
           }
         }
@@ -133,23 +162,8 @@ export class TableInteractorColumnComponent implements OnInit {
     return '';
   }
 
-  search(componentId: string) {
-    const url = this.router.serializeUrl(this.router.createUrlTree(
-      ['complex/search'],
-      {queryParams: {query: componentId, page: 1}}));
-    window.open(url, '_blank');
-  }
-
   toggleSubcomplexExpandable(i) {
     this.buttonContainers[i] = !this.buttonContainers[i];
   }
-
-  public givesIdToToggle(): any[] {
-    this.buttonContainers.push(false);
-    return this.buttonContainers;
-  }
-
-  protected readonly ComplexComponent = ComplexComponent;
-
 
 }
