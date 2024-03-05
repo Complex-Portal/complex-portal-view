@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../../shared/model/complex-results/element.model';
-import {Router} from '@angular/router';
+import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-table-interactor-column',
@@ -12,9 +12,10 @@ import {Router} from '@angular/router';
 export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _components: Set<Interactor>;
+
   buttonContainers = [];
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -33,8 +34,8 @@ export class TableInteractorColumnComponent implements OnInit {
     }
   }
 
-  public stochiometryOfInteractors(complex, componentId): string {
-    const match = complex.components.find(component => component.id === componentId);
+  public stochiometryOfInteractors(complex: Element, componentId: string): string {
+    const match = complex.components.find(component => component.identifier === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
         // selection of the maxvalue
@@ -46,7 +47,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public stoichiometryOfInteractorsExpandable(complex, interactor): string {
+  public stoichiometryOfInteractorsExpandable(complex: Element, interactor: ComplexComponent): string {
     /* Retrieve the stoichiometry of the interactors of subcomplexes to display them in the main complex */
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
     if (!!matchSub) {
@@ -60,7 +61,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch): string {
+  public stoichiometryOfInteractorsMainTable(complex: Element, interactor: Interactor, complexSearch: Element[]): string {
     // Add the stoichiometry number of subcomplexes' interactors into the main complex containing them
     const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
     if (!!subcomplexesArray) {
@@ -68,7 +69,7 @@ export class TableInteractorColumnComponent implements OnInit {
         const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
         // convert the elements of the subcomplexes' array into compplexes
         for (const el of subComplexToComplex.components) {
-          if (el.id === interactor.id) {
+          if (el.identifier === interactor.identifier) {
             if (!!el.stochiometry) {
               // selection of the range
               return (el.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
@@ -82,9 +83,9 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public getStochiometry(complex, componentId): string {
+  public getStochiometry(complex: Element, componentId: string): string {
     // used when hovering on the stoichiometry circle
-    const match = complex.components.find(component => component.id === componentId);
+    const match = complex.components.find(component => component.identifier === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
         return 'Stoichiometry values: ' + (match.stochiometry);
@@ -95,14 +96,14 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public getStoichiometrySubComplex(complex, interactor, complexSearch) {
+  public getStoichiometrySubComplex(complex: Element, interactor: Interactor, complexSearch: Element[]): string {
     const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
     if (!!subcomplexesArray) {
       for (const subcomplex of subcomplexesArray) {
         const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
         // convert the elements of the subcomplexes' array into complexes
         for (const el of subComplexToComplex.components) {
-          if (el.id === interactor.id) {
+          if (el.identifier === interactor.identifier) {
             if (!!el.stochiometry) {
               return el.stochiometry;
             } else {
@@ -115,8 +116,13 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public isComponentASubcomplex(component): boolean {
+  public isComponentASubcomplex(component: Interactor): boolean {
     return (component.interactorType) === 'stable complex';
+  }
+
+  public componentToComplex(component: Interactor | ComplexComponent, ComplexSearch: Element[]): Element {
+    // this function convert a interactor (subcomplexes) into a complex in order to retrieve its components
+    return ComplexSearch.find(complex => complex.complexAC === component.identifier);
   }
 
   public findConnections(complex): boolean {
@@ -131,40 +137,11 @@ export class TableInteractorColumnComponent implements OnInit {
     return connection;
   }
 
-  public componentToComplex(component, ComplexSearch): Element {
-    // this function convert an interactor (subcomplexes) into a complex in order to retrieve its components
-    return ComplexSearch.find(complex => complex.complexAC === component.id);
+  public showExternalLink(component: Interactor | ComplexComponent): boolean {
+    return component.interactorType !== 'stable complex' && !!component.identifierLink;
   }
 
-  public showExternalLink(component: Interactor): boolean {
-    return (component.interactorType === 'protein' ||
-      component.interactorType === 'ribonucleic acid' ||
-      component.interactorType === 'small molecule');
-  }
-
-  public externalLink(component: Interactor): string {
-    if (component.interactorType === 'protein') {
-      return 'https://www.uniprot.org/uniprotkb/' + component.id;
-    } else if (component.interactorType === 'ribonucleic acid') {
-      return 'https://rnacentral.org/rna/' + component.id;
-    } else if (component.interactorType === 'small molecule') {
-      return 'https://www.ebi.ac.uk/chebi/searchId.do?chebiId=' + component.id;
-    }
-    return '';
-  }
-
-  public externalLinkName(component: Interactor): string {
-    if (component.interactorType === 'protein') {
-      return 'Uniprot';
-    } else if (component.interactorType === 'ribonucleic acid') {
-      return 'RNA central';
-    } else if (component.interactorType === 'small molecule') {
-      return 'ChEMBL';
-    }
-    return '';
-  }
-
-  toggleSubcomplexExpandable(i) {
+  toggleSubcomplexExpandable(i: number): void {
     this.buttonContainers[i] = !this.buttonContainers[i];
   }
 
