@@ -14,10 +14,7 @@ import {ComplexComponent} from '../../shared/model/complex-results/complex-compo
 export class ComplexNavigatorComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _components: Set<Interactor>;
-
-  DisplayType = true;
   buttonContainers = [];
-  SubcomplexExpander: boolean;
 
   constructor(private router: Router) {
   }

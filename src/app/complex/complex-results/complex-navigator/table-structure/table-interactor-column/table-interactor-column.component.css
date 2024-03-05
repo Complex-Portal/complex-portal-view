@@ -4,15 +4,15 @@ td:first-child {
   left: 0;
   z-index: 3;
   border: 1px solid #0a494c;
-  background-color: #CCCCCC;
+  background-color: #e6e6e6;
   height: 100px;
-  min-width: 160px;
-  max-width: 160px;
+  min-width: 190px;
+  max-width: 190px;
 }
 
 /* cells */
 td {
-  text-align: center;
+  padding-left: 5px;
   border: 1px solid #0a494c;
   height: 100px;
   min-width: 160px;
@@ -30,6 +30,28 @@ td {
   background-color: #389198;
   color: #e6e6e6;
   border-radius: 3ch;
-  margin: auto;
+  margin: 40px auto auto;
   padding-top: 1ch;
+  vertical-align: center;
+}
+
+.verticalLineBottom {
+  position: relative;
+  min-width: 51%;
+  max-width: 51%;
+  max-height: 50%;
+  overflow: hidden;
+  color: #e6e6e6;
+  top: 0;
+  border-right: 5px solid #389198;
+}
+
+.verticalLineTop {
+  min-width: 51%;
+  max-width: 51%;
+  min-height: 50%;
+  color: #e6e6e6;
+  border-right: 5px solid #389198;
+  top: 0;
+  margin-bottom: -50px;
 }
