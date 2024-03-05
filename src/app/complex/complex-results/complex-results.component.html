@@ -22,13 +22,12 @@
                  (click)="toggleDisplayType()">
         </div>
         <div class="listOfResults" *ngIf="DisplayType==false">
-          <cp-complex-list [complexSearch]="complexSearch"
-                           [components]="allComponentsInComplexSearch">
+          <cp-complex-list [complexSearch]="complexSearch">
           </cp-complex-list>
         </div>
         <div class="Complex-navigator" *ngIf="DisplayType">
           <cp-complex-navigator [complexSearch]="complexSearch"
-                                [components]="allComponentsInComplexSearch">
+                                [interactors]="allInteractorsInComplexSearch">
           </cp-complex-navigator>
         </div>
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
