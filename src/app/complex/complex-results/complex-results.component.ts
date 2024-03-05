@@ -5,7 +5,6 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
-import Record = __LiteMolImmutable.Record;
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 
 
@@ -23,7 +22,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-  private _allComponentsInComplexSearch = new Set<Interactor>();
+  private _allComponentsInComplexSearch: Set<Interactor> = new Set<Interactor>();
   DisplayType = true;
 
 
@@ -35,6 +34,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
+    this._allComponentsInComplexSearch = new Set();
 
     this.route
       .queryParams
@@ -56,7 +56,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   private requestComplexResults() {
-    this.complexPortalService.findComplexWithComponents(this.query, this.spicesFilter, this.bioRoleFilter,
+    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       this._allComponentsInComplexSearch = new Set();
@@ -65,7 +65,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < complexSearch.elements.length; i++) {
           complexSearch.elements[i].components
             .forEach(component => this._allComponentsInComplexSearch.add(
-              new Interactor(component.id, component.interactorType, component.interactorName)));
+              new Interactor(
+                component.identifier,
+                component.identifierLink,
+                component.name,
+                component.description,
+                component.interactorType)));
         }
       }
       ProgressBarComponent.hide();

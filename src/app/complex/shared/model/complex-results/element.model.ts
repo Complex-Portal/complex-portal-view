@@ -31,11 +31,7 @@ export class Element {
   get description(): string {
     return this._description;
   }
-
-  set components(ids:ComplexComponent[]){
-    this._components=ids;
-  }
-  get components(): ComplexComponent[]{
+  get components(): ComplexComponent[] {
     return this._components;
   }
 }
