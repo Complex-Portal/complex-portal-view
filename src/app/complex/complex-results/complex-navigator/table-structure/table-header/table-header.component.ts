@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'cp-table-header',
@@ -10,7 +9,7 @@ import {Router} from '@angular/router';
 export class TableHeaderComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit(): void {

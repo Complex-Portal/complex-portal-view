@@ -38,7 +38,8 @@ export class TableInteractorColumnComponent implements OnInit {
     const match = complex.components.find(component => component.identifier === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
-        return (match.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
+        // selection of the maxvalue
+        return (match.stochiometry).replace('minValue: ', '').replace('maxValue: ', ''); // .substring to only select the maxValue
       } else {
         return ' '; // sometimes we don't have the stoichiometry value
       }
@@ -51,6 +52,7 @@ export class TableInteractorColumnComponent implements OnInit {
     const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
     if (!!matchSub) {
       if (!!interactor.stochiometry) {
+        // selection of the range
         return (interactor.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
       } else {
         return ' '; // sometimes we don't have the stoichiometry value
@@ -60,6 +62,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public stoichiometryOfInteractorsMainTable(complex: Element, interactor: Interactor, complexSearch: Element[]): string {
+    // Add the stoichiometry number of subcomplexes' interactors into the main complex containing them
     const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
     if (!!subcomplexesArray) {
       for (const subcomplex of subcomplexesArray) {
@@ -68,6 +71,7 @@ export class TableInteractorColumnComponent implements OnInit {
         for (const el of subComplexToComplex.components) {
           if (el.identifier === interactor.identifier) {
             if (!!el.stochiometry) {
+              // selection of the range
               return (el.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
             } else {
               return ' '; // sometimes we don't have the stoichiometry value
@@ -80,6 +84,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public getStochiometry(complex: Element, componentId: string): string {
+    // used when hovering on the stoichiometry circle
     const match = complex.components.find(component => component.identifier === componentId);
     if (!!match) {
       if (!!match.stochiometry) {
@@ -120,6 +125,18 @@ export class TableInteractorColumnComponent implements OnInit {
     return ComplexSearch.find(complex => complex.complexAC === component.identifier);
   }
 
+  public findConnections(complex): boolean {
+    // test to display the line // may be fixed after access to database
+    const componentsArray = Array.from(this.components);
+    let connection: boolean;
+    for (let i = 0; i < complex.components.length - 1; i++) {
+      for (let j = 0; j < componentsArray.length - 1; j++) {
+        connection = (complex.components[i].id === componentsArray[j].id) && (complex.components[i + 1].id === componentsArray[j + 1].id);
+      }
+    }
+    return connection;
+  }
+
   public showExternalLink(component: Interactor | ComplexComponent): boolean {
     return component.interactorType !== 'stable complex' && !!component.identifierLink;
   }
@@ -128,4 +145,16 @@ export class TableInteractorColumnComponent implements OnInit {
     this.buttonContainers[i] = !this.buttonContainers[i];
   }
 
+  public interactorTypeIcon(component: Interactor): string {
+    if (component.interactorType === 'protein') {
+      return 'icon icon-conceptual icon-proteins';
+    } else if (component.interactorType === 'ribonucleic acid') {
+      return 'icon icon-conceptual icon-dna';
+    } else if (component.interactorType === 'small molecule') {
+      return 'icon icon-conceptual icon-chemical';
+    } else if (component.interactorType === 'stable complex') {
+      return 'icon icon-conceptual icon-systems';
+    }
+    return '';
+  }
 }

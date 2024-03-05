@@ -22,6 +22,9 @@
   padding-left: 28px;
   padding-right: 28px;
 
+  min-width: 190px;
+  max-width: 190px;
+
 }
 
 /* "Complexes from results Header */
