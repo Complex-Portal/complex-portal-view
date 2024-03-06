@@ -170,11 +170,7 @@ export class TableInteractorColumnComponent implements OnInit {
         const subInteractorIds: string[] = this._enrichedInteractors[i].subComponents.map(component => component.identifier);
         for (let j = 0; j < this._enrichedInteractors.length; j++) {
           if (i !== j) {
-            if (subInteractorIds.includes(this._enrichedInteractors[j].interactor.identifier)) {
-              this._enrichedInteractors[j].hidden = true;
-            } else {
-              this._enrichedInteractors[j].hidden = false;
-            }
+            this._enrichedInteractors[j].hidden = !!subInteractorIds.includes(this._enrichedInteractors[j].interactor.identifier);
           }
         }
       }
@@ -269,5 +265,32 @@ export class TableInteractorColumnComponent implements OnInit {
       return [minValue, maxValue];
     }
     return null;
+  }
+
+  public beginOfLine(complex: Element, interactor: Interactor): boolean {
+    for (let i = 0; i < complex.components.length; i++) {
+      if (complex.components[i].identifier === interactor.identifier) {
+        return i === 0;
+      }
+    }
+    return false;
+  }
+
+  public endOfLine(complex: Element, interactor: Interactor): boolean {
+    const lastComponentIndex = complex.components.length - 1;
+    for (let i = 0; i < complex.components.length; i++) {
+      if (complex.components[i].identifier === interactor.identifier) {
+        return i === lastComponentIndex;
+      }
+    }
+    return false;
+  }
+
+  public displayLine(complex: Element, interactor: Interactor): boolean {
+    if (this.beginOfLine(complex, interactor) && this.endOfLine(complex, interactor)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

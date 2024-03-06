@@ -24,34 +24,44 @@ td {
 }
 
 .stoichNum {
-  text-align: center;
   width: 5ch;
   height: 5ch;
-  background-color: #389198;
-  color: #e6e6e6;
   border-radius: 3ch;
-  margin: 40px auto auto;
+  background-color: #389198;
+
+  margin-top: 30%;
+  margin-bottom: 30%;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
   padding-top: 1ch;
-  vertical-align: center;
+  color: #e6e6e6;
 }
 
 .verticalLineBottom {
-  position: relative;
   min-width: 51%;
   max-width: 51%;
   max-height: 50%;
-  overflow: hidden;
-  color: #e6e6e6;
-  top: 0;
+  min-height: 50%;
   border-right: 5px solid #389198;
+  margin-top: -30%;
 }
 
 .verticalLineTop {
   min-width: 51%;
   max-width: 51%;
-  min-height: 50%;
-  color: #e6e6e6;
+  max-height: 70%;
+  min-height: 70%;
   border-right: 5px solid #389198;
-  top: 0;
-  margin-bottom: -50px;
+  margin-bottom: -30%;
+}
+
+.verticalLine {
+  min-width: 51%;
+  max-width: 51%;
+  max-height: 100%;
+  min-height: 100%;
+  border-right: 5px solid #389198;
+  margin-bottom: -30%;
 }
