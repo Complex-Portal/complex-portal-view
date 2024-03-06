@@ -4,6 +4,12 @@ import {Interactor} from '../../../../shared/model/complex-results/interactor.mo
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 
+class EnrichedInteractor {
+  interactor: Interactor;
+  isSubComplex: boolean;
+  expanded: boolean;
+}
+
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -11,9 +17,7 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 })
 export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  _interactors: Set<Interactor>;
-
-  buttonContainers = [];
+  _enrichedInteractors: EnrichedInteractor[];
 
   constructor() {
   }
@@ -21,16 +25,21 @@ export class TableInteractorColumnComponent implements OnInit {
   ngOnInit() {
   }
 
-  get interactors(): Set<Interactor> {
-    return this._interactors;
+  get enrichedInteractors(): EnrichedInteractor[] {
+    return this._enrichedInteractors;
   }
 
   @Input()
   set interactors(value: Set<Interactor>) {
-    this.buttonContainers = [];
-    this._interactors = value;
-    for (let i = 0; i < this._interactors.size; i++) {
-      this.buttonContainers.push(false);
+    this._enrichedInteractors = [];
+    for (const interactor of value) {
+      const isSubComplex = interactor.interactorType === 'stable complex';
+      const newEnrichedInteractor: EnrichedInteractor = {
+        interactor,
+        isSubComplex,
+        expanded: false
+      };
+      this._enrichedInteractors.push(newEnrichedInteractor);
     }
   }
 
@@ -116,10 +125,6 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public isComponentASubcomplex(interactor: Interactor): boolean {
-    return (interactor.interactorType) === 'stable complex';
-  }
-
   public componentToComplex(component: Interactor | ComplexComponent, ComplexSearch: Element[]): Element {
     // this function convert a interactor (subcomplexes) into a complex in order to retrieve its components
     return ComplexSearch.find(complex => complex.complexAC === component.identifier);
@@ -130,7 +135,18 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   toggleSubcomplexExpandable(i: number): void {
-    this.buttonContainers[i] = !this.buttonContainers[i];
+    this._enrichedInteractors[i].expanded = !this._enrichedInteractors[i].expanded;
+
+    if (this._enrichedInteractors[i].expanded) {
+      // EnrichedInteractor has been expanded, we need to:
+
+      // 1. Collapse the other ones, in case there is any other expanded
+      for (let j = 0; j < this._enrichedInteractors.length; j++) {
+        if (i !== j) {
+          this._enrichedInteractors[j].expanded = false;
+        }
+      }
+    }
   }
 
   public interactorTypeIcon(interactor: Interactor): string {
