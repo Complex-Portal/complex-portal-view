@@ -33,30 +33,28 @@
           <!-- Interactors' stoichiometry -->
           <ng-container *ngFor="let complex of complexSearch.elements">
             <td>
-              <div class="verticalLineTop"
-                   *ngIf="(stochiometryOfInteractors(complex, interactor.identifier)) != null">.
-              </div>
-              <div class="stoichNum" *ngIf="(stochiometryOfInteractors(complex, interactor.identifier))"
-                   title="{{ (getStochiometry(complex, interactor.identifier)) }}">
-                {{ (stochiometryOfInteractors(complex, interactor.identifier)) }}
-              </div>
-              <div class="verticalLineBottom"
-                   *ngIf="(stochiometryOfInteractors(complex, interactor.identifier)) != null">.
-              </div>
-              <div class="verticalLineTop"
-                   *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements)">.
-              </div>
-              <ng-container class="stoichComponent"
-                            *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) ">
-                <!-- subcomplexes' interactors' stoichiometry -->
-                <div class="stoichNum"
-                     title="{{ (getStoichiometrySubComplex(complex, interactor, complexSearch.elements)) }}">
-                  {{ stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) }}
+              <ng-container *ngIf="stochiometryOfInteractors(complex, interactor.identifier) != null">
+                <div class="verticalLineTop">.
+                </div>
+                <div class="stoichNum" title="{{ getStochiometry(complex, interactor.identifier) }}">
+                  {{ stochiometryOfInteractors(complex, interactor.identifier) }}
+                </div>
+                <div class="verticalLineBottom">.
                 </div>
               </ng-container>
-              <div class="verticalLineBottom"
-                   *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements)">.
-              </div>
+              <ng-container *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements)">
+                <div class="verticalLineTop">.
+                </div>
+                <ng-container class="stoichComponent">
+                  <!-- subcomplexes' interactors' stoichiometry -->
+                  <div class="stoichNum"
+                       title="{{ getStoichiometrySubComplex(complex, interactor, complexSearch.elements) }}">
+                    {{ stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements) }}
+                  </div>
+                </ng-container>
+                <div class="verticalLineBottom">.
+                </div>
+              </ng-container>
             </td>
           </ng-container>
         </tr>
@@ -83,20 +81,24 @@
             </td>
             <ng-container *ngFor="let complex of complexSearch.elements">
               <td style="background: #b7b8b8;">
-                <div class="verticalLineTop"
-                     *ngIf="stochiometryOfInteractors(complex, el.identifier) || stoichiometryOfInteractorsExpandable(complex, el)">
-                  .
-                </div>
-                <div class="stoichNum"
-                     *ngIf="stochiometryOfInteractors(complex, el.identifier) || stoichiometryOfInteractorsExpandable(complex, el)"
-                     title="{{ (getStochiometry(complex, el.identifier)) }}">
-                  {{ stochiometryOfInteractors(complex, el.identifier) }}
-                  {{ stoichiometryOfInteractorsExpandable(complex, el) }}
-                </div>
-                <div class="verticalLineBottom"
-                     *ngIf="stochiometryOfInteractors(complex, el.identifier) || stoichiometryOfInteractorsExpandable(complex, el)">
-                  .
-                </div>
+                <ng-container *ngIf="stochiometryOfInteractors(complex, el.identifier)">
+                  <div class="verticalLineTop">.
+                  </div>
+                  <div class="stoichNum" title="{{ (getStochiometry(complex, el.identifier)) }}">
+                    {{ stochiometryOfInteractors(complex, el.identifier) }}
+                  </div>
+                  <div class="verticalLineBottom">.
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="stoichiometryOfInteractorsExpandable(complex, el)">
+                  <div class="verticalLineTop">.
+                  </div>
+                  <div class="stoichNum" title="{{ (getStochiometry(complex, el.identifier)) }}">
+                    {{ stoichiometryOfInteractorsExpandable(complex, el) }}
+                  </div>
+                  <div class="verticalLineBottom">.
+                  </div>
+                </ng-container>
               </td>
             </ng-container>
           </tr>
