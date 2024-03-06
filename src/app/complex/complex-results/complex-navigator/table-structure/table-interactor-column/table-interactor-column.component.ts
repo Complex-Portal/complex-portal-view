@@ -3,11 +3,14 @@ import {ComplexSearchResult} from '../../../../shared/model/complex-results/comp
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs';
 
 class EnrichedInteractor {
   interactor: Interactor;
   isSubComplex: boolean;
   expanded: boolean;
+  subComponents: ComplexComponent[];
 }
 
 @Component({
@@ -37,64 +40,75 @@ export class TableInteractorColumnComponent implements OnInit {
       const newEnrichedInteractor: EnrichedInteractor = {
         interactor,
         isSubComplex,
-        expanded: false
+        expanded: false,
+        subComponents: null
       };
+      if (isSubComplex) {
+        this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
+      }
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
   }
 
-  public stochiometryOfInteractors(complex: Element, interactorId: string): string {
-    const match = complex.components.find(component => component.identifier === interactorId);
+  findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
+    return complex.components.find(component => component.identifier === componentId);
+  }
+
+  findInteractorsInSubComplex(complex: Element, interactorId: string): ComplexComponent[] {
+    return this._enrichedInteractors
+      // filter subcomplexes
+      .filter(interactor => interactor.isSubComplex)
+      // filter subcomplexes included in complex
+      .filter(interactor =>
+        complex.components.some(component => component.identifier === interactor.interactor.identifier))
+      // filter subcomplexes that match the componentId
+      .filter(interactor => !!interactor.subComponents)
+      .map(interactor => interactor.subComponents.find(subComponent => subComponent.identifier === interactorId))
+      .filter(component => !!component);
+  }
+
+  public findInteractorInExpandedSubComplex(interactor: EnrichedInteractor, complex: Element, interactorId: string): ComplexComponent {
+    if (complex.components.some(component => component.identifier === interactor.interactor.identifier)) {
+      return interactor.subComponents.find(component => component.identifier === interactorId);
+    }
+    return null;
+  }
+
+  stochiometryOfInteractors(complex: Element, interactorId: string): string {
+    const match = this.findInteractorInComplex(complex, interactorId);
     if (!!match) {
-      if (!!match.stochiometry) {
-        // selection of the maxvalue
-        return (match.stochiometry).replace('minValue: ', '').replace('maxValue: ', ''); // .substring to only select the maxValue
-      } else {
-        return ' '; // sometimes we don't have the stoichiometry value
-      }
+      return this.formatStochiometryValues(match.stochiometry);
     }
     return null;
   }
 
-  public stoichiometryOfInteractorsExpandable(complex: Element, component: ComplexComponent): string {
-    /* Retrieve the stoichiometry of the interactors of subcomplexes to display them in the main complex */
-    const matchSub = complex.components.find(component => component.interactorType === 'stable complex'); /* look for subcomplexes */
-    if (!!matchSub) {
-      if (!!component.stochiometry) {
-        // selection of the range
-        return (component.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
-      } else {
-        return ' '; // sometimes we don't have the stoichiometry value
-      }
+  stoichiometryOfInteractorsExpandable(interactor: EnrichedInteractor, interactorId: string): string {
+    const match = this.findInteractorInSubcomplex(interactor, interactorId);
+    if (!!match) {
+      return this.formatStochiometryValues(match.stochiometry);
     }
     return null;
   }
 
-  public stoichiometryOfInteractorsMainTable(complex: Element, interactor: Interactor, complexSearch: Element[]): string {
-    // Add the stoichiometry number of subcomplexes' interactors into the main complex containing them
-    const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
-    if (!!subcomplexesArray) {
-      for (const subcomplex of subcomplexesArray) {
-        const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
-        // convert the elements of the subcomplexes' array into compplexes
-        for (const el of subComplexToComplex.components) {
-          if (el.identifier === interactor.identifier) {
-            if (!!el.stochiometry) {
-              // selection of the range
-              return (el.stochiometry).replace('minValue: ', '').replace('maxValue: ', '');
-            } else {
-              return ' '; // sometimes we don't have the stoichiometry value
-            }
-          }
+  stoichiometryOfInteractorsMainTable(complex: Element, interactorId: string): string {
+    const matches = this.findInteractorsInSubComplex(complex, interactorId);
+    if (matches.length > 0) {
+      const stochiometryValues = this.addedStoichiometryValues(matches);
+      if (!!stochiometryValues) {
+        if (stochiometryValues[0] === stochiometryValues[1]) {
+          return stochiometryValues[0].toString();
+        } else {
+          return `${stochiometryValues[0]}, ${stochiometryValues[1]}`;
         }
+      } else {
+        return ' ';
       }
     }
     return null;
   }
 
-  public getStochiometry(complex: Element, interactorId: string): string {
-    // used when hovering on the stoichiometry circle
-    const match = complex.components.find(component => component.identifier === interactorId);
+  getStochiometry(complex: Element, componentId: string): string {
+    const match = this.findInteractorInComplex(complex, componentId);
     if (!!match) {
       if (!!match.stochiometry) {
         return 'Stoichiometry values: ' + (match.stochiometry);
@@ -105,29 +119,29 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public getStoichiometrySubComplex(complex: Element, interactor: Interactor, complexSearch: Element[]): string {
-    const subcomplexesArray = complex.components.filter(component => (component.interactorType === 'stable complex'));
-    if (!!subcomplexesArray) {
-      for (const subcomplex of subcomplexesArray) {
-        const subComplexToComplex = this.componentToComplex(subcomplex, complexSearch);
-        // convert the elements of the subcomplexes' array into complexes
-        for (const el of subComplexToComplex.components) {
-          if (el.identifier === interactor.identifier) {
-            if (!!el.stochiometry) {
-              return el.stochiometry;
-            } else {
-              return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
-            }
-          }
-        }
+  getStoichiometrySubComplex(complex: Element, interactorId: string): string {
+    const matches = this.findInteractorsInSubComplex(complex, interactorId);
+    if (matches.length > 0) {
+      const stochiometryValues = this.addedStoichiometryValues(matches);
+      if (!!stochiometryValues) {
+        return `Stoichiometry values: minValue: ${stochiometryValues[0]}, maxValue: ${stochiometryValues[1]}`;
+      } else {
+        return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
       }
     }
     return null;
   }
 
-  public componentToComplex(component: Interactor | ComplexComponent, ComplexSearch: Element[]): Element {
-    // this function convert a interactor (subcomplexes) into a complex in order to retrieve its components
-    return ComplexSearch.find(complex => complex.complexAC === component.identifier);
+  getStochiometryInExpandedSubComplex(interactor: EnrichedInteractor, interactorId: string): string {
+    const match = this.findInteractorInSubcomplex(interactor, interactorId);
+    if (!!match) {
+      if (!!match.stochiometry) {
+        return 'Stoichiometry values: ' + (match.stochiometry);
+      } else {
+        return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
+      }
+    }
+    return null;
   }
 
   public showExternalLink(component: Interactor | ComplexComponent): boolean {
@@ -160,5 +174,67 @@ export class TableInteractorColumnComponent implements OnInit {
       return 'icon icon-conceptual icon-systems';
     }
     return '';
+  }
+
+  private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
+    // this function returns the list of subcomponents of an interactor of type stable complex
+    const foundComplex: Element = this.complexSearch.elements.find(complex => complex.complexAC === interactor.interactor.identifier);
+    if (!!foundComplex) {
+      return of(foundComplex.components);
+    }
+    return of();
+  }
+
+  private findInteractorInSubcomplex(interactor: EnrichedInteractor, interactorId: string): ComplexComponent {
+    return interactor.subComponents.find(component => component.identifier === interactorId);
+  }
+
+  private fetchValuesFromStochiometry(stochiometry: string) {
+    const pattern = 'minValue: ([0-9+]), maxValue: ([0-9+])';
+    return stochiometry.match(pattern);
+  }
+
+  private formatStochiometryValues(stochiometry: string): string {
+    if (!!stochiometry) {
+      const matchedStochometry = this.fetchValuesFromStochiometry(stochiometry);
+      if (!!matchedStochometry) {
+        // tslint:disable-next-line:radix
+        const minValue = parseInt(matchedStochometry[1]);
+        // tslint:disable-next-line:radix
+        const maxValue = parseInt(matchedStochometry[2]);
+        if (minValue === maxValue) {
+          return minValue.toString();
+        } else {
+          return `${minValue}, ${maxValue}`;
+        }
+      }
+    }
+    return ' '; // sometimes we don't have the stoichiometry value
+  }
+
+  private addedStoichiometryValues(components: ComplexComponent[]): [number, number] {
+    let minValue: number = null;
+    let maxValue: number = null;
+    for (const component of components) {
+      if (!!component.stochiometry) {
+        const matchedStochometry = this.fetchValuesFromStochiometry(component.stochiometry);
+        if (!!matchedStochometry) {
+          if (minValue === null) {
+            minValue = 0;
+          }
+          if (maxValue === null) {
+            maxValue = 0;
+          }
+          // tslint:disable-next-line:radix
+          minValue += parseInt(matchedStochometry[1]);
+          // tslint:disable-next-line:radix
+          maxValue += parseInt(matchedStochometry[2]);
+        }
+      }
+    }
+    if (minValue !== null && maxValue !== null) {
+      return [minValue, maxValue];
+    }
+    return null;
   }
 }
