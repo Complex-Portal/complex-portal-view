@@ -5,6 +5,8 @@ import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
+import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
+import {map} from 'rxjs/operators';
 
 class EnrichedInteractor {
   interactor: Interactor;
@@ -23,7 +25,7 @@ export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _enrichedInteractors: EnrichedInteractor[];
 
-  constructor() {
+  constructor(private complexPortalService: ComplexPortalService) {
   }
 
   ngOnInit() {
@@ -203,8 +205,17 @@ export class TableInteractorColumnComponent implements OnInit {
     const foundComplex: Element = this.complexSearch.elements.find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.components);
+    } else {
+      // Actually call the back-end to fetch these
+      return this.complexPortalService.getComplexAc(interactor.interactor.identifier)
+        .pipe(map(complex => complex.participants.map(participant => new ComplexComponent(
+          participant.identifier,
+          participant.identifierLink,
+          participant.name,
+          participant.description,
+          participant.stochiometry,
+          participant.interactorType))));
     }
-    return of();
   }
 
   private findInteractorInSubcomplex(interactor: EnrichedInteractor, interactorId: string): ComplexComponent {
