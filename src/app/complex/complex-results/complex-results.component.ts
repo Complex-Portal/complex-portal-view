@@ -22,7 +22,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-  private _allComponentsInComplexSearch: Set<Interactor> = new Set<Interactor>();
+  private _allInteractorsInComplexSearch: Set<Interactor> = new Set<Interactor>();
   DisplayType = true;
 
 
@@ -34,7 +34,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
-    this._allComponentsInComplexSearch = new Set();
+    this._allInteractorsInComplexSearch = new Set();
 
     this.route
       .queryParams
@@ -59,12 +59,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
-      this._allComponentsInComplexSearch = new Set();
+      this._allInteractorsInComplexSearch = new Set();
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
           complexSearch.elements[i].components
-            .forEach(component => this._allComponentsInComplexSearch.add(
+            .forEach(component => this._allInteractorsInComplexSearch.add(
               new Interactor(
                 component.identifier,
                 component.identifierLink,
@@ -216,12 +216,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this._interactorTypeFilter = value;
   }
 
-  public get allComponentsInComplexSearch(): Set<Interactor> {
-    return this._allComponentsInComplexSearch;
+  public get allInteractorsInComplexSearch(): Set<Interactor> {
+    return this._allInteractorsInComplexSearch;
   }
 
-  set allComponentsInComplexSearch(value: Set<Interactor>) {
-    this._allComponentsInComplexSearch = value;
+  set allInteractorsInComplexSearch(value: Set<Interactor>) {
+    this._allInteractorsInComplexSearch = value;
   }
 
   toggleDisplayType() {

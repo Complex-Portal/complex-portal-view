@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class TableStructureComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  _components: Set<Interactor>;
+  _interactors: Set<Interactor>;
 
   constructor(private router: Router) {
   }
@@ -18,13 +18,13 @@ export class TableStructureComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get components(): Set<Interactor> {
-    return this._components;
+  get interactors(): Set<Interactor> {
+    return this._interactors;
   }
 
   @Input()
-  set components(value: Set<Interactor>) {
-    this._components = value;
+  set interactors(value: Set<Interactor>) {
+    this._interactors = value;
   }
 
 }

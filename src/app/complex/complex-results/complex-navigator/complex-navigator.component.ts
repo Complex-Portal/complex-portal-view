@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class ComplexNavigatorComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  _components: Set<Interactor>;
+  _interactors: Set<Interactor>;
 
   constructor(private router: Router) {
   }
@@ -19,12 +19,12 @@ export class ComplexNavigatorComponent implements OnInit {
   ngOnInit() {
   }
 
-  get components(): Set<Interactor> {
-    return this._components;
+  get interactors(): Set<Interactor> {
+    return this._interactors;
   }
 
   @Input()
-  set components(value: Set<Interactor>) {
-    this._components = value;
+  set interactors(value: Set<Interactor>) {
+    this._interactors = value;
   }
 }
