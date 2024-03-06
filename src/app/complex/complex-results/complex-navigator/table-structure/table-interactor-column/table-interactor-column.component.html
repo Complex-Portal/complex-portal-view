@@ -1,7 +1,7 @@
 <div class="Complex-navigator">
   <table class="interactors-table">
     <!-- Interactors' column -->
-    <ng-container *ngFor="let interactor of components; let i=index">
+    <ng-container *ngFor="let interactor of interactors; let i=index">
       <ng-container>
         <tr>
           <td>
@@ -41,7 +41,7 @@
                 {{ (stochiometryOfInteractors(complex, interactor.identifier)) }}
               </div>
               <div class="verticalLineBottom"
-                   *ngIf="(stochiometryOfInteractors(complex, interactor.id)) != null">.
+                   *ngIf="(stochiometryOfInteractors(complex, interactor.identifier)) != null">.
               </div>
               <div class="verticalLineTop"
                    *ngIf="stoichiometryOfInteractorsMainTable(complex, interactor, complexSearch.elements)">.
@@ -69,7 +69,7 @@
                 <a [routerLink]="['/complex/search']"
                    [queryParams]="{query: el.identifier, page: 1}"
                    target="_blank">
-                  {{ el.interactorName }}
+                  {{ el.name }}
                   <i class="{{interactorTypeIcon(el)}}" title="{{interactor.interactorType}}"></i>
                   <i class="icon icon-functional small" data-icon="1"
                      title="More complexes containing this interactor"></i>
@@ -84,7 +84,7 @@
             <ng-container *ngFor="let complex of complexSearch.elements">
               <td style="background: #b7b8b8;">
                 <div class="verticalLineTop"
-                     *ngIf="stochiometryOfInteractors(complex, el.id) || stoichiometryOfInteractorsExpandable(complex, el)">
+                     *ngIf="stochiometryOfInteractors(complex, el.identifier) || stoichiometryOfInteractorsExpandable(complex, el)">
                   .
                 </div>
                 <div class="stoichNum"
@@ -94,7 +94,7 @@
                   {{ stoichiometryOfInteractorsExpandable(complex, el) }}
                 </div>
                 <div class="verticalLineBottom"
-                     *ngIf="stochiometryOfInteractors(complex, el.id) || stoichiometryOfInteractorsExpandable(complex, el)">
+                     *ngIf="stochiometryOfInteractors(complex, el.identifier) || stoichiometryOfInteractorsExpandable(complex, el)">
                   .
                 </div>
               </td>
