@@ -3,7 +3,7 @@
     <!-- Interactors' column -->
     <ng-container *ngFor="let interactor of enrichedInteractors; let i=index">
       <ng-container>
-        <tr>
+        <tr *ngIf="!interactor.hidden">
           <td>
             <div style="font-weight: bold">
               {{ interactor.interactor.name }}

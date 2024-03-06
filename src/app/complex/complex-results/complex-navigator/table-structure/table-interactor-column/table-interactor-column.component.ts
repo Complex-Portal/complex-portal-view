@@ -8,6 +8,7 @@ import {of} from 'rxjs';
 
 class EnrichedInteractor {
   interactor: Interactor;
+  hidden: boolean;
   isSubComplex: boolean;
   expanded: boolean;
   subComponents: ComplexComponent[];
@@ -39,6 +40,7 @@ export class TableInteractorColumnComponent implements OnInit {
       const isSubComplex = interactor.interactorType === 'stable complex';
       const newEnrichedInteractor: EnrichedInteractor = {
         interactor,
+        hidden: false,
         isSubComplex,
         expanded: false,
         subComponents: null
@@ -144,7 +146,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public showExternalLink(component: Interactor | ComplexComponent): boolean {
+  showExternalLink(component: Interactor | ComplexComponent): boolean {
     return component.interactorType !== 'stable complex' && !!component.identifierLink;
   }
 
@@ -159,6 +161,26 @@ export class TableInteractorColumnComponent implements OnInit {
         if (i !== j) {
           this._enrichedInteractors[j].expanded = false;
         }
+      }
+
+      // 2. Hide any interactor now displayed in the expanded section
+      if (!!this._enrichedInteractors[i].subComponents) {
+        const subInteractorIds: string[] = this._enrichedInteractors[i].subComponents.map(component => component.identifier);
+        for (let j = 0; j < this._enrichedInteractors.length; j++) {
+          if (i !== j) {
+            if (subInteractorIds.includes(this._enrichedInteractors[j].interactor.identifier)) {
+              this._enrichedInteractors[j].hidden = true;
+            } else {
+              this._enrichedInteractors[j].hidden = false;
+            }
+          }
+        }
+      }
+    } else {
+      // EnrichedInteractor has been collapsed, we need to:
+      // 1. Display any interactor previously hidden
+      for (let j = 0; j < this._enrichedInteractors.length; j++) {
+        this._enrichedInteractors[j].hidden = false;
       }
     }
   }
