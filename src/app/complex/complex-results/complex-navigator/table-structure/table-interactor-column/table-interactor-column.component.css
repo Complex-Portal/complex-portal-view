@@ -33,17 +33,18 @@ td {
   border-radius: 3ch;
   background-color: #389198;
   text-align: center;
-  color: #e6e6e6;
+  color: white;
   font-size: small;
   z-index: 2;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .verticalLine {
-  min-width: 52%;
-  max-width: 52%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 1%;
+  max-width: 1%;
   max-height: 50%;
   min-height: 50%;
   border-right: 5px solid #389198;
@@ -59,5 +60,3 @@ td {
   /*border-right: 5px solid #983843;*/
   z-index: 0;
 }
-
-
