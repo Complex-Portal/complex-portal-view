@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -22,7 +22,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-  private _allInteractorsInComplexSearch: Set<Interactor> = new Set<Interactor>();
+  private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType = true;
 
 
@@ -34,7 +34,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
-    this._allInteractorsInComplexSearch = new Set();
+    this._allInteractorsInComplexSearch = [];
 
     this.route
       .queryParams
@@ -59,18 +59,21 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
-      this._allInteractorsInComplexSearch = new Set();
+      this._allInteractorsInComplexSearch = [];
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
-          complexSearch.elements[i].components
-            .forEach(component => this._allInteractorsInComplexSearch.add(
-              new Interactor(
-                component.identifier,
-                component.identifierLink,
-                component.name,
-                component.description,
-                component.interactorType)));
+          for (const component of complexSearch.elements[i].components) {
+            if (!this._allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
+              this._allInteractorsInComplexSearch.push(
+                new Interactor(
+                  component.identifier,
+                  component.identifierLink,
+                  component.name,
+                  component.description,
+                  component.interactorType));
+            }
+          }
         }
       }
       ProgressBarComponent.hide();
@@ -216,11 +219,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this._interactorTypeFilter = value;
   }
 
-  public get allInteractorsInComplexSearch(): Set<Interactor> {
+  public get allInteractorsInComplexSearch(): Interactor[] {
     return this._allInteractorsInComplexSearch;
   }
 
-  set allInteractorsInComplexSearch(value: Set<Interactor>) {
+  set allInteractorsInComplexSearch(value: Interactor[]) {
     this._allInteractorsInComplexSearch = value;
   }
 

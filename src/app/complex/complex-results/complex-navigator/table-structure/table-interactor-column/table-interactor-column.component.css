@@ -44,27 +44,19 @@ td {
 .verticalLine {
   min-width: 52%;
   max-width: 52%;
-  max-height: 30%;
-  min-height: 30%;
+  max-height: 50%;
+  min-height: 50%;
   border-right: 5px solid #389198;
   z-index: 0;
 }
 
-.verticalLineBottom {
+.transparentVerticalLine {
   min-width: 52%;
   max-width: 52%;
-  max-height: 30%;
-  min-height: 30%;
+  max-height: 50%;
+  min-height: 50%;
   border-right: 0;
-  z-index: 0;
-}
-
-.verticalLineTop {
-  min-width: 52%;
-  max-width: 52%;
-  max-height: 30%;
-  min-height: 30%;
-  border-right: 0;
+  /*border-right: 5px solid #983843;*/
   z-index: 0;
 }
 

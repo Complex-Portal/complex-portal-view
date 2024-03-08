@@ -14,6 +14,7 @@ class EnrichedInteractor {
   isSubComplex: boolean;
   expanded: boolean;
   subComponents: ComplexComponent[];
+  partOfComplex: number[];
 }
 
 @Component({
@@ -45,7 +46,8 @@ export class TableInteractorColumnComponent implements OnInit {
         hidden: false,
         isSubComplex,
         expanded: false,
-        subComponents: null
+        subComponents: null,
+        partOfComplex: []
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -267,29 +269,9 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  public beginOfLine(complex: Element, interactor: Interactor): boolean {
-    for (let i = 0; i < this._enrichedInteractors.length; i++) {
-      for (let j = 0; j < complex.components.length; j++) {
-        if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
-          return this._enrichedInteractors[i].interactor.identifier === interactor.identifier;
-        }
-      }
-    }
-    return false;
-  }
+  private findStartAndEndIndexes(complex: Element): [number, number] {
+    const subComponentsToCheck: string[] = [];
 
-  public endOfLine(complex: Element, interactor: Interactor): boolean {
-    for (let i = this._enrichedInteractors.length - 1; i >= 0; i--) {
-      for (let j = 0; j < complex.components.length; j++) {
-        if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
-          return this._enrichedInteractors[i].interactor.identifier === interactor.identifier;
-        }
-      }
-    }
-    return false;
-  }
-
-  public displayLine(complex: Element, interactor: Interactor): boolean {
     let startIndex: number = null;
     let endIndex: number = null;
     // Find startIndex and endIndex
@@ -300,17 +282,93 @@ export class TableInteractorColumnComponent implements OnInit {
             startIndex = i;
           }
           endIndex = i;
+
+          if (this._enrichedInteractors[i].isSubComplex && !!this._enrichedInteractors[i].subComponents) {
+            this._enrichedInteractors[i].subComponents.forEach(subComponent => subComponentsToCheck.push(subComponent.identifier));
+          }
         }
       }
     }
-    // Check if interactor's index is between startIndex and endIndex
-    for (let j = startIndex; j <= endIndex; j++) {
-      if (interactor.identifier === this._enrichedInteractors[j].interactor.identifier) {
-        return true;
+
+    for (let i = 0; i < this._enrichedInteractors.length; i++) {
+      if (subComponentsToCheck.includes(this._enrichedInteractors[i].interactor.identifier)) {
+        if (startIndex === null || i < startIndex) {
+          startIndex = i;
+        }
+        if (endIndex === null || i > endIndex) {
+          endIndex = i;
+        }
       }
     }
-    return false;
+
+    return [startIndex, endIndex];
   }
 
+  public displayTopLineClass(complex: Element, interactorIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
+    const startIndex: number = indices[0];
+    const endIndex: number = indices[1];
 
+    if (startIndex != null && endIndex != null) {
+      if (startIndex < interactorIndex && endIndex >= interactorIndex) {
+        return 'verticalLine';
+      }
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  public displayBottomLineClass(complex: Element, interactorIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
+    const startIndex: number = indices[0];
+    const endIndex: number = indices[1];
+
+    if (startIndex != null && endIndex != null) {
+      if (startIndex <= interactorIndex && endIndex > interactorIndex) {
+        return 'verticalLine';
+      }
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  public displayTopLineClassExpanded(complex: Element, interactor: EnrichedInteractor, interactorIndex: number, subComponentIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
+    const startIndex: number = indices[0];
+    const endIndex: number = indices[1];
+
+    if (startIndex != null && endIndex != null) {
+      if (startIndex <= interactorIndex && endIndex >= interactorIndex) {
+        return 'verticalLine';
+      }
+    }
+
+    if (complex.complexAC === interactor.interactor.identifier) {
+      if (subComponentIndex > 0) {
+        return 'verticalLine';
+      }
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  public displayBottomLineClassExpanded(complex: Element, interactor: EnrichedInteractor, interactorIndex: number, subComponentIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
+    const startIndex: number = indices[0];
+    const endIndex: number = indices[1];
+
+    if (startIndex != null && endIndex != null) {
+      if (startIndex <= interactorIndex && endIndex > interactorIndex) {
+        return 'verticalLine';
+      }
+    }
+
+    if (complex.complexAC === interactor.interactor.identifier) {
+      if (subComponentIndex < interactor.subComponents.length - 1) {
+        return 'verticalLine';
+      }
+    }
+
+    return 'transparentVerticalLine';
+  }
 }
