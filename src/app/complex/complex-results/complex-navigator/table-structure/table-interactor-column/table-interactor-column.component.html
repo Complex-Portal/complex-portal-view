@@ -34,7 +34,7 @@
           <!-- Interactors' stoichiometry -->
           <ng-container *ngFor="let complex of complexSearch.elements">
             <td>
-              <div [ngClass]="displayTopLineClass(complex, interactor.interactor, i)"></div>
+              <div [ngClass]="displayTopLineClass(complex, i)"></div>
               <ng-container *ngIf="!!findInteractorInComplex(complex, interactor.interactor.identifier)">
                 <div class="stoichNum" title="{{ getStochiometry(complex, interactor.interactor.identifier) }}">
                   {{ stochiometryOfInteractors(complex, interactor.interactor.identifier) }}
@@ -48,7 +48,7 @@
                   {{ stoichiometryOfInteractorsMainTable(complex, interactor.interactor.identifier) }}
                 </div>
               </ng-container>
-              <div [ngClass]="displayBottomLineClass(complex, interactor.interactor, i)"></div>
+              <div [ngClass]="displayBottomLineClass(complex, i)"></div>
             </td>
           </ng-container>
         </tr>

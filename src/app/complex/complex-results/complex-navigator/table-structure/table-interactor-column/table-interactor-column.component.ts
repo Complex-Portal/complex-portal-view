@@ -269,7 +269,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  private findStartAndEndIndexes(complex: Element, interactor: Interactor): [number, number] {
+  private findStartAndEndIndexes(complex: Element): [number, number] {
     const subComponentsToCheck: string[] = [];
 
     let startIndex: number = null;
@@ -304,8 +304,8 @@ export class TableInteractorColumnComponent implements OnInit {
     return [startIndex, endIndex];
   }
 
-  public displayTopLineClass(complex: Element, interactor: Interactor, interactorIndex: number): string {
-    const indices = this.findStartAndEndIndexes(complex, interactor);
+  public displayTopLineClass(complex: Element, interactorIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
     const startIndex: number = indices[0];
     const endIndex: number = indices[1];
 
@@ -318,8 +318,8 @@ export class TableInteractorColumnComponent implements OnInit {
     return 'transparentVerticalLine';
   }
 
-  public displayBottomLineClass(complex: Element, interactor: Interactor, interactorIndex: number): string {
-    const indices = this.findStartAndEndIndexes(complex, interactor);
+  public displayBottomLineClass(complex: Element, interactorIndex: number): string {
+    const indices = this.findStartAndEndIndexes(complex);
     const startIndex: number = indices[0];
     const endIndex: number = indices[1];
 
@@ -333,7 +333,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public displayTopLineClassExpanded(complex: Element, interactor: EnrichedInteractor, interactorIndex: number, subComponentIndex: number): string {
-    const indices = this.findStartAndEndIndexes(complex, interactor.interactor);
+    const indices = this.findStartAndEndIndexes(complex);
     const startIndex: number = indices[0];
     const endIndex: number = indices[1];
 
@@ -353,7 +353,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public displayBottomLineClassExpanded(complex: Element, interactor: EnrichedInteractor, interactorIndex: number, subComponentIndex: number): string {
-    const indices = this.findStartAndEndIndexes(complex, interactor.interactor);
+    const indices = this.findStartAndEndIndexes(complex);
     const startIndex: number = indices[0];
     const endIndex: number = indices[1];
 
