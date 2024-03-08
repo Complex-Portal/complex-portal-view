@@ -1,5 +1,5 @@
 .complexNavigatorTable {
-  height: 750px;
+  max-height: 750px;
   border-collapse: separate;
   overflow: scroll;
   width: 100%;

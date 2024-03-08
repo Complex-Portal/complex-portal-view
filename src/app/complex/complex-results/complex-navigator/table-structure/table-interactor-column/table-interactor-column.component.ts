@@ -268,29 +268,49 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public beginOfLine(complex: Element, interactor: Interactor): boolean {
-    for (let i = 0; i < complex.components.length; i++) {
-      if (complex.components[i].identifier === interactor.identifier) {
-        return i === 0;
+    for (let i = 0; i < this._enrichedInteractors.length; i++) {
+      for (let j = 0; j < complex.components.length; j++) {
+        if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
+          return this._enrichedInteractors[i].interactor.identifier === interactor.identifier;
+        }
       }
     }
     return false;
   }
 
   public endOfLine(complex: Element, interactor: Interactor): boolean {
-    const lastComponentIndex = complex.components.length - 1;
-    for (let i = 0; i < complex.components.length; i++) {
-      if (complex.components[i].identifier === interactor.identifier) {
-        return i === lastComponentIndex;
+    for (let i = this._enrichedInteractors.length - 1; i >= 0; i--) {
+      for (let j = 0; j < complex.components.length; j++) {
+        if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
+          return this._enrichedInteractors[i].interactor.identifier === interactor.identifier;
+        }
       }
     }
     return false;
   }
 
   public displayLine(complex: Element, interactor: Interactor): boolean {
-    if (this.beginOfLine(complex, interactor) && this.endOfLine(complex, interactor)) {
-      return false;
-    } else {
-      return true;
+    let startIndex: number = null;
+    let endIndex: number = null;
+    // Find startIndex and endIndex
+    for (let i = 0; i < this._enrichedInteractors.length; i++) {
+      for (let j = 0; j < complex.components.length; j++) {
+        if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
+          if (startIndex === null) {
+            startIndex = i;
+          }
+          endIndex = i;
+        }
+      }
     }
+    // Check if interactor's index is between startIndex and endIndex
+    for (let j = startIndex; j <= endIndex; j++) {
+      if (interactor.identifier === this._enrichedInteractors[j].interactor.identifier) {
+        return true;
+      }
+    }
+    return false;
   }
+
+
 }

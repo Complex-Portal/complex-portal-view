@@ -12,8 +12,10 @@
           <a [routerLink]="['/complex', complex.complexAC]"
              title="{{complex.complexAC}}"
              target="_blank">
-            {{ complex.complexName }}
-            <i class="icon icon-generic small" data-icon="x"></i>
+            <div class="txt">
+              {{ complex.complexName }}
+              <i class="icon icon-generic small" data-icon="x"></i>
+            </div>
           </a>
         </div>
       </th>
