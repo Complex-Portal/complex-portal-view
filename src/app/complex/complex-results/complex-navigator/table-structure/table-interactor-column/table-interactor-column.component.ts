@@ -6,7 +6,7 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {map, min} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 class EnrichedInteractor {
   interactor: Interactor;
