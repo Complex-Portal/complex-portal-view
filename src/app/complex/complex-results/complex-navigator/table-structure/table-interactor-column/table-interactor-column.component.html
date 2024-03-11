@@ -56,7 +56,7 @@
         <ng-container *ngIf="interactor.expanded">
           <ng-container *ngIf="!!interactor.subComponents">
             <tr *ngFor="let el of interactor.subComponents; let j=index">
-              <td style="background: #7e9394">
+              <td style="background: #8b9394">
                 <div style="font-weight: bold">
                   <a [routerLink]="['/complex/search']"
                      [queryParams]="{query: el.identifier, page: 1}"
@@ -74,7 +74,7 @@
                 </div>
               </td>
               <ng-container *ngFor="let complex of complexSearch.elements">
-                <td style="background: #7e9394;">
+                <td style="background: #8b9394;">
                   <div [ngClass]="displayTopLineClassExpanded(complex, interactor, i, j)"></div>
                   <ng-container *ngIf="!!findInteractorInComplex(complex, el.identifier)">
                     <div class="stoichNum"
