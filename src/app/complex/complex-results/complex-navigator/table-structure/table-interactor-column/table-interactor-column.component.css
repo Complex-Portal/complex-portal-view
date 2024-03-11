@@ -9,17 +9,17 @@ td:first-child {
   max-height: 50px;
   min-height: 50px;
 
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 130px;
+  max-width: 130px;
+  padding-left: 5px;
 }
 
 /* cells */
 td {
-  padding-left: 5px;
   border: 1px solid #0a494c;
   height: 50px;
-  max-width: 70px;
-  min-width: 70px;
+  max-width: 140px;
+  min-width: 140px;
   font-size: small;
 }
 

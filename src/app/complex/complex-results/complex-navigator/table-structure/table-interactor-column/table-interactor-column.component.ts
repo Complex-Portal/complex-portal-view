@@ -185,18 +185,33 @@ export class TableInteractorColumnComponent implements OnInit {
     }
   }
 
+
   public interactorTypeIcon(interactor: Interactor): string {
-    if (interactor.interactorType === 'protein') {
-      return 'icon icon-conceptual icon-proteins';
-    } else if (interactor.interactorType === 'ribonucleic acid') {
-      return 'icon icon-conceptual icon-dna';
-    } else if (interactor.interactorType === 'small molecule') {
-      return 'icon icon-conceptual icon-chemical';
-    } else if (interactor.interactorType === 'stable complex') {
-      return 'icon icon-conceptual icon-systems';
+    switch (interactor.interactorType) {
+      case 'small molecule':
+        return 'icon icon-conceptual icon-chemical';
+      case 'protein':
+      case 'peptide':
+        return 'icon icon-conceptual icon-proteins';
+      case 'stable complex':
+        return 'icon icon-conceptual icon-systems';
+      case 'molecule set':
+        return 'icon icon-generic icon-math';
+      case 'single stranded deoxyribonucleic acid':
+      case 'double stranded deoxyribonucleic acid':
+      case 'small nuclear rna':
+      case 'small nucleolar rna':
+      case 'ribosomal rna':
+      case 'messenger rna':
+      case 'transfer rna':
+      case 'signal recognition particle rna':
+      case 'ribonucleic acid':
+      case 'nucleic acid':
+      case 'long non-coding ribonucleic acid':
+        return 'icon icon-conceptual icon-dna';
     }
-    return '';
   }
+
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
