@@ -21,6 +21,7 @@ export class ComplexSearchResult {
   get totalNumberOfResults(): number {
     return this._totalNumberOfResults;
   }
+
   get elements(): Element[] {
     return this._elements;
   }

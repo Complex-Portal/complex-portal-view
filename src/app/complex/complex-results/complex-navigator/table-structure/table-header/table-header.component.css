@@ -32,10 +32,11 @@ th {
   z-index: 3;
   text-align: center;
   top: 0;
+  padding-top: 40px;
   background-color: #389198;
   border: 1px solid #0a494c;
-  min-width: 60px;
-  max-width: 60px;
+  min-width: 70px;
+  max-width: 70px;
   height: 200px;
   font-size: small;
   overflow: scroll;
@@ -45,7 +46,8 @@ th .txt {
   transform: rotate(-90deg);
   text-align: center;
   width: 100%;
-  height: 100%;
+  height: 200%;
+  color: #e6e6e6;
 }
 
 #CN-table {
