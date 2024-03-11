@@ -6,7 +6,6 @@
   height: 40px;
   text-align: left;
   font-size: medium;
-  border: 1px solid #0a494c;
   padding-left: 10px;
 }
 
@@ -15,11 +14,9 @@
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 4;
+  z-index: 3;
 
   font-size: medium;
-  border: 1px solid #0a494c;
-
 
   min-width: 130px;
   max-width: 130px;
@@ -29,25 +26,35 @@
 /* "Complexes from results Headerr */
 th {
   position: sticky;
-  z-index: 2;
+  z-index: 3;
   text-align: center;
   top: 0;
-  background-color: #389198;
-  border: 1px solid #0a494c;
-  min-width: 140px;
-  max-width: 140px;
-  height: 200px;
+  min-width: 75px;
+  max-width: 75px;
+  height: 250px;
   font-size: small;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 th .txt {
+  padding-top: 15px;
+  padding-left: 25px;
   text-align: center;
   width: 100%;
   height: 200%;
   color: #e6e6e6;
+}
 
+.rotate {
+  transform:
+    translate(-5px, 55px)
+    rotate(-50deg);
+  /*z-index: 4;*/
+  height: 125px;
+  width: 275px;
+  background-color: #389198;
+  border: 1px solid #0a494c;
 }
 
 #CN-table {

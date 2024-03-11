@@ -2,13 +2,16 @@
   <table class="CN-table">
     <!-- Complexes' row (table's header) -->
     <tr>
-      <th class="intHeader" rowspan="2">Interactors</th>
-      <th class="compHeader" colspan="15">Complexes</th>
+      <th class="intHeader">
+        <div class="rotate">
+          <div class="txt">Interactors</div>
+        </div>
+      </th>
+<!--      <th class="compHeader" colspan="15">Complexes</th>-->
       <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts) -->
-    </tr>
-    <tr>
+
       <th *ngFor="let complex of complexSearch.elements">
-        <div class="complexInTable">
+        <div class="rotate">
           <a [routerLink]="['/complex', complex.complexAC]"
              title="{{complex.complexAC}}"
              target="_blank">
