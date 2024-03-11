@@ -6,7 +6,7 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {map} from 'rxjs/operators';
+import {map, min} from 'rxjs/operators';
 
 class EnrichedInteractor {
   interactor: Interactor;
@@ -293,13 +293,69 @@ export class TableInteractorColumnComponent implements OnInit {
     }
   }
 
+  private getMinValue(valueA: number, valueB: number) {
+    if (valueB === null) {
+      return valueA;
+    }
+    if (valueA === null) {
+      return valueB;
+    }
+    return Math.min(valueA, valueB);
+  }
+
+  public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
+    if (this.doesLineCrossInteractorCell(complex, interactorIndex) || this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
+      return 'verticalLine';
+    }
+    return 'transparentVerticalLine';
+  }
+
+  public displayBottomLineClass(complex: EnrichedComplex, interactorIndex: number): string {
+    if (this.doesLineCrossInteractorCell(complex, interactorIndex) || this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
+      return 'verticalLine';
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  public displayTopLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
+    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex) ||
+      this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+      return 'verticalLine';
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  public displayBottomLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
+    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex) ||
+      this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+      return 'verticalLine';
+    }
+
+    return 'transparentVerticalLine';
+  }
+
+  private getMaxValue(valueA: number, valueB: number) {
+    if (valueB === null) {
+      return valueA;
+    }
+    if (valueA === null) {
+      return valueB;
+    }
+    return Math.max(valueA, valueB);
+  }
+
   private calculateStartAndEndIndexes(complex: Element): EnrichedComplex {
     const subComponentsToCheck: string[] = [];
 
-    let startInteractorIndex: number = null;
-    let endInteractorIndex: number = null;
-    let startSubComponentIndex: number = null;
-    let endSubComponentIndex: number = null;
+    const enrichedComplex: EnrichedComplex = {
+      complex,
+      startInteractorIndex: null,
+      endInteractorIndex: null,
+      startSubComponentIndex: null,
+      endSubComponentIndex: null
+    };
 
     // We iterate through the interactors to find the first and last one part of the complex
     // We do this to be able to draw a line connecting all interactors in the complex
@@ -307,15 +363,10 @@ export class TableInteractorColumnComponent implements OnInit {
       if (!this._enrichedInteractors[i].hidden) {
         for (let j = 0; j < complex.components.length; j++) {
           if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
-            // The interactor is part of the complex
-            if (startInteractorIndex === null) {
-              // If startInteractorIndex is null, it means it's the first interactor part of the complex we have found,
-              // then it is where the line starts
-              startInteractorIndex = i;
-            }
-            // So far this interactor is the last one part of the complex have found,
-            // then it is so far where the line ends
-            endInteractorIndex = i;
+            // The interactor is part of the complex, we update the start and end indices for the interactors
+            // line as it may start in this interactor
+            enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+            enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
 
             // The interactor is a subcomplex
             if (this._enrichedInteractors[i].isSubComplex && !!this._enrichedInteractors[i].subComponents) {
@@ -326,10 +377,10 @@ export class TableInteractorColumnComponent implements OnInit {
               if (this._enrichedInteractors[i].expanded) {
                 // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
                 // of it. That means we need a line connecting all the subcomponents.
-                // That line must also connects to the subcomplex, so we start it at -1 to make sure it starts before
-                // the first subcomponent
-                startSubComponentIndex = -1;
-                endSubComponentIndex = this._enrichedInteractors[i].subComponents.length - 1;
+                // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
+                // and not at the first subcomponent
+                enrichedComplex.startSubComponentIndex = -1;
+                enrichedComplex.endSubComponentIndex = this._enrichedInteractors[i].subComponents.length - 1;
               }
             }
           } else if (this._enrichedInteractors[i].isSubComplex &&
@@ -340,22 +391,14 @@ export class TableInteractorColumnComponent implements OnInit {
             // In that case, the line could start or end on any of those subcomponents
             for (let k = 0; k < this._enrichedInteractors[i].subComponents.length; k++) {
               if (complex.components[j].identifier === this._enrichedInteractors[i].subComponents[k].identifier) {
-                // The subcomponent is part of the complex
-                // Or the whole subcomplex is part of the complex, meaning all subcomponents are part of it too
-                if (startInteractorIndex === null) {
-                  // If startInteractorIndex is null, it means it's the first interactor part of the complex we have found,
-                  // then it is where the line joining interactor starts
-                  startInteractorIndex = i;
-                }
-                // If startSubComponentIndex is null, it means it's the first subcomponent part of the complex we have found,
-                // then it is where the line joining subcomponents starts
-                if (startSubComponentIndex === null) {
-                  startSubComponentIndex = k;
-                }
-                // So far this is the last interactor and subcomponent part of the complex have found,
-                // then it is so far where the line ends
-                endInteractorIndex = i;
-                endSubComponentIndex = k;
+                // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
+                // line as it may start in this interactor
+                enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+                enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
+                // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
+                // line as it may start in this subcomponent
+                enrichedComplex.startSubComponentIndex = this.getMinValue(enrichedComplex.startSubComponentIndex, k);
+                enrichedComplex.endSubComponentIndex = this.getMaxValue(enrichedComplex.endSubComponentIndex, k);
               }
             }
           }
@@ -369,59 +412,18 @@ export class TableInteractorColumnComponent implements OnInit {
     for (let i = 0; i < this._enrichedInteractors.length; i++) {
       if (!this._enrichedInteractors[i].hidden) {
         if (subComponentsToCheck.includes(this._enrichedInteractors[i].interactor.identifier)) {
-          if (startInteractorIndex === null || i < startInteractorIndex) {
-            startInteractorIndex = i;
-          }
-          if (endInteractorIndex === null || i > endInteractorIndex) {
-            endInteractorIndex = i;
-          }
+          // The interactor is part of a subcomplex that is part of the complex, we update the start and end indices for the interactors
+          // line as it may start in this interactor
+          enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+          enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
         }
       }
     }
 
-    return {
-      complex,
-      startInteractorIndex,
-      endInteractorIndex,
-      startSubComponentIndex,
-      endSubComponentIndex
-    };
+    return enrichedComplex;
   }
 
-  public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractor(complex, interactorIndex) || this.doesLineEndOnInteractor(complex, interactorIndex)) {
-      return 'verticalLine';
-    }
-    return 'transparentVerticalLine';
-  }
-
-  public displayBottomLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractor(complex, interactorIndex) || this.doesLineStartOnInteractor(complex, interactorIndex)) {
-      return 'verticalLine';
-    }
-
-    return 'transparentVerticalLine';
-  }
-
-  public displayTopLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
-    if (this.doesLineCrossSubcomponent(complex, interactorIndex, subComponentIndex) ||
-      this.doesLineEndOnSubcomponent(complex, interactorIndex, subComponentIndex)) {
-        return 'verticalLine';
-    }
-
-    return 'transparentVerticalLine';
-  }
-
-  public displayBottomLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
-    if (this.doesLineCrossSubcomponent(complex, interactorIndex, subComponentIndex) ||
-      this.doesLineStartOnSubcomponent(complex, interactorIndex, subComponentIndex)) {
-      return 'verticalLine';
-    }
-
-    return 'transparentVerticalLine';
-  }
-
-  private doesLineCrossInteractor(complex: EnrichedComplex, interactorIndex: number): boolean {
+  private doesLineCrossInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
     if (complex.startInteractorIndex != null && complex.endInteractorIndex != null) {
 
       // The line starts before this interactor and ends after, so it crosses through the interactor
@@ -444,7 +446,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  private doesLineStartOnInteractor(complex: EnrichedComplex, interactorIndex: number): boolean {
+  private doesLineStartOnInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
     // The line starts at this interactor or on any of its subcomponents
     if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
 
@@ -465,7 +467,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  private doesLineEndOnInteractor(complex: EnrichedComplex, interactorIndex: number): boolean {
+  private doesLineEndOnInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
     // The line ends at this interactor or on any of its subcomponents
     if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
 
@@ -484,7 +486,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  private doesLineCrossSubcomponent(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
+  private doesLineCrossSubcomponentCell(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
     if (complex.startInteractorIndex != null && complex.endInteractorIndex != null) {
       // The line starts before this interactor and ends after, so it crosses through all the subcomponents of the interactor
       if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex > interactorIndex) {
@@ -512,7 +514,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  private doesLineStartOnSubcomponent(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
+  private doesLineStartOnSubcomponentCell(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
     // The line starts at this interactor or on any of its subcomponents
     if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
       if (complex.startSubComponentIndex != null && complex.startSubComponentIndex === subComponentIndex) {
@@ -530,7 +532,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  private doesLineEndOnSubcomponent(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
+  private doesLineEndOnSubcomponentCell(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
     if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
       // The line ends at this interactor and this subcomponent
       if (complex.endSubComponentIndex != null && complex.endSubComponentIndex === subComponentIndex) {
