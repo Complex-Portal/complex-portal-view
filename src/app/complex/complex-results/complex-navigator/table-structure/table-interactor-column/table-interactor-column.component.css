@@ -18,8 +18,8 @@ td:first-child {
 td {
   border: 1px solid #0a494c;
   height: 50px;
-  max-width: 140px;
-  min-width: 140px;
+  max-width: 100px;
+  min-width: 100px;
   font-size: small;
 }
 

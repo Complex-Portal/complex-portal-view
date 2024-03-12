@@ -1,25 +1,28 @@
 <div class="Complex-navigator">
-  <table class="CN-table">
+  <table class="table CN-table">
     <!-- Complexes' row (table's header) -->
+    <thead>
     <tr>
-      <th class="intHeader" rowspan="2">Interactors</th>
-      <th class="compHeader" colspan="15">Complexes</th>
-      <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts) -->
+      <th class="interactorsHeader" rowspan="2">Interactors</th>
+      <!-- <th class="compHeader" colspan="15">Complexes</th> -->
+      <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts)
     </tr>
     <tr>
-      <th *ngFor="let complex of complexSearch.elements">
-        <div class="complexInTable">
-          <a [routerLink]="['/complex', complex.complexAC]"
-             title="{{complex.complexAC}}"
-             target="_blank">
-            <div class="txt">
+    -->
+      <th class="rotate" *ngFor="let complex of complexSearch.elements">
+        <a [routerLink]="['/complex', complex.complexAC]"
+           title="{{complex.complexAC}}"
+           target="_blank">
+          <div>
+            <span>
               {{ complex.complexName }}
               <i class="icon icon-generic small" data-icon="x"></i>
-            </div>
-          </a>
-        </div>
+            </span>
+          </div>
+        </a>
       </th>
     </tr>
+    </thead>
   </table>
 </div>
 
