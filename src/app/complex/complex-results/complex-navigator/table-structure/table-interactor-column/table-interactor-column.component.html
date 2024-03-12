@@ -32,20 +32,20 @@
             </div>
           </td>
           <!-- Interactors' stoichiometry -->
-          <ng-container *ngFor="let complex of complexSearch.elements">
+          <ng-container *ngFor="let complex of enrichedComplexes">
             <td>
               <div [ngClass]="displayTopLineClass(complex, i)"></div>
-              <ng-container *ngIf="!!findInteractorInComplex(complex, interactor.interactor.identifier)">
-                <div class="stoichNum" title="{{ getStochiometry(complex, interactor.interactor.identifier) }}">
-                  {{ stochiometryOfInteractors(complex, interactor.interactor.identifier) }}
+              <ng-container *ngIf="!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)">
+                <div class="stoichNum" title="{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}">
+                  {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}
                 </div>
               </ng-container>
               <ng-container class="stoichComponent"
-                            *ngIf="findInteractorsInSubComplex(complex, interactor.interactor.identifier).length > 0">
+                            *ngIf="findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0">
                 <!-- subcomplexes' interactors' stoichiometry -->
                 <div class="stoichNum"
-                     title="{{ getStoichiometrySubComplex(complex, interactor.interactor.identifier) }}">
-                  {{ stoichiometryOfInteractorsMainTable(complex, interactor.interactor.identifier) }}
+                     title="{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}">
+                  {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}
                 </div>
               </ng-container>
               <div [ngClass]="displayBottomLineClass(complex, i)"></div>
@@ -73,24 +73,24 @@
                   </a>
                 </div>
               </td>
-              <ng-container *ngFor="let complex of complexSearch.elements">
+              <ng-container *ngFor="let complex of enrichedComplexes">
                 <td style="background: #8b9394;">
-                  <div [ngClass]="displayTopLineClassExpanded(complex, interactor, i, j)"></div>
-                  <ng-container *ngIf="!!findInteractorInComplex(complex, el.identifier)">
+                  <div [ngClass]="displayTopLineClassExpanded(complex, i, j)"></div>
+                  <ng-container *ngIf="!!findInteractorInComplex(complex.complex, el.identifier)">
                     <div class="stoichNum"
-                         title="{{ getStochiometry(complex, el.identifier) }}">
-                      {{ stochiometryOfInteractors(complex, el.identifier) }}
+                         title="{{ getStochiometry(complex.complex, el.identifier) }}">
+                      {{ stochiometryOfInteractors(complex.complex, el.identifier) }}
                     </div>
                   </ng-container>
                   <ng-container
-                    *ngIf="!!findInteractorInExpandedSubComplex(interactor, complex, el.identifier)">
+                    *ngIf="!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)">
                     <!-- subcomplexes' interactors' stoichiometry -->
                     <div class="stoichNum"
                          title="{{ getStochiometryInExpandedSubComplex(interactor, el.identifier) }}">
                       {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}
                     </div>
                   </ng-container>
-                  <div [ngClass]="displayBottomLineClassExpanded(complex, interactor, i, j)"></div>
+                  <div [ngClass]="displayBottomLineClassExpanded(complex, i, j)"></div>
                 </td>
               </ng-container>
             </tr>
