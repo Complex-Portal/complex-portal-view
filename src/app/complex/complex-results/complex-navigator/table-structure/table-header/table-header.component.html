@@ -14,9 +14,13 @@
            title="{{complex.complexAC}}"
            target="_blank">
           <div>
-            <span>
-              {{ complex.complexName }}
+            <span *ngIf="complex.complexName.length<=22" title="{{ complex.complexName }}">
               <i class="icon icon-generic small" data-icon="x"></i>
+              {{ complex.complexName }}
+            </span>
+            <span *ngIf="complex.complexName.length>22" title="{{ complex.complexName }}">
+              <i class="icon icon-generic small" data-icon="x"></i>
+              {{ complex.complexName.substring(0, 19) }}...
             </span>
           </div>
         </a>

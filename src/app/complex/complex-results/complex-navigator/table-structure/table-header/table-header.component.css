@@ -1,8 +1,8 @@
 /* STYLESHEET FOR WHEN THE NUMBERS OF COMPLEXES IN A SEARCH IS STRICTLY OVER 6*/
 
 thead {
-  background-color: white;
   border: 1px solid white;
+  background-color: white;
 }
 
 .interactorsHeader {
@@ -14,9 +14,9 @@ thead {
   position: sticky;
   left: 0;
   z-index: 4;
-  background-color: white;
   color: #0a494c;
   padding-top: 150px;
+  background-color: white;
 }
 
 .CN-table th.rotate {
@@ -45,6 +45,6 @@ thead {
   left: 43px; /* horizontal alignement of the line */
   bottom: 58px; /* vertical alignement of the line */
 
-  /*background-color: #389198; */
+  /*background-color: #389198;*/
 }
 
