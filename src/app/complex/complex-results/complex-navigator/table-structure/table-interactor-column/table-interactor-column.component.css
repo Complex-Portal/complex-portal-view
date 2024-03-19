@@ -1,3 +1,5 @@
+/* STYLESHEET FOR WHEN THE NUMBERS OF COMPLEXES IN A SEARCH IS OVER 6 -> When the matrix becomes scrollable*/
+
 /* interactors column*/
 td:first-child {
   position: sticky;
@@ -62,3 +64,20 @@ td {
   /*border-right: 5px solid #983843;*/
   z-index: 0;
 }
+
+i:not(.small) {
+  font-size: large;
+}
+
+
+/*
+For the borders that are disapearing
+
+border-collapse: separate;
+border-spacing: 0px;
+
+td, th {
+  border-right: 1px solid #0a494c;
+  border-bottom: 1px solid #0a494c;
+}
+*/

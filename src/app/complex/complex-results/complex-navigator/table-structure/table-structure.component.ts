@@ -12,6 +12,8 @@ export class TableStructureComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _interactors: Set<Interactor>;
 
+  //_overFlowing: boolean;
+
   constructor(private router: Router) {
   }
 
@@ -27,4 +29,21 @@ export class TableStructureComponent implements OnInit {
     this._interactors = value;
   }
 
+  /*
+get overFlowing(): boolean {
+  return this._overFlowing;
+}
+
+set overFlowing(value: boolean) {
+  this._overFlowing = this.isOverFlowing();
+}
+
+
+isOverFlowing(): boolean {
+  const tablePart = document.querySelector<HTMLElement>('.header');
+  console.log(tablePart.scrollWidth > tablePart.offsetWidth);
+  this._overFlowing = tablePart.scrollWidth > tablePart.offsetWidth;
+  return tablePart.scrollWidth > tablePart.offsetWidth;
+}
+*/
 }

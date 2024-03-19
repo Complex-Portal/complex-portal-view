@@ -319,14 +319,21 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractorCell(complex, interactorIndex) || this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
+    if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
       return 'verticalLine';
     }
+    if (this.doesLineEndOnInteractorCell(complex, interactorIndex) && !this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
+      return 'verticalLine';
+    }
+
     return 'transparentVerticalLine';
   }
 
   public displayBottomLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractorCell(complex, interactorIndex) || this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
+    if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
+      return 'verticalLine';
+    }
+    if (this.doesLineStartOnInteractorCell(complex, interactorIndex) && !this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
       return 'verticalLine';
     }
 
@@ -334,8 +341,11 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public displayTopLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
-    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex) ||
-      this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+      return 'verticalLine';
+    }
+    if (this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex) &&
+      !this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
       return 'verticalLine';
     }
 
@@ -343,8 +353,11 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public displayBottomLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
-    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex) ||
-      this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+    if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+      return 'verticalLine';
+    }
+    if (this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex) &&
+      !this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
       return 'verticalLine';
     }
 
@@ -486,17 +499,14 @@ export class TableInteractorColumnComponent implements OnInit {
     // The line ends at this interactor or on any of its subcomponents
     if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
 
-      // The line starts before this interactor and ends at this interactor or on any of its subcomponents
-      if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
-        // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-        // the line does not end in this interactor and it must cross through to the subcomponents
-        if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
-          if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
-            return false;
-          }
+      // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
+      // the line does not end in this interactor and it must cross through to the subcomponents
+      if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
+        if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
+          return false;
         }
-        return true;
       }
+      return true;
     }
     return false;
   }

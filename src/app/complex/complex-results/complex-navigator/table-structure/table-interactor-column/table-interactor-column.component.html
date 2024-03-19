@@ -62,14 +62,16 @@
                      [queryParams]="{query: el.identifier, page: 1}"
                      target="_blank">
                     {{ el.name }}
-                    <i class="{{interactorTypeIcon(el)}}" title="{{interactor.interactor.interactorType}}"></i>
+                    <i class="{{interactorTypeIcon(el)}}" title="{{interactor.interactor.interactorType}}"
+                       style="font-size: 50px;"></i>
                     <i class="icon icon-functional small" data-icon="1"
                        title="More complexes containing this interactor"></i>
                   </a>
                 </div>
                 <div *ngIf="showExternalLink(el)" class="interactorType">
                   <a href="{{el.identifierLink}}" target="_blank">{{ el.identifier }}
-                    <i class="icon icon-generic small" data-icon="x" title="More information"></i>
+                    <i class="icon icon-generic small" data-icon="x" title="More information"
+                    ></i>
                   </a>
                 </div>
               </td>

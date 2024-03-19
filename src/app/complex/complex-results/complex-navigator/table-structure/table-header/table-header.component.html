@@ -1,24 +1,42 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- Complexes' row (table's header) -->
-    <thead>
+    <!-- When table is not overflowing -->
+    <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
     <tr>
       <th class="interactorsHeader" rowspan="2">Interactors</th>
-      <!-- <th class="compHeader" colspan="15">Complexes</th> -->
-      <!-- 15 being the maximum complexes per page (also set in complex-results.component.ts)
+      <th class="horizontal" *ngFor="let complex of complexSearch.elements">
+        <a [routerLink]="['/complex', complex.complexAC]"
+           title="{{complex.complexAC}}"
+           target="_blank">
+          <div>
+            <span *ngIf="complex.complexName.length<=16" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+              <i class="icon icon-generic small" data-icon="x"></i>
+              {{ complex.complexName }}
+            </span>
+            <span *ngIf="complex.complexName.length>16" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+              <i class="icon icon-generic small" data-icon="x"></i>
+              {{ complex.complexName.substring(0, 19) }}...
+            </span>
+          </div>
+        </a>
+      </th>
     </tr>
+    </thead>
+    <!-- When table is overflowing -->
+    <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
     <tr>
-    -->
+      <th class="interactorsHeader" rowspan="2">Interactors</th>
       <th class="rotate" *ngFor="let complex of complexSearch.elements">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
           <div>
-            <span *ngIf="complex.complexName.length<=22" title="{{ complex.complexName }}">
+            <span *ngIf="complex.complexName.length<=22" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
               {{ complex.complexName }}
             </span>
-            <span *ngIf="complex.complexName.length>22" title="{{ complex.complexName }}">
+            <span *ngIf="complex.complexName.length>22" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
               {{ complex.complexName.substring(0, 19) }}...
             </span>
