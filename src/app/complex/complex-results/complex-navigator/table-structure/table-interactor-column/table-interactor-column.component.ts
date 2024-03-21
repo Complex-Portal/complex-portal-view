@@ -15,6 +15,7 @@ class EnrichedInteractor {
   expanded: boolean;
   subComponents: ComplexComponent[];
   partOfComplex: number[];
+  timesAppearing: number;
 }
 
 class EnrichedComplex {
@@ -60,7 +61,8 @@ export class TableInteractorColumnComponent implements OnInit {
         isSubComplex,
         expanded: false,
         subComponents: null,
-        partOfComplex: []
+        partOfComplex: [],
+        timesAppearing: 1,
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -546,11 +548,9 @@ export class TableInteractorColumnComponent implements OnInit {
         // If the subcomplex is a component of the complex, the line starts in the cell of the interactor, meaning it cannot
         // start on any subcomponent.
         // Otherwise, it starts on the subcomponent with the index subComponentIndex
-        if (complex.complex.components.some(component =>
-          this._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier)) {
-          return false;
-        }
-        return true;
+        return !complex.complex.components.some(component =>
+          this._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier);
+
       }
     }
 
@@ -565,5 +565,28 @@ export class TableInteractorColumnComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  classifyIntercators(): Map<EnrichedInteractor, number> {
+    const interactorClassified = new Map<EnrichedInteractor, number>();
+    for (let oneInteractor of this._enrichedInteractors) {
+      let inNComplexes: number = 0;
+      for (let complex of this._enrichedComplexes) {
+        for (let complexesInteractors of complex.complex.components) {
+          if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
+            inNComplexes++;
+          }
+        }
+      }
+      for (let interactorTested of this._enrichedInteractors) {
+        if (interactorTested.interactor === oneInteractor.interactor) {
+          interactorTested.timesAppearing = inNComplexes;
+          interactorClassified.set(interactorTested, interactorTested.timesAppearing);
+        }
+      }
+    }
+    let interactorsClassified = new Map([...interactorClassified.entries()].sort((a, b) => b[1] - a[1]));
+    console.log(interactorsClassified);
+    return interactorsClassified;
   }
 }

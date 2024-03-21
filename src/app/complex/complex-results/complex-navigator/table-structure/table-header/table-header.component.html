@@ -1,11 +1,13 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
+
+    <ng-container *ngIf="classifyComplexes(complexSearch)"></ng-container>
     <!-- Complexes' row (table's header) -->
     <!-- When table is not overflowing -->
     <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
     <tr>
       <th class="interactorsHeader" rowspan="2">Interactors</th>
-      <th class="horizontal" *ngFor="let complex of complexSearch.elements">
+      <th class="horizontal" *ngFor="let complex of classifyComplexes(complexSearch).elements">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
@@ -27,7 +29,7 @@
     <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
     <tr>
       <th class="interactorsHeader" rowspan="2">Interactors</th>
-      <th class="rotate" *ngFor="let complex of complexSearch.elements">
+      <th class="rotate" *ngFor="let complex of classifyComplexes(complexSearch).elements">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">

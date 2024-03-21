@@ -1,12 +1,14 @@
 <div class="Complex-navigator">
   <table class="interactors-table">
     <!-- Interactors' column -->
+    <ng-container *ngIf="classifyIntercators()"></ng-container>
     <ng-container *ngFor="let interactor of enrichedInteractors; let i=index">
       <ng-container>
         <tr *ngIf="!interactor.hidden">
           <td>
             <div style="font-weight: bold">
               {{ interactor.interactor.name }}
+              {{ interactor.timesAppearing }}
               <i class="{{interactorTypeIcon(interactor.interactor)}}"
                  title="{{interactor.interactor.interactorType}}"></i>
               <!-- Adding of the icons to access details of the interactor -->

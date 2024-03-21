@@ -12,7 +12,7 @@ export class TableStructureComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _interactors: Set<Interactor>;
 
-  //_overFlowing: boolean;
+  // _overFlowing: boolean;
 
   constructor(private router: Router) {
   }
