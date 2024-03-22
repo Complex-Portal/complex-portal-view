@@ -1,24 +1,21 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
-
-    <ng-container *ngIf="classifyComplexes(complexSearch)"></ng-container>
-    <!-- Complexes' row (table's header) -->
     <!-- When table is not overflowing -->
     <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
     <tr>
       <th class="interactorsHeader" rowspan="2">Interactors</th>
-      <th class="horizontal" *ngFor="let complex of classifyComplexes(complexSearch).elements">
+      <th class="horizontal" *ngFor="let complex of complexSearch.elements">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
           <div>
-            <span *ngIf="complex.complexName.length<=16" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+            <span *ngIf="complex.complexName.length<=17" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
               {{ complex.complexName }}
             </span>
-            <span *ngIf="complex.complexName.length>16" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+            <span *ngIf="complex.complexName.length>17" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
-              {{ complex.complexName.substring(0, 19) }}...
+              {{ complex.complexName.substring(0, 25) }}...
             </span>
           </div>
         </a>
@@ -29,18 +26,18 @@
     <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
     <tr>
       <th class="interactorsHeader" rowspan="2">Interactors</th>
-      <th class="rotate" *ngFor="let complex of classifyComplexes(complexSearch).elements">
+      <th class="rotate" *ngFor="let complex of complexSearch.elements">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
           <div>
-            <span *ngIf="complex.complexName.length<=22" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+            <span *ngIf="complex.complexName.length<=20" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
               {{ complex.complexName }}
             </span>
-            <span *ngIf="complex.complexName.length>22" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+            <span *ngIf="complex.complexName.length>20" title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <i class="icon icon-generic small" data-icon="x"></i>
-              {{ complex.complexName.substring(0, 19) }}...
+              {{ complex.complexName.substring(0, 21) }}...
             </span>
           </div>
         </a>

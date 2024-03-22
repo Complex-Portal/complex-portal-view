@@ -17,15 +17,19 @@
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)"></cp-complex-paginator>
-        <div class="displayButton" style="text-align: center">
-          <input type="submit" name="submit" value="View list" class="button"
-                 (click)="toggleDisplayType()">
-        </div>
         <div class="listOfResults" *ngIf="DisplayType==false">
+          <div class="displayButton" style="text-align: center">
+            <input type="submit" name="submit" value="Complex navigator" class="button"
+                   (click)="toggleDisplayType()">
+          </div>
           <cp-complex-list [complexSearch]="complexSearch">
           </cp-complex-list>
         </div>
         <div class="Complex-navigator" *ngIf="DisplayType">
+          <div class="displayButton" style="text-align: center">
+            <input type="submit" name="submit" value="View list" class="button"
+                   (click)="toggleDisplayType()">
+          </div>
           <cp-complex-navigator [complexSearch]="complexSearch"
                                 [interactors]="allInteractorsInComplexSearch">
           </cp-complex-navigator>

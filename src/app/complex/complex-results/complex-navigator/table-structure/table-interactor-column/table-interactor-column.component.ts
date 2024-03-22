@@ -378,6 +378,8 @@ export class TableInteractorColumnComponent implements OnInit {
 
   private calculateStartAndEndIndexes(complex: Element): EnrichedComplex {
     const subComponentsToCheck: string[] = [];
+    //////////// CLASSIFICATION BEFORE CALCULATIONS
+    this.classifyIntercators();
 
     const enrichedComplex: EnrichedComplex = {
       complex,
@@ -567,26 +569,22 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  classifyIntercators(): Map<EnrichedInteractor, number> {
-    const interactorClassified = new Map<EnrichedInteractor, number>();
-    for (let oneInteractor of this._enrichedInteractors) {
-      let inNComplexes: number = 0;
-      for (let complex of this._enrichedComplexes) {
-        for (let complexesInteractors of complex.complex.components) {
+  classifyIntercators() {
+    for (const oneInteractor of this._enrichedInteractors) {
+      let inNComplexes = 0;
+      for (const complex of this._enrichedComplexes) {
+        for (const complexesInteractors of complex.complex.components) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             inNComplexes++;
           }
         }
       }
-      for (let interactorTested of this._enrichedInteractors) {
+      for (const interactorTested of this._enrichedInteractors) {
         if (interactorTested.interactor === oneInteractor.interactor) {
           interactorTested.timesAppearing = inNComplexes;
-          interactorClassified.set(interactorTested, interactorTested.timesAppearing);
         }
       }
     }
-    let interactorsClassified = new Map([...interactorClassified.entries()].sort((a, b) => b[1] - a[1]));
-    console.log(interactorsClassified);
-    return interactorsClassified;
+    return this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing);
   }
 }

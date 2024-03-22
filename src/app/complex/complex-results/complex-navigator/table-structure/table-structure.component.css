@@ -1,15 +1,14 @@
 .complexNavigatorTable {
-  max-height: 750px;
   border-collapse: separate;
   overflow: scroll;
-  width: 100%;
+  width: 130%;
 }
 
 .header {
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 4;
+  z-index: 20;
   color: #e6e6e6;
 }
 

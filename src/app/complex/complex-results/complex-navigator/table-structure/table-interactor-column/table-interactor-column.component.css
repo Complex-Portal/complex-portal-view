@@ -5,25 +5,31 @@ td:first-child {
   position: sticky;
   left: 0;
   z-index: 3;
-  border: 1px solid #0a494c;
-  background-color: #e6e6e6;
+
+  background-color: white;
+  border-top: 1px solid #0a494c;
+  border-bottom: 1px solid #0a494c;
+  border-right: 1px solid #0a494c;
 
   max-height: 50px;
   min-height: 50px;
 
   min-width: 130px;
   max-width: 130px;
-  padding-right: 5px;
+
+  padding: 5px;
   text-align: end;
+  color: #0a494c;
 }
 
 /* cells */
-td {
+.intStoich {
   border: 1px solid #0a494c;
   height: 50px;
   max-width: 100px;
   min-width: 100px;
   font-size: small;
+  background-color: white;
 }
 
 #interactors-table {
