@@ -7,8 +7,9 @@
 
 .header {
   position: sticky;
-  top: 38px;
-  z-index: 20;
+  top: 28px;
+  z-index: 2;
+
 }
 
 .interactors {

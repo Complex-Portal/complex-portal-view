@@ -1,8 +1,9 @@
 /* Header */
 
 thead {
-  border: 0px;
+  border: 0;
   background-color: white;
+  border-right: 0 solid white;
 }
 
 .CN-table {
@@ -17,10 +18,11 @@ thead {
   position: sticky;
   left: 0;
   z-index: 4;
-  color: #0a494c;
-  padding-top: 150px;
+  color: #0e6f76;
   background-color: white;
+  padding-top: 150px;
   text-align: right;
+  border-bottom: 3px solid #0d6c72;
 }
 
 .tilted-label {
@@ -45,7 +47,8 @@ thead {
   position: absolute;
   width: 340px;
 
-  color: #0a494c;
+  color: white;
+  background-color: #0e6f76;
   font-size: small;
 
   /* vertical alignement of the text */
@@ -54,7 +57,7 @@ thead {
   padding-left: 70px;
 
   /* line */
-  border-top: 1px solid black;
+  border-top: 1px solid white;
   top: 55px; /* vertical alignement of the line */
   bottom: 58px; /* vertical alignement of the line */
   left: -27px; /* horizontal alignement of the line */
@@ -64,16 +67,18 @@ thead {
   position: absolute;
   top: auto;
   bottom: auto;
-  background: #389198;
+  background: #0e6f76;
   margin-top: 7px;
-  left: 0px;
+  left: 0;
   width: 66px;
   height: 5px;
   border-radius: 4px;
 }
 
 .placeholder {
-  min-width: 120px;
+  min-width: 190px;
+  background-color: white;
+  border-right: 0 solid white;
 }
 
 /* Horizontal complexes name */
@@ -83,26 +88,36 @@ thead {
   min-width: 130px;
   max-width: 130px;
   font-size: medium;
-  border: 1px solid black;
+  border-bottom: 3px solid #0d6c72;
   border-left: none;
   text-align: right;
-  color: #0a494c;
+  color: #0e6f76;
+  background-color: white;
 }
 
 .horizontal-label {
   text-align: center;
   text-overflow: ellipsis;
-  width: 28ch;
+  width: 90%;
   white-space: nowrap;
   overflow: hidden;
   margin: auto;
 }
 
 .CN-table th.horizontal {
-  background-color: white;
-  border: 1px solid black;
+  color: white;
+  background-color: #0e6f76;
+  border: 1px solid white;
   min-width: 100px;
   max-width: 100px;
   height: 50px;
-  font-size: medium;
+  font-size: 15px;
+}
+
+a:visited {
+  color: white;
+}
+
+a {
+  color: white;
 }

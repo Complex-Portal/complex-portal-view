@@ -582,6 +582,7 @@ export class TableInteractorColumnComponent implements OnInit {
         }
         if (oneInteractor.isSubComplex) {
           for (const subComponent of oneInteractor.subComponents) {
+            // tslint:disable-next-line:no-shadowed-variable
             for (const complex of this.complexSearch.elements) {
               for (const complexesInteractors of complex.components) {
                 if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
@@ -594,7 +595,9 @@ export class TableInteractorColumnComponent implements OnInit {
         oneInteractor.timesAppearing = inNComplexes;
       }
     }
-    this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
+    // tslint:disable-next-line:max-line-length
+    // this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
+    this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
   }
 
   public displayLineInteractorType(interactor): string {
@@ -611,7 +614,7 @@ export class TableInteractorColumnComponent implements OnInit {
   public rangeOfInteractorType(interactor: Interactor): number[] {
     let startIndex = 0;
     let endIndex = 0;
-    let range = [0, 0];
+    const range = [0, 0];
     for (let i; i < this._enrichedInteractors.length; i++) {
       if (this.enrichedInteractors[i].interactor.interactorType === interactor.interactorType) {
         startIndex = i;

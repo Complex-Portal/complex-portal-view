@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
+import {TableInteractorColumnComponent} from '../table-interactor-column/table-interactor-column.component';
+import {Element} from '../../../../shared/model/complex-results/element.model';
 
 @Component({
   selector: 'cp-table-header',
@@ -9,67 +11,66 @@ import {ComplexSearchResult} from '../../../../shared/model/complex-results/comp
 
 export class TableHeaderComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  // overFlowing: TableStructureComponent['overFlowing'];
-  // displayTilted: boolean;
+  @Input() interactorsTable: TableInteractorColumnComponent;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.classifyComplexes();
   }
 
-  function;
+  classifyComplexes(): void {
+    const searchResult = this.complexSearch.elements;
+    const complexesWithSimilarities = new Map<ComplexSearchResult['elements'][0], number>();
+    const biggestComplex = [searchResult[0], 0];
 
-  classifyComplexes(searchResult: ComplexSearchResult): ComplexSearchResult {
-    const complexAndSimilarComponents = new Map<ComplexSearchResult['elements'][0], number>();
+    // check which complex is the biggest
+    for (const complex of searchResult) {
+      let totalLength = complex.components.length;
+      for (const complexInteractorChecked of complex.components) {
+        if (complexInteractorChecked.interactorType === 'stable complex') {
+          // tslint:disable-next-line:no-shadowed-variable
+          const subComplex: Element = searchResult.find(complex => complex.complexAC === complexInteractorChecked.identifier);
+          totalLength += subComplex.components.length;
+        }
+      }
+      if (totalLength > biggestComplex[1]) {
+        biggestComplex[0] = complex;
+        biggestComplex[1] = totalLength;
+      }
+    }
 
-    // check how many similar components a complex have with the others
-    for (const complex of searchResult.elements) {
-      let similarParticipantsCount = 0;
-      for (const otherCpx of searchResult.elements) {
-        if (complex !== otherCpx) {
-          for (const participant of complex.components) {
-            for (const otherCpxParticipant of otherCpx.components) {
-              if (otherCpxParticipant.identifier === participant.identifier) {
-                similarParticipantsCount++;
+    const bigComplex: any = biggestComplex[0]; // access to the complex
+
+    // compare the other complexes with the biggest
+    for (const comparedComplex of searchResult) {
+      let similarities = 0;
+      for (const biggestComplexInteractor of bigComplex.components) {
+        for (const complexInteractor of comparedComplex.components) {
+          if (biggestComplexInteractor.identifier === complexInteractor.identifier) {
+            similarities++;
+          }
+        }
+        if (biggestComplexInteractor.interactorType === 'stable complex') {
+          // tslint:disable-next-line:max-line-length
+          const subComplex: Element = searchResult.find(complex => complex.complexAC === biggestComplexInteractor.identifier);
+          if (comparedComplex.complexAC === bigComplex.complexAC) {
+            similarities += subComplex.components.length;
+          }
+          for (const subComponent of subComplex.components) {
+            for (const complexInteractor of comparedComplex.components) {
+              if (subComponent.identifier === complexInteractor.identifier) {
+                similarities++;
               }
             }
           }
         }
       }
-      complexAndSimilarComponents.set(complex, similarParticipantsCount);
-      // console.log(complexAndSimilarComponents);
+      complexesWithSimilarities.set(comparedComplex, similarities);
     }
-
-    // sort complexes depending on their similarity counts
-    searchResult.elements.sort((a, b) => complexAndSimilarComponents.get(b)! - complexAndSimilarComponents.get(a)!);
-
-    // creation of a new result list
-    const ComplexSearchResultSorted = new ComplexSearchResult(
-      searchResult.size,
-      searchResult.size,
-      searchResult.elements,
-      []
-    );
-    // console.log(ComplexSearchResultSorted);
-
-    return ComplexSearchResultSorted;
+    // sort complexes depending on their similarities with the biggest
+    this.complexSearch.elements.sort((a, b) => complexesWithSimilarities.get(b)! - complexesWithSimilarities.get(a)!);
   }
-
-
-  /*
-   set displayTilted(value: boolean) {
-    this.displayTilted = this.overFlowing;
-   }
-
-  isOverFlowing(): boolean {
-    const tablePart = document.querySelector<HTMLElement>('.Complex-navigator');
-    console.log(tablePart.scrollWidth > tablePart.offsetWidth);
-    this.displayTilted = tablePart.scrollWidth > tablePart.offsetWidth;
-    return tablePart.scrollWidth > tablePart.offsetWidth;.
-  }
-
- */
-
 }
 
