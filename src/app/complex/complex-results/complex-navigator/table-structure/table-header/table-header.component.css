@@ -1,15 +1,19 @@
-/* STYLESHEET FOR WHEN THE NUMBERS OF COMPLEXES IN A SEARCH IS STRICTLY OVER 6*/
+/* Header */
 
 thead {
-  border: 1px solid white;
+  border: 0px;
   background-color: white;
-  border-bottom: 2.5px solid #389198;
 }
+
+.CN-table {
+  clip-path: fill-box;
+}
+
+/* Rotated complexes names */
 
 .interactorsHeader {
   min-width: 130px;
   max-width: 130px;
-  border-right: none;
   position: sticky;
   left: 0;
   z-index: 4;
@@ -19,14 +23,22 @@ thead {
   text-align: right;
 }
 
+.tilted-label {
+  padding-left: 5px;
+  text-overflow: ellipsis;
+  width: 28ch;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .CN-table th.rotate {
   min-width: 100px;
   max-width: 100px;
   position: relative;
-  border-bottom: 1px solid #0a494c;
-  white-space: nowrap; /* all text in one lineee */
+  border-bottom: 3px solid white;
+  white-space: nowrap; /* all text in one line */
+  border-bottom: 1px solid black;
 }
-
 
 .CN-table th.rotate span {
   transform: rotate(-45deg);
@@ -37,48 +49,60 @@ thead {
   font-size: small;
 
   /* vertical alignement of the text */
-  padding-bottom: 30px;
-  padding-top: 30px;
+  align-content: center;
   text-align: left;
   padding-left: 70px;
 
-
   /* line */
-  left: -27px; /* horizontal alignement of the line */
+  border-top: 1px solid black;
+  top: 55px; /* vertical alignement of the line */
   bottom: 58px; /* vertical alignement of the line */
-
-  border-top: 1px solid #0a494c;
-  border-top-length: 200px;
-  top: 55px;
-
-  /*background-color: #389198;*/
+  left: -27px; /* horizontal alignement of the line */
 }
 
-.CN-table th.rotate:last-child span {
-  border-bottom: 1px solid #0a494c;
+.line {
+  position: absolute;
+  top: auto;
+  bottom: auto;
+  background: #389198;
+  margin-top: 7px;
+  left: 0px;
+  width: 66px;
+  height: 5px;
+  border-radius: 4px;
 }
 
-/* "Complexes from results Header */
-.CN-table th.horizontal {
-  position: sticky;
-  z-index: 2;
+.placeholder {
+  min-width: 120px;
+}
+
+/* Horizontal complexes name */
+
+.CN-table th.horizontal.interactorsHeader {
+  padding: 5px;
+  min-width: 130px;
+  max-width: 130px;
+  font-size: medium;
+  border: 1px solid black;
+  border-left: none;
+  text-align: right;
+  color: #0a494c;
+}
+
+.horizontal-label {
   text-align: center;
-  top: 0;
+  text-overflow: ellipsis;
+  width: 28ch;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: auto;
+}
+
+.CN-table th.horizontal {
   background-color: white;
-  border: 1px solid #0a494c;
+  border: 1px solid black;
   min-width: 100px;
   max-width: 100px;
-  height: 200px;
-  font-size: small;
-  padding-left: 5px;
-  padding-right: 5px;
-
+  height: 50px;
+  font-size: medium;
 }
-
-.CN-table th.horizontal .txt {
-  text-align: center;
-  width: 100%;
-  height: 200%;
-  color: #e6e6e6;
-}
-

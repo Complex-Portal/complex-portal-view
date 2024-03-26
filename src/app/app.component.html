@@ -16,17 +16,20 @@
       </div>
 
       <!-- local-nav -->
-      <nav>
+      <nav style="position: sticky; top: 0">
         <ul id="local-nav" class="dropdown menu float-left" data-dropdown-menu="true" data-description="navigational">
           <li routerLinkActive="active"><a routerLink="/home" routerLinkActive="active">Home</a></li>
           <li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active">About</a></li>
           <li routerLinkActive="active"><a routerLink="/documentation" routerLinkActive="active">Documentation</a></li>
-          <li routerLinkActive="active"><a routerLink="/basket" routerLinkActive="active" [ngClass]="{'animated flash': onChangeInBasket}" >Basket
+          <li routerLinkActive="active"><a routerLink="/basket" routerLinkActive="active"
+                                           [ngClass]="{'animated flash': onChangeInBasket}">Basket
             <div routerLink="/basket" routerLinkActive="active" class="basket">
-              &nbsp;<strong>{{basketCount}}</strong>&nbsp;
-            </div></a>
+              &nbsp;<strong>{{ basketCount }}</strong>&nbsp;
+            </div>
+          </a>
           </li>
-          <li routerLinkActive="active"><a href="{{complexPortalSupportUrl}}">Support <i class="icon icon-generic" data-icon="x"></i></a></li>
+          <li routerLinkActive="active"><a href="{{complexPortalSupportUrl}}">Support <i class="icon icon-generic"
+                                                                                         data-icon="x"></i></a></li>
         </ul>
       </nav>
       <!-- /local-nav -->
@@ -34,7 +37,7 @@
   </header>
   <!-- END COMPLEX PORTAL HEADER SECTION -->
 
-<!--  <cp-progress-bar></cp-progress-bar>-->
+  <!--  <cp-progress-bar></cp-progress-bar>-->
 </div>
 
 <!---->

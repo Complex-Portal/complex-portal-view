@@ -38,24 +38,24 @@ export class TableHeaderComponent implements OnInit {
         }
       }
       complexAndSimilarComponents.set(complex, similarParticipantsCount);
-      //console.log(complexAndSimilarComponents);
+      // console.log(complexAndSimilarComponents);
     }
 
-    //sort complexes depending on their similarity counts
+    // sort complexes depending on their similarity counts
     searchResult.elements.sort((a, b) => complexAndSimilarComponents.get(b)! - complexAndSimilarComponents.get(a)!);
 
-    //creation of a new result list
+    // creation of a new result list
     const ComplexSearchResultSorted = new ComplexSearchResult(
       searchResult.size,
       searchResult.size,
       searchResult.elements,
       []
     );
-    //console.log(ComplexSearchResultSorted);
+    // console.log(ComplexSearchResultSorted);
 
     return ComplexSearchResultSorted;
   }
-  
+
 
   /*
    set displayTilted(value: boolean) {

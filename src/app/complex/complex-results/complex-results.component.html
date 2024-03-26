@@ -30,9 +30,11 @@
             <input type="submit" name="submit" value="View list" class="button"
                    (click)="toggleDisplayType()">
           </div>
-          <cp-complex-navigator [complexSearch]="complexSearch"
-                                [interactors]="allInteractorsInComplexSearch">
-          </cp-complex-navigator>
+          <div class="Matrix">
+            <cp-complex-navigator [complexSearch]="complexSearch"
+                                  [interactors]="allInteractorsInComplexSearch">
+            </cp-complex-navigator>
+          </div>
         </div>
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"

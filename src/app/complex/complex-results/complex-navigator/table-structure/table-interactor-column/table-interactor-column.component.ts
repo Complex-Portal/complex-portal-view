@@ -43,6 +43,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   get enrichedInteractors(): EnrichedInteractor[] {
+
     return this._enrichedInteractors;
   }
 
@@ -69,7 +70,10 @@ export class TableInteractorColumnComponent implements OnInit {
       }
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
+    //////////// CLASSIFICATION BEFORE CALCULATIONS
+    this.classifyIntercators();
     this.calculateAllStartAndEndIndexes();
+
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -204,7 +208,6 @@ export class TableInteractorColumnComponent implements OnInit {
     this.calculateAllStartAndEndIndexes();
   }
 
-
   public interactorTypeIcon(interactor: Interactor): string {
     switch (interactor.interactorType) {
       case 'small molecule':
@@ -230,7 +233,6 @@ export class TableInteractorColumnComponent implements OnInit {
         return 'icon icon-conceptual icon-dna';
     }
   }
-
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
@@ -305,9 +307,11 @@ export class TableInteractorColumnComponent implements OnInit {
 
   private calculateAllStartAndEndIndexes(): void {
     this._enrichedComplexes = [];
+
     for (const complex of this.complexSearch.elements) {
       this._enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
     }
+
   }
 
   private getMinValue(valueA: number, valueB: number) {
@@ -378,8 +382,6 @@ export class TableInteractorColumnComponent implements OnInit {
 
   private calculateStartAndEndIndexes(complex: Element): EnrichedComplex {
     const subComponentsToCheck: string[] = [];
-    //////////// CLASSIFICATION BEFORE CALCULATIONS
-    this.classifyIntercators();
 
     const enrichedComplex: EnrichedComplex = {
       complex,
@@ -572,19 +574,59 @@ export class TableInteractorColumnComponent implements OnInit {
   classifyIntercators() {
     for (const oneInteractor of this._enrichedInteractors) {
       let inNComplexes = 0;
-      for (const complex of this._enrichedComplexes) {
-        for (const complexesInteractors of complex.complex.components) {
+      for (const complex of this.complexSearch.elements) {
+        for (const complexesInteractors of complex.components) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             inNComplexes++;
           }
         }
-      }
-      for (const interactorTested of this._enrichedInteractors) {
-        if (interactorTested.interactor === oneInteractor.interactor) {
-          interactorTested.timesAppearing = inNComplexes;
+        if (oneInteractor.isSubComplex) {
+          for (const subComponent of oneInteractor.subComponents) {
+            for (const complex of this.complexSearch.elements) {
+              for (const complexesInteractors of complex.components) {
+                if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
+                  inNComplexes++;
+                }
+              }
+            }
+          }
         }
+        oneInteractor.timesAppearing = inNComplexes;
       }
     }
-    return this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing);
+    this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
   }
+
+  public displayLineInteractorType(interactor): string {
+    if (this.interactorFirstOfType(interactor)) {
+      return 'verticalLine';
+    }
+    return 'transparentVerticalLine';
+  }
+
+  public interactorFirstOfType(interactor: Interactor): boolean {
+    return false;
+  }
+
+  public rangeOfInteractorType(interactor: Interactor): number[] {
+    let startIndex = 0;
+    let endIndex = 0;
+    let range = [0, 0];
+    for (let i; i < this._enrichedInteractors.length; i++) {
+      if (this.enrichedInteractors[i].interactor.interactorType === interactor.interactorType) {
+        startIndex = i;
+      }
+    }
+    for (let i = startIndex; i < this._enrichedInteractors.length; i++) {
+      if (this.enrichedInteractors[i].interactor.interactorType !== interactor.interactorType) {
+        endIndex = i;
+      }
+    }
+    console.log('startIndex : ' + startIndex + ' endIndex : ' + endIndex);
+    range[0] = startIndex;
+    range[1] = endIndex;
+    console.log(range);
+    return range;
+  }
+
 }

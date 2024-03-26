@@ -2,6 +2,7 @@
   <table class="interactors-table">
     <!-- Interactors' column -->
     <ng-container *ngFor="let interactor of enrichedInteractors; let i=index">
+      <!-- <ng-container [ngClass]="rangeOfInteractorType(interactor.interactor)"></ng-container> -->
       <ng-container>
         <tr *ngIf="!interactor.hidden">
           <td>
@@ -57,14 +58,14 @@
         <ng-container *ngIf="interactor.expanded">
           <ng-container *ngIf="!!interactor.subComponents">
             <tr *ngFor="let el of interactor.subComponents; let j=index">
-              <td style="background: #8b9394">
+              <td style="background: #8b9394;">
                 <div style="font-weight: bold">
                   <a [routerLink]="['/complex/search']"
                      [queryParams]="{query: el.identifier, page: 1}"
                      target="_blank">
                     {{ el.name }}
-                    <i class="{{interactorTypeIcon(el)}}" title="{{interactor.interactor.interactorType}}"
-                       style="font-size: 50px;"></i>
+                    <i class="{{interactorTypeIcon(el)}}"
+                       title="{{interactor.interactor.interactorType}}"></i>
                     <i class="icon icon-functional small" data-icon="1"
                        title="More complexes containing this interactor"></i>
                   </a>
@@ -77,7 +78,7 @@
                 </div>
               </td>
               <ng-container *ngFor="let complex of enrichedComplexes">
-                <td style="background: #8b9394;">
+                <td style="background: #8b9394;" class="intStoich">
                   <div [ngClass]="displayTopLineClassExpanded(complex, i, j)"></div>
                   <ng-container *ngIf="!!findInteractorInComplex(complex.complex, el.identifier)">
                     <div class="stoichNum"
