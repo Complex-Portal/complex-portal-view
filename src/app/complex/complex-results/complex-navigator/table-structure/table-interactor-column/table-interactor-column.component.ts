@@ -74,6 +74,7 @@ export class TableInteractorColumnComponent implements OnInit {
     this.classifyIntercators();
     this.calculateAllStartAndEndIndexes();
 
+    // console.log(this.compactInteractorList());
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -214,7 +215,7 @@ export class TableInteractorColumnComponent implements OnInit {
         return 'icon icon-conceptual icon-chemical';
       case 'protein':
       case 'peptide':
-        return 'icon icon-conceptual icon-proteins';
+        return 'icon icon-conceptual icon-structures-3d';
       case 'stable complex':
         return 'icon icon-conceptual icon-systems';
       case 'molecule set':
@@ -597,6 +598,7 @@ export class TableInteractorColumnComponent implements OnInit {
     }
     // tslint:disable-next-line:max-line-length
     // this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
+    // tslint:disable-next-line:max-line-length
     this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
   }
 
@@ -632,4 +634,34 @@ export class TableInteractorColumnComponent implements OnInit {
     return range;
   }
 
+  calculateTotalLengthOfLine(): number {
+    let totalLength = 0;
+    for (let i = 0; i < this._enrichedComplexes.length; i++) {
+      const lengthOfLine = (this._enrichedComplexes[i].endInteractorIndex) - this._enrichedComplexes[i].startInteractorIndex;
+      totalLength += lengthOfLine;
+    }
+    // console.log(totalLength);
+    return totalLength;
+  }
+
+  randomiseInteractors(): void {
+    // based on fisher-yates algorithm
+    const listOfInteractorsList = [];
+    const interactorList = this._enrichedInteractors;
+    for (let i = interactorList.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [interactorList[i], interactorList[j]] = [interactorList[j], interactorList[i]];
+    }
+    listOfInteractorsList.push(interactorList);
+  }
+
+  compactInteractorList() {
+    const lowestLength = this.calculateTotalLengthOfLine();
+    for (let n = 0; n < this._enrichedInteractors.length; n++) {
+      this.randomiseInteractors();
+      if (this.calculateTotalLengthOfLine() < lowestLength) {
+        return;
+      }
+    }
+  }
 }
