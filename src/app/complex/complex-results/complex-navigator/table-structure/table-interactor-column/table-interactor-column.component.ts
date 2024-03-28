@@ -74,6 +74,7 @@ export class TableInteractorColumnComponent implements OnInit {
     this.classifyIntercators();
     this.calculateAllStartAndEndIndexes();
 
+    this.compactInteractorList();
     // console.log(this.compactInteractorList());
   }
 
@@ -627,10 +628,10 @@ export class TableInteractorColumnComponent implements OnInit {
         endIndex = i;
       }
     }
-    console.log('startIndex : ' + startIndex + ' endIndex : ' + endIndex);
+    // console.log('startIndex : ' + startIndex + ' endIndex : ' + endIndex);
     range[0] = startIndex;
     range[1] = endIndex;
-    console.log(range);
+    // console.log(range);
     return range;
   }
 
@@ -640,28 +641,41 @@ export class TableInteractorColumnComponent implements OnInit {
       const lengthOfLine = (this._enrichedComplexes[i].endInteractorIndex) - this._enrichedComplexes[i].startInteractorIndex;
       totalLength += lengthOfLine;
     }
-    // console.log(totalLength);
+    console.log(totalLength);
     return totalLength;
   }
 
-  randomiseInteractors(): void {
-    // based on fisher-yates algorithm
-    const listOfInteractorsList = [];
-    const interactorList = this._enrichedInteractors;
-    for (let i = interactorList.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [interactorList[i], interactorList[j]] = [interactorList[j], interactorList[i]];
-    }
-    listOfInteractorsList.push(interactorList);
-  }
+  generateCombinations(interactorsArray) {
+    const combinations = [];
 
-  compactInteractorList() {
-    const lowestLength = this.calculateTotalLengthOfLine();
-    for (let n = 0; n < this._enrichedInteractors.length; n++) {
-      this.randomiseInteractors();
-      if (this.calculateTotalLengthOfLine() < lowestLength) {
-        return;
+    function permuteInteractors(array, tmp = []) {
+      if (array.length === 0) {
+        combinations.push(tmp);
+      } else {
+        for (let i = 0; i < array.length; i++) {
+          const current = array.slice();
+          const next = current.splice(i, 1);
+          permuteInteractors(current.slice(), tmp.concat(next));
+        }
       }
     }
+
+    permuteInteractors(interactorsArray);
+    return combinations;
+  }
+
+
+  compactInteractorList() {
+    const listOfCombinations = this.generateCombinations(this._enrichedInteractors);
+    let lowestLength = 5000;
+    let lowestLengthList = 0;
+    for (let n = 0; n < listOfCombinations.length; n++) {
+      this._enrichedInteractors = listOfCombinations[n];
+      if (this.calculateTotalLengthOfLine() < lowestLength) {
+        lowestLength = this.calculateTotalLengthOfLine();
+        lowestLengthList = n;
+      }
+    }
+    this._enrichedInteractors = listOfCombinations[lowestLengthList];
   }
 }
