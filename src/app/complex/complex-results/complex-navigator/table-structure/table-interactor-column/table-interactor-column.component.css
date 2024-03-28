@@ -1,0 +1,87 @@
+/* interactors column*/
+td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+
+  max-height: 50px;
+  min-height: 50px;
+
+  min-width: 130px;
+  max-width: 130px;
+
+  padding: 5px;
+  text-align: end;
+  color: #0e6f76;
+}
+
+/* cells */
+.intStoich {
+
+  height: 50px;
+  max-width: 100px;
+  min-width: 100px;
+  font-size: medium;
+
+}
+
+#interactors-table {
+  width: 100%;
+}
+
+.stoichNum {
+  width: 3ch;
+  height: 3ch;
+  border-radius: 3ch;
+  background-color: #0e6f76;
+  text-align: center;
+  color: white;
+  font-size: small;
+  z-index: 2;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.verticalLine {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 1%;
+  max-width: 1%;
+  max-height: 50%;
+  min-height: 50%;
+  border-right: 5px solid #0e6f76;
+  z-index: 0;
+}
+
+.transparentVerticalLine {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 1%;
+  max-width: 1%;
+  max-height: 50%;
+  min-height: 50%;
+  border-right: 0;
+  z-index: 0;
+}
+
+i:not(.small) {
+  font-size: large;
+}
+
+tr:nth-child(even) {
+  background-color: #dfeced;
+}
+
+.expandedRows {
+  border-right: 3px solid #0e6f76;
+  border-left: 3px solid #0e6f76;
+  color: #0e6f76;
+}
+
+a {
+  color: #0e6f76;
+}
+
+a:visited {
+  color: #0e6f76;
+}

@@ -29,4 +29,5 @@ export class ComplexSearchResult {
   get facets(): Facets[] {
     return this._facets;
   }
+
 }

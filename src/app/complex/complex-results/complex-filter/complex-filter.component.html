@@ -13,12 +13,12 @@
           <div [ngSwitch]="isSelected(facet.name, spicesFilter)">
             <div *ngSwitchCase="true">
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{facet.name}}
-              ({{facet.count}})
+                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{ facet.name }}
+              ({{ facet.count }})
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{facet.name}} ({{facet.count}})
+                     (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{ facet.name }} ({{ facet.count }})
             </div>
           </div>
         </li>
@@ -32,13 +32,13 @@
           <div [ngSwitch]="isSelected(facet.name, bioRoleFilter)">
             <div *ngSwitchCase="true">
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{facet.name}}
-              ({{facet.count}})
+                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{ facet.name }}
+              ({{ facet.count }})
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{facet.name}}
-              ({{facet.count}})
+                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{ facet.name }}
+              ({{ facet.count }})
             </div>
           </div>
         </li>
@@ -53,13 +53,17 @@
           <div [ngSwitch]="isSelected(facet.name, interactorTypeFilter)">
             <div *ngSwitchCase="true">
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)" checked> {{facet.name}}
-              ({{facet.count}})
+                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)" checked> {{ facet.name }}
+              ({{ facet.count }})
+              <i class="{{ interactorTypeIcon(facet) }}"
+                 style="font-size: large;"></i>
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)"> {{facet.name}}
-              ({{facet.count}})
+                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)"> {{ facet.name }}
+              ({{ facet.count }})
+              <i class="{{ interactorTypeIcon(facet) }}"
+                 style="font-size: large;"></i>
             </div>
           </div>
         </li>

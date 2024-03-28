@@ -45,7 +45,7 @@ import {FooterComponent} from './footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot([], {relativeLinkResolution: 'legacy'}),
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,

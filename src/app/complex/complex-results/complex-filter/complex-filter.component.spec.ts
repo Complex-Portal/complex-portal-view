@@ -13,7 +13,7 @@ describe('ComplexFilterComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ComplexFilterComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

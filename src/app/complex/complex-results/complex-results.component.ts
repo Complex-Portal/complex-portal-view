@@ -5,30 +5,36 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
+import {Interactor} from '../shared/model/complex-results/interactor.model';
 
 
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
-  styleUrls: ['./complex-results.component.css']
+  styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
   private _lastPageIndex: number;
-  private _pageSize = 10;
+  private _pageSize = 15;
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
+  private _allInteractorsInComplexSearch: Interactor[] = [];
+  DisplayType = true;
+
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
-              private googleAnalyticsService: AnalyticsService) {
+              private googleAnalyticsService: AnalyticsService,
+  ) {
   }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
+    this._allInteractorsInComplexSearch = [];
 
     this.route
       .queryParams
@@ -43,6 +49,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this.requestComplexResults();
         document.body.scrollTop = 0;
       });
+
   }
 
   ngAfterViewInit(): void {
@@ -52,11 +59,26 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
+      this._allInteractorsInComplexSearch = [];
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
+        for (let i = 0; i < complexSearch.elements.length; i++) {
+          for (const component of complexSearch.elements[i].components) {
+            if (!this._allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
+              this._allInteractorsInComplexSearch.push(
+                new Interactor(
+                  component.identifier,
+                  component.identifierLink,
+                  component.name,
+                  component.description,
+                  component.interactorType));
+            }
+          }
+        }
       }
       ProgressBarComponent.hide();
     });
+
   }
 
   /**
@@ -96,6 +118,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
 
+
   /**
    *
    * @param pageIndex new page index after hitting the paginator to update the URL and reload content
@@ -125,11 +148,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  public onInteractorTyoeFilterChanged(filter: string[]): void {
+  public onInteractorTypeFilterChanged(filter: string[]): void {
     this.interactorTypeFilter = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
+
 
   get query(): string {
     return this._query;
@@ -194,4 +218,17 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   set interactorTypeFilter(value: string[]) {
     this._interactorTypeFilter = value;
   }
+
+  public get allInteractorsInComplexSearch(): Interactor[] {
+    return this._allInteractorsInComplexSearch;
+  }
+
+  set allInteractorsInComplexSearch(value: Interactor[]) {
+    this._allInteractorsInComplexSearch = value;
+  }
+
+  toggleDisplayType() {
+    this.DisplayType = !this.DisplayType;
+  }
+
 }

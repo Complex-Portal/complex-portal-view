@@ -24,5 +24,7 @@
 
 /* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */
 .no-border-submenu {
-  border-right: 0 !important ;
+  border-right: 0 !important;
 }
+
+
