@@ -5,15 +5,15 @@ export class Element {
   private _complexName: string;
   private _organismName: string;
   private _description: string;
-  private _components: ComplexComponent[];
+  private _interactors: ComplexComponent[];
 
 
-  constructor(complexAC: string, complexName: string, organismName: string, description: string, components: ComplexComponent[]) {
+  constructor(complexAC: string, complexName: string, organismName: string, description: string, interactors: ComplexComponent[]) {
     this._complexAC = complexAC;
     this._complexName = complexName;
     this._organismName = organismName;
     this._description = description;
-    this._components = components;
+    this._interactors = interactors;
   }
 
   get complexAC(): string {
@@ -31,7 +31,7 @@ export class Element {
   get description(): string {
     return this._description;
   }
-  get components(): ComplexComponent[] {
-    return this._components;
+  get interactors(): ComplexComponent[] {
+    return this._interactors;
   }
 }

@@ -63,7 +63,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
-          for (const component of complexSearch.elements[i].components) {
+          for (const component of complexSearch.elements[i].interactors) {
             if (!this._allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
               this._allInteractorsInComplexSearch.push(
                 new Interactor(
