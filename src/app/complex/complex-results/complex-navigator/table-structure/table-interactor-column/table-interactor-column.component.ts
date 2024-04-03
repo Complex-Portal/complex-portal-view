@@ -681,6 +681,7 @@ export class TableInteractorColumnComponent implements OnInit {
     this._enrichedInteractors = listOfCombinations[lowestLengthList];
   }
 
+
   fillBinaryComponent() {
     for (const interactor of this._enrichedInteractors) {
       for (const complex of this._enrichedComplexes) {
@@ -696,7 +697,16 @@ export class TableInteractorColumnComponent implements OnInit {
         }
       }
     }
-    BinaryComponentList.sort();
+    BinaryComponentList.sort((a, b) => {
+      if (a[0] !== b[0]) {
+        return a[0].localeCompare(b[0]); // Sort by first element
+      } else if (a[1] !== b[1]) {
+        return a[1].localeCompare(b[1]); // Sort by second element
+      } else {
+        return a[2] - b[2]; // Sort by third element
+      }
+    });
+
     console.log(BinaryComponentList);
   }
 }
