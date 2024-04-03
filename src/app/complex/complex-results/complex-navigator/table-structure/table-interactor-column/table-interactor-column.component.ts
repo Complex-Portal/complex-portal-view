@@ -26,6 +26,8 @@ class EnrichedComplex {
   endSubComponentIndex: number;
 }
 
+const BinaryComponentList = [];
+
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -71,11 +73,12 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     //////////// CLASSIFICATION BEFORE CALCULATIONS
-    this.classifyIntercators();
+    // this.classifyIntercators();
     this.calculateAllStartAndEndIndexes();
 
-    this.compactInteractorList();
+    // this.compactInteractorList();
     // console.log(this.compactInteractorList());
+    this.fillBinaryComponent();
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -641,7 +644,7 @@ export class TableInteractorColumnComponent implements OnInit {
       const lengthOfLine = (this._enrichedComplexes[i].endInteractorIndex) - this._enrichedComplexes[i].startInteractorIndex;
       totalLength += lengthOfLine;
     }
-    console.log(totalLength);
+    // console.log('total length of line: ' + totalLength);
     return totalLength;
   }
 
@@ -664,7 +667,6 @@ export class TableInteractorColumnComponent implements OnInit {
     return combinations;
   }
 
-
   compactInteractorList() {
     const listOfCombinations = this.generateCombinations(this._enrichedInteractors);
     let lowestLength = 5000;
@@ -677,5 +679,24 @@ export class TableInteractorColumnComponent implements OnInit {
       }
     }
     this._enrichedInteractors = listOfCombinations[lowestLengthList];
+  }
+
+  fillBinaryComponent() {
+    for (const interactor of this._enrichedInteractors) {
+      for (const complex of this._enrichedComplexes) {
+        let binaryValue = 0;
+        // tslint:disable-next-line:max-line-length
+        if (this.getStochiometry(complex.complex, interactor.interactor.identifier) || this.getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier)) {
+          binaryValue = 1;
+          const binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
+          BinaryComponentList.push(binaryComponent);
+        } else {
+          const binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
+          BinaryComponentList.push(binaryComponent);
+        }
+      }
+    }
+    BinaryComponentList.sort();
+    console.log(BinaryComponentList);
   }
 }
