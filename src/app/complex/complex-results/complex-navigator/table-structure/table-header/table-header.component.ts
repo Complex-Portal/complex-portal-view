@@ -27,12 +27,12 @@ export class TableHeaderComponent implements OnInit {
 
     // check which complex is the biggest
     for (const complex of searchResult) {
-      let totalLength = complex.components.length;
-      for (const complexInteractorChecked of complex.components) {
+      let totalLength = complex.interactors.length;
+      for (const complexInteractorChecked of complex.interactors) {
         if (complexInteractorChecked.interactorType === 'stable complex') {
           // tslint:disable-next-line:no-shadowed-variable
           const subComplex: Element = searchResult.find(complex => complex.complexAC === complexInteractorChecked.identifier);
-          totalLength += subComplex.components.length;
+          totalLength += subComplex.interactors.length;
         }
       }
       if (totalLength > biggestComplex[1]) {
@@ -46,8 +46,8 @@ export class TableHeaderComponent implements OnInit {
     // compare the other complexes with the biggest
     for (const comparedComplex of searchResult) {
       let similarities = 0;
-      for (const biggestComplexInteractor of bigComplex.components) {
-        for (const complexInteractor of comparedComplex.components) {
+      for (const biggestComplexInteractor of bigComplex.interactors) {
+        for (const complexInteractor of comparedComplex.interactors) {
           if (biggestComplexInteractor.identifier === complexInteractor.identifier) {
             similarities++;
           }
@@ -56,10 +56,10 @@ export class TableHeaderComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
           const subComplex: Element = searchResult.find(complex => complex.complexAC === biggestComplexInteractor.identifier);
           if (comparedComplex.complexAC === bigComplex.complexAC) {
-            similarities += subComplex.components.length;
+            similarities += subComplex.interactors.length;
           }
-          for (const subComponent of subComplex.components) {
-            for (const complexInteractor of comparedComplex.components) {
+          for (const subComponent of subComplex.interactors) {
+            for (const complexInteractor of comparedComplex.interactors) {
               if (subComponent.identifier === complexInteractor.identifier) {
                 similarities++;
               }

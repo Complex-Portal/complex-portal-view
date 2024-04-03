@@ -82,7 +82,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
-    return complex.components.find(component => component.identifier === componentId);
+    return complex.interactors.find(component => component.identifier === componentId);
   }
 
   findInteractorsInSubComplex(complex: Element, interactorId: string): ComplexComponent[] {
@@ -91,7 +91,7 @@ export class TableInteractorColumnComponent implements OnInit {
       .filter(interactor => interactor.isSubComplex)
       // filter subcomplexes included in complex
       .filter(interactor =>
-        complex.components.some(component => component.identifier === interactor.interactor.identifier))
+        complex.interactors.some(component => component.identifier === interactor.interactor.identifier))
       // filter subcomplexes that match the componentId
       .filter(interactor => !!interactor.subComponents)
       .map(interactor => interactor.subComponents.find(subComponent => subComponent.identifier === interactorId))
@@ -99,7 +99,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public findInteractorInExpandedSubComplex(interactor: EnrichedInteractor, complex: Element, interactorId: string): ComplexComponent {
-    if (complex.components.some(component => component.identifier === interactor.interactor.identifier)) {
+    if (complex.interactors.some(component => component.identifier === interactor.interactor.identifier)) {
       return interactor.subComponents.find(component => component.identifier === interactorId);
     }
     return null;
@@ -243,7 +243,7 @@ export class TableInteractorColumnComponent implements OnInit {
     // this function returns the list of subcomponents of an interactor of type stable complex
     const foundComplex: Element = this.complexSearch.elements.find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
-      return of(foundComplex.components);
+      return of(foundComplex.interactors);
     } else {
       // Actually call the back-end to fetch these
       return this.complexPortalService.getComplexAc(interactor.interactor.identifier)
@@ -400,8 +400,8 @@ export class TableInteractorColumnComponent implements OnInit {
     // We do this to be able to draw a line connecting all interactors in the complex
     for (let i = 0; i < this._enrichedInteractors.length; i++) {
       if (!this._enrichedInteractors[i].hidden) {
-        for (let j = 0; j < complex.components.length; j++) {
-          if (complex.components[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
+        for (let j = 0; j < complex.interactors.length; j++) {
+          if (complex.interactors[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
             // The interactor is part of the complex, we update the start and end indices for the interactors
             // line as it may start in this interactor
             enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
@@ -429,7 +429,7 @@ export class TableInteractorColumnComponent implements OnInit {
             // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
             // In that case, the line could start or end on any of those subcomponents
             for (let k = 0; k < this._enrichedInteractors[i].subComponents.length; k++) {
-              if (complex.components[j].identifier === this._enrichedInteractors[i].subComponents[k].identifier) {
+              if (complex.interactors[j].identifier === this._enrichedInteractors[i].subComponents[k].identifier) {
                 // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
                 // line as it may start in this interactor
                 enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
@@ -497,7 +497,7 @@ export class TableInteractorColumnComponent implements OnInit {
       // If the interactor is actually part of the complex, the line starts in this interactor
       // Otherwise, the line actually starts on one of the subcomponets of the complex, but not on the interactor itself, as it is
       // not part of the complex.
-      if (complex.complex.components.some(component =>
+      if (complex.complex.interactors.some(component =>
         this._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier)) {
         return true;
       }
@@ -557,7 +557,7 @@ export class TableInteractorColumnComponent implements OnInit {
         // If the subcomplex is a component of the complex, the line starts in the cell of the interactor, meaning it cannot
         // start on any subcomponent.
         // Otherwise, it starts on the subcomponent with the index subComponentIndex
-        return !complex.complex.components.some(component =>
+        return !complex.complex.interactors.some(component =>
           this._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier);
 
       }
@@ -580,7 +580,7 @@ export class TableInteractorColumnComponent implements OnInit {
     for (const oneInteractor of this._enrichedInteractors) {
       let inNComplexes = 0;
       for (const complex of this.complexSearch.elements) {
-        for (const complexesInteractors of complex.components) {
+        for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             inNComplexes++;
           }
@@ -589,7 +589,7 @@ export class TableInteractorColumnComponent implements OnInit {
           for (const subComponent of oneInteractor.subComponents) {
             // tslint:disable-next-line:no-shadowed-variable
             for (const complex of this.complexSearch.elements) {
-              for (const complexesInteractors of complex.components) {
+              for (const complexesInteractors of complex.interactors) {
                 if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
                   inNComplexes++;
                 }
