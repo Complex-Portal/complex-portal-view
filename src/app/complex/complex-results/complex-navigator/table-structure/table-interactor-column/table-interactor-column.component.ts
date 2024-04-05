@@ -65,7 +65,7 @@ export class TableInteractorColumnComponent implements OnInit {
         expanded: false,
         subComponents: null,
         partOfComplex: [],
-        timesAppearing: 1,
+        timesAppearing: 0,
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -73,12 +73,9 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     //////////// CLASSIFICATION BEFORE CALCULATIONS
-    // this.classifyIntercators();
+    this.classifyIntercators();
     this.calculateAllStartAndEndIndexes();
 
-    // this.compactInteractorList();
-    // console.log(this.compactInteractorList());
-    this.fillBinaryComponent();
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -578,30 +575,36 @@ export class TableInteractorColumnComponent implements OnInit {
 
   classifyIntercators() {
     for (const oneInteractor of this._enrichedInteractors) {
-      let inNComplexes = 0;
+      let inNComplexes = oneInteractor.timesAppearing;
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-            inNComplexes++;
+            // tslint:disable-next-line:radix
+            if (isNaN(parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
+              inNComplexes = inNComplexes;
+            } else {
+              // tslint:disable-next-line:radix
+              inNComplexes += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
+            }
           }
         }
         if (oneInteractor.isSubComplex) {
-          for (const subComponent of oneInteractor.subComponents) {
-            // tslint:disable-next-line:no-shadowed-variable
-            for (const complex of this.complexSearch.elements) {
-              for (const complexesInteractors of complex.interactors) {
-                if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-                  inNComplexes++;
-                }
+          // tslint:disable-next-line:no-shadowed-variable
+          for (const subInteractor of oneInteractor.subComponents) {
+            for (const interactorFromList of this._enrichedInteractors) {
+              if (subInteractor.identifier === interactorFromList.interactor.identifier) {
+                // console.log(parseInt(this.formatStochiometryValues(subInteractor.stochiometry)));
+                // tslint:disable-next-line:radix
+                interactorFromList.timesAppearing += parseInt(this.formatStochiometryValues(subInteractor.stochiometry));
               }
             }
           }
         }
-        oneInteractor.timesAppearing = inNComplexes;
       }
+      oneInteractor.timesAppearing += inNComplexes;
+      console.log(oneInteractor.interactor.identifier + '   ' + oneInteractor.timesAppearing);
     }
-    // tslint:disable-next-line:max-line-length
-    // this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
+
     // tslint:disable-next-line:max-line-length
     this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
   }
@@ -621,7 +624,7 @@ export class TableInteractorColumnComponent implements OnInit {
     let startIndex = 0;
     let endIndex = 0;
     const range = [0, 0];
-    for (let i; i < this._enrichedInteractors.length; i++) {
+    for (let i = 0; i < this._enrichedInteractors.length; i++) {
       if (this.enrichedInteractors[i].interactor.interactorType === interactor.interactorType) {
         startIndex = i;
       }
@@ -638,7 +641,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return range;
   }
 
-  calculateTotalLengthOfLine(): number {
+  calculateTotalLengthOfLineType(): number {
     let totalLength = 0;
     for (let i = 0; i < this._enrichedComplexes.length; i++) {
       const lengthOfLine = (this._enrichedComplexes[i].endInteractorIndex) - this._enrichedComplexes[i].startInteractorIndex;
@@ -647,56 +650,5 @@ export class TableInteractorColumnComponent implements OnInit {
     // console.log('total length of line: ' + totalLength);
     return totalLength;
   }
-
-  generateCombinations(interactorsArray) {
-    const combinations = [];
-
-    function permuteInteractors(array, tmp = []) {
-      if (array.length === 0) {
-        combinations.push(tmp);
-      } else {
-        for (let i = 0; i < array.length; i++) {
-          const current = array.slice();
-          const next = current.splice(i, 1);
-          permuteInteractors(current.slice(), tmp.concat(next));
-        }
-      }
-    }
-
-    permuteInteractors(interactorsArray);
-    return combinations;
-  }
-
-  compactInteractorList() {
-    const listOfCombinations = this.generateCombinations(this._enrichedInteractors);
-    let lowestLength = 5000;
-    let lowestLengthList = 0;
-    for (let n = 0; n < listOfCombinations.length; n++) {
-      this._enrichedInteractors = listOfCombinations[n];
-      if (this.calculateTotalLengthOfLine() < lowestLength) {
-        lowestLength = this.calculateTotalLengthOfLine();
-        lowestLengthList = n;
-      }
-    }
-    this._enrichedInteractors = listOfCombinations[lowestLengthList];
-  }
-
-  fillBinaryComponent() {
-    for (const interactor of this._enrichedInteractors) {
-      for (const complex of this._enrichedComplexes) {
-        let binaryValue = 0;
-        // tslint:disable-next-line:max-line-length
-        if (this.getStochiometry(complex.complex, interactor.interactor.identifier) || this.getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier)) {
-          binaryValue = 1;
-          const binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
-          BinaryComponentList.push(binaryComponent);
-        } else {
-          const binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
-          BinaryComponentList.push(binaryComponent);
-        }
-      }
-    }
-    BinaryComponentList.sort();
-    console.log(BinaryComponentList);
-  }
 }
+

@@ -7,7 +7,6 @@ import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 
-
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
@@ -25,7 +24,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType = true;
 
-
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
               private googleAnalyticsService: AnalyticsService,
@@ -35,7 +33,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
-
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -49,7 +46,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this.requestComplexResults();
         document.body.scrollTop = 0;
       });
-
   }
 
   ngAfterViewInit(): void {
@@ -78,7 +74,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       }
       ProgressBarComponent.hide();
     });
-
   }
 
   /**
@@ -100,9 +95,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.router.navigate([], {
       queryParams
     });
-
     ProgressBarComponent.hide();
-
     // This is a test case event for GA, to monitor if users ever use more then one filter.
     const filterCount = this.getFilterCount();
     if (1 < filterCount) {
@@ -117,7 +110,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private getFilterCount(): number {
     return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
   }
-
 
   /**
    *
@@ -153,7 +145,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.currentPageIndex = 1;
     this.reloadPage();
   }
-
 
   get query(): string {
     return this._query;
@@ -230,5 +221,4 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   toggleDisplayType() {
     this.DisplayType = !this.DisplayType;
   }
-
 }

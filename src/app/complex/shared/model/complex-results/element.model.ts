@@ -31,6 +31,7 @@ export class Element {
   get description(): string {
     return this._description;
   }
+
   get interactors(): ComplexComponent[] {
     return this._interactors;
   }
