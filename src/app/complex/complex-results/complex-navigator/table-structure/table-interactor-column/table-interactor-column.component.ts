@@ -73,7 +73,7 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     //////////// CLASSIFICATION BEFORE CALCULATIONS
-    this.classifyIntercators();
+    this.classifyIntercatorsByAppearance();
     this.calculateAllStartAndEndIndexes();
 
   }
@@ -573,38 +573,29 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  classifyIntercators() {
+  classifyIntercatorsByAppearance() {
     for (const oneInteractor of this._enrichedInteractors) {
-      let inNComplexes = oneInteractor.timesAppearing;
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             // tslint:disable-next-line:radix
             if (isNaN(parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
-              inNComplexes = inNComplexes;
+              oneInteractor.timesAppearing = oneInteractor.timesAppearing;
             } else {
               // tslint:disable-next-line:radix
-              inNComplexes += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
+              oneInteractor.timesAppearing += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
             }
           }
         }
         if (oneInteractor.isSubComplex) {
           // tslint:disable-next-line:no-shadowed-variable
           for (const subInteractor of oneInteractor.subComponents) {
-            for (const interactorFromList of this._enrichedInteractors) {
-              if (subInteractor.identifier === interactorFromList.interactor.identifier) {
-                // console.log(parseInt(this.formatStochiometryValues(subInteractor.stochiometry)));
-                // tslint:disable-next-line:radix
-                interactorFromList.timesAppearing += parseInt(this.formatStochiometryValues(subInteractor.stochiometry));
-              }
-            }
+            const enrichedInteractor = this._enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === subInteractor.identifier);
+            enrichedInteractor.timesAppearing = parseInt(this.formatStochiometryValues(subInteractor.stochiometry));
           }
         }
       }
-      oneInteractor.timesAppearing += inNComplexes;
-      console.log(oneInteractor.interactor.identifier + '   ' + oneInteractor.timesAppearing);
     }
-
     // tslint:disable-next-line:max-line-length
     this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
   }
