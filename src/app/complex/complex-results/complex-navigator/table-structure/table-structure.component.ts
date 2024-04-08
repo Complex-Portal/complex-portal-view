@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class TableStructureComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _interactors: Set<Interactor>;
+  _interactorsSorting: string;
 
   // _overFlowing: boolean;
 
@@ -29,21 +30,12 @@ export class TableStructureComponent implements OnInit {
     this._interactors = value;
   }
 
-  /*
-get overFlowing(): boolean {
-  return this._overFlowing;
-}
+  @Input()
+  set interactorsSorting(value: string) {
+    this._interactorsSorting = value;
+  }
 
-set overFlowing(value: boolean) {
-  this._overFlowing = this.isOverFlowing();
-}
-
-
-isOverFlowing(): boolean {
-  const tablePart = document.querySelector<HTMLElement>('.header');
-  console.log(tablePart.scrollWidth > tablePart.offsetWidth);
-  this._overFlowing = tablePart.scrollWidth > tablePart.offsetWidth;
-  return tablePart.scrollWidth > tablePart.offsetWidth;
-}
-*/
+  get interactorsSorting(): string {
+    return this._interactorsSorting;
+  }
 }

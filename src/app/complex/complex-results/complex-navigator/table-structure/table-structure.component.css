@@ -1,7 +1,7 @@
 .complexNavigatorTable {
   border-collapse: separate;
   /* overflow-x: scroll;  remove to make the header sticky */
-  width: 120%;
+
   height: 100%;
 }
 

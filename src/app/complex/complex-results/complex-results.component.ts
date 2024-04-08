@@ -23,6 +23,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType = true;
+  _interactorsSorting = 'Appearance';
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -220,5 +221,18 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   toggleDisplayType() {
     this.DisplayType = !this.DisplayType;
+  }
+
+  // set interactorsSortingBy(typeOfSorting: string) {
+  //   this.interactorsSortingBy = typeOfSorting;
+  // }
+
+  get interactorsSorting(): string {
+    return this._interactorsSorting;
+  }
+
+  setInteractorsSorting(typeOfSorting: string) {
+    //console.log(typeOfSorting);
+    this._interactorsSorting = typeOfSorting;
   }
 }

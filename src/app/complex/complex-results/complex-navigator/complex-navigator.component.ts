@@ -11,7 +11,9 @@ import {Router} from '@angular/router';
 })
 export class ComplexNavigatorComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
+  _interactorsSorting: string;
   _interactors: Set<Interactor>;
+
 
   constructor(private router: Router) {
   }
@@ -26,5 +28,14 @@ export class ComplexNavigatorComponent implements OnInit {
   @Input()
   set interactors(value: Set<Interactor>) {
     this._interactors = value;
+  }
+
+  @Input()
+  set interactorsSorting(value: string) {
+    this._interactorsSorting = value;
+  }
+
+  get interactorsSorting(): string {
+    return this._interactorsSorting;
   }
 }

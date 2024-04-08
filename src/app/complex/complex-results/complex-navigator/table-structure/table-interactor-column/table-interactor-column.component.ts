@@ -16,6 +16,7 @@ class EnrichedInteractor {
   subComponents: ComplexComponent[];
   partOfComplex: number[];
   timesAppearing: number;
+  organismName: string;
 }
 
 class EnrichedComplex {
@@ -37,6 +38,8 @@ export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _enrichedInteractors: EnrichedInteractor[];
   _enrichedComplexes: EnrichedComplex[];
+  _interactorsSorting: string;
+
 
   constructor(private complexPortalService: ComplexPortalService) {
   }
@@ -54,6 +57,15 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   @Input()
+  set interactorsSorting(value: string) {
+    this._interactorsSorting = value;
+  }
+
+  get interactorsSorting(): string {
+    return this._interactorsSorting;
+  }
+
+  @Input()
   set interactors(value: Set<Interactor>) {
     this._enrichedInteractors = [];
     for (const interactor of value) {
@@ -66,6 +78,7 @@ export class TableInteractorColumnComponent implements OnInit {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
+        organismName: '',
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -73,8 +86,12 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     //////////// CLASSIFICATION BEFORE CALCULATIONS
-    this.classifyIntercatorsByAppearance();
+    this.interactorOrganism();
+    this.classificationChosen(); // default = Appearance
     this.calculateAllStartAndEndIndexes();
+    console.log(this.rangeOfInteractorType());
+    console.log(this.rangeOfInteractorOrganisms()); // check for the different labels (e.g homosapiens)
+    console.log(this._interactorsSorting); // check to retrieve the data (displaying undefined)
 
   }
 
@@ -313,7 +330,6 @@ export class TableInteractorColumnComponent implements OnInit {
     for (const complex of this.complexSearch.elements) {
       this._enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
     }
-
   }
 
   private getMinValue(valueA: number, valueB: number) {
@@ -455,7 +471,6 @@ export class TableInteractorColumnComponent implements OnInit {
         }
       }
     }
-
     return enrichedComplex;
   }
 
@@ -573,7 +588,26 @@ export class TableInteractorColumnComponent implements OnInit {
     return false;
   }
 
-  classifyIntercatorsByAppearance() {
+  private interactorOrganism() {
+    for (const complex of this.complexSearch.elements) {
+      const organismName = complex.organismName;
+      for (const complexInteractor of complex.interactors) {
+        // tslint:disable-next-line:max-line-length
+        const match = this._enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === complexInteractor.identifier);
+        match.organismName = organismName;
+      }
+    }
+  }
+
+  public classifyInteractorsByOrganism() {
+    this._enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
+  }
+
+  public classifyInteractorsByType() {
+    this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
+  }
+
+  public classifyIntercatorsByAppearance() {
     for (const oneInteractor of this._enrichedInteractors) {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
@@ -590,7 +624,9 @@ export class TableInteractorColumnComponent implements OnInit {
         if (oneInteractor.isSubComplex) {
           // tslint:disable-next-line:no-shadowed-variable
           for (const subInteractor of oneInteractor.subComponents) {
+            // tslint:disable-next-line:max-line-length no-shadowed-variable
             const enrichedInteractor = this._enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === subInteractor.identifier);
+            // tslint:disable-next-line:radix
             enrichedInteractor.timesAppearing = parseInt(this.formatStochiometryValues(subInteractor.stochiometry));
           }
         }
@@ -600,46 +636,77 @@ export class TableInteractorColumnComponent implements OnInit {
     this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
   }
 
-  public displayLineInteractorType(interactor): string {
-    if (this.interactorFirstOfType(interactor)) {
-      return 'verticalLine';
+  public classificationChosen() {
+    switch (this._interactorsSorting) {
+      case 'Type':
+        this.classifyInteractorsByType();
+        break;
+      case 'Organism':
+        this.classifyInteractorsByOrganism();
+        break;
+      default:
+        this.classifyIntercatorsByAppearance();
     }
-    return 'transparentVerticalLine';
   }
 
-  public interactorFirstOfType(interactor: Interactor): boolean {
-    return false;
+  private rangeOfInteractorType(): number[] {
+    const ranges = [];
+    const interactorTypesList = this.listOfInteractorTypes();
+    for (const type of interactorTypesList) {
+      const rangeOfType = [];
+      const listOfInteractors = [];
+      for (const enrichedInteractor of this._enrichedInteractors) {
+        if (enrichedInteractor.interactor.interactorType === type) {
+          const interactorAndIndex = [];
+          interactorAndIndex.push(enrichedInteractor);
+          interactorAndIndex.push(this._enrichedInteractors.indexOf(enrichedInteractor));
+          listOfInteractors.push(interactorAndIndex);
+        }
+      }
+      rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1]);
+      ranges.push(rangeOfType);
+    }
+    return ranges;
   }
 
-  public rangeOfInteractorType(interactor: Interactor): number[] {
-    let startIndex = 0;
-    let endIndex = 0;
-    const range = [0, 0];
-    for (let i = 0; i < this._enrichedInteractors.length; i++) {
-      if (this.enrichedInteractors[i].interactor.interactorType === interactor.interactorType) {
-        startIndex = i;
+  private rangeOfInteractorOrganisms(): number[] {
+    const ranges = [];
+    const interactorOrganismsList = this.listOfInteractorOrganism();
+    for (const organism of interactorOrganismsList) {
+      const rangeOfOrganism = [];
+      const listOfInteractors = [];
+      for (const enrichedInteractor of this._enrichedInteractors) {
+        if (enrichedInteractor.organismName === organism) {
+          const interactorAndIndex = [];
+          interactorAndIndex.push(enrichedInteractor);
+          interactorAndIndex.push(this._enrichedInteractors.indexOf(enrichedInteractor));
+          listOfInteractors.push(interactorAndIndex);
+        }
+      }
+      rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1]);
+      ranges.push(rangeOfOrganism);
+    }
+    return ranges;
+  }
+
+  private listOfInteractorTypes() {
+    const interactorsTypesList = [];
+    for (const enrichedInteractor of this._enrichedInteractors) {
+      if (!interactorsTypesList.includes(enrichedInteractor.interactor.interactorType)) {
+        interactorsTypesList.push(enrichedInteractor.interactor.interactorType);
       }
     }
-    for (let i = startIndex; i < this._enrichedInteractors.length; i++) {
-      if (this.enrichedInteractors[i].interactor.interactorType !== interactor.interactorType) {
-        endIndex = i;
-      }
-    }
-    // console.log('startIndex : ' + startIndex + ' endIndex : ' + endIndex);
-    range[0] = startIndex;
-    range[1] = endIndex;
-    // console.log(range);
-    return range;
+    return interactorsTypesList;
   }
 
-  calculateTotalLengthOfLineType(): number {
-    let totalLength = 0;
-    for (let i = 0; i < this._enrichedComplexes.length; i++) {
-      const lengthOfLine = (this._enrichedComplexes[i].endInteractorIndex) - this._enrichedComplexes[i].startInteractorIndex;
-      totalLength += lengthOfLine;
+  private listOfInteractorOrganism() {
+    const interactorsOrganismsList = [];
+    for (const enrichedInteractor of this._enrichedInteractors) {
+      if (!interactorsOrganismsList.includes(enrichedInteractor.organismName)) {
+        interactorsOrganismsList.push(enrichedInteractor.organismName);
+      }
     }
-    // console.log('total length of line: ' + totalLength);
-    return totalLength;
+    return interactorsOrganismsList;
   }
+
 }
-

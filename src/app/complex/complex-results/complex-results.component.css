@@ -1,0 +1,17 @@
+.typeOfSorting {
+  display: none;
+}
+
+.sortingInteractors {
+  text-align: center;
+}
+
+.sortingInteractors:hover .typeOfSorting {
+  display: flex;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+  max-width: 19ch;
+  min-width: 19ch;
+}

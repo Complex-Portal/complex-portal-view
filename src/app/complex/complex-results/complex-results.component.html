@@ -30,9 +30,23 @@
             <input type="submit" name="submit" value="View list" class="button"
                    (click)="toggleDisplayType()">
           </div>
+          <div class="sortingInteractors">
+            <input type="submit" name="classificationButton" value="Interactors sorting" class="button">
+            <div class="typeOfSorting">
+              <input type="submit" name="appearanceClassification" value="Appearance" class="button"
+                     (click)="setInteractorsSorting('Appearance')">
+              <input type="submit" name="typeClassification" value="Type" class="button"
+                     (click)="setInteractorsSorting('Type')">
+              <input type="submit" name="organismClassification" value="Organism" class="button"
+                     (click)="setInteractorsSorting('Organism')">
+              <input type="submit" name="geneClassification" value="Orthology (Not available yet)" class="button"
+                     (click)="setInteractorsSorting('Orthology')">
+            </div>
+          </div>
           <div class="Matrix">
             <cp-complex-navigator [complexSearch]="complexSearch"
-                                  [interactors]="allInteractorsInComplexSearch">
+                                  [interactors]="allInteractorsInComplexSearch"
+                                  [interactorsSorting]="interactorsSorting">
             </cp-complex-navigator>
           </div>
         </div>
