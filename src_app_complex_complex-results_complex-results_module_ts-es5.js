@@ -329,6 +329,14 @@
           set: function set(value) {
             this._interactors = value;
           }
+        }, {
+          key: "interactorsSorting",
+          get: function get() {
+            return this._interactorsSorting;
+          },
+          set: function set(value) {
+            this._interactorsSorting = value;
+          }
         }]);
         return ComplexNavigatorComponent;
       }();
@@ -342,6 +350,9 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }],
         interactors: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        interactorsSorting: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }]
       };
@@ -387,11 +398,12 @@
         _createClass(TableHeaderComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.classifyComplexes();
+            this.classifyComplexesSize();
+            this.classifyComplexesSimilarities(this.complexSearch);
           }
         }, {
-          key: "classifyComplexes",
-          value: function classifyComplexes() {
+          key: "classifyComplexesSize",
+          value: function classifyComplexesSize() {
             var searchResult = this.complexSearch.elements;
             var complexesWithSimilarities = new Map();
             var biggestComplex = [searchResult[0], 0];
@@ -515,6 +527,122 @@
               return complexesWithSimilarities.get(b) - complexesWithSimilarities.get(a);
             });
           }
+        }, {
+          key: "calculateSimilarity",
+          value: function calculateSimilarity(complex1, complex2) {
+            var _this = this;
+            var similarities = 0;
+            var _iterator8 = _createForOfIteratorHelper(complex1.interactors),
+              _step8;
+            try {
+              var _loop3 = function _loop3() {
+                var complex1Interactor = _step8.value;
+                var _iterator9 = _createForOfIteratorHelper(complex2.interactors),
+                  _step9;
+                try {
+                  for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+                    var complex2Interactor = _step9.value;
+                    if (complex1Interactor.identifier === complex2Interactor.identifier) {
+                      similarities++;
+                    }
+                  }
+                } catch (err) {
+                  _iterator9.e(err);
+                } finally {
+                  _iterator9.f();
+                }
+                if (complex1Interactor.interactorType === 'stable complex') {
+                  // tslint:disable-next-line:max-line-length
+                  var subComplex = _this.complexSearch.elements.find(function (complex) {
+                    return complex.complexAC === complex1Interactor.identifier;
+                  });
+                  if (complex2.complexAC === complex1.complexAC) {
+                    similarities += subComplex.interactors.length;
+                  }
+                  var _iterator10 = _createForOfIteratorHelper(subComplex.interactors),
+                    _step10;
+                  try {
+                    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                      var subComponent = _step10.value;
+                      var _iterator11 = _createForOfIteratorHelper(complex2.interactors),
+                        _step11;
+                      try {
+                        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+                          var complexInteractor = _step11.value;
+                          if (subComponent.identifier === complexInteractor.identifier) {
+                            similarities++;
+                          }
+                        }
+                      } catch (err) {
+                        _iterator11.e(err);
+                      } finally {
+                        _iterator11.f();
+                      }
+                    }
+                  } catch (err) {
+                    _iterator10.e(err);
+                  } finally {
+                    _iterator10.f();
+                  }
+                }
+              };
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                _loop3();
+              }
+            } catch (err) {
+              _iterator8.e(err);
+            } finally {
+              _iterator8.f();
+            }
+            return similarities;
+          }
+        }, {
+          key: "classifyComplexesSimilarities",
+          value: function classifyComplexesSimilarities(complexSearch) {
+            var _this2 = this;
+            var classifiedList = [];
+            complexSearch.elements.forEach(function (complex) {
+              var found = false;
+              classifiedList.forEach(function (classification) {
+                classification.forEach(function (classifiedComplex, index) {
+                  var similarity = _this2.calculateSimilarity(complex, classifiedComplex);
+                  if (similarity >= 1) {
+                    found = true;
+                    classification.splice(index + 1, 0, complex);
+                  }
+                });
+              });
+              if (!found) {
+                // this list is multidimensional (1 list per complex)
+                classifiedList.push([complex]);
+              }
+            });
+            // make the array 1D
+            var listOfComplex = classifiedList.reduce(function (acc, val) {
+              return acc.concat(val);
+            }, []);
+            // The list which was multidimensional before has duplicates
+            var unique = [];
+            listOfComplex.forEach(function (element) {
+              if (!unique.includes(element)) {
+                unique.push(element);
+              }
+            });
+            // sorting by similarities
+            this.complexSearch.elements.sort(function (a, b) {
+              var indexA = unique.indexOf(a);
+              var indexB = unique.indexOf(b);
+              if (indexA !== -1 && indexB !== -1) {
+                return indexA - indexB; // Sort in ascending order based on the index
+              } else if (indexA !== -1) {
+                return -1; // Put element a before element b
+              } else if (indexB !== -1) {
+                return 1; // Put element b before element a
+              } else {
+                return 0; // Leave the order unchanged if both elements are not found in unique list
+              }
+            });
+          }
         }]);
         return TableHeaderComponent;
       }();
@@ -598,15 +726,23 @@
             return this._enrichedComplexes;
           }
         }, {
+          key: "interactorsSorting",
+          get: function get() {
+            return this._interactorsSorting;
+          },
+          set: function set(value) {
+            this._interactorsSorting = value;
+          }
+        }, {
           key: "interactors",
           set: function set(value) {
-            var _this = this;
+            var _this3 = this;
             this._enrichedInteractors = [];
-            var _iterator8 = _createForOfIteratorHelper(value),
-              _step8;
+            var _iterator12 = _createForOfIteratorHelper(value),
+              _step12;
             try {
-              var _loop3 = function _loop3() {
-                var interactor = _step8.value;
+              var _loop4 = function _loop4() {
+                var interactor = _step12.value;
                 var isSubComplex = interactor.interactorType === 'stable complex';
                 var newEnrichedInteractor = {
                   interactor: interactor,
@@ -615,29 +751,29 @@
                   expanded: false,
                   subComponents: null,
                   partOfComplex: [],
-                  timesAppearing: 1
+                  timesAppearing: 0,
+                  organismName: ''
                 };
                 if (isSubComplex) {
-                  _this.loadSubInteractors(newEnrichedInteractor).subscribe(function (subComponents) {
+                  _this3.loadSubInteractors(newEnrichedInteractor).subscribe(function (subComponents) {
                     return newEnrichedInteractor.subComponents = subComponents;
                   });
                 }
-                _this._enrichedInteractors.push(newEnrichedInteractor);
+                _this3._enrichedInteractors.push(newEnrichedInteractor);
               };
-              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                _loop3();
+              for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                _loop4();
               }
               //////////// CLASSIFICATION BEFORE CALCULATIONS
-              // this.classifyIntercators();
             } catch (err) {
-              _iterator8.e(err);
+              _iterator12.e(err);
             } finally {
-              _iterator8.f();
+              _iterator12.f();
             }
+            this.interactorOrganism();
+            this.classifyIntercatorsByAppearance();
             this.calculateAllStartAndEndIndexes();
-            // this.compactInteractorList();
-            // console.log(this.compactInteractorList());
-            this.fillBinaryComponent();
+            console.log(this._interactorsSorting);
           }
         }, {
           key: "findInteractorInComplex",
@@ -879,11 +1015,11 @@
           value: function addedStoichiometryValues(components) {
             var minValue = null;
             var maxValue = null;
-            var _iterator9 = _createForOfIteratorHelper(components),
-              _step9;
+            var _iterator13 = _createForOfIteratorHelper(components),
+              _step13;
             try {
-              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                var component = _step9.value;
+              for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+                var component = _step13.value;
                 if (!!component.stochiometry) {
                   var matchedStochometry = this.fetchValuesFromStochiometry(component.stochiometry);
                   if (!!matchedStochometry) {
@@ -901,9 +1037,9 @@
                 }
               }
             } catch (err) {
-              _iterator9.e(err);
+              _iterator13.e(err);
             } finally {
-              _iterator9.f();
+              _iterator13.f();
             }
             if (minValue !== null && maxValue !== null) {
               return [minValue, maxValue];
@@ -914,17 +1050,17 @@
           key: "calculateAllStartAndEndIndexes",
           value: function calculateAllStartAndEndIndexes() {
             this._enrichedComplexes = [];
-            var _iterator10 = _createForOfIteratorHelper(this.complexSearch.elements),
-              _step10;
+            var _iterator14 = _createForOfIteratorHelper(this.complexSearch.elements),
+              _step14;
             try {
-              for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-                var complex = _step10.value;
+              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+                var complex = _step14.value;
                 this._enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
               }
             } catch (err) {
-              _iterator10.e(err);
+              _iterator14.e(err);
             } finally {
-              _iterator10.f();
+              _iterator14.f();
             }
           }
         }, {
@@ -1090,7 +1226,7 @@
         }, {
           key: "doesLineStartOnInteractorCell",
           value: function doesLineStartOnInteractorCell(complex, interactorIndex) {
-            var _this2 = this;
+            var _this4 = this;
             // The line starts at this interactor or on any of its subcomponents
             if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
               if (!this._enrichedInteractors[interactorIndex].isSubComplex) {
@@ -1102,7 +1238,7 @@
               // Otherwise, the line actually starts on one of the subcomponets of the complex, but not on the interactor itself, as it is
               // not part of the complex.
               if (complex.complex.interactors.some(function (component) {
-                return _this2._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
+                return _this4._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
               })) {
                 return true;
               }
@@ -1153,7 +1289,7 @@
         }, {
           key: "doesLineStartOnSubcomponentCell",
           value: function doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex) {
-            var _this3 = this;
+            var _this5 = this;
             // The line starts at this interactor or on any of its subcomponents
             if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
               if (complex.startSubComponentIndex != null && complex.startSubComponentIndex === subComponentIndex) {
@@ -1161,7 +1297,7 @@
                 // start on any subcomponent.
                 // Otherwise, it starts on the subcomponent with the index subComponentIndex
                 return !complex.complex.interactors.some(function (component) {
-                  return _this3._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
+                  return _this5._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
                 });
               }
             }
@@ -1179,194 +1315,111 @@
             return false;
           }
         }, {
-          key: "classifyIntercators",
-          value: function classifyIntercators() {
-            var _iterator11 = _createForOfIteratorHelper(this._enrichedInteractors),
-              _step11;
+          key: "interactorOrganism",
+          value: function interactorOrganism() {
+            var _this6 = this;
+            var _iterator15 = _createForOfIteratorHelper(this.complexSearch.elements),
+              _step15;
             try {
-              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-                var oneInteractor = _step11.value;
-                var inNComplexes = 0;
-                var _iterator12 = _createForOfIteratorHelper(this.complexSearch.elements),
-                  _step12;
+              for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                var complex = _step15.value;
+                var organismName = complex.organismName;
+                var _iterator16 = _createForOfIteratorHelper(complex.interactors),
+                  _step16;
                 try {
-                  for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-                    var complex = _step12.value;
-                    var _iterator13 = _createForOfIteratorHelper(complex.interactors),
-                      _step13;
-                    try {
-                      for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-                        var _complexesInteractors = _step13.value;
-                        if (oneInteractor.interactor.identifier === _complexesInteractors.identifier) {
-                          inNComplexes++;
-                        }
-                      }
-                    } catch (err) {
-                      _iterator13.e(err);
-                    } finally {
-                      _iterator13.f();
-                    }
-                    if (oneInteractor.isSubComplex) {
-                      var _iterator14 = _createForOfIteratorHelper(oneInteractor.subComponents),
-                        _step14;
-                      try {
-                        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-                          var subComponent = _step14.value;
-                          // tslint:disable-next-line:no-shadowed-variable
-                          var _iterator15 = _createForOfIteratorHelper(this.complexSearch.elements),
-                            _step15;
-                          try {
-                            for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-                              var _complex = _step15.value;
-                              var _iterator16 = _createForOfIteratorHelper(_complex.interactors),
-                                _step16;
-                              try {
-                                for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                                  var complexesInteractors = _step16.value;
-                                  if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-                                    inNComplexes++;
-                                  }
-                                }
-                              } catch (err) {
-                                _iterator16.e(err);
-                              } finally {
-                                _iterator16.f();
-                              }
-                            }
-                          } catch (err) {
-                            _iterator15.e(err);
-                          } finally {
-                            _iterator15.f();
-                          }
-                        }
-                      } catch (err) {
-                        _iterator14.e(err);
-                      } finally {
-                        _iterator14.f();
-                      }
-                    }
-                    oneInteractor.timesAppearing = inNComplexes;
+                  var _loop5 = function _loop5() {
+                    var complexInteractor = _step16.value;
+                    // tslint:disable-next-line:max-line-length
+                    var match = _this6._enrichedInteractors.find(function (enrichedInteractor) {
+                      return enrichedInteractor.interactor.identifier === complexInteractor.identifier;
+                    });
+                    match.organismName = organismName;
+                  };
+                  for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+                    _loop5();
                   }
                 } catch (err) {
-                  _iterator12.e(err);
+                  _iterator16.e(err);
                 } finally {
-                  _iterator12.f();
+                  _iterator16.f();
                 }
               }
-              // tslint:disable-next-line:max-line-length
-              // this._enrichedInteractors.sort((a, b) => a.interactor.interactorType.localeCompare(b.interactor.interactorType) || b.timesAppearing - a.timesAppearing);
-              // tslint:disable-next-line:max-line-length
             } catch (err) {
-              _iterator11.e(err);
+              _iterator15.e(err);
             } finally {
-              _iterator11.f();
+              _iterator15.f();
             }
+          }
+        }, {
+          key: "classifyInteractorsByOrganism",
+          value: function classifyInteractorsByOrganism() {
             this._enrichedInteractors.sort(function (a, b) {
-              return b.timesAppearing - a.timesAppearing;
-            } /* || a.interactor.name.localeCompare(b.interactor.name) */);
+              return b.organismName.localeCompare(a.organismName);
+            });
           }
         }, {
-          key: "displayLineInteractorType",
-          value: function displayLineInteractorType(interactor) {
-            if (this.interactorFirstOfType(interactor)) {
-              return 'verticalLine';
-            }
-            return 'transparentVerticalLine';
+          key: "classifyInteractorsByType",
+          value: function classifyInteractorsByType() {
+            this._enrichedInteractors.sort(function (a, b) {
+              return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
+            });
           }
         }, {
-          key: "interactorFirstOfType",
-          value: function interactorFirstOfType(interactor) {
-            return false;
-          }
-        }, {
-          key: "rangeOfInteractorType",
-          value: function rangeOfInteractorType(interactor) {
-            var startIndex = 0;
-            var endIndex = 0;
-            var range = [0, 0];
-            for (var i; i < this._enrichedInteractors.length; i++) {
-              if (this.enrichedInteractors[i].interactor.interactorType === interactor.interactorType) {
-                startIndex = i;
-              }
-            }
-            for (var _i2 = startIndex; _i2 < this._enrichedInteractors.length; _i2++) {
-              if (this.enrichedInteractors[_i2].interactor.interactorType !== interactor.interactorType) {
-                endIndex = _i2;
-              }
-            }
-            // console.log('startIndex : ' + startIndex + ' endIndex : ' + endIndex);
-            range[0] = startIndex;
-            range[1] = endIndex;
-            // console.log(range);
-            return range;
-          }
-        }, {
-          key: "calculateTotalLengthOfLine",
-          value: function calculateTotalLengthOfLine() {
-            var totalLength = 0;
-            for (var i = 0; i < this._enrichedComplexes.length; i++) {
-              var lengthOfLine = this._enrichedComplexes[i].endInteractorIndex - this._enrichedComplexes[i].startInteractorIndex;
-              totalLength += lengthOfLine;
-            }
-            // console.log('total length of line: ' + totalLength);
-            return totalLength;
-          }
-        }, {
-          key: "generateCombinations",
-          value: function generateCombinations(interactorsArray) {
-            var combinations = [];
-            function permuteInteractors(array) {
-              var tmp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-              if (array.length === 0) {
-                combinations.push(tmp);
-              } else {
-                for (var i = 0; i < array.length; i++) {
-                  var current = array.slice();
-                  var next = current.splice(i, 1);
-                  permuteInteractors(current.slice(), tmp.concat(next));
-                }
-              }
-            }
-            permuteInteractors(interactorsArray);
-            return combinations;
-          }
-        }, {
-          key: "compactInteractorList",
-          value: function compactInteractorList() {
-            var listOfCombinations = this.generateCombinations(this._enrichedInteractors);
-            var lowestLength = 5000;
-            var lowestLengthList = 0;
-            for (var n = 0; n < listOfCombinations.length; n++) {
-              this._enrichedInteractors = listOfCombinations[n];
-              if (this.calculateTotalLengthOfLine() < lowestLength) {
-                lowestLength = this.calculateTotalLengthOfLine();
-                lowestLengthList = n;
-              }
-            }
-            this._enrichedInteractors = listOfCombinations[lowestLengthList];
-          }
-        }, {
-          key: "fillBinaryComponent",
-          value: function fillBinaryComponent() {
+          key: "classifyIntercatorsByAppearance",
+          value: function classifyIntercatorsByAppearance() {
+            var _this7 = this;
             var _iterator17 = _createForOfIteratorHelper(this._enrichedInteractors),
               _step17;
             try {
               for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-                var interactor = _step17.value;
-                var _iterator18 = _createForOfIteratorHelper(this._enrichedComplexes),
+                var oneInteractor = _step17.value;
+                var _iterator18 = _createForOfIteratorHelper(this.complexSearch.elements),
                   _step18;
                 try {
                   for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
                     var complex = _step18.value;
-                    var binaryValue = 0;
-                    // tslint:disable-next-line:max-line-length
-                    if (this.getStochiometry(complex.complex, interactor.interactor.identifier) || this.getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier)) {
-                      binaryValue = 1;
-                      var binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
-                      BinaryComponentList.push(binaryComponent);
-                    } else {
-                      var _binaryComponent = [complex.complex.complexAC, interactor.interactor.identifier, binaryValue];
-                      BinaryComponentList.push(_binaryComponent);
+                    var _iterator19 = _createForOfIteratorHelper(complex.interactors),
+                      _step19;
+                    try {
+                      for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+                        var complexesInteractors = _step19.value;
+                        if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
+                          // tslint:disable-next-line:radix
+                          if (isNaN(parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
+                            oneInteractor.timesAppearing = oneInteractor.timesAppearing;
+                          } else {
+                            // tslint:disable-next-line:radix
+                            oneInteractor.timesAppearing += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
+                          }
+                        }
+                      }
+                    } catch (err) {
+                      _iterator19.e(err);
+                    } finally {
+                      _iterator19.f();
+                    }
+                    if (oneInteractor.isSubComplex) {
+                      // tslint:disable-next-line:no-shadowed-variable
+                      var _iterator20 = _createForOfIteratorHelper(oneInteractor.subComponents),
+                        _step20;
+                      try {
+                        var _loop6 = function _loop6() {
+                          var subInteractor = _step20.value;
+                          // tslint:disable-next-line:max-line-length no-shadowed-variable
+                          var enrichedInteractor = _this7._enrichedInteractors.find(function (enrichedInteractor) {
+                            return enrichedInteractor.interactor.identifier === subInteractor.identifier;
+                          });
+                          // tslint:disable-next-line:radix
+                          enrichedInteractor.timesAppearing = parseInt(_this7.formatStochiometryValues(subInteractor.stochiometry));
+                        };
+                        for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+                          _loop6();
+                        }
+                      } catch (err) {
+                        _iterator20.e(err);
+                      } finally {
+                        _iterator20.f();
+                      }
                     }
                   }
                 } catch (err) {
@@ -1375,21 +1428,29 @@
                   _iterator18.f();
                 }
               }
+              // tslint:disable-next-line:max-line-length
             } catch (err) {
               _iterator17.e(err);
             } finally {
               _iterator17.f();
             }
-            BinaryComponentList.sort(function (a, b) {
-              if (a[0] !== b[0]) {
-                return a[0].localeCompare(b[0]); // Sort by first element
-              } else if (a[1] !== b[1]) {
-                return a[1].localeCompare(b[1]); // Sort by second element
-              } else {
-                return a[2] - b[2]; // Sort by third element
-              }
-            });
-            console.log(BinaryComponentList);
+            this._enrichedInteractors.sort(function (a, b) {
+              return b.timesAppearing - a.timesAppearing;
+            } /* || a.interactor.name.localeCompare(b.interactor.name) */);
+          }
+        }, {
+          key: "classificationChosen",
+          value: function classificationChosen() {
+            switch (this._interactorsSorting) {
+              case 'Type':
+                this.classifyInteractorsByType();
+                break;
+              case 'Organism':
+                this.classifyInteractorsByOrganism();
+                break;
+              default:
+                this.classifyIntercatorsByAppearance();
+            }
           }
         }]);
         return TableInteractorColumnComponent;
@@ -1401,6 +1462,9 @@
       };
       _TableInteractorColumnComponent.propDecorators = {
         complexSearch: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        }],
+        interactorsSorting: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
         }],
         interactors: [{
@@ -1461,6 +1525,14 @@
           set: function set(value) {
             this._interactors = value;
           }
+        }, {
+          key: "interactorsSorting",
+          get: function get() {
+            return this._interactorsSorting;
+          },
+          set: function set(value) {
+            this._interactorsSorting = value;
+          }
         }]);
         return TableStructureComponent;
       }();
@@ -1474,6 +1546,9 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }],
         interactors: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        interactorsSorting: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }]
       };
@@ -1681,22 +1756,23 @@
           this._pageSize = 15;
           this._allInteractorsInComplexSearch = [];
           this.DisplayType = true;
+          this._interactorsSorting = 'Appearance';
         }
         _createClass(ComplexResultsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this8 = this;
             this.titleService.setTitle('Complex Portal - Results');
             this._allInteractorsInComplexSearch = [];
             this.route.queryParams.subscribe(function (queryParams) {
-              _this4._query = queryParams['query'];
-              _this4._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
-              _this4._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
-              _this4._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
-              _this4._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+              _this8._query = queryParams['query'];
+              _this8._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+              _this8._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+              _this8._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
+              _this8._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
               // TODO This is out for now, but CP-84 (JIRA )should fix that!!
               // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-              _this4.requestComplexResults();
+              _this8.requestComplexResults();
               document.body.scrollTop = 0;
             });
           }
@@ -1706,31 +1782,31 @@
         }, {
           key: "requestComplexResults",
           value: function requestComplexResults() {
-            var _this5 = this;
+            var _this9 = this;
             this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter, this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(function (complexSearch) {
-              _this5.complexSearch = complexSearch;
-              _this5._allInteractorsInComplexSearch = [];
-              if (_this5.complexSearch.totalNumberOfResults !== 0) {
-                _this5.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this5.pageSize);
+              _this9.complexSearch = complexSearch;
+              _this9._allInteractorsInComplexSearch = [];
+              if (_this9.complexSearch.totalNumberOfResults !== 0) {
+                _this9.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this9.pageSize);
                 for (var i = 0; i < complexSearch.elements.length; i++) {
-                  var _iterator19 = _createForOfIteratorHelper(complexSearch.elements[i].interactors),
-                    _step19;
+                  var _iterator21 = _createForOfIteratorHelper(complexSearch.elements[i].interactors),
+                    _step21;
                   try {
-                    var _loop4 = function _loop4() {
-                      var component = _step19.value;
-                      if (!_this5._allInteractorsInComplexSearch.some(function (interactor) {
+                    var _loop7 = function _loop7() {
+                      var component = _step21.value;
+                      if (!_this9._allInteractorsInComplexSearch.some(function (interactor) {
                         return interactor.identifier === component.identifier;
                       })) {
-                        _this5._allInteractorsInComplexSearch.push(new _shared_model_complex_results_interactor_model__WEBPACK_IMPORTED_MODULE_5__.Interactor(component.identifier, component.identifierLink, component.name, component.description, component.interactorType));
+                        _this9._allInteractorsInComplexSearch.push(new _shared_model_complex_results_interactor_model__WEBPACK_IMPORTED_MODULE_5__.Interactor(component.identifier, component.identifierLink, component.name, component.description, component.interactorType));
                       }
                     };
-                    for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-                      _loop4();
+                    for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
+                      _loop7();
                     }
                   } catch (err) {
-                    _iterator19.e(err);
+                    _iterator21.e(err);
                   } finally {
-                    _iterator19.f();
+                    _iterator21.f();
                   }
                 }
               }
@@ -1891,6 +1967,20 @@
           key: "toggleDisplayType",
           value: function toggleDisplayType() {
             this.DisplayType = !this.DisplayType;
+          }
+          // set interactorsSortingBy(typeOfSorting: string) {
+          //   this.interactorsSortingBy = typeOfSorting;
+          // }
+        }, {
+          key: "interactorsSorting",
+          get: function get() {
+            return this._interactorsSorting;
+          }
+        }, {
+          key: "setInteractorsSorting",
+          value: function setInteractorsSorting(typeOfSorting) {
+            //console.log(typeOfSorting);
+            this._interactorsSorting = typeOfSorting;
           }
         }]);
         return ComplexResultsComponent;
@@ -2119,7 +2209,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"ComplexNavigator\">\n  <cp-table-structure [complexSearch]=\"complexSearch\"\n                      [interactors]=\"interactors\">\n  </cp-table-structure>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"ComplexNavigator\">\n  <cp-table-structure [complexSearch]=\"complexSearch\"\n                      [interactors]=\"interactors\"\n                      [interactorsSorting]=\"interactorsSorting\">\n  </cp-table-structure>\n</div>\n";
 
       /***/
     }),
@@ -2143,7 +2233,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\"let interactor of enrichedInteractors; let i=index\">\n      <!-- <ng-container [ngClass]=\"rangeOfInteractorType(interactor.interactor)\"></ng-container> -->\n      <ng-container>\n        <tr *ngIf=\"!interactor.hidden\">\n          <td>\n            <div style=\"font-weight: bold\">\n              {{ interactor.interactor.name }}\n              <!--{{ interactor.timesAppearing }}-->\n              <i class=\"{{interactorTypeIcon(interactor.interactor)}}\"\n                 title=\"{{interactor.interactor.interactorType}}\"></i>\n              <!-- Adding of the icons to access details of the interactorr -->\n              <a [routerLink]=\"['/complex/search']\"\n                 [queryParams]=\"{query: interactor.interactor.identifier, page: 1}\"\n                 target=\"_blank\">\n                <i class=\"icon icon-functional small\" data-icon=\"1\"\n                   title=\"Complexes containing this interactor\"></i>\n              </a>\n            </div>\n            <!-- Icon for the expandable -->\n            <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n              {{ interactor.interactor.identifier }}\n              <a title=\"{{ interactor.interactor.name }}'s interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n                <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                   style=\"font-size:small; margin-top: 2px\"></i>\n              </a>\n            </div>\n            <div *ngIf=\"showExternalLink(interactor.interactor)\" class=\"interactorType\">\n              <a href=\"{{interactor.interactor.identifierLink}}\" target=\"_blank\">{{ interactor.interactor.identifier }}\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n              </a>\n            </div>\n          </td>\n          <!-- Interactors' stoichiometry -->\n          <ng-container *ngFor=\"let complex of enrichedComplexes\">\n            <td class=\"intStoich\">\n              <div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n              <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\">\n                <div class=\"stoichNum\" title=\"{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}\">\n                  {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}\n                </div>\n              </ng-container>\n              <ng-container class=\"stoichComponent\"\n                            *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\">\n                <!-- subcomplexes' interactors' stoichiometry -->\n                <div class=\"stoichNum\"\n                     title=\"{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}\">\n                  {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}\n                </div>\n              </ng-container>\n              <div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n            </td>\n          </ng-container>\n        </tr>\n        <!-- Expandable menu for subcomplexes -->\n        <ng-container *ngIf=\"interactor.expanded\">\n          <ng-container *ngIf=\"!!interactor.subComponents\">\n            <tr class=\"expandedRows\" *ngFor=\"let el of interactor.subComponents; let j=index\">\n              <td class=\"intStoich\">\n                <div style=\"font-weight: bold\">\n                  <a [routerLink]=\"['/complex/search']\"\n                     [queryParams]=\"{query: el.identifier, page: 1}\"\n                     target=\"_blank\">\n                    {{ el.name }}\n                    <i class=\"{{interactorTypeIcon(el)}}\"\n                       title=\"{{interactor.interactor.interactorType}}\"></i>\n                    <i class=\"icon icon-functional small\" data-icon=\"1\"\n                       title=\"More complexes containing this interactor\"></i>\n                  </a>\n                </div>\n                <div *ngIf=\"showExternalLink(el)\" class=\"interactorType\">\n                  <a href=\"{{el.identifierLink}}\" target=\"_blank\">{{ el.identifier }}\n                    <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"\n                    ></i>\n                  </a>\n                </div>\n              </td>\n              <ng-container *ngFor=\"let complex of enrichedComplexes\">\n                <td class=\"intStoich\">\n                  <div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n                  <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\">\n                    <div class=\"stoichNum\"\n                         title=\"{{ getStochiometry(complex.complex, el.identifier) }}\">\n                      {{ stochiometryOfInteractors(complex.complex, el.identifier) }}\n                    </div>\n                  </ng-container>\n                  <ng-container\n                    *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\">\n                    <!-- subcomplexes' interactors' stoichiometry -->\n                    <div class=\"stoichNum\"\n                         title=\"{{ getStochiometryInExpandedSubComplex(interactor, el.identifier) }}\">\n                      {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}\n                    </div>\n                  </ng-container>\n                  <div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n                </td>\n              </ng-container>\n            </tr>\n          </ng-container>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n  </table>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\"let interactor of enrichedInteractors; let i=index\">\n      <!-- <ng-container [ngClass]=\"rangeOfInteractorType(interactor.interactor)\"></ng-container> -->\n      <ng-container>\n        <tr *ngIf=\"!interactor.hidden\">\n          <td>\n            <div style=\"font-weight: bold\">\n              {{ interactor.interactor.name }}\n              <!--{{ interactor.organismName }}-->\n              <i class=\"{{interactorTypeIcon(interactor.interactor)}}\"\n                 title=\"{{interactor.interactor.interactorType}}\"></i>\n              <!-- Adding of the icons to access details of the interactorr -->\n              <a [routerLink]=\"['/complex/search']\"\n                 [queryParams]=\"{query: interactor.interactor.identifier, page: 1}\"\n                 target=\"_blank\">\n                <i class=\"icon icon-functional small\" data-icon=\"1\"\n                   title=\"Complexes containing this interactor\"></i>\n              </a>\n            </div>\n            <!-- Icon for the expandable -->\n            <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n              {{ interactor.interactor.identifier }}\n              <a title=\"{{ interactor.interactor.name }}'s interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n                <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                   style=\"font-size:small; margin-top: 2px\"></i>\n              </a>\n            </div>\n            <div *ngIf=\"showExternalLink(interactor.interactor)\" class=\"interactorType\">\n              <a href=\"{{interactor.interactor.identifierLink}}\" target=\"_blank\">{{ interactor.interactor.identifier }}\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n              </a>\n            </div>\n          </td>\n          <!-- Interactors' stoichiometry -->\n          <ng-container *ngFor=\"let complex of enrichedComplexes\">\n            <td class=\"intStoich\">\n              <div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n              <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\">\n                <div class=\"stoichNum\" title=\"{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}\">\n                  {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}\n                </div>\n              </ng-container>\n              <ng-container class=\"stoichComponent\"\n                            *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\">\n                <!-- subcomplexes' interactors' stoichiometry -->\n                <div class=\"stoichNum\"\n                     title=\"{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}\">\n                  {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}\n                </div>\n              </ng-container>\n              <div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n            </td>\n          </ng-container>\n        </tr>\n        <!-- Expandable menu for subcomplexes -->\n        <ng-container *ngIf=\"interactor.expanded\">\n          <ng-container *ngIf=\"!!interactor.subComponents\">\n            <tr class=\"expandedRows\" *ngFor=\"let el of interactor.subComponents; let j=index\">\n              <td class=\"intStoich\">\n                <div style=\"font-weight: bold\">\n                  <a [routerLink]=\"['/complex/search']\"\n                     [queryParams]=\"{query: el.identifier, page: 1}\"\n                     target=\"_blank\">\n                    {{ el.name }}\n                    <i class=\"{{interactorTypeIcon(el)}}\"\n                       title=\"{{interactor.interactor.interactorType}}\"></i>\n                    <i class=\"icon icon-functional small\" data-icon=\"1\"\n                       title=\"More complexes containing this interactor\"></i>\n                  </a>\n                </div>\n                <div *ngIf=\"showExternalLink(el)\" class=\"interactorType\">\n                  <a href=\"{{el.identifierLink}}\" target=\"_blank\">{{ el.identifier }}\n                    <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"\n                    ></i>\n                  </a>\n                </div>\n              </td>\n              <ng-container *ngFor=\"let complex of enrichedComplexes\">\n                <td class=\"intStoich\">\n                  <div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n                  <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\">\n                    <div class=\"stoichNum\"\n                         title=\"{{ getStochiometry(complex.complex, el.identifier) }}\">\n                      {{ stochiometryOfInteractors(complex.complex, el.identifier) }}\n                    </div>\n                  </ng-container>\n                  <ng-container\n                    *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\">\n                    <!-- subcomplexes' interactors' stoichiometry -->\n                    <div class=\"stoichNum\"\n                         title=\"{{ getStochiometryInExpandedSubComplex(interactor, el.identifier) }}\">\n                      {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}\n                    </div>\n                  </ng-container>\n                  <div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n                </td>\n              </ng-container>\n            </tr>\n          </ng-container>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n  </table>\n</div>\n";
 
       /***/
     }),
@@ -2155,7 +2245,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"complexNavigatorTable\">\n  <div class=\"header\">\n    <cp-table-header [complexSearch]=\"complexSearch\">\n    </cp-table-header>\n  </div>\n  <div class=\"interactors\">\n    <cp-table-interactor-column\n      [complexSearch]=\"complexSearch\"\n      [interactors]=\"interactors\">\n    </cp-table-interactor-column>\n  </div>\n</div>\n\n";
+      __webpack_exports__["default"] = "<div class=\"complexNavigatorTable\">\n  <div class=\"header\">\n    <cp-table-header [complexSearch]=\"complexSearch\">\n    </cp-table-header>\n  </div>\n  <div class=\"interactors\">\n    <cp-table-interactor-column\n      [complexSearch]=\"complexSearch\"\n      [interactors]=\"interactors\"\n      [interactorsSorting]=\"interactorsSorting\">\n    </cp-table-interactor-column>\n  </div>\n</div>\n\n";
 
       /***/
     }),
@@ -2179,7 +2269,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <div class=\"listOfResults\" *ngIf=\"DisplayType==false\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"Complex navigator\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <cp-complex-list [complexSearch]=\"complexSearch\">\n          </cp-complex-list>\n        </div>\n        <div class=\"Complex-navigator\" *ngIf=\"DisplayType\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <div class=\"Matrix\">\n            <cp-complex-navigator [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\">\n            </cp-complex-navigator>\n          </div>\n        </div>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <div class=\"listOfResults\" *ngIf=\"DisplayType==false\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"Complex navigator\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <cp-complex-list [complexSearch]=\"complexSearch\">\n          </cp-complex-list>\n        </div>\n        <div class=\"Complex-navigator\" *ngIf=\"DisplayType\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <div class=\"sortingInteractors\">\n            <input type=\"submit\" name=\"classificationButton\" value=\"Interactors sorting\" class=\"button\">\n            <div class=\"typeOfSorting\">\n              <input type=\"submit\" name=\"appearanceClassification\" value=\"Appearance\" class=\"button\"\n                     (click)=\"setInteractorsSorting('Appearance')\">\n              <input type=\"submit\" name=\"typeClassification\" value=\"Type\" class=\"button\"\n                     (click)=\"setInteractorsSorting('Type')\">\n              <input type=\"submit\" name=\"organismClassification\" value=\"Organism\" class=\"button\"\n                     (click)=\"setInteractorsSorting('Organism')\">\n              <input type=\"submit\" name=\"geneClassification\" value=\"Orthology\" class=\"button\"\n                     (click)=\"setInteractorsSorting('Orthology')\">\n            </div>\n          </div>\n          <div class=\"Matrix\">\n            <cp-complex-navigator [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [interactorsSorting]=\"interactorsSorting\">\n            </cp-complex-navigator>\n          </div>\n        </div>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
 
       /***/
     }),
@@ -2229,7 +2319,7 @@
       \*****************************************************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = "/* interactors column*/\ntd:first-child {\n  position: sticky;\n  left: 0;\n  z-index: 3;\n\n  max-height: 50px;\n  min-height: 50px;\n\n  min-width: 130px;\n  max-width: 130px;\n\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n}\n/* cells */\n.intStoich {\n\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n\n}\n#interactors-table {\n  width: 100%;\n}\n.stoichNum {\n  width: 3ch;\n  height: 3ch;\n  border-radius: 3ch;\n  background-color: #0e6f76;\n  text-align: center;\n  color: white;\n  font-size: small;\n  z-index: 2;\n  margin-left: auto;\n  margin-right: auto;\n}\n.verticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  border-right: 5px solid #0e6f76;\n  z-index: 0;\n}\n.transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  border-right: 0;\n  z-index: 0;\n}\ni:not(.small) {\n  font-size: large;\n}\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\n.expandedRows {\n  border-right: 3px solid #0e6f76;\n  border-left: 3px solid #0e6f76;\n  color: #0e6f76;\n}\na {\n  color: #0e6f76;\n}\na:visited {\n  color: #0e6f76;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0JBQXNCO0FBQ3RCO0VBQ0UsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVOztFQUVWLGdCQUFnQjtFQUNoQixnQkFBZ0I7O0VBRWhCLGdCQUFnQjtFQUNoQixnQkFBZ0I7O0VBRWhCLFlBQVk7RUFDWixlQUFlO0VBQ2YsY0FBYztBQUNoQjtBQUVBLFVBQVU7QUFDVjs7RUFFRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixpQkFBaUI7O0FBRW5CO0FBRUE7RUFDRSxXQUFXO0FBQ2I7QUFFQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixVQUFVO0VBQ1YsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0VBQ2YsK0JBQStCO0VBQy9CLFVBQVU7QUFDWjtBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0VBQ2YsZUFBZTtFQUNmLFVBQVU7QUFDWjtBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7QUFFQTtFQUNFLCtCQUErQjtFQUMvQiw4QkFBOEI7RUFDOUIsY0FBYztBQUNoQjtBQUVBO0VBQ0UsY0FBYztBQUNoQjtBQUVBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJ0YWJsZS1pbnRlcmFjdG9yLWNvbHVtbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogaW50ZXJhY3RvcnMgY29sdW1uKi9cbnRkOmZpcnN0LWNoaWxkIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMztcblxuICBtYXgtaGVpZ2h0OiA1MHB4O1xuICBtaW4taGVpZ2h0OiA1MHB4O1xuXG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG5cbiAgcGFkZGluZzogNXB4O1xuICB0ZXh0LWFsaWduOiBlbmQ7XG4gIGNvbG9yOiAjMGU2Zjc2O1xufVxuXG4vKiBjZWxscyAqL1xuLmludFN0b2ljaCB7XG5cbiAgaGVpZ2h0OiA1MHB4O1xuICBtYXgtd2lkdGg6IDEwMHB4O1xuICBtaW4td2lkdGg6IDEwMHB4O1xuICBmb250LXNpemU6IG1lZGl1bTtcblxufVxuXG4jaW50ZXJhY3RvcnMtdGFibGUge1xuICB3aWR0aDogMTAwJTtcbn1cblxuLnN0b2ljaE51bSB7XG4gIHdpZHRoOiAzY2g7XG4gIGhlaWdodDogM2NoO1xuICBib3JkZXItcmFkaXVzOiAzY2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IHNtYWxsO1xuICB6LWluZGV4OiAyO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4udmVydGljYWxMaW5lIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbiAgbWluLXdpZHRoOiAxJTtcbiAgbWF4LXdpZHRoOiAxJTtcbiAgbWF4LWhlaWdodDogNTAlO1xuICBtaW4taGVpZ2h0OiA1MCU7XG4gIGJvcmRlci1yaWdodDogNXB4IHNvbGlkICMwZTZmNzY7XG4gIHotaW5kZXg6IDA7XG59XG5cbi50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1pbi13aWR0aDogMSU7XG4gIG1heC13aWR0aDogMSU7XG4gIG1heC1oZWlnaHQ6IDUwJTtcbiAgbWluLWhlaWdodDogNTAlO1xuICBib3JkZXItcmlnaHQ6IDA7XG4gIHotaW5kZXg6IDA7XG59XG5cbmk6bm90KC5zbWFsbCkge1xuICBmb250LXNpemU6IGxhcmdlO1xufVxuXG50cjpudGgtY2hpbGQoZXZlbikge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGZlY2VkO1xufVxuXG4uZXhwYW5kZWRSb3dzIHtcbiAgYm9yZGVyLXJpZ2h0OiAzcHggc29saWQgIzBlNmY3NjtcbiAgYm9yZGVyLWxlZnQ6IDNweCBzb2xpZCAjMGU2Zjc2O1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuYSB7XG4gIGNvbG9yOiAjMGU2Zjc2O1xufVxuXG5hOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cbiJdfQ== */";
+      module.exports = "td:first-child {\n  position: sticky;\n  left: 0;\n  z-index: 30;\n  max-height: 50px;\n  min-height: 50px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n}\n\n.intStoich {\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n}\n\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: #0e6f76;\n  text-align: center;\n  padding-top: 0.5ch;\n  color: white;\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n}\n\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n\n.transparentVerticalLine {\n  border-right: 0;\n}\n\ni:not(.small) {\n  font-size: large;\n}\n\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\n\ntr:nth-child(odd) {\n  background-color: #f7f9fa;\n}\n\n.expandedRows {\n  border-right: 4px solid #0e6f76;\n  border-left: 4px solid #0e6f76;\n  color: #0e6f76;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsT0FBTztFQUNQLFdBQVc7RUFDWCxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7RUFDZixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25COztBQUdBO0VBQ0UsVUFBVTtFQUNWLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIseUJBQXlCO0VBQ3pCLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsK0JBQStCO0FBQ2pDOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLCtCQUErQjtFQUMvQiw4QkFBOEI7RUFDOUIsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGNBQWM7QUFDaEIiLCJmaWxlIjoidGFibGUtaW50ZXJhY3Rvci1jb2x1bW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInRkOmZpcnN0LWNoaWxkIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMzA7XG4gIG1heC1oZWlnaHQ6IDUwcHg7XG4gIG1pbi1oZWlnaHQ6IDUwcHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBhZGRpbmc6IDVweDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuLmludFN0b2ljaCB7XG4gIGhlaWdodDogNTBweDtcbiAgbWF4LXdpZHRoOiAxMDBweDtcbiAgbWluLXdpZHRoOiAxMDBweDtcbiAgZm9udC1zaXplOiBtZWRpdW07XG59XG5cblxuLnN0b2ljaE51bSB7XG4gIHdpZHRoOiA0Y2g7XG4gIGhlaWdodDogNGNoO1xuICBib3JkZXItcmFkaXVzOiA0Y2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZy10b3A6IDAuNWNoO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogc21hbGw7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG59XG5cbi52ZXJ0aWNhbExpbmUsIC50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1pbi13aWR0aDogMSU7XG4gIG1heC13aWR0aDogMSU7XG4gIG1heC1oZWlnaHQ6IDUwJTtcbiAgbWluLWhlaWdodDogNTAlO1xufVxuXG4udmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiA1cHggc29saWQgIzBlNmY3Njtcbn1cblxuLnRyYW5zcGFyZW50VmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiAwO1xufVxuXG5pOm5vdCguc21hbGwpIHtcbiAgZm9udC1zaXplOiBsYXJnZTtcbn1cblxudHI6bnRoLWNoaWxkKGV2ZW4pIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RmZWNlZDtcbn1cblxudHI6bnRoLWNoaWxkKG9kZCkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjdmOWZhO1xufVxuXG4uZXhwYW5kZWRSb3dzIHtcbiAgYm9yZGVyLXJpZ2h0OiA0cHggc29saWQgIzBlNmY3NjtcbiAgYm9yZGVyLWxlZnQ6IDRweCBzb2xpZCAjMGU2Zjc2O1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuYSwgYTp2aXNpdGVkIHtcbiAgY29sb3I6ICMwZTZmNzY7XG59XG4iXX0= */";
 
       /***/
     }),
@@ -2239,7 +2329,7 @@
       \*********************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = ".complexNavigatorTable {\n  border-collapse: separate;\n  /* overflow-x: scroll;  remove to make the header sticky */\n  width: 130%;\n  height: 100%;\n}\n\n.header {\n  position: sticky;\n  top: 28px;\n  z-index: 2;\n\n}\n\n.interactors {\n  top: -21px;\n  z-index: 1;\n  position: relative;\n  border-top: 1px solid black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQXlCO0VBQ3pCLDBEQUEwRDtFQUMxRCxXQUFXO0VBQ1gsWUFBWTtBQUNkOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFNBQVM7RUFDVCxVQUFVOztBQUVaOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFVBQVU7RUFDVixrQkFBa0I7RUFDbEIsMkJBQTJCO0FBQzdCIiwiZmlsZSI6InRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbXBsZXhOYXZpZ2F0b3JUYWJsZSB7XG4gIGJvcmRlci1jb2xsYXBzZTogc2VwYXJhdGU7XG4gIC8qIG92ZXJmbG93LXg6IHNjcm9sbDsgIHJlbW92ZSB0byBtYWtlIHRoZSBoZWFkZXIgc3RpY2t5ICovXG4gIHdpZHRoOiAxMzAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi5oZWFkZXIge1xuICBwb3NpdGlvbjogc3RpY2t5O1xuICB0b3A6IDI4cHg7XG4gIHotaW5kZXg6IDI7XG5cbn1cblxuLmludGVyYWN0b3JzIHtcbiAgdG9wOiAtMjFweDtcbiAgei1pbmRleDogMTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBib3JkZXItdG9wOiAxcHggc29saWQgYmxhY2s7XG59XG4iXX0= */";
+      module.exports = ".complexNavigatorTable {\n  border-collapse: separate;\n  /* overflow-x: scroll;  remove to make the header sticky */\n\n  height: 100%;\n}\n\n.header {\n  position: sticky;\n  top: 28px;\n  z-index: 2;\n\n}\n\n.interactors {\n  top: -21px;\n  z-index: 1;\n  position: relative;\n  border-top: 1px solid black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQXlCO0VBQ3pCLDBEQUEwRDs7RUFFMUQsWUFBWTtBQUNkOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFNBQVM7RUFDVCxVQUFVOztBQUVaOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFVBQVU7RUFDVixrQkFBa0I7RUFDbEIsMkJBQTJCO0FBQzdCIiwiZmlsZSI6InRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbXBsZXhOYXZpZ2F0b3JUYWJsZSB7XG4gIGJvcmRlci1jb2xsYXBzZTogc2VwYXJhdGU7XG4gIC8qIG92ZXJmbG93LXg6IHNjcm9sbDsgIHJlbW92ZSB0byBtYWtlIHRoZSBoZWFkZXIgc3RpY2t5ICovXG5cbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uaGVhZGVyIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAyOHB4O1xuICB6LWluZGV4OiAyO1xuXG59XG5cbi5pbnRlcmFjdG9ycyB7XG4gIHRvcDogLTIxcHg7XG4gIHotaW5kZXg6IDE7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIGJsYWNrO1xufVxuIl19 */";
 
       /***/
     }),
@@ -2259,7 +2349,7 @@
       \***********************************************************************/
     /***/
     function _(module) {
-      module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb21wbGV4LXJlc3VsdHMuY29tcG9uZW50LmNzcyJ9 */";
+      module.exports = ".typeOfSorting {\n  display: none;\n}\n\n.sortingInteractors {\n  max-width: 100px;\n  min-width: 100px;\n}\n\n.sortingInteractors:hover .typeOfSorting {\n  display: flex;\n  flex-direction: column;\n  max-width: 100px;\n  min-width: 100px;\n}\n\n.typeOfSorting {\n  background-color: #389198;\n}\n\n.typeOfSorting .button {\n  background-color: #389198;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtcmVzdWx0cy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQiIsImZpbGUiOiJjb21wbGV4LXJlc3VsdHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50eXBlT2ZTb3J0aW5nIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cblxuLnNvcnRpbmdJbnRlcmFjdG9ycyB7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIG1pbi13aWR0aDogMTAwcHg7XG59XG5cbi5zb3J0aW5nSW50ZXJhY3RvcnM6aG92ZXIgLnR5cGVPZlNvcnRpbmcge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBtYXgtd2lkdGg6IDEwMHB4O1xuICBtaW4td2lkdGg6IDEwMHB4O1xufVxuXG4udHlwZU9mU29ydGluZyB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzODkxOTg7XG59XG5cbi50eXBlT2ZTb3J0aW5nIC5idXR0b24ge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzg5MTk4O1xufVxuIl19 */";
 
       /***/
     })
