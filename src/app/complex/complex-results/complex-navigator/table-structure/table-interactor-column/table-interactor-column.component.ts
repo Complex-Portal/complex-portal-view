@@ -665,7 +665,8 @@ export class TableInteractorColumnComponent implements OnInit {
           listOfInteractors.push(interactorAndIndex);
         }
       }
-      rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1]);
+      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) - (listOfInteractors[0][1]);
+      rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfType);
     }
     return ranges;
@@ -685,7 +686,8 @@ export class TableInteractorColumnComponent implements OnInit {
           listOfInteractors.push(interactorAndIndex);
         }
       }
-      rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1]);
+      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) - (listOfInteractors[0][1]);
+      rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfOrganism);
     }
     return ranges;
@@ -711,4 +713,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return interactorsOrganismsList;
   }
 
+  get enrichedInteractorsLength() {
+    return this._enrichedInteractors.length + 1;
+  }
 }

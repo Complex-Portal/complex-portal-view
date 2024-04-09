@@ -1,17 +1,18 @@
 <div class="Complex-navigator">
   <table class="interactors-table">
     <!-- Interactors' column -->
-    <ng-container *ngFor="let interactor of enrichedInteractors; let i=index">
-      <!-- <ng-container [ngClass]="rangeOfInteractorType(interactor.interactor)"></ng-container> -->
+    <ng-container *ngIf=" enrichedInteractorsLength">
+      <td [attr.rowspan]="enrichedInteractorsLength" class="interactorSeparation"></td>
+    </ng-container>
+    <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <ng-container>
         <tr *ngIf="!interactor.hidden">
-          <td>
-            <div style="font-weight: bold">
+          <td class="interactorsColumn">
+            <div>
               {{ interactor.interactor.name }}
-              <!--{{ interactor.organismName }}-->
               <i class="{{interactorTypeIcon(interactor.interactor)}}"
                  title="{{interactor.interactor.interactorType}}"></i>
-              <!-- Adding of the icons to access details of the interactorr -->
+              <!-- Adding of the icons to access details of the interactor -->
               <a [routerLink]="['/complex/search']"
                  [queryParams]="{query: interactor.interactor.identifier, page: 1}"
                  target="_blank">
@@ -21,14 +22,15 @@
             </div>
             <!-- Icon for the expandable -->
             <div class="container" *ngIf="interactor.isSubComplex">
-              {{ interactor.interactor.identifier }}
               <a title="{{ interactor.interactor.name }}'s interactors" (click)="toggleSubcomplexExpandable(i)">
+                {{ interactor.interactor.identifier }}
                 <i class="icon icon-common" data-icon="&#xf078;"
                    style="font-size:small; margin-top: 2px"></i>
               </a>
             </div>
             <div *ngIf="showExternalLink(interactor.interactor)" class="interactorType">
-              <a href="{{interactor.interactor.identifierLink}}" target="_blank">{{ interactor.interactor.identifier }}
+              <a href="{{interactor.interactor.identifierLink}}"
+                 target="_blank">{{ interactor.interactor.identifier }}
                 <i class="icon icon-generic small" data-icon="x"></i>
               </a>
             </div>
@@ -38,7 +40,8 @@
             <td class="intStoich">
               <div [ngClass]="displayTopLineClass(complex, i)"></div>
               <ng-container *ngIf="!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)">
-                <div class="stoichNum" title="{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}">
+                <div class="stoichNum"
+                     title="{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}">
                   {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}
                 </div>
               </ng-container>
@@ -100,7 +103,6 @@
               </ng-container>
             </tr>
             </tbody>
-
           </ng-container>
         </ng-container>
       </ng-container>
