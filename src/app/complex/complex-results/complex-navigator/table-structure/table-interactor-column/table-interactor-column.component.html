@@ -57,6 +57,7 @@
         <!-- Expandable menu for subcomplexes -->
         <ng-container *ngIf="interactor.expanded">
           <ng-container *ngIf="!!interactor.subComponents">
+            <tbody class="expandedRows">
             <tr class="expandedRows" *ngFor="let el of interactor.subComponents; let j=index">
               <td class="intStoich">
                 <div style="font-weight: bold">
@@ -98,6 +99,8 @@
                 </td>
               </ng-container>
             </tr>
+            </tbody>
+
           </ng-container>
         </ng-container>
       </ng-container>

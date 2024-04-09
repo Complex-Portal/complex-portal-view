@@ -23,15 +23,16 @@
     </thead>
     <!-- When table is overflowing -->
     <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
-    <tr>
+    <tr [style.--cols]="complexSearch.elements.length">
       <th class="interactorsHeader">Interactors</th>
       <th class="rotate" *ngFor="let complex of complexSearch.elements">
+
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
           <div>
             <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
-            <div class="line"></div>
+<!--            <div class="line"></div>-->
               <div class="tilted-label">
                 <i class="icon icon-generic small" data-icon="x"></i>
                 {{ complex.complexName }}
@@ -39,8 +40,8 @@
             </span>
           </div>
         </a>
+
       </th>
-      <th class="placeholder"></th>
     </tr>
     </thead>
   </table>

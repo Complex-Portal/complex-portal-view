@@ -33,53 +33,64 @@ thead {
   overflow: hidden;
 }
 
-.CN-table th.rotate {
-  min-width: 100px;
-  max-width: 100px;
-  position: relative;
-  border-bottom: 3px solid white;
-  white-space: nowrap; /* all text in one line */
-  border-bottom: 1px solid black;
+/*.CN-table {*/
+/*  position: relative;*/
+
+/*}*/
+
+.CN-table .tableHeadOverflow tr {
+  --cols: 1;
+  display: grid;
+  grid-template-columns: 130px repeat(auto-fit, 100px);
+  /*grid-auto-flow: column;*/
+  width: calc(130px + 100px * var(--cols) + 185px);
 }
 
-.CN-table th.rotate span {
-  transform: rotate(-45deg);
-  position: absolute;
+.CN-table .tableHeadOverflow th.rotate {
+  position: relative;
   width: 340px;
-
+  height: 72px !important;
   color: white;
-  background-color: #0e6f76;
+  /*background-color: #0e6f76;*/
   font-size: 14px;
-
-  /* vertical alignement of the text */
-  align-content: center;
   text-align: left;
-  padding-left: 70px;
+  border-top: 1px solid white;
+  top: 55px;
+  left: -27px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  padding: 0;
+
+  transform: rotate(-45deg);
+
 
   /* line */
   border-top: 1px solid white;
-  top: 55px; /* vertical alignement of the line */
-  bottom: 58px; /* vertical alignement of the line */
-  left: -27px; /* horizontal alignement of the line */
 }
 
-.line {
-  position: absolute;
-  top: auto;
-  bottom: auto;
-  background: #0e6f76;
-  margin-top: 7px;
-  left: 0;
-  width: 66px;
-  height: 5px;
-  border-radius: 4px;
+.CN-table .tableHeadOverflow th.rotate a {
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  background-color: #0e6f76;
+  padding: 0 0 0 70px;
+
+
 }
 
-.placeholder {
-  min-width: 190px;
-  background-color: white;
-  border-right: 0 solid white;
-}
+
+/*.line {*/
+/*  position: absolute;*/
+/*  top: auto;*/
+/*  bottom: auto;*/
+/*  background: #0e6f76;*/
+/*  margin-top: 7px;*/
+/*  left: 0;*/
+/*  width: 66px;*/
+/*  height: 5px;*/
+/*  border-radius: 4px;*/
+/*}*/
 
 /* Horizontal complexes name */
 

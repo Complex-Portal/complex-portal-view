@@ -28,3 +28,18 @@
 }
 
 
+.sticky-nav-container {
+  --global-margin: calc((100vw - 80rem) / -2);
+  position: sticky;
+  top: 0;
+  background: #007c82;
+  margin-left: var(--global-margin);
+  padding: 0 calc(-1 * var(--global-margin));
+  width: 100vw;
+  z-index: 4;
+}
+
+.sticky-nav-container nav {
+  display: flex;
+}
+

@@ -607,7 +607,7 @@ export class TableInteractorColumnComponent implements OnInit {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
   }
 
-  public classifyIntercatorsByAppearance() {
+  public classifyIntercatorsByOccurence() {
     for (const oneInteractor of this._enrichedInteractors) {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
@@ -640,12 +640,14 @@ export class TableInteractorColumnComponent implements OnInit {
     switch (this._interactorsSorting) {
       case 'Type':
         this.classifyInteractorsByType();
+        this.rangeOfInteractorType();
         break;
       case 'Organism':
         this.classifyInteractorsByOrganism();
+        this.rangeOfInteractorOrganisms();
         break;
       default:
-        this.classifyIntercatorsByAppearance();
+        this.classifyIntercatorsByOccurence();
     }
   }
 
