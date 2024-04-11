@@ -23,7 +23,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType = true;
-  _interactorsSorting = 'Appearance';
+  _interactorsSorting = 'Occurrence';
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -34,6 +34,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
+    this._interactorsSorting = this.interactorsSorting;
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -223,16 +224,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.DisplayType = !this.DisplayType;
   }
 
-  // set interactorsSortingBy(typeOfSorting: string) {
-  //   this.interactorsSortingBy = typeOfSorting;
-  // }
-
   get interactorsSorting(): string {
     return this._interactorsSorting;
   }
 
   setInteractorsSorting(typeOfSorting: string) {
-    //console.log(typeOfSorting);
     this._interactorsSorting = typeOfSorting;
   }
 }

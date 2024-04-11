@@ -38,7 +38,7 @@ export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _enrichedInteractors: EnrichedInteractor[];
   _enrichedComplexes: EnrichedComplex[];
-  _interactorsSorting: string;
+  @Input() _interactorsSorting;
 
 
   constructor(private complexPortalService: ComplexPortalService) {
@@ -85,14 +85,10 @@ export class TableInteractorColumnComponent implements OnInit {
       }
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
-    //////////// CLASSIFICATION BEFORE CALCULATIONS
     this.interactorOrganism();
-    this.classificationChosen(); // default = Appearance
+    //////////// CLASSIFICATION BEFORE CALCULATIONS
+    this.classificationChosen();
     this.calculateAllStartAndEndIndexes();
-    console.log(this.rangeOfInteractorType());
-    console.log(this.rangeOfInteractorOrganisms()); // check for the different labels (e.g homosapiens)
-    console.log(this._interactorsSorting); // check to retrieve the data (displaying undefined)
-
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -607,7 +603,7 @@ export class TableInteractorColumnComponent implements OnInit {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
   }
 
-  public classifyIntercatorsByOccurence() {
+  public classifyInteractorsByOccurence() {
     for (const oneInteractor of this._enrichedInteractors) {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
@@ -637,18 +633,31 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public classificationChosen() {
+    let type: string;
     switch (this._interactorsSorting) {
       case 'Type':
         this.classifyInteractorsByType();
+        this.calculateAllStartAndEndIndexes();
         this.rangeOfInteractorType();
+        type = 'Type';
         break;
       case 'Organism':
         this.classifyInteractorsByOrganism();
+        this.calculateAllStartAndEndIndexes();
         this.rangeOfInteractorOrganisms();
+        type = 'Organism';
+        break;
+      case 'Occurrence':
+        this.classifyInteractorsByOccurence();
+        this.calculateAllStartAndEndIndexes();
+        type = 'Occurrence';
         break;
       default:
-        this.classifyIntercatorsByOccurence();
+        this.classifyInteractorsByOccurence();
+        this.calculateAllStartAndEndIndexes();
+        type = 'Occurrence';
     }
+    return type;
   }
 
   private rangeOfInteractorType(): number[] {
@@ -665,7 +674,7 @@ export class TableInteractorColumnComponent implements OnInit {
           listOfInteractors.push(interactorAndIndex);
         }
       }
-      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) - (listOfInteractors[0][1]);
+      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) + 1 - (listOfInteractors[0][1]);
       rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfType);
     }
@@ -686,10 +695,12 @@ export class TableInteractorColumnComponent implements OnInit {
           listOfInteractors.push(interactorAndIndex);
         }
       }
-      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) - (listOfInteractors[0][1]);
+      const lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) + 1 - (listOfInteractors[0][1]);
+      // console.log(lengthOfRange);
       rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfOrganism);
     }
+    // console.log(ranges);
     return ranges;
   }
 
@@ -710,6 +721,7 @@ export class TableInteractorColumnComponent implements OnInit {
         interactorsOrganismsList.push(enrichedInteractor.organismName);
       }
     }
+    // console.log(interactorsOrganismsList);
     return interactorsOrganismsList;
   }
 
