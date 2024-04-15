@@ -3,8 +3,8 @@
     <!-- Interactors' column -->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
-        <ng-container *ngIf="classificationChosen()=='Type'">
-          <ng-container *ngFor="let oneType of rangeOfInteractorType()">
+        <ng-container *ngIf="interactorsSorting == 'Type'">
+          <ng-container *ngFor="classifyInteractorsByType();let oneType of rangeOfInteractorType()">
             <ng-container *ngIf="oneType[1]==i">
               <td [attr.rowspan]="oneType[3]" class="interactorSeparation" title="{{oneType[0]}}">
                 <div class="interactorSeparationName"> {{ oneType[0] }}</div>
@@ -12,14 +12,17 @@
             </ng-container>
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="classificationChosen()=='Organism'">
-          <ng-container *ngFor="let oneOrganism of rangeOfInteractorOrganisms()">
+        <ng-container *ngIf="interactorsSorting=='Organism'">
+          <ng-container *ngFor="classifyInteractorsByOrganism(); let oneOrganism of rangeOfInteractorOrganisms()">
             <ng-container *ngIf="oneOrganism[1]==i">
               <td [attr.rowspan]="oneOrganism[3]" class="interactorSeparation" title="{{oneOrganism[0]}}">
                 <div class="interactorSeparationName"> {{ oneOrganism[0] }}</div>
               </td>
             </ng-container>
           </ng-container>
+        </ng-container>
+        <ng-container *ngIf="interactorsSorting=='Occurrence'">
+          <!--          {{ classifyInteractorsByOccurrence() }}-->
         </ng-container>
         <td class="interactorsColumn">
           <div>
@@ -55,8 +58,8 @@
             <div [ngClass]="displayTopLineClass(complex, i)"></div>
             <ng-container *ngIf="!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)">
               <div class="stoichNum"
-                   title="{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}">
-                {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}
+                   title="{{ getStoichiometry(complex.complex, interactor.interactor.identifier) }}">
+                {{ stoichiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}
               </div>
             </ng-container>
             <ng-container class="stoichComponent"
@@ -70,6 +73,7 @@
             <div [ngClass]="displayBottomLineClass(complex, i)"></div>
           </td>
         </ng-container>
+        <div class="spaceHolder" *ngIf="complexSearch.elements.length>6"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->
       <ng-container *ngIf="interactor.expanded">
@@ -100,15 +104,15 @@
                 <div [ngClass]="displayTopLineClassExpanded(complex, i, j)"></div>
                 <ng-container *ngIf="!!findInteractorInComplex(complex.complex, el.identifier)">
                   <div class="stoichNum"
-                       title="{{ getStochiometry(complex.complex, el.identifier) }}">
-                    {{ stochiometryOfInteractors(complex.complex, el.identifier) }}
+                       title="{{ getStoichiometry(complex.complex, el.identifier) }}">
+                    {{ stoichiometryOfInteractors(complex.complex, el.identifier) }}
                   </div>
                 </ng-container>
                 <ng-container
                   *ngIf="!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)">
                   <!-- subcomplexes' interactors' stoichiometry -->
                   <div class="stoichNum"
-                       title="{{ getStochiometryInExpandedSubComplex(interactor, el.identifier) }}">
+                       title="{{ getStoichiometryInExpandedSubComplex(interactor, el.identifier) }}">
                     {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}
                   </div>
                 </ng-container>
@@ -120,6 +124,5 @@
         </ng-container>
       </ng-container>
     </ng-container>
-
   </table>
 </div>

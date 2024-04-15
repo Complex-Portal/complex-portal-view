@@ -1,5 +1,9 @@
 /* Header */
 
+.CN-table {
+  transform: rotateX(180deg); /* On reinverse le contenu du header pour que le contenu soit dans le bon sens */
+}
+
 thead {
   border: 0;
   background-color: white;
@@ -33,16 +37,11 @@ thead {
   overflow: hidden;
 }
 
-/*.CN-table {*/
-/*  position: relative;*/
-
-/*}*/
 
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
   display: grid;
   grid-template-columns: 130px repeat(auto-fit, 100px);
-  /*grid-auto-flow: column;*/
   width: calc(130px + 100px * var(--cols) + 185px);
 }
 
@@ -51,7 +50,6 @@ thead {
   width: 340px;
   height: 72px !important;
   color: white;
-  /*background-color: #0e6f76;*/
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
@@ -129,4 +127,9 @@ a:visited {
 
 a {
   color: white;
+}
+
+.spaceHolder {
+  width: 180px;
+  background-color: white;
 }

@@ -11,6 +11,7 @@
   text-align: end;
   color: #0e6f76;
   font-weight: bold;
+  background: inherit;
 }
 
 .interactorsColumn a {
@@ -111,4 +112,8 @@ a, a:visited {
   font-size: small;
   color: white;
   line-height: 0.8;
+}
+
+.spaceHolder {
+  width: 180px;
 }

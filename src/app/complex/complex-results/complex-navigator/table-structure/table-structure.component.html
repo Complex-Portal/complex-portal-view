@@ -1,14 +1,18 @@
 <div class="complexNavigatorTable">
-  <div class="header">
+  <div class="header"
+       (scroll)="body.scrollLeft = header.scrollLeft" #header>
+
     <cp-table-header [complexSearch]="complexSearch">
     </cp-table-header>
   </div>
-  <div class="interactors">
+  <div class="interactors"
+       (scroll)="header.scrollLeft = body.scrollLeft" #body>
     <cp-table-interactor-column
       [complexSearch]="complexSearch"
       [interactors]="interactors"
       [interactorsSorting]="interactorsSorting">
     </cp-table-interactor-column>
   </div>
+  <div class="spaceHolder"></div>
 </div>
 

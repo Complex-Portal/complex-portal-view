@@ -1,20 +1,21 @@
 .complexNavigatorTable {
   border-collapse: separate;
-  /* overflow-x: scroll;  remove to make the header sticky */
-
   height: 100%;
+  width: 120%;
 }
 
 .header {
   position: sticky;
-  top: 38px;
+  top: 20px;
   z-index: 2;
-
+  overflow-x: auto;
+  overflow-y: hidden;
+  transform: rotateX(180deg);
 }
 
 .interactors {
-  top: -21px;
   z-index: 1;
   position: relative;
-  border-top: 1px solid black;
+  overflow-x: auto;
+  overflow-y: hidden;
 }

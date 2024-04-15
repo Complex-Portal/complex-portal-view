@@ -27,8 +27,6 @@ class EnrichedComplex {
   endSubComponentIndex: number;
 }
 
-const BinaryComponentList = [];
-
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -38,7 +36,7 @@ export class TableInteractorColumnComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   _enrichedInteractors: EnrichedInteractor[];
   _enrichedComplexes: EnrichedComplex[];
-  @Input() _interactorsSorting;
+  @Input() interactorsSorting: string;
 
 
   constructor(private complexPortalService: ComplexPortalService) {
@@ -56,14 +54,6 @@ export class TableInteractorColumnComponent implements OnInit {
     return this._enrichedComplexes;
   }
 
-  @Input()
-  set interactorsSorting(value: string) {
-    this._interactorsSorting = value;
-  }
-
-  get interactorsSorting(): string {
-    return this._interactorsSorting;
-  }
 
   @Input()
   set interactors(value: Set<Interactor>) {
@@ -86,9 +76,7 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     this.interactorOrganism();
-    //////////// CLASSIFICATION BEFORE CALCULATIONS
-    this.classificationChosen();
-    this.calculateAllStartAndEndIndexes();
+    this.classifyInteractorsByOccurrence();
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -115,10 +103,10 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  stochiometryOfInteractors(complex: Element, interactorId: string): string {
+  stoichiometryOfInteractors(complex: Element, interactorId: string): string {
     const match = this.findInteractorInComplex(complex, interactorId);
     if (!!match) {
-      return this.formatStochiometryValues(match.stochiometry);
+      return this.formatStoichiometryValues(match.stochiometry);
     }
     return null;
   }
@@ -126,7 +114,7 @@ export class TableInteractorColumnComponent implements OnInit {
   stoichiometryOfInteractorsExpandable(interactor: EnrichedInteractor, interactorId: string): string {
     const match = this.findInteractorInSubcomplex(interactor, interactorId);
     if (!!match) {
-      return this.formatStochiometryValues(match.stochiometry);
+      return this.formatStoichiometryValues(match.stochiometry);
     }
     return null;
   }
@@ -134,12 +122,12 @@ export class TableInteractorColumnComponent implements OnInit {
   stoichiometryOfInteractorsMainTable(complex: Element, interactorId: string): string {
     const matches = this.findInteractorsInSubComplex(complex, interactorId);
     if (matches.length > 0) {
-      const stochiometryValues = this.addedStoichiometryValues(matches);
-      if (!!stochiometryValues) {
-        if (stochiometryValues[0] === stochiometryValues[1]) {
-          return stochiometryValues[0].toString();
+      const stoichiometryValues = this.addedStoichiometryValues(matches);
+      if (!!stoichiometryValues) {
+        if (stoichiometryValues[0] === stoichiometryValues[1]) {
+          return stoichiometryValues[0].toString();
         } else {
-          return `${stochiometryValues[0]}, ${stochiometryValues[1]}`;
+          return `${stoichiometryValues[0]}, ${stoichiometryValues[1]}`;
         }
       } else {
         return ' ';
@@ -148,7 +136,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  getStochiometry(complex: Element, componentId: string): string {
+  getStoichiometry(complex: Element, componentId: string): string {
     const match = this.findInteractorInComplex(complex, componentId);
     if (!!match) {
       if (!!match.stochiometry) {
@@ -163,9 +151,9 @@ export class TableInteractorColumnComponent implements OnInit {
   getStoichiometrySubComplex(complex: Element, interactorId: string): string {
     const matches = this.findInteractorsInSubComplex(complex, interactorId);
     if (matches.length > 0) {
-      const stochiometryValues = this.addedStoichiometryValues(matches);
-      if (!!stochiometryValues) {
-        return `Stoichiometry values: minValue: ${stochiometryValues[0]}, maxValue: ${stochiometryValues[1]}`;
+      const stoichiometryValues = this.addedStoichiometryValues(matches);
+      if (!!stoichiometryValues) {
+        return `Stoichiometry values: minValue: ${stoichiometryValues[0]}, maxValue: ${stoichiometryValues[1]}`;
       } else {
         return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
       }
@@ -173,7 +161,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return null;
   }
 
-  getStochiometryInExpandedSubComplex(interactor: EnrichedInteractor, interactorId: string): string {
+  getStoichiometryInExpandedSubComplex(interactor: EnrichedInteractor, interactorId: string): string {
     const match = this.findInteractorInSubcomplex(interactor, interactorId);
     if (!!match) {
       if (!!match.stochiometry) {
@@ -271,19 +259,19 @@ export class TableInteractorColumnComponent implements OnInit {
     return interactor.subComponents.find(component => component.identifier === interactorId);
   }
 
-  private fetchValuesFromStochiometry(stochiometry: string) {
+  private fetchValuesFromStoichiometry(stoichiometry: string) {
     const pattern = 'minValue: ([0-9+]), maxValue: ([0-9+])';
-    return stochiometry.match(pattern);
+    return stoichiometry.match(pattern);
   }
 
-  private formatStochiometryValues(stochiometry: string): string {
-    if (!!stochiometry) {
-      const matchedStochometry = this.fetchValuesFromStochiometry(stochiometry);
-      if (!!matchedStochometry) {
+  private formatStoichiometryValues(stoichiometry: string): string {
+    if (!!stoichiometry) {
+      const matchedStoichiometry = this.fetchValuesFromStoichiometry(stoichiometry);
+      if (!!matchedStoichiometry) {
         // tslint:disable-next-line:radix
-        const minValue = parseInt(matchedStochometry[1]);
+        const minValue = parseInt(matchedStoichiometry[1]);
         // tslint:disable-next-line:radix
-        const maxValue = parseInt(matchedStochometry[2]);
+        const maxValue = parseInt(matchedStoichiometry[2]);
         if (minValue === maxValue) {
           return minValue.toString();
         } else {
@@ -299,8 +287,9 @@ export class TableInteractorColumnComponent implements OnInit {
     let maxValue: number = null;
     for (const component of components) {
       if (!!component.stochiometry) {
-        const matchedStochometry = this.fetchValuesFromStochiometry(component.stochiometry);
-        if (!!matchedStochometry) {
+        const matchedStoichiometry = this.fetchValuesFromStoichiometry(component.stochiometry);
+        if (!!matchedStoichiometry
+        ) {
           if (minValue === null) {
             minValue = 0;
           }
@@ -308,9 +297,9 @@ export class TableInteractorColumnComponent implements OnInit {
             maxValue = 0;
           }
           // tslint:disable-next-line:radix
-          minValue += parseInt(matchedStochometry[1]);
+          minValue += parseInt(matchedStoichiometry[1]);
           // tslint:disable-next-line:radix
-          maxValue += parseInt(matchedStochometry[2]);
+          maxValue += parseInt(matchedStoichiometry[2]);
         }
       }
     }
@@ -434,7 +423,7 @@ export class TableInteractorColumnComponent implements OnInit {
           } else if (this._enrichedInteractors[i].isSubComplex &&
             !!this._enrichedInteractors[i].subComponents &&
             this._enrichedInteractors[i].expanded) {
-            // The interactor is not part of the complex but it is a subcomplex and it is expanded.
+            // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
             // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
             // In that case, the line could start or end on any of those subcomponents
             for (let k = 0; k < this._enrichedInteractors[i].subComponents.length; k++) {
@@ -481,7 +470,7 @@ export class TableInteractorColumnComponent implements OnInit {
       // The line starts before this interactor and end at this interactor or on any of its subcomponents
       if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
         // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-        // the line does not end in this interactor and it musy cross through the interactor cell to the subcomponents
+        // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
         if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
           if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
             return true;
@@ -503,7 +492,7 @@ export class TableInteractorColumnComponent implements OnInit {
       }
       // If the interactor is a subcomplex.
       // If the interactor is actually part of the complex, the line starts in this interactor
-      // Otherwise, the line actually starts on one of the subcomponets of the complex, but not on the interactor itself, as it is
+      // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the interactor itself, as it is
       // not part of the complex.
       if (complex.complex.interactors.some(component =>
         this._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier)) {
@@ -519,7 +508,7 @@ export class TableInteractorColumnComponent implements OnInit {
     if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
 
       // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-      // the line does not end in this interactor and it must cross through to the subcomponents
+      // the line does not end in this interactor, and it must cross through to the subcomponents
       if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
         if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
           return false;
@@ -543,12 +532,12 @@ export class TableInteractorColumnComponent implements OnInit {
           return true;
         }
 
-        // The line started before this interactor and it ends on a later subcomponent, so it crosses through this subcomponent
+        // The line started before this interactor, and it ends on a later subcomponent, so it crosses through this subcomponent
         if (complex.startInteractorIndex < interactorIndex && complex.endSubComponentIndex > subComponentIndex) {
           return true;
         }
 
-        // The line started before this subcomponent and it ends on a later interactor, so it crosses through this subcomponent
+        // The line started before this subcomponent, and it ends on a later interactor, so it crosses through this subcomponent
         if (complex.startSubComponentIndex < subComponentIndex && complex.endInteractorIndex > interactorIndex) {
           return true;
         }
@@ -597,23 +586,27 @@ export class TableInteractorColumnComponent implements OnInit {
 
   public classifyInteractorsByOrganism() {
     this._enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
+    this.calculateAllStartAndEndIndexes();
+    this.rangeOfInteractorOrganisms();
   }
 
   public classifyInteractorsByType() {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
+    this.calculateAllStartAndEndIndexes();
+    this.rangeOfInteractorType();
   }
 
-  public classifyInteractorsByOccurence() {
+  public classifyInteractorsByOccurrence() {
     for (const oneInteractor of this._enrichedInteractors) {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             // tslint:disable-next-line:radix
-            if (isNaN(parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
+            if (isNaN(parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
               oneInteractor.timesAppearing = oneInteractor.timesAppearing;
             } else {
               // tslint:disable-next-line:radix
-              oneInteractor.timesAppearing += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
+              oneInteractor.timesAppearing += parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier));
             }
           }
         }
@@ -623,44 +616,17 @@ export class TableInteractorColumnComponent implements OnInit {
             // tslint:disable-next-line:max-line-length no-shadowed-variable
             const enrichedInteractor = this._enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === subInteractor.identifier);
             // tslint:disable-next-line:radix
-            enrichedInteractor.timesAppearing = parseInt(this.formatStochiometryValues(subInteractor.stochiometry));
+            enrichedInteractor.timesAppearing = parseInt(this.formatStoichiometryValues(subInteractor.stochiometry));
           }
         }
       }
     }
     // tslint:disable-next-line:max-line-length
     this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
+    this.calculateAllStartAndEndIndexes();
   }
 
-  public classificationChosen() {
-    let type: string;
-    switch (this._interactorsSorting) {
-      case 'Type':
-        this.classifyInteractorsByType();
-        this.calculateAllStartAndEndIndexes();
-        this.rangeOfInteractorType();
-        type = 'Type';
-        break;
-      case 'Organism':
-        this.classifyInteractorsByOrganism();
-        this.calculateAllStartAndEndIndexes();
-        this.rangeOfInteractorOrganisms();
-        type = 'Organism';
-        break;
-      case 'Occurrence':
-        this.classifyInteractorsByOccurence();
-        this.calculateAllStartAndEndIndexes();
-        type = 'Occurrence';
-        break;
-      default:
-        this.classifyInteractorsByOccurence();
-        this.calculateAllStartAndEndIndexes();
-        type = 'Occurrence';
-    }
-    return type;
-  }
-
-  private rangeOfInteractorType(): number[] {
+  public rangeOfInteractorType(): number[] {
     const ranges = [];
     const interactorTypesList = this.listOfInteractorTypes();
     for (const type of interactorTypesList) {
@@ -674,14 +640,14 @@ export class TableInteractorColumnComponent implements OnInit {
           listOfInteractors.push(interactorAndIndex);
         }
       }
-      let lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) + 1 - (listOfInteractors[0][1]);
+      const lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) + 1 - (listOfInteractors[0][1]);
       rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfType);
     }
     return ranges;
   }
 
-  private rangeOfInteractorOrganisms(): number[] {
+  public rangeOfInteractorOrganisms(): number[] {
     const ranges = [];
     const interactorOrganismsList = this.listOfInteractorOrganism();
     for (const organism of interactorOrganismsList) {
@@ -704,7 +670,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return ranges;
   }
 
-  private listOfInteractorTypes() {
+  public listOfInteractorTypes() {
     const interactorsTypesList = [];
     for (const enrichedInteractor of this._enrichedInteractors) {
       if (!interactorsTypesList.includes(enrichedInteractor.interactor.interactorType)) {
@@ -714,7 +680,7 @@ export class TableInteractorColumnComponent implements OnInit {
     return interactorsTypesList;
   }
 
-  private listOfInteractorOrganism() {
+  public listOfInteractorOrganism() {
     const interactorsOrganismsList = [];
     for (const enrichedInteractor of this._enrichedInteractors) {
       if (!interactorsOrganismsList.includes(enrichedInteractor.organismName)) {
@@ -723,9 +689,5 @@ export class TableInteractorColumnComponent implements OnInit {
     }
     // console.log(interactorsOrganismsList);
     return interactorsOrganismsList;
-  }
-
-  get enrichedInteractorsLength() {
-    return this._enrichedInteractors.length + 1;
   }
 }

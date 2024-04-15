@@ -37,6 +37,7 @@
   padding: 0 calc(-1 * var(--global-margin));
   width: 100vw;
   z-index: 4;
+  border-bottom: 1px solid white;
 }
 
 .sticky-nav-container nav {
