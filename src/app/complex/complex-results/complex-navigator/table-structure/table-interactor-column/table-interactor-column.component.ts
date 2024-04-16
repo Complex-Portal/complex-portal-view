@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../../shared/model/complex-results/element.model';
@@ -32,11 +32,13 @@ class EnrichedComplex {
   templateUrl: './table-interactor-column.component.html',
   styleUrls: ['./table-interactor-column.component.css']
 })
-export class TableInteractorColumnComponent implements OnInit {
+export class TableInteractorColumnComponent implements OnInit, OnChanges {
   @Input() complexSearch: ComplexSearchResult;
   _enrichedInteractors: EnrichedInteractor[];
   _enrichedComplexes: EnrichedComplex[];
-  @Input() interactorsSorting: string;
+  _interactorsSorting: string;
+  _rangesOfInteractorsType: number[];
+  _rangesOfInteractorsOrganism: number[];
 
 
   constructor(private complexPortalService: ComplexPortalService) {
@@ -54,6 +56,30 @@ export class TableInteractorColumnComponent implements OnInit {
     return this._enrichedComplexes;
   }
 
+  @Input()
+  set interactorsSorting(value: string) {
+    this._interactorsSorting = value;
+  }
+
+  get interactorsSorting(): string {
+    return this._interactorsSorting;
+  }
+
+  get rangesOfInteractorType(): number[] {
+    return this._rangesOfInteractorsType;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!!this._interactorsSorting && !!this._enrichedInteractors && this._enrichedInteractors.length > 0) {
+      if (this._interactorsSorting === 'Type') {
+        this.classifyInteractorsByType();
+      } else if (this._interactorsSorting === 'Organism') {
+        this.classifyInteractorsByOrganism();
+      } else {
+        this.classifyInteractorsByOccurrence();
+      }
+    }
+  }
 
   @Input()
   set interactors(value: Set<Interactor>) {
@@ -76,7 +102,6 @@ export class TableInteractorColumnComponent implements OnInit {
       this._enrichedInteractors.push(newEnrichedInteractor);
     }
     this.interactorOrganism();
-    this.classifyInteractorsByOccurrence();
   }
 
   findInteractorInComplex(complex: Element, componentId: string): ComplexComponent {
@@ -208,6 +233,7 @@ export class TableInteractorColumnComponent implements OnInit {
     }
 
     // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
+    this.rangeOfInteractorTypeV2();
     this.calculateAllStartAndEndIndexes();
   }
 
@@ -593,7 +619,7 @@ export class TableInteractorColumnComponent implements OnInit {
   public classifyInteractorsByType() {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
     this.calculateAllStartAndEndIndexes();
-    this.rangeOfInteractorType();
+    this.rangeOfInteractorTypeV2();
   }
 
   public classifyInteractorsByOccurrence() {
@@ -627,7 +653,7 @@ export class TableInteractorColumnComponent implements OnInit {
   }
 
   public rangeOfInteractorType(): number[] {
-    const ranges = [];
+    const ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     const interactorTypesList = this.listOfInteractorTypes();
     for (const type of interactorTypesList) {
       const rangeOfType = [];
@@ -644,6 +670,7 @@ export class TableInteractorColumnComponent implements OnInit {
       rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfType);
     }
+    this._rangesOfInteractorsType = ranges;
     return ranges;
   }
 
@@ -667,6 +694,7 @@ export class TableInteractorColumnComponent implements OnInit {
       ranges.push(rangeOfOrganism);
     }
     // console.log(ranges);
+    this._rangesOfInteractorsOrganism = ranges;
     return ranges;
   }
 
@@ -690,4 +718,29 @@ export class TableInteractorColumnComponent implements OnInit {
     // console.log(interactorsOrganismsList);
     return interactorsOrganismsList;
   }
+
+  public rangeOfInteractorTypeV2() {
+    const ranges = [];
+    for (let i = 0; i < this.enrichedInteractors.length; i++) {
+      const oneType = [];
+      let n = i;
+      // tslint:disable-next-line:max-line-length
+      if (!!this.enrichedInteractors[i + 1] && this.enrichedInteractors[i].interactor.interactorType === this.enrichedInteractors[i + 1].interactor.interactorType) {
+        n += 1;
+      } else {
+        oneType.push(this.enrichedInteractors[i].interactor.interactorType, n, 0);
+        ranges.push(oneType);
+      }
+    }
+    for (let j = 1; j < ranges.length; j++) {
+      ranges[j][2] += ranges[j - 1][1] + 1;
+    }
+    for (let k = 0; k < ranges.length; k++) {
+      ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
+    }
+    console.log(ranges);
+    this._rangesOfInteractorsType = ranges;
+    return ranges;
+  }
+
 }

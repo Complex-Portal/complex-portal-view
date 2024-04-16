@@ -4,25 +4,26 @@
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngIf="interactorsSorting == 'Type'">
-          <ng-container *ngFor="classifyInteractorsByType();let oneType of rangeOfInteractorType()">
-            <ng-container *ngIf="oneType[1]==i">
-              <td [attr.rowspan]="oneType[3]" class="interactorSeparation" title="{{oneType[0]}}">
-                <div class="interactorSeparationName"> {{ oneType[0] }}</div>
-              </td>
-            </ng-container>
+          <ng-container *ngFor="let oneType of rangeOfInteractorTypeV2()">
+            <td *ngIf="oneType[2]==i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
+                title="{{oneType[0]}}">
+              <div class="interactorSeparationName"> {{ oneType[0] }}</div>
+            </td>
+            <!--            <td *ngIf="interactor.expanded && i==oneType[1]+interactor.subComponents.length"-->
+            <!--                [attr.rowspan]="oneType[3]+interactor.subComponents.length"-->
+            <!--                class="interactorSeparation"-->
+            <!--                title="{{oneType[0]}}">-->
+            <!--              <div class="interactorSeparationName"> {{ oneType[0] }}</div>-->
+            <!--            </td>-->
           </ng-container>
         </ng-container>
         <ng-container *ngIf="interactorsSorting=='Organism'">
-          <ng-container *ngFor="classifyInteractorsByOrganism(); let oneOrganism of rangeOfInteractorOrganisms()">
-            <ng-container *ngIf="oneOrganism[1]==i">
-              <td [attr.rowspan]="oneOrganism[3]" class="interactorSeparation" title="{{oneOrganism[0]}}">
-                <div class="interactorSeparationName"> {{ oneOrganism[0] }}</div>
-              </td>
-            </ng-container>
+          <ng-container *ngFor="let oneOrganism of rangeOfInteractorOrganisms()">
+            <td *ngIf="oneOrganism[1]==i" [attr.rowspan]="oneOrganism[3]" class="interactorSeparation"
+                title="{{oneOrganism[0]}}">
+              <div class="interactorSeparationName"> {{ oneOrganism[0] }}</div>
+            </td>
           </ng-container>
-        </ng-container>
-        <ng-container *ngIf="interactorsSorting=='Occurrence'">
-          <!--          {{ classifyInteractorsByOccurrence() }}-->
         </ng-container>
         <td class="interactorsColumn">
           <div>
@@ -80,6 +81,10 @@
         <ng-container *ngIf="!!interactor.subComponents">
           <tbody class="expandedRows">
           <tr class="expandedRows" *ngFor="let el of interactor.subComponents; let j=index">
+            <!--            <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"-->
+            <!--                *ngIf="interactorsSorting == 'Type' && j===0 || interactorsSorting == 'Organism' && j===0">-->
+            <!--              <div class="interactorSeparationName"> {{ interactor.interactor.name }}'s interactors</div>-->
+            <!--            </td>-->
             <td class="intStoich">
               <div style="font-weight: bold">
                 <a [routerLink]="['/complex/search']"
@@ -119,6 +124,7 @@
                 <div [ngClass]="displayBottomLineClassExpanded(complex, i, j)"></div>
               </td>
             </ng-container>
+            <div class="spaceHolder" *ngIf="complexSearch.elements.length>6"></div>
           </tr>
           </tbody>
         </ng-container>
