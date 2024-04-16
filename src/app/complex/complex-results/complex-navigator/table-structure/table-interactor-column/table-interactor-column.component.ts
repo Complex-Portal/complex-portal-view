@@ -233,6 +233,7 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     }
 
     // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
+    console.log(this.rangeOfInteractorTypeV2());
     this.rangeOfInteractorTypeV2();
     this.calculateAllStartAndEndIndexes();
   }
@@ -738,7 +739,7 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     for (let k = 0; k < ranges.length; k++) {
       ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
     }
-    console.log(ranges);
+    //console.log(ranges);
     this._rangesOfInteractorsType = ranges;
     return ranges;
   }

@@ -2,7 +2,7 @@
   <table class="interactors-table">
     <!-- Interactors' column -->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
-      <tr *ngIf="!interactor.hidden">
+      <tr>
         <ng-container *ngIf="interactorsSorting == 'Type'">
           <ng-container *ngFor="let oneType of rangeOfInteractorTypeV2()">
             <td *ngIf="oneType[2]==i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
