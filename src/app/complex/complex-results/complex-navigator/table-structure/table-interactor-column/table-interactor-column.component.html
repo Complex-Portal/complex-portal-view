@@ -9,12 +9,6 @@
                 title="{{oneType[0]}}">
               <div class="interactorSeparationName"> {{ oneType[0] }}</div>
             </td>
-            <!--            <td *ngIf="interactor.expanded && i==oneType[1]+interactor.subComponents.length"-->
-            <!--                [attr.rowspan]="oneType[3]+interactor.subComponents.length"-->
-            <!--                class="interactorSeparation"-->
-            <!--                title="{{oneType[0]}}">-->
-            <!--              <div class="interactorSeparationName"> {{ oneType[0] }}</div>-->
-            <!--            </td>-->
           </ng-container>
         </ng-container>
         <ng-container *ngIf="interactorsSorting=='Organism'">
@@ -81,10 +75,11 @@
         <ng-container *ngIf="!!interactor.subComponents">
           <tbody class="expandedRows">
           <tr class="expandedRows" *ngFor="let el of interactor.subComponents; let j=index">
-            <!--            <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"-->
-            <!--                *ngIf="interactorsSorting == 'Type' && j===0 || interactorsSorting == 'Organism' && j===0">-->
-            <!--              <div class="interactorSeparationName"> {{ interactor.interactor.name }}'s interactors</div>-->
-            <!--            </td>-->
+            <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
+                title="{{interactor.interactor.name}}'s interactors"
+                *ngIf="interactorsSorting == 'Type' && j===0 || interactorsSorting == 'Organism' && j===0">
+              <div class="interactorSeparationName"> {{ interactor.interactor.name }}'s interactors"</div>
+            </td>
             <td class="intStoich">
               <div style="font-weight: bold">
                 <a [routerLink]="['/complex/search']"
