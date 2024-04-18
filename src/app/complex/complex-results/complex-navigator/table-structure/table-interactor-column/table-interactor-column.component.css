@@ -99,15 +99,9 @@ a, a:visited {
   max-width: 2ch;
   background-color: #0e6f76;
   border: 1px solid white;
-  text-align: left;
-  align-items: start;
-  min-height: 50px;
-  padding-left: auto;
-  padding-right: auto;
 }
 
 .interactorSeparationName {
-  text-align: center;
   transform: rotate(-90deg);
   font-weight: lighter;
   font-size: small;

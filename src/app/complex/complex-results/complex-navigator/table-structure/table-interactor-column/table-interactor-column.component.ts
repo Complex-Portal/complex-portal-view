@@ -233,9 +233,11 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     }
 
     // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
+    console.log(this.rangeOfInteractorOrganismV2());
     console.log(this.rangeOfInteractorTypeV2());
-    this.rangeOfInteractorTypeV2();
     this.calculateAllStartAndEndIndexes();
+    this.rangeOfInteractorTypeV2();
+    this.rangeOfInteractorOrganismV2();
   }
 
   public interactorTypeIcon(interactor: Interactor): string {
@@ -614,12 +616,14 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
   public classifyInteractorsByOrganism() {
     this._enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
     this.calculateAllStartAndEndIndexes();
-    this.rangeOfInteractorOrganisms();
+    console.log(this.rangeOfInteractorOrganismV2());
+    this.rangeOfInteractorOrganismV2();
   }
 
   public classifyInteractorsByType() {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
     this.calculateAllStartAndEndIndexes();
+    console.log(this.rangeOfInteractorTypeV2());
     this.rangeOfInteractorTypeV2();
   }
 
@@ -726,7 +730,7 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       const oneType = [];
       let n = i;
       // tslint:disable-next-line:max-line-length
-      if (!!this.enrichedInteractors[i + 1] && this.enrichedInteractors[i].interactor.interactorType === this.enrichedInteractors[i + 1].interactor.interactorType) {
+      if (!!this.enrichedInteractors[i + 1] && !this.enrichedInteractors[i].isSubComplex && !this.enrichedInteractors[i].hidden && this.enrichedInteractors[i].interactor.interactorType === this.enrichedInteractors[i + 1].interactor.interactorType) {
         n += 1;
       } else {
         oneType.push(this.enrichedInteractors[i].interactor.interactorType, n, 0);
@@ -739,8 +743,30 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     for (let k = 0; k < ranges.length; k++) {
       ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
     }
-    //console.log(ranges);
     this._rangesOfInteractorsType = ranges;
+    return ranges;
+  }
+
+  public rangeOfInteractorOrganismV2() {
+    const ranges = [];
+    for (let i = 0; i < this.enrichedInteractors.length; i++) {
+      const oneType = [];
+      let n = i;
+      // tslint:disable-next-line:max-line-length
+      if (!!this.enrichedInteractors[i + 1] && !this.enrichedInteractors[i].isSubComplex && !this.enrichedInteractors[i].hidden && this.enrichedInteractors[i].organismName === this.enrichedInteractors[i + 1].organismName) {
+        n += 1;
+      } else {
+        oneType.push(this.enrichedInteractors[i].organismName, n, 0);
+        ranges.push(oneType);
+      }
+    }
+    for (let j = 1; j < ranges.length; j++) {
+      ranges[j][2] += ranges[j - 1][1] + 1;
+    }
+    for (let k = 0; k < ranges.length; k++) {
+      ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
+    }
+    this._rangesOfInteractorsOrganism = ranges;
     return ranges;
   }
 
