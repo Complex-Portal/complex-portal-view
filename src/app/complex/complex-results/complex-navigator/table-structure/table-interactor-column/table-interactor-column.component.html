@@ -2,18 +2,18 @@
   <table class="interactors-table">
     <!-- Interactors' column -->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
-      <tr *ngIf="!interactor.hidden"> <!-- without it the div for sorting works &ndash;&gt;-->
-        <ng-container *ngIf="interactorsSorting == 'Type'">
-          <ng-container *ngFor="let oneType of rangeOfInteractorTypeV2()">
-            <td *ngIf="oneType[2]==i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
+      <tr *ngIf="!interactor.hidden"> <!-- without it the div for sorting works -->
+        <ng-container *ngIf="interactorsSorting === 'Type'">
+          <ng-container *ngFor="let oneType of rangesOfInteractorType">
+            <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
                 title="{{oneType[0]}}">
               <div class="interactorSeparationName">{{ oneType[0] }}</div>
             </td>
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="interactorsSorting=='Organism'">
-          <ng-container *ngFor="let oneOrganism of rangeOfInteractorOrganismV2()">
-            <td *ngIf="oneOrganism[2]==i" [attr.rowspan]="oneOrganism[1]" class="interactorSeparation"
+        <ng-container *ngIf="interactorsSorting==='Organism'">
+          <ng-container *ngFor="let oneOrganism of rangesOfInteractorOrganism">
+            <td *ngIf="oneOrganism[2]===i" [attr.rowspan]="oneOrganism[1]" class="interactorSeparation"
                 title="{{oneOrganism[0]}}">
               <div class="interactorSeparationName"> {{ oneOrganism[0] }}</div>
             </td>
@@ -77,7 +77,7 @@
           <tr class="expandedRows" *ngFor="let el of interactor.subComponents; let j=index">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                 title="{{interactor.interactor.name}}'s interactors"
-                *ngIf="interactorsSorting == 'Type' && j===0 || interactorsSorting == 'Organism' && j===0">
+                *ngIf="(interactorsSorting === 'Type' && j===0) || (interactorsSorting === 'Organism' && j===0)">
               <div class="interactorSeparationName"> {{ interactor.interactor.name }}'s interactors</div>
             </td>
             <td class="intStoich">

@@ -107,6 +107,7 @@ a, a:visited {
   font-size: small;
   color: white;
   line-height: 0.8;
+  text-align: center;
 }
 
 .spaceHolder {

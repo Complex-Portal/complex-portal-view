@@ -69,6 +69,10 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     return this._rangesOfInteractorsType;
   }
 
+  get rangesOfInteractorOrganism(): number[] {
+    return this._rangesOfInteractorsOrganism;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (!!this._interactorsSorting && !!this._enrichedInteractors && this._enrichedInteractors.length > 0) {
       if (this._interactorsSorting === 'Type') {
@@ -233,11 +237,10 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     }
 
     // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
-    console.log(this.rangeOfInteractorOrganismV2());
-    console.log(this.rangeOfInteractorTypeV2());
-    this.calculateAllStartAndEndIndexes();
     this.rangeOfInteractorTypeV2();
     this.rangeOfInteractorOrganismV2();
+    this.calculateAllStartAndEndIndexes();
+
   }
 
   public interactorTypeIcon(interactor: Interactor): string {
@@ -616,14 +619,12 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
   public classifyInteractorsByOrganism() {
     this._enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
     this.calculateAllStartAndEndIndexes();
-    console.log(this.rangeOfInteractorOrganismV2());
     this.rangeOfInteractorOrganismV2();
   }
 
   public classifyInteractorsByType() {
     this._enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
     this.calculateAllStartAndEndIndexes();
-    console.log(this.rangeOfInteractorTypeV2());
     this.rangeOfInteractorTypeV2();
   }
 
@@ -694,11 +695,9 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
         }
       }
       const lengthOfRange = (listOfInteractors[listOfInteractors.length - 1][1]) + 1 - (listOfInteractors[0][1]);
-      // console.log(lengthOfRange);
       rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
       ranges.push(rangeOfOrganism);
     }
-    // console.log(ranges);
     this._rangesOfInteractorsOrganism = ranges;
     return ranges;
   }
@@ -720,54 +719,54 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
         interactorsOrganismsList.push(enrichedInteractor.organismName);
       }
     }
-    // console.log(interactorsOrganismsList);
     return interactorsOrganismsList;
   }
 
   public rangeOfInteractorTypeV2() {
-    const ranges = [];
+    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+    let length = 0;
+    let start = null;
     for (let i = 0; i < this.enrichedInteractors.length; i++) {
       const oneType = [];
-      let n = i;
-      // tslint:disable-next-line:max-line-length
-      if (!!this.enrichedInteractors[i + 1] && !this.enrichedInteractors[i].isSubComplex && !this.enrichedInteractors[i].hidden && this.enrichedInteractors[i].interactor.interactorType === this.enrichedInteractors[i + 1].interactor.interactorType) {
-        n += 1;
-      } else {
-        oneType.push(this.enrichedInteractors[i].interactor.interactorType, n, 0);
+      if (!this.enrichedInteractors[i].hidden) {
+        length += 1;
+        if (start === null) {
+          start = i;
+        }
+      }
+      if (!this.enrichedInteractors[i + 1]
+        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
+        || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
+        oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
         ranges.push(oneType);
+        length = 0;
+        start = null;
       }
     }
-    for (let j = 1; j < ranges.length; j++) {
-      ranges[j][2] += ranges[j - 1][1] + 1;
-    }
-    for (let k = 0; k < ranges.length; k++) {
-      ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
-    }
     this._rangesOfInteractorsType = ranges;
-    return ranges;
   }
 
   public rangeOfInteractorOrganismV2() {
-    const ranges = [];
+    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+    let length = 0;
+    let start = null;
     for (let i = 0; i < this.enrichedInteractors.length; i++) {
       const oneType = [];
-      let n = i;
-      // tslint:disable-next-line:max-line-length
-      if (!!this.enrichedInteractors[i + 1] && !this.enrichedInteractors[i].isSubComplex && !this.enrichedInteractors[i].hidden && this.enrichedInteractors[i].organismName === this.enrichedInteractors[i + 1].organismName) {
-        n += 1;
-      } else {
-        oneType.push(this.enrichedInteractors[i].organismName, n, 0);
+      if (!this.enrichedInteractors[i].hidden) {
+        length += 1;
+        if (start === null) {
+          start = i;
+        }
+      }
+      if (!this.enrichedInteractors[i + 1]
+        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
+        || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
+        oneType.push(this.enrichedInteractors[i].organismName, length, start);
         ranges.push(oneType);
+        length = 0;
+        start = null;
       }
     }
-    for (let j = 1; j < ranges.length; j++) {
-      ranges[j][2] += ranges[j - 1][1] + 1;
-    }
-    for (let k = 0; k < ranges.length; k++) {
-      ranges[k][1] = ranges[k][1] - ranges[k][2] + 1;
-    }
     this._rangesOfInteractorsOrganism = ranges;
-    return ranges;
   }
-
 }
