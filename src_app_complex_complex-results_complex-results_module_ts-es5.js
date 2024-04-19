@@ -706,7 +706,6 @@
       var EnrichedComplex = /*#__PURE__*/_createClass(function EnrichedComplex() {
         _classCallCheck(this, EnrichedComplex);
       });
-      var BinaryComponentList = [];
       var _TableInteractorColumnComponent = /*#__PURE__*/function () {
         function TableInteractorColumnComponent(complexPortalService) {
           _classCallCheck(this, TableInteractorColumnComponent);
@@ -732,6 +731,29 @@
           },
           set: function set(value) {
             this._interactorsSorting = value;
+          }
+        }, {
+          key: "rangesOfInteractorType",
+          get: function get() {
+            return this._rangesOfInteractorsType;
+          }
+        }, {
+          key: "rangesOfInteractorOrganism",
+          get: function get() {
+            return this._rangesOfInteractorsOrganism;
+          }
+        }, {
+          key: "ngOnChanges",
+          value: function ngOnChanges(changes) {
+            if (!!this._interactorsSorting && !!this._enrichedInteractors && this._enrichedInteractors.length > 0) {
+              if (this._interactorsSorting === 'Type') {
+                this.classifyInteractorsByType();
+              } else if (this._interactorsSorting === 'Organism') {
+                this.classifyInteractorsByOrganism();
+              } else {
+                this.classifyInteractorsByOccurrence();
+              }
+            }
           }
         }, {
           key: "interactors",
@@ -770,9 +792,6 @@
               _iterator12.f();
             }
             this.interactorOrganism();
-            //////////// CLASSIFICATION BEFORE CALCULATIONS
-            this.classificationChosen();
-            this.calculateAllStartAndEndIndexes();
           }
         }, {
           key: "findInteractorInComplex",
@@ -819,11 +838,11 @@
             return null;
           }
         }, {
-          key: "stochiometryOfInteractors",
-          value: function stochiometryOfInteractors(complex, interactorId) {
+          key: "stoichiometryOfInteractors",
+          value: function stoichiometryOfInteractors(complex, interactorId) {
             var match = this.findInteractorInComplex(complex, interactorId);
             if (!!match) {
-              return this.formatStochiometryValues(match.stochiometry);
+              return this.formatStoichiometryValues(match.stochiometry);
             }
             return null;
           }
@@ -832,7 +851,7 @@
           value: function stoichiometryOfInteractorsExpandable(interactor, interactorId) {
             var match = this.findInteractorInSubcomplex(interactor, interactorId);
             if (!!match) {
-              return this.formatStochiometryValues(match.stochiometry);
+              return this.formatStoichiometryValues(match.stochiometry);
             }
             return null;
           }
@@ -841,12 +860,12 @@
           value: function stoichiometryOfInteractorsMainTable(complex, interactorId) {
             var matches = this.findInteractorsInSubComplex(complex, interactorId);
             if (matches.length > 0) {
-              var stochiometryValues = this.addedStoichiometryValues(matches);
-              if (!!stochiometryValues) {
-                if (stochiometryValues[0] === stochiometryValues[1]) {
-                  return stochiometryValues[0].toString();
+              var stoichiometryValues = this.addedStoichiometryValues(matches);
+              if (!!stoichiometryValues) {
+                if (stoichiometryValues[0] === stoichiometryValues[1]) {
+                  return stoichiometryValues[0].toString();
                 } else {
-                  return "".concat(stochiometryValues[0], ", ").concat(stochiometryValues[1]);
+                  return "".concat(stoichiometryValues[0], ", ").concat(stoichiometryValues[1]);
                 }
               } else {
                 return ' ';
@@ -855,8 +874,8 @@
             return null;
           }
         }, {
-          key: "getStochiometry",
-          value: function getStochiometry(complex, componentId) {
+          key: "getStoichiometry",
+          value: function getStoichiometry(complex, componentId) {
             var match = this.findInteractorInComplex(complex, componentId);
             if (!!match) {
               if (!!match.stochiometry) {
@@ -872,9 +891,9 @@
           value: function getStoichiometrySubComplex(complex, interactorId) {
             var matches = this.findInteractorsInSubComplex(complex, interactorId);
             if (matches.length > 0) {
-              var stochiometryValues = this.addedStoichiometryValues(matches);
-              if (!!stochiometryValues) {
-                return "Stoichiometry values: minValue: ".concat(stochiometryValues[0], ", maxValue: ").concat(stochiometryValues[1]);
+              var stoichiometryValues = this.addedStoichiometryValues(matches);
+              if (!!stoichiometryValues) {
+                return "Stoichiometry values: minValue: ".concat(stoichiometryValues[0], ", maxValue: ").concat(stoichiometryValues[1]);
               } else {
                 return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
               }
@@ -882,8 +901,8 @@
             return null;
           }
         }, {
-          key: "getStochiometryInExpandedSubComplex",
-          value: function getStochiometryInExpandedSubComplex(interactor, interactorId) {
+          key: "getStoichiometryInExpandedSubComplex",
+          value: function getStoichiometryInExpandedSubComplex(interactor, interactorId) {
             var match = this.findInteractorInSubcomplex(interactor, interactorId);
             if (!!match) {
               if (!!match.stochiometry) {
@@ -930,6 +949,8 @@
               }
             }
             // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
+            this.rangeOfInteractorTypeV2();
+            this.rangeOfInteractorOrganismV2();
             this.calculateAllStartAndEndIndexes();
           }
         }, {
@@ -985,21 +1006,21 @@
             });
           }
         }, {
-          key: "fetchValuesFromStochiometry",
-          value: function fetchValuesFromStochiometry(stochiometry) {
+          key: "fetchValuesFromStoichiometry",
+          value: function fetchValuesFromStoichiometry(stoichiometry) {
             var pattern = 'minValue: ([0-9+]), maxValue: ([0-9+])';
-            return stochiometry.match(pattern);
+            return stoichiometry.match(pattern);
           }
         }, {
-          key: "formatStochiometryValues",
-          value: function formatStochiometryValues(stochiometry) {
-            if (!!stochiometry) {
-              var matchedStochometry = this.fetchValuesFromStochiometry(stochiometry);
-              if (!!matchedStochometry) {
+          key: "formatStoichiometryValues",
+          value: function formatStoichiometryValues(stoichiometry) {
+            if (!!stoichiometry) {
+              var matchedStoichiometry = this.fetchValuesFromStoichiometry(stoichiometry);
+              if (!!matchedStoichiometry) {
                 // tslint:disable-next-line:radix
-                var minValue = parseInt(matchedStochometry[1]);
+                var minValue = parseInt(matchedStoichiometry[1]);
                 // tslint:disable-next-line:radix
-                var maxValue = parseInt(matchedStochometry[2]);
+                var maxValue = parseInt(matchedStoichiometry[2]);
                 if (minValue === maxValue) {
                   return minValue.toString();
                 } else {
@@ -1020,8 +1041,8 @@
               for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
                 var component = _step13.value;
                 if (!!component.stochiometry) {
-                  var matchedStochometry = this.fetchValuesFromStochiometry(component.stochiometry);
-                  if (!!matchedStochometry) {
+                  var matchedStoichiometry = this.fetchValuesFromStoichiometry(component.stochiometry);
+                  if (!!matchedStoichiometry) {
                     if (minValue === null) {
                       minValue = 0;
                     }
@@ -1029,9 +1050,9 @@
                       maxValue = 0;
                     }
                     // tslint:disable-next-line:radix
-                    minValue += parseInt(matchedStochometry[1]);
+                    minValue += parseInt(matchedStoichiometry[1]);
                     // tslint:disable-next-line:radix
-                    maxValue += parseInt(matchedStochometry[2]);
+                    maxValue += parseInt(matchedStoichiometry[2]);
                   }
                 }
               }
@@ -1167,7 +1188,7 @@
                       }
                     }
                   } else if (this._enrichedInteractors[i].isSubComplex && !!this._enrichedInteractors[i].subComponents && this._enrichedInteractors[i].expanded) {
-                    // The interactor is not part of the complex but it is a subcomplex and it is expanded.
+                    // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
                     // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
                     // In that case, the line could start or end on any of those subcomponents
                     for (var k = 0; k < this._enrichedInteractors[i].subComponents.length; k++) {
@@ -1212,7 +1233,7 @@
               // The line starts before this interactor and end at this interactor or on any of its subcomponents
               if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
                 // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-                // the line does not end in this interactor and it musy cross through the interactor cell to the subcomponents
+                // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
                 if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
                   if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
                     return true;
@@ -1234,7 +1255,7 @@
               }
               // If the interactor is a subcomplex.
               // If the interactor is actually part of the complex, the line starts in this interactor
-              // Otherwise, the line actually starts on one of the subcomponets of the complex, but not on the interactor itself, as it is
+              // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the interactor itself, as it is
               // not part of the complex.
               if (complex.complex.interactors.some(function (component) {
                 return _this4._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
@@ -1250,7 +1271,7 @@
             // The line ends at this interactor or on any of its subcomponents
             if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
               // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-              // the line does not end in this interactor and it must cross through to the subcomponents
+              // the line does not end in this interactor, and it must cross through to the subcomponents
               if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
                 if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
                   return false;
@@ -1273,11 +1294,11 @@
                 if (complex.startSubComponentIndex < subComponentIndex && complex.endSubComponentIndex > subComponentIndex) {
                   return true;
                 }
-                // The line started before this interactor and it ends on a later subcomponent, so it crosses through this subcomponent
+                // The line started before this interactor, and it ends on a later subcomponent, so it crosses through this subcomponent
                 if (complex.startInteractorIndex < interactorIndex && complex.endSubComponentIndex > subComponentIndex) {
                   return true;
                 }
-                // The line started before this subcomponent and it ends on a later interactor, so it crosses through this subcomponent
+                // The line started before this subcomponent, and it ends on a later interactor, so it crosses through this subcomponent
                 if (complex.startSubComponentIndex < subComponentIndex && complex.endInteractorIndex > interactorIndex) {
                   return true;
                 }
@@ -1355,6 +1376,8 @@
             this._enrichedInteractors.sort(function (a, b) {
               return b.organismName.localeCompare(a.organismName);
             });
+            this.calculateAllStartAndEndIndexes();
+            this.rangeOfInteractorOrganismV2();
           }
         }, {
           key: "classifyInteractorsByType",
@@ -1362,10 +1385,12 @@
             this._enrichedInteractors.sort(function (a, b) {
               return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
             });
+            this.calculateAllStartAndEndIndexes();
+            this.rangeOfInteractorTypeV2();
           }
         }, {
-          key: "classifyInteractorsByOccurence",
-          value: function classifyInteractorsByOccurence() {
+          key: "classifyInteractorsByOccurrence",
+          value: function classifyInteractorsByOccurrence() {
             var _this7 = this;
             var _iterator17 = _createForOfIteratorHelper(this._enrichedInteractors),
               _step17;
@@ -1384,11 +1409,11 @@
                         var complexesInteractors = _step19.value;
                         if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
                           // tslint:disable-next-line:radix
-                          if (isNaN(parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
+                          if (isNaN(parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
                             oneInteractor.timesAppearing = oneInteractor.timesAppearing;
                           } else {
                             // tslint:disable-next-line:radix
-                            oneInteractor.timesAppearing += parseInt(this.stochiometryOfInteractors(complex, oneInteractor.interactor.identifier));
+                            oneInteractor.timesAppearing += parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier));
                           }
                         }
                       }
@@ -1409,7 +1434,7 @@
                             return enrichedInteractor.interactor.identifier === subInteractor.identifier;
                           });
                           // tslint:disable-next-line:radix
-                          enrichedInteractor.timesAppearing = parseInt(_this7.formatStochiometryValues(subInteractor.stochiometry));
+                          enrichedInteractor.timesAppearing = parseInt(_this7.formatStoichiometryValues(subInteractor.stochiometry));
                         };
                         for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
                           _loop6();
@@ -1436,40 +1461,12 @@
             this._enrichedInteractors.sort(function (a, b) {
               return b.timesAppearing - a.timesAppearing;
             } /* || a.interactor.name.localeCompare(b.interactor.name) */);
-          }
-        }, {
-          key: "classificationChosen",
-          value: function classificationChosen() {
-            var type;
-            switch (this._interactorsSorting) {
-              case 'Type':
-                this.classifyInteractorsByType();
-                this.calculateAllStartAndEndIndexes();
-                this.rangeOfInteractorType();
-                type = 'Type';
-                break;
-              case 'Organism':
-                this.classifyInteractorsByOrganism();
-                this.calculateAllStartAndEndIndexes();
-                this.rangeOfInteractorOrganisms();
-                type = 'Organism';
-                break;
-              case 'Occurrence':
-                this.classifyInteractorsByOccurence();
-                this.calculateAllStartAndEndIndexes();
-                type = 'Occurrence';
-                break;
-              default:
-                this.classifyInteractorsByOccurence();
-                this.calculateAllStartAndEndIndexes();
-                type = 'Occurrence';
-            }
-            return type;
+            this.calculateAllStartAndEndIndexes();
           }
         }, {
           key: "rangeOfInteractorType",
           value: function rangeOfInteractorType() {
-            var ranges = [];
+            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
             var interactorTypesList = this.listOfInteractorTypes();
             var _iterator21 = _createForOfIteratorHelper(interactorTypesList),
               _step21;
@@ -1504,6 +1501,7 @@
             } finally {
               _iterator21.f();
             }
+            this._rangesOfInteractorsType = ranges;
             return ranges;
           }
         }, {
@@ -1536,16 +1534,15 @@
                   _iterator24.f();
                 }
                 var lengthOfRange = listOfInteractors[listOfInteractors.length - 1][1] + 1 - listOfInteractors[0][1];
-                // console.log(lengthOfRange);
                 rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
                 ranges.push(rangeOfOrganism);
               }
-              // console.log(ranges);
             } catch (err) {
               _iterator23.e(err);
             } finally {
               _iterator23.f();
             }
+            this._rangesOfInteractorsOrganism = ranges;
             return ranges;
           }
         }, {
@@ -1581,7 +1578,6 @@
                   interactorsOrganismsList.push(enrichedInteractor.organismName);
                 }
               }
-              // console.log(interactorsOrganismsList);
             } catch (err) {
               _iterator26.e(err);
             } finally {
@@ -1590,9 +1586,54 @@
             return interactorsOrganismsList;
           }
         }, {
-          key: "enrichedInteractorsLength",
-          get: function get() {
-            return this._enrichedInteractors.length + 1;
+          key: "rangeOfInteractorTypeV2",
+          value: function rangeOfInteractorTypeV2() {
+            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+            var length = 0;
+            var start = null;
+            for (var i = 0; i < this.enrichedInteractors.length; i++) {
+              var oneType = [];
+              if (!this.enrichedInteractors[i].hidden) {
+                length += 1;
+                if (start === null) {
+                  start = i;
+                }
+              }
+              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
+                if (start !== null) {
+                  oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
+                  ranges.push(oneType);
+                  start = null;
+                }
+                length = 0;
+              }
+            }
+            this._rangesOfInteractorsType = ranges;
+          }
+        }, {
+          key: "rangeOfInteractorOrganismV2",
+          value: function rangeOfInteractorOrganismV2() {
+            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+            var length = 0;
+            var start = null;
+            for (var i = 0; i < this.enrichedInteractors.length; i++) {
+              var oneType = [];
+              if (!this.enrichedInteractors[i].hidden) {
+                length += 1;
+                if (start === null) {
+                  start = i;
+                }
+              }
+              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
+                if (start !== null) {
+                  oneType.push(this.enrichedInteractors[i].organismName, length, start);
+                  ranges.push(oneType);
+                  start = null;
+                }
+                length = 0;
+              }
+            }
+            this._rangesOfInteractorsOrganism = ranges;
           }
         }]);
         return TableInteractorColumnComponent;
@@ -1604,9 +1645,6 @@
       };
       _TableInteractorColumnComponent.propDecorators = {
         complexSearch: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
-        }],
-        _interactorsSorting: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
         }],
         interactorsSorting: [{
@@ -2363,7 +2401,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"table CN-table\">\n    <!-- When table is not overflowing -->\n    <thead class=\"tableHead\" *ngIf=\"complexSearch.elements.length<=6\">\n    <tr>\n      <th class=\"interactorsHeader horizontal\">Interactors</th>\n      <th class=\"horizontal\" *ngFor=\"let complex of complexSearch.elements\">\n        <a [routerLink]=\"['/complex', complex.complexAC]\"\n           title=\"{{complex.complexAC}}\"\n           target=\"_blank\">\n          <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n              <div class=\"line\"></div>\n                <div class=\"horizontal-label\">\n                  <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                  {{ complex.complexName }}\n                </div>\n            </span>\n          </div>\n        </a>\n      </th>\n    </tr>\n    </thead>\n    <!-- When table is overflowing -->\n    <thead class=\"tableHeadOverflow\" *ngIf=\"complexSearch.elements.length>6\">\n    <tr [style.--cols]=\"complexSearch.elements.length\">\n      <th class=\"interactorsHeader\">Interactors</th>\n      <th class=\"rotate\" *ngFor=\"let complex of complexSearch.elements\">\n\n        <a [routerLink]=\"['/complex', complex.complexAC]\"\n           title=\"{{complex.complexAC}}\"\n           target=\"_blank\">\n          <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n<!--            <div class=\"line\"></div>-->\n              <div class=\"tilted-label\">\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                {{ complex.complexName }}\n              </div>\n            </span>\n          </div>\n        </a>\n\n      </th>\n    </tr>\n    </thead>\n  </table>\n</div>\n\n";
+      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n    <table class=\"table CN-table\">\n        <!-- When table is not overflowing -->\n        <thead class=\"tableHead\" *ngIf=\"complexSearch.elements.length<=6\">\n        <tr>\n            <th class=\"interactorsHeader horizontal\">Interactors</th>\n            <th class=\"horizontal\" *ngFor=\"let complex of complexSearch.elements\">\n                <a [routerLink]=\"['/complex', complex.complexAC]\"\n                   title=\"{{complex.complexAC}}\"\n                   target=\"_blank\">\n                    <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n              <div class=\"line\"></div>\n                <div class=\"horizontal-label\">\n                  <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                    {{ complex.complexName }}\n                </div>\n            </span>\n                    </div>\n                </a>\n            </th>\n        </tr>\n        </thead>\n        <!-- When table is overflowing -->\n        <thead class=\"tableHeadOverflow\" *ngIf=\"complexSearch.elements.length>6\">\n        <tr [style.--cols]=\"complexSearch.elements.length\">\n            <th class=\"interactorsHeader\">Interactors</th>\n            <th class=\"rotate\" *ngFor=\"let complex of complexSearch.elements\">\n                <a [routerLink]=\"['/complex', complex.complexAC]\"\n                   title=\"{{complex.complexAC}}\"\n                   target=\"_blank\">\n                    <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n<!--            <div class=\"line\"></div>-->\n              <div class=\"tilted-label\">\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                  {{ complex.complexName }}\n              </div>\n            </span>\n                    </div>\n                </a>\n            </th>\n            <div class=\"spaceHolder\"></div>\n        </tr>\n        </thead>\n    </table>\n</div>\n\n\n";
 
       /***/
     }),
@@ -2375,7 +2413,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\" let interactor of enrichedInteractors; let i=index\">\n      <tr *ngIf=\"!interactor.hidden\">\n        <ng-container *ngIf=\"classificationChosen()=='Type'\">\n          <ng-container *ngFor=\"let oneType of rangeOfInteractorType()\">\n            <ng-container *ngIf=\"oneType[1]==i\">\n              <td [attr.rowspan]=\"oneType[3]\" class=\"interactorSeparation\" title=\"{{oneType[0]}}\">\n                <div class=\"interactorSeparationName\"> {{ oneType[0] }}</div>\n              </td>\n            </ng-container>\n          </ng-container>\n        </ng-container>\n        <ng-container *ngIf=\"classificationChosen()=='Organism'\">\n          <ng-container *ngFor=\"let oneOrganism of rangeOfInteractorOrganisms()\">\n            <ng-container *ngIf=\"oneOrganism[1]==i\">\n              <td [attr.rowspan]=\"oneOrganism[3]\" class=\"interactorSeparation\" title=\"{{oneOrganism[0]}}\">\n                <div class=\"interactorSeparationName\"> {{ oneOrganism[0] }}</div>\n              </td>\n            </ng-container>\n          </ng-container>\n        </ng-container>\n        <td class=\"interactorsColumn\">\n          <div>\n            {{ interactor.interactor.name }}\n            <i class=\"{{interactorTypeIcon(interactor.interactor)}}\"\n               title=\"{{interactor.interactor.interactorType}}\"></i>\n            <!-- Adding of the icons to access details of the interactor -->\n            <a [routerLink]=\"['/complex/search']\"\n               [queryParams]=\"{query: interactor.interactor.identifier, page: 1}\"\n               target=\"_blank\">\n              <i class=\"icon icon-functional small\" data-icon=\"1\"\n                 title=\"Complexes containing this interactor\"></i>\n            </a>\n          </div>\n          <!-- Icon for the expandable -->\n          <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n            <a title=\"{{ interactor.interactor.name }}'s interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n              {{ interactor.interactor.identifier }}\n              <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                 style=\"font-size:small; margin-top: 2px\"></i>\n            </a>\n          </div>\n          <div *ngIf=\"showExternalLink(interactor.interactor)\" class=\"interactorType\">\n            <a href=\"{{interactor.interactor.identifierLink}}\"\n               target=\"_blank\">{{ interactor.interactor.identifier }}\n              <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n            </a>\n          </div>\n        </td>\n        <!-- Interactors' stoichiometry -->\n        <ng-container *ngFor=\"let complex of enrichedComplexes\">\n          <td class=\"intStoich\">\n            <div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n            <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\">\n              <div class=\"stoichNum\"\n                   title=\"{{ getStochiometry(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stochiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <ng-container class=\"stoichComponent\"\n                          *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\">\n              <!-- subcomplexes' interactors' stoichiometry -->\n              <div class=\"stoichNum\"\n                   title=\"{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n          </td>\n        </ng-container>\n      </tr>\n      <!-- Expandable menu for subcomplexes -->\n      <ng-container *ngIf=\"interactor.expanded\">\n        <ng-container *ngIf=\"!!interactor.subComponents\">\n          <tbody class=\"expandedRows\">\n          <tr class=\"expandedRows\" *ngFor=\"let el of interactor.subComponents; let j=index\">\n            <td class=\"intStoich\">\n              <div style=\"font-weight: bold\">\n                <a [routerLink]=\"['/complex/search']\"\n                   [queryParams]=\"{query: el.identifier, page: 1}\"\n                   target=\"_blank\">\n                  {{ el.name }}\n                  <i class=\"{{interactorTypeIcon(el)}}\"\n                     title=\"{{interactor.interactor.interactorType}}\"></i>\n                  <i class=\"icon icon-functional small\" data-icon=\"1\"\n                     title=\"More complexes containing this interactor\"></i>\n                </a>\n              </div>\n              <div *ngIf=\"showExternalLink(el)\" class=\"interactorType\">\n                <a href=\"{{el.identifierLink}}\" target=\"_blank\">{{ el.identifier }}\n                  <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"\n                  ></i>\n                </a>\n              </div>\n            </td>\n            <ng-container *ngFor=\"let complex of enrichedComplexes\">\n              <td class=\"intStoich\">\n                <div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n                <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\">\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStochiometry(complex.complex, el.identifier) }}\">\n                    {{ stochiometryOfInteractors(complex.complex, el.identifier) }}\n                  </div>\n                </ng-container>\n                <ng-container\n                  *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\">\n                  <!-- subcomplexes' interactors' stoichiometry -->\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStochiometryInExpandedSubComplex(interactor, el.identifier) }}\">\n                    {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}\n                  </div>\n                </ng-container>\n                <div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n              </td>\n            </ng-container>\n          </tr>\n          </tbody>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n\n  </table>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\" let interactor of enrichedInteractors; let i=index\">\n      <tr *ngIf=\"!interactor.hidden\"> <!-- without it the div for sorting works -->\n        <ng-container *ngIf=\"interactorsSorting === 'Type'\">\n          <ng-container *ngFor=\"let oneType of rangesOfInteractorType\">\n            <td *ngIf=\"oneType[2]===i\" [attr.rowspan]=\"oneType[1]\" class=\"interactorSeparation\"\n                title=\"{{oneType[0]}}\">\n              <div class=\"interactorSeparationName\">{{ oneType[0] }}</div>\n            </td>\n          </ng-container>\n        </ng-container>\n        <ng-container *ngIf=\"interactorsSorting==='Organism'\">\n          <ng-container *ngFor=\"let oneOrganism of rangesOfInteractorOrganism\">\n            <td *ngIf=\"oneOrganism[2]===i\" [attr.rowspan]=\"oneOrganism[1]\" class=\"interactorSeparation\"\n                title=\"{{oneOrganism[0]}}\">\n              <div class=\"interactorSeparationName\"> {{ oneOrganism[0] }}</div>\n            </td>\n          </ng-container>\n        </ng-container>\n        <td class=\"interactorsColumn\">\n          <div>\n            {{ interactor.interactor.name }}\n            <i class=\"{{interactorTypeIcon(interactor.interactor)}}\"\n               title=\"{{interactor.interactor.interactorType}}\"></i>\n            <!-- Adding of the icons to access details of the interactor -->\n            <a [routerLink]=\"['/complex/search']\"\n               [queryParams]=\"{query: interactor.interactor.identifier, page: 1}\"\n               target=\"_blank\">\n              <i class=\"icon icon-functional small\" data-icon=\"1\"\n                 title=\"Complexes containing this interactor\"></i>\n            </a>\n          </div>\n          <!-- Icon for the expandable -->\n          <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n            <a title=\"{{ interactor.interactor.name }}'s interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n              {{ interactor.interactor.identifier }}\n              <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                 style=\"font-size:small; margin-top: 2px\"></i>\n            </a>\n          </div>\n          <div *ngIf=\"showExternalLink(interactor.interactor)\" class=\"interactorType\">\n            <a href=\"{{interactor.interactor.identifierLink}}\"\n               target=\"_blank\">{{ interactor.interactor.identifier }}\n              <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n            </a>\n          </div>\n        </td>\n        <!-- Interactors' stoichiometry -->\n        <ng-container *ngFor=\"let complex of enrichedComplexes\">\n          <td class=\"intStoich\">\n            <div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n            <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\">\n              <div class=\"stoichNum\"\n                   title=\"{{ getStoichiometry(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stoichiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <ng-container class=\"stoichComponent\"\n                          *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\">\n              <!-- subcomplexes' interactors' stoichiometry -->\n              <div class=\"stoichNum\"\n                   title=\"{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n          </td>\n        </ng-container>\n        <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n      </tr>\n      <!-- Expandable menu for subcomplexes -->\n      <ng-container *ngIf=\"interactor.expanded\">\n        <ng-container *ngIf=\"!!interactor.subComponents\">\n          <tr *ngFor=\"let el of interactor.subComponents; let j=index\"\n              class=\"expandedRows\"\n              [ngClass]=\"{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}\">\n            <td [attr.rowspan]=\"interactor.subComponents.length\" class=\"interactorSeparation\"\n                title=\"{{interactor.interactor.name}}'s interactors\"\n                *ngIf=\"(interactorsSorting === 'Type' && j===0) || (interactorsSorting === 'Organism' && j===0)\">\n              <div class=\"interactorSeparationName\"> {{ interactor.interactor.name }}'s interactors</div>\n            </td>\n            <td class=\"intStoich\">\n              <div style=\"font-weight: bold\">\n                <a [routerLink]=\"['/complex/search']\"\n                   [queryParams]=\"{query: el.identifier, page: 1}\"\n                   target=\"_blank\">\n                  {{ el.name }}\n                  <i class=\"{{interactorTypeIcon(el)}}\"\n                     title=\"{{interactor.interactor.interactorType}}\"></i>\n                  <i class=\"icon icon-functional small\" data-icon=\"1\"\n                     title=\"More complexes containing this interactor\"></i>\n                </a>\n              </div>\n              <div *ngIf=\"showExternalLink(el)\" class=\"interactorType\">\n                <a href=\"{{el.identifierLink}}\" target=\"_blank\">{{ el.identifier }}\n                  <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"\n                  ></i>\n                </a>\n              </div>\n            </td>\n            <ng-container *ngFor=\"let complex of enrichedComplexes\">\n              <td class=\"intStoich\">\n                <div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n                <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\">\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStoichiometry(complex.complex, el.identifier) }}\">\n                    {{ stoichiometryOfInteractors(complex.complex, el.identifier) }}\n                  </div>\n                </ng-container>\n                <ng-container\n                  *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\">\n                  <!-- subcomplexes' interactors' stoichiometry -->\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStoichiometryInExpandedSubComplex(interactor, el.identifier) }}\">\n                    {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}\n                  </div>\n                </ng-container>\n                <div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n              </td>\n            </ng-container>\n            <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n          </tr>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n  </table>\n</div>\n";
 
       /***/
     }),
@@ -2387,7 +2425,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"complexNavigatorTable\">\n  <div class=\"header\">\n    <cp-table-header [complexSearch]=\"complexSearch\">\n    </cp-table-header>\n  </div>\n  <div class=\"interactors\">\n    <cp-table-interactor-column\n      [complexSearch]=\"complexSearch\"\n      [interactors]=\"interactors\"\n      [interactorsSorting]=\"interactorsSorting\">\n    </cp-table-interactor-column>\n  </div>\n</div>\n\n";
+      __webpack_exports__["default"] = "<div class=\"complexNavigatorTable\">\n  <div class=\"header\"\n       (scroll)=\"body.scrollLeft = header.scrollLeft\" #header>\n\n    <cp-table-header [complexSearch]=\"complexSearch\">\n    </cp-table-header>\n  </div>\n  <div class=\"interactors\"\n       (scroll)=\"header.scrollLeft = body.scrollLeft\" #body>\n    <cp-table-interactor-column\n      [complexSearch]=\"complexSearch\"\n      [interactors]=\"interactors\"\n      [interactorsSorting]=\"interactorsSorting\">\n    </cp-table-interactor-column>\n  </div>\n  <div class=\"spaceHolder\"></div>\n</div>\n\n";
 
       /***/
     }),
@@ -2411,7 +2449,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <div class=\"listOfResults\" *ngIf=\"DisplayType==false\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"Complex navigator\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <cp-complex-list [complexSearch]=\"complexSearch\">\n          </cp-complex-list>\n        </div>\n        <div class=\"Complex-navigator\" *ngIf=\"DisplayType\">\n          <div class=\"buttonContainer\">\n            <div class=\"displayButton\" style=\"text-align: center\">\n              <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button\"\n                     (click)=\"toggleDisplayType()\">\n            </div>\n            <div class=\"sortingInteractors\">\n              <input type=\"submit\" name=\"classificationButton\" value=\"Interactors sorting\" class=\"button\">\n              <div class=\"typeOfSorting\">\n                <input type=\"submit\" name=\"appearanceClassification\" value=\"Occurrence\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Appearance')\">\n                <input type=\"submit\" name=\"typeClassification\" value=\"Type\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Type')\">\n                <input type=\"submit\" name=\"organismClassification\" value=\"Organism\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Organism')\">\n                <input type=\"submit\" name=\"geneClassification\" value=\"Orthology (Not available yet)\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Orthology')\">\n              </div>\n            </div>\n          </div>\n          <div class=\"Matrix\">\n            <cp-complex-navigator [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [interactorsSorting]=\"interactorsSorting\">\n            </cp-complex-navigator>\n          </div>\n        </div>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <div class=\"listOfResults\" *ngIf=\"DisplayType==false\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"Complex navigator\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <cp-complex-list [complexSearch]=\"complexSearch\">\n          </cp-complex-list>\n        </div>\n        <div class=\"Complex-navigator\" *ngIf=\"DisplayType\">\n          <div class=\"buttonContainer\">\n            <div class=\"displayButton\" style=\"text-align: center\">\n              <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button\"\n                     (click)=\"toggleDisplayType()\">\n            </div>\n            <div class=\"sortingInteractors\">\n              <input type=\"submit\" name=\"classificationButton\" value=\"Interactors sorting\" class=\"button\">\n              <div class=\"typeOfSorting\">\n                <input type=\"submit\" name=\"appearanceClassification\" value=\"Occurrence\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Occurrence')\">\n                <input type=\"submit\" name=\"typeClassification\" value=\"Type\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Type')\">\n                <input type=\"submit\" name=\"organismClassification\" value=\"Organism\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Organism')\">\n                <input type=\"submit\" name=\"geneClassification\" value=\"Orthology (Not available yet)\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Orthology')\">\n              </div>\n            </div>\n          </div>\n          <div class=\"Matrix\">\n            <cp-complex-navigator [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [interactorsSorting]=\"interactorsSorting\">\n            </cp-complex-navigator>\n          </div>\n        </div>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
 
       /***/
     }),
@@ -2451,7 +2489,7 @@
       \*******************************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = "/* Header */\n\nthead {\n  border: 0;\n  background-color: white;\n  border-right: 0 solid white;\n}\n\n.CN-table {\n  -webkit-clip-path: fill-box;\n          clip-path: fill-box;\n}\n\n/* Rotated complexes names */\n\n.interactorsHeader {\n  min-width: 130px;\n  max-width: 130px;\n  position: sticky;\n  left: 0;\n  z-index: 4;\n  color: #007c82;\n  background-color: white;\n  padding-top: 150px;\n  text-align: right;\n  border-bottom: 3px solid #007c82;\n}\n\n.tilted-label {\n  padding-left: 5px;\n  text-overflow: ellipsis;\n  width: 28ch;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n/*.CN-table {*/\n\n/*  position: relative;*/\n\n/*}*/\n\n.CN-table .tableHeadOverflow tr {\n  --cols: 1;\n  display: grid;\n  grid-template-columns: 130px repeat(auto-fit, 100px);\n  /*grid-auto-flow: column;*/\n  width: calc(130px + 100px * var(--cols) + 185px);\n}\n\n.CN-table .tableHeadOverflow th.rotate {\n  position: relative;\n  width: 340px;\n  height: 72px !important;\n  color: white;\n  /*background-color: #0e6f76;*/\n  font-size: 14px;\n  text-align: left;\n  border-top: 1px solid white;\n  top: 55px;\n  left: -27px;\n  display: flex;\n  align-items: center;\n  align-content: center;\n  padding: 0;\n\n  transform: rotate(-45deg);\n\n\n  /* line */\n  border-top: 1px solid white;\n}\n\n.CN-table .tableHeadOverflow th.rotate a {\n  width: 100%;\n  height: 100%;\n  align-content: center;\n  background-color: #007c82;\n  padding: 0 0 0 70px;\n}\n\n/*.line {*/\n\n/*  position: absolute;*/\n\n/*  top: auto;*/\n\n/*  bottom: auto;*/\n\n/*  background: #0e6f76;*/\n\n/*  margin-top: 7px;*/\n\n/*  left: 0;*/\n\n/*  width: 66px;*/\n\n/*  height: 5px;*/\n\n/*  border-radius: 4px;*/\n\n/*}*/\n\n/* Horizontal complexes name */\n\n.CN-table th.horizontal.interactorsHeader {\n  padding: 5px;\n  min-width: 130px;\n  max-width: 130px;\n  font-size: medium;\n  border-bottom: 3px solid #007c82;\n  border-left: none;\n  text-align: right;\n  color: #007c82;\n  background-color: white;\n}\n\n.horizontal-label {\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 90%;\n  white-space: nowrap;\n  overflow: hidden;\n  margin: auto;\n}\n\n.CN-table th.horizontal {\n  color: white;\n  background-color: #007c82;\n  border: 1px solid white;\n  min-width: 100px;\n  max-width: 100px;\n  height: 50px;\n  font-size: 15px;\n}\n\na:visited {\n  color: white;\n}\n\na {\n  color: white;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7O0FBRVg7RUFDRSxTQUFTO0VBQ1QsdUJBQXVCO0VBQ3ZCLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDJCQUFtQjtVQUFuQixtQkFBbUI7QUFDckI7O0FBRUEsNEJBQTRCOztBQUU1QjtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVO0VBQ1YsY0FBYztFQUNkLHVCQUF1QjtFQUN2QixrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztBQUNsQzs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQix1QkFBdUI7RUFDdkIsV0FBVztFQUNYLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEI7O0FBRUEsY0FBYzs7QUFDZCx3QkFBd0I7O0FBRXhCLElBQUk7O0FBRUo7RUFDRSxTQUFTO0VBQ1QsYUFBYTtFQUNiLG9EQUFvRDtFQUNwRCwwQkFBMEI7RUFDMUIsZ0RBQWdEO0FBQ2xEOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWix1QkFBdUI7RUFDdkIsWUFBWTtFQUNaLDZCQUE2QjtFQUM3QixlQUFlO0VBQ2YsZ0JBQWdCO0VBQ2hCLDJCQUEyQjtFQUMzQixTQUFTO0VBQ1QsV0FBVztFQUNYLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIscUJBQXFCO0VBQ3JCLFVBQVU7O0VBRVYseUJBQXlCOzs7RUFHekIsU0FBUztFQUNULDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1oscUJBQXFCO0VBQ3JCLHlCQUF5QjtFQUN6QixtQkFBbUI7QUFDckI7O0FBR0EsVUFBVTs7QUFDVix3QkFBd0I7O0FBQ3hCLGVBQWU7O0FBQ2Ysa0JBQWtCOztBQUNsQix5QkFBeUI7O0FBQ3pCLHFCQUFxQjs7QUFDckIsYUFBYTs7QUFDYixpQkFBaUI7O0FBQ2pCLGlCQUFpQjs7QUFDakIsd0JBQXdCOztBQUN4QixJQUFJOztBQUVKLDhCQUE4Qjs7QUFFOUI7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsZ0NBQWdDO0VBQ2hDLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsY0FBYztFQUNkLHVCQUF1QjtBQUN6Qjs7QUFFQTtFQUNFLGtCQUFrQjtFQUNsQix1QkFBdUI7RUFDdkIsVUFBVTtFQUNWLG1CQUFtQjtFQUNuQixnQkFBZ0I7RUFDaEIsWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtFQUNaLHlCQUF5QjtFQUN6Qix1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZUFBZTtBQUNqQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7QUFDZCIsImZpbGUiOiJ0YWJsZS1oZWFkZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIEhlYWRlciAqL1xuXG50aGVhZCB7XG4gIGJvcmRlcjogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGJvcmRlci1yaWdodDogMCBzb2xpZCB3aGl0ZTtcbn1cblxuLkNOLXRhYmxlIHtcbiAgY2xpcC1wYXRoOiBmaWxsLWJveDtcbn1cblxuLyogUm90YXRlZCBjb21wbGV4ZXMgbmFtZXMgKi9cblxuLmludGVyYWN0b3JzSGVhZGVyIHtcbiAgbWluLXdpZHRoOiAxMzBweDtcbiAgbWF4LXdpZHRoOiAxMzBweDtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogNDtcbiAgY29sb3I6ICMwMDdjODI7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBwYWRkaW5nLXRvcDogMTUwcHg7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgIzAwN2M4Mjtcbn1cblxuLnRpbHRlZC1sYWJlbCB7XG4gIHBhZGRpbmctbGVmdDogNXB4O1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgd2lkdGg6IDI4Y2g7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG5cbi8qLkNOLXRhYmxlIHsqL1xuLyogIHBvc2l0aW9uOiByZWxhdGl2ZTsqL1xuXG4vKn0qL1xuXG4uQ04tdGFibGUgLnRhYmxlSGVhZE92ZXJmbG93IHRyIHtcbiAgLS1jb2xzOiAxO1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDEzMHB4IHJlcGVhdChhdXRvLWZpdCwgMTAwcHgpO1xuICAvKmdyaWQtYXV0by1mbG93OiBjb2x1bW47Ki9cbiAgd2lkdGg6IGNhbGMoMTMwcHggKyAxMDBweCAqIHZhcigtLWNvbHMpICsgMTg1cHgpO1xufVxuXG4uQ04tdGFibGUgLnRhYmxlSGVhZE92ZXJmbG93IHRoLnJvdGF0ZSB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgd2lkdGg6IDM0MHB4O1xuICBoZWlnaHQ6IDcycHggIWltcG9ydGFudDtcbiAgY29sb3I6IHdoaXRlO1xuICAvKmJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7Ki9cbiAgZm9udC1zaXplOiAxNHB4O1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG4gIHRvcDogNTVweDtcbiAgbGVmdDogLTI3cHg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcbiAgcGFkZGluZzogMDtcblxuICB0cmFuc2Zvcm06IHJvdGF0ZSgtNDVkZWcpO1xuXG5cbiAgLyogbGluZSAqL1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG59XG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdGgucm90YXRlIGEge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdjODI7XG4gIHBhZGRpbmc6IDAgMCAwIDcwcHg7XG59XG5cblxuLyoubGluZSB7Ki9cbi8qICBwb3NpdGlvbjogYWJzb2x1dGU7Ki9cbi8qICB0b3A6IGF1dG87Ki9cbi8qICBib3R0b206IGF1dG87Ki9cbi8qICBiYWNrZ3JvdW5kOiAjMGU2Zjc2OyovXG4vKiAgbWFyZ2luLXRvcDogN3B4OyovXG4vKiAgbGVmdDogMDsqL1xuLyogIHdpZHRoOiA2NnB4OyovXG4vKiAgaGVpZ2h0OiA1cHg7Ki9cbi8qICBib3JkZXItcmFkaXVzOiA0cHg7Ki9cbi8qfSovXG5cbi8qIEhvcml6b250YWwgY29tcGxleGVzIG5hbWUgKi9cblxuLkNOLXRhYmxlIHRoLmhvcml6b250YWwuaW50ZXJhY3RvcnNIZWFkZXIge1xuICBwYWRkaW5nOiA1cHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIGZvbnQtc2l6ZTogbWVkaXVtO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgIzAwN2M4MjtcbiAgYm9yZGVyLWxlZnQ6IG5vbmU7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xuICBjb2xvcjogIzAwN2M4MjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5ob3Jpem9udGFsLWxhYmVsIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgd2lkdGg6IDkwJTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbWFyZ2luOiBhdXRvO1xufVxuXG4uQ04tdGFibGUgdGguaG9yaXpvbnRhbCB7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwN2M4MjtcbiAgYm9yZGVyOiAxcHggc29saWQgd2hpdGU7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIGhlaWdodDogNTBweDtcbiAgZm9udC1zaXplOiAxNXB4O1xufVxuXG5hOnZpc2l0ZWQge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbmEge1xuICBjb2xvcjogd2hpdGU7XG59XG4iXX0= */";
+      module.exports = "/* Header */\n\n.CN-table {\n  transform: rotateX(180deg); /* On reinverse le contenu du header pour que le contenu soit dans le bon sens */\n}\n\nthead {\n  border: 0;\n  background-color: white;\n  border-right: 0 solid white;\n}\n\n.CN-table {\n  -webkit-clip-path: fill-box;\n          clip-path: fill-box;\n}\n\n/* Rotated complexes names */\n\n.interactorsHeader {\n  min-width: 130px;\n  max-width: 130px;\n  position: sticky;\n  left: 0;\n  z-index: 4;\n  color: #007c82;\n  background-color: white;\n  padding-top: 150px;\n  text-align: right;\n  border-bottom: 3px solid #007c82;\n}\n\n.tilted-label {\n  padding-left: 5px;\n  text-overflow: ellipsis;\n  width: 28ch;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.CN-table .tableHeadOverflow tr {\n  --cols: 1;\n  display: grid;\n  grid-template-columns: 130px repeat(auto-fit, 100px);\n  width: calc(130px + 100px * var(--cols) + 185px);\n}\n\n.CN-table .tableHeadOverflow th.rotate {\n  position: relative;\n  width: 340px;\n  height: 72px !important;\n  color: white;\n  font-size: 14px;\n  text-align: left;\n  border-top: 1px solid white;\n  top: 55px;\n  left: -27px;\n  display: flex;\n  align-items: center;\n  align-content: center;\n  padding: 0;\n\n  transform: rotate(-45deg);\n\n\n  /* line */\n  border-top: 1px solid white;\n}\n\n.CN-table .tableHeadOverflow th.rotate a {\n  width: 100%;\n  height: 100%;\n  align-content: center;\n  background-color: #007c82;\n  padding: 0 0 0 70px;\n}\n\n/*.line {*/\n\n/*  position: absolute;*/\n\n/*  top: auto;*/\n\n/*  bottom: auto;*/\n\n/*  background: #0e6f76;*/\n\n/*  margin-top: 7px;*/\n\n/*  left: 0;*/\n\n/*  width: 66px;*/\n\n/*  height: 5px;*/\n\n/*  border-radius: 4px;*/\n\n/*}*/\n\n/* Horizontal complexes name */\n\n.CN-table th.horizontal.interactorsHeader {\n  padding: 5px;\n  min-width: 130px;\n  max-width: 130px;\n  font-size: medium;\n  border-bottom: 3px solid #007c82;\n  border-left: none;\n  text-align: right;\n  color: #007c82;\n  background-color: white;\n}\n\n.horizontal-label {\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 90%;\n  white-space: nowrap;\n  overflow: hidden;\n  margin: auto;\n}\n\n.CN-table th.horizontal {\n  color: white;\n  background-color: #007c82;\n  border: 1px solid white;\n  min-width: 100px;\n  max-width: 100px;\n  height: 50px;\n  font-size: 15px;\n}\n\na:visited {\n  color: white;\n}\n\na {\n  color: white;\n}\n\n.spaceHolder {\n  width: 180px;\n  background-color: white;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7O0FBRVg7RUFDRSwwQkFBMEIsRUFBRSxnRkFBZ0Y7QUFDOUc7O0FBRUE7RUFDRSxTQUFTO0VBQ1QsdUJBQXVCO0VBQ3ZCLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDJCQUFtQjtVQUFuQixtQkFBbUI7QUFDckI7O0FBRUEsNEJBQTRCOztBQUU1QjtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVO0VBQ1YsY0FBYztFQUNkLHVCQUF1QjtFQUN2QixrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztBQUNsQzs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQix1QkFBdUI7RUFDdkIsV0FBVztFQUNYLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEI7O0FBR0E7RUFDRSxTQUFTO0VBQ1QsYUFBYTtFQUNiLG9EQUFvRDtFQUNwRCxnREFBZ0Q7QUFDbEQ7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osZUFBZTtFQUNmLGdCQUFnQjtFQUNoQiwyQkFBMkI7RUFDM0IsU0FBUztFQUNULFdBQVc7RUFDWCxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixVQUFVOztFQUVWLHlCQUF5Qjs7O0VBR3pCLFNBQVM7RUFDVCwyQkFBMkI7QUFDN0I7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHFCQUFxQjtFQUNyQix5QkFBeUI7RUFDekIsbUJBQW1CO0FBQ3JCOztBQUdBLFVBQVU7O0FBQ1Ysd0JBQXdCOztBQUN4QixlQUFlOztBQUNmLGtCQUFrQjs7QUFDbEIseUJBQXlCOztBQUN6QixxQkFBcUI7O0FBQ3JCLGFBQWE7O0FBQ2IsaUJBQWlCOztBQUNqQixpQkFBaUI7O0FBQ2pCLHdCQUF3Qjs7QUFDeEIsSUFBSTs7QUFFSiw4QkFBOEI7O0FBRTlCO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztFQUNoQyxpQkFBaUI7RUFDakIsaUJBQWlCO0VBQ2pCLGNBQWM7RUFDZCx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLFVBQVU7RUFDVixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogSGVhZGVyICovXG5cbi5DTi10YWJsZSB7XG4gIHRyYW5zZm9ybTogcm90YXRlWCgxODBkZWcpOyAvKiBPbiByZWludmVyc2UgbGUgY29udGVudSBkdSBoZWFkZXIgcG91ciBxdWUgbGUgY29udGVudSBzb2l0IGRhbnMgbGUgYm9uIHNlbnMgKi9cbn1cblxudGhlYWQge1xuICBib3JkZXI6IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBib3JkZXItcmlnaHQ6IDAgc29saWQgd2hpdGU7XG59XG5cbi5DTi10YWJsZSB7XG4gIGNsaXAtcGF0aDogZmlsbC1ib3g7XG59XG5cbi8qIFJvdGF0ZWQgY29tcGxleGVzIG5hbWVzICovXG5cbi5pbnRlcmFjdG9yc0hlYWRlciB7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIGxlZnQ6IDA7XG4gIHotaW5kZXg6IDQ7XG4gIGNvbG9yOiAjMDA3YzgyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgcGFkZGluZy10b3A6IDE1MHB4O1xuICB0ZXh0LWFsaWduOiByaWdodDtcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkICMwMDdjODI7XG59XG5cbi50aWx0ZWQtbGFiZWwge1xuICBwYWRkaW5nLWxlZnQ6IDVweDtcbiAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gIHdpZHRoOiAyOGNoO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdHIge1xuICAtLWNvbHM6IDE7XG4gIGRpc3BsYXk6IGdyaWQ7XG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogMTMwcHggcmVwZWF0KGF1dG8tZml0LCAxMDBweCk7XG4gIHdpZHRoOiBjYWxjKDEzMHB4ICsgMTAwcHggKiB2YXIoLS1jb2xzKSArIDE4NXB4KTtcbn1cblxuLkNOLXRhYmxlIC50YWJsZUhlYWRPdmVyZmxvdyB0aC5yb3RhdGUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHdpZHRoOiAzNDBweDtcbiAgaGVpZ2h0OiA3MnB4ICFpbXBvcnRhbnQ7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxNHB4O1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG4gIHRvcDogNTVweDtcbiAgbGVmdDogLTI3cHg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcbiAgcGFkZGluZzogMDtcblxuICB0cmFuc2Zvcm06IHJvdGF0ZSgtNDVkZWcpO1xuXG5cbiAgLyogbGluZSAqL1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG59XG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdGgucm90YXRlIGEge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdjODI7XG4gIHBhZGRpbmc6IDAgMCAwIDcwcHg7XG59XG5cblxuLyoubGluZSB7Ki9cbi8qICBwb3NpdGlvbjogYWJzb2x1dGU7Ki9cbi8qICB0b3A6IGF1dG87Ki9cbi8qICBib3R0b206IGF1dG87Ki9cbi8qICBiYWNrZ3JvdW5kOiAjMGU2Zjc2OyovXG4vKiAgbWFyZ2luLXRvcDogN3B4OyovXG4vKiAgbGVmdDogMDsqL1xuLyogIHdpZHRoOiA2NnB4OyovXG4vKiAgaGVpZ2h0OiA1cHg7Ki9cbi8qICBib3JkZXItcmFkaXVzOiA0cHg7Ki9cbi8qfSovXG5cbi8qIEhvcml6b250YWwgY29tcGxleGVzIG5hbWUgKi9cblxuLkNOLXRhYmxlIHRoLmhvcml6b250YWwuaW50ZXJhY3RvcnNIZWFkZXIge1xuICBwYWRkaW5nOiA1cHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIGZvbnQtc2l6ZTogbWVkaXVtO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgIzAwN2M4MjtcbiAgYm9yZGVyLWxlZnQ6IG5vbmU7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xuICBjb2xvcjogIzAwN2M4MjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5ob3Jpem9udGFsLWxhYmVsIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgd2lkdGg6IDkwJTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbWFyZ2luOiBhdXRvO1xufVxuXG4uQ04tdGFibGUgdGguaG9yaXpvbnRhbCB7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwN2M4MjtcbiAgYm9yZGVyOiAxcHggc29saWQgd2hpdGU7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIGhlaWdodDogNTBweDtcbiAgZm9udC1zaXplOiAxNXB4O1xufVxuXG5hOnZpc2l0ZWQge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbmEge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbi5zcGFjZUhvbGRlciB7XG4gIHdpZHRoOiAxODBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG4iXX0= */";
 
       /***/
     }),
@@ -2461,7 +2499,7 @@
       \*****************************************************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = "/* interactors column */\n.interactorsColumn {\n  position: sticky;\n  left: 0;\n  z-index: 30;\n  max-height: 50px;\n  min-height: 50px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n}\n.interactorsColumn a {\n  font-weight: normal;\n}\n.intStoich {\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n}\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: #0e6f76;\n  text-align: center;\n  padding-top: 0.5ch;\n  color: white;\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n}\n.verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n}\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n.transparentVerticalLine {\n  border-right: 0;\n}\ni:not(.small) {\n  font-size: large;\n}\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\ntr:nth-child(odd) {\n  background-color: #f7f9fa;\n}\ntbody.expandedRows {\n  /*box-shadow: inset 0px 0px 16px 2px #0e6f76;*/\n  color: #0e6f76;\n  position: relative;\n  /*filter: shadow(0.5);*/\n}\ntbody.expandedRows:before {\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  /*background: #0e6f7612;*/\n  /*box-shadow: inset 0 0 10px 2px #0e6f7696;*/\n  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px),\n    /*linear-gradient(90deg, #0e6f7696 0px, transparent 10px),*/ linear-gradient(180deg, #0e6f7696 0px, transparent 10px);\n  /*linear-gradient(270deg, #0e6f7696 0px, transparent 10px);*/\n  /*border-left: 4px solid #0e6f76;*/\n}\na, a:visited {\n  color: #0e6f76;\n}\n.interactorSeparation {\n  min-width: 2ch;\n  max-width: 2ch;\n  background-color: #0e6f76;\n  border: 1px solid white;\n  text-align: left;\n  align-items: start;\n  min-height: 50px;\n  padding-left: auto;\n  padding-right: auto;\n}\n.interactorSeparationName {\n  text-align: center;\n  transform: rotate(-90deg);\n  font-weight: lighter;\n  font-size: small;\n  color: white;\n  line-height: 0.8;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsdUJBQXVCO0FBQ3ZCO0VBQ0UsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxXQUFXO0VBQ1gsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFlBQVk7RUFDWixlQUFlO0VBQ2YsY0FBYztFQUNkLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCO0FBRUE7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7QUFHQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0FBQ2pCO0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7QUFFQTtFQUNFLGVBQWU7QUFDakI7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjtBQUVBO0VBQ0UseUJBQXlCO0FBQzNCO0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7QUFFQTtFQUNFLDhDQUE4QztFQUM5QyxjQUFjO0VBQ2Qsa0JBQWtCO0VBQ2xCLHVCQUF1QjtBQUN6QjtBQUVBO0VBQ0UsV0FBVztFQUNYLGtCQUFrQjtFQUNsQiwwQkFBMEI7RUFDMUIseUJBQXlCO0VBQ3pCLDRDQUE0QztFQUM1Qzt5SEFDdUg7RUFDdkgsNERBQTREO0VBQzVELGtDQUFrQztBQUNwQztBQUdBO0VBQ0UsY0FBYztBQUNoQjtBQUdBO0VBQ0UsY0FBYztFQUNkLGNBQWM7RUFDZCx5QkFBeUI7RUFDekIsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtFQUNsQixtQkFBbUI7QUFDckI7QUFFQTtFQUNFLGtCQUFrQjtFQUNsQix5QkFBeUI7RUFDekIsb0JBQW9CO0VBQ3BCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZ0JBQWdCO0FBQ2xCIiwiZmlsZSI6InRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBpbnRlcmFjdG9ycyBjb2x1bW4gKi9cbi5pbnRlcmFjdG9yc0NvbHVtbiB7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIGxlZnQ6IDA7XG4gIHotaW5kZXg6IDMwO1xuICBtYXgtaGVpZ2h0OiA1MHB4O1xuICBtaW4taGVpZ2h0OiA1MHB4O1xuICBtaW4td2lkdGg6IDEzMHB4O1xuICBtYXgtd2lkdGg6IDEzMHB4O1xuICBwYWRkaW5nOiA1cHg7XG4gIHRleHQtYWxpZ246IGVuZDtcbiAgY29sb3I6ICMwZTZmNzY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG4uaW50ZXJhY3RvcnNDb2x1bW4gYSB7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbi5pbnRTdG9pY2gge1xuICBoZWlnaHQ6IDUwcHg7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIGZvbnQtc2l6ZTogbWVkaXVtO1xufVxuXG5cbi5zdG9pY2hOdW0ge1xuICB3aWR0aDogNGNoO1xuICBoZWlnaHQ6IDRjaDtcbiAgYm9yZGVyLXJhZGl1czogNGNoO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMGU2Zjc2O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmctdG9wOiAwLjVjaDtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IHNtYWxsO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4udmVydGljYWxMaW5lLCAudHJhbnNwYXJlbnRWZXJ0aWNhbExpbmUge1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xuICBtaW4td2lkdGg6IDElO1xuICBtYXgtd2lkdGg6IDElO1xuICBtYXgtaGVpZ2h0OiA1MCU7XG4gIG1pbi1oZWlnaHQ6IDUwJTtcbn1cblxuLnZlcnRpY2FsTGluZSB7XG4gIGJvcmRlci1yaWdodDogNXB4IHNvbGlkICMwZTZmNzY7XG59XG5cbi50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIGJvcmRlci1yaWdodDogMDtcbn1cblxuaTpub3QoLnNtYWxsKSB7XG4gIGZvbnQtc2l6ZTogbGFyZ2U7XG59XG5cbnRyOm50aC1jaGlsZChldmVuKSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNkZmVjZWQ7XG59XG5cbnRyOm50aC1jaGlsZChvZGQpIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2Y3ZjlmYTtcbn1cblxudGJvZHkuZXhwYW5kZWRSb3dzIHtcbiAgLypib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDE2cHggMnB4ICMwZTZmNzY7Ki9cbiAgY29sb3I6ICMwZTZmNzY7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgLypmaWx0ZXI6IHNoYWRvdygwLjUpOyovXG59XG5cbnRib2R5LmV4cGFuZGVkUm93czpiZWZvcmUge1xuICBjb250ZW50OiAnJztcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBpbnNldDogLTJweCAtMXB4IC0ycHggLTFweDtcbiAgLypiYWNrZ3JvdW5kOiAjMGU2Zjc2MTI7Ki9cbiAgLypib3gtc2hhZG93OiBpbnNldCAwIDAgMTBweCAycHggIzBlNmY3Njk2OyovXG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgwZGVnLCAjMGU2Zjc2OTYgMHB4LCB0cmFuc3BhcmVudCAxMHB4KSxcbiAgICAvKmxpbmVhci1ncmFkaWVudCg5MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCksKi8gbGluZWFyLWdyYWRpZW50KDE4MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7XG4gIC8qbGluZWFyLWdyYWRpZW50KDI3MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7Ki9cbiAgLypib3JkZXItbGVmdDogNHB4IHNvbGlkICMwZTZmNzY7Ki9cbn1cblxuXG5hLCBhOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuXG4uaW50ZXJhY3RvclNlcGFyYXRpb24ge1xuICBtaW4td2lkdGg6IDJjaDtcbiAgbWF4LXdpZHRoOiAyY2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHdoaXRlO1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBhbGlnbi1pdGVtczogc3RhcnQ7XG4gIG1pbi1oZWlnaHQ6IDUwcHg7XG4gIHBhZGRpbmctbGVmdDogYXV0bztcbiAgcGFkZGluZy1yaWdodDogYXV0bztcbn1cblxuLmludGVyYWN0b3JTZXBhcmF0aW9uTmFtZSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgdHJhbnNmb3JtOiByb3RhdGUoLTkwZGVnKTtcbiAgZm9udC13ZWlnaHQ6IGxpZ2h0ZXI7XG4gIGZvbnQtc2l6ZTogc21hbGw7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgbGluZS1oZWlnaHQ6IDAuODtcbn1cbiJdfQ== */";
+      module.exports = "/* interactors column */\n.interactorsColumn {\n  position: sticky;\n  left: 0;\n  z-index: 3;\n  max-height: 60px;\n  min-height: 60px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n  background: inherit;\n}\n.interactorsColumn a {\n  font-weight: normal;\n}\n.intStoich {\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n  text-align: end;\n}\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: #0e6f76;\n  text-align: center;\n  padding-top: 0.5ch;\n  color: white;\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n}\n.verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n}\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n.transparentVerticalLine {\n  border-right: 0;\n}\ni:not(.small) {\n  font-size: large;\n}\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\ntr:nth-child(odd) {\n  background-color: #f7f9fa;\n}\n/*.expandedRows {*/\n/*  !*box-shadow: inset 0px 0px 16px 2px #0e6f76;*!*/\n/*  color: #0e6f76;*/\n/*  position: relative;*/\n/*  !*filter: shadow(0.5);*!*/\n/*}*/\n/*.expandedRows:before {*/\n/*  content: '';*/\n/*  position: absolute;*/\n/*  inset: -2px -1px -2px -1px;*/\n/*  !*background: #0e6f7612;*!*/\n/*  !*box-shadow: inset 0 0 10px 2px #0e6f7696;*!*/\n/*  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px),*/\n/*    !*linear-gradient(90deg, #0e6f7696 0px, transparent 10px),*! linear-gradient(180deg, #0e6f7696 0px, transparent 10px);*/\n/*  !*linear-gradient(270deg, #0e6f7696 0px, transparent 10px);*!*/\n/*  !*border-left: 4px solid #0e6f76;*!*/\n/*}*/\na, a:visited {\n  color: #0e6f76;\n}\n.interactorSeparation {\n  min-width: 2ch;\n  max-width: 2ch;\n  background-color: #0e6f76;\n  border: 1px solid white;\n}\n.interactorSeparationName {\n  transform: rotate(-90deg);\n  font-weight: lighter;\n  font-size: small;\n  color: white;\n  line-height: 0.8;\n  text-align: center;\n}\n.spaceHolder {\n  width: 180px;\n}\n.expandedRows {\n  color: #0e6f76;\n  position: relative;\n}\n.firstExpandedRow:after {\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px);\n}\n.lastExpandedRow:after {\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);\n}\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsdUJBQXVCO0FBQ3ZCO0VBQ0UsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVO0VBQ1YsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFlBQVk7RUFDWixlQUFlO0VBQ2YsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixtQkFBbUI7QUFDckI7QUFFQTtFQUNFLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGVBQWU7QUFDakI7QUFHQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0FBQ2pCO0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7QUFFQTtFQUNFLGVBQWU7QUFDakI7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjtBQUVBO0VBQ0UseUJBQXlCO0FBQzNCO0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7QUFFQSxrQkFBa0I7QUFDbEIsb0RBQW9EO0FBQ3BELG9CQUFvQjtBQUNwQix3QkFBd0I7QUFDeEIsNkJBQTZCO0FBQzdCLElBQUk7QUFFSix5QkFBeUI7QUFDekIsaUJBQWlCO0FBQ2pCLHdCQUF3QjtBQUN4QixnQ0FBZ0M7QUFDaEMsK0JBQStCO0FBQy9CLGtEQUFrRDtBQUNsRCx3RUFBd0U7QUFDeEUsNkhBQTZIO0FBQzdILGtFQUFrRTtBQUNsRSx3Q0FBd0M7QUFDeEMsSUFBSTtBQUdKO0VBQ0UsY0FBYztBQUNoQjtBQUdBO0VBQ0UsY0FBYztFQUNkLGNBQWM7RUFDZCx5QkFBeUI7RUFDekIsdUJBQXVCO0FBQ3pCO0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsb0JBQW9CO0VBQ3BCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsWUFBWTtBQUNkO0FBRUE7RUFDRSxjQUFjO0VBQ2Qsa0JBQWtCO0FBQ3BCO0FBRUE7RUFDRSxXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLDBCQUEwQjtFQUMxQixvRUFBb0U7QUFDdEU7QUFFQTtFQUNFLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsMEJBQTBCO0VBQzFCLGtFQUFrRTtBQUNwRSIsImZpbGUiOiJ0YWJsZS1pbnRlcmFjdG9yLWNvbHVtbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogaW50ZXJhY3RvcnMgY29sdW1uICovXG4uaW50ZXJhY3RvcnNDb2x1bW4ge1xuICBwb3NpdGlvbjogc3RpY2t5O1xuICBsZWZ0OiAwO1xuICB6LWluZGV4OiAzO1xuICBtYXgtaGVpZ2h0OiA2MHB4O1xuICBtaW4taGVpZ2h0OiA2MHB4O1xuICBtaW4td2lkdGg6IDEzMHB4O1xuICBtYXgtd2lkdGg6IDEzMHB4O1xuICBwYWRkaW5nOiA1cHg7XG4gIHRleHQtYWxpZ246IGVuZDtcbiAgY29sb3I6ICMwZTZmNzY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBiYWNrZ3JvdW5kOiBpbmhlcml0O1xufVxuXG4uaW50ZXJhY3RvcnNDb2x1bW4gYSB7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbi5pbnRTdG9pY2gge1xuICBoZWlnaHQ6IDUwcHg7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIGZvbnQtc2l6ZTogbWVkaXVtO1xuICB0ZXh0LWFsaWduOiBlbmQ7XG59XG5cblxuLnN0b2ljaE51bSB7XG4gIHdpZHRoOiA0Y2g7XG4gIGhlaWdodDogNGNoO1xuICBib3JkZXItcmFkaXVzOiA0Y2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZy10b3A6IDAuNWNoO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogc21hbGw7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG59XG5cbi52ZXJ0aWNhbExpbmUsIC50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1pbi13aWR0aDogMSU7XG4gIG1heC13aWR0aDogMSU7XG4gIG1heC1oZWlnaHQ6IDUwJTtcbiAgbWluLWhlaWdodDogNTAlO1xufVxuXG4udmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiA1cHggc29saWQgIzBlNmY3Njtcbn1cblxuLnRyYW5zcGFyZW50VmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiAwO1xufVxuXG5pOm5vdCguc21hbGwpIHtcbiAgZm9udC1zaXplOiBsYXJnZTtcbn1cblxudHI6bnRoLWNoaWxkKGV2ZW4pIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RmZWNlZDtcbn1cblxudHI6bnRoLWNoaWxkKG9kZCkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjdmOWZhO1xufVxuXG4vKi5leHBhbmRlZFJvd3MgeyovXG4vKiAgISpib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDE2cHggMnB4ICMwZTZmNzY7KiEqL1xuLyogIGNvbG9yOiAjMGU2Zjc2OyovXG4vKiAgcG9zaXRpb246IHJlbGF0aXZlOyovXG4vKiAgISpmaWx0ZXI6IHNoYWRvdygwLjUpOyohKi9cbi8qfSovXG5cbi8qLmV4cGFuZGVkUm93czpiZWZvcmUgeyovXG4vKiAgY29udGVudDogJyc7Ki9cbi8qICBwb3NpdGlvbjogYWJzb2x1dGU7Ki9cbi8qICBpbnNldDogLTJweCAtMXB4IC0ycHggLTFweDsqL1xuLyogICEqYmFja2dyb3VuZDogIzBlNmY3NjEyOyohKi9cbi8qICAhKmJveC1zaGFkb3c6IGluc2V0IDAgMCAxMHB4IDJweCAjMGU2Zjc2OTY7KiEqL1xuLyogIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgwZGVnLCAjMGU2Zjc2OTYgMHB4LCB0cmFuc3BhcmVudCAxMHB4KSwqL1xuLyogICAgISpsaW5lYXItZ3JhZGllbnQoOTBkZWcsICMwZTZmNzY5NiAwcHgsIHRyYW5zcGFyZW50IDEwcHgpLCohIGxpbmVhci1ncmFkaWVudCgxODBkZWcsICMwZTZmNzY5NiAwcHgsIHRyYW5zcGFyZW50IDEwcHgpOyovXG4vKiAgISpsaW5lYXItZ3JhZGllbnQoMjcwZGVnLCAjMGU2Zjc2OTYgMHB4LCB0cmFuc3BhcmVudCAxMHB4KTsqISovXG4vKiAgISpib3JkZXItbGVmdDogNHB4IHNvbGlkICMwZTZmNzY7KiEqL1xuLyp9Ki9cblxuXG5hLCBhOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuXG4uaW50ZXJhY3RvclNlcGFyYXRpb24ge1xuICBtaW4td2lkdGg6IDJjaDtcbiAgbWF4LXdpZHRoOiAyY2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHdoaXRlO1xufVxuXG4uaW50ZXJhY3RvclNlcGFyYXRpb25OYW1lIHtcbiAgdHJhbnNmb3JtOiByb3RhdGUoLTkwZGVnKTtcbiAgZm9udC13ZWlnaHQ6IGxpZ2h0ZXI7XG4gIGZvbnQtc2l6ZTogc21hbGw7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgbGluZS1oZWlnaHQ6IDAuODtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uc3BhY2VIb2xkZXIge1xuICB3aWR0aDogMTgwcHg7XG59XG5cbi5leHBhbmRlZFJvd3Mge1xuICBjb2xvcjogIzBlNmY3NjtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4uZmlyc3RFeHBhbmRlZFJvdzphZnRlciB7XG4gIGNvbnRlbnQ6ICcnO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGluc2V0OiAtMnB4IC0xcHggLTJweCAtMXB4O1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCAjMGU2Zjc2OTYgMHB4LCB0cmFuc3BhcmVudCAxMHB4KTtcbn1cblxuLmxhc3RFeHBhbmRlZFJvdzphZnRlciB7XG4gIGNvbnRlbnQ6ICcnO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGluc2V0OiAtMnB4IC0xcHggLTJweCAtMXB4O1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7XG59XG5cblxuIl19 */";
 
       /***/
     }),
@@ -2471,7 +2509,7 @@
       \*********************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = ".complexNavigatorTable {\n  border-collapse: separate;\n  /* overflow-x: scroll;  remove to make the header sticky */\n\n  height: 100%;\n}\n\n.header {\n  position: sticky;\n  top: 38px;\n  z-index: 2;\n\n}\n\n.interactors {\n  top: -21px;\n  z-index: 1;\n  position: relative;\n  border-top: 1px solid black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQXlCO0VBQ3pCLDBEQUEwRDs7RUFFMUQsWUFBWTtBQUNkOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFNBQVM7RUFDVCxVQUFVOztBQUVaOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFVBQVU7RUFDVixrQkFBa0I7RUFDbEIsMkJBQTJCO0FBQzdCIiwiZmlsZSI6InRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbXBsZXhOYXZpZ2F0b3JUYWJsZSB7XG4gIGJvcmRlci1jb2xsYXBzZTogc2VwYXJhdGU7XG4gIC8qIG92ZXJmbG93LXg6IHNjcm9sbDsgIHJlbW92ZSB0byBtYWtlIHRoZSBoZWFkZXIgc3RpY2t5ICovXG5cbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uaGVhZGVyIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAzOHB4O1xuICB6LWluZGV4OiAyO1xuXG59XG5cbi5pbnRlcmFjdG9ycyB7XG4gIHRvcDogLTIxcHg7XG4gIHotaW5kZXg6IDE7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIGJsYWNrO1xufVxuIl19 */";
+      module.exports = ".complexNavigatorTable {\n  border-collapse: separate;\n  height: 100%;\n  width: 120%;\n}\n\n.header {\n  position: sticky;\n  top: 20px;\n  z-index: 2;\n  overflow-x: auto;\n  overflow-y: hidden;\n  transform: rotateX(180deg);\n}\n\n.interactors {\n  z-index: 1;\n  position: relative;\n  overflow-x: auto;\n  overflow-y: hidden;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLXN0cnVjdHVyZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQXlCO0VBQ3pCLFlBQVk7RUFDWixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsU0FBUztFQUNULFVBQVU7RUFDVixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLDBCQUEwQjtBQUM1Qjs7QUFFQTtFQUNFLFVBQVU7RUFDVixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQiIsImZpbGUiOiJ0YWJsZS1zdHJ1Y3R1cmUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb21wbGV4TmF2aWdhdG9yVGFibGUge1xuICBib3JkZXItY29sbGFwc2U6IHNlcGFyYXRlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAxMjAlO1xufVxuXG4uaGVhZGVyIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAyMHB4O1xuICB6LWluZGV4OiAyO1xuICBvdmVyZmxvdy14OiBhdXRvO1xuICBvdmVyZmxvdy15OiBoaWRkZW47XG4gIHRyYW5zZm9ybTogcm90YXRlWCgxODBkZWcpO1xufVxuXG4uaW50ZXJhY3RvcnMge1xuICB6LWluZGV4OiAxO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG92ZXJmbG93LXg6IGF1dG87XG4gIG92ZXJmbG93LXk6IGhpZGRlbjtcbn1cbiJdfQ== */";
 
       /***/
     }),
