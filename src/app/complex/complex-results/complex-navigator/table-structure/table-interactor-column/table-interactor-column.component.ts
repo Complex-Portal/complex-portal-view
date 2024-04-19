@@ -737,10 +737,12 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
         || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
-        oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
-        ranges.push(oneType);
+        if (start !== null) {
+          oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
+          ranges.push(oneType);
+          start = null;
+        }
         length = 0;
-        start = null;
       }
     }
     this._rangesOfInteractorsType = ranges;
@@ -761,10 +763,12 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
         || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
-        oneType.push(this.enrichedInteractors[i].organismName, length, start);
-        ranges.push(oneType);
+        if (start !== null) {
+          oneType.push(this.enrichedInteractors[i].organismName, length, start);
+          ranges.push(oneType);
+          start = null;
+        }
         length = 0;
-        start = null;
       }
     }
     this._rangesOfInteractorsOrganism = ranges;

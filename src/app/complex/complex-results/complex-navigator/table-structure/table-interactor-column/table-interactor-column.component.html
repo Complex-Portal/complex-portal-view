@@ -73,15 +73,16 @@
       <!-- Expandable menu for subcomplexes -->
       <ng-container *ngIf="interactor.expanded">
         <ng-container *ngIf="!!interactor.subComponents">
-          <tbody class="expandedRows">
-          <tr class="expandedRows" *ngFor="let el of interactor.subComponents; let j=index">
+          <tr *ngFor="let el of interactor.subComponents; let j=index"
+              class="expandedRows"
+              [ngClass]="{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                 title="{{interactor.interactor.name}}'s interactors"
                 *ngIf="(interactorsSorting === 'Type' && j===0) || (interactorsSorting === 'Organism' && j===0)">
               <div class="interactorSeparationName"> {{ interactor.interactor.name }}'s interactors</div>
             </td>
-            <td class="intStoich">
-              <div style="font-weight: bold">
+            <td class="subComponentColumn">
+              <div>
                 <a [routerLink]="['/complex/search']"
                    [queryParams]="{query: el.identifier, page: 1}"
                    target="_blank">
@@ -121,7 +122,6 @@
             </ng-container>
             <div class="spaceHolder" *ngIf="complexSearch.elements.length>6"></div>
           </tr>
-          </tbody>
         </ng-container>
       </ng-container>
     </ng-container>
