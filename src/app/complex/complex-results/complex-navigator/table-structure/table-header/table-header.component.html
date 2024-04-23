@@ -1,49 +1,48 @@
 <div class="Complex-navigator">
-    <table class="table CN-table">
-        <!-- When table is not overflowing -->
-        <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
-        <tr>
-            <th class="interactorsHeader horizontal">Interactors</th>
-            <th class="horizontal" *ngFor="let complex of complexSearch.elements">
-                <a [routerLink]="['/complex', complex.complexAC]"
-                   title="{{complex.complexAC}}"
-                   target="_blank">
-                    <div>
+  <table class="table CN-table">
+    <!-- When table is not overflowing -->
+    <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
+    <tr>
+      <th class="interactorsHeader horizontal">Interactors</th>
+      <th class="horizontal" *ngFor="let complex of complexSearch.elements">
+        <a [routerLink]="['/complex', complex.complexAC]"
+           title="{{complex.complexAC}}"
+           target="_blank">
+          <div>
             <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <div class="line"></div>
                 <div class="horizontal-label">
                   <i class="icon icon-generic small" data-icon="x"></i>
-                    {{ complex.complexName }}
+                  {{ complex.complexName }}
                 </div>
             </span>
-                    </div>
-                </a>
-            </th>
-        </tr>
-        </thead>
-        <!-- When table is overflowing -->
-        <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
-        <tr [style.--cols]="complexSearch.elements.length">
-            <th class="interactorsHeader">Interactors</th>
-            <th class="rotate" *ngFor="let complex of complexSearch.elements">
-                <a [routerLink]="['/complex', complex.complexAC]"
-                   title="{{complex.complexAC}}"
-                   target="_blank">
-                    <div>
+          </div>
+        </a>
+      </th>
+    </tr>
+    </thead>
+    <!-- When table is overflowing -->
+    <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
+    <tr [style.--cols]="complexSearch.elements.length">
+      <th class="interactorsHeader">Interactors</th>
+      <th class="rotate" *ngFor="let complex of complexSearch.elements">
+        <a [routerLink]="['/complex', complex.complexAC]"
+           title="{{complex.complexAC}}"
+           target="_blank">
+          <div>
             <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
-<!--            <div class="line"></div>-->
               <div class="tilted-label">
                 <i class="icon icon-generic small" data-icon="x"></i>
-                  {{ complex.complexName }}
+                {{ complex.complexName }}
               </div>
             </span>
-                    </div>
-                </a>
-            </th>
-            <div class="spaceHolder"></div>
-        </tr>
-        </thead>
-    </table>
+          </div>
+        </a>
+      </th>
+      <div class="spaceHolder"></div>
+    </tr>
+    </thead>
+  </table>
 </div>
 
 

@@ -1,0 +1,13 @@
+
+.stoichNum {
+  width: 4ch;
+  height: 4ch;
+  border-radius: 4ch;
+  background-color: #0e6f76;
+  text-align: center;
+  padding-top: 0.5ch;
+  color: white;
+  font-size: small;
+  margin-left: auto;
+  margin-right: auto;
+}

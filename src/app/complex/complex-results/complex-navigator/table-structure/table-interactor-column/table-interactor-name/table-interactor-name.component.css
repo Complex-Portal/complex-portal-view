@@ -1,0 +1,12 @@
+
+a {
+  font-weight: normal;
+}
+
+a, a:visited {
+  color: #0e6f76;
+}
+
+i:not(.small) {
+  font-size: large;
+}

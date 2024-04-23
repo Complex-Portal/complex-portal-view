@@ -1,0 +1,13 @@
+<div class="sortingInteractors">
+  <input type="submit" name="classificationButton" value="Interactors sorting" class="button">
+  <div class="typeOfSorting">
+    <input type="submit" name="appearanceClassification" value="Occurrence" class="button"
+           (click)="setInteractorsSorting('Occurrence')">
+    <input type="submit" name="typeClassification" value="Type" class="button"
+           (click)="setInteractorsSorting('Type')">
+    <input type="submit" name="organismClassification" value="Organism" class="button"
+           (click)="setInteractorsSorting('Organism')">
+    <input type="submit" name="geneClassification" value="Orthology (Not available yet)" class="button"
+           (click)="setInteractorsSorting('Orthology')">
+  </div>
+</div>

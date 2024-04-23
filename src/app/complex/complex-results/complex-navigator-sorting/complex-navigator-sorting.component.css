@@ -1,0 +1,9 @@
+.typeOfSorting {
+  display: none;
+}
+
+.sortingInteractors:hover .typeOfSorting {
+  display: flex;
+  margin-top: -16px;
+
+}

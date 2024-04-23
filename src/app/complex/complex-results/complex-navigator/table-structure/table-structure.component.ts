@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
 })
 export class TableStructureComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
-  _interactors: Set<Interactor>;
-  _interactorsSorting: string;
+  @Input() interactors: Set<Interactor>;
+  @Input() interactorsSorting: string;
 
   // _overFlowing: boolean;
 
@@ -19,23 +19,5 @@ export class TableStructureComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  get interactors(): Set<Interactor> {
-    return this._interactors;
-  }
-
-  @Input()
-  set interactors(value: Set<Interactor>) {
-    this._interactors = value;
-  }
-
-  @Input()
-  set interactorsSorting(value: string) {
-    this._interactorsSorting = value;
-  }
-
-  get interactorsSorting(): string {
-    return this._interactorsSorting;
   }
 }

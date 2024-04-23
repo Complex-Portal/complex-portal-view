@@ -1,15 +1,27 @@
-.typeOfSorting {
-  display: none;
+.displayButton {
+  float: right;
 }
 
-.sortingInteractors:hover .typeOfSorting {
-  display: flex;
-  margin-top: -16px;
-
+.view-button {
+  float: unset;
+  width: 225px;
+  margin-right: 5px;
+  background-color: white;
+  color: #555;
+  border: 1px dotted #007c82;
 }
 
-.buttonContainer {
-  display: inline-flex;
-  width: 130%;
-  height: 80px;
+.view-button:hover {
+  color: #007c82;
+  background-color: rgb(234, 234, 234);
+  border: transparent;
+  border-bottom: 1px dotted #007c82;
 }
+
+.selected,
+.selected:hover {
+  background-color: #007c82;
+  color: white;
+  opacity: 100%;
+}
+

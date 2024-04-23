@@ -1,6 +1,5 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/0.13/config/configuration-file.html
-// test
 
 module.exports = function (config) {
   config.set({
@@ -12,14 +11,10 @@ module.exports = function (config) {
       require('karma-remap-istanbul'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    files: [
-
-    ],
-    preprocessors: {
-
-    },
+    files: [],
+    preprocessors: {},
     mime: {
-      'text/x-typescript': ['ts','tsx']
+      'text/x-typescript': ['ts', 'tsx']
     },
     remapIstanbulReporter: {
       dir: require('path').join(__dirname, 'coverage'), reports: {
@@ -29,8 +24,8 @@ module.exports = function (config) {
     },
 
     reporters: config.angularCli && config.angularCli.codeCoverage
-              ? ['progress', 'karma-remap-istanbul']
-              : ['progress'],
+      ? ['progress', 'karma-remap-istanbul']
+      : ['progress'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

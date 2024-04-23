@@ -22,17 +22,16 @@ export class TableHeaderComponent implements OnInit {
   }
 
   classifyComplexesSize(): void {
-    const searchResult = this.complexSearch.elements;
-    const complexesWithSimilarities = new Map<ComplexSearchResult['elements'][0], number>();
-    const biggestComplex = [searchResult[0], 0];
+    const searchResult: Element[] = this.complexSearch.elements;
+    const complexesWithSimilarities: Map<Element, number> = new Map<ComplexSearchResult['elements'][0], number>();
+    const biggestComplex: [Element, number] = [searchResult[0], 0];
 
     // check which complex is the biggest
     for (const complex of searchResult) {
       let totalLength = complex.interactors.length;
       for (const complexInteractorChecked of complex.interactors) {
         if (complexInteractorChecked.interactorType === 'stable complex') {
-          // tslint:disable-next-line:no-shadowed-variable
-          const subComplex: Element = searchResult.find(complex => complex.complexAC === complexInteractorChecked.identifier);
+          const subComplex: Element = searchResult.find(c => c.complexAC === complexInteractorChecked.identifier);
           totalLength += subComplex.interactors.length;
         }
       }
@@ -42,7 +41,8 @@ export class TableHeaderComponent implements OnInit {
       }
     }
 
-    const bigComplex: any = biggestComplex[0]; // access to the complex
+    // console.log(typeof biggestComplex[0]);
+    const bigComplex: Element = biggestComplex[0]; // access to the complex
 
     // compare the other complexes with the biggest
     for (const comparedComplex of searchResult) {
@@ -54,8 +54,7 @@ export class TableHeaderComponent implements OnInit {
           }
         }
         if (biggestComplexInteractor.interactorType === 'stable complex') {
-          // tslint:disable-next-line:max-line-length
-          const subComplex: Element = searchResult.find(complex => complex.complexAC === biggestComplexInteractor.identifier);
+          const subComplex: Element = searchResult.find(c => c.complexAC === biggestComplexInteractor.identifier);
           if (comparedComplex.complexAC === bigComplex.complexAC) {
             similarities += subComplex.interactors.length;
           }

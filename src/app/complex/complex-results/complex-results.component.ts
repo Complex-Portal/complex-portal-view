@@ -13,6 +13,8 @@ import {Interactor} from '../shared/model/complex-results/interactor.model';
   styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
+  LIST_VIEW = 'LIST_VIEW';
+  COMPLEX_NAVIGATOR_VIEW = 'COMPLEX_NAVIGATOR_VIEW';
   private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
@@ -22,8 +24,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
-  DisplayType = true;
-  _interactorsSorting = 'Occurrence';
+  DisplayType: string = this.LIST_VIEW;
+  interactorsSorting: string;
+
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -34,7 +37,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
-    this._interactorsSorting = this.interactorsSorting;
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -220,15 +222,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this._allInteractorsInComplexSearch = value;
   }
 
-  toggleDisplayType() {
-    this.DisplayType = !this.DisplayType;
+  setListView() {
+    this.DisplayType = this.LIST_VIEW;
   }
 
-  get interactorsSorting(): string {
-    return this._interactorsSorting;
-  }
-
-  setInteractorsSorting(typeOfSorting: string) {
-    this._interactorsSorting = typeOfSorting;
+  setComplexNavigatorView() {
+    this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
   }
 }

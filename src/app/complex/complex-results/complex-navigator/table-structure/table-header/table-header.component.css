@@ -1,7 +1,7 @@
 /* Header */
 
 .CN-table {
-  transform: rotateX(180deg); /* On reinverse le contenu du header pour que le contenu soit dans le bon sens */
+  transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
 }
 
 thead {
@@ -59,10 +59,7 @@ thead {
   align-items: center;
   align-content: center;
   padding: 0;
-
   transform: rotate(-45deg);
-
-
   /* line */
   border-top: 1px solid white;
 }
@@ -74,19 +71,6 @@ thead {
   background-color: #007c82;
   padding: 0 0 0 70px;
 }
-
-
-/*.line {*/
-/*  position: absolute;*/
-/*  top: auto;*/
-/*  bottom: auto;*/
-/*  background: #0e6f76;*/
-/*  margin-top: 7px;*/
-/*  left: 0;*/
-/*  width: 66px;*/
-/*  height: 5px;*/
-/*  border-radius: 4px;*/
-/*}*/
 
 /* Horizontal complexes name */
 

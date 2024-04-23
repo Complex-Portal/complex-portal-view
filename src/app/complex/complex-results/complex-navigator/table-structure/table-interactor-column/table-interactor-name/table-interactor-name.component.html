@@ -1,0 +1,12 @@
+<div>
+  {{ interactorName }}
+  <i class="{{interactorTypeIcon()}}"
+     title="{{interactorType}}"></i>
+  <!-- Adding of the icons to access details of the interactor -->
+  <a [routerLink]="['/complex/search']"
+     [queryParams]="{query: interactorId, page: 1}"
+     target="_blank">
+    <i class="icon icon-functional small" data-icon="1"
+       title="Complexes containing this interactor"></i>
+  </a>
+</div>

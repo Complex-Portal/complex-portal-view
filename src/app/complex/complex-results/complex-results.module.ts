@@ -8,8 +8,26 @@ import {ComplexListComponent} from './complex-list/complex-list.component';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {ComplexNavigatorComponent} from './complex-navigator/complex-navigator.component';
 import {TableStructureComponent} from './complex-navigator/table-structure/table-structure.component';
-import { TableHeaderComponent } from './complex-navigator/table-structure/table-header/table-header.component';
-import { TableInteractorColumnComponent } from './complex-navigator/table-structure/table-interactor-column/table-interactor-column.component';
+import {TableHeaderComponent} from './complex-navigator/table-structure/table-header/table-header.component';
+import {
+  TableInteractorColumnComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-interactor-column.component';
+import {
+  TableInteractorNameComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component';
+import {
+  TableInteractorExternalLinkComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component';
+import {
+  TableInteractorStoichiometryComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component';
+import {
+  TableMainInteractorComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-main-interactor/table-main-interactor.component';
+import {
+  TableSubcomponentInteractorComponent
+} from './complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
+import {ComplexNavigatorSortingComponent} from './complex-navigator-sorting/complex-navigator-sorting.component';
 
 
 @NgModule({
@@ -30,6 +48,12 @@ import { TableInteractorColumnComponent } from './complex-navigator/table-struct
     TableStructureComponent,
     TableHeaderComponent,
     TableInteractorColumnComponent,
+    TableInteractorNameComponent,
+    TableInteractorExternalLinkComponent,
+    TableInteractorStoichiometryComponent,
+    TableMainInteractorComponent,
+    TableSubcomponentInteractorComponent,
+    ComplexNavigatorSortingComponent,
   ]
 })
 export class ComplexResultsModule {

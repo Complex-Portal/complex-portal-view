@@ -3,15 +3,39 @@
 
 
 /*based on https://github.com/ebiwd/EBI-Pattern-library/issues/25#issuecomment-287742227*/
-.button.ebi-background:hover { background: #007c82; }
-.button.services-background:hover { background: #389198; }
-.button.research-background:hover { background: #6dab49; }
-.button.training-background:hover { background: #e9b400; }
-.button.industry-background:hover { background: #0086b4; }
-.button.elixir-background:hover { background: #fb6a2a; }
-.button.white-background:hover { background: white; }
-.button.secondary-background:hover { background: #666; }
-.button.medium-gray-background:hover { background: #999; }
+.button.ebi-background:hover {
+  background: #007c82;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.button.services-background:hover {
+  background: #389198;
+}
+
+.button.research-background:hover {
+  background: #6dab49;
+}
+
+.button.training-background:hover {
+  background: #e9b400;
+}
+
+.button.industry-background:hover {
+  background: #0086b4;
+}
+
+.button.elixir-background:hover {
+  background: #fb6a2a;
+}
+
+.button.white-background:hover {
+  background: white;
+}
+
+.button.secondary-background:hover {
+  background: #666;
+}
+
+.button.medium-gray-background:hover {
+  background: #999;
+}
+
