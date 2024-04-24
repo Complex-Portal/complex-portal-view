@@ -55,14 +55,14 @@
               <input type="checkbox" #filter value="{{facet.name}}"
                      (change)="changeInteractorTypeFilter(filter.value, filter.checked)" checked> {{ facet.name }}
               ({{ facet.count }})
-              <i class="{{ interactorTypeIcon(facet) }}"
+              <i class="{{ facetTypeIcon(facet) }}"
                  style="font-size: large;"></i>
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
                      (change)="changeInteractorTypeFilter(filter.value, filter.checked)"> {{ facet.name }}
               ({{ facet.count }})
-              <i class="{{ interactorTypeIcon(facet) }}"
+              <i class="{{ facetTypeIcon(facet) }}"
                  style="font-size: large;"></i>
             </div>
           </div>

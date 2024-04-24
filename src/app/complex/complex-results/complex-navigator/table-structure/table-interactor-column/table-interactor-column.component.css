@@ -1,3 +1,7 @@
+table {
+  height: 1px;
+}
+
 /* interactors column */
 .interactorsColumn {
   position: sticky;
@@ -109,7 +113,7 @@ a, a:visited {
 
 
   text-overflow: ellipsis;
-  height: calc(var(--rowspanSize) * 40px);
+  height: calc(var(--rowspanSize) * 48px);
   white-space: nowrap;
   overflow: hidden;
 }

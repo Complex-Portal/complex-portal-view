@@ -12,6 +12,7 @@ import {Element} from '../../../../shared/model/complex-results/element.model';
 export class TableHeaderComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactorsTable: TableInteractorColumnComponent;
+  @Input() interactorsSorting: string;
 
   constructor() {
   }
@@ -143,5 +144,9 @@ export class TableHeaderComponent implements OnInit {
         return 0; // Leave the order unchanged if both elements are not found in unique list
       }
     });
+  }
+
+  getInteractorSorting() {
+    return this.interactorsSorting !== 'Occurrence';
   }
 }
