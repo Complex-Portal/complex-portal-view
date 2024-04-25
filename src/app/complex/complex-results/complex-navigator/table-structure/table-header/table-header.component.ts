@@ -20,6 +20,7 @@ export class TableHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.classifyComplexesSize();
     this.classifyComplexesSimilarities(this.complexSearch);
+    this.isInteractorSortingSet();
   }
 
   classifyComplexesSize(): void {
@@ -147,7 +148,11 @@ export class TableHeaderComponent implements OnInit {
     });
   }
 
-  getInteractorSorting() {
-    return this.interactorsSorting !== 'Occurrence';
+  isInteractorSortingSet() {
+    if (this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

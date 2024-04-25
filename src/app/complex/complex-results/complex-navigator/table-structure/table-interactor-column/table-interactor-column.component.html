@@ -3,7 +3,7 @@
     <!-- Interactors' column -->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
-        <ng-container *ngFor="let oneType of ranges()" class="interactorsOrdering">
+        <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
           <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
               title="{{oneType[0]}}">
             <div class="interactorNameContainer" [style.--rowspanSize]="oneType[1]">

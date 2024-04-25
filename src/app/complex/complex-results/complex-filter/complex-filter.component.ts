@@ -15,9 +15,6 @@ export class ComplexFilterComponent implements OnInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-
-  @Input() icon: string;
-
   @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();

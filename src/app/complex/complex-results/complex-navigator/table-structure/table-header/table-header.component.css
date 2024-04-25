@@ -1,6 +1,5 @@
 .CN-table {
   transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
-  --interactorsHeaderWidth: 130px;
 }
 
 thead {
@@ -16,8 +15,8 @@ thead {
 /* Rotated complexes names */
 
 .interactorsHeader {
-  min-width: calc(130px + 3ch);
-  max-width: calc(130px + 3ch);
+  min-width: 130px;
+  max-width: 130px;
   position: sticky;
   left: 0;
   z-index: 4;

@@ -3,7 +3,8 @@
     <!-- When table is not overflowing -->
     <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
     <tr>
-      <th class="interactorsHeader horizontal" [ngClass]="{'bigInteractorHeader':getInteractorSorting()}">Interactors
+      <!--      <td class="filler" *ngIf="!isInteractorSortingSet()"></td>-->
+      <th class="interactorsHeader horizontal">Interactors
       </th>
       <th class="horizontal" *ngFor="let complex of complexSearch.elements">
         <a [routerLink]="['/complex', complex.complexAC]"
