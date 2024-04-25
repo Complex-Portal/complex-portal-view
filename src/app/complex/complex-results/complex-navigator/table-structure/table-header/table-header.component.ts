@@ -83,8 +83,9 @@ export class TableHeaderComponent implements OnInit {
         }
       }
       if (complex1Interactor.interactorType === 'stable complex') {
-        // tslint:disable-next-line:max-line-length
-        const subComplex: Element = this.complexSearch.elements.find(complex => complex.complexAC === complex1Interactor.identifier);
+        const subComplex: Element = this.complexSearch.elements.find(
+          complex => complex.complexAC === complex1Interactor.identifier
+        );
         if (complex2.complexAC === complex1.complexAC) {
           similarities += subComplex.interactors.length;
         }

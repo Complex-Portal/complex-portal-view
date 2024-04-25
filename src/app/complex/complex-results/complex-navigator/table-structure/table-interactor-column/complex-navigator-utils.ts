@@ -5,10 +5,8 @@ export function formatStoichiometryValues(stoichiometry: string): string {
   if (!!stoichiometry) {
     const matchedStoichiometry = fetchValuesFromStoichiometry(stoichiometry);
     if (!!matchedStoichiometry) {
-      // tslint:disable-next-line:radix
-      const minValue = parseInt(matchedStoichiometry[1]);
-      // tslint:disable-next-line:radix
-      const maxValue = parseInt(matchedStoichiometry[2]);
+      const minValue = parseInt(matchedStoichiometry[1], 10);
+      const maxValue = parseInt(matchedStoichiometry[2], 10);
       if (minValue === maxValue) {
         return minValue.toString();
       } else {

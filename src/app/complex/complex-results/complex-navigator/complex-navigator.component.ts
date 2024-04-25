@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
-import {Router} from '@angular/router';
 
 
 @Component({
@@ -15,7 +14,7 @@ export class ComplexNavigatorComponent implements OnInit {
   @Input() interactors: Set<Interactor>;
 
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {

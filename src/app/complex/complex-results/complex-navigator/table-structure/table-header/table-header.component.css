@@ -16,8 +16,8 @@ thead {
 /* Rotated complexes names */
 
 .interactorsHeader {
-  min-width: var(--interactorsHeaderWidth);
-  max-width: var(--interactorsHeaderWidth);
+  min-width: calc(130px + 3ch);
+  max-width: calc(130px + 3ch);
   position: sticky;
   left: 0;
   z-index: 4;
@@ -120,4 +120,5 @@ a {
 .interactorsHeader horizontal .bigInteractorHeader {
   min-width: calc(var(--interactorsHeaderWidth) + 3ch);
   max-width: calc(var(--interactorsHeaderWidth) + 3ch);
+  background-color: #6dab49;
 }

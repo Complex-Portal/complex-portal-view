@@ -69,14 +69,6 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     }
   }
 
-  get rangesOfInteractorType(): number[] {
-    return this._rangesOfInteractorsType;
-  }
-
-  get rangesOfInteractorOrganism(): number[] {
-    return this._rangesOfInteractorsOrganism;
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['interactors']) {
       this.enrichInteractors();
@@ -313,8 +305,7 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-            // tslint:disable-next-line:radix
-            if (isNaN(parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
+            if (isNaN(parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10))) {
               oneInteractor.timesAppearing = oneInteractor.timesAppearing;
             } else {
               oneInteractor.timesAppearing += parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10);
@@ -322,18 +313,18 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
           }
         }
         if (oneInteractor.isSubComplex) {
-          // tslint:disable-next-line:no-shadowed-variable
-          for (const subInteractor of oneInteractor.subComponents) {
-            // tslint:disable-next-line:max-line-length no-shadowed-variable
-            const enrichedInteractor = this._enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === subInteractor.identifier);
-            // tslint:disable-next-line:radix
-            enrichedInteractor.timesAppearing = parseInt(formatStoichiometryValues(subInteractor.stochiometry));
+          for (const oneSubInteractor of oneInteractor.subComponents) {
+            const oneEnrichedInteractor = this._enrichedInteractors.find(
+              enrichedInteractor => enrichedInteractor.interactor.identifier === oneSubInteractor.identifier
+            );
+            oneEnrichedInteractor.timesAppearing = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
           }
         }
       }
     }
-    // tslint:disable-next-line:max-line-length
-    this._enrichedInteractors.sort((a, b) => b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */);
+    this._enrichedInteractors.sort((a, b) =>
+      b.timesAppearing - a.timesAppearing /* || a.interactor.name.localeCompare(b.interactor.name) */
+    );
     // this.calculateAllStartAndEndIndexes();
   }
 

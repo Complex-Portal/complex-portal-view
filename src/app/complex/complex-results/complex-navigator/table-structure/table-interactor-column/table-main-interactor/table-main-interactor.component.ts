@@ -180,10 +180,8 @@ export class TableMainInteractorComponent implements OnInit {
           if (maxValue === null) {
             maxValue = 0;
           }
-          // tslint:disable-next-line:radix
-          minValue += parseInt(matchedStoichiometry[1]);
-          // tslint:disable-next-line:radix
-          maxValue += parseInt(matchedStoichiometry[2]);
+          minValue += parseInt(matchedStoichiometry[1], 10);
+          maxValue += parseInt(matchedStoichiometry[2], 10);
         }
       }
     }
