@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
 import {Element} from '../../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {
   fetchValuesFromStoichiometry,
   findInteractorInComplex,
-  formatStoichiometryValues,
-  getStoichiometry
+  getStoichiometry,
+  stoichiometryOfInteractors
 } from '../complex-navigator-utils';
 
 @Component({
@@ -14,20 +14,14 @@ import {
   templateUrl: './table-main-interactor.component.html',
   styleUrls: ['./table-main-interactor.component.css']
 })
-export class TableMainInteractorComponent implements OnInit {
-
+export class TableMainInteractorComponent {
   @Input() complex: EnrichedComplex;
   @Input() i: number;
   @Input() enrichedInteractors: EnrichedInteractor[];
 
   findInteractorInComplex = findInteractorInComplex;
   getStoichiometry = getStoichiometry;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
+  stoichiometryOfInteractors = stoichiometryOfInteractors;
 
   get interactor(): EnrichedInteractor {
     return this.enrichedInteractors[this.i];
@@ -77,14 +71,6 @@ export class TableMainInteractorComponent implements OnInit {
       } else {
         return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
       }
-    }
-    return null;
-  }
-
-  stoichiometryOfInteractors(complex: Element, interactorId: string): string {
-    const match = findInteractorInComplex(complex, interactorId);
-    if (!!match) {
-      return formatStoichiometryValues(match.stochiometry);
     }
     return null;
   }

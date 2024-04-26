@@ -116,8 +116,8 @@ a {
   background-color: white;
 }
 
-.interactorsHeader horizontal .bigInteractorHeader {
-  min-width: calc(var(--interactorsHeaderWidth) + 3ch);
-  max-width: calc(var(--interactorsHeaderWidth) + 3ch);
-  background-color: #6dab49;
-}
+/*.interactorsHeader horizontal .bigInteractorHeader {*/
+/*  min-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
+/*  max-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
+/*  background-color: #6dab49;*/
+/*}*/

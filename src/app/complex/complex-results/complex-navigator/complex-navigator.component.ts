@@ -8,15 +8,8 @@ import {Interactor} from '../../shared/model/complex-results/interactor.model';
   templateUrl: './complex-navigator.component.html',
   styleUrls: ['./complex-navigator.component.css']
 })
-export class ComplexNavigatorComponent implements OnInit {
+export class ComplexNavigatorComponent {
   @Input() complexSearch: ComplexSearchResult;
-  @Input() interactorsSorting: string;
-  @Input() interactors: Set<Interactor>;
-
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
+  @Input() interactors: Interactor[];
+  interactorsSorting: 'Occurrence';
 }

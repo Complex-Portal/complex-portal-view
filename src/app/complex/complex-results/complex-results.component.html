@@ -4,9 +4,9 @@
       <h2 class="padding-left-large">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row">
         <div class="displayButton columns medium-8" style="text-align: center">
-          <input type="submit" name="submit" value="List View" class="button view-button"
+          <input type="submit" name="submit" value="View list" class="button view-button"
                  (click)="setListView()" [ngClass]="{'selected': DisplayType === LIST_VIEW}">
-          <input type="submit" name="submit" value="Complex Navigator View" class="button view-button"
+          <input type="submit" name="submit" value="View Complex Navigator" class="button view-button"
                  (click)="setComplexNavigatorView()" [ngClass]="{'selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}">
         </div>
       </div>
@@ -30,8 +30,7 @@
         </cp-complex-list>
         <cp-complex-navigator class="Complex-navigator" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
                               [complexSearch]="complexSearch"
-                              [interactors]="allInteractorsInComplexSearch"
-                              [interactorsSorting]="interactorsSorting">
+                              [interactors]="allInteractorsInComplexSearch">
         </cp-complex-navigator>
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"

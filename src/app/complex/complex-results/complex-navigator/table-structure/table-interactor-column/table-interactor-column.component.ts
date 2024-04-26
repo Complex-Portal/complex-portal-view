@@ -1,13 +1,14 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
-import {Element} from '../../../../shared/model/complex-results/element.model';
+// import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
 import {map} from 'rxjs/operators';
-import {findInteractorInComplex, formatStoichiometryValues} from './complex-navigator-utils';
+import {formatStoichiometryValues, stoichiometryOfInteractors} from './complex-navigator-utils';
+import {Element} from '../../../../shared/model/complex-results/element.model';
 
 export class EnrichedInteractor {
   interactor: Interactor;
@@ -33,7 +34,7 @@ export class EnrichedComplex {
   templateUrl: './table-interactor-column.component.html',
   styleUrls: ['./table-interactor-column.component.css']
 })
-export class TableInteractorColumnComponent implements OnInit, OnChanges {
+export class TableInteractorColumnComponent implements OnChanges {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactorsSorting: string;
   @Input() interactors: Interactor[];
@@ -44,9 +45,6 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
 
 
   constructor(private complexPortalService: ComplexPortalService) {
-  }
-
-  ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -89,14 +87,6 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       this.enrichedInteractors.push(newEnrichedInteractor);
     }
     this.interactorOrganism();
-  }
-
-  stoichiometryOfInteractors(complex: Element, interactorId: string): string {
-    const match = findInteractorInComplex(complex, interactorId);
-    if (!!match) {
-      return formatStoichiometryValues(match.stochiometry);
-    }
-    return null;
   }
 
   toggleSubcomplexExpandable(i: number): void {
@@ -142,14 +132,8 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       return of(foundComplex.interactors);
     } else {
       // Actually call the back-end to fetch these
-      return this.complexPortalService.getComplexAc(interactor.interactor.identifier)
-        .pipe(map(complex => complex.participants.map(participant => new ComplexComponent(
-          participant.identifier,
-          participant.identifierLink,
-          participant.name,
-          participant.description,
-          participant.stochiometry,
-          participant.interactorType))));
+      return this.complexPortalService.getSimplifiedComplex(interactor.interactor.identifier)
+        .pipe(map(complex => complex?.interactors));
     }
   }
 
@@ -261,8 +245,9 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
     for (const complex of this.complexSearch.elements) {
       const organismName = complex.organismName;
       for (const complexInteractor of complex.interactors) {
-        // tslint:disable-next-line:max-line-length
-        const match = this.enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === complexInteractor.identifier);
+        const match = this.enrichedInteractors.find(
+          enrichedInteractor => enrichedInteractor.interactor.identifier === complexInteractor.identifier
+        );
         match.organismName = organismName;
       }
     }
@@ -284,7 +269,7 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       for (const complex of this.complexSearch.elements) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-            const stoichiometryValue = parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10);
+            const stoichiometryValue = parseInt(stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10);
             if (!isNaN(stoichiometryValue)) {
               oneInteractor.timesAppearing += stoichiometryValue;
             }
@@ -304,7 +289,6 @@ export class TableInteractorColumnComponent implements OnInit, OnChanges {
       b.timesAppearing - a.timesAppearing
     );
     this.ranges = [];
-    // this.calculateAllStartAndEndIndexes();
   }
 
   public rangeOfInteractorTypeV2() {

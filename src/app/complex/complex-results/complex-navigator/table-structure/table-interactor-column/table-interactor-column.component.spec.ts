@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ComplexNavigatorComponent} from './complex-navigator.component';
+import {ComplexNavigatorComponent} from '../../complex-navigator.component';
 
 describe('ComplexNavigatorComponent', () => {
   let component: ComplexNavigatorComponent;

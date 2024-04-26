@@ -51,7 +51,7 @@
               [ngClass]="{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                 title="{{interactor.interactor.name}}'s interactors"
-                *ngIf="(interactorsSorting === 'Type' && j===0) || (interactorsSorting === 'Organism' && j===0)">
+                *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
               <div class="interactorSeparationName"> {{ interactor.interactor.name }} interactors</div>
             </td>
             <td class="subComponentColumn">

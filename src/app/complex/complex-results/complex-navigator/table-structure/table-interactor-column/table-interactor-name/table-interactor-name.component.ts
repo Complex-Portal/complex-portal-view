@@ -13,9 +13,6 @@ export class TableInteractorNameComponent implements OnInit {
   @Input() interactorId: string;
   @Input() interactorTypeIcon: string;
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     this.interactorTypeIcon = interactorTypeIcon(this.interactorType);
   }

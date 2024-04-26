@@ -13,10 +13,7 @@ export class TableHeaderComponent implements OnInit {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactorsTable: TableInteractorColumnComponent;
   @Input() interactorsSorting: string;
-
-  constructor() {
-  }
-
+  
   ngOnInit(): void {
     this.classifyComplexesSize();
     this.classifyComplexesSimilarities(this.complexSearch);
@@ -149,10 +146,6 @@ export class TableHeaderComponent implements OnInit {
   }
 
   isInteractorSortingSet() {
-    if (this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism') {
-      return true;
-    } else {
-      return false;
-    }
+    return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
   }
 }

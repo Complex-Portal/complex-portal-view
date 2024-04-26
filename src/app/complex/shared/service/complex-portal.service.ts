@@ -11,6 +11,7 @@ import {ComplexSearchResult} from '../model/complex-results/complex-search.model
 import {SpeciesFacet} from '../model/complex-results/facets/species_f.model';
 import {Observable} from 'rxjs/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
+import {Element} from '../model/complex-results/element.model';
 
 const baseURL = environment.complex_ws_base_url;
 
@@ -107,6 +108,13 @@ export class ComplexPortalService {
     } else {
       console.error(err.message ? err.message : err.toString());
     }
+  }
+
+  getSimplifiedComplex(complexAc: string): Observable<Element> {
+    const url = `${baseURL}/complex-simplified/${complexAc}`;
+    // const url = `${baseURL}/complex-simplified/${complexAc}`;
+    return this.http.get(url).pipe(
+      catchError(this.handleError));
   }
 
 }
