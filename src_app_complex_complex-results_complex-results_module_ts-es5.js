@@ -10,6 +10,48 @@
   function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
   function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
   (self["webpackChunkcomplex_portal_view"] = self["webpackChunkcomplex_portal_view"] || []).push([["src_app_complex_complex-results_complex-results_module_ts"], {
+    /***/82682: (
+    /*!*************************************************!*\
+      !*** ./src/app/complex/complex-portal-utils.ts ***!
+      \*************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"interactorTypeIcon": function interactorTypeIcon() {
+          return /* binding */_interactorTypeIcon;
+        }
+        /* harmony export */
+      });
+      function _interactorTypeIcon(type) {
+        switch (type) {
+          case 'small molecule':
+            return 'icon icon-conceptual icon-chemical';
+          case 'protein':
+          case 'peptide':
+            return 'icon icon-conceptual icon-structures-3d';
+          case 'stable complex':
+            return 'icon icon-conceptual icon-systems';
+          case 'molecule set':
+            return 'icon icon-generic icon-math';
+          case 'single stranded deoxyribonucleic acid':
+          case 'double stranded deoxyribonucleic acid':
+          case 'small nuclear rna':
+          case 'small nucleolar rna':
+          case 'ribosomal rna':
+          case 'messenger rna':
+          case 'transfer rna':
+          case 'signal recognition particle rna':
+          case 'ribonucleic acid':
+          case 'nucleic acid':
+          case 'long non-coding ribonucleic acid':
+            return 'icon icon-conceptual icon-dna';
+        }
+      }
+
+      /***/
+    }),
     /***/16778: (
     /*!************************************************************************************!*\
       !*** ./src/app/complex/complex-results/complex-filter/complex-filter.component.ts ***!
@@ -29,9 +71,11 @@
       /* harmony import */
       var _complex_filter_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./complex-filter.component.css */87165);
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
       var _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../shared/google-analytics/service/analytics.service */96242);
+      /* harmony import */
+      var _complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../../complex-portal-utils */82682);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -43,10 +87,10 @@
         function ComplexFilterComponent(googleAnalyticsService) {
           _classCallCheck(this, ComplexFilterComponent);
           this.googleAnalyticsService = googleAnalyticsService;
-          this.onSpicesFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
-          this.onBiologicalRoleFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
-          this.onInteractorTypeFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
-          this.onResetAllFilters = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
+          this.onSpicesFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
+          this.onBiologicalRoleFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
+          this.onInteractorTypeFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
+          this.onResetAllFilters = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
         }
         _createClass(ComplexFilterComponent, [{
           key: "ngOnInit",
@@ -163,31 +207,9 @@
             this._interactorTypeFilter = value;
           }
         }, {
-          key: "interactorTypeIcon",
-          value: function interactorTypeIcon(facet) {
-            switch (facet.name) {
-              case 'small molecule':
-                return 'icon icon-conceptual icon-chemical';
-              case 'protein':
-              case 'peptide':
-                return 'icon icon-conceptual icon-structures-3d';
-              case 'stable complex':
-                return 'icon icon-conceptual icon-systems';
-              case 'molecule set':
-                return 'icon icon-generic icon-math';
-              case 'single stranded deoxyribonucleic acid':
-              case 'double stranded deoxyribonucleic acid':
-              case 'small nuclear rna':
-              case 'small nucleolar rna':
-              case 'ribosomal rna':
-              case 'messenger rna':
-              case 'transfer rna':
-              case 'signal recognition particle rna':
-              case 'ribonucleic acid':
-              case 'nucleic acid':
-              case 'long non-coding ribonucleic acid':
-                return 'icon icon-conceptual icon-dna';
-            }
+          key: "facetTypeIcon",
+          value: function facetTypeIcon(facet) {
+            return (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.interactorTypeIcon)(facet.name);
           }
         }]);
         return ComplexFilterComponent;
@@ -199,31 +221,31 @@
       };
       _ComplexFilterComponent.propDecorators = {
         onSpicesFilterChanged: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output
         }],
         onBiologicalRoleFilterChanged: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output
         }],
         onInteractorTypeFilterChanged: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output
         }],
         onResetAllFilters: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output
         }],
         facets: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input
         }],
         spicesFilter: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input
         }],
         bioRoleFilter: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input
         }],
         interactorTypeFilter: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input
         }]
       };
-      _ComplexFilterComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+      _ComplexFilterComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'cp-complex-filter',
         template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_filter_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_complex_filter_component_css__WEBPACK_IMPORTED_MODULE_1__]
@@ -284,6 +306,70 @@
 
       /***/
     }),
+    /***/79373: (
+    /*!**********************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator-sorting/complex-navigator-sorting.component.ts ***!
+      \**********************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"ComplexNavigatorSortingComponent": function ComplexNavigatorSortingComponent() {
+          return /* binding */_ComplexNavigatorSortingComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_sorting_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-navigator-sorting.component.html */47724);
+      /* harmony import */
+      var _complex_navigator_sorting_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./complex-navigator-sorting.component.css */84353);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _ComplexNavigatorSortingComponent = /*#__PURE__*/function () {
+        function ComplexNavigatorSortingComponent() {
+          _classCallCheck(this, ComplexNavigatorSortingComponent);
+          this.interactorsSortingChange = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+        }
+        _createClass(ComplexNavigatorSortingComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.setInteractorsSorting('Occurrence');
+          }
+        }, {
+          key: "setInteractorsSorting",
+          value: function setInteractorsSorting(typeOfSorting) {
+            this.interactorsSortingChange.emit(typeOfSorting);
+          }
+        }]);
+        return ComplexNavigatorSortingComponent;
+      }();
+      _ComplexNavigatorSortingComponent.ctorParameters = function () {
+        return [];
+      };
+      _ComplexNavigatorSortingComponent.propDecorators = {
+        interactorsSortingChange: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Output
+        }],
+        interactorsSorting: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }]
+      };
+      _ComplexNavigatorSortingComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'cp-complex-navigator-sorting',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_sorting_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_complex_navigator_sorting_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _ComplexNavigatorSortingComponent);
+
+      /***/
+    }),
     /***/76549: (
     /*!******************************************************************************************!*\
       !*** ./src/app/complex/complex-results/complex-navigator/complex-navigator.component.ts ***!
@@ -303,9 +389,7 @@
       /* harmony import */
       var _complex_navigator_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./complex-navigator.component.css */14332);
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
-      /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */71258);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -313,50 +397,18 @@
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
       };
-      var _ComplexNavigatorComponent = /*#__PURE__*/function () {
-        function ComplexNavigatorComponent(router) {
-          _classCallCheck(this, ComplexNavigatorComponent);
-          this.router = router;
-        }
-        _createClass(ComplexNavigatorComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {}
-        }, {
-          key: "interactors",
-          get: function get() {
-            return this._interactors;
-          },
-          set: function set(value) {
-            this._interactors = value;
-          }
-        }, {
-          key: "interactorsSorting",
-          get: function get() {
-            return this._interactorsSorting;
-          },
-          set: function set(value) {
-            this._interactorsSorting = value;
-          }
-        }]);
-        return ComplexNavigatorComponent;
-      }();
-      _ComplexNavigatorComponent.ctorParameters = function () {
-        return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router
-        }];
-      };
+      var _ComplexNavigatorComponent = /*#__PURE__*/_createClass(function ComplexNavigatorComponent() {
+        _classCallCheck(this, ComplexNavigatorComponent);
+      });
       _ComplexNavigatorComponent.propDecorators = {
         complexSearch: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }],
         interactors: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
-        }],
-        interactorsSorting: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }]
       };
-      _ComplexNavigatorComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+      _ComplexNavigatorComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-complex-navigator',
         template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_complex_navigator_component_css__WEBPACK_IMPORTED_MODULE_1__]
@@ -400,6 +452,7 @@
           value: function ngOnInit() {
             this.classifyComplexesSize();
             this.classifyComplexesSimilarities(this.complexSearch);
+            this.isInteractorSortingSet();
           }
         }, {
           key: "classifyComplexesSize",
@@ -420,9 +473,8 @@
                   var _loop = function _loop() {
                     var complexInteractorChecked = _step3.value;
                     if (complexInteractorChecked.interactorType === 'stable complex') {
-                      // tslint:disable-next-line:no-shadowed-variable
-                      var subComplex = searchResult.find(function (complex) {
-                        return complex.complexAC === complexInteractorChecked.identifier;
+                      var subComplex = searchResult.find(function (c) {
+                        return c.complexAC === complexInteractorChecked.identifier;
                       });
                       totalLength += subComplex.interactors.length;
                     }
@@ -440,6 +492,7 @@
                   biggestComplex[1] = totalLength;
                 }
               }
+              // console.log(typeof biggestComplex[0]);
             } catch (err) {
               _iterator.e(err);
             } finally {
@@ -473,9 +526,8 @@
                       _iterator5.f();
                     }
                     if (biggestComplexInteractor.interactorType === 'stable complex') {
-                      // tslint:disable-next-line:max-line-length
-                      var subComplex = searchResult.find(function (complex) {
-                        return complex.complexAC === biggestComplexInteractor.identifier;
+                      var subComplex = searchResult.find(function (c) {
+                        return c.complexAC === biggestComplexInteractor.identifier;
                       });
                       if (comparedComplex.complexAC === bigComplex.complexAC) {
                         similarities += subComplex.interactors.length;
@@ -552,7 +604,6 @@
                   _iterator9.f();
                 }
                 if (complex1Interactor.interactorType === 'stable complex') {
-                  // tslint:disable-next-line:max-line-length
                   var subComplex = _this.complexSearch.elements.find(function (complex) {
                     return complex.complexAC === complex1Interactor.identifier;
                   });
@@ -643,17 +694,22 @@
               }
             });
           }
+        }, {
+          key: "isInteractorSortingSet",
+          value: function isInteractorSortingSet() {
+            return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+          }
         }]);
         return TableHeaderComponent;
       }();
-      _TableHeaderComponent.ctorParameters = function () {
-        return [];
-      };
       _TableHeaderComponent.propDecorators = {
         complexSearch: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }],
         interactorsTable: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }],
+        interactorsSorting: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }]
       };
@@ -662,6 +718,77 @@
         template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_header_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_table_header_component_css__WEBPACK_IMPORTED_MODULE_1__]
       })], _TableHeaderComponent);
+
+      /***/
+    }),
+    /***/65766: (
+    /*!******************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/complex-navigator-utils.ts ***!
+      \******************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"formatStoichiometryValues": function formatStoichiometryValues() {
+          return /* binding */_formatStoichiometryValues;
+        },
+        /* harmony export */"fetchValuesFromStoichiometry": function fetchValuesFromStoichiometry() {
+          return /* binding */_fetchValuesFromStoichiometry;
+        },
+        /* harmony export */"findInteractorInComplex": function findInteractorInComplex() {
+          return /* binding */_findInteractorInComplex;
+        },
+        /* harmony export */"getStoichiometry": function getStoichiometry() {
+          return /* binding */_getStoichiometry;
+        },
+        /* harmony export */"stoichiometryOfInteractors": function stoichiometryOfInteractors() {
+          return /* binding */_stoichiometryOfInteractors;
+        }
+        /* harmony export */
+      });
+      function _formatStoichiometryValues(stoichiometry) {
+        if (!!stoichiometry) {
+          var matchedStoichiometry = _fetchValuesFromStoichiometry(stoichiometry);
+          if (!!matchedStoichiometry) {
+            var minValue = parseInt(matchedStoichiometry[1], 10);
+            var maxValue = parseInt(matchedStoichiometry[2], 10);
+            if (minValue === maxValue) {
+              return minValue.toString();
+            } else {
+              return "".concat(minValue, ", ").concat(maxValue);
+            }
+          }
+        }
+        return ' '; // sometimes we don't have the stoichiometry value
+      }
+      function _fetchValuesFromStoichiometry(stoichiometry) {
+        var pattern = 'minValue: ([0-9+]), maxValue: ([0-9+])';
+        return stoichiometry.match(pattern);
+      }
+      function _findInteractorInComplex(complex, componentId) {
+        return complex.interactors.find(function (component) {
+          return component.identifier === componentId;
+        });
+      }
+      function _getStoichiometry(complex, componentId) {
+        var match = this.findInteractorInComplex(complex, componentId);
+        if (!!match) {
+          if (!!match.stochiometry) {
+            return 'Stoichiometry values: ' + match.stochiometry;
+          } else {
+            return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
+          }
+        }
+        return null;
+      }
+      function _stoichiometryOfInteractors(complex, interactorId) {
+        var match = _findInteractorInComplex(complex, interactorId);
+        if (!!match) {
+          return _formatStoichiometryValues(match.stochiometry);
+        }
+        return null;
+      }
 
       /***/
     }),
@@ -674,6 +801,12 @@
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"EnrichedInteractor": function EnrichedInteractor() {
+          return /* binding */_EnrichedInteractor;
+        },
+        /* harmony export */"EnrichedComplex": function EnrichedComplex() {
+          return /* binding */_EnrichedComplex;
+        },
         /* harmony export */"TableInteractorColumnComponent": function TableInteractorColumnComponent() {
           return /* binding */_TableInteractorColumnComponent;
         }
@@ -686,13 +819,13 @@
       /* harmony import */
       var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
-      var _shared_model_complex_results_complex_component_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../../shared/model/complex-results/complex-component.model */76572);
-      /* harmony import */
       var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! rxjs */81134);
       /* harmony import */
-      var _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../../../../shared/service/complex-portal.service */20658);
+      var _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../../shared/service/complex-portal.service */20658);
       /* harmony import */
       var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! rxjs/operators */33927);
+      /* harmony import */
+      var _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./complex-navigator-utils */65766);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -700,11 +833,11 @@
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
       };
-      var EnrichedInteractor = /*#__PURE__*/_createClass(function EnrichedInteractor() {
-        _classCallCheck(this, EnrichedInteractor);
+      var _EnrichedInteractor = /*#__PURE__*/_createClass(function _EnrichedInteractor() {
+        _classCallCheck(this, _EnrichedInteractor);
       });
-      var EnrichedComplex = /*#__PURE__*/_createClass(function EnrichedComplex() {
-        _classCallCheck(this, EnrichedComplex);
+      var _EnrichedComplex = /*#__PURE__*/_createClass(function _EnrichedComplex() {
+        _classCallCheck(this, _EnrichedComplex);
       });
       var _TableInteractorColumnComponent = /*#__PURE__*/function () {
         function TableInteractorColumnComponent(complexPortalService) {
@@ -712,43 +845,21 @@
           this.complexPortalService = complexPortalService;
         }
         _createClass(TableInteractorColumnComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {}
-        }, {
-          key: "enrichedInteractors",
-          get: function get() {
-            return this._enrichedInteractors;
-          }
-        }, {
-          key: "enrichedComplexes",
-          get: function get() {
-            return this._enrichedComplexes;
-          }
-        }, {
-          key: "interactorsSorting",
-          get: function get() {
-            return this._interactorsSorting;
-          },
-          set: function set(value) {
-            this._interactorsSorting = value;
-          }
-        }, {
-          key: "rangesOfInteractorType",
-          get: function get() {
-            return this._rangesOfInteractorsType;
-          }
-        }, {
-          key: "rangesOfInteractorOrganism",
-          get: function get() {
-            return this._rangesOfInteractorsOrganism;
-          }
-        }, {
           key: "ngOnChanges",
           value: function ngOnChanges(changes) {
-            if (!!this._interactorsSorting && !!this._enrichedInteractors && this._enrichedInteractors.length > 0) {
-              if (this._interactorsSorting === 'Type') {
+            if (!!changes['interactors']) {
+              this.enrichInteractors();
+            }
+            this.classifyInteractors();
+            this.calculateAllStartAndEndIndexes();
+          }
+        }, {
+          key: "classifyInteractors",
+          value: function classifyInteractors() {
+            if (!!this.interactorsSorting && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
+              if (this.interactorsSorting === 'Type') {
                 this.classifyInteractorsByType();
-              } else if (this._interactorsSorting === 'Organism') {
+              } else if (this.interactorsSorting === 'Organism') {
                 this.classifyInteractorsByOrganism();
               } else {
                 this.classifyInteractorsByOccurrence();
@@ -756,11 +867,11 @@
             }
           }
         }, {
-          key: "interactors",
-          set: function set(value) {
+          key: "enrichInteractors",
+          value: function enrichInteractors() {
             var _this3 = this;
-            this._enrichedInteractors = [];
-            var _iterator12 = _createForOfIteratorHelper(value),
+            this.enrichedInteractors = [];
+            var _iterator12 = _createForOfIteratorHelper(this.interactors),
               _step12;
             try {
               var _loop4 = function _loop4() {
@@ -781,7 +892,7 @@
                     return newEnrichedInteractor.subComponents = subComponents;
                   });
                 }
-                _this3._enrichedInteractors.push(newEnrichedInteractor);
+                _this3.enrichedInteractors.push(newEnrichedInteractor);
               };
               for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
                 _loop4();
@@ -794,191 +905,38 @@
             this.interactorOrganism();
           }
         }, {
-          key: "findInteractorInComplex",
-          value: function findInteractorInComplex(complex, componentId) {
-            return complex.interactors.find(function (component) {
-              return component.identifier === componentId;
-            });
-          }
-        }, {
-          key: "findInteractorsInSubComplex",
-          value: function findInteractorsInSubComplex(complex, interactorId) {
-            return this._enrichedInteractors
-            // filter subcomplexes
-            .filter(function (interactor) {
-              return interactor.isSubComplex;
-            })
-            // filter subcomplexes included in complex
-            .filter(function (interactor) {
-              return complex.interactors.some(function (component) {
-                return component.identifier === interactor.interactor.identifier;
-              });
-            })
-            // filter subcomplexes that match the componentId
-            .filter(function (interactor) {
-              return !!interactor.subComponents;
-            }).map(function (interactor) {
-              return interactor.subComponents.find(function (subComponent) {
-                return subComponent.identifier === interactorId;
-              });
-            }).filter(function (component) {
-              return !!component;
-            });
-          }
-        }, {
-          key: "findInteractorInExpandedSubComplex",
-          value: function findInteractorInExpandedSubComplex(interactor, complex, interactorId) {
-            if (complex.interactors.some(function (component) {
-              return component.identifier === interactor.interactor.identifier;
-            })) {
-              return interactor.subComponents.find(function (component) {
-                return component.identifier === interactorId;
-              });
-            }
-            return null;
-          }
-        }, {
-          key: "stoichiometryOfInteractors",
-          value: function stoichiometryOfInteractors(complex, interactorId) {
-            var match = this.findInteractorInComplex(complex, interactorId);
-            if (!!match) {
-              return this.formatStoichiometryValues(match.stochiometry);
-            }
-            return null;
-          }
-        }, {
-          key: "stoichiometryOfInteractorsExpandable",
-          value: function stoichiometryOfInteractorsExpandable(interactor, interactorId) {
-            var match = this.findInteractorInSubcomplex(interactor, interactorId);
-            if (!!match) {
-              return this.formatStoichiometryValues(match.stochiometry);
-            }
-            return null;
-          }
-        }, {
-          key: "stoichiometryOfInteractorsMainTable",
-          value: function stoichiometryOfInteractorsMainTable(complex, interactorId) {
-            var matches = this.findInteractorsInSubComplex(complex, interactorId);
-            if (matches.length > 0) {
-              var stoichiometryValues = this.addedStoichiometryValues(matches);
-              if (!!stoichiometryValues) {
-                if (stoichiometryValues[0] === stoichiometryValues[1]) {
-                  return stoichiometryValues[0].toString();
-                } else {
-                  return "".concat(stoichiometryValues[0], ", ").concat(stoichiometryValues[1]);
-                }
-              } else {
-                return ' ';
-              }
-            }
-            return null;
-          }
-        }, {
-          key: "getStoichiometry",
-          value: function getStoichiometry(complex, componentId) {
-            var match = this.findInteractorInComplex(complex, componentId);
-            if (!!match) {
-              if (!!match.stochiometry) {
-                return 'Stoichiometry values: ' + match.stochiometry;
-              } else {
-                return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
-              }
-            }
-            return null;
-          }
-        }, {
-          key: "getStoichiometrySubComplex",
-          value: function getStoichiometrySubComplex(complex, interactorId) {
-            var matches = this.findInteractorsInSubComplex(complex, interactorId);
-            if (matches.length > 0) {
-              var stoichiometryValues = this.addedStoichiometryValues(matches);
-              if (!!stoichiometryValues) {
-                return "Stoichiometry values: minValue: ".concat(stoichiometryValues[0], ", maxValue: ").concat(stoichiometryValues[1]);
-              } else {
-                return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
-              }
-            }
-            return null;
-          }
-        }, {
-          key: "getStoichiometryInExpandedSubComplex",
-          value: function getStoichiometryInExpandedSubComplex(interactor, interactorId) {
-            var match = this.findInteractorInSubcomplex(interactor, interactorId);
-            if (!!match) {
-              if (!!match.stochiometry) {
-                return 'Stoichiometry values: ' + match.stochiometry;
-              } else {
-                return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
-              }
-            }
-            return null;
-          }
-        }, {
-          key: "showExternalLink",
-          value: function showExternalLink(component) {
-            return component.interactorType !== 'stable complex' && !!component.identifierLink;
-          }
-        }, {
           key: "toggleSubcomplexExpandable",
           value: function toggleSubcomplexExpandable(i) {
-            this._enrichedInteractors[i].expanded = !this._enrichedInteractors[i].expanded;
-            if (this._enrichedInteractors[i].expanded) {
+            this.enrichedInteractors[i].expanded = !this.enrichedInteractors[i].expanded;
+            if (this.enrichedInteractors[i].expanded) {
               // EnrichedInteractor has been expanded, we need to:
               // 1. Collapse the other ones, in case there is any other expanded
-              for (var j = 0; j < this._enrichedInteractors.length; j++) {
+              for (var j = 0; j < this.enrichedInteractors.length; j++) {
                 if (i !== j) {
-                  this._enrichedInteractors[j].expanded = false;
+                  this.enrichedInteractors[j].expanded = false;
                 }
               }
               // 2. Hide any interactor now displayed in the expanded section
-              if (!!this._enrichedInteractors[i].subComponents) {
-                var subInteractorIds = this._enrichedInteractors[i].subComponents.map(function (component) {
+              if (!!this.enrichedInteractors[i].subComponents) {
+                var subInteractorIds = this.enrichedInteractors[i].subComponents.map(function (component) {
                   return component.identifier;
                 });
-                for (var _j = 0; _j < this._enrichedInteractors.length; _j++) {
+                for (var _j = 0; _j < this.enrichedInteractors.length; _j++) {
                   if (i !== _j) {
-                    this._enrichedInteractors[_j].hidden = !!subInteractorIds.includes(this._enrichedInteractors[_j].interactor.identifier);
+                    this.enrichedInteractors[_j].hidden = !!subInteractorIds.includes(this.enrichedInteractors[_j].interactor.identifier);
                   }
                 }
               }
             } else {
               // EnrichedInteractor has been collapsed, we need to:
               // 1. Display any interactor previously hidden
-              for (var _j2 = 0; _j2 < this._enrichedInteractors.length; _j2++) {
-                this._enrichedInteractors[_j2].hidden = false;
+              for (var _j2 = 0; _j2 < this.enrichedInteractors.length; _j2++) {
+                this.enrichedInteractors[_j2].hidden = false;
               }
             }
             // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
-            this.rangeOfInteractorTypeV2();
-            this.rangeOfInteractorOrganismV2();
+            this.classifyInteractors();
             this.calculateAllStartAndEndIndexes();
-          }
-        }, {
-          key: "interactorTypeIcon",
-          value: function interactorTypeIcon(interactor) {
-            switch (interactor.interactorType) {
-              case 'small molecule':
-                return 'icon icon-conceptual icon-chemical';
-              case 'protein':
-              case 'peptide':
-                return 'icon icon-conceptual icon-structures-3d';
-              case 'stable complex':
-                return 'icon icon-conceptual icon-systems';
-              case 'molecule set':
-                return 'icon icon-generic icon-math';
-              case 'single stranded deoxyribonucleic acid':
-              case 'double stranded deoxyribonucleic acid':
-              case 'small nuclear rna':
-              case 'small nucleolar rna':
-              case 'ribosomal rna':
-              case 'messenger rna':
-              case 'transfer rna':
-              case 'signal recognition particle rna':
-              case 'ribonucleic acid':
-              case 'nucleic acid':
-              case 'long non-coding ribonucleic acid':
-                return 'icon icon-conceptual icon-dna';
-            }
           }
         }, {
           key: "loadSubInteractors",
@@ -991,96 +949,26 @@
               return (0, rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(foundComplex.interactors);
             } else {
               // Actually call the back-end to fetch these
-              return this.complexPortalService.getComplexAc(interactor.interactor.identifier).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(function (complex) {
-                return complex.participants.map(function (participant) {
-                  return new _shared_model_complex_results_complex_component_model__WEBPACK_IMPORTED_MODULE_2__.ComplexComponent(participant.identifier, participant.identifierLink, participant.name, participant.description, participant.stochiometry, participant.interactorType);
-                });
+              return this.complexPortalService.getSimplifiedComplex(interactor.interactor.identifier).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(function (complex) {
+                return complex === null || complex === void 0 ? void 0 : complex.interactors;
               }));
             }
           }
         }, {
-          key: "findInteractorInSubcomplex",
-          value: function findInteractorInSubcomplex(interactor, interactorId) {
-            return interactor.subComponents.find(function (component) {
-              return component.identifier === interactorId;
-            });
-          }
-        }, {
-          key: "fetchValuesFromStoichiometry",
-          value: function fetchValuesFromStoichiometry(stoichiometry) {
-            var pattern = 'minValue: ([0-9+]), maxValue: ([0-9+])';
-            return stoichiometry.match(pattern);
-          }
-        }, {
-          key: "formatStoichiometryValues",
-          value: function formatStoichiometryValues(stoichiometry) {
-            if (!!stoichiometry) {
-              var matchedStoichiometry = this.fetchValuesFromStoichiometry(stoichiometry);
-              if (!!matchedStoichiometry) {
-                // tslint:disable-next-line:radix
-                var minValue = parseInt(matchedStoichiometry[1]);
-                // tslint:disable-next-line:radix
-                var maxValue = parseInt(matchedStoichiometry[2]);
-                if (minValue === maxValue) {
-                  return minValue.toString();
-                } else {
-                  return "".concat(minValue, ", ").concat(maxValue);
-                }
-              }
-            }
-            return ' '; // sometimes we don't have the stoichiometry value
-          }
-        }, {
-          key: "addedStoichiometryValues",
-          value: function addedStoichiometryValues(components) {
-            var minValue = null;
-            var maxValue = null;
-            var _iterator13 = _createForOfIteratorHelper(components),
+          key: "calculateAllStartAndEndIndexes",
+          value: function calculateAllStartAndEndIndexes() {
+            this.enrichedComplexes = [];
+            var _iterator13 = _createForOfIteratorHelper(this.complexSearch.elements),
               _step13;
             try {
               for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-                var component = _step13.value;
-                if (!!component.stochiometry) {
-                  var matchedStoichiometry = this.fetchValuesFromStoichiometry(component.stochiometry);
-                  if (!!matchedStoichiometry) {
-                    if (minValue === null) {
-                      minValue = 0;
-                    }
-                    if (maxValue === null) {
-                      maxValue = 0;
-                    }
-                    // tslint:disable-next-line:radix
-                    minValue += parseInt(matchedStoichiometry[1]);
-                    // tslint:disable-next-line:radix
-                    maxValue += parseInt(matchedStoichiometry[2]);
-                  }
-                }
+                var complex = _step13.value;
+                this.enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
               }
             } catch (err) {
               _iterator13.e(err);
             } finally {
               _iterator13.f();
-            }
-            if (minValue !== null && maxValue !== null) {
-              return [minValue, maxValue];
-            }
-            return null;
-          }
-        }, {
-          key: "calculateAllStartAndEndIndexes",
-          value: function calculateAllStartAndEndIndexes() {
-            this._enrichedComplexes = [];
-            var _iterator14 = _createForOfIteratorHelper(this.complexSearch.elements),
-              _step14;
-            try {
-              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-                var complex = _step14.value;
-                this._enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
-              }
-            } catch (err) {
-              _iterator14.e(err);
-            } finally {
-              _iterator14.f();
             }
           }
         }, {
@@ -1093,50 +981,6 @@
               return valueB;
             }
             return Math.min(valueA, valueB);
-          }
-        }, {
-          key: "displayTopLineClass",
-          value: function displayTopLineClass(complex, interactorIndex) {
-            if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
-              return 'verticalLine';
-            }
-            if (this.doesLineEndOnInteractorCell(complex, interactorIndex) && !this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
-              return 'verticalLine';
-            }
-            return 'transparentVerticalLine';
-          }
-        }, {
-          key: "displayBottomLineClass",
-          value: function displayBottomLineClass(complex, interactorIndex) {
-            if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
-              return 'verticalLine';
-            }
-            if (this.doesLineStartOnInteractorCell(complex, interactorIndex) && !this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
-              return 'verticalLine';
-            }
-            return 'transparentVerticalLine';
-          }
-        }, {
-          key: "displayTopLineClassExpanded",
-          value: function displayTopLineClassExpanded(complex, interactorIndex, subComponentIndex) {
-            if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
-              return 'verticalLine';
-            }
-            if (this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex) && !this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
-              return 'verticalLine';
-            }
-            return 'transparentVerticalLine';
-          }
-        }, {
-          key: "displayBottomLineClassExpanded",
-          value: function displayBottomLineClassExpanded(complex, interactorIndex, subComponentIndex) {
-            if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
-              return 'verticalLine';
-            }
-            if (this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex) && !this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
-              return 'verticalLine';
-            }
-            return 'transparentVerticalLine';
           }
         }, {
           key: "getMaxValue",
@@ -1162,37 +1006,37 @@
             };
             // We iterate through the interactors to find the first and last one part of the complex
             // We do this to be able to draw a line connecting all interactors in the complex
-            for (var i = 0; i < this._enrichedInteractors.length; i++) {
-              if (!this._enrichedInteractors[i].hidden) {
+            for (var i = 0; i < this.enrichedInteractors.length; i++) {
+              if (!this.enrichedInteractors[i].hidden) {
                 for (var j = 0; j < complex.interactors.length; j++) {
-                  if (complex.interactors[j].identifier === this._enrichedInteractors[i].interactor.identifier) {
+                  if (complex.interactors[j].identifier === this.enrichedInteractors[i].interactor.identifier) {
                     // The interactor is part of the complex, we update the start and end indices for the interactors
                     // line as it may start in this interactor
                     enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
                     enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
                     // The interactor is a subcomplex
-                    if (this._enrichedInteractors[i].isSubComplex && !!this._enrichedInteractors[i].subComponents) {
+                    if (this.enrichedInteractors[i].isSubComplex && !!this.enrichedInteractors[i].subComponents) {
                       // The subcomponents of that subcomplex could also be displayed in the table as separate interactors.
                       // In that case, the line could start or end there, so we need to also check the position of those
                       // interactors. We add those subcomponents to 'subComponentsToCheck' to check their position later
-                      this._enrichedInteractors[i].subComponents.forEach(function (subComponent) {
+                      this.enrichedInteractors[i].subComponents.forEach(function (subComponent) {
                         return subComponentsToCheck.push(subComponent.identifier);
                       });
-                      if (this._enrichedInteractors[i].expanded) {
+                      if (this.enrichedInteractors[i].expanded) {
                         // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
                         // of it. That means we need a line connecting all the subcomponents.
                         // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
                         // and not at the first subcomponent
                         enrichedComplex.startSubComponentIndex = -1;
-                        enrichedComplex.endSubComponentIndex = this._enrichedInteractors[i].subComponents.length - 1;
+                        enrichedComplex.endSubComponentIndex = this.enrichedInteractors[i].subComponents.length - 1;
                       }
                     }
-                  } else if (this._enrichedInteractors[i].isSubComplex && !!this._enrichedInteractors[i].subComponents && this._enrichedInteractors[i].expanded) {
+                  } else if (this.enrichedInteractors[i].isSubComplex && !!this.enrichedInteractors[i].subComponents && this.enrichedInteractors[i].expanded) {
                     // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
                     // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
                     // In that case, the line could start or end on any of those subcomponents
-                    for (var k = 0; k < this._enrichedInteractors[i].subComponents.length; k++) {
-                      if (complex.interactors[j].identifier === this._enrichedInteractors[i].subComponents[k].identifier) {
+                    for (var k = 0; k < this.enrichedInteractors[i].subComponents.length; k++) {
+                      if (complex.interactors[j].identifier === this.enrichedInteractors[i].subComponents[k].identifier) {
                         // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
                         // line as it may start in this interactor
                         enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
@@ -1210,9 +1054,9 @@
             // We finally check the position of the subcomponents of subcomplexes part of the complex on the main table.
             // If any is before or after where the lines start and end, then we need to update the start and end indexes,
             // as the line must start or end there
-            for (var _i = 0; _i < this._enrichedInteractors.length; _i++) {
-              if (!this._enrichedInteractors[_i].hidden) {
-                if (subComponentsToCheck.includes(this._enrichedInteractors[_i].interactor.identifier)) {
+            for (var _i = 0; _i < this.enrichedInteractors.length; _i++) {
+              if (!this.enrichedInteractors[_i].hidden) {
+                if (subComponentsToCheck.includes(this.enrichedInteractors[_i].interactor.identifier)) {
                   // The interactor is part of a subcomplex that is part of the complex, we update the start and end indices for the interactors
                   // line as it may start in this interactor
                   enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, _i);
@@ -1221,6 +1065,490 @@
               }
             }
             return enrichedComplex;
+          }
+        }, {
+          key: "interactorOrganism",
+          value: function interactorOrganism() {
+            var _this4 = this;
+            var _iterator14 = _createForOfIteratorHelper(this.complexSearch.elements),
+              _step14;
+            try {
+              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+                var complex = _step14.value;
+                var organismName = complex.organismName;
+                var _iterator15 = _createForOfIteratorHelper(complex.interactors),
+                  _step15;
+                try {
+                  var _loop5 = function _loop5() {
+                    var complexInteractor = _step15.value;
+                    var match = _this4.enrichedInteractors.find(function (enrichedInteractor) {
+                      return enrichedInteractor.interactor.identifier === complexInteractor.identifier;
+                    });
+                    match.organismName = organismName;
+                  };
+                  for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                    _loop5();
+                  }
+                } catch (err) {
+                  _iterator15.e(err);
+                } finally {
+                  _iterator15.f();
+                }
+              }
+            } catch (err) {
+              _iterator14.e(err);
+            } finally {
+              _iterator14.f();
+            }
+          }
+        }, {
+          key: "classifyInteractorsByOrganism",
+          value: function classifyInteractorsByOrganism() {
+            this.enrichedInteractors.sort(function (a, b) {
+              return b.organismName.localeCompare(a.organismName);
+            });
+            // this.calculateAllStartAndEndIndexes();
+            this.rangeOfInteractorOrganismV2();
+          }
+        }, {
+          key: "classifyInteractorsByType",
+          value: function classifyInteractorsByType() {
+            this.enrichedInteractors.sort(function (a, b) {
+              return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
+            });
+            this.rangeOfInteractorTypeV2();
+          }
+        }, {
+          key: "classifyInteractorsByOccurrence",
+          value: function classifyInteractorsByOccurrence() {
+            var _this5 = this;
+            var _iterator16 = _createForOfIteratorHelper(this.enrichedInteractors),
+              _step16;
+            try {
+              for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+                var oneInteractor = _step16.value;
+                var _iterator17 = _createForOfIteratorHelper(this.complexSearch.elements),
+                  _step17;
+                try {
+                  for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+                    var complex = _step17.value;
+                    var _iterator18 = _createForOfIteratorHelper(complex.interactors),
+                      _step18;
+                    try {
+                      for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
+                        var complexesInteractors = _step18.value;
+                        if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
+                          var stoichiometryValue = parseInt((0, _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_3__.stoichiometryOfInteractors)(complex, oneInteractor.interactor.identifier), 10);
+                          if (!isNaN(stoichiometryValue)) {
+                            oneInteractor.timesAppearing += stoichiometryValue;
+                          }
+                        }
+                      }
+                    } catch (err) {
+                      _iterator18.e(err);
+                    } finally {
+                      _iterator18.f();
+                    }
+                    if (oneInteractor.isSubComplex && !!oneInteractor.subComponents) {
+                      var _iterator19 = _createForOfIteratorHelper(oneInteractor.subComponents),
+                        _step19;
+                      try {
+                        var _loop6 = function _loop6() {
+                          var oneSubInteractor = _step19.value;
+                          var oneEnrichedInteractor = _this5.enrichedInteractors.find(function (enrichedInteractor) {
+                            return enrichedInteractor.interactor.identifier === oneSubInteractor.identifier;
+                          });
+                          oneEnrichedInteractor.timesAppearing = parseInt((0, _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_3__.formatStoichiometryValues)(oneSubInteractor.stochiometry), 10);
+                        };
+                        for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+                          _loop6();
+                        }
+                      } catch (err) {
+                        _iterator19.e(err);
+                      } finally {
+                        _iterator19.f();
+                      }
+                    }
+                  }
+                } catch (err) {
+                  _iterator17.e(err);
+                } finally {
+                  _iterator17.f();
+                }
+              }
+            } catch (err) {
+              _iterator16.e(err);
+            } finally {
+              _iterator16.f();
+            }
+            this.enrichedInteractors.sort(function (a, b) {
+              return b.timesAppearing - a.timesAppearing;
+            });
+            this.ranges = [];
+          }
+        }, {
+          key: "rangeOfInteractorTypeV2",
+          value: function rangeOfInteractorTypeV2() {
+            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+            var length = 0;
+            var start = null;
+            for (var i = 0; i < this.enrichedInteractors.length; i++) {
+              var oneType = [];
+              if (!this.enrichedInteractors[i].hidden) {
+                length += 1;
+                if (start === null) {
+                  start = i;
+                }
+              }
+              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
+                if (start !== null) {
+                  oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
+                  ranges.push(oneType);
+                  start = null;
+                }
+                length = 0;
+              }
+            }
+            this.ranges = ranges;
+          }
+        }, {
+          key: "rangeOfInteractorOrganismV2",
+          value: function rangeOfInteractorOrganismV2() {
+            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+            var length = 0;
+            var start = null;
+            for (var i = 0; i < this.enrichedInteractors.length; i++) {
+              var oneType = [];
+              if (!this.enrichedInteractors[i].hidden) {
+                length += 1;
+                if (start === null) {
+                  start = i;
+                }
+              }
+              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
+                if (start !== null) {
+                  oneType.push(this.enrichedInteractors[i].organismName, length, start);
+                  ranges.push(oneType);
+                  start = null;
+                }
+                length = 0;
+              }
+            }
+            this.ranges = ranges;
+          }
+        }]);
+        return TableInteractorColumnComponent;
+      }();
+      _TableInteractorColumnComponent.ctorParameters = function () {
+        return [{
+          type: _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_2__.ComplexPortalService
+        }];
+      };
+      _TableInteractorColumnComponent.propDecorators = {
+        complexSearch: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        }],
+        interactorsSorting: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        }],
+        interactors: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        }]
+      };
+      _TableInteractorColumnComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+        selector: 'cp-table-interactor-column',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_column_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_interactor_column_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableInteractorColumnComponent);
+
+      /***/
+    }),
+    /***/42423: (
+    /*!******************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component.ts ***!
+      \******************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"TableInteractorExternalLinkComponent": function TableInteractorExternalLinkComponent() {
+          return /* binding */_TableInteractorExternalLinkComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_external_link_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./table-interactor-external-link.component.html */60908);
+      /* harmony import */
+      var _table_interactor_external_link_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-interactor-external-link.component.css */52504);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _TableInteractorExternalLinkComponent = /*#__PURE__*/function () {
+        function TableInteractorExternalLinkComponent() {
+          _classCallCheck(this, TableInteractorExternalLinkComponent);
+        }
+        _createClass(TableInteractorExternalLinkComponent, [{
+          key: "showExternalLink",
+          value: function showExternalLink() {
+            return this.interactorType !== 'stable complex' && !!this.identifierLink;
+          }
+        }]);
+        return TableInteractorExternalLinkComponent;
+      }();
+      _TableInteractorExternalLinkComponent.propDecorators = {
+        interactorId: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }],
+        identifierLink: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }],
+        interactorType: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }]
+      };
+      _TableInteractorExternalLinkComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'cp-table-interactor-external-link',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_external_link_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_interactor_external_link_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableInteractorExternalLinkComponent);
+
+      /***/
+    }),
+    /***/84768: (
+    /*!************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component.ts ***!
+      \************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"TableInteractorNameComponent": function TableInteractorNameComponent() {
+          return /* binding */_TableInteractorNameComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_name_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./table-interactor-name.component.html */41087);
+      /* harmony import */
+      var _table_interactor_name_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-interactor-name.component.css */57324);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
+      /* harmony import */
+      var _complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../../../complex-portal-utils */82682);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _TableInteractorNameComponent = /*#__PURE__*/function () {
+        function TableInteractorNameComponent() {
+          _classCallCheck(this, TableInteractorNameComponent);
+        }
+        _createClass(TableInteractorNameComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.interactorTypeIcon = (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__.interactorTypeIcon)(this.interactorType);
+          }
+        }]);
+        return TableInteractorNameComponent;
+      }();
+      _TableInteractorNameComponent.propDecorators = {
+        interactorName: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        interactorType: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        interactorId: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        interactorTypeIcon: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }]
+      };
+      _TableInteractorNameComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'cp-table-interactor-name',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_name_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_interactor_name_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableInteractorNameComponent);
+
+      /***/
+    }),
+    /***/50048: (
+    /*!******************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component.ts ***!
+      \******************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"TableInteractorStoichiometryComponent": function TableInteractorStoichiometryComponent() {
+          return /* binding */_TableInteractorStoichiometryComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_stoichiometry_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./table-interactor-stoichiometry.component.html */32716);
+      /* harmony import */
+      var _table_interactor_stoichiometry_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-interactor-stoichiometry.component.css */90745);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _TableInteractorStoichiometryComponent = /*#__PURE__*/_createClass(function TableInteractorStoichiometryComponent() {
+        _classCallCheck(this, TableInteractorStoichiometryComponent);
+      });
+      _TableInteractorStoichiometryComponent.propDecorators = {
+        stoichiometryText: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }],
+        stoichiometryValue: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
+        }]
+      };
+      _TableInteractorStoichiometryComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'cp-table-interactor-stoichiometry',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_stoichiometry_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_interactor_stoichiometry_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableInteractorStoichiometryComponent);
+
+      /***/
+    }),
+    /***/37161: (
+    /*!************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-main-interactor/table-main-interactor.component.ts ***!
+      \************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"TableMainInteractorComponent": function TableMainInteractorComponent() {
+          return /* binding */_TableMainInteractorComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_main_interactor_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./table-main-interactor.component.html */16865);
+      /* harmony import */
+      var _table_main_interactor_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-main-interactor.component.css */96532);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
+      /* harmony import */
+      var _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../complex-navigator-utils */65766);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _TableMainInteractorComponent = /*#__PURE__*/function () {
+        function TableMainInteractorComponent() {
+          _classCallCheck(this, TableMainInteractorComponent);
+          this.findInteractorInComplex = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.findInteractorInComplex;
+          this.getStoichiometry = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.getStoichiometry;
+          this.stoichiometryOfInteractors = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.stoichiometryOfInteractors;
+        }
+        _createClass(TableMainInteractorComponent, [{
+          key: "interactor",
+          get: function get() {
+            return this.enrichedInteractors[this.i];
+          }
+        }, {
+          key: "findInteractorsInSubComplex",
+          value: function findInteractorsInSubComplex(complex, interactorId) {
+            return this.enrichedInteractors
+            // filter subcomplexes
+            .filter(function (interactor) {
+              return interactor.isSubComplex;
+            })
+            // filter subcomplexes included in complex
+            .filter(function (interactor) {
+              return complex.interactors.some(function (component) {
+                return component.identifier === interactor.interactor.identifier;
+              });
+            })
+            // filter subcomplexes that match the componentId
+            .filter(function (interactor) {
+              return !!interactor.subComponents;
+            }).map(function (interactor) {
+              return interactor.subComponents.find(function (subComponent) {
+                return subComponent.identifier === interactorId;
+              });
+            }).filter(function (component) {
+              return !!component;
+            });
+          }
+        }, {
+          key: "displayTopLineClass",
+          value: function displayTopLineClass(complex, interactorIndex) {
+            if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
+              return 'verticalLine';
+            }
+            if (this.doesLineEndOnInteractorCell(complex, interactorIndex) && !this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
+              return 'verticalLine';
+            }
+            return 'transparentVerticalLine';
+          }
+        }, {
+          key: "displayBottomLineClass",
+          value: function displayBottomLineClass(complex, interactorIndex) {
+            if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
+              return 'verticalLine';
+            }
+            if (this.doesLineStartOnInteractorCell(complex, interactorIndex) && !this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
+              return 'verticalLine';
+            }
+            return 'transparentVerticalLine';
+          }
+        }, {
+          key: "getStoichiometrySubComplex",
+          value: function getStoichiometrySubComplex(complex, interactorId) {
+            var matches = this.findInteractorsInSubComplex(complex, interactorId);
+            if (matches.length > 0) {
+              var stoichiometryValues = this.addedStoichiometryValues(matches);
+              if (!!stoichiometryValues) {
+                return "Stoichiometry values: minValue: ".concat(stoichiometryValues[0], ", maxValue: ").concat(stoichiometryValues[1]);
+              } else {
+                return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
+              }
+            }
+            return null;
+          }
+        }, {
+          key: "stoichiometryOfInteractorsMainTable",
+          value: function stoichiometryOfInteractorsMainTable(complex, interactorId) {
+            var matches = this.findInteractorsInSubComplex(complex, interactorId);
+            if (matches.length > 0) {
+              var stoichiometryValues = this.addedStoichiometryValues(matches);
+              if (!!stoichiometryValues) {
+                if (stoichiometryValues[0] === stoichiometryValues[1]) {
+                  return stoichiometryValues[0].toString();
+                } else {
+                  return "".concat(stoichiometryValues[0], ", ").concat(stoichiometryValues[1]);
+                }
+              } else {
+                return ' ';
+              }
+            }
+            return null;
           }
         }, {
           key: "doesLineCrossInteractorCell",
@@ -1234,7 +1562,7 @@
               if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
                 // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
                 // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
-                if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
+                if (this.enrichedInteractors[interactorIndex].isSubComplex && this.enrichedInteractors[interactorIndex].expanded) {
                   if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
                     return true;
                   }
@@ -1246,10 +1574,10 @@
         }, {
           key: "doesLineStartOnInteractorCell",
           value: function doesLineStartOnInteractorCell(complex, interactorIndex) {
-            var _this4 = this;
+            var _this6 = this;
             // The line starts at this interactor or on any of its subcomponents
             if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
-              if (!this._enrichedInteractors[interactorIndex].isSubComplex) {
+              if (!this.enrichedInteractors[interactorIndex].isSubComplex) {
                 // If the interactor is not a subcomplex, then the interactor has no subcomponents and the line starts in it
                 return true;
               }
@@ -1258,7 +1586,7 @@
               // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the interactor itself, as it is
               // not part of the complex.
               if (complex.complex.interactors.some(function (component) {
-                return _this4._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
+                return _this6.enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
               })) {
                 return true;
               }
@@ -1272,7 +1600,7 @@
             if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
               // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
               // the line does not end in this interactor, and it must cross through to the subcomponents
-              if (this._enrichedInteractors[interactorIndex].isSubComplex && this._enrichedInteractors[interactorIndex].expanded) {
+              if (this.enrichedInteractors[interactorIndex].isSubComplex && this.enrichedInteractors[interactorIndex].expanded) {
                 if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
                   return false;
                 }
@@ -1280,6 +1608,164 @@
               return true;
             }
             return false;
+          }
+        }, {
+          key: "addedStoichiometryValues",
+          value: function addedStoichiometryValues(components) {
+            var minValue = null;
+            var maxValue = null;
+            var _iterator20 = _createForOfIteratorHelper(components),
+              _step20;
+            try {
+              for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+                var component = _step20.value;
+                if (!!component.stochiometry) {
+                  var matchedStoichiometry = (0, _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.fetchValuesFromStoichiometry)(component.stochiometry);
+                  if (!!matchedStoichiometry) {
+                    if (minValue === null) {
+                      minValue = 0;
+                    }
+                    if (maxValue === null) {
+                      maxValue = 0;
+                    }
+                    minValue += parseInt(matchedStoichiometry[1], 10);
+                    maxValue += parseInt(matchedStoichiometry[2], 10);
+                  }
+                }
+              }
+            } catch (err) {
+              _iterator20.e(err);
+            } finally {
+              _iterator20.f();
+            }
+            if (minValue !== null && maxValue !== null) {
+              return [minValue, maxValue];
+            }
+            return null;
+          }
+        }]);
+        return TableMainInteractorComponent;
+      }();
+      _TableMainInteractorComponent.propDecorators = {
+        complex: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        i: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        enrichedInteractors: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }]
+      };
+      _TableMainInteractorComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'cp-table-main-interactor',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_main_interactor_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_main_interactor_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableMainInteractorComponent);
+
+      /***/
+    }),
+    /***/68677: (
+    /*!****************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component.ts ***!
+      \****************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"TableSubcomponentInteractorComponent": function TableSubcomponentInteractorComponent() {
+          return /* binding */_TableSubcomponentInteractorComponent;
+        }
+        /* harmony export */
+      });
+      /* harmony import */
+      var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_subcomponent_interactor_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./table-subcomponent-interactor.component.html */59270);
+      /* harmony import */
+      var _table_subcomponent_interactor_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-subcomponent-interactor.component.css */85339);
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
+      /* harmony import */
+      var _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../complex-navigator-utils */65766);
+      var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+        var c = arguments.length,
+          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+          d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      };
+      var _TableSubcomponentInteractorComponent = /*#__PURE__*/function () {
+        function TableSubcomponentInteractorComponent() {
+          _classCallCheck(this, TableSubcomponentInteractorComponent);
+          this.findInteractorInComplex = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.findInteractorInComplex;
+          this.getStoichiometry = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.getStoichiometry;
+          this.stoichiometryOfInteractors = _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.stoichiometryOfInteractors;
+        }
+        _createClass(TableSubcomponentInteractorComponent, [{
+          key: "interactor",
+          get: function get() {
+            return this.enrichedInteractors[this.i];
+          }
+        }, {
+          key: "el",
+          get: function get() {
+            return this.enrichedInteractors[this.i].subComponents[this.j];
+          }
+        }, {
+          key: "displayTopLineClassExpanded",
+          value: function displayTopLineClassExpanded(complex, interactorIndex, subComponentIndex) {
+            if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+              return 'verticalLine';
+            }
+            if (this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex) && !this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+              return 'verticalLine';
+            }
+            return 'transparentVerticalLine';
+          }
+        }, {
+          key: "displayBottomLineClassExpanded",
+          value: function displayBottomLineClassExpanded(complex, interactorIndex, subComponentIndex) {
+            if (this.doesLineCrossSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+              return 'verticalLine';
+            }
+            if (this.doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex) && !this.doesLineEndOnSubcomponentCell(complex, interactorIndex, subComponentIndex)) {
+              return 'verticalLine';
+            }
+            return 'transparentVerticalLine';
+          }
+        }, {
+          key: "findInteractorInExpandedSubComplex",
+          value: function findInteractorInExpandedSubComplex(interactor, complex, interactorId) {
+            if (complex.interactors.some(function (component) {
+              return component.identifier === interactor.interactor.identifier;
+            })) {
+              return interactor.subComponents.find(function (component) {
+                return component.identifier === interactorId;
+              });
+            }
+            return null;
+          }
+        }, {
+          key: "getStoichiometryInExpandedSubComplex",
+          value: function getStoichiometryInExpandedSubComplex(interactor, interactorId) {
+            var match = this.findInteractorInSubcomplex(interactor, interactorId);
+            if (!!match) {
+              if (!!match.stochiometry) {
+                return 'Stoichiometry values: ' + match.stochiometry;
+              } else {
+                return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
+              }
+            }
+            return null;
+          }
+        }, {
+          key: "stoichiometryOfInteractorsExpandable",
+          value: function stoichiometryOfInteractorsExpandable(interactor, interactorId) {
+            var match = this.findInteractorInSubcomplex(interactor, interactorId);
+            if (!!match) {
+              return (0, _complex_navigator_utils__WEBPACK_IMPORTED_MODULE_2__.formatStoichiometryValues)(match.stochiometry);
+            }
+            return null;
           }
         }, {
           key: "doesLineCrossSubcomponentCell",
@@ -1309,7 +1795,7 @@
         }, {
           key: "doesLineStartOnSubcomponentCell",
           value: function doesLineStartOnSubcomponentCell(complex, interactorIndex, subComponentIndex) {
-            var _this5 = this;
+            var _this7 = this;
             // The line starts at this interactor or on any of its subcomponents
             if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
               if (complex.startSubComponentIndex != null && complex.startSubComponentIndex === subComponentIndex) {
@@ -1317,7 +1803,7 @@
                 // start on any subcomponent.
                 // Otherwise, it starts on the subcomponent with the index subComponentIndex
                 return !complex.complex.interactors.some(function (component) {
-                  return _this5._enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
+                  return _this7.enrichedInteractors[interactorIndex].interactor.identifier === component.identifier;
                 });
               }
             }
@@ -1335,330 +1821,34 @@
             return false;
           }
         }, {
-          key: "interactorOrganism",
-          value: function interactorOrganism() {
-            var _this6 = this;
-            var _iterator15 = _createForOfIteratorHelper(this.complexSearch.elements),
-              _step15;
-            try {
-              for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-                var complex = _step15.value;
-                var organismName = complex.organismName;
-                var _iterator16 = _createForOfIteratorHelper(complex.interactors),
-                  _step16;
-                try {
-                  var _loop5 = function _loop5() {
-                    var complexInteractor = _step16.value;
-                    // tslint:disable-next-line:max-line-length
-                    var match = _this6._enrichedInteractors.find(function (enrichedInteractor) {
-                      return enrichedInteractor.interactor.identifier === complexInteractor.identifier;
-                    });
-                    match.organismName = organismName;
-                  };
-                  for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                    _loop5();
-                  }
-                } catch (err) {
-                  _iterator16.e(err);
-                } finally {
-                  _iterator16.f();
-                }
-              }
-            } catch (err) {
-              _iterator15.e(err);
-            } finally {
-              _iterator15.f();
-            }
-          }
-        }, {
-          key: "classifyInteractorsByOrganism",
-          value: function classifyInteractorsByOrganism() {
-            this._enrichedInteractors.sort(function (a, b) {
-              return b.organismName.localeCompare(a.organismName);
+          key: "findInteractorInSubcomplex",
+          value: function findInteractorInSubcomplex(interactor, interactorId) {
+            return interactor.subComponents.find(function (component) {
+              return component.identifier === interactorId;
             });
-            this.calculateAllStartAndEndIndexes();
-            this.rangeOfInteractorOrganismV2();
-          }
-        }, {
-          key: "classifyInteractorsByType",
-          value: function classifyInteractorsByType() {
-            this._enrichedInteractors.sort(function (a, b) {
-              return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
-            });
-            this.calculateAllStartAndEndIndexes();
-            this.rangeOfInteractorTypeV2();
-          }
-        }, {
-          key: "classifyInteractorsByOccurrence",
-          value: function classifyInteractorsByOccurrence() {
-            var _this7 = this;
-            var _iterator17 = _createForOfIteratorHelper(this._enrichedInteractors),
-              _step17;
-            try {
-              for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-                var oneInteractor = _step17.value;
-                var _iterator18 = _createForOfIteratorHelper(this.complexSearch.elements),
-                  _step18;
-                try {
-                  for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
-                    var complex = _step18.value;
-                    var _iterator19 = _createForOfIteratorHelper(complex.interactors),
-                      _step19;
-                    try {
-                      for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-                        var complexesInteractors = _step19.value;
-                        if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-                          // tslint:disable-next-line:radix
-                          if (isNaN(parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier)))) {
-                            oneInteractor.timesAppearing = oneInteractor.timesAppearing;
-                          } else {
-                            // tslint:disable-next-line:radix
-                            oneInteractor.timesAppearing += parseInt(this.stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier));
-                          }
-                        }
-                      }
-                    } catch (err) {
-                      _iterator19.e(err);
-                    } finally {
-                      _iterator19.f();
-                    }
-                    if (oneInteractor.isSubComplex) {
-                      // tslint:disable-next-line:no-shadowed-variable
-                      var _iterator20 = _createForOfIteratorHelper(oneInteractor.subComponents),
-                        _step20;
-                      try {
-                        var _loop6 = function _loop6() {
-                          var subInteractor = _step20.value;
-                          // tslint:disable-next-line:max-line-length no-shadowed-variable
-                          var enrichedInteractor = _this7._enrichedInteractors.find(function (enrichedInteractor) {
-                            return enrichedInteractor.interactor.identifier === subInteractor.identifier;
-                          });
-                          // tslint:disable-next-line:radix
-                          enrichedInteractor.timesAppearing = parseInt(_this7.formatStoichiometryValues(subInteractor.stochiometry));
-                        };
-                        for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
-                          _loop6();
-                        }
-                      } catch (err) {
-                        _iterator20.e(err);
-                      } finally {
-                        _iterator20.f();
-                      }
-                    }
-                  }
-                } catch (err) {
-                  _iterator18.e(err);
-                } finally {
-                  _iterator18.f();
-                }
-              }
-              // tslint:disable-next-line:max-line-length
-            } catch (err) {
-              _iterator17.e(err);
-            } finally {
-              _iterator17.f();
-            }
-            this._enrichedInteractors.sort(function (a, b) {
-              return b.timesAppearing - a.timesAppearing;
-            } /* || a.interactor.name.localeCompare(b.interactor.name) */);
-            this.calculateAllStartAndEndIndexes();
-          }
-        }, {
-          key: "rangeOfInteractorType",
-          value: function rangeOfInteractorType() {
-            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-            var interactorTypesList = this.listOfInteractorTypes();
-            var _iterator21 = _createForOfIteratorHelper(interactorTypesList),
-              _step21;
-            try {
-              for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
-                var type = _step21.value;
-                var rangeOfType = [];
-                var listOfInteractors = [];
-                var _iterator22 = _createForOfIteratorHelper(this._enrichedInteractors),
-                  _step22;
-                try {
-                  for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
-                    var enrichedInteractor = _step22.value;
-                    if (enrichedInteractor.interactor.interactorType === type) {
-                      var interactorAndIndex = [];
-                      interactorAndIndex.push(enrichedInteractor);
-                      interactorAndIndex.push(this._enrichedInteractors.indexOf(enrichedInteractor));
-                      listOfInteractors.push(interactorAndIndex);
-                    }
-                  }
-                } catch (err) {
-                  _iterator22.e(err);
-                } finally {
-                  _iterator22.f();
-                }
-                var lengthOfRange = listOfInteractors[listOfInteractors.length - 1][1] + 1 - listOfInteractors[0][1];
-                rangeOfType.push(type, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
-                ranges.push(rangeOfType);
-              }
-            } catch (err) {
-              _iterator21.e(err);
-            } finally {
-              _iterator21.f();
-            }
-            this._rangesOfInteractorsType = ranges;
-            return ranges;
-          }
-        }, {
-          key: "rangeOfInteractorOrganisms",
-          value: function rangeOfInteractorOrganisms() {
-            var ranges = [];
-            var interactorOrganismsList = this.listOfInteractorOrganism();
-            var _iterator23 = _createForOfIteratorHelper(interactorOrganismsList),
-              _step23;
-            try {
-              for (_iterator23.s(); !(_step23 = _iterator23.n()).done;) {
-                var organism = _step23.value;
-                var rangeOfOrganism = [];
-                var listOfInteractors = [];
-                var _iterator24 = _createForOfIteratorHelper(this._enrichedInteractors),
-                  _step24;
-                try {
-                  for (_iterator24.s(); !(_step24 = _iterator24.n()).done;) {
-                    var enrichedInteractor = _step24.value;
-                    if (enrichedInteractor.organismName === organism) {
-                      var interactorAndIndex = [];
-                      interactorAndIndex.push(enrichedInteractor);
-                      interactorAndIndex.push(this._enrichedInteractors.indexOf(enrichedInteractor));
-                      listOfInteractors.push(interactorAndIndex);
-                    }
-                  }
-                } catch (err) {
-                  _iterator24.e(err);
-                } finally {
-                  _iterator24.f();
-                }
-                var lengthOfRange = listOfInteractors[listOfInteractors.length - 1][1] + 1 - listOfInteractors[0][1];
-                rangeOfOrganism.push(organism, listOfInteractors[0][1], listOfInteractors[listOfInteractors.length - 1][1], lengthOfRange);
-                ranges.push(rangeOfOrganism);
-              }
-            } catch (err) {
-              _iterator23.e(err);
-            } finally {
-              _iterator23.f();
-            }
-            this._rangesOfInteractorsOrganism = ranges;
-            return ranges;
-          }
-        }, {
-          key: "listOfInteractorTypes",
-          value: function listOfInteractorTypes() {
-            var interactorsTypesList = [];
-            var _iterator25 = _createForOfIteratorHelper(this._enrichedInteractors),
-              _step25;
-            try {
-              for (_iterator25.s(); !(_step25 = _iterator25.n()).done;) {
-                var enrichedInteractor = _step25.value;
-                if (!interactorsTypesList.includes(enrichedInteractor.interactor.interactorType)) {
-                  interactorsTypesList.push(enrichedInteractor.interactor.interactorType);
-                }
-              }
-            } catch (err) {
-              _iterator25.e(err);
-            } finally {
-              _iterator25.f();
-            }
-            return interactorsTypesList;
-          }
-        }, {
-          key: "listOfInteractorOrganism",
-          value: function listOfInteractorOrganism() {
-            var interactorsOrganismsList = [];
-            var _iterator26 = _createForOfIteratorHelper(this._enrichedInteractors),
-              _step26;
-            try {
-              for (_iterator26.s(); !(_step26 = _iterator26.n()).done;) {
-                var enrichedInteractor = _step26.value;
-                if (!interactorsOrganismsList.includes(enrichedInteractor.organismName)) {
-                  interactorsOrganismsList.push(enrichedInteractor.organismName);
-                }
-              }
-            } catch (err) {
-              _iterator26.e(err);
-            } finally {
-              _iterator26.f();
-            }
-            return interactorsOrganismsList;
-          }
-        }, {
-          key: "rangeOfInteractorTypeV2",
-          value: function rangeOfInteractorTypeV2() {
-            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-            var length = 0;
-            var start = null;
-            for (var i = 0; i < this.enrichedInteractors.length; i++) {
-              var oneType = [];
-              if (!this.enrichedInteractors[i].hidden) {
-                length += 1;
-                if (start === null) {
-                  start = i;
-                }
-              }
-              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
-                if (start !== null) {
-                  oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
-                  ranges.push(oneType);
-                  start = null;
-                }
-                length = 0;
-              }
-            }
-            this._rangesOfInteractorsType = ranges;
-          }
-        }, {
-          key: "rangeOfInteractorOrganismV2",
-          value: function rangeOfInteractorOrganismV2() {
-            var ranges = []; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-            var length = 0;
-            var start = null;
-            for (var i = 0; i < this.enrichedInteractors.length; i++) {
-              var oneType = [];
-              if (!this.enrichedInteractors[i].hidden) {
-                length += 1;
-                if (start === null) {
-                  start = i;
-                }
-              }
-              if (!this.enrichedInteractors[i + 1] || this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
-                if (start !== null) {
-                  oneType.push(this.enrichedInteractors[i].organismName, length, start);
-                  ranges.push(oneType);
-                  start = null;
-                }
-                length = 0;
-              }
-            }
-            this._rangesOfInteractorsOrganism = ranges;
           }
         }]);
-        return TableInteractorColumnComponent;
+        return TableSubcomponentInteractorComponent;
       }();
-      _TableInteractorColumnComponent.ctorParameters = function () {
-        return [{
-          type: _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_3__.ComplexPortalService
-        }];
-      };
-      _TableInteractorColumnComponent.propDecorators = {
-        complexSearch: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+      _TableSubcomponentInteractorComponent.propDecorators = {
+        complex: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }],
-        interactorsSorting: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        i: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }],
-        interactors: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input
+        j: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        enrichedInteractors: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
         }]
       };
-      _TableInteractorColumnComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
-        selector: 'cp-table-interactor-column',
-        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_interactor_column_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_table_interactor_column_component_css__WEBPACK_IMPORTED_MODULE_1__]
-      })], _TableInteractorColumnComponent);
+      _TableSubcomponentInteractorComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'cp-table-subcomponent-interactor',
+        template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_subcomponent_interactor_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_table_subcomponent_interactor_component_css__WEBPACK_IMPORTED_MODULE_1__]
+      })], _TableSubcomponentInteractorComponent);
 
       /***/
     }),
@@ -1691,34 +1881,10 @@
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
       };
-      var _TableStructureComponent = /*#__PURE__*/function () {
-        // _overFlowing: boolean;
-        function TableStructureComponent(router) {
-          _classCallCheck(this, TableStructureComponent);
-          this.router = router;
-        }
-        _createClass(TableStructureComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {}
-        }, {
-          key: "interactors",
-          get: function get() {
-            return this._interactors;
-          },
-          set: function set(value) {
-            this._interactors = value;
-          }
-        }, {
-          key: "interactorsSorting",
-          get: function get() {
-            return this._interactorsSorting;
-          },
-          set: function set(value) {
-            this._interactorsSorting = value;
-          }
-        }]);
-        return TableStructureComponent;
-      }();
+      var _TableStructureComponent = /*#__PURE__*/_createClass(function TableStructureComponent(router) {
+        _classCallCheck(this, TableStructureComponent);
+        this.router = router;
+      });
       _TableStructureComponent.ctorParameters = function () {
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router
@@ -1936,10 +2102,11 @@
           this.complexPortalService = complexPortalService;
           this.titleService = titleService;
           this.googleAnalyticsService = googleAnalyticsService;
+          this.LIST_VIEW = 'LIST_VIEW';
+          this.COMPLEX_NAVIGATOR_VIEW = 'COMPLEX_NAVIGATOR_VIEW';
           this._pageSize = 15;
           this._allInteractorsInComplexSearch = [];
-          this.DisplayType = true;
-          this._interactorsSorting = 'Occurrence';
+          this.DisplayType = this.LIST_VIEW;
         }
         _createClass(ComplexResultsComponent, [{
           key: "ngOnInit",
@@ -1947,7 +2114,6 @@
             var _this8 = this;
             this.titleService.setTitle('Complex Portal - Results');
             this._allInteractorsInComplexSearch = [];
-            this._interactorsSorting = this.interactorsSorting;
             this.route.queryParams.subscribe(function (queryParams) {
               _this8._query = queryParams['query'];
               _this8._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
@@ -1973,24 +2139,24 @@
               if (_this9.complexSearch.totalNumberOfResults !== 0) {
                 _this9.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / _this9.pageSize);
                 for (var i = 0; i < complexSearch.elements.length; i++) {
-                  var _iterator27 = _createForOfIteratorHelper(complexSearch.elements[i].interactors),
-                    _step27;
+                  var _iterator21 = _createForOfIteratorHelper(complexSearch.elements[i].interactors),
+                    _step21;
                   try {
                     var _loop7 = function _loop7() {
-                      var component = _step27.value;
+                      var component = _step21.value;
                       if (!_this9._allInteractorsInComplexSearch.some(function (interactor) {
                         return interactor.identifier === component.identifier;
                       })) {
                         _this9._allInteractorsInComplexSearch.push(new _shared_model_complex_results_interactor_model__WEBPACK_IMPORTED_MODULE_5__.Interactor(component.identifier, component.identifierLink, component.name, component.description, component.interactorType));
                       }
                     };
-                    for (_iterator27.s(); !(_step27 = _iterator27.n()).done;) {
+                    for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
                       _loop7();
                     }
                   } catch (err) {
-                    _iterator27.e(err);
+                    _iterator21.e(err);
                   } finally {
-                    _iterator27.f();
+                    _iterator21.f();
                   }
                 }
               }
@@ -2148,19 +2314,14 @@
             this._allInteractorsInComplexSearch = value;
           }
         }, {
-          key: "toggleDisplayType",
-          value: function toggleDisplayType() {
-            this.DisplayType = !this.DisplayType;
+          key: "setListView",
+          value: function setListView() {
+            this.DisplayType = this.LIST_VIEW;
           }
         }, {
-          key: "interactorsSorting",
-          get: function get() {
-            return this._interactorsSorting;
-          }
-        }, {
-          key: "setInteractorsSorting",
-          value: function setInteractorsSorting(typeOfSorting) {
-            this._interactorsSorting = typeOfSorting;
+          key: "setComplexNavigatorView",
+          value: function setComplexNavigatorView() {
+            this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
           }
         }]);
         return ComplexResultsComponent;
@@ -2201,13 +2362,13 @@
         /* harmony export */
       });
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! @angular/core */2316);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
-      var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! @angular/common */54364);
+      var _angular_common__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! @angular/common */54364);
       /* harmony import */
       var _complex_results_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./complex-results.component */50967);
       /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! @angular/router */71258);
+      var _angular_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! @angular/router */71258);
       /* harmony import */
       var _complex_paginator_complex_paginator_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./complex-paginator/complex-paginator.component */80556);
       /* harmony import */
@@ -2224,6 +2385,18 @@
       var _complex_navigator_table_structure_table_header_table_header_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-header/table-header.component */40969);
       /* harmony import */
       var _complex_navigator_table_structure_table_interactor_column_table_interactor_column_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-interactor-column.component */48774);
+      /* harmony import */
+      var _complex_navigator_table_structure_table_interactor_column_table_interactor_name_table_interactor_name_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component */84768);
+      /* harmony import */
+      var _complex_navigator_table_structure_table_interactor_column_table_interactor_external_link_table_interactor_external_link_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component */42423);
+      /* harmony import */
+      var _complex_navigator_table_structure_table_interactor_column_table_interactor_stoichiometry_table_interactor_stoichiometry_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component */50048);
+      /* harmony import */
+      var _complex_navigator_table_structure_table_interactor_column_table_main_interactor_table_main_interactor_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-main-interactor/table-main-interactor.component */37161);
+      /* harmony import */
+      var _complex_navigator_table_structure_table_interactor_column_table_subcomponent_interactor_table_subcomponent_interactor_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ./complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component */68677);
+      /* harmony import */
+      var _complex_navigator_sorting_complex_navigator_sorting_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ./complex-navigator-sorting/complex-navigator-sorting.component */79373);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -2234,74 +2407,15 @@
       var _ComplexResultsModule = /*#__PURE__*/_createClass(function ComplexResultsModule() {
         _classCallCheck(this, ComplexResultsModule);
       });
-      _ComplexResultsModule = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_10__.RouterModule.forChild([{
+      _ComplexResultsModule = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_15__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_16__.RouterModule.forChild([{
           path: '',
           component: _complex_results_component__WEBPACK_IMPORTED_MODULE_0__.ComplexResultsComponent
-        }]), _angular_common__WEBPACK_IMPORTED_MODULE_11__.CommonModule, _shared_loading_indicators_progress_spinner_progress_spinner_module__WEBPACK_IMPORTED_MODULE_4__.ProgressSpinnerModule],
+        }]), _angular_common__WEBPACK_IMPORTED_MODULE_17__.CommonModule, _shared_loading_indicators_progress_spinner_progress_spinner_module__WEBPACK_IMPORTED_MODULE_4__.ProgressSpinnerModule],
         exports: [_complex_navigator_table_structure_table_structure_component__WEBPACK_IMPORTED_MODULE_6__.TableStructureComponent],
-        declarations: [_complex_results_component__WEBPACK_IMPORTED_MODULE_0__.ComplexResultsComponent, _complex_list_complex_list_component__WEBPACK_IMPORTED_MODULE_3__.ComplexListComponent, _complex_filter_complex_filter_component__WEBPACK_IMPORTED_MODULE_2__.ComplexFilterComponent, _complex_paginator_complex_paginator_component__WEBPACK_IMPORTED_MODULE_1__.ComplexPaginatorComponent, _complex_navigator_complex_navigator_component__WEBPACK_IMPORTED_MODULE_5__.ComplexNavigatorComponent, _complex_navigator_table_structure_table_structure_component__WEBPACK_IMPORTED_MODULE_6__.TableStructureComponent, _complex_navigator_table_structure_table_header_table_header_component__WEBPACK_IMPORTED_MODULE_7__.TableHeaderComponent, _complex_navigator_table_structure_table_interactor_column_table_interactor_column_component__WEBPACK_IMPORTED_MODULE_8__.TableInteractorColumnComponent]
+        declarations: [_complex_results_component__WEBPACK_IMPORTED_MODULE_0__.ComplexResultsComponent, _complex_list_complex_list_component__WEBPACK_IMPORTED_MODULE_3__.ComplexListComponent, _complex_filter_complex_filter_component__WEBPACK_IMPORTED_MODULE_2__.ComplexFilterComponent, _complex_paginator_complex_paginator_component__WEBPACK_IMPORTED_MODULE_1__.ComplexPaginatorComponent, _complex_navigator_complex_navigator_component__WEBPACK_IMPORTED_MODULE_5__.ComplexNavigatorComponent, _complex_navigator_table_structure_table_structure_component__WEBPACK_IMPORTED_MODULE_6__.TableStructureComponent, _complex_navigator_table_structure_table_header_table_header_component__WEBPACK_IMPORTED_MODULE_7__.TableHeaderComponent, _complex_navigator_table_structure_table_interactor_column_table_interactor_column_component__WEBPACK_IMPORTED_MODULE_8__.TableInteractorColumnComponent, _complex_navigator_table_structure_table_interactor_column_table_interactor_name_table_interactor_name_component__WEBPACK_IMPORTED_MODULE_9__.TableInteractorNameComponent, _complex_navigator_table_structure_table_interactor_column_table_interactor_external_link_table_interactor_external_link_component__WEBPACK_IMPORTED_MODULE_10__.TableInteractorExternalLinkComponent, _complex_navigator_table_structure_table_interactor_column_table_interactor_stoichiometry_table_interactor_stoichiometry_component__WEBPACK_IMPORTED_MODULE_11__.TableInteractorStoichiometryComponent, _complex_navigator_table_structure_table_interactor_column_table_main_interactor_table_main_interactor_component__WEBPACK_IMPORTED_MODULE_12__.TableMainInteractorComponent, _complex_navigator_table_structure_table_interactor_column_table_subcomponent_interactor_table_subcomponent_interactor_component__WEBPACK_IMPORTED_MODULE_13__.TableSubcomponentInteractorComponent, _complex_navigator_sorting_complex_navigator_sorting_component__WEBPACK_IMPORTED_MODULE_14__.ComplexNavigatorSortingComponent]
       })], _ComplexResultsModule);
 
-      /***/
-    }),
-    /***/76572: (
-    /*!*********************************************************************************!*\
-      !*** ./src/app/complex/shared/model/complex-results/complex-component.model.ts ***!
-      \*********************************************************************************/
-    /***/
-    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"ComplexComponent": function ComplexComponent() {
-          return /* binding */_ComplexComponent;
-        }
-        /* harmony export */
-      });
-      var _ComplexComponent = /*#__PURE__*/function () {
-        function _ComplexComponent(identifier, identifierLink, name, description, stochiometry, interactorType) {
-          _classCallCheck(this, _ComplexComponent);
-          this._identifier = identifier;
-          this._identifierLink = identifierLink;
-          this._name = name;
-          this._description = description;
-          this._stochiometry = stochiometry;
-          this._interactorType = interactorType;
-        }
-        _createClass(_ComplexComponent, [{
-          key: "identifier",
-          get: function get() {
-            return this._identifier;
-          }
-        }, {
-          key: "identifierLink",
-          get: function get() {
-            return this._identifierLink;
-          }
-        }, {
-          key: "name",
-          get: function get() {
-            return this._name;
-          }
-        }, {
-          key: "description",
-          get: function get() {
-            return this._description;
-          }
-        }, {
-          key: "stochiometry",
-          get: function get() {
-            return this._stochiometry;
-          }
-        }, {
-          key: "interactorType",
-          get: function get() {
-            return this._interactorType;
-          }
-        }]);
-        return _ComplexComponent;
-      }();
       /***/
     }),
     /***/45178: (
@@ -2365,7 +2479,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{ facet.name }} ({{ facet.count }})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n              <i class=\"{{ interactorTypeIcon(facet) }}\"\n                 style=\"font-size: large;\"></i>\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\"> {{ facet.name }}\n              ({{ facet.count }})\n              <i class=\"{{ interactorTypeIcon(facet) }}\"\n                 style=\"font-size: large;\"></i>\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-functional\" data-icon=\"d\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, spicesFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"> {{ facet.name }} ({{ facet.count }})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, bioRoleFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"> {{ facet.name }}\n              ({{ facet.count }})\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Interactor Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <div [ngSwitch]=\"isSelected(facet.name, interactorTypeFilter)\">\n            <div *ngSwitchCase=\"true\">\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\" checked> {{ facet.name }}\n              ({{ facet.count }})\n              <i class=\"{{ facetTypeIcon(facet) }}\"\n                 style=\"font-size: large;\"></i>\n            </div>\n            <div *ngSwitchDefault>\n              <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                     (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\"> {{ facet.name }}\n              ({{ facet.count }})\n              <i class=\"{{ facetTypeIcon(facet) }}\"\n                 style=\"font-size: large;\"></i>\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n";
 
       /***/
     }),
@@ -2381,6 +2495,18 @@
 
       /***/
     }),
+    /***/47724: (
+    /*!***************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator-sorting/complex-navigator-sorting.component.html ***!
+      \***************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<div class=\"sortingInteractors\">\n  <input type=\"submit\" name=\"classificationButton\" value=\"Sort interactors\" class=\"button\">\n  <div class=\"typeOfSorting\">\n    <input type=\"submit\" name=\"appearanceClassification\" value=\"Occurrence\" class=\"button\"\n           (click)=\"setInteractorsSorting('Occurrence')\">\n    <input type=\"submit\" name=\"typeClassification\" value=\"Type\" class=\"button\"\n           (click)=\"setInteractorsSorting('Type')\">\n    <input type=\"submit\" name=\"organismClassification\" value=\"Organism\" class=\"button\"\n           (click)=\"setInteractorsSorting('Organism')\">\n    <input type=\"submit\" name=\"geneClassification\" value=\"Orthology (Not available yet)\" class=\"button\"\n           (click)=\"setInteractorsSorting('Orthology')\">\n  </div>\n</div>\n";
+
+      /***/
+    }),
     /***/81779: (
     /*!***********************************************************************************************************************************************************!*\
       !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/complex-navigator.component.html ***!
@@ -2389,7 +2515,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"ComplexNavigator\">\n  <cp-table-structure [complexSearch]=\"complexSearch\"\n                      [interactors]=\"interactors\"\n                      [interactorsSorting]=\"interactorsSorting\">\n  </cp-table-structure>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"ComplexNavigator\">\n  <cp-complex-navigator-sorting\n    [(interactorsSorting)]=\"interactorsSorting\">\n  </cp-complex-navigator-sorting>\n  <cp-table-structure [complexSearch]=\"complexSearch\"\n                      [interactors]=\"interactors\"\n                      [interactorsSorting]=\"interactorsSorting\">\n  </cp-table-structure>\n</div>\n";
 
       /***/
     }),
@@ -2401,7 +2527,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n    <table class=\"table CN-table\">\n        <!-- When table is not overflowing -->\n        <thead class=\"tableHead\" *ngIf=\"complexSearch.elements.length<=6\">\n        <tr>\n            <th class=\"interactorsHeader horizontal\">Interactors</th>\n            <th class=\"horizontal\" *ngFor=\"let complex of complexSearch.elements\">\n                <a [routerLink]=\"['/complex', complex.complexAC]\"\n                   title=\"{{complex.complexAC}}\"\n                   target=\"_blank\">\n                    <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n              <div class=\"line\"></div>\n                <div class=\"horizontal-label\">\n                  <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                    {{ complex.complexName }}\n                </div>\n            </span>\n                    </div>\n                </a>\n            </th>\n        </tr>\n        </thead>\n        <!-- When table is overflowing -->\n        <thead class=\"tableHeadOverflow\" *ngIf=\"complexSearch.elements.length>6\">\n        <tr [style.--cols]=\"complexSearch.elements.length\">\n            <th class=\"interactorsHeader\">Interactors</th>\n            <th class=\"rotate\" *ngFor=\"let complex of complexSearch.elements\">\n                <a [routerLink]=\"['/complex', complex.complexAC]\"\n                   title=\"{{complex.complexAC}}\"\n                   target=\"_blank\">\n                    <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n<!--            <div class=\"line\"></div>-->\n              <div class=\"tilted-label\">\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                  {{ complex.complexName }}\n              </div>\n            </span>\n                    </div>\n                </a>\n            </th>\n            <div class=\"spaceHolder\"></div>\n        </tr>\n        </thead>\n    </table>\n</div>\n\n\n";
+      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"table CN-table\">\n    <!-- When table is not overflowing -->\n    <thead class=\"tableHead\" *ngIf=\"complexSearch.elements.length<=6\">\n    <tr>\n      <!--      <td class=\"filler\" *ngIf=\"!isInteractorSortingSet()\"></td>-->\n      <th class=\"interactorsHeader horizontal\">Interactors\n      </th>\n      <th class=\"horizontal\" *ngFor=\"let complex of complexSearch.elements\">\n        <a [routerLink]=\"['/complex', complex.complexAC]\"\n           title=\"{{complex.complexAC}}\"\n           target=\"_blank\">\n          <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n              <div class=\"line\"></div>\n                <div class=\"horizontal-label\">\n                  <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                  {{ complex.complexName }}\n                </div>\n            </span>\n          </div>\n        </a>\n      </th>\n    </tr>\n    </thead>\n    <!-- When table is overflowing -->\n    <thead class=\"tableHeadOverflow\" *ngIf=\"complexSearch.elements.length>6\">\n    <tr [style.--cols]=\"complexSearch.elements.length\">\n      <th class=\"interactorsHeader\">Interactors</th>\n      <th class=\"rotate\" *ngFor=\"let complex of complexSearch.elements\">\n        <a [routerLink]=\"['/complex', complex.complexAC]\"\n           title=\"{{complex.complexAC}}\"\n           target=\"_blank\">\n          <div>\n            <span title=\"{{ complex.complexName }} - {{ complex.complexAC}}\">\n              <div class=\"tilted-label\">\n                <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n                {{ complex.complexName }}\n              </div>\n            </span>\n          </div>\n        </a>\n      </th>\n      <div class=\"spaceHolder\"></div>\n    </tr>\n    </thead>\n  </table>\n</div>\n\n\n";
 
       /***/
     }),
@@ -2413,7 +2539,67 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\" let interactor of enrichedInteractors; let i=index\">\n      <tr *ngIf=\"!interactor.hidden\"> <!-- without it the div for sorting works -->\n        <ng-container *ngIf=\"interactorsSorting === 'Type'\">\n          <ng-container *ngFor=\"let oneType of rangesOfInteractorType\">\n            <td *ngIf=\"oneType[2]===i\" [attr.rowspan]=\"oneType[1]\" class=\"interactorSeparation\"\n                title=\"{{oneType[0]}}\">\n              <div class=\"interactorSeparationName\">{{ oneType[0] }}</div>\n            </td>\n          </ng-container>\n        </ng-container>\n        <ng-container *ngIf=\"interactorsSorting==='Organism'\">\n          <ng-container *ngFor=\"let oneOrganism of rangesOfInteractorOrganism\">\n            <td *ngIf=\"oneOrganism[2]===i\" [attr.rowspan]=\"oneOrganism[1]\" class=\"interactorSeparation\"\n                title=\"{{oneOrganism[0]}}\">\n              <div class=\"interactorSeparationName\"> {{ oneOrganism[0] }}</div>\n            </td>\n          </ng-container>\n        </ng-container>\n        <td class=\"interactorsColumn\">\n          <div>\n            {{ interactor.interactor.name }}\n            <i class=\"{{interactorTypeIcon(interactor.interactor)}}\"\n               title=\"{{interactor.interactor.interactorType}}\"></i>\n            <!-- Adding of the icons to access details of the interactor -->\n            <a [routerLink]=\"['/complex/search']\"\n               [queryParams]=\"{query: interactor.interactor.identifier, page: 1}\"\n               target=\"_blank\">\n              <i class=\"icon icon-functional small\" data-icon=\"1\"\n                 title=\"Complexes containing this interactor\"></i>\n            </a>\n          </div>\n          <!-- Icon for the expandable -->\n          <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n            <a title=\"{{ interactor.interactor.name }}'s interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n              {{ interactor.interactor.identifier }}\n              <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                 style=\"font-size:small; margin-top: 2px\"></i>\n            </a>\n          </div>\n          <div *ngIf=\"showExternalLink(interactor.interactor)\" class=\"interactorType\">\n            <a href=\"{{interactor.interactor.identifierLink}}\"\n               target=\"_blank\">{{ interactor.interactor.identifier }}\n              <i class=\"icon icon-generic small\" data-icon=\"x\"></i>\n            </a>\n          </div>\n        </td>\n        <!-- Interactors' stoichiometry -->\n        <ng-container *ngFor=\"let complex of enrichedComplexes\">\n          <td class=\"intStoich\">\n            <div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n            <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\">\n              <div class=\"stoichNum\"\n                   title=\"{{ getStoichiometry(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stoichiometryOfInteractors(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <ng-container class=\"stoichComponent\"\n                          *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\">\n              <!-- subcomplexes' interactors' stoichiometry -->\n              <div class=\"stoichNum\"\n                   title=\"{{ getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier) }}\">\n                {{ stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier) }}\n              </div>\n            </ng-container>\n            <div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n          </td>\n        </ng-container>\n        <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n      </tr>\n      <!-- Expandable menu for subcomplexes -->\n      <ng-container *ngIf=\"interactor.expanded\">\n        <ng-container *ngIf=\"!!interactor.subComponents\">\n          <tr *ngFor=\"let el of interactor.subComponents; let j=index\"\n              class=\"expandedRows\"\n              [ngClass]=\"{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}\">\n            <td [attr.rowspan]=\"interactor.subComponents.length\" class=\"interactorSeparation\"\n                title=\"{{interactor.interactor.name}}'s interactors\"\n                *ngIf=\"(interactorsSorting === 'Type' && j===0) || (interactorsSorting === 'Organism' && j===0)\">\n              <div class=\"interactorSeparationName\"> {{ interactor.interactor.name }}'s interactors</div>\n            </td>\n            <td class=\"subComponentColumn\">\n              <div>\n                <a [routerLink]=\"['/complex/search']\"\n                   [queryParams]=\"{query: el.identifier, page: 1}\"\n                   target=\"_blank\">\n                  {{ el.name }}\n                  <i class=\"{{interactorTypeIcon(el)}}\"\n                     title=\"{{interactor.interactor.interactorType}}\"></i>\n                  <i class=\"icon icon-functional small\" data-icon=\"1\"\n                     title=\"More complexes containing this interactor\"></i>\n                </a>\n              </div>\n              <div *ngIf=\"showExternalLink(el)\" class=\"interactorType\">\n                <a href=\"{{el.identifierLink}}\" target=\"_blank\">{{ el.identifier }}\n                  <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"\n                  ></i>\n                </a>\n              </div>\n            </td>\n            <ng-container *ngFor=\"let complex of enrichedComplexes\">\n              <td class=\"intStoich\">\n                <div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n                <ng-container *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\">\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStoichiometry(complex.complex, el.identifier) }}\">\n                    {{ stoichiometryOfInteractors(complex.complex, el.identifier) }}\n                  </div>\n                </ng-container>\n                <ng-container\n                  *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\">\n                  <!-- subcomplexes' interactors' stoichiometry -->\n                  <div class=\"stoichNum\"\n                       title=\"{{ getStoichiometryInExpandedSubComplex(interactor, el.identifier) }}\">\n                    {{ stoichiometryOfInteractorsExpandable(interactor, el.identifier) }}\n                  </div>\n                </ng-container>\n                <div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n              </td>\n            </ng-container>\n            <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n          </tr>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n  </table>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"Complex-navigator\">\n  <table class=\"interactors-table\">\n    <!-- Interactors' column -->\n    <ng-container *ngFor=\" let interactor of enrichedInteractors; let i=index\">\n      <tr *ngIf=\"!interactor.hidden\">\n        <ng-container *ngFor=\"let oneType of ranges\" class=\"interactorsOrdering\">\n          <td *ngIf=\"oneType[2]===i\" [attr.rowspan]=\"oneType[1]\" class=\"interactorSeparation\"\n              title=\"{{oneType[0]}}\">\n            <div class=\"interactorNameContainer\" [style.--rowspanSize]=\"oneType[1]\">\n              {{ oneType[0] }}\n            </div>\n          </td>\n        </ng-container>\n        <td class=\"interactorsColumn\">\n          <cp-table-interactor-name\n            [interactorName]=\"interactor.interactor.name\"\n            [interactorType]=\"interactor.interactor.interactorType\"\n            [interactorId]=\"interactor.interactor.identifier\"\n          ></cp-table-interactor-name>\n          <!-- Icon for the expandable -->\n          <div class=\"container\" *ngIf=\"interactor.isSubComplex\">\n            <a title=\"{{ interactor.interactor.name }} interactors\" (click)=\"toggleSubcomplexExpandable(i)\">\n              {{ interactor.interactor.identifier }}\n              <i class=\"icon icon-common\" data-icon=\"&#xf078;\"\n                 style=\"font-size:small; margin-top: 2px\"></i>\n            </a>\n          </div>\n          <cp-table-interactor-external-link\n            [interactorId]=\"interactor.interactor.identifier\"\n            [interactorType]=\"interactor.interactor.interactorType\"\n            [identifierLink]=\"interactor.interactor.identifierLink\"\n          ></cp-table-interactor-external-link>\n        </td>\n        <!-- Interactors' stoichiometry -->\n        <ng-container *ngFor=\"let complex of enrichedComplexes\">\n          <td class=\"intStoich\">\n            <cp-table-main-interactor\n              [complex]=\"complex\"\n              [i]=\"i\"\n              [enrichedInteractors]=\"enrichedInteractors\"\n            ></cp-table-main-interactor>\n          </td>\n        </ng-container>\n        <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n      </tr>\n      <!-- Expandable menu for subcomplexes -->\n      <ng-container *ngIf=\"interactor.expanded\">\n        <ng-container *ngIf=\"!!interactor.subComponents\">\n          <tr *ngFor=\"let el of interactor.subComponents; let j=index\"\n              class=\"expandedRows\"\n              [ngClass]=\"{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}\">\n            <td [attr.rowspan]=\"interactor.subComponents.length\" class=\"interactorSeparation\"\n                title=\"{{interactor.interactor.name}}'s interactors\"\n                *ngIf=\"j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')\">\n              <div class=\"interactorSeparationName\"> {{ interactor.interactor.name }} interactors</div>\n            </td>\n            <td class=\"subComponentColumn\">\n              <div>\n                <cp-table-interactor-name\n                  [interactorName]=\"el.name\"\n                  [interactorType]=\"el.interactorType\"\n                  [interactorId]=\"el.identifier\"\n                ></cp-table-interactor-name>\n              </div>\n              <cp-table-interactor-external-link\n                [interactorId]=\"el.identifier\"\n                [interactorType]=\"el.interactorType\"\n                [identifierLink]=\"el.identifierLink\"\n              ></cp-table-interactor-external-link>\n            </td>\n            <ng-container *ngFor=\"let complex of enrichedComplexes\">\n              <td class=\"intStoich\">\n                <cp-table-subcomponent-interactor\n                  [complex]=\"complex\"\n                  [i]=\"i\"\n                  [j]=\"j\"\n                  [enrichedInteractors]=\"enrichedInteractors\"\n                ></cp-table-subcomponent-interactor>\n              </td>\n            </ng-container>\n            <div class=\"spaceHolder\" *ngIf=\"complexSearch.elements.length>6\"></div>\n          </tr>\n        </ng-container>\n      </ng-container>\n    </ng-container>\n  </table>\n</div>\n";
+
+      /***/
+    }),
+    /***/60908: (
+    /*!***********************************************************************************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component.html ***!
+      \***********************************************************************************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<div class=\"externalLinkContainer\" *ngIf=\"showExternalLink()\">\n  <a href=\"{{identifierLink}}\"\n     target=\"_blank\">{{ interactorId }}\n    <i class=\"icon icon-generic small\" data-icon=\"x\" title=\"More information\"></i>\n  </a>\n</div>\n";
+
+      /***/
+    }),
+    /***/41087: (
+    /*!*****************************************************************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component.html ***!
+      \*****************************************************************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<div>\n  {{ interactorName }}\n  <i class=\"{{interactorTypeIcon}}\"\n     title=\"{{interactorType}}\"></i>\n  <!-- Adding of the icons to access details of the interactor -->\n  <a [routerLink]=\"['/complex/search']\"\n     [queryParams]=\"{query: interactorId, page: 1}\"\n     target=\"_blank\">\n    <i class=\"icon icon-functional small\" data-icon=\"1\"\n       title=\"Complexes containing this interactor\"></i>\n  </a>\n</div>\n";
+
+      /***/
+    }),
+    /***/32716: (
+    /*!***********************************************************************************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component.html ***!
+      \***********************************************************************************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<ng-container>\n  <div class=\"stoichNum\" title=\"{{ stoichiometryText }}\">\n    {{ stoichiometryValue }}\n  </div>\n</ng-container>\n";
+
+      /***/
+    }),
+    /***/16865: (
+    /*!*****************************************************************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-main-interactor/table-main-interactor.component.html ***!
+      \*****************************************************************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<div [ngClass]=\"displayTopLineClass(complex, i)\"></div>\n<cp-table-interactor-stoichiometry\n  *ngIf=\"!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)\"\n  [stoichiometryText]=\"getStoichiometry(complex.complex, interactor.interactor.identifier)\"\n  [stoichiometryValue]=\"stoichiometryOfInteractors(complex.complex, interactor.interactor.identifier)\"\n></cp-table-interactor-stoichiometry>\n<cp-table-interactor-stoichiometry\n  *ngIf=\"findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0\"\n  [stoichiometryText]=\"getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier)\"\n  [stoichiometryValue]=\"stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier)\"\n></cp-table-interactor-stoichiometry>\n<div [ngClass]=\"displayBottomLineClass(complex, i)\"></div>\n";
+
+      /***/
+    }),
+    /***/59270: (
+    /*!*********************************************************************************************************************************************************************************************************************************************!*\
+      !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component.html ***!
+      \*********************************************************************************************************************************************************************************************************************************************/
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+      __webpack_exports__["default"] = "<div [ngClass]=\"displayTopLineClassExpanded(complex, i, j)\"></div>\n<cp-table-interactor-stoichiometry\n  *ngIf=\"!!findInteractorInComplex(complex.complex, el.identifier)\"\n  [stoichiometryText]=\"getStoichiometry(complex.complex, el.identifier)\"\n  [stoichiometryValue]=\"stoichiometryOfInteractors(complex.complex, el.identifier)\"\n></cp-table-interactor-stoichiometry>\n<cp-table-interactor-stoichiometry\n  *ngIf=\"!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)\"\n  [stoichiometryText]=\"getStoichiometryInExpandedSubComplex(interactor, el.identifier)\"\n  [stoichiometryValue]=\"stoichiometryOfInteractorsExpandable(interactor, el.identifier)\"\n></cp-table-interactor-stoichiometry>\n<div [ngClass]=\"displayBottomLineClassExpanded(complex, i, j)\"></div>\n";
 
       /***/
     }),
@@ -2449,7 +2635,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <div class=\"listOfResults\" *ngIf=\"DisplayType==false\">\n          <div class=\"displayButton\" style=\"text-align: center\">\n            <input type=\"submit\" name=\"submit\" value=\"Complex navigator\" class=\"button\"\n                   (click)=\"toggleDisplayType()\">\n          </div>\n          <cp-complex-list [complexSearch]=\"complexSearch\">\n          </cp-complex-list>\n        </div>\n        <div class=\"Complex-navigator\" *ngIf=\"DisplayType\">\n          <div class=\"buttonContainer\">\n            <div class=\"displayButton\" style=\"text-align: center\">\n              <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button\"\n                     (click)=\"toggleDisplayType()\">\n            </div>\n            <div class=\"sortingInteractors\">\n              <input type=\"submit\" name=\"classificationButton\" value=\"Interactors sorting\" class=\"button\">\n              <div class=\"typeOfSorting\">\n                <input type=\"submit\" name=\"appearanceClassification\" value=\"Occurrence\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Occurrence')\">\n                <input type=\"submit\" name=\"typeClassification\" value=\"Type\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Type')\">\n                <input type=\"submit\" name=\"organismClassification\" value=\"Organism\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Organism')\">\n                <input type=\"submit\" name=\"geneClassification\" value=\"Orthology (Not available yet)\" class=\"button\"\n                       (click)=\"setInteractorsSorting('Orthology')\">\n              </div>\n            </div>\n          </div>\n          <div class=\"Matrix\">\n            <cp-complex-navigator [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [interactorsSorting]=\"interactorsSorting\">\n            </cp-complex-navigator>\n          </div>\n        </div>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"margin-top-large margin-bottom-large row\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"row\">\n        <div class=\"displayButton columns medium-8\" style=\"text-align: center\">\n          <input type=\"submit\" name=\"submit\" value=\"View list\" class=\"button view-button\"\n                 (click)=\"setListView()\" [ngClass]=\"{'selected': DisplayType === LIST_VIEW}\">\n          <input type=\"submit\" name=\"submit\" value=\"View Complex Navigator\" class=\"button view-button\"\n                 (click)=\"setComplexNavigatorView()\" [ngClass]=\"{'selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}\">\n        </div>\n      </div>\n      <div class=\"columns medium-4\">\n        <cp-complex-filter *ngIf=\"spicesFilter && bioRoleFilter && interactorTypeFilter\"\n                           [spicesFilter]=\"spicesFilter\"\n                           [bioRoleFilter]=\"bioRoleFilter\"\n                           [interactorTypeFilter]=\"interactorTypeFilter\" [facets]=\"complexSearch.facets\"\n                           (onResetAllFilters)=\"onResetAllFilters()\"\n                           (onSpicesFilterChanged)=\"onSpicesFilterChanged($event)\"\n                           (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                           (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\">\n        </cp-complex-filter>\n      </div>\n      <div class=\"columns medium-8\">\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        <cp-complex-list class=\"listOfResults\" *ngIf=\"DisplayType===LIST_VIEW\"\n                         [complexSearch]=\"complexSearch\">\n        </cp-complex-list>\n        <cp-complex-navigator class=\"Complex-navigator\" *ngIf=\"DisplayType===COMPLEX_NAVIGATOR_VIEW\"\n                              [complexSearch]=\"complexSearch\"\n                              [interactors]=\"allInteractorsInComplexSearch\">\n        </cp-complex-navigator>\n        <cp-complex-paginator [currentPageIndex]=\"currentPageIndex\"\n                              [lastPageIndex]=\"lastPageIndex\"\n                              (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n      </div>\n    </div>\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than\n          \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n";
 
       /***/
     }),
@@ -2473,6 +2659,16 @@
 
       /***/
     }),
+    /***/84353: (
+    /*!***********************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator-sorting/complex-navigator-sorting.component.css ***!
+      \***********************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = ".typeOfSorting {\n  display: none;\n}\n\n.sortingInteractors:hover .typeOfSorting {\n  display: flex;\n  margin-top: -16px;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbmF2aWdhdG9yLXNvcnRpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTtFQUNFLGFBQWE7RUFDYixpQkFBaUI7O0FBRW5CIiwiZmlsZSI6ImNvbXBsZXgtbmF2aWdhdG9yLXNvcnRpbmcuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50eXBlT2ZTb3J0aW5nIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cblxuLnNvcnRpbmdJbnRlcmFjdG9yczpob3ZlciAudHlwZU9mU29ydGluZyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIG1hcmdpbi10b3A6IC0xNnB4O1xuXG59XG4iXX0= */";
+
+      /***/
+    }),
     /***/14332: (
     /*!*******************************************************************************************!*\
       !*** ./src/app/complex/complex-results/complex-navigator/complex-navigator.component.css ***!
@@ -2489,7 +2685,7 @@
       \*******************************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = "/* Header */\n\n.CN-table {\n  transform: rotateX(180deg); /* On reinverse le contenu du header pour que le contenu soit dans le bon sens */\n}\n\nthead {\n  border: 0;\n  background-color: white;\n  border-right: 0 solid white;\n}\n\n.CN-table {\n  -webkit-clip-path: fill-box;\n          clip-path: fill-box;\n}\n\n/* Rotated complexes names */\n\n.interactorsHeader {\n  min-width: 130px;\n  max-width: 130px;\n  position: sticky;\n  left: 0;\n  z-index: 4;\n  color: #007c82;\n  background-color: white;\n  padding-top: 150px;\n  text-align: right;\n  border-bottom: 3px solid #007c82;\n}\n\n.tilted-label {\n  padding-left: 5px;\n  text-overflow: ellipsis;\n  width: 28ch;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.CN-table .tableHeadOverflow tr {\n  --cols: 1;\n  display: grid;\n  grid-template-columns: 130px repeat(auto-fit, 100px);\n  width: calc(130px + 100px * var(--cols) + 185px);\n}\n\n.CN-table .tableHeadOverflow th.rotate {\n  position: relative;\n  width: 340px;\n  height: 72px !important;\n  color: white;\n  font-size: 14px;\n  text-align: left;\n  border-top: 1px solid white;\n  top: 55px;\n  left: -27px;\n  display: flex;\n  align-items: center;\n  align-content: center;\n  padding: 0;\n\n  transform: rotate(-45deg);\n\n\n  /* line */\n  border-top: 1px solid white;\n}\n\n.CN-table .tableHeadOverflow th.rotate a {\n  width: 100%;\n  height: 100%;\n  align-content: center;\n  background-color: #007c82;\n  padding: 0 0 0 70px;\n}\n\n/*.line {*/\n\n/*  position: absolute;*/\n\n/*  top: auto;*/\n\n/*  bottom: auto;*/\n\n/*  background: #0e6f76;*/\n\n/*  margin-top: 7px;*/\n\n/*  left: 0;*/\n\n/*  width: 66px;*/\n\n/*  height: 5px;*/\n\n/*  border-radius: 4px;*/\n\n/*}*/\n\n/* Horizontal complexes name */\n\n.CN-table th.horizontal.interactorsHeader {\n  padding: 5px;\n  min-width: 130px;\n  max-width: 130px;\n  font-size: medium;\n  border-bottom: 3px solid #007c82;\n  border-left: none;\n  text-align: right;\n  color: #007c82;\n  background-color: white;\n}\n\n.horizontal-label {\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 90%;\n  white-space: nowrap;\n  overflow: hidden;\n  margin: auto;\n}\n\n.CN-table th.horizontal {\n  color: white;\n  background-color: #007c82;\n  border: 1px solid white;\n  min-width: 100px;\n  max-width: 100px;\n  height: 50px;\n  font-size: 15px;\n}\n\na:visited {\n  color: white;\n}\n\na {\n  color: white;\n}\n\n.spaceHolder {\n  width: 180px;\n  background-color: white;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7O0FBRVg7RUFDRSwwQkFBMEIsRUFBRSxnRkFBZ0Y7QUFDOUc7O0FBRUE7RUFDRSxTQUFTO0VBQ1QsdUJBQXVCO0VBQ3ZCLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDJCQUFtQjtVQUFuQixtQkFBbUI7QUFDckI7O0FBRUEsNEJBQTRCOztBQUU1QjtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVO0VBQ1YsY0FBYztFQUNkLHVCQUF1QjtFQUN2QixrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztBQUNsQzs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQix1QkFBdUI7RUFDdkIsV0FBVztFQUNYLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEI7O0FBR0E7RUFDRSxTQUFTO0VBQ1QsYUFBYTtFQUNiLG9EQUFvRDtFQUNwRCxnREFBZ0Q7QUFDbEQ7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osZUFBZTtFQUNmLGdCQUFnQjtFQUNoQiwyQkFBMkI7RUFDM0IsU0FBUztFQUNULFdBQVc7RUFDWCxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixVQUFVOztFQUVWLHlCQUF5Qjs7O0VBR3pCLFNBQVM7RUFDVCwyQkFBMkI7QUFDN0I7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHFCQUFxQjtFQUNyQix5QkFBeUI7RUFDekIsbUJBQW1CO0FBQ3JCOztBQUdBLFVBQVU7O0FBQ1Ysd0JBQXdCOztBQUN4QixlQUFlOztBQUNmLGtCQUFrQjs7QUFDbEIseUJBQXlCOztBQUN6QixxQkFBcUI7O0FBQ3JCLGFBQWE7O0FBQ2IsaUJBQWlCOztBQUNqQixpQkFBaUI7O0FBQ2pCLHdCQUF3Qjs7QUFDeEIsSUFBSTs7QUFFSiw4QkFBOEI7O0FBRTlCO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztFQUNoQyxpQkFBaUI7RUFDakIsaUJBQWlCO0VBQ2pCLGNBQWM7RUFDZCx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLFVBQVU7RUFDVixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogSGVhZGVyICovXG5cbi5DTi10YWJsZSB7XG4gIHRyYW5zZm9ybTogcm90YXRlWCgxODBkZWcpOyAvKiBPbiByZWludmVyc2UgbGUgY29udGVudSBkdSBoZWFkZXIgcG91ciBxdWUgbGUgY29udGVudSBzb2l0IGRhbnMgbGUgYm9uIHNlbnMgKi9cbn1cblxudGhlYWQge1xuICBib3JkZXI6IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBib3JkZXItcmlnaHQ6IDAgc29saWQgd2hpdGU7XG59XG5cbi5DTi10YWJsZSB7XG4gIGNsaXAtcGF0aDogZmlsbC1ib3g7XG59XG5cbi8qIFJvdGF0ZWQgY29tcGxleGVzIG5hbWVzICovXG5cbi5pbnRlcmFjdG9yc0hlYWRlciB7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIGxlZnQ6IDA7XG4gIHotaW5kZXg6IDQ7XG4gIGNvbG9yOiAjMDA3YzgyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgcGFkZGluZy10b3A6IDE1MHB4O1xuICB0ZXh0LWFsaWduOiByaWdodDtcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkICMwMDdjODI7XG59XG5cbi50aWx0ZWQtbGFiZWwge1xuICBwYWRkaW5nLWxlZnQ6IDVweDtcbiAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gIHdpZHRoOiAyOGNoO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdHIge1xuICAtLWNvbHM6IDE7XG4gIGRpc3BsYXk6IGdyaWQ7XG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogMTMwcHggcmVwZWF0KGF1dG8tZml0LCAxMDBweCk7XG4gIHdpZHRoOiBjYWxjKDEzMHB4ICsgMTAwcHggKiB2YXIoLS1jb2xzKSArIDE4NXB4KTtcbn1cblxuLkNOLXRhYmxlIC50YWJsZUhlYWRPdmVyZmxvdyB0aC5yb3RhdGUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHdpZHRoOiAzNDBweDtcbiAgaGVpZ2h0OiA3MnB4ICFpbXBvcnRhbnQ7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxNHB4O1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG4gIHRvcDogNTVweDtcbiAgbGVmdDogLTI3cHg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcbiAgcGFkZGluZzogMDtcblxuICB0cmFuc2Zvcm06IHJvdGF0ZSgtNDVkZWcpO1xuXG5cbiAgLyogbGluZSAqL1xuICBib3JkZXItdG9wOiAxcHggc29saWQgd2hpdGU7XG59XG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdGgucm90YXRlIGEge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdjODI7XG4gIHBhZGRpbmc6IDAgMCAwIDcwcHg7XG59XG5cblxuLyoubGluZSB7Ki9cbi8qICBwb3NpdGlvbjogYWJzb2x1dGU7Ki9cbi8qICB0b3A6IGF1dG87Ki9cbi8qICBib3R0b206IGF1dG87Ki9cbi8qICBiYWNrZ3JvdW5kOiAjMGU2Zjc2OyovXG4vKiAgbWFyZ2luLXRvcDogN3B4OyovXG4vKiAgbGVmdDogMDsqL1xuLyogIHdpZHRoOiA2NnB4OyovXG4vKiAgaGVpZ2h0OiA1cHg7Ki9cbi8qICBib3JkZXItcmFkaXVzOiA0cHg7Ki9cbi8qfSovXG5cbi8qIEhvcml6b250YWwgY29tcGxleGVzIG5hbWUgKi9cblxuLkNOLXRhYmxlIHRoLmhvcml6b250YWwuaW50ZXJhY3RvcnNIZWFkZXIge1xuICBwYWRkaW5nOiA1cHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIGZvbnQtc2l6ZTogbWVkaXVtO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgIzAwN2M4MjtcbiAgYm9yZGVyLWxlZnQ6IG5vbmU7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xuICBjb2xvcjogIzAwN2M4MjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5ob3Jpem9udGFsLWxhYmVsIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgd2lkdGg6IDkwJTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbWFyZ2luOiBhdXRvO1xufVxuXG4uQ04tdGFibGUgdGguaG9yaXpvbnRhbCB7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwN2M4MjtcbiAgYm9yZGVyOiAxcHggc29saWQgd2hpdGU7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIG1heC13aWR0aDogMTAwcHg7XG4gIGhlaWdodDogNTBweDtcbiAgZm9udC1zaXplOiAxNXB4O1xufVxuXG5hOnZpc2l0ZWQge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbmEge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbi5zcGFjZUhvbGRlciB7XG4gIHdpZHRoOiAxODBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG4iXX0= */";
+      module.exports = ".CN-table {\n  transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */\n}\n\nthead {\n  border: 0;\n  background-color: white;\n  border-right: 0 solid white;\n}\n\n.CN-table {\n  -webkit-clip-path: fill-box;\n          clip-path: fill-box;\n}\n\n/* Rotated complexes names */\n\n.interactorsHeader {\n  min-width: 130px;\n  max-width: 130px;\n  position: sticky;\n  left: 0;\n  z-index: 4;\n  color: #007c82;\n  background-color: white;\n  padding-top: 150px;\n  text-align: right;\n  border-bottom: 3px solid #007c82;\n}\n\n.tilted-label {\n  padding-left: 5px;\n  text-overflow: ellipsis;\n  width: 28ch;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.CN-table .tableHeadOverflow tr {\n  --cols: 1;\n  display: grid;\n  grid-template-columns: 130px repeat(auto-fit, 100px);\n  width: calc(130px + 100px * var(--cols) + 185px);\n}\n\n.CN-table .tableHeadOverflow th.rotate {\n  position: relative;\n  width: 340px;\n  height: 72px !important;\n  color: white;\n  font-size: 14px;\n  text-align: left;\n  border-top: 1px solid white;\n  top: 55px;\n  left: -27px;\n  display: flex;\n  align-items: center;\n  align-content: center;\n  padding: 0;\n  transform: rotate(-45deg);\n  /* line */\n  border-top: 1px solid white;\n}\n\n.CN-table .tableHeadOverflow th.rotate a {\n  width: 100%;\n  height: 100%;\n  align-content: center;\n  background-color: #007c82;\n  padding: 0 0 0 70px;\n}\n\n/* Horizontal complexes name */\n\n.CN-table th.horizontal.interactorsHeader {\n  padding: 5px;\n  min-width: 130px;\n  max-width: 130px;\n  font-size: medium;\n  border-bottom: 3px solid #007c82;\n  border-left: none;\n  text-align: right;\n  color: #007c82;\n  background-color: white;\n}\n\n.horizontal-label {\n  text-align: center;\n  text-overflow: ellipsis;\n  width: 90%;\n  white-space: nowrap;\n  overflow: hidden;\n  margin: auto;\n}\n\n.CN-table th.horizontal {\n  color: white;\n  background-color: #007c82;\n  border: 1px solid white;\n  min-width: 100px;\n  max-width: 100px;\n  height: 50px;\n  font-size: 15px;\n}\n\na:visited {\n  color: white;\n}\n\na {\n  color: white;\n}\n\n.spaceHolder {\n  width: 180px;\n  background-color: white;\n}\n\n/*.interactorsHeader horizontal .bigInteractorHeader {*/\n\n/*  min-width: calc(var(--interactorsHeaderWidth) + 3ch);*/\n\n/*  max-width: calc(var(--interactorsHeaderWidth) + 3ch);*/\n\n/*  background-color: #6dab49;*/\n\n/*}*/\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsMEJBQTBCLEVBQUUsZ0dBQWdHO0FBQzlIOztBQUVBO0VBQ0UsU0FBUztFQUNULHVCQUF1QjtFQUN2QiwyQkFBMkI7QUFDN0I7O0FBRUE7RUFDRSwyQkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBLDRCQUE0Qjs7QUFFNUI7RUFDRSxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixPQUFPO0VBQ1AsVUFBVTtFQUNWLGNBQWM7RUFDZCx1QkFBdUI7RUFDdkIsa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixnQ0FBZ0M7QUFDbEM7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsdUJBQXVCO0VBQ3ZCLFdBQVc7RUFDWCxtQkFBbUI7RUFDbkIsZ0JBQWdCO0FBQ2xCOztBQUdBO0VBQ0UsU0FBUztFQUNULGFBQWE7RUFDYixvREFBb0Q7RUFDcEQsZ0RBQWdEO0FBQ2xEOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWix1QkFBdUI7RUFDdkIsWUFBWTtFQUNaLGVBQWU7RUFDZixnQkFBZ0I7RUFDaEIsMkJBQTJCO0VBQzNCLFNBQVM7RUFDVCxXQUFXO0VBQ1gsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsVUFBVTtFQUNWLHlCQUF5QjtFQUN6QixTQUFTO0VBQ1QsMkJBQTJCO0FBQzdCOztBQUVBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWixxQkFBcUI7RUFDckIseUJBQXlCO0VBQ3pCLG1CQUFtQjtBQUNyQjs7QUFFQSw4QkFBOEI7O0FBRTlCO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdDQUFnQztFQUNoQyxpQkFBaUI7RUFDakIsaUJBQWlCO0VBQ2pCLGNBQWM7RUFDZCx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLFVBQVU7RUFDVixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osdUJBQXVCO0FBQ3pCOztBQUVBLHVEQUF1RDs7QUFDdkQsMERBQTBEOztBQUMxRCwwREFBMEQ7O0FBQzFELCtCQUErQjs7QUFDL0IsSUFBSSIsImZpbGUiOiJ0YWJsZS1oZWFkZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5DTi10YWJsZSB7XG4gIHRyYW5zZm9ybTogcm90YXRlWCgxODBkZWcpOyAvKiByb3RhdGUgdGhlIGhlYWRlcidzIGNvbnRlbnQgdG8gbWFrZSBpdCBpdCB0aGUgcmlnaHQgc2Vuc2UgKHdoZW4gcmVtb3ZlcywgaXQgaXMgdXBzaWRlIGRvd24pICovXG59XG5cbnRoZWFkIHtcbiAgYm9yZGVyOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgYm9yZGVyLXJpZ2h0OiAwIHNvbGlkIHdoaXRlO1xufVxuXG4uQ04tdGFibGUge1xuICBjbGlwLXBhdGg6IGZpbGwtYm94O1xufVxuXG4vKiBSb3RhdGVkIGNvbXBsZXhlcyBuYW1lcyAqL1xuXG4uaW50ZXJhY3RvcnNIZWFkZXIge1xuICBtaW4td2lkdGg6IDEzMHB4O1xuICBtYXgtd2lkdGg6IDEzMHB4O1xuICBwb3NpdGlvbjogc3RpY2t5O1xuICBsZWZ0OiAwO1xuICB6LWluZGV4OiA0O1xuICBjb2xvcjogIzAwN2M4MjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIHBhZGRpbmctdG9wOiAxNTBweDtcbiAgdGV4dC1hbGlnbjogcmlnaHQ7XG4gIGJvcmRlci1ib3R0b206IDNweCBzb2xpZCAjMDA3YzgyO1xufVxuXG4udGlsdGVkLWxhYmVsIHtcbiAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICB3aWR0aDogMjhjaDtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuXG4uQ04tdGFibGUgLnRhYmxlSGVhZE92ZXJmbG93IHRyIHtcbiAgLS1jb2xzOiAxO1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDEzMHB4IHJlcGVhdChhdXRvLWZpdCwgMTAwcHgpO1xuICB3aWR0aDogY2FsYygxMzBweCArIDEwMHB4ICogdmFyKC0tY29scykgKyAxODVweCk7XG59XG5cbi5DTi10YWJsZSAudGFibGVIZWFkT3ZlcmZsb3cgdGgucm90YXRlIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB3aWR0aDogMzQwcHg7XG4gIGhlaWdodDogNzJweCAhaW1wb3J0YW50O1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHdoaXRlO1xuICB0b3A6IDU1cHg7XG4gIGxlZnQ6IC0yN3B4O1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG4gIHBhZGRpbmc6IDA7XG4gIHRyYW5zZm9ybTogcm90YXRlKC00NWRlZyk7XG4gIC8qIGxpbmUgKi9cbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHdoaXRlO1xufVxuXG4uQ04tdGFibGUgLnRhYmxlSGVhZE92ZXJmbG93IHRoLnJvdGF0ZSBhIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYWxpZ24tY29udGVudDogY2VudGVyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDA3YzgyO1xuICBwYWRkaW5nOiAwIDAgMCA3MHB4O1xufVxuXG4vKiBIb3Jpem9udGFsIGNvbXBsZXhlcyBuYW1lICovXG5cbi5DTi10YWJsZSB0aC5ob3Jpem9udGFsLmludGVyYWN0b3JzSGVhZGVyIHtcbiAgcGFkZGluZzogNXB4O1xuICBtaW4td2lkdGg6IDEzMHB4O1xuICBtYXgtd2lkdGg6IDEzMHB4O1xuICBmb250LXNpemU6IG1lZGl1bTtcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkICMwMDdjODI7XG4gIGJvcmRlci1sZWZ0OiBub25lO1xuICB0ZXh0LWFsaWduOiByaWdodDtcbiAgY29sb3I6ICMwMDdjODI7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufVxuXG4uaG9yaXpvbnRhbC1sYWJlbCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gIHdpZHRoOiA5MCU7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIG1hcmdpbjogYXV0bztcbn1cblxuLkNOLXRhYmxlIHRoLmhvcml6b250YWwge1xuICBjb2xvcjogd2hpdGU7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdjODI7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHdoaXRlO1xuICBtaW4td2lkdGg6IDEwMHB4O1xuICBtYXgtd2lkdGg6IDEwMHB4O1xuICBoZWlnaHQ6IDUwcHg7XG4gIGZvbnQtc2l6ZTogMTVweDtcbn1cblxuYTp2aXNpdGVkIHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG5hIHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc3BhY2VIb2xkZXIge1xuICB3aWR0aDogMTgwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufVxuXG4vKi5pbnRlcmFjdG9yc0hlYWRlciBob3Jpem9udGFsIC5iaWdJbnRlcmFjdG9ySGVhZGVyIHsqL1xuLyogIG1pbi13aWR0aDogY2FsYyh2YXIoLS1pbnRlcmFjdG9yc0hlYWRlcldpZHRoKSArIDNjaCk7Ki9cbi8qICBtYXgtd2lkdGg6IGNhbGModmFyKC0taW50ZXJhY3RvcnNIZWFkZXJXaWR0aCkgKyAzY2gpOyovXG4vKiAgYmFja2dyb3VuZC1jb2xvcjogIzZkYWI0OTsqL1xuLyp9Ki9cbiJdfQ== */";
 
       /***/
     }),
@@ -2499,7 +2695,57 @@
       \*****************************************************************************************************************************************/
     /***/
     function _(module) {
-      module.exports = "/* interactors column */\n.interactorsColumn {\n  position: sticky;\n  left: 0;\n  z-index: 3;\n  max-height: 60px;\n  min-height: 60px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n  background: inherit;\n}\n.interactorsColumn a {\n  font-weight: normal;\n}\n.intStoich {\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n  text-align: end;\n  z-index: 1;\n}\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: #0e6f76;\n  text-align: center;\n  padding-top: 0.5ch;\n  color: white;\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n}\n.verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  z-index: 0;\n}\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n.transparentVerticalLine {\n  border-right: 0;\n}\ni:not(.small) {\n  font-size: large;\n}\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\ntr:nth-child(odd) {\n  background-color: #f7f9fa;\n}\n/*.expandedRows {*/\n/*  !*box-shadow: inset 0px 0px 16px 2px #0e6f76;*!*/\n/*  color: #0e6f76;*/\n/*  position: relative;*/\n/*  !*filter: shadow(0.5);*!*/\n/*}*/\n/*.expandedRows:before {*/\n/*  content: '';*/\n/*  position: absolute;*/\n/*  inset: -2px -1px -2px -1px;*/\n/*  !*background: #0e6f7612;*!*/\n/*  !*box-shadow: inset 0 0 10px 2px #0e6f7696;*!*/\n/*  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px),*/\n/*    !*linear-gradient(90deg, #0e6f7696 0px, transparent 10px),*! linear-gradient(180deg, #0e6f7696 0px, transparent 10px);*/\n/*  !*linear-gradient(270deg, #0e6f7696 0px, transparent 10px);*!*/\n/*  !*border-left: 4px solid #0e6f76;*!*/\n/*}*/\na, a:visited {\n  color: #0e6f76;\n}\n.interactorSeparation {\n  min-width: 2ch;\n  max-width: 2ch;\n  background-color: #0e6f76;\n  border: 1px solid white;\n}\n.interactorSeparationName {\n  transform: rotate(-90deg);\n  font-weight: lighter;\n  font-size: small;\n  color: white;\n  line-height: 0.8;\n  text-align: center;\n}\n.spaceHolder {\n  width: 180px;\n}\n.subComponentColumn {\n  left: 0;\n  z-index: 30;\n  max-height: 50px;\n  min-height: 50px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n  background: inherit;\n  position: sticky\n}\n.expandedRows {\n  color: #0e6f76;\n  position: relative;\n}\n.firstExpandedRow:after {\n  z-index: 40;\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px);\n}\n.lastExpandedRow:after {\n  z-index: 40;\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);\n}\n.interactorSeparationName {\n  transform: rotate(-90deg);\n  font-weight: lighter;\n  font-size: small;\n  color: white;\n  line-height: 0.8;\n  text-align: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsdUJBQXVCO0FBQ3ZCO0VBQ0UsZ0JBQWdCO0VBQ2hCLE9BQU87RUFDUCxVQUFVO0VBQ1YsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFlBQVk7RUFDWixlQUFlO0VBQ2YsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixtQkFBbUI7QUFDckI7QUFFQTtFQUNFLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZixVQUFVO0FBQ1o7QUFHQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0VBQ2YsVUFBVTtBQUNaO0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7QUFFQTtFQUNFLGVBQWU7QUFDakI7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjtBQUVBO0VBQ0UseUJBQXlCO0FBQzNCO0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7QUFFQSxrQkFBa0I7QUFDbEIsb0RBQW9EO0FBQ3BELG9CQUFvQjtBQUNwQix3QkFBd0I7QUFDeEIsNkJBQTZCO0FBQzdCLElBQUk7QUFFSix5QkFBeUI7QUFDekIsaUJBQWlCO0FBQ2pCLHdCQUF3QjtBQUN4QixnQ0FBZ0M7QUFDaEMsK0JBQStCO0FBQy9CLGtEQUFrRDtBQUNsRCx3RUFBd0U7QUFDeEUsNkhBQTZIO0FBQzdILGtFQUFrRTtBQUNsRSx3Q0FBd0M7QUFDeEMsSUFBSTtBQUdKO0VBQ0UsY0FBYztBQUNoQjtBQUdBO0VBQ0UsY0FBYztFQUNkLGNBQWM7RUFDZCx5QkFBeUI7RUFDekIsdUJBQXVCO0FBQ3pCO0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsb0JBQW9CO0VBQ3BCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjtBQUVBO0VBQ0UsWUFBWTtBQUNkO0FBR0E7RUFDRSxPQUFPO0VBQ1AsV0FBVztFQUNYLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZUFBZTtFQUNmLGNBQWM7RUFDZCxpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CO0FBQ0Y7QUFFQTtFQUNFLGNBQWM7RUFDZCxrQkFBa0I7QUFDcEI7QUFFQTtFQUNFLFdBQVc7RUFDWCxXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLDBCQUEwQjtFQUMxQixvRUFBb0U7QUFDdEU7QUFFQTtFQUNFLFdBQVc7RUFDWCxXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLDBCQUEwQjtFQUMxQixrRUFBa0U7QUFDcEU7QUFHQTtFQUNFLHlCQUF5QjtFQUN6QixvQkFBb0I7RUFDcEIsZ0JBQWdCO0VBQ2hCLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBpbnRlcmFjdG9ycyBjb2x1bW4gKi9cbi5pbnRlcmFjdG9yc0NvbHVtbiB7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIGxlZnQ6IDA7XG4gIHotaW5kZXg6IDM7XG4gIG1heC1oZWlnaHQ6IDYwcHg7XG4gIG1pbi1oZWlnaHQ6IDYwcHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBhZGRpbmc6IDVweDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBjb2xvcjogIzBlNmY3NjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGJhY2tncm91bmQ6IGluaGVyaXQ7XG59XG5cbi5pbnRlcmFjdG9yc0NvbHVtbiBhIHtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuLmludFN0b2ljaCB7XG4gIGhlaWdodDogNTBweDtcbiAgbWF4LXdpZHRoOiAxMDBweDtcbiAgbWluLXdpZHRoOiAxMDBweDtcbiAgZm9udC1zaXplOiBtZWRpdW07XG4gIHRleHQtYWxpZ246IGVuZDtcbiAgei1pbmRleDogMTtcbn1cblxuXG4uc3RvaWNoTnVtIHtcbiAgd2lkdGg6IDRjaDtcbiAgaGVpZ2h0OiA0Y2g7XG4gIGJvcmRlci1yYWRpdXM6IDRjaDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzBlNmY3NjtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nLXRvcDogMC41Y2g7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiBzbWFsbDtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbn1cblxuLnZlcnRpY2FsTGluZSwgLnRyYW5zcGFyZW50VmVydGljYWxMaW5lIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbiAgbWluLXdpZHRoOiAxJTtcbiAgbWF4LXdpZHRoOiAxJTtcbiAgbWF4LWhlaWdodDogNTAlO1xuICBtaW4taGVpZ2h0OiA1MCU7XG4gIHotaW5kZXg6IDA7XG59XG5cbi52ZXJ0aWNhbExpbmUge1xuICBib3JkZXItcmlnaHQ6IDVweCBzb2xpZCAjMGU2Zjc2O1xufVxuXG4udHJhbnNwYXJlbnRWZXJ0aWNhbExpbmUge1xuICBib3JkZXItcmlnaHQ6IDA7XG59XG5cbmk6bm90KC5zbWFsbCkge1xuICBmb250LXNpemU6IGxhcmdlO1xufVxuXG50cjpudGgtY2hpbGQoZXZlbikge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGZlY2VkO1xufVxuXG50cjpudGgtY2hpbGQob2RkKSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmN2Y5ZmE7XG59XG5cbi8qLmV4cGFuZGVkUm93cyB7Ki9cbi8qICAhKmJveC1zaGFkb3c6IGluc2V0IDBweCAwcHggMTZweCAycHggIzBlNmY3NjsqISovXG4vKiAgY29sb3I6ICMwZTZmNzY7Ki9cbi8qICBwb3NpdGlvbjogcmVsYXRpdmU7Ki9cbi8qICAhKmZpbHRlcjogc2hhZG93KDAuNSk7KiEqL1xuLyp9Ki9cblxuLyouZXhwYW5kZWRSb3dzOmJlZm9yZSB7Ki9cbi8qICBjb250ZW50OiAnJzsqL1xuLyogIHBvc2l0aW9uOiBhYnNvbHV0ZTsqL1xuLyogIGluc2V0OiAtMnB4IC0xcHggLTJweCAtMXB4OyovXG4vKiAgISpiYWNrZ3JvdW5kOiAjMGU2Zjc2MTI7KiEqL1xuLyogICEqYm94LXNoYWRvdzogaW5zZXQgMCAwIDEwcHggMnB4ICMwZTZmNzY5NjsqISovXG4vKiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDBkZWcsICMwZTZmNzY5NiAwcHgsIHRyYW5zcGFyZW50IDEwcHgpLCovXG4vKiAgICAhKmxpbmVhci1ncmFkaWVudCg5MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCksKiEgbGluZWFyLWdyYWRpZW50KDE4MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7Ki9cbi8qICAhKmxpbmVhci1ncmFkaWVudCgyNzBkZWcsICMwZTZmNzY5NiAwcHgsIHRyYW5zcGFyZW50IDEwcHgpOyohKi9cbi8qICAhKmJvcmRlci1sZWZ0OiA0cHggc29saWQgIzBlNmY3NjsqISovXG4vKn0qL1xuXG5cbmEsIGE6dmlzaXRlZCB7XG4gIGNvbG9yOiAjMGU2Zjc2O1xufVxuXG5cbi5pbnRlcmFjdG9yU2VwYXJhdGlvbiB7XG4gIG1pbi13aWR0aDogMmNoO1xuICBtYXgtd2lkdGg6IDJjaDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzBlNmY3NjtcbiAgYm9yZGVyOiAxcHggc29saWQgd2hpdGU7XG59XG5cbi5pbnRlcmFjdG9yU2VwYXJhdGlvbk5hbWUge1xuICB0cmFuc2Zvcm06IHJvdGF0ZSgtOTBkZWcpO1xuICBmb250LXdlaWdodDogbGlnaHRlcjtcbiAgZm9udC1zaXplOiBzbWFsbDtcbiAgY29sb3I6IHdoaXRlO1xuICBsaW5lLWhlaWdodDogMC44O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5zcGFjZUhvbGRlciB7XG4gIHdpZHRoOiAxODBweDtcbn1cblxuXG4uc3ViQ29tcG9uZW50Q29sdW1uIHtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMzA7XG4gIG1heC1oZWlnaHQ6IDUwcHg7XG4gIG1pbi1oZWlnaHQ6IDUwcHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBhZGRpbmc6IDVweDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBjb2xvcjogIzBlNmY3NjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGJhY2tncm91bmQ6IGluaGVyaXQ7XG4gIHBvc2l0aW9uOiBzdGlja3lcbn1cblxuLmV4cGFuZGVkUm93cyB7XG4gIGNvbG9yOiAjMGU2Zjc2O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5maXJzdEV4cGFuZGVkUm93OmFmdGVyIHtcbiAgei1pbmRleDogNDA7XG4gIGNvbnRlbnQ6ICcnO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGluc2V0OiAtMnB4IC0xcHggLTJweCAtMXB4O1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCAjMGU2Zjc2OTYgMHB4LCB0cmFuc3BhcmVudCAxMHB4KTtcbn1cblxuLmxhc3RFeHBhbmRlZFJvdzphZnRlciB7XG4gIHotaW5kZXg6IDQwO1xuICBjb250ZW50OiAnJztcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBpbnNldDogLTJweCAtMXB4IC0ycHggLTFweDtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDBkZWcsICMwZTZmNzY5NiAwcHgsIHRyYW5zcGFyZW50IDEwcHgpO1xufVxuXG5cbi5pbnRlcmFjdG9yU2VwYXJhdGlvbk5hbWUge1xuICB0cmFuc2Zvcm06IHJvdGF0ZSgtOTBkZWcpO1xuICBmb250LXdlaWdodDogbGlnaHRlcjtcbiAgZm9udC1zaXplOiBzbWFsbDtcbiAgY29sb3I6IHdoaXRlO1xuICBsaW5lLWhlaWdodDogMC44O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iXX0= */";
+      module.exports = "table {\n  height: 1px;\n}\n\n/* interactors column */\n\n.interactorsColumn {\n  position: sticky;\n  left: 0;\n  z-index: 3;\n  max-height: 60px;\n  min-height: 60px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n  background: inherit;\n}\n\n.interactorsColumn a {\n  font-weight: normal;\n}\n\n.intStoich {\n  height: 50px;\n  max-width: 100px;\n  min-width: 100px;\n  font-size: medium;\n  text-align: end;\n  z-index: 1;\n}\n\ni:not(.small) {\n  font-size: large;\n}\n\ntr:nth-child(even) {\n  background-color: #dfeced;\n}\n\ntr:nth-child(odd) {\n  background-color: #f7f9fa;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\n.spaceHolder {\n  width: 180px;\n}\n\n.subComponentColumn {\n  left: 0;\n  z-index: 30;\n  max-height: 50px;\n  min-height: 50px;\n  min-width: 130px;\n  max-width: 130px;\n  padding: 5px;\n  text-align: end;\n  color: #0e6f76;\n  font-weight: bold;\n  background: inherit;\n  position: sticky\n}\n\n.expandedRows {\n  color: #0e6f76;\n  position: relative;\n}\n\n.firstExpandedRow:after {\n  z-index: 40;\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  pointer-events: none;\n  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px);\n}\n\n.lastExpandedRow:after {\n  z-index: 40;\n  content: '';\n  position: absolute;\n  inset: -2px -1px -2px -1px;\n  pointer-events: none;\n  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);\n}\n\n/* Interactors sorting label*/\n\n.interactorSeparation {\n  max-width: 3ch;\n  min-width: 3ch;\n  background-color: #0e6f76;\n  border: 1px solid white;\n  overflow: hidden;\n  width: 3ch;\n  text-align: -webkit-center;\n}\n\n.interactorNameContainer {\n  --rowspanSize: 1;\n  writing-mode: vertical-rl;\n  transform: rotate(-180deg);\n  /*font-weight: lighter;*/\n  font-size: small;\n  color: white;\n  line-height: 0.8;\n  text-align: center;\n\n\n  text-overflow: ellipsis;\n  height: calc(var(--rowspanSize) * 48px);\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItY29sdW1uLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXO0FBQ2I7O0FBRUEsdUJBQXVCOztBQUN2QjtFQUNFLGdCQUFnQjtFQUNoQixPQUFPO0VBQ1AsVUFBVTtFQUNWLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZUFBZTtFQUNmLGNBQWM7RUFDZCxpQkFBaUI7RUFDakIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UsT0FBTztFQUNQLFdBQVc7RUFDWCxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7RUFDZixjQUFjO0VBQ2QsaUJBQWlCO0VBQ2pCLG1CQUFtQjtFQUNuQjtBQUNGOztBQUVBO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLDBCQUEwQjtFQUMxQixvQkFBb0I7RUFDcEIsb0VBQW9FO0FBQ3RFOztBQUVBO0VBQ0UsV0FBVztFQUNYLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsMEJBQTBCO0VBQzFCLG9CQUFvQjtFQUNwQixrRUFBa0U7QUFDcEU7O0FBRUEsNkJBQTZCOztBQUU3QjtFQUNFLGNBQWM7RUFDZCxjQUFjO0VBQ2QseUJBQXlCO0VBQ3pCLHVCQUF1QjtFQUN2QixnQkFBZ0I7RUFDaEIsVUFBVTtFQUNWLDBCQUEwQjtBQUM1Qjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQix5QkFBeUI7RUFDekIsMEJBQTBCO0VBQzFCLHdCQUF3QjtFQUN4QixnQkFBZ0I7RUFDaEIsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0I7OztFQUdsQix1QkFBdUI7RUFDdkIsdUNBQXVDO0VBQ3ZDLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEIiLCJmaWxlIjoidGFibGUtaW50ZXJhY3Rvci1jb2x1bW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcbiAgaGVpZ2h0OiAxcHg7XG59XG5cbi8qIGludGVyYWN0b3JzIGNvbHVtbiAqL1xuLmludGVyYWN0b3JzQ29sdW1uIHtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMztcbiAgbWF4LWhlaWdodDogNjBweDtcbiAgbWluLWhlaWdodDogNjBweDtcbiAgbWluLXdpZHRoOiAxMzBweDtcbiAgbWF4LXdpZHRoOiAxMzBweDtcbiAgcGFkZGluZzogNXB4O1xuICB0ZXh0LWFsaWduOiBlbmQ7XG4gIGNvbG9yOiAjMGU2Zjc2O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgYmFja2dyb3VuZDogaW5oZXJpdDtcbn1cblxuLmludGVyYWN0b3JzQ29sdW1uIGEge1xuICBmb250LXdlaWdodDogbm9ybWFsO1xufVxuXG4uaW50U3RvaWNoIHtcbiAgaGVpZ2h0OiA1MHB4O1xuICBtYXgtd2lkdGg6IDEwMHB4O1xuICBtaW4td2lkdGg6IDEwMHB4O1xuICBmb250LXNpemU6IG1lZGl1bTtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICB6LWluZGV4OiAxO1xufVxuXG5pOm5vdCguc21hbGwpIHtcbiAgZm9udC1zaXplOiBsYXJnZTtcbn1cblxudHI6bnRoLWNoaWxkKGV2ZW4pIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RmZWNlZDtcbn1cblxudHI6bnRoLWNoaWxkKG9kZCkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjdmOWZhO1xufVxuXG5hLCBhOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuLnNwYWNlSG9sZGVyIHtcbiAgd2lkdGg6IDE4MHB4O1xufVxuXG4uc3ViQ29tcG9uZW50Q29sdW1uIHtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMzA7XG4gIG1heC1oZWlnaHQ6IDUwcHg7XG4gIG1pbi1oZWlnaHQ6IDUwcHg7XG4gIG1pbi13aWR0aDogMTMwcHg7XG4gIG1heC13aWR0aDogMTMwcHg7XG4gIHBhZGRpbmc6IDVweDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBjb2xvcjogIzBlNmY3NjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGJhY2tncm91bmQ6IGluaGVyaXQ7XG4gIHBvc2l0aW9uOiBzdGlja3lcbn1cblxuLmV4cGFuZGVkUm93cyB7XG4gIGNvbG9yOiAjMGU2Zjc2O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5maXJzdEV4cGFuZGVkUm93OmFmdGVyIHtcbiAgei1pbmRleDogNDA7XG4gIGNvbnRlbnQ6ICcnO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGluc2V0OiAtMnB4IC0xcHggLTJweCAtMXB4O1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE4MGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7XG59XG5cbi5sYXN0RXhwYW5kZWRSb3c6YWZ0ZXIge1xuICB6LWluZGV4OiA0MDtcbiAgY29udGVudDogJyc7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IC0ycHggLTFweCAtMnB4IC0xcHg7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMGRlZywgIzBlNmY3Njk2IDBweCwgdHJhbnNwYXJlbnQgMTBweCk7XG59XG5cbi8qIEludGVyYWN0b3JzIHNvcnRpbmcgbGFiZWwqL1xuXG4uaW50ZXJhY3RvclNlcGFyYXRpb24ge1xuICBtYXgtd2lkdGg6IDNjaDtcbiAgbWluLXdpZHRoOiAzY2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHdoaXRlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICB3aWR0aDogM2NoO1xuICB0ZXh0LWFsaWduOiAtd2Via2l0LWNlbnRlcjtcbn1cblxuLmludGVyYWN0b3JOYW1lQ29udGFpbmVyIHtcbiAgLS1yb3dzcGFuU2l6ZTogMTtcbiAgd3JpdGluZy1tb2RlOiB2ZXJ0aWNhbC1ybDtcbiAgdHJhbnNmb3JtOiByb3RhdGUoLTE4MGRlZyk7XG4gIC8qZm9udC13ZWlnaHQ6IGxpZ2h0ZXI7Ki9cbiAgZm9udC1zaXplOiBzbWFsbDtcbiAgY29sb3I6IHdoaXRlO1xuICBsaW5lLWhlaWdodDogMC44O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG5cblxuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgaGVpZ2h0OiBjYWxjKHZhcigtLXJvd3NwYW5TaXplKSAqIDQ4cHgpO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG5cbiJdfQ== */";
+
+      /***/
+    }),
+    /***/52504: (
+    /*!*******************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component.css ***!
+      \*******************************************************************************************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = "a {\n  font-weight: normal;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\ni:not(.small) {\n  font-size: large;\n}\n\n.externalLinkContainer {\n  word-wrap: break-word;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItZXh0ZXJuYWwtbGluay5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLHFCQUFxQjtBQUN2QiIsImZpbGUiOiJ0YWJsZS1pbnRlcmFjdG9yLWV4dGVybmFsLWxpbmsuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImEge1xuICBmb250LXdlaWdodDogbm9ybWFsO1xufVxuXG5hLCBhOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuaTpub3QoLnNtYWxsKSB7XG4gIGZvbnQtc2l6ZTogbGFyZ2U7XG59XG5cbi5leHRlcm5hbExpbmtDb250YWluZXIge1xuICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG59XG4iXX0= */";
+
+      /***/
+    }),
+    /***/57324: (
+    /*!*************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component.css ***!
+      \*************************************************************************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = "a {\n  font-weight: normal;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\ni:not(.small) {\n  font-size: large;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3ItbmFtZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJ0YWJsZS1pbnRlcmFjdG9yLW5hbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImEge1xuICBmb250LXdlaWdodDogbm9ybWFsO1xufVxuXG5hLCBhOnZpc2l0ZWQge1xuICBjb2xvcjogIzBlNmY3Njtcbn1cblxuaTpub3QoLnNtYWxsKSB7XG4gIGZvbnQtc2l6ZTogbGFyZ2U7XG59XG4iXX0= */";
+
+      /***/
+    }),
+    /***/90745: (
+    /*!*******************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component.css ***!
+      \*******************************************************************************************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = "\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: #0e6f76;\n  text-align: center;\n  padding-top: 0.5ch;\n  color: white;\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLWludGVyYWN0b3Itc3RvaWNoaW9tZXRyeS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsa0JBQWtCO0VBQ2xCLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQiIsImZpbGUiOiJ0YWJsZS1pbnRlcmFjdG9yLXN0b2ljaGlvbWV0cnkuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnN0b2ljaE51bSB7XG4gIHdpZHRoOiA0Y2g7XG4gIGhlaWdodDogNGNoO1xuICBib3JkZXItcmFkaXVzOiA0Y2g7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwZTZmNzY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZy10b3A6IDAuNWNoO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogc21hbGw7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG59XG4iXX0= */";
+
+      /***/
+    }),
+    /***/96532: (
+    /*!*************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-main-interactor/table-main-interactor.component.css ***!
+      \*************************************************************************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = ".verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  z-index: 0;\n}\n\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n\n.transparentVerticalLine {\n  border-right: 0;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLW1haW4taW50ZXJhY3Rvci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0VBQ2YsVUFBVTtBQUNaOztBQUVBO0VBQ0UsK0JBQStCO0FBQ2pDOztBQUVBO0VBQ0UsZUFBZTtBQUNqQiIsImZpbGUiOiJ0YWJsZS1tYWluLWludGVyYWN0b3IuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi52ZXJ0aWNhbExpbmUsIC50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1pbi13aWR0aDogMSU7XG4gIG1heC13aWR0aDogMSU7XG4gIG1heC1oZWlnaHQ6IDUwJTtcbiAgbWluLWhlaWdodDogNTAlO1xuICB6LWluZGV4OiAwO1xufVxuXG4udmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiA1cHggc29saWQgIzBlNmY3Njtcbn1cblxuLnRyYW5zcGFyZW50VmVydGljYWxMaW5lIHtcbiAgYm9yZGVyLXJpZ2h0OiAwO1xufVxuIl19 */";
+
+      /***/
+    }),
+    /***/85339: (
+    /*!*****************************************************************************************************************************************************************************!*\
+      !*** ./src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component.css ***!
+      \*****************************************************************************************************************************************************************************/
+    /***/
+    function _(module) {
+      module.exports = "\n.verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  z-index: 0;\n}\n\n.verticalLine {\n  border-right: 5px solid #0e6f76;\n}\n\n.transparentVerticalLine {\n  border-right: 0;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYmxlLXN1YmNvbXBvbmVudC1pbnRlcmFjdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsYUFBYTtFQUNiLGVBQWU7RUFDZixlQUFlO0VBQ2YsVUFBVTtBQUNaOztBQUVBO0VBQ0UsK0JBQStCO0FBQ2pDOztBQUVBO0VBQ0UsZUFBZTtBQUNqQiIsImZpbGUiOiJ0YWJsZS1zdWJjb21wb25lbnQtaW50ZXJhY3Rvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG4udmVydGljYWxMaW5lLCAudHJhbnNwYXJlbnRWZXJ0aWNhbExpbmUge1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xuICBtaW4td2lkdGg6IDElO1xuICBtYXgtd2lkdGg6IDElO1xuICBtYXgtaGVpZ2h0OiA1MCU7XG4gIG1pbi1oZWlnaHQ6IDUwJTtcbiAgei1pbmRleDogMDtcbn1cblxuLnZlcnRpY2FsTGluZSB7XG4gIGJvcmRlci1yaWdodDogNXB4IHNvbGlkICMwZTZmNzY7XG59XG5cbi50cmFuc3BhcmVudFZlcnRpY2FsTGluZSB7XG4gIGJvcmRlci1yaWdodDogMDtcbn1cbiJdfQ== */";
 
       /***/
     }),
@@ -2529,7 +2775,7 @@
       \***********************************************************************/
     /***/
     function _(module) {
-      module.exports = ".typeOfSorting {\n  display: none;\n}\n\n.sortingInteractors:hover .typeOfSorting {\n  display: flex;\n  margin-top: -16px;\n\n}\n\n.buttonContainer {\n  display: inline-flex;\n  width: 130%;\n  height: 80px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtcmVzdWx0cy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsYUFBYTtFQUNiLGlCQUFpQjs7QUFFbkI7O0FBRUE7RUFDRSxvQkFBb0I7RUFDcEIsV0FBVztFQUNYLFlBQVk7QUFDZCIsImZpbGUiOiJjb21wbGV4LXJlc3VsdHMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50eXBlT2ZTb3J0aW5nIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cblxuLnNvcnRpbmdJbnRlcmFjdG9yczpob3ZlciAudHlwZU9mU29ydGluZyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIG1hcmdpbi10b3A6IC0xNnB4O1xuXG59XG5cbi5idXR0b25Db250YWluZXIge1xuICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcbiAgd2lkdGg6IDEzMCU7XG4gIGhlaWdodDogODBweDtcbn1cbiJdfQ== */";
+      module.exports = ".displayButton {\n  float: right;\n}\n\n.view-button {\n  float: unset;\n  width: 225px;\n  margin-right: 5px;\n  background-color: white;\n  color: #555;\n  border: 1px dotted #007c82;\n}\n\n.view-button:hover {\n  color: #007c82;\n  background-color: rgb(234, 234, 234);\n  border: transparent;\n  border-bottom: 1px dotted #007c82;\n}\n\n.selected,\n.selected:hover {\n  background-color: #007c82;\n  color: white;\n  opacity: 100%;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtcmVzdWx0cy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixpQkFBaUI7RUFDakIsdUJBQXVCO0VBQ3ZCLFdBQVc7RUFDWCwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSxjQUFjO0VBQ2Qsb0NBQW9DO0VBQ3BDLG1CQUFtQjtFQUNuQixpQ0FBaUM7QUFDbkM7O0FBRUE7O0VBRUUseUJBQXlCO0VBQ3pCLFlBQVk7RUFDWixhQUFhO0FBQ2YiLCJmaWxlIjoiY29tcGxleC1yZXN1bHRzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZGlzcGxheUJ1dHRvbiB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLnZpZXctYnV0dG9uIHtcbiAgZmxvYXQ6IHVuc2V0O1xuICB3aWR0aDogMjI1cHg7XG4gIG1hcmdpbi1yaWdodDogNXB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgY29sb3I6ICM1NTU7XG4gIGJvcmRlcjogMXB4IGRvdHRlZCAjMDA3YzgyO1xufVxuXG4udmlldy1idXR0b246aG92ZXIge1xuICBjb2xvcjogIzAwN2M4MjtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIzNCwgMjM0LCAyMzQpO1xuICBib3JkZXI6IHRyYW5zcGFyZW50O1xuICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICMwMDdjODI7XG59XG5cbi5zZWxlY3RlZCxcbi5zZWxlY3RlZDpob3ZlciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdjODI7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgb3BhY2l0eTogMTAwJTtcbn1cblxuIl19 */";
 
       /***/
     })
