@@ -1871,9 +1871,7 @@
       /* harmony import */
       var _table_structure_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./table-structure.component.css */71108);
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */2316);
-      /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */71258);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1881,27 +1879,21 @@
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
       };
-      var _TableStructureComponent = /*#__PURE__*/_createClass(function TableStructureComponent(router) {
+      var _TableStructureComponent = /*#__PURE__*/_createClass(function TableStructureComponent() {
         _classCallCheck(this, TableStructureComponent);
-        this.router = router;
       });
-      _TableStructureComponent.ctorParameters = function () {
-        return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router
-        }];
-      };
       _TableStructureComponent.propDecorators = {
         complexSearch: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }],
         interactors: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }],
         interactorsSorting: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input
         }]
       };
-      _TableStructureComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+      _TableStructureComponent = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-table-structure',
         template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_table_structure_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_table_structure_component_css__WEBPACK_IMPORTED_MODULE_1__]
@@ -2264,6 +2256,7 @@
           },
           set: function set(value) {
             this._complexSearch = value;
+            this.setFirstDisplayType(); // if only one complex is in the search result, the display is list
           }
         }, {
           key: "lastPageIndex",
@@ -2322,6 +2315,13 @@
           key: "setComplexNavigatorView",
           value: function setComplexNavigatorView() {
             this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+          }
+        }, {
+          key: "setFirstDisplayType",
+          value: function setFirstDisplayType() {
+            if (this._complexSearch.elements.length > 1) {
+              this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+            }
           }
         }]);
         return ComplexResultsComponent;
@@ -2623,7 +2623,7 @@
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div>\n  <h5 class=\"text-center\">{{currentPageIndex}} of {{lastPageIndex}}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{index[0]}}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{index[0]}}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n  </ul>\n</div>\n";
+      __webpack_exports__["default"] = "<div>\n  <h5 class=\"text-center\">{{ currentPageIndex }} of {{ lastPageIndex }}</h5>\n  <ul class=\"pagination text-center\" role=\"navigation\" aria-label=\"Pagination\">\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getFirstPage()\">&laquo; First</a></li>\n    <li class=\"arrow unavailable\" *ngIf=\"currentPageIndex != 1\" aria-disabled=\"true\"><a\n      (click)=\"getPreviousPage()\">&laquo; Previous</a></li>\n    <ng-container *ngFor=\"let index of pagination\">\n      <li *ngIf=\"index[1] == 'true'\" class=\"current\"><span class=\"show-for-sr\">You're on page</span>{{ index[0] }}</li>\n      <li *ngIf=\"index[1] == 'false'\"><a (click)=\"getPage(index[0])\">{{ index[0] }}</a></li>\n    </ng-container>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getNextPage()\">Next &raquo;</a></li>\n    <li class=\"arrow\" *ngIf=\"currentPageIndex != lastPageIndex\"><a (click)=\"getLastPage()\">Last &raquo;</a></li>\n  </ul>\n</div>\n";
 
       /***/
     }),
