@@ -743,7 +743,9 @@ let TableInteractorColumnComponent = class TableInteractorColumnComponent {
                 if (oneInteractor.isSubComplex && !!oneInteractor.subComponents) {
                     for (const oneSubInteractor of oneInteractor.subComponents) {
                         const oneEnrichedInteractor = this.enrichedInteractors.find(enrichedInteractor => enrichedInteractor.interactor.identifier === oneSubInteractor.identifier);
-                        oneEnrichedInteractor.timesAppearing = parseInt((0,_complex_navigator_utils__WEBPACK_IMPORTED_MODULE_3__.formatStoichiometryValues)(oneSubInteractor.stochiometry), 10);
+                        if (!!oneEnrichedInteractor) {
+                            oneEnrichedInteractor.timesAppearing = parseInt((0,_complex_navigator_utils__WEBPACK_IMPORTED_MODULE_3__.formatStoichiometryValues)(oneSubInteractor.stochiometry), 10);
+                        }
                     }
                 }
             }
@@ -2114,7 +2116,7 @@ module.exports = ".description {\n  width: 90%;\n  text-align: justify;\n}\n\n/*
   \***********************************************************************************************************/
 /***/ (function(module) {
 
-module.exports = ".typeOfSorting {\n  display: none;\n}\n\n.sortingInteractors:hover .typeOfSorting {\n  display: flex;\n  margin-top: -16px;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbmF2aWdhdG9yLXNvcnRpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTtFQUNFLGFBQWE7RUFDYixpQkFBaUI7O0FBRW5CIiwiZmlsZSI6ImNvbXBsZXgtbmF2aWdhdG9yLXNvcnRpbmcuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50eXBlT2ZTb3J0aW5nIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cblxuLnNvcnRpbmdJbnRlcmFjdG9yczpob3ZlciAudHlwZU9mU29ydGluZyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIG1hcmdpbi10b3A6IC0xNnB4O1xuXG59XG4iXX0= */";
+module.exports = ".typeOfSorting {\n  display: none;\n}\n\n.sortingInteractors:hover .typeOfSorting {\n  display: flex;\n  margin-top: -16px;\n}\n\n/*.sortingInteractors {*/\n\n/*  text-align: center;*/\n\n/*}*/\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbmF2aWdhdG9yLXNvcnRpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTtFQUNFLGFBQWE7RUFDYixpQkFBaUI7QUFDbkI7O0FBRUEsd0JBQXdCOztBQUN4Qix3QkFBd0I7O0FBQ3hCLElBQUkiLCJmaWxlIjoiY29tcGxleC1uYXZpZ2F0b3Itc29ydGluZy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnR5cGVPZlNvcnRpbmcge1xuICBkaXNwbGF5OiBub25lO1xufVxuXG4uc29ydGluZ0ludGVyYWN0b3JzOmhvdmVyIC50eXBlT2ZTb3J0aW5nIHtcbiAgZGlzcGxheTogZmxleDtcbiAgbWFyZ2luLXRvcDogLTE2cHg7XG59XG5cbi8qLnNvcnRpbmdJbnRlcmFjdG9ycyB7Ki9cbi8qICB0ZXh0LWFsaWduOiBjZW50ZXI7Ki9cbi8qfSovXG4iXX0= */";
 
 /***/ }),
 
