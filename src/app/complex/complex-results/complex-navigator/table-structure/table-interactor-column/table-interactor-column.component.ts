@@ -1,7 +1,5 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ComplexSearchResult} from '../../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
-// import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
@@ -35,7 +33,7 @@ export class EnrichedComplex {
   styleUrls: ['./table-interactor-column.component.css']
 })
 export class TableInteractorColumnComponent implements OnChanges {
-  @Input() complexSearch: ComplexSearchResult;
+  @Input() complexes: Element[];
   @Input() interactorsSorting: string;
   @Input() interactors: Interactor[];
 
@@ -127,7 +125,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Element = this.complexSearch.elements.find(complex => complex.complexAC === interactor.interactor.identifier);
+    const foundComplex: Element = this.complexes.find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.interactors);
     } else {
@@ -140,7 +138,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   private calculateAllStartAndEndIndexes(): void {
     this.enrichedComplexes = [];
 
-    for (const complex of this.complexSearch.elements) {
+    for (const complex of this.complexes) {
       this.enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
     }
   }
@@ -242,7 +240,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private interactorOrganism() {
-    for (const complex of this.complexSearch.elements) {
+    for (const complex of this.complexes) {
       const organismName = complex.organismName;
       for (const complexInteractor of complex.interactors) {
         const match = this.enrichedInteractors.find(
@@ -266,7 +264,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   public classifyInteractorsByOccurrence() {
     for (const oneInteractor of this.enrichedInteractors) {
-      for (const complex of this.complexSearch.elements) {
+      for (const complex of this.complexes) {
         for (const complexesInteractors of complex.interactors) {
           if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
             const stoichiometryValue = parseInt(stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10);
@@ -280,7 +278,9 @@ export class TableInteractorColumnComponent implements OnChanges {
             const oneEnrichedInteractor = this.enrichedInteractors.find(
               enrichedInteractor => enrichedInteractor.interactor.identifier === oneSubInteractor.identifier
             );
-            oneEnrichedInteractor.timesAppearing = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
+            if (!!oneEnrichedInteractor) {
+              oneEnrichedInteractor.timesAppearing = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
+            }
           }
         }
       }

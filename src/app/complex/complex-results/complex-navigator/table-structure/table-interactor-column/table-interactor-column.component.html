@@ -16,6 +16,7 @@
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"
             [interactorId]="interactor.interactor.identifier"
+            [interactorOrganism]="interactor.organismName"
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
@@ -41,7 +42,7 @@
             ></cp-table-main-interactor>
           </td>
         </ng-container>
-        <div class="spaceHolder" *ngIf="complexSearch.elements.length>6"></div>
+        <div class="spaceHolder" *ngIf="complexes.length>6"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->
       <ng-container *ngIf="interactor.expanded">
@@ -50,9 +51,11 @@
               class="expandedRows"
               [ngClass]="{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
-                title="{{interactor.interactor.name}}'s interactors"
+                title="{{interactor.interactor.name}} interactors"
                 *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
-              <div class="interactorSeparationName"> {{ interactor.interactor.name }} interactors</div>
+              <div class="interactorSeparationName"
+                   [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} interactors
+              </div>
             </td>
             <td class="subComponentColumn">
               <div>
@@ -60,6 +63,7 @@
                   [interactorName]="el.name"
                   [interactorType]="el.interactorType"
                   [interactorId]="el.identifier"
+                  [interactorOrganism]="interactor.organismName"
                 ></cp-table-interactor-name>
               </div>
               <cp-table-interactor-external-link
@@ -78,7 +82,7 @@
                 ></cp-table-subcomponent-interactor>
               </td>
             </ng-container>
-            <div class="spaceHolder" *ngIf="complexSearch.elements.length>6"></div>
+            <div class="spaceHolder" *ngIf="complexes.length>6"></div>
           </tr>
         </ng-container>
       </ng-container>

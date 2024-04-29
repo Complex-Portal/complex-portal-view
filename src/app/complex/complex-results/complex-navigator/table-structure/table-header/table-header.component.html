@@ -1,12 +1,13 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- When table is not overflowing -->
-    <thead class="tableHead" *ngIf="complexSearch.elements.length<=6">
+    <thead class="tableHead" *ngIf="complexes.length<=6">
     <tr>
-      <!--      <td class="filler" *ngIf="!isInteractorSortingSet()"></td>-->
-      <th class="interactorsHeader horizontal">Interactors
+      <th class="interactorsHeader horizontal"
+          [style]="isInteractorSortingSet() ? 'min-width: 135px; max-width: 135px;':''">
+        Interactors
       </th>
-      <th class="horizontal" *ngFor="let complex of complexSearch.elements">
+      <th class="horizontal" *ngFor="let complex of complexes">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">
@@ -24,10 +25,14 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexSearch.elements.length>6">
-    <tr [style.--cols]="complexSearch.elements.length">
-      <th class="interactorsHeader">Interactors</th>
-      <th class="rotate" *ngFor="let complex of complexSearch.elements">
+    <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
+    <tr [style.--cols]="complexes.length">
+      <th class="interactorsHeader"
+          [style]="isInteractorSortingSet() ? 'min-width: 155px; max-width: 155px;':''">
+        Interactors
+      </th>
+      <th class="rotate" *ngFor="let complex of complexes"
+          [style]="isInteractorSortingSet() ? 'left:-1px':''">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{complex.complexAC}}"
            target="_blank">

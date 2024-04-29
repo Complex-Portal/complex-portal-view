@@ -18,7 +18,7 @@ export class TableSubcomponentInteractorComponent {
   findInteractorInComplex = findInteractorInComplex;
   getStoichiometry = getStoichiometry;
   stoichiometryOfInteractors = stoichiometryOfInteractors;
-  
+
   get interactor(): EnrichedInteractor {
     return this.enrichedInteractors[this.i];
   }

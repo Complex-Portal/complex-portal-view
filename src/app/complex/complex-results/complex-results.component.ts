@@ -13,8 +13,8 @@ import {Interactor} from '../shared/model/complex-results/interactor.model';
   styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  LIST_VIEW = 'LIST_VIEW';
-  COMPLEX_NAVIGATOR_VIEW = 'COMPLEX_NAVIGATOR_VIEW';
+  LIST_VIEW = 'view_list';
+  COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
   private _query: string;
   private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
@@ -24,8 +24,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
-  DisplayType: string = this.LIST_VIEW;
-  interactorsSorting: string;
+  DisplayType: string;
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -50,6 +49,13 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this.requestComplexResults();
         document.body.scrollTop = 0;
       });
+    this.route.fragment.subscribe(fragment => {
+      if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
+        this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+      } else if (fragment === this.LIST_VIEW) {
+        this.DisplayType = this.LIST_VIEW;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -97,7 +103,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       queryParams['interactorType'] = this.prepareFiltersForParams(this._interactorTypeFilter);
     }
     this.router.navigate([], {
-      queryParams
+      queryParams,
+      fragment: this.DisplayType
     });
     ProgressBarComponent.hide();
     // This is a test case event for GA, to monitor if users ever use more then one filter.
@@ -172,6 +179,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   set complexSearch(value: ComplexSearchResult) {
     this._complexSearch = value;
+    this.setFirstDisplayType(); // if only one complex is in the search result, the display is list
   }
 
   get lastPageIndex(): number {
@@ -224,9 +232,22 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   setListView() {
     this.DisplayType = this.LIST_VIEW;
+    this.reloadPage();
   }
 
   setComplexNavigatorView() {
     this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+    this.reloadPage();
   }
+
+  setFirstDisplayType(): void {
+    if (!this.DisplayType) {
+      if (this._complexSearch.elements.length > 1) {
+        this.setComplexNavigatorView();
+      } else {
+        this.setListView();
+      }
+    }
+  }
+
 }

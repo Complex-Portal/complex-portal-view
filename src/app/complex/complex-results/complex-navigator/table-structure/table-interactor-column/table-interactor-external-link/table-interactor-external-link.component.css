@@ -1,4 +1,3 @@
-
 a {
   font-weight: normal;
 }
@@ -9,4 +8,8 @@ a, a:visited {
 
 i:not(.small) {
   font-size: large;
+}
+
+.externalLinkContainer {
+  word-wrap: break-word;
 }

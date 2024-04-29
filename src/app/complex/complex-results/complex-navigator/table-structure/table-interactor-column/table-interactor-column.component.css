@@ -119,3 +119,19 @@ a, a:visited {
 }
 
 
+.interactorSeparationName {
+  --rowspanSize: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  /*font-weight: lighter;*/
+  font-size: small;
+  color: white;
+  line-height: 0.8;
+  text-align: center;
+
+
+  text-overflow: ellipsis;
+  height: calc(var(--rowspanSize) * 48px);
+  white-space: nowrap;
+  overflow: hidden;
+}

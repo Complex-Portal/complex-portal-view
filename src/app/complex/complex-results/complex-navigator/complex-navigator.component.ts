@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
-
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -11,5 +10,5 @@ import {Interactor} from '../../shared/model/complex-results/interactor.model';
 export class ComplexNavigatorComponent {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactors: Interactor[];
-  interactorsSorting: 'Occurrence';
+  interactorsSorting: string = 'Occurrence';
 }
