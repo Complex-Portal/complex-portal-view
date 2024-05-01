@@ -1,5 +1,5 @@
 a {
-  font-weight: normal;
+  font-weight: bold;
 }
 
 a, a:visited {
@@ -7,5 +7,36 @@ a, a:visited {
 }
 
 i:not(.small) {
-  font-size: large;
+  font-size: medium;
+}
+
+.nameAndIcons {
+  font-size: 14px;
+  display: flex;
+  width: inherit;
+  justify-content: space-between;
+}
+
+.externalLinkContainer {
+  display: inline-flex;
+  justify-content: end;
+  grid-gap: 5px;
+  font-size: 14px;
+}
+
+.inlineDisplay {
+  display: -webkit-box;
+  width: 130%
+}
+
+.name {
+  width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-align: center;
+}
+
+.inlineDisplayName {
+  width: 65%;
 }

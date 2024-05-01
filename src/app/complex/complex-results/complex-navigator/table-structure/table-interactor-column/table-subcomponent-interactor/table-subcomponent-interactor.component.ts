@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, SimpleChanges, OnChanges} from '@angular/core';
 import {Element} from '../../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
@@ -9,15 +9,39 @@ import {findInteractorInComplex, formatStoichiometryValues, getStoichiometry, st
   templateUrl: './table-subcomponent-interactor.component.html',
   styleUrls: ['./table-subcomponent-interactor.component.css']
 })
-export class TableSubcomponentInteractorComponent {
+
+export class TableSubcomponentInteractorComponent implements OnChanges {
   @Input() complex: EnrichedComplex;
   @Input() i: number;
   @Input() j: number;
   @Input() enrichedInteractors: EnrichedInteractor[];
 
-  findInteractorInComplex = findInteractorInComplex;
-  getStoichiometry = getStoichiometry;
-  stoichiometryOfInteractors = stoichiometryOfInteractors;
+  displayTopLineClass: string;
+  displayBottomLineClass: string;
+  interactorInComplex = false;
+  interactorStoichiometryText: string;
+  interactorStoichiometryValue: string;
+  interactorInSubComplex = false;
+  subComplexInteractorStoichiometryText: string;
+  subComplexInteractorStoichiometryValue: string;
+
+
+  // findInteractorInComplex = findInteractorInComplex;
+  // getStoichiometry = getStoichiometry;
+  // stoichiometryOfInteractors = stoichiometryOfInteractors;
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.displayTopLineClass = this.displayTopLineClassExpanded(this.complex, this.i, this.j);
+    this.interactorInComplex = !!findInteractorInComplex(this.complex.complex, this.el.identifier);
+    this.interactorStoichiometryText = getStoichiometry(this.complex.complex, this.el.identifier);
+    this.interactorStoichiometryValue = stoichiometryOfInteractors(this.complex.complex, this.el.identifier);
+    this.interactorInSubComplex = !!this.findInteractorInExpandedSubComplex(this.interactor, this.complex.complex, this.el.identifier);
+    this.subComplexInteractorStoichiometryText = this.getStoichiometryInExpandedSubComplex(this.interactor, this.el.identifier);
+    this.subComplexInteractorStoichiometryValue = this.stoichiometryOfInteractorsExpandable(this.interactor, this.el.identifier);
+    this.displayBottomLineClass = this.displayBottomLineClassExpanded(this.complex, this.i, this.j);
+  }
+
 
   get interactor(): EnrichedInteractor {
     return this.enrichedInteractors[this.i];

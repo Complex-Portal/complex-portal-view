@@ -12,9 +12,13 @@ export class TableInteractorNameComponent implements OnInit {
   @Input() interactorName: string;
   @Input() interactorType: string;
   @Input() interactorId: string;
-  @Input() interactorTypeIcon: string;
-  @Input() interactorOrganismIcon: string;
   @Input() interactorOrganism: string;
+  @Input() identifierLink: string;
+  @Input() organismIconDisplay: boolean;
+  @Input() interactorTypeDisplay: boolean;
+  @Input() IDDisplay: boolean;
+  interactorTypeIcon: string;
+  interactorOrganismIcon: string;
 
   ngOnInit(): void {
     this.formatInteractorOrganism(); // put the organism name into the right format for the interactorOrganismIcon function
@@ -23,7 +27,11 @@ export class TableInteractorNameComponent implements OnInit {
   }
 
   formatInteractorOrganism() {
-    let from = this.interactorOrganism.indexOf(';');
-    this.interactorOrganism = this.interactorOrganism.substring(0, from);
+    const end = this.interactorOrganism.indexOf(';');
+    this.interactorOrganism = this.interactorOrganism.substring(0, end);
+  }
+
+  showExternalLink(): boolean {
+    return this.interactorType !== 'stable complex' && !!this.identifierLink;
   }
 }

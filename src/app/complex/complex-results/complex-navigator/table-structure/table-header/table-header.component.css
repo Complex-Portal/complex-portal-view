@@ -22,7 +22,7 @@ thead {
   z-index: 4;
   color: #007c82;
   background-color: white;
-  padding-top: 150px;
+  padding-top: 135px;
   text-align: right;
   border-bottom: 3px solid #007c82;
 }
@@ -51,8 +51,8 @@ thead {
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
-  top: 55px;
-  left: -27px;
+  top: 50px;
+  left: -35px;
   display: flex;
   align-items: center;
   align-content: center;
@@ -76,7 +76,8 @@ thead {
   padding: 5px;
   min-width: 130px;
   max-width: 130px;
-  font-size: medium;
+  width: 30%;
+
   border-bottom: 3px solid #007c82;
   border-left: none;
   text-align: right;
@@ -87,10 +88,11 @@ thead {
 .horizontal-label {
   text-align: center;
   text-overflow: ellipsis;
-  width: 90%;
+  width: 80%;
   white-space: nowrap;
   overflow: hidden;
   margin: auto;
+  font-size: 14px;
 }
 
 .CN-table th.horizontal {
@@ -116,7 +118,13 @@ a {
   background-color: white;
 }
 
-.sortingSpace {
-  min-width: 135px;
-  max-width: 135px;
-}
+/*.sortingSpace {*/
+/*  min-width: 135px;*/
+/*  max-width: 135px;*/
+/*}*/
+
+/*.interactorsHeader horizontal .bigInteractorHeader {*/
+/*  min-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
+/*  max-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
+/*  background-color: #6dab49;*/
+/*}*/

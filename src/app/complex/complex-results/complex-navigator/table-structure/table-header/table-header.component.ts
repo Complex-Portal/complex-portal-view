@@ -8,7 +8,6 @@ import {Element} from '../../../../shared/model/complex-results/element.model';
 })
 
 export class TableHeaderComponent {
-  // @Input() complexSearch: ComplexSearchResult;
   @Input() complexes: Element[];
   @Input() interactorsSorting: string;
 

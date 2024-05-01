@@ -1,15 +1,30 @@
-<div>
-  <i class="{{interactorOrganismIcon}}"
-     title="{{interactorOrganism}}"></i>
-  {{ interactorName }}
-  <i class="{{interactorTypeIcon}}"
-     title="{{interactorType}}"></i>
-  <!-- Adding of the icons to access details of the interactor -->
-  <a [routerLink]="['/complex/search']"
-     [queryParams]="{query: interactorId, page: 1}"
-     [fragment]="'NAVIGATOR_VIEW'"
-     target="_blank">
-    <i class="icon icon-functional small" data-icon="1"
-       title="Complexes containing this interactor"></i>
+<div class="container">
+  <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType==='stable complex'}">
+    <i *ngIf="organismIconDisplay"
+       class="{{interactorOrganismIcon}}"
+       title="{{interactorOrganism}}"></i>
+
+    <i *ngIf="interactorTypeDisplay"
+       class="{{interactorTypeIcon}}"
+       title="{{interactorType}}"></i>
+
+    <div class="name" title="{{interactorName}}"> {{ interactorName }}
+    </div>
+
+    <a [routerLink]="['/complex/search']"
+       [queryParams]="{query: interactorId, page: 1}"
+       [fragment]="'view_complex_navigator'"
+       target="_blank">
+      <i class="icon icon-functional small" data-icon="1"
+         title="Complexes containing this interactor"></i>
+    </a>
+    <a *ngIf="showExternalLink() && !IDDisplay" href="{{identifierLink}}" target="_blank"
+       class="externalLinkContainer">
+      <i class="icon icon-generic small" data-icon="x" title="More information about {{interactorId}}"></i>
+    </a>
+  </div>
+  <a *ngIf="showExternalLink() && IDDisplay" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
+    {{ interactorId }}
+    <i class="icon icon-generic small" data-icon="x" title="More information about {{interactorId}}"></i>
   </a>
 </div>

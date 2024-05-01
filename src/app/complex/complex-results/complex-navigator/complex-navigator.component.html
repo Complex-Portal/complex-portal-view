@@ -1,9 +1,15 @@
 <div class="ComplexNavigator">
   <cp-complex-navigator-sorting
-    [(interactorsSorting)]="interactorsSorting">
+    [(interactorsSorting)]="interactorsSorting"
+    [(organismIconDisplay)]="organismIconDisplay"
+    [(interactorTypeDisplay)]="interactorTypeDisplay"
+    [(IDDisplay)]="IDDisplay">
   </cp-complex-navigator-sorting>
   <cp-table-structure [complexSearch]="complexSearch"
                       [interactors]="interactors"
-                      [interactorsSorting]="interactorsSorting">
+                      [interactorsSorting]="interactorsSorting"
+                      [organismIconDisplay]="organismIconDisplay"
+                      [interactorTypeDisplay]="interactorTypeDisplay"
+                      [IDDisplay]="IDDisplay">
   </cp-table-structure>
 </div>

@@ -11,26 +11,32 @@
             </div>
           </td>
         </ng-container>
-        <td class="interactorsColumn">
+        <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<6}">
+
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"
             [interactorId]="interactor.interactor.identifier"
             [interactorOrganism]="interactor.organismName"
+            [identifierLink]="interactor.interactor.identifierLink"
+            [organismIconDisplay]="organismIconDisplay"
+            [interactorTypeDisplay]="interactorTypeDisplay"
+            [IDDisplay]="IDDisplay"
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
             <a title="{{ interactor.interactor.name }} interactors" (click)="toggleSubcomplexExpandable(i)">
-              {{ interactor.interactor.identifier }}
+              Expand
               <i class="icon icon-common" data-icon="&#xf078;"
-                 style="font-size:small; margin-top: 2px"></i>
+                 style="font-size:small;
+                "></i>
             </a>
           </div>
-          <cp-table-interactor-external-link
-            [interactorId]="interactor.interactor.identifier"
-            [interactorType]="interactor.interactor.interactorType"
-            [identifierLink]="interactor.interactor.identifierLink"
-          ></cp-table-interactor-external-link>
+          <!--          <cp-table-interactor-external-link-->
+          <!--            [interactorId]="interactor.interactor.identifier"-->
+          <!--            [interactorType]="interactor.interactor.interactorType"-->
+          <!--            [identifierLink]="interactor.interactor.identifierLink"-->
+          <!--          ></cp-table-interactor-external-link>-->
         </td>
         <!-- Interactors' stoichiometry -->
         <ng-container *ngFor="let complex of enrichedComplexes">
@@ -64,6 +70,8 @@
                   [interactorType]="el.interactorType"
                   [interactorId]="el.identifier"
                   [interactorOrganism]="interactor.organismName"
+                  [organismIconDisplay]="organismIconDisplay"
+                  [interactorTypeDisplay]="interactorTypeDisplay"
                 ></cp-table-interactor-name>
               </div>
               <cp-table-interactor-external-link

@@ -2,14 +2,14 @@
   <h5 class="text-center">{{ currentPageIndex }} of {{ lastPageIndex }}</h5>
   <ul class="pagination text-center" role="navigation" aria-label="Pagination">
     <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a
-      (click)="getFirstPage()">&laquo; First</a></li>
+      (click)="getFirstPage()">&Lang; First</a></li>
     <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a
-      (click)="getPreviousPage()">&laquo; Previous</a></li>
+      (click)="getPreviousPage()">&lang; Previous</a></li>
     <ng-container *ngFor="let index of pagination">
       <li *ngIf="index[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{ index[0] }}</li>
       <li *ngIf="index[1] == 'false'"><a (click)="getPage(index[0])">{{ index[0] }}</a></li>
     </ng-container>
-    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getNextPage()">Next &raquo;</a></li>
-    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getLastPage()">Last &raquo;</a></li>
+    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getNextPage()">Next &rang;</a></li>
+    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getLastPage()">Last &Rang;</a></li>
   </ul>
 </div>

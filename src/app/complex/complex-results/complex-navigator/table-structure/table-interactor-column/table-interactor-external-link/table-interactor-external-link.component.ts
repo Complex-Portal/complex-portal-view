@@ -11,7 +11,7 @@ export class TableInteractorExternalLinkComponent {
   @Input() identifierLink: string;
   @Input() interactorType: string;
 
-  showExternalLink(): boolean {
-    return this.interactorType !== 'stable complex' && !!this.identifierLink;
-  }
+  // showExternalLink(): boolean {
+  //   return this.interactorType !== 'stable complex' && !!this.identifierLink;
+  // }
 }

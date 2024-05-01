@@ -1,12 +1,12 @@
-<div [ngClass]="displayTopLineClassExpanded(complex, i, j)"></div>
+<div [ngClass]="displayTopLineClass"></div>
 <cp-table-interactor-stoichiometry
-  *ngIf="!!findInteractorInComplex(complex.complex, el.identifier)"
-  [stoichiometryText]="getStoichiometry(complex.complex, el.identifier)"
-  [stoichiometryValue]="stoichiometryOfInteractors(complex.complex, el.identifier)"
+  *ngIf="interactorInComplex"
+  [stoichiometryText]="interactorStoichiometryText"
+  [stoichiometryValue]="interactorStoichiometryValue"
 ></cp-table-interactor-stoichiometry>
 <cp-table-interactor-stoichiometry
-  *ngIf="!!findInteractorInExpandedSubComplex(interactor, complex.complex, el.identifier)"
-  [stoichiometryText]="getStoichiometryInExpandedSubComplex(interactor, el.identifier)"
-  [stoichiometryValue]="stoichiometryOfInteractorsExpandable(interactor, el.identifier)"
+  *ngIf="interactorInSubComplex"
+  [stoichiometryText]="subComplexInteractorStoichiometryText"
+  [stoichiometryValue]="subComplexInteractorStoichiometryValue"
 ></cp-table-interactor-stoichiometry>
-<div [ngClass]="displayBottomLineClassExpanded(complex, i, j)"></div>
+<div [ngClass]="displayBottomLineClass"></div>

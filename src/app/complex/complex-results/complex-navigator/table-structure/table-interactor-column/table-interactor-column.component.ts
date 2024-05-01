@@ -36,6 +36,9 @@ export class TableInteractorColumnComponent implements OnChanges {
   @Input() complexes: Element[];
   @Input() interactorsSorting: string;
   @Input() interactors: Interactor[];
+  @Input() organismIconDisplay: boolean;
+  @Input() interactorTypeDisplay: boolean;
+  @Input() IDDisplay: boolean;
 
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
@@ -246,7 +249,9 @@ export class TableInteractorColumnComponent implements OnChanges {
         const match = this.enrichedInteractors.find(
           enrichedInteractor => enrichedInteractor.interactor.identifier === complexInteractor.identifier
         );
-        match.organismName = organismName;
+        if (!!match) {
+          match.organismName = organismName;
+        }
       }
     }
   }
@@ -254,12 +259,12 @@ export class TableInteractorColumnComponent implements OnChanges {
   public classifyInteractorsByOrganism() {
     this.enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
     // this.calculateAllStartAndEndIndexes();
-    this.rangeOfInteractorOrganismV2();
+    this.rangeOfInteractorOrganism();
   }
 
   public classifyInteractorsByType() {
     this.enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
-    this.rangeOfInteractorTypeV2();
+    this.rangeOfInteractorType();
   }
 
   public classifyInteractorsByOccurrence() {
@@ -279,7 +284,10 @@ export class TableInteractorColumnComponent implements OnChanges {
               enrichedInteractor => enrichedInteractor.interactor.identifier === oneSubInteractor.identifier
             );
             if (!!oneEnrichedInteractor) {
-              oneEnrichedInteractor.timesAppearing = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
+              const stoichiometryValue = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
+              if (!isNaN(stoichiometryValue)) {
+                oneEnrichedInteractor.timesAppearing += stoichiometryValue;
+              }
             }
           }
         }
@@ -291,7 +299,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.ranges = [];
   }
 
-  public rangeOfInteractorTypeV2() {
+  public rangeOfInteractorType() {
     const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;
@@ -317,7 +325,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.ranges = ranges;
   }
 
-  public rangeOfInteractorOrganismV2() {
+  public rangeOfInteractorOrganism() {
     const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;

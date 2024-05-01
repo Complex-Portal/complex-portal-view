@@ -27,7 +27,7 @@ export function findInteractorInComplex(complex: Element, componentId: string): 
 }
 
 export function getStoichiometry(complex: Element, componentId: string): string {
-  const match = this.findInteractorInComplex(complex, componentId);
+  const match = findInteractorInComplex(complex, componentId);
   if (!!match) {
     if (!!match.stochiometry) {
       return 'Stoichiometry values: ' + (match.stochiometry);

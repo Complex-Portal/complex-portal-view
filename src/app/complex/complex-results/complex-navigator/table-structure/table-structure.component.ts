@@ -2,7 +2,6 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../shared/model/complex-results/element.model';
-import {ComplexPortalService} from '../../../shared/service/complex-portal.service';
 
 @Component({
   selector: 'cp-table-structure',
@@ -13,6 +12,9 @@ export class TableStructureComponent implements OnChanges {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactors: Interactor[];
   @Input() interactorsSorting: string;
+  @Input() organismIconDisplay: boolean;
+  @Input() interactorTypeDisplay: boolean;
+  @Input() IDDisplay: boolean;
 
   sortedComplexes: Element[] = [];
 
@@ -23,8 +25,8 @@ export class TableStructureComponent implements OnChanges {
   classifyComplexesSize(): Element[] {
     const searchResult: Element[] = this.complexSearch.elements;
     const complexesAndSizes: [Element, number][] = [];
+    // const complexesAndSizesMap: Map<Element, number> = new Map<ComplexSearchResult['elements'][0], number>();
 
-    // check which complex is the biggest
     for (const complex of searchResult) {
       let totalLength = complex.interactors.length;
       for (const complexInteractorChecked of complex.interactors) {
@@ -36,9 +38,11 @@ export class TableStructureComponent implements OnChanges {
         }
       }
       complexesAndSizes.push([complex, totalLength]);
+      // complexesAndSizesMap.set(complex, totalLength);
     }
     complexesAndSizes.sort((a, b) => b[1] - a[1]);
     return complexesAndSizes.map(a => a[0]);
+    // this.complexSearch.elements.sort((a, b) => complexesWithSimilarities.get(b)! - complexesWithSimilarities.get(a)!);
   }
 
   private calculateSimilarity(complex1, complex2) {
@@ -92,7 +96,7 @@ export class TableStructureComponent implements OnChanges {
               }
             }
           } else if (complex1Interactor.identifier === complex2Interactor.identifier) {
-            // The interactors of complex 1 and complex 2 are not subcomplexes and they have the same id, so we add to the similarities
+            // The interactors of complex 1 and complex 2 are not subcomplexes, and they have the same id, so we add to the similarities
             similarities++;
           }
         }

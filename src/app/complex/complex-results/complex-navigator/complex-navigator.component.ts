@@ -10,5 +10,8 @@ import {Interactor} from '../../shared/model/complex-results/interactor.model';
 export class ComplexNavigatorComponent {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactors: Interactor[];
-  interactorsSorting: string = 'Occurrence';
+  interactorsSorting = 'Occurrence';
+  organismIconDisplay = true;
+  interactorTypeDisplay = true;
+  IDDisplay = true;
 }
