@@ -12,6 +12,4 @@ export class ComplexNavigatorSortingComponent {
   setInteractorsSorting(typeOfSorting: string) {
     this.interactorsSortingChange.emit(typeOfSorting);
   }
-
-  //test
 }
