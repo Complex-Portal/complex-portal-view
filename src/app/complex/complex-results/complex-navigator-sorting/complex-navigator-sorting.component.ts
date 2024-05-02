@@ -16,22 +16,59 @@ export class ComplexNavigatorSortingComponent {
   @Input() interactorTypeDisplay: boolean;
   @Input() IDDisplay: boolean;
 
-  setInteractorsSorting(typeOfSorting: string) {
+  typeOfDisplay: string;
+
+  InteractorsSorting(typeOfSorting: string) {
     this.interactorsSortingChange.emit(typeOfSorting);
+    switch (this.typeOfDisplay) {
+      case 'compact':
+        this.compactDisplay();
+        break;
+      default:
+        this.detailedDisplay();
+        if (typeOfSorting === 'Type') {
+          this.interactorTypeDisplay = false;
+        } else if (typeOfSorting === 'Organism') {
+          this.organismIconDisplay = false;
+        }
+    }
+    this.changesEmitter();
   }
 
-  setDisplayingOrganism() {
+  DisplayingOrganism() {
     this.organismIconDisplay = !this.organismIconDisplay;
-    this.organismIconDisplayChange.emit(this.organismIconDisplay);
+    this.changesEmitter();
   }
 
-  setDisplayingType() {
+  DisplayingType() {
     this.interactorTypeDisplay = !this.interactorTypeDisplay;
-    this.interactorTypeDisplayChange.emit(this.interactorTypeDisplay);
+    this.changesEmitter();
   }
 
-  setDisplayingID() {
+  DisplayingID() {
     this.IDDisplay = !this.IDDisplay;
+    this.changesEmitter();
+  }
+
+  compactDisplay() {
+    this.organismIconDisplay = false;
+    this.interactorTypeDisplay = false;
+    this.IDDisplay = false;
+    this.changesEmitter();
+    this.typeOfDisplay = 'compact';
+  }
+
+  detailedDisplay() {
+    this.organismIconDisplay = true;
+    this.interactorTypeDisplay = true;
+    this.IDDisplay = true;
+    this.changesEmitter();
+    this.typeOfDisplay = 'detailed';
+  }
+
+  changesEmitter() {
+    this.organismIconDisplayChange.emit(this.organismIconDisplay);
+    this.interactorTypeDisplayChange.emit(this.interactorTypeDisplay);
     this.IDDisplayChange.emit(this.IDDisplay);
   }
 }

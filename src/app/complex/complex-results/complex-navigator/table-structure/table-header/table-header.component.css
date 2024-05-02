@@ -15,15 +15,15 @@ thead {
 /* Rotated complexes names */
 
 .interactorsHeader {
-  min-width: 130px;
-  max-width: 130px;
+  min-width: 100%;
+  max-width: 100%;
   position: sticky;
   left: 0;
   z-index: 4;
   color: #007c82;
-  background-color: white;
   padding-top: 135px;
   text-align: right;
+  background-color: white;
   border-bottom: 3px solid #007c82;
 }
 
@@ -74,8 +74,8 @@ thead {
 
 .CN-table th.horizontal.interactorsHeader {
   padding: 5px;
-  min-width: 130px;
-  max-width: 130px;
+  min-width: 30%;
+  max-width: 30%;
   width: 30%;
 
   border-bottom: 3px solid #007c82;

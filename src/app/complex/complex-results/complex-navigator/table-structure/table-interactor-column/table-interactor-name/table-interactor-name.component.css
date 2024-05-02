@@ -14,7 +14,7 @@ i:not(.small) {
   font-size: 14px;
   display: flex;
   width: inherit;
-  justify-content: space-between;
+  justify-content: end;
 }
 
 .externalLinkContainer {
@@ -25,16 +25,17 @@ i:not(.small) {
 }
 
 .inlineDisplay {
-  display: -webkit-box;
-  width: 130%
+  display: flex;
+  justify-content: end;
 }
 
 .name {
-  width: 50%;
+  width: inherit;
   text-overflow: ellipsis;
   overflow: hidden;
   text-wrap: nowrap;
-  text-align: center;
+  text-align: end;
+  padding-right: 5px;
 }
 
 .inlineDisplayName {

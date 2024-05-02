@@ -7,6 +7,8 @@
 .sortingInteractors:hover .typeOfSorting {
   display: flex;
   margin-top: -15px;
+  flex-direction: row;
+  position: absolute;
 }
 
 /* Style button inside typeOfSorting */
@@ -17,9 +19,12 @@
 
 /* Style filters */
 .filters {
-  width: 25%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  grid-gap: 10px;
+  height: 67px;
+  z-index: 5;
 }
 
 .displaySize {
@@ -33,32 +38,46 @@
 .dropdown:hover .displaySize {
   display: flex;
   list-style: none;
-  width: 400px;
+  width: 300px;
   background-color: #007c82;
   color: white;
   margin-top: -15px;
+  flex-direction: row;
+  position: absolute;
+  height: 40px;
+  align-content: center;
+  z-index: 5;
 }
 
 .dropdown:hover .displaySize li {
   width: 200px;
+  background-color: #007c82;
+  margin-left: -21px;
+  text-align: left;
+  padding-left: 6px;
+  z-index: 5;
 }
 
-
 li {
-  border-right: 1px solid white;
   text-align: center;
   align-items: center;
   font-size: 14px;
+  border-left: 1px solid white;
+  padding-top: 10px;
+  max-width: 171px;
 }
 
 .detailedDisplay:hover .detailedDisplayOptions {
   display: flex;
-  flex-direction: column;
   list-style: none;
   align-content: baseline;
+  flex-direction: column;
+  position: absolute;
+  z-index: 5;
+  margin-left: 14px;
 }
 
 .detailedDisplayOptions li {
   text-align: left;
+  z-index: 5;
 }
-

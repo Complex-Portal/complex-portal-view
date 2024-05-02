@@ -8,7 +8,13 @@
        class="{{interactorTypeIcon}}"
        title="{{interactorType}}"></i>
 
-    <div class="name" title="{{interactorName}}"> {{ interactorName }}
+    <div class="name" title="{{interactorName}}" *ngIf="IDDisplay"> {{ interactorName }}
+    </div>
+    <div class="name" title="More information about {{interactorId}}" *ngIf="!IDDisplay">
+      <a *ngIf="!IDDisplay" href="{{identifierLink}}" target="_blank"
+         class="externalLinkContainer">
+        {{ interactorName }}
+      </a>
     </div>
 
     <a [routerLink]="['/complex/search']"
@@ -17,10 +23,6 @@
        target="_blank">
       <i class="icon icon-functional small" data-icon="1"
          title="Complexes containing this interactor"></i>
-    </a>
-    <a *ngIf="showExternalLink() && !IDDisplay" href="{{identifierLink}}" target="_blank"
-       class="externalLinkContainer">
-      <i class="icon icon-generic small" data-icon="x" title="More information about {{interactorId}}"></i>
     </a>
   </div>
   <a *ngIf="showExternalLink() && IDDisplay" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">

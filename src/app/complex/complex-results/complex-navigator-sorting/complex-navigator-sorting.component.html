@@ -4,41 +4,41 @@
     <input type="submit" name="classificationButton" value="Sort interactors" class="button">
     <div class="typeOfSorting">
       <input type="submit" name="occurrenceClassification" value="Occurrence" class="button"
-             (click)="setInteractorsSorting('Occurrence')">
+             (click)="InteractorsSorting('Occurrence')">
       <input type="submit" name="typeClassification" value="Type" class="button"
-             (click)="setInteractorsSorting('Type')">
+             (click)="InteractorsSorting('Type')">
       <input type="submit" name="organismClassification" value="Organism" class="button"
-             (click)="setInteractorsSorting('Organism')">
+             (click)="InteractorsSorting('Organism')">
       <input type="submit" name="geneClassification" value="Orthology (Not available yet)" class="button"
-             (click)="setInteractorsSorting('Orthology')">
+             (click)="InteractorsSorting('Orthology')">
     </div>
   </div>
 
   <div class="dropdown">
     <input type="submit" name="classificationButton" value="Display Options" class="button">
     <ul class="displaySize">
-      <li><input type="radio" name="organism" value="Detailed view" class="checkbox compact"
-                 (click)="setDisplayingOrganism(); setDisplayingType(); setDisplayingID()">
+      <li>
+        <input type="radio" name="organism" value="Detailed view" class="checkbox compact" (click)="compactDisplay()">
         Compact display
       </li>
       <li class="detailedDisplay">
-        <input type="radio" name="organism" value="Detailed view" class="checkbox"
-               (click)="setDisplayingOrganism(); setDisplayingType(); setDisplayingID()" checked>
+        <input type="radio" name="organism" value="Detailed view" class="checkbox detailed" (click)="detailedDisplay()"
+               checked>
         Detailed display
         <ul class="detailedDisplayOptions">
           <li>
-            <input type="checkbox" name="organism" value="organism" class="checkbox"
-                   (click)="setDisplayingOrganism()" checked>
+            <input type="checkbox" name="organism" value="organism" class="checkbox" [checked]="organismIconDisplay"
+                   (change)="DisplayingOrganism()">
             Organism
           </li>
           <li>
-            <input type="checkbox" name="type" value="type" class="checkbox"
-                   (click)="setDisplayingType()" checked>
+            <input type="checkbox" name="type" value="type" class="checkbox" [checked]="interactorTypeDisplay"
+                   (change)="DisplayingType()">
             Type
           </li>
           <li>
-            <input type="checkbox" name="type" value="type" class="checkbox"
-                   (click)="setDisplayingID()" checked>
+            <input type="checkbox" name="type" value="type" class="checkbox" [checked]="IDDisplay"
+                   (change)="DisplayingID()">
             Interactor ID
           </li>
         </ul>
