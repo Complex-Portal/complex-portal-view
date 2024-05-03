@@ -25,3 +25,12 @@
   opacity: 100%;
 }
 
+.new-tag {
+  color: red;
+  font-weight: bold;
+  font-size: x-small;
+}
+
+.new-tag-selected {
+  color: yellow;
+}

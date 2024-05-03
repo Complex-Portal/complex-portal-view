@@ -3,10 +3,10 @@ import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.co
 import {Element} from '../../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {
-  fetchValuesFromStoichiometry,
   findInteractorInComplex,
   getStoichiometry,
-  stoichiometryOfInteractors
+  stoichiometryOfInteractors,
+  parseStoichiometryValues
 } from '../complex-navigator-utils';
 
 @Component({
@@ -156,19 +156,16 @@ export class TableMainInteractorComponent {
     let minValue: number = null;
     let maxValue: number = null;
     for (const component of components) {
-      if (!!component.stochiometry) {
-        const matchedStoichiometry = fetchValuesFromStoichiometry(component.stochiometry);
-        if (!!matchedStoichiometry
-        ) {
-          if (minValue === null) {
-            minValue = 0;
-          }
-          if (maxValue === null) {
-            maxValue = 0;
-          }
-          minValue += parseInt(matchedStoichiometry[1], 10);
-          maxValue += parseInt(matchedStoichiometry[2], 10);
+      const parsedStoichiometry = parseStoichiometryValues(component.stochiometry);
+      if (!!parsedStoichiometry) {
+        if (minValue === null) {
+          minValue = 0;
         }
+        if (maxValue === null) {
+          maxValue = 0;
+        }
+        minValue += parsedStoichiometry[0];
+        maxValue += parsedStoichiometry[1];
       }
     }
     if (minValue !== null && maxValue !== null) {

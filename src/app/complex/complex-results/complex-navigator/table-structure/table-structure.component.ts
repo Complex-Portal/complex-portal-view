@@ -19,14 +19,13 @@ export class TableStructureComponent implements OnChanges {
   sortedComplexes: Element[] = [];
 
   ngOnChanges(): void {
-    this.sortedComplexes = this.classifyComplexesSimilarities(this.classifyComplexesSize());
+    this.classifyComplexesSize(); // ensure to always have the same base of comparison
+    this.sortedComplexes = this.classifyComplexesSimilarities(this.complexSearch.elements);
   }
 
-  classifyComplexesSize(): Element[] {
-    const searchResult: Element[] = this.complexSearch.elements;
+  classifyComplexesSize(): void {
+    const searchResult: Element[] = [...this.complexSearch.elements];
     const complexesAndSizes: [Element, number][] = [];
-    // const complexesAndSizesMap: Map<Element, number> = new Map<ComplexSearchResult['elements'][0], number>();
-
     for (const complex of searchResult) {
       let totalLength = complex.interactors.length;
       for (const complexInteractorChecked of complex.interactors) {
@@ -38,11 +37,11 @@ export class TableStructureComponent implements OnChanges {
         }
       }
       complexesAndSizes.push([complex, totalLength]);
-      // complexesAndSizesMap.set(complex, totalLength);
     }
     complexesAndSizes.sort((a, b) => b[1] - a[1]);
-    return complexesAndSizes.map(a => a[0]);
-    // this.complexSearch.elements.sort((a, b) => complexesWithSimilarities.get(b)! - complexesWithSimilarities.get(a)!);
+    for (let i = 0; i < searchResult.length; i++) {
+      this.complexSearch.elements[i] = complexesAndSizes[i][0];
+    }
   }
 
   private calculateSimilarity(complex1, complex2) {
@@ -106,36 +105,31 @@ export class TableStructureComponent implements OnChanges {
   }
 
   private classifyComplexesSimilarities(bigComplexes: Element[]): Element[] {
-    const classifiedList = [];
-    bigComplexes.forEach(complex => {
-      // if (complex.complexAC !== bigComplex.complexAC) {
-      let found = false;
-      classifiedList.forEach(classification => {
-        classification.forEach((classifiedComplex, index) => {
-          const similarity = this.calculateSimilarity(complex, classifiedComplex);
-          if (similarity >= 1) {
-            found = true;
-            classification.splice(index + 1, 0, complex);
-          }
-        });
-      });
-      if (!found) {
-        // this list is multidimensional (1 list per complex)
-        classifiedList.push([complex]);
+    const classifiedList: Element[][] = [];
+    // multidimensional array containing groups of complexes having similar interactors
+    for (const complex of bigComplexes) {
+      let similarInteractorFound = false;
+      for (const classification of classifiedList) {
+        const comparedComplex = classification[0];
+        const similarity = this.calculateSimilarity(complex, comparedComplex);
+        if (similarity >= 1) {
+          classification.push(complex);
+          similarInteractorFound = true; // goes to the next complex
+        }
       }
-      // }
-    });
-
-    // make the array 1D
-    const listOfComplex: Element[] = classifiedList.reduce((acc, val) => acc.concat(val), []);
-
-    // The list which was multidimensional before has duplicates
+      if (!similarInteractorFound) {
+        classifiedList.push([complex]); // fill classifiedList with arrays of all the complexes in the list
+      }
+    }
     const unique: Element[] = [];
-    listOfComplex.forEach(element => {
-      if (!unique.includes(element)) {
-        unique.push(element);
+    for (const classification of classifiedList) {
+      for (const complex of classification) {
+        if (!unique.includes(complex)) {
+          unique.push(complex);
+        }
       }
-    });
+    }
     return unique;
   }
+
 }

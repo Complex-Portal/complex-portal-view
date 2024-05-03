@@ -7,26 +7,23 @@ table {
   position: sticky;
   left: 0;
   z-index: 3;
-  max-height: 50px;
-  min-height: 50px;
+  max-height: 45px;
+  min-height: 45px;
   min-width: 130px;
   max-width: 130px;
-  width: 30%;
   padding: 5px;
   text-align: end;
   color: #0e6f76;
   font-weight: bold;
   background: inherit;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 .interactorsColumn a {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .intStoich {
-  height: 50px;
+  height: 45px;
   max-width: 100px;
   min-width: 100px;
   font-size: medium;
@@ -104,43 +101,20 @@ a, a:visited {
   text-align: -webkit-center;
 }
 
-.interactorNameContainer {
-  --rowspanSize: 1;
-  writing-mode: vertical-rl;
-  font-size: small;
-  color: white;
-  line-height: 0.8;
-  text-align: center;
-  text-overflow: ellipsis;
-  height: calc(var(--rowspanSize) * 48px);
-  white-space: nowrap;
-  overflow: hidden;
-  transform: rotate(180deg);
-}
-
-
+.interactorNameContainer,
 .interactorSeparationName {
   --rowspanSize: 1;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
+  /*font-weight: lighter;*/
   font-size: small;
   color: white;
   line-height: 0.8;
   text-align: center;
+
+
   text-overflow: ellipsis;
   height: calc(var(--rowspanSize) * 48px);
   white-space: nowrap;
   overflow: hidden;
-}
-
-.container {
-  width: 100%;
-  text-align: end;
-  margin-top: -5px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.horizontalHeader {
-  min-width: 100%;
 }

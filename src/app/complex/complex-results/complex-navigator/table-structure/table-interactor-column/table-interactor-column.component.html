@@ -26,17 +26,12 @@
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
             <a title="{{ interactor.interactor.name }} interactors" (click)="toggleSubcomplexExpandable(i)">
-              Expand
+              Subcomplex interactors
               <i class="icon icon-common" data-icon="&#xf078;"
                  style="font-size:small;
                 "></i>
             </a>
           </div>
-          <!--          <cp-table-interactor-external-link-->
-          <!--            [interactorId]="interactor.interactor.identifier"-->
-          <!--            [interactorType]="interactor.interactor.interactorType"-->
-          <!--            [identifierLink]="interactor.interactor.identifierLink"-->
-          <!--          ></cp-table-interactor-external-link>-->
         </td>
         <!-- Interactors' stoichiometry -->
         <ng-container *ngFor="let complex of enrichedComplexes">

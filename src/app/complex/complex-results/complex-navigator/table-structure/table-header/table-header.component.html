@@ -4,7 +4,7 @@
     <thead class="tableHead" *ngIf="complexes.length<=6">
     <tr>
       <th class="interactorsHeader horizontal"
-          [style]="isInteractorSortingSet() ? 'min-width: 35%; max-width: 35%; width:32.5%;':''">
+          [style]="isInteractorSortingSet() ? 'min-width: 135px; max-width: 135px;   border-bottom: 3px solid #007c82;':''">
         Interactors
       </th>
       <th class="horizontal" *ngFor="let complex of complexes">
@@ -28,7 +28,7 @@
     <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
     <tr [style.--cols]="complexes.length">
       <th class="interactorsHeader"
-          [style]="isInteractorSortingSet() ? 'min-width: 126%; max-width: 126%; width:126%;':''">
+          [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Interactors
       </th>
       <th class="rotate" *ngFor="let complex of complexes"

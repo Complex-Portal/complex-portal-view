@@ -1,9 +1,7 @@
-/* Hide typeOfSorting by default */
 .typeOfSorting {
   display: none;
 }
 
-/* Show typeOfSorting on hover */
 .sortingInteractors:hover .typeOfSorting {
   display: flex;
   margin-top: -15px;
@@ -11,13 +9,11 @@
   position: absolute;
 }
 
-/* Style button inside typeOfSorting */
 .typeOfSorting .button {
   border-right: 1px solid white;
   font-size: 14px;
 }
 
-/* Style filters */
 .filters {
   width: 100%;
   display: flex;

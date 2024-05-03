@@ -15,15 +15,15 @@ thead {
 /* Rotated complexes names */
 
 .interactorsHeader {
-  min-width: 100%;
-  max-width: 100%;
+  min-width: 130px;
+  max-width: 130px;
   position: sticky;
   left: 0;
   z-index: 4;
   color: #007c82;
-  padding-top: 135px;
-  text-align: right;
   background-color: white;
+  padding-top: 150px;
+  text-align: right;
   border-bottom: 3px solid #007c82;
 }
 
@@ -51,8 +51,8 @@ thead {
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
-  top: 50px;
-  left: -35px;
+  top: 55px;
+  left: -27px;
   display: flex;
   align-items: center;
   align-content: center;
@@ -74,10 +74,9 @@ thead {
 
 .CN-table th.horizontal.interactorsHeader {
   padding: 5px;
-  min-width: 30%;
-  max-width: 30%;
-  width: 30%;
-
+  min-width: 130px;
+  max-width: 130px;
+  font-size: medium;
   border-bottom: 3px solid #007c82;
   border-left: none;
   text-align: right;
@@ -88,11 +87,10 @@ thead {
 .horizontal-label {
   text-align: center;
   text-overflow: ellipsis;
-  width: 80%;
+  width: 90%;
   white-space: nowrap;
   overflow: hidden;
   margin: auto;
-  font-size: 14px;
 }
 
 .CN-table th.horizontal {
@@ -118,13 +116,7 @@ a {
   background-color: white;
 }
 
-/*.sortingSpace {*/
-/*  min-width: 135px;*/
-/*  max-width: 135px;*/
-/*}*/
-
-/*.interactorsHeader horizontal .bigInteractorHeader {*/
-/*  min-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
-/*  max-width: calc(var(--interactorsHeaderWidth) + 3ch);*/
-/*  background-color: #6dab49;*/
-/*}*/
+.sortingSpace {
+  min-width: 135px;
+  max-width: 135px;
+}
