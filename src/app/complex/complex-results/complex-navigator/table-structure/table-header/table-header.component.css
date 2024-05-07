@@ -39,26 +39,25 @@ thead {
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
   display: grid;
-  grid-template-columns: 130px repeat(auto-fit, 100px);
-  width: calc(130px + 100px * var(--cols) + 185px);
+  grid-template-columns: 130px repeat(auto-fit, 80px);
+  width: calc(130px + 80px * var(--cols) + 185px);
 }
 
 .CN-table .tableHeadOverflow th.rotate {
   position: relative;
   width: 340px;
-  height: 72px !important;
+  height: 60px !important;
   color: white;
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
-  top: 55px;
-  left: -27px;
+  top: 70px;
+  left: -46px;
   display: flex;
   align-items: center;
   align-content: center;
   padding: 0;
   transform: rotate(-45deg);
-  /* line */
   border-top: 1px solid white;
 }
 
@@ -97,8 +96,8 @@ thead {
   color: white;
   background-color: #007c82;
   border: 1px solid white;
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 80px;
+  max-width: 80px;
   height: 50px;
   font-size: 15px;
 }
@@ -113,10 +112,7 @@ a {
 
 .spaceHolder {
   width: 180px;
-  background-color: white;
+  background-color: #007c82;
 }
 
-.sortingSpace {
-  min-width: 135px;
-  max-width: 135px;
-}
+

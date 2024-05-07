@@ -25,8 +25,12 @@
          title="Complexes containing this interactor"></i>
     </a>
   </div>
-  <a *ngIf="showExternalLink() && IDDisplay" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
-    {{ interactorId }}
-    <i class="icon icon-generic small" data-icon="x" title="More information about {{interactorId}}"></i>
-  </a>
+  <cp-table-interactor-external-link
+    [interactorId]="interactorId"
+    [identifierLink]="identifierLink"
+    [interactorType]="interactorType"
+    [isMainInteractor]="isMainInteractor"
+    [IDDisplay]="IDDisplay"
+    (externalLinkVisible)="externalLinkVisibleHandler($event)">
+  </cp-table-interactor-external-link>
 </div>

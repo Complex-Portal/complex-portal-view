@@ -17,8 +17,10 @@ export class TableInteractorNameComponent implements OnInit {
   @Input() organismIconDisplay: boolean;
   @Input() interactorTypeDisplay: boolean;
   @Input() IDDisplay: boolean;
+  @Input() isMainInteractor: boolean;
   interactorTypeIcon: string;
   interactorOrganismIcon: string;
+  externalLinkVisible: boolean;
 
   ngOnInit(): void {
     this.formatInteractorOrganism(); // put the organism name into the right format for the interactorOrganismIcon function
@@ -27,11 +29,13 @@ export class TableInteractorNameComponent implements OnInit {
   }
 
   formatInteractorOrganism() {
-    const end = this.interactorOrganism.indexOf(';');
-    this.interactorOrganism = this.interactorOrganism.substring(0, end);
+    if (this.interactorOrganism.includes(';')) {
+      const end = this.interactorOrganism.indexOf(';');
+      this.interactorOrganism = this.interactorOrganism.substring(0, end);
+    }
   }
 
-  showExternalLink(): boolean {
-    return this.interactorType !== 'stable complex' && !!this.identifierLink;
+  externalLinkVisibleHandler(isVisible: boolean): void {
+    this.externalLinkVisible = isVisible;
   }
 }

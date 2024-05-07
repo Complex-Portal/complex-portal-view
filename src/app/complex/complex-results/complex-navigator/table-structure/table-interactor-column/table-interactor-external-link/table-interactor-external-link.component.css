@@ -10,3 +10,10 @@ i:not(.small) {
   font-size: large;
 }
 
+.externalLinkContainer {
+  justify-content: end;
+  grid-gap: 5px;
+  font-size: 14px;
+  line-break: anywhere;
+  word-break: break-word;
+}

@@ -12,7 +12,6 @@
           </td>
         </ng-container>
         <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<6}">
-
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"
@@ -26,7 +25,7 @@
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
             <a title="{{ interactor.interactor.name }} interactors" (click)="toggleSubcomplexExpandable(i)">
-              Subcomplex interactors
+              Interactors
               <i class="icon icon-common" data-icon="&#xf078;"
                  style="font-size:small;
                 "></i>

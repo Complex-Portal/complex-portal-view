@@ -32,14 +32,16 @@
         Interactors
       </th>
       <th class="rotate" *ngFor="let complex of complexes"
-          [style]="isInteractorSortingSet() ? 'left:-1px':''">
+          [style]="isInteractorSortingSet() ? 'left:-1px':''"
+          title="{{ complex.complexName }} - {{ complex.complexAC}}">
         <a [routerLink]="['/complex', complex.complexAC]"
-           title="{{complex.complexAC}}"
+           title="{{ complex.complexName }} - {{ complex.complexAC}}"
            target="_blank">
           <div>
-            <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
-              <div class="tilted-label">
-                <i class="icon icon-generic small" data-icon="x"></i>
+            <span>
+              <div class="tilted-label" title="{{ complex.complexName }} - {{ complex.complexAC}}">
+                <i class="icon icon-generic small" data-icon="x"
+                   title="{{ complex.complexName }} - {{ complex.complexAC}}"></i>
                 {{ complex.complexName }}
               </div>
             </span>

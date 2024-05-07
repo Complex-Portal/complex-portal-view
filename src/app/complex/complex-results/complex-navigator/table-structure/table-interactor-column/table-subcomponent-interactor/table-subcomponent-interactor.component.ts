@@ -1,4 +1,4 @@
-import {Component, Input, SimpleChanges, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {Element} from '../../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
@@ -31,7 +31,7 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
   // stoichiometryOfInteractors = stoichiometryOfInteractors;
 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.displayTopLineClass = this.displayTopLineClassExpanded(this.complex, this.i, this.j);
     this.interactorInComplex = !!findInteractorInComplex(this.complex.complex, this.el.identifier);
     this.interactorStoichiometryText = getStoichiometry(this.complex.complex, this.el.identifier);

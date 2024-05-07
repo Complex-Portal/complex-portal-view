@@ -24,8 +24,8 @@ table {
 
 .intStoich {
   height: 45px;
-  max-width: 100px;
-  min-width: 100px;
+  max-width: 80px;
+  min-width: 80px;
   font-size: medium;
   text-align: end;
   z-index: 1;
@@ -54,8 +54,8 @@ a, a:visited {
 .subComponentColumn {
   left: 0;
   z-index: 30;
-  max-height: 50px;
-  min-height: 50px;
+  max-height: 45px;
+  min-height: 45px;
   min-width: 130px;
   max-width: 130px;
   padding: 5px;

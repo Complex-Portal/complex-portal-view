@@ -17,13 +17,6 @@ i:not(.small) {
   justify-content: end;
 }
 
-.externalLinkContainer {
-  display: inline-flex;
-  justify-content: end;
-  grid-gap: 5px;
-  font-size: 14px;
-}
-
 .inlineDisplay {
   display: flex;
   justify-content: end;
@@ -38,6 +31,3 @@ i:not(.small) {
   padding-right: 5px;
 }
 
-.inlineDisplayName {
-  width: 65%;
-}
