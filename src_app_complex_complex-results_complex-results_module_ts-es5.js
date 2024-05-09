@@ -2541,6 +2541,13 @@
         }, {
           key: "setFirstDisplayType",
           value: function setFirstDisplayType() {
+            if (this._complexSearch.elements.length === 1) {
+              console.log(this._complexSearch.elements.length);
+              var complexId = this._complexSearch.elements[0].complexAC;
+              window.location.href = "https://complex-portal.github.io/complex-portal-view/complex/".concat(complexId); // DEV WEBSITE
+              // window.location.href = `http://localhost:4200/complex/${complexId}`; // LOCAL
+              // window.location.href = `https://www.ebi.ac.uk/complexportal/complex/${complexId}`; // EBI
+            }
             if (!this.DisplayType) {
               if (this._complexSearch.elements.length > 1) {
                 this.setComplexNavigatorView();
