@@ -2634,7 +2634,7 @@
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div id=\"twitter\">\n  <h3><i class=\"icon icon-common icon-twitter icon-spacer\"></i>Twitter</h3>\n  <a href=\"https://twitter.com/complexportal?ref_src=twsrc%5Etfw\"\n     class=\"twitter-follow-button\"\n     data-size=\"large\"\n     data-show-count=\"false\">\n    Follow @complexportal\n  </a>\n<!--  <a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"530\" data-theme=\"light\"-->\n<!--     data-chrome=\"noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/complexportal\">Tweets-->\n<!--    by Complex Portal</a>-->\n</div>\n";
+      __webpack_exports__["default"] = "<div id=\"twitter\">\n  <h3><i class=\"icon icon-common icon-twitter icon-spacer\"></i>Twitter</h3>\n  <a href=\"https://twitter.com/complexportal?ref_src=twsrc%5Etfw\"\n     class=\"twitter-follow-button\"\n     data-size=\"large\"\n     data-show-count=\"false\">\n    Follow @complexportal\n  </a>\n  <!--  <a class=\"twitter-timeline\" data-lang=\"en\" data-height=\"530\" data-theme=\"light\"-->\n  <!--     data-chrome=\"noheader noborders\" data-link-color=\"#007c82\" href=\"https://twitter.com/complexportal\">Tweets-->\n  <!--    by Complex Portal</a>-->\n</div>\n";
 
       /***/
     }),
