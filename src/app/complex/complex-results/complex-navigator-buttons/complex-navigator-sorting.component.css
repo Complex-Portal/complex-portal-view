@@ -7,6 +7,7 @@
   margin-top: -15px;
   flex-direction: row;
   position: absolute;
+  z-index: 5;
 }
 
 .typeOfSorting .button {

@@ -27,7 +27,7 @@ import {
 import {
   TableSubcomponentInteractorComponent
 } from './complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
-import {ComplexNavigatorSortingComponent} from './complex-navigator-sorting/complex-navigator-sorting.component';
+import {ComplexNavigatorSortingComponent} from './complex-navigator-buttons/complex-navigator-sorting.component';
 
 
 @NgModule({

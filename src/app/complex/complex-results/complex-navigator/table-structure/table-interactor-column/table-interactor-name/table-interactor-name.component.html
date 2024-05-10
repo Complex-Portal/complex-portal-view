@@ -19,7 +19,7 @@
 
     <a [routerLink]="['/complex/search']"
        [queryParams]="{query: interactorId, page: 1}"
-       [fragment]="'view_complex_navigator'"
+       [preserveFragment]="true"
        target="_blank">
       <i class="icon icon-functional small" data-icon="1"
          title="Complexes containing this interactor"></i>

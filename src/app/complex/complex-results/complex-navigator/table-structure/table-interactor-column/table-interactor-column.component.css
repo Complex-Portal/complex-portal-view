@@ -118,3 +118,7 @@ a, a:visited {
   white-space: nowrap;
   overflow: hidden;
 }
+
+.container {
+  font-size: 14px;
+}

@@ -25,12 +25,6 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
   subComplexInteractorStoichiometryText: string;
   subComplexInteractorStoichiometryValue: string;
 
-
-  // findInteractorInComplex = findInteractorInComplex;
-  // getStoichiometry = getStoichiometry;
-  // stoichiometryOfInteractors = stoichiometryOfInteractors;
-
-
   ngOnChanges(): void {
     this.displayTopLineClass = this.displayTopLineClassExpanded(this.complex, this.i, this.j);
     this.interactorInComplex = !!findInteractorInComplex(this.complex.complex, this.el.identifier);

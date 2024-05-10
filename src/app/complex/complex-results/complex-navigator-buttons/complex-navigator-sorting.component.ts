@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'cp-complex-navigator-sorting',
+  selector: 'cp-complex-navigator-buttons',
   templateUrl: './complex-navigator-sorting.component.html',
   styleUrls: ['./complex-navigator-sorting.component.css']
 })
