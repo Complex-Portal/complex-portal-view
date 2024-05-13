@@ -57,7 +57,7 @@
                    [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} interactors
               </div>
             </td>
-            <td class="subComponentColumn">
+            <td class="subComponentColumn" [style]="ranges.length!=0 ? 'left:3ch':''">
               <div>
                 <cp-table-interactor-name
                   [interactorName]="el.name"
