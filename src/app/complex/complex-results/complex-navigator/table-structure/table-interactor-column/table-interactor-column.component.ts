@@ -361,5 +361,6 @@ export class TableInteractorColumnComponent implements OnChanges {
       const end = organismName.indexOf(';');
       return organismName.substring(0, end);
     }
+    return organismName;
   }
 }

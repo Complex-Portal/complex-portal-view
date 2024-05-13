@@ -39,6 +39,7 @@ export function organismIcon(organism: string): string {
     '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
       return 'icon icon-species icon-ecoli';
     case 'Rattus norvegicus':
+    case 'Rattus norvegicus (Rat)':
       return 'icon icon-species icon-rat';
     case 'Caenorhabditis elegans':
       return 'icon icon-species icon-c-elegans';

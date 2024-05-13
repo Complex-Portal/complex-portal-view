@@ -17,13 +17,14 @@ export class TableHeaderComponent {
   }
 
   iconOrganism(organismName: string) {
-    return organismIcon(this.formatInteractorOrganism(organismName));
+    return organismIcon(this.formatOrganismName(organismName));
   }
 
-  formatInteractorOrganism(organismName: string) {
+  formatOrganismName(organismName: string) {
     if (organismName.includes(';')) {
       const end = organismName.indexOf(';');
       return organismName.substring(0, end);
     }
+    return organismName;
   }
 }
