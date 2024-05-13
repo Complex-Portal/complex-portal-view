@@ -61,8 +61,9 @@ thead {
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
+  border-bottom: 1px solid white;
   top: 70px;
-  left: -44px;
+  left: -45px;
   display: flex;
   align-items: center;
   align-content: center;

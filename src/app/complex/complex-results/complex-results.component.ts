@@ -77,7 +77,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
                   component.identifierLink,
                   component.name,
                   component.description,
-                  component.interactorType));
+                  component.interactorType,
+                  component.organismName));
             }
           }
         }

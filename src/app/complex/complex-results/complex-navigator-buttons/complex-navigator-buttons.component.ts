@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
-  templateUrl: './complex-navigator-sorting.component.html',
-  styleUrls: ['./complex-navigator-sorting.component.css']
+  templateUrl: './complex-navigator-buttons.component.html',
+  styleUrls: ['./complex-navigator-buttons.component.css']
 })
-export class ComplexNavigatorSortingComponent {
+export class ComplexNavigatorButtonsComponent {
   @Output() interactorsSortingChange = new EventEmitter<string>();
   @Output() organismIconDisplayChange = new EventEmitter<boolean>();
   @Output() interactorTypeDisplayChange = new EventEmitter<boolean>();

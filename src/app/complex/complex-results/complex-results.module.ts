@@ -27,7 +27,7 @@ import {
 import {
   TableSubcomponentInteractorComponent
 } from './complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
-import {ComplexNavigatorSortingComponent} from './complex-navigator-buttons/complex-navigator-sorting.component';
+import {ComplexNavigatorButtonsComponent} from './complex-navigator-buttons/complex-navigator-buttons.component';
 
 
 @NgModule({
@@ -53,7 +53,7 @@ import {ComplexNavigatorSortingComponent} from './complex-navigator-buttons/comp
     TableInteractorStoichiometryComponent,
     TableMainInteractorComponent,
     TableSubcomponentInteractorComponent,
-    ComplexNavigatorSortingComponent,
+    ComplexNavigatorButtonsComponent,
   ]
 })
 export class ComplexResultsModule {

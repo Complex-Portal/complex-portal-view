@@ -1,7 +1,7 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- When table is not overflowing -->
-    <thead class="tableHead" *ngIf="complexes.length<=6">
+    <thead class="tableHead" *ngIf="complexes.length<=8">
     <tr>
       <th class="interactorsHeader horizontal"
           [style]="isInteractorSortingSet() ? 'min-width: 135px; max-width: 135px;   border-bottom: 3px solid #007c82;':''">
@@ -26,7 +26,7 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
+    <thead class="tableHeadOverflow" *ngIf="complexes.length>8">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''">
       <th class="interactorsHeader"
@@ -55,7 +55,8 @@
         Interactors
       </th>
       <ng-container *ngFor=" let complex of complexes;">
-        <th class="iconOrganism"><i class="{{iconOrganism(complex.organismName)}}"></i></th>
+        <th class="iconOrganism"><i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>
+        </th>
       </ng-container>
       <div class="spaceHolder"></div>
     </tr>

@@ -13,12 +13,18 @@
           <div [ngSwitch]="isSelected(facet.name, spicesFilter)">
             <div *ngSwitchCase="true">
               <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked> {{ facet.name }}
+                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked>
+              {{ facet.name }}
               ({{ facet.count }})
+              <i class="{{ facetOrganismIcon(facet.name) }}"
+                 style="font-size: large;"></i>
             </div>
             <div *ngSwitchDefault>
               <input type="checkbox" #filter value="{{facet.name}}"
                      (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{ facet.name }} ({{ facet.count }})
+
+              <i class="{{ facetOrganismIcon(facet.name) }}"
+                 style="font-size: large;"></i>
             </div>
           </div>
         </li>

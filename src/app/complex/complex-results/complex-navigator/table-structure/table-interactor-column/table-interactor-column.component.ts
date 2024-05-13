@@ -7,7 +7,6 @@ import {ComplexPortalService} from '../../../../shared/service/complex-portal.se
 import {map} from 'rxjs/operators';
 import {formatStoichiometryValues, stoichiometryOfInteractors} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
-import {organismIcon} from '../../../../complex-portal-utils';
 
 export class EnrichedInteractor {
   interactor: Interactor;
@@ -17,7 +16,6 @@ export class EnrichedInteractor {
   subComponents: ComplexComponent[];
   partOfComplex: number[];
   timesAppearing: number;
-  organismName: string;
 }
 
 export class EnrichedComplex {
@@ -81,14 +79,12 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
-        organismName: '',
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
       }
       this.enrichedInteractors.push(newEnrichedInteractor);
     }
-    this.interactorOrganism();
   }
 
   toggleSubcomplexExpandable(i: number): void {
@@ -243,22 +239,8 @@ export class TableInteractorColumnComponent implements OnChanges {
     return enrichedComplex;
   }
 
-  private interactorOrganism() {
-    for (const complex of this.complexes) {
-      const organismName = complex.organismName;
-      for (const complexInteractor of complex.interactors) {
-        const match = this.enrichedInteractors.find(
-          enrichedInteractor => enrichedInteractor.interactor.identifier === complexInteractor.identifier
-        );
-        if (!!match) {
-          match.organismName = organismName;
-        }
-      }
-    }
-  }
-
   public classifyInteractorsByOrganism() {
-    this.enrichedInteractors.sort((a, b) => b.organismName.localeCompare(a.organismName));
+    this.enrichedInteractors.sort((a, b) => b.interactor.organismName.localeCompare(a.interactor.organismName));
     // this.calculateAllStartAndEndIndexes();
     this.rangeOfInteractorOrganism();
   }
@@ -340,9 +322,9 @@ export class TableInteractorColumnComponent implements OnChanges {
       }
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].organismName !== this.enrichedInteractors[i + 1].organismName) {
+        || this.enrichedInteractors[i].interactor.organismName !== this.enrichedInteractors[i + 1].interactor.organismName) {
         if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].organismName, length, start);
+          oneType.push(this.enrichedInteractors[i].interactor.organismName, length, start);
           ranges.push(oneType);
           start = null;
         }
@@ -352,15 +334,4 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.ranges = ranges;
   }
 
-  organismIconComplex(complexOrganism) {
-    return organismIcon(this.formatInteractorOrganism(complexOrganism));
-  }
-
-  formatInteractorOrganism(organismName: string) {
-    if (organismName.includes(';')) {
-      const end = organismName.indexOf(';');
-      return organismName.substring(0, end);
-    }
-    return organismName;
-  }
 }

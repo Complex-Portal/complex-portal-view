@@ -25,16 +25,22 @@ export function interactorTypeIcon(type: string): string {
 }
 
 export function organismIcon(organism: string): string {
-  switch (organism) {
+  const formattedName = formatOrganismName(organism);
+  switch (formattedName) {
     case 'Homo sapiens':
+    case 'Homo sapiens; 9606':
       return 'icon icon-species icon-human';
     case 'Mus musculus':
+    case 'Mus musculus; 10090':
       return 'icon icon-species icon-mouse';
     case 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)':
     case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
+    case 'Saccharomyces cerevisiae; 559292':
       return 'icon icon-species icon-yeast';
     case 'Escherichia coli (strain K12)':
     case 'Escherichia coli':
+    case 'Escherichia coli (strain K12); 83333':
+    case 'Escherichia coli; 562':
     case 'Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 ' +
     '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
       return 'icon icon-species icon-ecoli';
@@ -46,6 +52,7 @@ export function organismIcon(organism: string): string {
     case 'Gallus gallus':
       return 'icon icon-species icon-chicken';
     case 'Drosophila melanogaster':
+    case 'Drosophila melanogaster (Fruit fly); 7227':
       return 'icon icon-species icon-fly';
     case 'Bos taurus':
       return 'icon icon-species icon-cow';
@@ -69,6 +76,7 @@ export function organismIcon(organism: string): string {
     case 'Lymnaea stagnalis':
       return 'icon icon-species icon-snail';
     case 'Arabidopsis thaliana':
+    case 'Arabidopsis thaliana (Mouse-ear cress); 3702':
       return 'icon icon-species icon-brassica';
     case 'Danio rerio':
       return 'icon icon-species icon-zebrafish';
@@ -78,6 +86,13 @@ export function organismIcon(organism: string): string {
     case 'Human betacoronavirus 2c EMC/2012':
       return 'icon icon-species icon-virus';
   }
-  return '';
+  return ' ';
 }
 
+function formatOrganismName(name: string): string {
+  if (name.includes(';')) {
+    const end = name.indexOf(';');
+    return name.substring(0, end);
+  }
+  return name;
+}

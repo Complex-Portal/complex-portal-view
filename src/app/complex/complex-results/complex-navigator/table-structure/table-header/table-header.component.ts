@@ -17,14 +17,6 @@ export class TableHeaderComponent {
   }
 
   iconOrganism(organismName: string) {
-    return organismIcon(this.formatOrganismName(organismName));
-  }
-
-  formatOrganismName(organismName: string) {
-    if (organismName.includes(';')) {
-      const end = organismName.indexOf(';');
-      return organismName.substring(0, end);
-    }
-    return organismName;
+    return organismIcon(organismName);
   }
 }

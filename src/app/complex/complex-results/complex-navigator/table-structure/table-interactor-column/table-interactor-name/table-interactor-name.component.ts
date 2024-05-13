@@ -23,16 +23,8 @@ export class TableInteractorNameComponent implements OnInit {
   externalLinkVisible: boolean;
 
   ngOnInit(): void {
-    this.formatInteractorOrganism(); // put the organism name into the right format for the interactorOrganismIcon function
     this.interactorTypeIcon = interactorTypeIcon(this.interactorType);
     this.interactorOrganismIcon = organismIcon(this.interactorOrganism);
-  }
-
-  formatInteractorOrganism() {
-    if (this.interactorOrganism.includes(';')) {
-      const end = this.interactorOrganism.indexOf(';');
-      this.interactorOrganism = this.interactorOrganism.substring(0, end);
-    }
   }
 
   externalLinkVisibleHandler(isVisible: boolean): void {

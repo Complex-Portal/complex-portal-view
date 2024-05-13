@@ -10,13 +10,13 @@
             </div>
           </td>
         </ng-container>
-        <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<6}"
+        <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<=8}"
             [style]="ranges.length!=0 ? 'left:3ch':''">
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"
             [interactorId]="interactor.interactor.identifier"
-            [interactorOrganism]="interactor.organismName"
+            [interactorOrganism]="interactor.interactor.organismName"
             [identifierLink]="interactor.interactor.identifierLink"
             [organismIconDisplay]="organismIconDisplay"
             [interactorTypeDisplay]="interactorTypeDisplay"
@@ -42,7 +42,7 @@
             ></cp-table-main-interactor>
           </td>
         </ng-container>
-        <div class="spaceHolder" *ngIf="complexes.length>6"></div>
+        <div class="spaceHolder" *ngIf="complexes.length>8"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->
       <ng-container *ngIf="interactor.expanded">
@@ -63,7 +63,7 @@
                   [interactorName]="el.name"
                   [interactorType]="el.interactorType"
                   [interactorId]="el.identifier"
-                  [interactorOrganism]="interactor.organismName"
+                  [interactorOrganism]="interactor.interactor.organismName"
                   [identifierLink]="el.identifierLink"
                   [organismIconDisplay]="organismIconDisplay"
                   [interactorTypeDisplay]="interactorTypeDisplay"

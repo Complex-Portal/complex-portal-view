@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon} from '../../complex-portal-utils';
+import {organismIcon} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-filter',
@@ -136,5 +137,9 @@ export class ComplexFilterComponent implements OnInit {
 
   public facetTypeIcon(facet): string {
     return interactorTypeIcon(facet.name);
+  }
+
+  public facetOrganismIcon(facet): string {
+    return organismIcon(facet);
   }
 }

@@ -5,19 +5,21 @@ export class ComplexComponent {
   private _description: string;
   private _stochiometry: string;
   private _interactorType: string;
+  private _organismName: string;
 
   constructor(identifier: string,
               identifierLink: string,
               name: string,
               description: string,
               stochiometry: string,
-              interactorType: string) {
+              interactorType: string, organismName: string) {
     this._identifier = identifier;
     this._identifierLink = identifierLink;
     this._name = name;
     this._description = description;
     this._stochiometry = stochiometry;
     this._interactorType = interactorType;
+    this._organismName = organismName;
   }
 
   get identifier(): string {
@@ -42,5 +44,9 @@ export class ComplexComponent {
 
   get interactorType(): string {
     return this._interactorType;
+  }
+
+  get organismName(): string {
+    return this._organismName;
   }
 }
