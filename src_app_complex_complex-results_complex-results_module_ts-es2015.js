@@ -52,6 +52,7 @@ function organismIcon(organism) {
             '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
             return 'icon icon-species icon-ecoli';
         case 'Rattus norvegicus':
+        case 'Rattus norvegicus (Rat)':
             return 'icon icon-species icon-rat';
         case 'Caenorhabditis elegans':
             return 'icon icon-species icon-c-elegans';
@@ -474,13 +475,14 @@ let TableHeaderComponent = class TableHeaderComponent {
         return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
     }
     iconOrganism(organismName) {
-        return (0,_complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__.organismIcon)(this.formatInteractorOrganism(organismName));
+        return (0,_complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__.organismIcon)(this.formatOrganismName(organismName));
     }
-    formatInteractorOrganism(organismName) {
+    formatOrganismName(organismName) {
         if (organismName.includes(';')) {
             const end = organismName.indexOf(';');
             return organismName.substring(0, end);
         }
+        return organismName;
     }
 };
 TableHeaderComponent.propDecorators = {
@@ -898,6 +900,7 @@ let TableInteractorColumnComponent = class TableInteractorColumnComponent {
             const end = organismName.indexOf(';');
             return organismName.substring(0, end);
         }
+        return organismName;
     }
 };
 TableInteractorColumnComponent.ctorParameters = () => [

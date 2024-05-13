@@ -70,6 +70,7 @@
           case 'Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 ' + '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
             return 'icon icon-species icon-ecoli';
           case 'Rattus norvegicus':
+          case 'Rattus norvegicus (Rat)':
             return 'icon icon-species icon-rat';
           case 'Caenorhabditis elegans':
             return 'icon icon-species icon-c-elegans';
@@ -591,15 +592,16 @@
         }, {
           key: "iconOrganism",
           value: function iconOrganism(organismName) {
-            return (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__.organismIcon)(this.formatInteractorOrganism(organismName));
+            return (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_2__.organismIcon)(this.formatOrganismName(organismName));
           }
         }, {
-          key: "formatInteractorOrganism",
-          value: function formatInteractorOrganism(organismName) {
+          key: "formatOrganismName",
+          value: function formatOrganismName(organismName) {
             if (organismName.includes(';')) {
               var end = organismName.indexOf(';');
               return organismName.substring(0, end);
             }
+            return organismName;
           }
         }]);
         return TableHeaderComponent;
@@ -1170,6 +1172,7 @@
               var end = organismName.indexOf(';');
               return organismName.substring(0, end);
             }
+            return organismName;
           }
         }]);
         return TableInteractorColumnComponent;
