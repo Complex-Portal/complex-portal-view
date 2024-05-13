@@ -7,6 +7,7 @@ import {ComplexPortalService} from '../../../../shared/service/complex-portal.se
 import {map} from 'rxjs/operators';
 import {formatStoichiometryValues, stoichiometryOfInteractors} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
+import {organismIcon} from '../../../../complex-portal-utils';
 
 export class EnrichedInteractor {
   interactor: Interactor;
@@ -349,5 +350,16 @@ export class TableInteractorColumnComponent implements OnChanges {
       }
     }
     this.ranges = ranges;
+  }
+
+  organismIconComplex(complexOrganism) {
+    return organismIcon(this.formatInteractorOrganism(complexOrganism));
+  }
+
+  formatInteractorOrganism(organismName: string) {
+    if (organismName.includes(';')) {
+      const end = organismName.indexOf(';');
+      return organismName.substring(0, end);
+    }
   }
 }

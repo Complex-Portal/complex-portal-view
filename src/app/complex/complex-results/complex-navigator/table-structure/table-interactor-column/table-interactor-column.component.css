@@ -99,6 +99,9 @@ a, a:visited {
   overflow: hidden;
   width: 3ch;
   text-align: -webkit-center;
+  position: sticky;
+  z-index: 4;
+  left: 0;
 }
 
 .interactorNameContainer,
@@ -117,8 +120,10 @@ a, a:visited {
   height: calc(var(--rowspanSize) * 48px);
   white-space: nowrap;
   overflow: hidden;
+
 }
 
 .container {
   font-size: 14px;
 }
+

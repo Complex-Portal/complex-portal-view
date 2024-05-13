@@ -1,6 +1,5 @@
 <div class="Complex-navigator">
   <table class="interactors-table">
-    <!-- Interactors' column -->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
@@ -11,7 +10,8 @@
             </div>
           </td>
         </ng-container>
-        <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<6}">
+        <td class="interactorsColumn" [ngClass]="{horizontalHeader : complexes.length<6}"
+            [style]="ranges.length!=0 ? 'left:3ch':''">
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"

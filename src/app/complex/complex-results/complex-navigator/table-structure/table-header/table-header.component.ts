@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Element} from '../../../../shared/model/complex-results/element.model';
+import {organismIcon} from '../../../../complex-portal-utils';
 
 @Component({
   selector: 'cp-table-header',
@@ -13,5 +14,16 @@ export class TableHeaderComponent {
 
   isInteractorSortingSet() {
     return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+  }
+
+  iconOrganism(organismName: string) {
+    return organismIcon(this.formatInteractorOrganism(organismName));
+  }
+
+  formatInteractorOrganism(organismName: string) {
+    if (organismName.includes(';')) {
+      const end = organismName.indexOf(';');
+      return organismName.substring(0, end);
+    }
   }
 }

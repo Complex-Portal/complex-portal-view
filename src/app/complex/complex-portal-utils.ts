@@ -79,3 +79,4 @@ export function organismIcon(organism: string): string {
   }
   return '';
 }
+

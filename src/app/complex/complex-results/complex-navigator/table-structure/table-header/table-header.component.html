@@ -15,6 +15,7 @@
             <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
               <div class="line"></div>
                 <div class="horizontal-label">
+                  <i class="{{iconOrganism(complex.organismName)}}"></i>
                   <i class="icon icon-generic small" data-icon="x"></i>
                   {{ complex.complexName }}
                 </div>
@@ -26,13 +27,12 @@
     </thead>
     <!-- When table is overflowing -->
     <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
-    <tr [style.--cols]="complexes.length">
+    <tr [style.--cols]="complexes.length"
+        [style.--intHeader]="isInteractorSortingSet() ? '156px':''">
       <th class="interactorsHeader"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
-        Interactors
       </th>
       <th class="rotate" *ngFor="let complex of complexes"
-          [style]="isInteractorSortingSet() ? 'left:-1px':''"
           title="{{ complex.complexName }} - {{ complex.complexAC}}">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{ complex.complexName }} - {{ complex.complexAC}}"
@@ -48,6 +48,15 @@
           </div>
         </a>
       </th>
+      <div class="spaceHolder"></div>
+    </tr>
+    <tr [style.--cols]="complexes.length" [style.--intHeader]="isInteractorSortingSet() ? '156px':''">
+      <th class="spaceHolderHeader" [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+        Interactors
+      </th>
+      <ng-container *ngFor=" let complex of complexes;">
+        <th class="iconOrganism"><i class="{{iconOrganism(complex.organismName)}}"></i></th>
+      </ng-container>
       <div class="spaceHolder"></div>
     </tr>
     </thead>

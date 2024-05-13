@@ -22,9 +22,18 @@ thead {
   z-index: 4;
   color: #007c82;
   background-color: white;
-  padding-top: 150px;
+  padding-top: 173px;
   text-align: right;
-  border-bottom: 3px solid #007c82;
+}
+
+.iconOrganism {
+  position: sticky;
+  text-align: center;
+  background-color: #007c82;
+  color: white;
+  border-left: 1px solid white;
+  font-size: medium;
+  height: 35px;
 }
 
 .tilted-label {
@@ -38,9 +47,10 @@ thead {
 
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
+  --intHeader: 130px;
   display: grid;
-  grid-template-columns: 130px repeat(auto-fit, 80px);
-  width: calc(130px + 80px * var(--cols) + 185px);
+  grid-template-columns: var(--intHeader) repeat(auto-fit, 80px);
+  width: calc(var(--intHeader) + 80px * var(--cols) + 185px);
 }
 
 .CN-table .tableHeadOverflow th.rotate {
@@ -52,7 +62,7 @@ thead {
   text-align: left;
   border-top: 1px solid white;
   top: 70px;
-  left: -46px;
+  left: -44px;
   display: flex;
   align-items: center;
   align-content: center;
@@ -76,11 +86,11 @@ thead {
   min-width: 130px;
   max-width: 130px;
   font-size: medium;
-  border-bottom: 3px solid #007c82;
   border-left: none;
   text-align: right;
   color: #007c82;
   background-color: white;
+  border-bottom: 3px solid #007c82;
 }
 
 .horizontal-label {
@@ -95,10 +105,10 @@ thead {
 .CN-table th.horizontal {
   color: white;
   background-color: #007c82;
-  border: 1px solid white;
+  border-left: 1px solid white;
   min-width: 80px;
   max-width: 80px;
-  height: 50px;
+  height: 35px;
   font-size: 15px;
 }
 
@@ -113,6 +123,19 @@ a {
 .spaceHolder {
   width: 180px;
   background-color: #007c82;
+  border-left: 1px solid white;
 }
 
-
+.spaceHolderHeader {
+  min-width: 130px;
+  max-width: 130px;
+  width: 130px;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background-color: white;
+  border-bottom: 3px solid #007c82;
+  height: 35px;
+  text-align: right;
+  color: #007c82;
+}
