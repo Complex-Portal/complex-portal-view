@@ -16,12 +16,13 @@
 }
 
 .filters {
-  width: 100%;
+  width: 120.5%;
   display: flex;
   justify-content: center;
   grid-gap: 10px;
   height: 67px;
   z-index: 5;
+  text-align: center;
 }
 
 .displaySize {

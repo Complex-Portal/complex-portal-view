@@ -11,6 +11,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   transform: rotateX(180deg);
+  width: 100%;
 }
 
 .interactors {
@@ -18,4 +19,5 @@
   position: relative;
   overflow-x: auto;
   overflow-y: hidden;
+  width: 100%;
 }

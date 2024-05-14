@@ -1,9 +1,10 @@
 <div class="margin-top-large margin-bottom-large row">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
     <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
-      <h2 class="padding-left-large">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>
+      <h2 class="padding-left-large numberResults">Total number of
+        results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row">
-        <div class="displayButton columns medium-8" style="text-align: center">
+        <div class="displayButton columns medium-8" style="text-align: center; padding-left: 10px">
           <button type="submit" name="submit" class="button view-button"
                   (click)="setListView()" [ngClass]="{'selected': DisplayType === LIST_VIEW}">
             View list
@@ -15,7 +16,7 @@
           </button>
         </div>
       </div>
-      <div class="columns medium-4">
+      <div class="columns medium-4 filterColumn">
         <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
                            [spicesFilter]="spicesFilter"
                            [bioRoleFilter]="bioRoleFilter"

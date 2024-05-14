@@ -49,20 +49,20 @@ thead {
   --cols: 1;
   --intHeader: 130px;
   display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 80px);
-  width: calc(var(--intHeader) + 80px * var(--cols) + 185px);
+  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
+  width: calc(var(--intHeader) + 70px * var(--cols) + 185px);
 }
 
 .CN-table .tableHeadOverflow th.rotate {
   position: relative;
   width: 340px;
-  height: 60px !important;
+  height: 52px !important;
   color: white;
   font-size: 14px;
   text-align: left;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  top: 70px;
+  top: 69px;
   left: -45px;
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@ a {
 }
 
 .spaceHolder {
-  width: 180px;
+  width: inherit;
   background-color: #007c82;
   border-left: 1px solid white;
 }

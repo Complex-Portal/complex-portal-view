@@ -34,3 +34,12 @@
 .new-tag-selected {
   color: yellow;
 }
+
+.filterColumn {
+  width: calc(100rem * 0.22);
+  margin-left: calc(-100rem * 0.17) /* make the blank space the same as the right side */
+}
+
+.numberResults {
+  margin-left: calc(-100rem * 0.17)
+}

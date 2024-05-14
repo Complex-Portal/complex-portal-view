@@ -30,7 +30,6 @@ export function stoichiometryOfInteractors(complex: Element, interactorId: strin
   return null;
 }
 
-
 export function parseStoichiometryValues(stoichiometry: string): [number, number] {
   if (!!stoichiometry) {
     const matchedStoichiometry = fetchValuesFromStoichiometry(stoichiometry);

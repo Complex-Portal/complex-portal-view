@@ -11,6 +11,7 @@ table {
   min-height: 45px;
   min-width: 130px;
   max-width: 130px;
+  width: 130px;
   padding: 5px;
   text-align: end;
   color: #0e6f76;
@@ -24,8 +25,9 @@ table {
 
 .intStoich {
   height: 45px;
-  max-width: 80px;
-  min-width: 80px;
+  max-width: 70px;
+  min-width: 70px;
+  width: 70px;
   font-size: medium;
   text-align: end;
   z-index: 1;
@@ -48,7 +50,7 @@ a, a:visited {
 }
 
 .spaceHolder {
-  width: 180px;
+  width: 185px;
 }
 
 .subComponentColumn {
@@ -127,3 +129,7 @@ a, a:visited {
   font-size: 14px;
 }
 
+.horizontalHeader {
+  min-width: 114px;
+  max-width: 114px;
+}
