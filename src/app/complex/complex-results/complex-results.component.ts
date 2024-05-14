@@ -195,10 +195,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return this._pageSize;
   }
 
-  set pageSize(value: number) {
-    this._pageSize = value;
-  }
-
   get spicesFilter(): string[] {
     return this._spicesFilter;
   }
@@ -225,10 +221,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   public get allInteractorsInComplexSearch(): Interactor[] {
     return this._allInteractorsInComplexSearch;
-  }
-
-  set allInteractorsInComplexSearch(value: Interactor[]) {
-    this._allInteractorsInComplexSearch = value;
   }
 
   setListView() {
