@@ -1,5 +1,7 @@
 <div class="Complex-navigator">
-  <table class="interactors-table" [style.--cols]="enrichedComplexes.length">
+  <table class="interactors-table"
+         [style.--cols]="complexes.length"
+         [style]="complexes.length>=8 ? 'width: calc(130px + 70px * var(--cols) + 183px)':''">
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">

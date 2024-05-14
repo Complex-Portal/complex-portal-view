@@ -1,7 +1,7 @@
 <div class="margin-top-large margin-bottom-large row">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
     <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
-      <h2 class="padding-left-large numberResults">Total number of
+      <h2 class="padding-left-large leftAligned">Total number of
         results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row">
         <div class="displayButton columns medium-8" style="text-align: center; padding-left: 10px">
@@ -16,7 +16,7 @@
           </button>
         </div>
       </div>
-      <div class="columns medium-4 filterColumn">
+      <div class="columns medium-4 filterColumn leftAligned">
         <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
                            [spicesFilter]="spicesFilter"
                            [bioRoleFilter]="bioRoleFilter"
