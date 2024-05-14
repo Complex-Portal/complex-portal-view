@@ -1,5 +1,7 @@
 table {
+  --cols: 1;
   height: 1px;
+  width: calc(130px + 70px * var(--cols) + 183px);
 }
 
 /* interactors column */
@@ -49,9 +51,9 @@ a, a:visited {
   color: #0e6f76;
 }
 
-.spaceHolder {
-  width: 185px;
-}
+/*.spaceHolder {*/
+/*  width: 150px;*/
+/*}*/
 
 .subComponentColumn {
   left: 0;

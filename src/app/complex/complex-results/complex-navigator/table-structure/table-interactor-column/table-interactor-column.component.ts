@@ -333,5 +333,4 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
     this.ranges = ranges;
   }
-
 }

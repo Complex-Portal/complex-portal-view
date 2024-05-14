@@ -37,7 +37,6 @@ thead {
 }
 
 .tilted-label {
-  padding-left: 5px;
   text-overflow: ellipsis;
   width: 28ch;
   white-space: nowrap;
@@ -50,26 +49,26 @@ thead {
   --intHeader: 130px;
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + 185px);
+  width: calc(var(--intHeader) + 70px * var(--cols) + 183px);
+  overflow: hidden;
 }
 
 .CN-table .tableHeadOverflow th.rotate {
   position: relative;
-  width: 340px;
-  height: 52px !important;
+  width: 350px;
+  height: 51px !important;
   color: white;
   font-size: 14px;
   text-align: left;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  top: 69px;
-  left: -45px;
+  border: 1px solid white;
+  top: 70px;
+  left: -52px;
   display: flex;
   align-items: center;
   align-content: center;
   padding: 0;
   transform: rotate(-45deg);
-  border-top: 1px solid white;
+  border-collapse: collapse;
 }
 
 .CN-table .tableHeadOverflow th.rotate a {
@@ -78,6 +77,7 @@ thead {
   align-content: center;
   background-color: #007c82;
   padding: 0 0 0 70px;
+  border: none;
 }
 
 /* Horizontal complexes name */

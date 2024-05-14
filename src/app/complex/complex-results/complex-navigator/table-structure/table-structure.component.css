@@ -17,7 +17,5 @@
 .interactors {
   z-index: 1;
   position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100%;
+
 }
