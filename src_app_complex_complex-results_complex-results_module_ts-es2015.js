@@ -1716,13 +1716,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-results.component.html */ 13182);
 /* harmony import */ var _complex_results_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-results.component.css */ 23654);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 71258);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 71258);
 /* harmony import */ var _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/service/complex-portal.service */ 20658);
 /* harmony import */ var _shared_loading_indicators_progress_bar_progress_bar_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/loading-indicators/progress-bar/progress-bar.component */ 57040);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
 /* harmony import */ var _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/google-analytics/service/analytics.service */ 96242);
 /* harmony import */ var _shared_model_complex_results_interactor_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/model/complex-results/interactor.model */ 45178);
+/* harmony import */ var _shared_notification_service_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/notification/service/notification.service */ 30048);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1738,13 +1739,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 let ComplexResultsComponent = class ComplexResultsComponent {
-    constructor(route, router, complexPortalService, titleService, googleAnalyticsService) {
+    constructor(route, router, complexPortalService, titleService, googleAnalyticsService, notificationService) {
         this.route = route;
         this.router = router;
         this.complexPortalService = complexPortalService;
         this.titleService = titleService;
         this.googleAnalyticsService = googleAnalyticsService;
+        this.notificationService = notificationService;
         this.LIST_VIEW = 'view_list';
         this.COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
         this._pageSize = 15;
@@ -1930,6 +1933,7 @@ let ComplexResultsComponent = class ComplexResultsComponent {
             // Currently the list view is the default, as we are just launching the navigator view
             // Later on we can change the default view to be the list or navigator view based on number of results
             this.setListView();
+            this.notificationService.complexNavigatorAnnouncement();
         }
     }
     closePopup() {
@@ -1937,14 +1941,15 @@ let ComplexResultsComponent = class ComplexResultsComponent {
     }
 };
 ComplexResultsComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.ActivatedRoute },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.ActivatedRoute },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: _shared_service_complex_portal_service__WEBPACK_IMPORTED_MODULE_2__.ComplexPortalService },
-    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.Title },
-    { type: _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_4__.AnalyticsService }
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.Title },
+    { type: _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_4__.AnalyticsService },
+    { type: _shared_notification_service_notification_service__WEBPACK_IMPORTED_MODULE_6__.NotificationService }
 ];
 ComplexResultsComponent = __decorate([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'cp-complex-results',
         template: _Users_susiehuget_Documents_GitHub_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_results_component_css__WEBPACK_IMPORTED_MODULE_1__]

@@ -2376,6 +2376,11 @@
           value: function rateComplexNavigator() {
             this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
           }
+        }, {
+          key: "complexNavigatorAnnouncement",
+          value: function complexNavigatorAnnouncement() {
+            this.addAnnouncementNotification('Try out our new display: the Complex Navigator!', this.toastrService.toastrConfig.timeOut);
+          }
         }]);
         return NotificationService;
       }();
