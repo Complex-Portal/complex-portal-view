@@ -2302,9 +2302,11 @@
         /* harmony export */
       });
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */2316);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ngx-toastr */83315);
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ngx-toastr */83315);
+      /* harmony import */
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../environments/environment */92340);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -2339,6 +2341,12 @@
             this.toastrService.info(announcementNotification, 'Just to let you know!', options);
           }
         }, {
+          key: "addRatingNotification",
+          value: function addRatingNotification(ratingNotification) {
+            this.toastrService.toastrConfig.timeOut = 10000;
+            this.toastrService.info(ratingNotification);
+          }
+        }, {
           key: "addHintNotification",
           value: function addHintNotification(hintNotification) {
             this.toastrService.warning(hintNotification, 'Just to let you know!');
@@ -2363,15 +2371,20 @@
           value: function onFeatureNotAvailableYet() {
             this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
           }
+        }, {
+          key: "rateComplexNavigator",
+          value: function rateComplexNavigator() {
+            this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
+          }
         }]);
         return NotificationService;
       }();
       _NotificationService.ctorParameters = function () {
         return [{
-          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_0__.ToastrService
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_1__.ToastrService
         }];
       };
-      _NotificationService = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_1__.Injectable)()], _NotificationService);
+      _NotificationService = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()], _NotificationService);
 
       /***/
     }),
