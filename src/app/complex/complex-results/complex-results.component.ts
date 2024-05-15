@@ -25,7 +25,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
-
+  popUpDisplay = true;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -252,4 +252,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  closePopup() {
+    this.popUpDisplay = false;
+  }
 }

@@ -50,8 +50,3 @@
   --min-margin-left: calc(-100rem * 0.17);
   margin-left: max(var(--global-margin), var(--min-margin-left));
 }
-
-
-
-
-

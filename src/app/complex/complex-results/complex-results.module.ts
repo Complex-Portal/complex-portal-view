@@ -28,6 +28,7 @@ import {
   TableSubcomponentInteractorComponent
 } from './complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
 import {ComplexNavigatorButtonsComponent} from './complex-navigator-buttons/complex-navigator-buttons.component';
+import {MarkdownModule} from 'ngx-markdown';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import {ComplexNavigatorButtonsComponent} from './complex-navigator-buttons/comp
     {path: '', component: ComplexResultsComponent},
   ]),
     CommonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule, MarkdownModule
   ],
   exports: [
     TableStructureComponent

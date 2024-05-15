@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ToastrService} from 'ngx-toastr';
+import {Injectable} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class NotificationService {
@@ -25,6 +26,11 @@ export class NotificationService {
     this.toastrService.info(announcementNotification, 'Just to let you know!', options);
   }
 
+  private addRatingNotification(ratingNotification: string): void {
+    this.toastrService.toastrConfig.timeOut = 10000;
+    this.toastrService.info(ratingNotification);
+  }
+
   private addHintNotification(hintNotification: string): void {
     this.toastrService.warning(hintNotification, 'Just to let you know!');
   }
@@ -44,5 +50,9 @@ export class NotificationService {
 
   public onFeatureNotAvailableYet() {
     this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
+  }
+
+  public rateComplexNavigator(): void {
+    this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
   }
 }
