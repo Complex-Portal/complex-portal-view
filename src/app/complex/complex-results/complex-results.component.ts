@@ -6,6 +6,7 @@ import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Interactor} from '../shared/model/complex-results/interactor.model';
+import {NotificationService} from '../../shared/notification/service/notification.service';
 
 @Component({
   selector: 'cp-complex-results',
@@ -29,8 +30,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
-              private googleAnalyticsService: AnalyticsService,
-  ) {
+              private googleAnalyticsService: AnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -249,6 +249,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
       this.setListView();
+      this.notificationService.complexNavigatorAnnouncement();
     }
   }
 

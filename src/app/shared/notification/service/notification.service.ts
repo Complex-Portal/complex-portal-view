@@ -55,4 +55,8 @@ export class NotificationService {
   public rateComplexNavigator(): void {
     this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
   }
+
+  public complexNavigatorAnnouncement() {
+    this.addAnnouncementNotification('Try out our new display: the Complex Navigator!', this.toastrService.toastrConfig.timeOut);
+  }
 }
