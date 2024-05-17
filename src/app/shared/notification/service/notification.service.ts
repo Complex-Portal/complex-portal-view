@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {environment} from '../../../../environments/environment';
+import {AnalyticsService} from '../../google-analytics/service/analytics.service';
+import {ComplexNavigatorComponent} from '../../../complex/complex-results/complex-navigator/complex-navigator.component';
+
 
 @Injectable()
 export class NotificationService {
@@ -53,10 +55,26 @@ export class NotificationService {
   }
 
   public rateComplexNavigator(): void {
-    this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
+    const ratingHtml = `
+  <div class="ratingComponent">
+    <div class="ratingComponentStars">
+      <span class="star" [ngClass]="{'selected': selectedRating >= 1}" (click)="selectRating(1)"> &#9733; </span>
+      <span class="star" [ngClass]="{'selected': selectedRating >= 2}" (click)="selectRating(2)"> &#9733; </span>
+      <span class="star" [ngClass]="{'selected': selectedRating >= 3}" (click)="selectRating(3)"> &#9733; </span>
+      <span class="star" [ngClass]="{'selected': selectedRating >= 4}" (click)="selectRating(4)"> &#9733; </span>
+      <span class="star" [ngClass]="{'selected': selectedRating >= 5}" (click)="selectRating(5)"> &#9733; </span>
+    </div>
+    <input type="submit" name="submitButton" value="Submit Rating" class="button" (click)="submitRating()">
+  </div>
+    `;
+    this.addRatingNotification(ratingHtml);
   }
 
   public complexNavigatorAnnouncement() {
-    this.addAnnouncementNotification('Try out our new display: the Complex Navigator!', this.toastrService.toastrConfig.timeOut);
+    this.addAnnouncementNotification(
+      'Try out our new display: the Complex Navigator!',
+      {
+        positionClass: 'toast-right-under-header'
+      });
   }
 }

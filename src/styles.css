@@ -39,3 +39,17 @@
   background: #999;
 }
 
+.toast-right-under-header {
+  right: 10px;
+  top: 225px;
+}
+
+.star {
+  font-size: 2em;
+  cursor: pointer;
+  color: grey;
+}
+
+.star.selected {
+  color: gold;
+}
