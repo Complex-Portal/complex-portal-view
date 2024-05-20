@@ -1,0 +1,14 @@
+<div class="ratingComponent" *ngIf="visible===true">
+  <div class="text">
+    <p>Tell us about your experience with the Complex Navigator!</p>
+    <button class="close" id="closePopup" (click)="ratingVisibility()" style="color: white">&times;</button>
+  </div>
+  <div class="ratingComponentStars">
+    <span class="star" [ngClass]="{'selected': selectedRating >= 1}" (click)="selectRating(1)"> &#9733; </span>
+    <span class="star" [ngClass]="{'selected': selectedRating >= 2}" (click)="selectRating(2)"> &#9733; </span>
+    <span class="star" [ngClass]="{'selected': selectedRating >= 3}" (click)="selectRating(3)"> &#9733; </span>
+    <span class="star" [ngClass]="{'selected': selectedRating >= 4}" (click)="selectRating(4)"> &#9733; </span>
+    <span class="star" [ngClass]="{'selected': selectedRating >= 5}" (click)="selectRating(5)"> &#9733; </span>
+  </div>
+  <input type="submit" name="submitButton" value="Submit Rating" class="button" (click)="submitRating()">
+</div>

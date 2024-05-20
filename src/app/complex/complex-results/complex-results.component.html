@@ -4,12 +4,14 @@
       <h2 class="padding-left-large leftAligned">Total number of
         results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row">
+        <cp-complex-navigator-rating *ngIf="DisplayType=== COMPLEX_NAVIGATOR_VIEW">
+        </cp-complex-navigator-rating>
         <div class="displayButton columns medium-8" style="text-align: center; padding-left: 10px">
           <button type="submit" name="submit" class="button view-button"
                   (click)="setListView()" [ngClass]="{'selected': DisplayType === LIST_VIEW}">
             View list
           </button>
-          <button type="submit" name="submit" class="button view-button"
+          <button type="submit" name="submit" class="button view-button cnButton"
                   (click)="setComplexNavigatorView()" [ngClass]="{'selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}">
             View Complex Navigator
             <span class="new-tag" [ngClass]="{'new-tag-selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}">NEW!</span>

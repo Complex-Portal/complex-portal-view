@@ -43,13 +43,3 @@
   right: 10px;
   top: 225px;
 }
-
-.star {
-  font-size: 2em;
-  cursor: pointer;
-  color: grey;
-}
-
-.star.selected {
-  color: gold;
-}

@@ -252,8 +252,4 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.notificationService.complexNavigatorAnnouncement();
     }
   }
-
-  closePopup() {
-    this.popUpDisplay = false;
-  }
 }

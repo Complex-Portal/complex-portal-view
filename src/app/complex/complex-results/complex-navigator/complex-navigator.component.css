@@ -1,14 +1,5 @@
 .ComplexNavigator {
-  width: calc(100rem * 0.71); /* the px value coresponds to the width of the facets column + the margin */
+  width: calc(100rem * 0.71); /* the px value corresponds to the width of the facets column + the margin */
   margin-left: calc(-100rem * 0.17)
 }
 
-.star {
-  font-size: 2em;
-  cursor: pointer;
-  color: grey;
-}
-
-.star.selected {
-  color: gold;
-}

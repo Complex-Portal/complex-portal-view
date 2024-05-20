@@ -29,6 +29,7 @@ import {
 } from './complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
 import {ComplexNavigatorButtonsComponent} from './complex-navigator-buttons/complex-navigator-buttons.component';
 import {MarkdownModule} from 'ngx-markdown';
+import {ComplexNavigatorRatingComponent} from './complex-navigator/complex-navigator-rating/complex-navigator-rating.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {MarkdownModule} from 'ngx-markdown';
     TableMainInteractorComponent,
     TableSubcomponentInteractorComponent,
     ComplexNavigatorButtonsComponent,
+    ComplexNavigatorRatingComponent,
   ]
 })
 export class ComplexResultsModule {

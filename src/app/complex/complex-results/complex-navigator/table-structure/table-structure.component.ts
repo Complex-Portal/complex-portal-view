@@ -2,7 +2,6 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../shared/model/complex-results/element.model';
-import {NotificationService} from '../../../../shared/notification/service/notification.service';
 
 @Component({
   selector: 'cp-table-structure',
@@ -22,10 +21,6 @@ export class TableStructureComponent implements OnChanges {
   ngOnChanges(): void {
     this.classifyComplexesSize(); // ensure to always have the same base of comparison
     this.sortedComplexes = this.classifyComplexesSimilarities(this.complexSearch.elements);
-    this.notificationService.rateComplexNavigator();
-  }
-
-  constructor(private notificationService: NotificationService) {
   }
 
   classifyComplexesSize(): void {

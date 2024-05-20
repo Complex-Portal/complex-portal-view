@@ -1,0 +1,48 @@
+.star {
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.ratingComponent {
+  background-color: #007c82;
+  padding: 5px;
+  width: 20%;
+  text-align: center;
+  margin-left: 92%;
+  margin-top: -5%;
+  position: fixed;
+  z-index: 5;
+  top: 20em;
+  left: -13%;
+  border: 1px solid white;
+  animation-name: ratingComponentMove;
+  animation-duration: 1s;
+}
+
+.ratingComponent input {
+  background-color: white;
+  color: #007c82;
+}
+
+.text {
+  display: -webkit-box;
+  color: white;
+  width: 96%;
+  text-align: -webkit-center;
+  padding-left: 10px;
+  margin-bottom: -20px;
+}
+
+@keyframes ratingComponentMove {
+  from {
+    left: 10%;
+  }
+  to {
+    left: -13%;
+  }
+}
