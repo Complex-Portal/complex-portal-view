@@ -1742,6 +1742,9 @@ let AnalyticsService = class AnalyticsService {
     fireAPIRequestErrorEvent(api, type) {
         this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.APIResquestError, api, type);
     }
+    rateComplexNavigator(rating) {
+        this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator, _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator, rating);
+    }
 };
 AnalyticsService.ctorParameters = () => [
     { type: ngx_google_analytics__WEBPACK_IMPORTED_MODULE_2__.GoogleAnalyticsService }
@@ -1782,6 +1785,7 @@ var Action;
     Action[Action["search"] = 12] = "search";
     Action[Action["AddToBasket"] = 13] = "AddToBasket";
     Action[Action["GoToMenu"] = 14] = "GoToMenu";
+    Action[Action["RatingComplexNavigator"] = 15] = "RatingComplexNavigator";
 })(Action || (Action = {}));
 
 
@@ -1823,6 +1827,7 @@ var Category;
     Category[Category["details"] = 20] = "details";
     Category[Category["basket"] = 21] = "basket";
     Category[Category["search"] = 22] = "search";
+    Category[Category["complexNavigator"] = 23] = "complexNavigator";
 })(Category || (Category = {}));
 
 
@@ -1943,16 +1948,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NotificationService": function() { return /* binding */ NotificationService; }
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ngx-toastr */ 83315);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../environments/environment */ 92340);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ngx-toastr */ 83315);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 let NotificationService = class NotificationService {
@@ -1974,9 +1977,12 @@ let NotificationService = class NotificationService {
     addAnnouncementNotification(announcementNotification, options) {
         this.toastrService.info(announcementNotification, 'Just to let you know!', options);
     }
-    addRatingNotification(ratingNotification) {
-        this.toastrService.toastrConfig.timeOut = 10000;
-        this.toastrService.info(ratingNotification);
+    addComplexNavigatorAnnouncementNotification(announcement) {
+        this.toastrService.toastrConfig.disableTimeOut = true;
+        this.toastrService.toastrConfig.closeButton = true;
+        this.toastrService.toastrConfig.progressBar = false;
+        this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
+        this.toastrService.info(announcement);
     }
     addHintNotification(hintNotification) {
         this.toastrService.warning(hintNotification, 'Just to let you know!');
@@ -1994,18 +2000,19 @@ let NotificationService = class NotificationService {
     onFeatureNotAvailableYet() {
         this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     }
-    rateComplexNavigator() {
-        this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
-    }
     complexNavigatorAnnouncement() {
-        this.addAnnouncementNotification('Try out our new display: the Complex Navigator!', this.toastrService.toastrConfig.timeOut);
+        this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' +
+            'the Complex Navigator!');
+    }
+    closeAnnouncement() {
+        this.toastrService.clear(this.toastrService.toasts[0].toastId);
     }
 };
 NotificationService.ctorParameters = () => [
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_1__.ToastrService }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_0__.ToastrService }
 ];
 NotificationService = __decorate([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.Injectable)()
 ], NotificationService);
 
 

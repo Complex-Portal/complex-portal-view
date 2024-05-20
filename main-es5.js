@@ -2058,6 +2058,11 @@
           value: function fireAPIRequestErrorEvent(api, type) {
             this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.APIResquestError, api, type);
           }
+        }, {
+          key: "rateComplexNavigator",
+          value: function rateComplexNavigator(rating) {
+            this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator, _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator, rating);
+          }
         }]);
         return AnalyticsService;
       }();
@@ -2103,6 +2108,7 @@
         Action[Action["search"] = 12] = "search";
         Action[Action["AddToBasket"] = 13] = "AddToBasket";
         Action[Action["GoToMenu"] = 14] = "GoToMenu";
+        Action[Action["RatingComplexNavigator"] = 15] = "RatingComplexNavigator";
       })(_Action || (_Action = {}));
 
       /***/
@@ -2148,6 +2154,7 @@
         Category[Category["details"] = 20] = "details";
         Category[Category["basket"] = 21] = "basket";
         Category[Category["search"] = 22] = "search";
+        Category[Category["complexNavigator"] = 23] = "complexNavigator";
       })(_Category || (_Category = {}));
 
       /***/
@@ -2302,11 +2309,9 @@
         /* harmony export */
       });
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */2316);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ngx-toastr */83315);
-      /* harmony import */
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../environments/environment */92340);
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ngx-toastr */83315);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -2341,10 +2346,13 @@
             this.toastrService.info(announcementNotification, 'Just to let you know!', options);
           }
         }, {
-          key: "addRatingNotification",
-          value: function addRatingNotification(ratingNotification) {
-            this.toastrService.toastrConfig.timeOut = 10000;
-            this.toastrService.info(ratingNotification);
+          key: "addComplexNavigatorAnnouncementNotification",
+          value: function addComplexNavigatorAnnouncementNotification(announcement) {
+            this.toastrService.toastrConfig.disableTimeOut = true;
+            this.toastrService.toastrConfig.closeButton = true;
+            this.toastrService.toastrConfig.progressBar = false;
+            this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
+            this.toastrService.info(announcement);
           }
         }, {
           key: "addHintNotification",
@@ -2372,24 +2380,24 @@
             this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
           }
         }, {
-          key: "rateComplexNavigator",
-          value: function rateComplexNavigator() {
-            this.addRatingNotification('<div><input class="input-small" value="textbox"/><a href="' + _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_portal_support_url + '">Tell us about your experience with the Complex Navigator!</a></div>');
-          }
-        }, {
           key: "complexNavigatorAnnouncement",
           value: function complexNavigatorAnnouncement() {
-            this.addAnnouncementNotification('Try out our new display: the Complex Navigator!', this.toastrService.toastrConfig.timeOut);
+            this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' + 'the Complex Navigator!');
+          }
+        }, {
+          key: "closeAnnouncement",
+          value: function closeAnnouncement() {
+            this.toastrService.clear(this.toastrService.toasts[0].toastId);
           }
         }]);
         return NotificationService;
       }();
       _NotificationService.ctorParameters = function () {
         return [{
-          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_1__.ToastrService
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_0__.ToastrService
         }];
       };
-      _NotificationService = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)()], _NotificationService);
+      _NotificationService = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_1__.Injectable)()], _NotificationService);
 
       /***/
     }),
