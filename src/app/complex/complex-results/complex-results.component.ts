@@ -26,7 +26,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
-  popUpDisplay = true;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -225,12 +224,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   setListView() {
     this.DisplayType = this.LIST_VIEW;
+    this.notificationService.complexNavigatorAnnouncement();
     this.reloadPage();
   }
 
   setComplexNavigatorView() {
     this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
     this.reloadPage();
+    this.notificationService.closeAnnouncement();
   }
 
   setFirstDisplayType(): void {
@@ -249,7 +250,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
       this.setListView();
-      this.notificationService.complexNavigatorAnnouncement();
     }
   }
 }

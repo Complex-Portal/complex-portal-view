@@ -25,10 +25,12 @@ export class NotificationService {
     this.toastrService.info(announcementNotification, 'Just to let you know!', options);
   }
 
-  private addRatingNotification(ratingNotification: string): void {
-    this.toastrService.toastrConfig.timeOut = 10000;
-    this.toastrService.toastrConfig.enableHtml = true;
-    this.toastrService.info(ratingNotification);
+  private addComplexNavigatorAnnouncementNotification(announcement: string): void {
+    this.toastrService.toastrConfig.disableTimeOut = true;
+    this.toastrService.toastrConfig.closeButton = true;
+    this.toastrService.toastrConfig.progressBar = false;
+    this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
+    this.toastrService.info(announcement);
   }
 
   private addHintNotification(hintNotification: string): void {
@@ -52,27 +54,13 @@ export class NotificationService {
     this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
   }
 
-  public rateComplexNavigator(): void {
-    const ratingHtml = `
-  <div class="ratingComponent">
-    <div class="ratingComponentStars">
-      <button class="star" id="star1" [ngClass]="{'selected': selectedRating >= 1}" (click)="selectRating(1)"> &#9733; </button>
-      <button class="star" [ngClass]="{'selected': selectedRating >= 2}" (click)="selectRating(2)"> &#9733; </button>
-      <button class="star" [ngClass]="{'selected': selectedRating >= 3}" (click)="selectRating(3)"> &#9733; </button>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 4}" (click)="selectRating(4)"> &#9733; </span>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 5}" (click)="selectRating(5)"> &#9733; </span>
-    </div>
-    <button type="submit" name="submitButton" value="Submit Rating" class="button" (click)="submitRating()">submit</button>
-  </div>
-    `;
-    this.addRatingNotification(ratingHtml);
+  public complexNavigatorAnnouncement() {
+    this.addComplexNavigatorAnnouncementNotification(
+      'Try out our new display: \n ' +
+      'the Complex Navigator!');
   }
 
-  public complexNavigatorAnnouncement() {
-    this.addAnnouncementNotification(
-      'Try out our new display: the Complex Navigator!',
-      {
-        positionClass: 'toast-right-under-header'
-      });
+  public closeAnnouncement(): void {
+    this.toastrService.clear(this.toastrService.toasts[0].toastId);
   }
 }
