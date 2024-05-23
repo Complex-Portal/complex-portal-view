@@ -32,7 +32,8 @@
       <div class="columns medium-8">
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
-                              (onPageChange)="onPageChange($event)"></cp-complex-paginator>
+                              (onPageChange)="onPageChange($event)">
+        </cp-complex-paginator>
         <cp-complex-list class="listOfResults" *ngIf="DisplayType===LIST_VIEW"
                          [complexSearch]="complexSearch">
         </cp-complex-list>

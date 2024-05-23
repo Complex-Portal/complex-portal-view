@@ -3,9 +3,9 @@
     <!-- When table is not overflowing -->
     <thead class="tableHead" *ngIf="complexes.length<=8">
     <tr>
-      <th class="interactorsHeader horizontal"
-          [style]="isInteractorSortingSet() ? 'min-width: 135px; max-width: 135px;   border-bottom: 3px solid #007c82;':''">
-        Interactors
+      <th *ngIf="isInteractorSortingSet()" class="spaceHolderSorting"></th>
+      <th class="interactorsHeader horizontal">
+        Interactor
       </th>
       <th class="horizontal" *ngFor="let complex of complexes">
         <a [routerLink]="['/complex', complex.complexAC]"
@@ -28,12 +28,14 @@
     <!-- When table is overflowing -->
     <thead class="tableHeadOverflow" *ngIf="complexes.length>8">
     <tr [style.--cols]="complexes.length"
-        [style.--intHeader]="isInteractorSortingSet() ? '156px':''">
+        [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
+        [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">
       <th class="interactorsHeader"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
       </th>
       <th class="rotate" *ngFor="let complex of complexes"
-          title="{{ complex.complexName }} - {{ complex.complexAC}}">
+          title="{{ complex.complexName }} - {{ complex.complexAC}}"
+          [style.--cols]="complexes.length">
         <a [routerLink]="['/complex', complex.complexAC]"
            title="{{ complex.complexName }} - {{ complex.complexAC}}"
            target="_blank">
@@ -48,9 +50,11 @@
           </div>
         </a>
       </th>
-      <div class="spaceHolder"></div>
+      <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>
     </tr>
-    <tr [style.--cols]="complexes.length" [style.--intHeader]="isInteractorSortingSet() ? '156px':''">
+    <tr [style.--cols]="complexes.length"
+        [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
+        [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">
       <th class="spaceHolderHeader" [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Interactors
       </th>
@@ -58,7 +62,7 @@
         <th class="iconOrganism"><i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>
         </th>
       </ng-container>
-      <div class="spaceHolder"></div>
+      <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>
     </tr>
     </thead>
   </table>

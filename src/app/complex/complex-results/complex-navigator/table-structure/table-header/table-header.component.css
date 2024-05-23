@@ -6,10 +6,13 @@ thead {
   border: 0;
   background-color: white;
   border-right: 0 solid white;
+  overflow: scroll;
+
 }
 
 .CN-table {
   clip-path: fill-box;
+  overflow: scroll;
 }
 
 /* Rotated complexes names */
@@ -47,9 +50,11 @@ thead {
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
   --intHeader: 130px;
+  --parentWidth: 100%;
+  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + 183px);
+  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
   overflow: hidden;
 }
 
@@ -122,7 +127,7 @@ a {
 }
 
 .spaceHolder {
-  width: inherit;
+  width: 1000px;
   background-color: #007c82;
   border-left: 1px solid white;
 }

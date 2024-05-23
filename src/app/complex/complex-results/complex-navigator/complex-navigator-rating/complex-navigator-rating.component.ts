@@ -15,17 +15,19 @@ export class ComplexNavigatorRatingComponent {
 
   selectRating(rating: number) {
     this.selectedRating = rating;
-    console.log(`Selected rating: ${rating}`);
+    // console.log(`Selected rating: ${rating}`);
+    this.analyticsService.rateComplexNavigator(this.selectedRating);
+    this.ratingVisibility();
   }
 
-  submitRating() {
-    if (this.selectedRating !== null) {
-      this.analyticsService.rateComplexNavigator(this.selectedRating.toString());
-      console.log(`Submitting rating: ${this.selectedRating}`);
-    } else {
-      console.log('No rating selected');
-    }
-  }
+  // submitRating() {
+  //   if (!!this.selectedRating) {
+  //     this.analyticsService.rateComplexNavigator(this.selectedRating);
+  //     console.log(`Submitting rating: ${this.selectedRating}`);
+  //   } else {
+  //     console.log('No rating selected');
+  //   }
+  // }
 
   ratingVisibility() {
     this.visible = false;

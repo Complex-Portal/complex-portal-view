@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
   templateUrl: './complex-navigator-buttons.component.html',
   styleUrls: ['./complex-navigator-buttons.component.css']
 })
-export class ComplexNavigatorButtonsComponent {
+export class ComplexNavigatorButtonsComponent implements OnInit {
   @Output() interactorsSortingChange = new EventEmitter<string>();
   @Output() organismIconDisplayChange = new EventEmitter<boolean>();
   @Output() interactorTypeDisplayChange = new EventEmitter<boolean>();
@@ -18,52 +18,70 @@ export class ComplexNavigatorButtonsComponent {
 
   typeOfDisplay: string;
 
-  InteractorsSorting(typeOfSorting: string) {
+  ngOnInit() {
+    this.updateDisplay();
+  }
+
+  InteractorsSortingChanges(typeOfSorting: string) {
     this.interactorsSortingChange.emit(typeOfSorting);
-    switch (this.typeOfDisplay) {
-      case 'compact':
-        this.compactDisplay();
-        break;
-      default:
-        this.detailedDisplay();
-        if (typeOfSorting === 'Type') {
-          this.interactorTypeDisplay = false;
-        } else if (typeOfSorting === 'Organism') {
-          this.organismIconDisplay = false;
-        }
+    if (this.typeOfDisplay === 'detailed') {
+      if (typeOfSorting === 'Type') {
+        this.interactorTypeDisplay = false;
+        this.organismIconDisplay = true;
+      } else if (typeOfSorting === 'Organism') {
+        this.organismIconDisplay = false;
+        this.interactorTypeDisplay = true;
+      }
+      this.updateDisplay();
     }
-    this.changesEmitter();
   }
 
   DisplayingOrganism() {
     this.organismIconDisplay = !this.organismIconDisplay;
-    this.changesEmitter();
+    this.updateDisplay();
   }
 
   DisplayingType() {
     this.interactorTypeDisplay = !this.interactorTypeDisplay;
-    this.changesEmitter();
+    this.updateDisplay();
   }
 
   DisplayingID() {
     this.IDDisplay = !this.IDDisplay;
-    this.changesEmitter();
+    this.updateDisplay();
+  }
+
+  setDisplayType(type: string) {
+    if (type === 'compact') {
+      this.compactDisplay();
+    } else if (type === 'detailed') {
+      this.detailedDisplay();
+    }
   }
 
   compactDisplay() {
     this.organismIconDisplay = false;
     this.interactorTypeDisplay = false;
     this.IDDisplay = false;
-    this.changesEmitter();
     this.typeOfDisplay = 'compact';
+    this.changesEmitter();
   }
 
   detailedDisplay() {
     this.organismIconDisplay = true;
     this.interactorTypeDisplay = true;
     this.IDDisplay = true;
-    this.changesEmitter();
     this.typeOfDisplay = 'detailed';
+    this.changesEmitter();
+  }
+
+  updateDisplay() {
+    if (this.organismIconDisplay || this.interactorTypeDisplay || this.IDDisplay) {
+      this.typeOfDisplay = 'detailed';
+    } else {
+      this.typeOfDisplay = 'compact';
+    }
+    this.changesEmitter();
   }
 
   changesEmitter() {
@@ -71,4 +89,5 @@ export class ComplexNavigatorButtonsComponent {
     this.interactorTypeDisplayChange.emit(this.interactorTypeDisplay);
     this.IDDisplayChange.emit(this.IDDisplay);
   }
+
 }

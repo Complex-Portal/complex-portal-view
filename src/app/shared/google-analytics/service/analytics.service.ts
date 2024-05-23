@@ -67,7 +67,7 @@ export class AnalyticsService {
     this.invokeCustomEvent(Action.APIResquestError, api, type);
   }
 
-  public rateComplexNavigator(rating: string) {
-    this.invokeCustomEvent(Action.RatingComplexNavigator, Category.complexNavigator, rating);
+  public rateComplexNavigator(rating: number) {
+    this.analytics.event(Action[Action.RatingComplexNavigator], Category[Category.complexNavigator], 'rating', rating);
   }
 }

@@ -11,11 +11,10 @@
   overflow-x: auto;
   overflow-y: hidden;
   transform: rotateX(180deg);
-  width: 100%;
 }
 
 .interactors {
   z-index: 1;
   position: relative;
-
+  overflow-y: hidden;
 }

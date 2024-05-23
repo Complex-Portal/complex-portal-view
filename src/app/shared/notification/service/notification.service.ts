@@ -25,12 +25,13 @@ export class NotificationService {
     this.toastrService.info(announcementNotification, 'Just to let you know!', options);
   }
 
-  private addComplexNavigatorAnnouncementNotification(announcement: string): void {
-    this.toastrService.toastrConfig.disableTimeOut = true;
-    this.toastrService.toastrConfig.closeButton = true;
-    this.toastrService.toastrConfig.progressBar = false;
-    this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
-    this.toastrService.info(announcement);
+  private addComplexNavigatorAnnouncementNotification(announcement: string) {
+    return this.toastrService.info(announcement, null, {
+      disableTimeOut: true,
+      closeButton: true,
+      progressBar: false,
+      positionClass: 'toast-right-under-header'
+    });
   }
 
   private addHintNotification(hintNotification: string): void {
@@ -55,12 +56,12 @@ export class NotificationService {
   }
 
   public complexNavigatorAnnouncement() {
-    this.addComplexNavigatorAnnouncementNotification(
+    return this.addComplexNavigatorAnnouncementNotification(
       'Try out our new display: \n ' +
       'the Complex Navigator!');
   }
 
-  public closeAnnouncement(): void {
-    this.toastrService.clear(this.toastrService.toasts[0].toastId);
+  public closeAnnouncement(toastId: number): void {
+    this.toastrService.clear(toastId);
   }
 }

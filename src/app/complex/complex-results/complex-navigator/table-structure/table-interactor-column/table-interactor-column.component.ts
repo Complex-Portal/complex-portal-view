@@ -333,4 +333,8 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
     this.ranges = ranges;
   }
+
+  isInteractorSortingSet() {
+    return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+  }
 }

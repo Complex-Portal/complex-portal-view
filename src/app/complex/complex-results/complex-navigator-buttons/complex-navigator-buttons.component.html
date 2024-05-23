@@ -1,16 +1,15 @@
 <div class="filters">
-
   <div class="sortingInteractors">
     <input type="submit" name="classificationButton" value="Sort interactors" class="button">
     <div class="typeOfSorting">
       <input type="submit" name="occurrenceClassification" value="Occurrence" class="button"
-             (click)="InteractorsSorting('Occurrence')">
+             (click)="InteractorsSortingChanges('Occurrence')">
       <input type="submit" name="typeClassification" value="Type" class="button"
-             (click)="InteractorsSorting('Type')">
+             (click)="InteractorsSortingChanges('Type')">
       <input type="submit" name="organismClassification" value="Organism" class="button"
-             (click)="InteractorsSorting('Organism')">
+             (click)="InteractorsSortingChanges('Organism')">
       <input type="submit" name="geneClassification" value="Orthology (Not available yet)" class="button"
-             (click)="InteractorsSorting('Orthology')">
+             (click)="InteractorsSortingChanges('Orthology')">
     </div>
   </div>
 
@@ -18,12 +17,13 @@
     <input type="submit" name="classificationButton" value="Display Options" class="button">
     <ul class="displaySize">
       <li>
-        <input type="radio" name="organism" value="Detailed view" class="checkbox compact" (click)="compactDisplay()">
+        <input type="radio" name="displayType" value="Compact" class="checkbox compact"
+               (click)="setDisplayType('compact')" [checked]="typeOfDisplay === 'compact'">
         Compact display
       </li>
       <li class="detailedDisplay">
-        <input type="radio" name="organism" value="Detailed view" class="checkbox detailed" (click)="detailedDisplay()"
-               checked>
+        <input type="radio" name="displayType" value="Detailed" class="checkbox detailed"
+               (click)="setDisplayType('detailed')" [checked]="typeOfDisplay === 'detailed'">
         Detailed display
         <ul class="detailedDisplayOptions">
           <li>
@@ -37,7 +37,7 @@
             Type
           </li>
           <li>
-            <input type="checkbox" name="type" value="type" class="checkbox" [checked]="IDDisplay"
+            <input type="checkbox" name="id" value="id" class="checkbox" [checked]="IDDisplay"
                    (change)="DisplayingID()">
             Interactor ID
           </li>
@@ -45,5 +45,4 @@
       </li>
     </ul>
   </div>
-
 </div>

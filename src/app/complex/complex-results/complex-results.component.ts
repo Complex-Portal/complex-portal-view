@@ -17,15 +17,20 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   LIST_VIEW = 'view_list';
   COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
   private _query: string;
-  private _currentPageIndex: number;
   private _complexSearch: ComplexSearchResult;
-  private _lastPageIndex: number;
-  private _pageSize = 15;
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
   private _allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
+  toast;
+
+  private _listPageSize = 15; // This is where we set the size of the pages for list view
+  private _navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
+  private _listCurrentPage: number;
+  private _navigatorCurrentPage: number;
+  private _listLastPageIndex;
+  private _navigatorLastPageIndex;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -35,19 +40,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
-    this.route
-      .queryParams
-      .subscribe(queryParams => {
-        this._query = queryParams['query'];
-        this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
-        this._currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
-        // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-        this.requestComplexResults();
-        document.body.scrollTop = 0;
-      });
     this.route.fragment.subscribe(fragment => {
       if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
         this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
@@ -55,6 +47,19 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         this.DisplayType = this.LIST_VIEW;
       }
     });
+    this.route
+      .queryParams
+      .subscribe(queryParams => {
+        this._query = queryParams['query'];
+        this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
+        this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
+        // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
+        this.requestComplexResults();
+        document.body.scrollTop = 0;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -92,7 +97,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private reloadPage(): void {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this._query;
-    queryParams['page'] = this._currentPageIndex;
+    queryParams['page'] = this.currentPageIndex;
     if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
       queryParams['species'] = this.prepareFiltersForParams(this.spicesFilter);
     }
@@ -166,11 +171,19 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get currentPageIndex(): number {
-    return this._currentPageIndex;
+    if (this.DisplayType === this.COMPLEX_NAVIGATOR_VIEW) {
+      return this._navigatorCurrentPage;
+    } else {
+      return this._listCurrentPage;
+    }
   }
 
   set currentPageIndex(value: number) {
-    this._currentPageIndex = value;
+    if (this.DisplayType === this.COMPLEX_NAVIGATOR_VIEW) {
+      this._navigatorCurrentPage = value;
+    } else {
+      this._listCurrentPage = value;
+    }
   }
 
   get complexSearch(): ComplexSearchResult {
@@ -183,15 +196,27 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get lastPageIndex(): number {
-    return this._lastPageIndex;
+    if (this.DisplayType === this.COMPLEX_NAVIGATOR_VIEW) {
+      return this._navigatorLastPageIndex;
+    } else {
+      return this._listLastPageIndex;
+    }
   }
 
   set lastPageIndex(value: number) {
-    this._lastPageIndex = value;
+    if (this.DisplayType === this.COMPLEX_NAVIGATOR_VIEW) {
+      this._navigatorLastPageIndex = value;
+    } else {
+      this._listLastPageIndex = value;
+    }
   }
 
   get pageSize(): number {
-    return this._pageSize;
+    if (this.DisplayType === this.COMPLEX_NAVIGATOR_VIEW) {
+      return this._navigatorPageSize;
+    } else {
+      return this._listPageSize;
+    }
   }
 
   get spicesFilter(): string[] {
@@ -224,15 +249,19 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   setListView() {
     this.DisplayType = this.LIST_VIEW;
-    this.notificationService.complexNavigatorAnnouncement();
+    this.toast = this.notificationService.complexNavigatorAnnouncement();
     this.reloadPage();
   }
 
   setComplexNavigatorView() {
     this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
     this.reloadPage();
-    this.notificationService.closeAnnouncement();
+    if (!!this.toast) {
+      this.notificationService.closeAnnouncement(this.toast.toastId);
+      this.toast = null;
+    }
   }
+
 
   setFirstDisplayType(): void {
     if (this._complexSearch.elements.length === 1) {
@@ -244,6 +273,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         };
         this.router.navigate(['/complex', complexId]);
       }
+    } else if (this._complexSearch.elements.length < this._navigatorPageSize) {
+      this.setComplexNavigatorView();
+    } else {
+      this.setListView();
     }
 
     if (!this.DisplayType) {
