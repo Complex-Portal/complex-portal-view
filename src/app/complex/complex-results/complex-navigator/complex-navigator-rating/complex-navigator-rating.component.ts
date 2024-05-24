@@ -20,15 +20,6 @@ export class ComplexNavigatorRatingComponent {
     this.ratingVisibility();
   }
 
-  // submitRating() {
-  //   if (!!this.selectedRating) {
-  //     this.analyticsService.rateComplexNavigator(this.selectedRating);
-  //     console.log(`Submitting rating: ${this.selectedRating}`);
-  //   } else {
-  //     console.log('No rating selected');
-  //   }
-  // }
-
   ratingVisibility() {
     this.visible = false;
   }

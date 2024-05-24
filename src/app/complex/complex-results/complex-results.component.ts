@@ -40,26 +40,26 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
-    this.route
-      .queryParams
-      .subscribe(queryParams => {
-        this._query = queryParams['query'];
-        this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
-        this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
-        this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
-        this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
-        // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-        this.requestComplexResults();
-        document.body.scrollTop = 0;
-        this.route.fragment.subscribe(fragment => {
-          if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
-            this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
-          } else if (fragment === this.LIST_VIEW) {
-            this.DisplayType = this.LIST_VIEW;
-          }
+    this.route.fragment.subscribe(fragment => {
+      if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
+        this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+      } else if (fragment === this.LIST_VIEW) {
+        this.DisplayType = this.LIST_VIEW;
+      }
+      this.route
+        .queryParams
+        .subscribe(queryParams => {
+          this._query = queryParams['query'];
+          this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+          this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+          this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
+          this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+          // TODO This is out for now, but CP-84 (JIRA )should fix that!!
+          // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
+          this.requestComplexResults();
+          document.body.scrollTop = 0;
         });
-      });
+    });
   }
 
   ngAfterViewInit(): void {

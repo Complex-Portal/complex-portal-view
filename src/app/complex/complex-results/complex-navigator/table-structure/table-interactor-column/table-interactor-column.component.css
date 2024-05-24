@@ -120,7 +120,6 @@ a, a:visited {
   --rowspanSize: 1;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
-  /*font-weight: lighter;*/
   font-size: small;
   color: white;
   line-height: 0.8;
