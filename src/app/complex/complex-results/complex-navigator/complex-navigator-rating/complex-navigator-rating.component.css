@@ -35,7 +35,7 @@
   width: 96%;
   text-align: -webkit-center;
   padding-left: 10px;
-  margin-bottom: -20px;
+  margin-bottom: -15px;
 }
 
 @keyframes ratingComponentMove {
@@ -45,4 +45,19 @@
   to {
     left: -13%;
   }
+}
+
+.buttonContainer {
+  width: 100%;
+  height: 1ch;
+  text-align: end;
+  padding-right: 5px;
+}
+
+.close {
+  color: white;
+}
+
+.ratingComponentStars {
+  padding-bottom: 5px;
 }

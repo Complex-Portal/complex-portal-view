@@ -40,13 +40,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this._allInteractorsInComplexSearch = [];
-    this.route.fragment.subscribe(fragment => {
-      if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
-        this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
-      } else if (fragment === this.LIST_VIEW) {
-        this.DisplayType = this.LIST_VIEW;
-      }
-    });
     this.route
       .queryParams
       .subscribe(queryParams => {
@@ -59,6 +52,13 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
         this.requestComplexResults();
         document.body.scrollTop = 0;
+        this.route.fragment.subscribe(fragment => {
+          if (fragment === this.COMPLEX_NAVIGATOR_VIEW) {
+            this.DisplayType = this.COMPLEX_NAVIGATOR_VIEW;
+          } else if (fragment === this.LIST_VIEW) {
+            this.DisplayType = this.LIST_VIEW;
+          }
+        });
       });
   }
 
@@ -264,7 +264,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
 
   setFirstDisplayType(): void {
-    if (this._complexSearch.elements.length === 1) {
+    if (this._complexSearch.totalNumberOfResults === 1) {
       const complexId = this._complexSearch.elements[0].complexAC;
       if (!!complexId) {
         // For some reason this is needed so the navigate call works
@@ -273,16 +273,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         };
         this.router.navigate(['/complex', complexId]);
       }
-    } else if (this._complexSearch.elements.length < this._navigatorPageSize) {
-      this.setComplexNavigatorView();
-    } else {
-      this.setListView();
     }
 
     if (!this.DisplayType) {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
-      this.setListView();
+      if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
+        this.setComplexNavigatorView();
+      } else {
+        this.setListView();
+      }
     }
   }
 }

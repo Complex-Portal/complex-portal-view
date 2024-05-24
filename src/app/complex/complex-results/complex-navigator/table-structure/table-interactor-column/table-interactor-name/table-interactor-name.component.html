@@ -8,7 +8,7 @@
        class="{{interactorTypeIcon}}"
        title="{{interactorType}}"></i>
 
-    <div class="name" title="{{interactorName}}" *ngIf="IDDisplay"> {{ interactorName }}
+    <div class="name" title="{{interactorId}}" *ngIf="IDDisplay"> {{ interactorName }}
     </div>
     <div class="name" title="More information about {{interactorId}}" *ngIf="!IDDisplay">
       <a *ngIf="!IDDisplay" href="{{identifierLink}}" target="_blank"
@@ -16,10 +16,8 @@
         {{ interactorName }}
       </a>
     </div>
-
     <a [routerLink]="['/complex/search']"
        [queryParams]="{query: interactorId, page: 1}"
-       [preserveFragment]="true"
        target="_blank">
       <i class="icon icon-functional small" data-icon="1"
          title="Complexes containing this interactor"></i>
