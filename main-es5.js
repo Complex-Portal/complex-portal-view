@@ -2061,7 +2061,7 @@
         }, {
           key: "rateComplexNavigator",
           value: function rateComplexNavigator(rating) {
-            this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator, _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator, rating);
+            this.analytics.event(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action[_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator], _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category[_types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator], 'rating', rating);
           }
         }]);
         return AnalyticsService;
@@ -2348,11 +2348,12 @@
         }, {
           key: "addComplexNavigatorAnnouncementNotification",
           value: function addComplexNavigatorAnnouncementNotification(announcement) {
-            this.toastrService.toastrConfig.disableTimeOut = true;
-            this.toastrService.toastrConfig.closeButton = true;
-            this.toastrService.toastrConfig.progressBar = false;
-            this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
-            this.toastrService.info(announcement);
+            return this.toastrService.info(announcement, null, {
+              disableTimeOut: true,
+              closeButton: true,
+              progressBar: false,
+              positionClass: 'toast-right-under-header'
+            });
           }
         }, {
           key: "addHintNotification",
@@ -2382,12 +2383,12 @@
         }, {
           key: "complexNavigatorAnnouncement",
           value: function complexNavigatorAnnouncement() {
-            this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' + 'the Complex Navigator!');
+            return this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' + 'the Complex Navigator!');
           }
         }, {
           key: "closeAnnouncement",
-          value: function closeAnnouncement() {
-            this.toastrService.clear(this.toastrService.toasts[0].toastId);
+          value: function closeAnnouncement(toastId) {
+            this.toastrService.clear(toastId);
           }
         }]);
         return NotificationService;

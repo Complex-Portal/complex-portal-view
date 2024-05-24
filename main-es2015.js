@@ -1743,7 +1743,7 @@ let AnalyticsService = class AnalyticsService {
         this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.APIResquestError, api, type);
     }
     rateComplexNavigator(rating) {
-        this.invokeCustomEvent(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator, _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator, rating);
+        this.analytics.event(_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action[_types_action_enum__WEBPACK_IMPORTED_MODULE_1__.Action.RatingComplexNavigator], _types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category[_types_category_enum__WEBPACK_IMPORTED_MODULE_0__.Category.complexNavigator], 'rating', rating);
     }
 };
 AnalyticsService.ctorParameters = () => [
@@ -1978,11 +1978,12 @@ let NotificationService = class NotificationService {
         this.toastrService.info(announcementNotification, 'Just to let you know!', options);
     }
     addComplexNavigatorAnnouncementNotification(announcement) {
-        this.toastrService.toastrConfig.disableTimeOut = true;
-        this.toastrService.toastrConfig.closeButton = true;
-        this.toastrService.toastrConfig.progressBar = false;
-        this.toastrService.toastrConfig.positionClass = 'toast-right-under-header';
-        this.toastrService.info(announcement);
+        return this.toastrService.info(announcement, null, {
+            disableTimeOut: true,
+            closeButton: true,
+            progressBar: false,
+            positionClass: 'toast-right-under-header'
+        });
     }
     addHintNotification(hintNotification) {
         this.toastrService.warning(hintNotification, 'Just to let you know!');
@@ -2001,11 +2002,11 @@ let NotificationService = class NotificationService {
         this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
     }
     complexNavigatorAnnouncement() {
-        this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' +
+        return this.addComplexNavigatorAnnouncementNotification('Try out our new display: \n ' +
             'the Complex Navigator!');
     }
-    closeAnnouncement() {
-        this.toastrService.clear(this.toastrService.toasts[0].toastId);
+    closeAnnouncement(toastId) {
+        this.toastrService.clear(toastId);
     }
 };
 NotificationService.ctorParameters = () => [
