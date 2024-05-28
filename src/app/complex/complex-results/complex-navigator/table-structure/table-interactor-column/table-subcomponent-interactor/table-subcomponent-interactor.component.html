@@ -1,12 +1,7 @@
 <div [ngClass]="displayTopLineClass"></div>
 <cp-table-interactor-stoichiometry
-  *ngIf="interactorInComplex"
-  [stoichiometryText]="interactorStoichiometryText"
-  [stoichiometryValue]="interactorStoichiometryValue"
-></cp-table-interactor-stoichiometry>
-<cp-table-interactor-stoichiometry
-  *ngIf="interactorInSubComplex"
-  [stoichiometryText]="subComplexInteractorStoichiometryText"
-  [stoichiometryValue]="subComplexInteractorStoichiometryValue"
+  *ngIf="!!interactorComponent"
+  [stoichiometryText]="interactorComponent.stochiometryText"
+  [stoichiometryValue]="interactorComponent.stochiometryValueFormatted"
 ></cp-table-interactor-stoichiometry>
 <div [ngClass]="displayBottomLineClass"></div>
