@@ -154,7 +154,7 @@ function formatStoichiometryValues(stoichiometry: [number, number]): string {
     if (minValue === maxValue) {
       return minValue.toString();
     } else {
-      return `${minValue}, ${maxValue}`;
+      return `${minValue}-${maxValue}`;
     }
   }
   return ' '; // sometimes we don't have the stoichiometry value
@@ -162,7 +162,7 @@ function formatStoichiometryValues(stoichiometry: [number, number]): string {
 
 function getStoichiometryText(stoichiometry: [number, number]): string {
   if (!!stoichiometry) {
-      return 'Stoichiometry values: ' + (stoichiometry);
+      return 'Stoichiometry values: minValue: ' + stoichiometry[0] + ', maxValue: ' + stoichiometry[1];
   } else {
     return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
   }
