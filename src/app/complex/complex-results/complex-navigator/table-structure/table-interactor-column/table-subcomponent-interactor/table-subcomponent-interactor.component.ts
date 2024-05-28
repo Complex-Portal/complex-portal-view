@@ -1,8 +1,7 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {Element} from '../../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
-import {findInteractorInComplex, formatStoichiometryValues, getStoichiometry, stoichiometryOfInteractors} from '../complex-navigator-utils';
+import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-navigator-utils';
 
 @Component({
   selector: 'cp-table-subcomponent-interactor',
@@ -16,23 +15,13 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
   @Input() j: number;
   @Input() enrichedInteractors: EnrichedInteractor[];
 
+  interactorComponent: ComponentWithStoichiometry;
   displayTopLineClass: string;
   displayBottomLineClass: string;
-  interactorInComplex = false;
-  interactorStoichiometryText: string;
-  interactorStoichiometryValue: string;
-  interactorInSubComplex = false;
-  subComplexInteractorStoichiometryText: string;
-  subComplexInteractorStoichiometryValue: string;
 
   ngOnChanges(): void {
+    this.interactorComponent = findInteractorInComplex(this.complex.complex, this.el.identifier, this.enrichedInteractors);
     this.displayTopLineClass = this.displayTopLineClassExpanded(this.complex, this.i, this.j);
-    this.interactorInComplex = !!findInteractorInComplex(this.complex.complex, this.el.identifier);
-    this.interactorStoichiometryText = getStoichiometry(this.complex.complex, this.el.identifier);
-    this.interactorStoichiometryValue = stoichiometryOfInteractors(this.complex.complex, this.el.identifier);
-    this.interactorInSubComplex = !!this.findInteractorInExpandedSubComplex(this.interactor, this.complex.complex, this.el.identifier);
-    this.subComplexInteractorStoichiometryText = this.getStoichiometryInExpandedSubComplex(this.interactor, this.el.identifier);
-    this.subComplexInteractorStoichiometryValue = this.stoichiometryOfInteractorsExpandable(this.interactor, this.el.identifier);
     this.displayBottomLineClass = this.displayBottomLineClassExpanded(this.complex, this.i, this.j);
   }
 
@@ -67,33 +56,6 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
     }
 
     return 'transparentVerticalLine';
-  }
-
-  public findInteractorInExpandedSubComplex(interactor: EnrichedInteractor, complex: Element, interactorId: string): ComplexComponent {
-    if (complex.interactors.some(component => component.identifier === interactor.interactor.identifier)) {
-      return interactor.subComponents.find(component => component.identifier === interactorId);
-    }
-    return null;
-  }
-
-  getStoichiometryInExpandedSubComplex(interactor: EnrichedInteractor, interactorId: string): string {
-    const match = this.findInteractorInSubcomplex(interactor, interactorId);
-    if (!!match) {
-      if (!!match.stochiometry) {
-        return 'Stoichiometry values: ' + (match.stochiometry);
-      } else {
-        return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
-      }
-    }
-    return null;
-  }
-
-  stoichiometryOfInteractorsExpandable(interactor: EnrichedInteractor, interactorId: string): string {
-    const match = this.findInteractorInSubcomplex(interactor, interactorId);
-    if (!!match) {
-      return formatStoichiometryValues(match.stochiometry);
-    }
-    return null;
   }
 
   private doesLineCrossSubcomponentCell(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): boolean {
@@ -148,10 +110,6 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
       }
     }
     return false;
-  }
-
-  private findInteractorInSubcomplex(interactor: EnrichedInteractor, interactorId: string): ComplexComponent {
-    return interactor.subComponents.find(component => component.identifier === interactorId);
   }
 
 }

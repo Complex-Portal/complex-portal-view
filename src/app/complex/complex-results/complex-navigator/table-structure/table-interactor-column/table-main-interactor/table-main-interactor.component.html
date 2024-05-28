@@ -1,12 +1,7 @@
-<div [ngClass]="displayTopLineClass(complex, i)"></div>
+<div [ngClass]="topLineClass"></div>
 <cp-table-interactor-stoichiometry
-  *ngIf="!!findInteractorInComplex(complex.complex, interactor.interactor.identifier)"
-  [stoichiometryText]="getStoichiometry(complex.complex, interactor.interactor.identifier)"
-  [stoichiometryValue]="stoichiometryOfInteractors(complex.complex, interactor.interactor.identifier)"
+  *ngIf="!!interactorComponent"
+  [stoichiometryText]="interactorComponent.stochiometryText"
+  [stoichiometryValue]="interactorComponent.stochiometryValueFormatted"
 ></cp-table-interactor-stoichiometry>
-<cp-table-interactor-stoichiometry
-  *ngIf="!findInteractorInComplex(complex.complex, interactor.interactor.identifier) && findInteractorsInSubComplex(complex.complex, interactor.interactor.identifier).length > 0"
-  [stoichiometryText]="getStoichiometrySubComplex(complex.complex, interactor.interactor.identifier)"
-  [stoichiometryValue]="stoichiometryOfInteractorsMainTable(complex.complex, interactor.interactor.identifier)"
-></cp-table-interactor-stoichiometry>
-<div [ngClass]="displayBottomLineClass(complex, i)"></div>
+<div [ngClass]="bottomLineClass"></div>

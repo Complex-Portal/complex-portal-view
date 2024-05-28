@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
 import {map} from 'rxjs/operators';
-import {formatStoichiometryValues, stoichiometryOfInteractors} from './complex-navigator-utils';
+import {findInteractorInComplex} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
 
 export class EnrichedInteractor {
@@ -24,6 +24,7 @@ export class EnrichedComplex {
   endInteractorIndex: number;
   startSubComponentIndex: number;
   endSubComponentIndex: number;
+  startInteractorIncludedWhenExpanded: boolean;
 }
 
 @Component({
@@ -120,6 +121,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
+    console.log('Done');
 
   }
 
@@ -164,53 +166,57 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private calculateStartAndEndIndexes(complex: Element): EnrichedComplex {
-    const subComponentsToCheck: string[] = [];
-
     const enrichedComplex: EnrichedComplex = {
       complex,
       startInteractorIndex: null,
       endInteractorIndex: null,
       startSubComponentIndex: null,
-      endSubComponentIndex: null
+      endSubComponentIndex: null,
+      startInteractorIncludedWhenExpanded: true,
     };
 
     // We iterate through the interactors to find the first and last one part of the complex
     // We do this to be able to draw a line connecting all interactors in the complex
     for (let i = 0; i < this.enrichedInteractors.length; i++) {
       if (!this.enrichedInteractors[i].hidden) {
-        for (let j = 0; j < complex.interactors.length; j++) {
-          if (complex.interactors[j].identifier === this.enrichedInteractors[i].interactor.identifier) {
-            // The interactor is part of the complex, we update the start and end indices for the interactors
-            // line as it may start in this interactor
-            enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
-            enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
 
-            // The interactor is a subcomplex
-            if (this.enrichedInteractors[i].isSubComplex && !!this.enrichedInteractors[i].subComponents) {
-              // The subcomponents of that subcomplex could also be displayed in the table as separate interactors.
-              // In that case, the line could start or end there, so we need to also check the position of those
-              // interactors. We add those subcomponents to 'subComponentsToCheck' to check their position later
-              this.enrichedInteractors[i].subComponents.forEach(subComponent => subComponentsToCheck.push(subComponent.identifier));
-              if (this.enrichedInteractors[i].expanded) {
-                // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
-                // of it. That means we need a line connecting all the subcomponents.
-                // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
-                // and not at the first subcomponent
-                enrichedComplex.startSubComponentIndex = -1;
-                enrichedComplex.endSubComponentIndex = this.enrichedInteractors[i].subComponents.length - 1;
-              }
+        if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].interactor.identifier, this.enrichedInteractors)) {
+          // The interactor is part of the complex, we update the start and end indices for the interactors
+          // line as it may start in this interactor
+          enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+          if (enrichedComplex.startInteractorIndex === i) {
+            // The line starts in this interactor, so the line always starts in this interactor, even when expanded
+            enrichedComplex.startInteractorIncludedWhenExpanded = true;
+          }
+          enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
+
+          // The interactor is a subcomplex
+          if (this.enrichedInteractors[i].isSubComplex && !!this.enrichedInteractors[i].subComponents) {
+            if (this.enrichedInteractors[i].expanded) {
+              // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
+              // of it. That means we need a line connecting all the subcomponents.
+              // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
+              // and not at the first subcomponent
+              enrichedComplex.startSubComponentIndex = -1;
+              enrichedComplex.endSubComponentIndex = this.enrichedInteractors[i].subComponents.length - 1;
             }
-          } else if (this.enrichedInteractors[i].isSubComplex &&
-            !!this.enrichedInteractors[i].subComponents &&
-            this.enrichedInteractors[i].expanded) {
+          }
+        } else if (this.enrichedInteractors[i].isSubComplex &&
+          !!this.enrichedInteractors[i].subComponents &&
+          this.enrichedInteractors[i].expanded) {
             // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
             // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
             // In that case, the line could start or end on any of those subcomponents
             for (let k = 0; k < this.enrichedInteractors[i].subComponents.length; k++) {
-              if (complex.interactors[j].identifier === this.enrichedInteractors[i].subComponents[k].identifier) {
+              if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].subComponents[k].identifier, this.enrichedInteractors)) {
                 // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
                 // line as it may start in this interactor
                 enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+                if (enrichedComplex.startInteractorIndex === i) {
+                  // The line starts in a subcomponent of the interactor, but not on the interactor itself,
+                  // so the line does not start in the interactor when expanded
+                  enrichedComplex.startInteractorIncludedWhenExpanded = false;
+                }
                 enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
                 // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
                 // line as it may start in this subcomponent
@@ -218,21 +224,6 @@ export class TableInteractorColumnComponent implements OnChanges {
                 enrichedComplex.endSubComponentIndex = this.getMaxValue(enrichedComplex.endSubComponentIndex, k);
               }
             }
-          }
-        }
-      }
-    }
-
-    // We finally check the position of the subcomponents of subcomplexes part of the complex on the main table.
-    // If any is before or after where the lines start and end, then we need to update the start and end indexes,
-    // as the line must start or end there
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      if (!this.enrichedInteractors[i].hidden) {
-        if (subComponentsToCheck.includes(this.enrichedInteractors[i].interactor.identifier)) {
-          // The interactor is part of a subcomplex that is part of the complex, we update the start and end indices for the interactors
-          // line as it may start in this interactor
-          enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
-          enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
         }
       }
     }
@@ -241,7 +232,6 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   public classifyInteractorsByOrganism() {
     this.enrichedInteractors.sort((a, b) => b.interactor.organismName.localeCompare(a.interactor.organismName));
-    // this.calculateAllStartAndEndIndexes();
     this.rangeOfInteractorOrganism();
   }
 
@@ -253,25 +243,12 @@ export class TableInteractorColumnComponent implements OnChanges {
   public classifyInteractorsByOccurrence() {
     for (const oneInteractor of this.enrichedInteractors) {
       for (const complex of this.complexes) {
-        for (const complexesInteractors of complex.interactors) {
-          if (oneInteractor.interactor.identifier === complexesInteractors.identifier) {
-            const stoichiometryValue = parseInt(stoichiometryOfInteractors(complex, oneInteractor.interactor.identifier), 10);
-            if (!isNaN(stoichiometryValue)) {
-              oneInteractor.timesAppearing += stoichiometryValue;
-            }
-          }
-        }
-        if (oneInteractor.isSubComplex && !!oneInteractor.subComponents) {
-          for (const oneSubInteractor of oneInteractor.subComponents) {
-            const oneEnrichedInteractor = this.enrichedInteractors.find(
-              enrichedInteractor => enrichedInteractor.interactor.identifier === oneSubInteractor.identifier
-            );
-            if (!!oneEnrichedInteractor) {
-              const stoichiometryValue = parseInt(formatStoichiometryValues(oneSubInteractor.stochiometry), 10);
-              if (!isNaN(stoichiometryValue)) {
-                oneEnrichedInteractor.timesAppearing += stoichiometryValue;
-              }
-            }
+        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
+        if (!!match) {
+          if (!!match.stochiometryValue) {
+            oneInteractor.timesAppearing += match.stochiometryValue[0];
+          } else {
+            oneInteractor.timesAppearing += 1;
           }
         }
       }
