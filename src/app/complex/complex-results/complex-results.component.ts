@@ -264,24 +264,24 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
 
   setFirstDisplayType(): void {
-    if (this._complexSearch.totalNumberOfResults === 1) {
-      const complexId = this._complexSearch.elements[0].complexAC;
-      if (!!complexId) {
-        // For some reason this is needed so the navigate call works
-        this.router.routeReuseStrategy.shouldReuseRoute = function () {
-          return false;
-        };
-        this.router.navigate(['/complex', complexId]);
-      }
-    }
-
     if (!this.DisplayType) {
-      // Currently the list view is the default, as we are just launching the navigator view
-      // Later on we can change the default view to be the list or navigator view based on number of results
-      if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
-        this.setComplexNavigatorView();
+      if (this._complexSearch.totalNumberOfResults === 1) {
+        const complexId = this._complexSearch.elements[0].complexAC;
+        if (!!complexId) {
+          // For some reason this is needed so the navigate call works
+          this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+          };
+          this.router.navigate(['/complex', complexId]);
+        }
       } else {
-        this.setListView();
+        // Currently the list view is the default, as we are just launching the navigator view
+        // Later on we can change the default view to be the list or navigator view based on number of results
+        if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
+          this.setComplexNavigatorView();
+        } else {
+          this.setListView();
+        }
       }
     }
   }
