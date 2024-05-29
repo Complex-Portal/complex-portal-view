@@ -19,7 +19,7 @@ export class TableMainInteractorComponent implements OnChanges {
   ngOnChanges(): void {
     this.interactorComponent = findInteractorInComplex(
       this.complex.complex, this.interactor.interactor.identifier, this.enrichedInteractors);
-    this.topLineClass = this.displayTopLineClas2(this.complex, this.i);
+    this.topLineClass = this.displayTopLineClass(this.complex, this.i);
     this.bottomLineClass = this.displayBottomLineClass(this.complex, this.i);
   }
 
@@ -27,7 +27,7 @@ export class TableMainInteractorComponent implements OnChanges {
     return this.enrichedInteractors[this.i];
   }
 
-  public displayTopLineClas2(complex: EnrichedComplex, interactorIndex: number): string {
+  public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
     if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
       return 'verticalLine';
     }
