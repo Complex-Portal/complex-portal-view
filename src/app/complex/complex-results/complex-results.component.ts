@@ -26,7 +26,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   toast;
 
   private _listPageSize = 15; // This is where we set the size of the pages for list view
-  private _navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
+  private _navigatorPageSize = 15; // This is where we set the size of the pages for navigator view
   private _listCurrentPage: number;
   private _navigatorCurrentPage: number;
   private _listLastPageIndex;

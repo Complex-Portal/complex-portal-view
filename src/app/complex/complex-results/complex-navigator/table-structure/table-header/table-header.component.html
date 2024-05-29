@@ -1,7 +1,7 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- When table is not overflowing -->
-    <thead class="tableHead" *ngIf="complexes.length<=8">
+    <thead class="tableHead" *ngIf="complexes.length<=6">
     <tr>
       <th *ngIf="isInteractorSortingSet()" class="spaceHolderSorting"></th>
       <th class="interactorsHeader horizontal">
@@ -26,11 +26,11 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length>8">
+    <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">
-      <th class="interactorsHeader"
+      <th class="spaceHolderHeaderOverflow"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
       </th>
       <th class="rotate" *ngFor="let complex of complexes"
@@ -52,10 +52,12 @@
       </th>
       <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>
     </tr>
+    <!-- icons row -->
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">
-      <th class="spaceHolderHeader" [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+      <th class="interactorsHeader overflow"
+          [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Interactors
       </th>
       <ng-container *ngFor=" let complex of complexes;">

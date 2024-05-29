@@ -15,9 +15,14 @@ thead {
   overflow: scroll;
 }
 
+.spaceHolderSorting {
+  width: 3ch;
+  border-bottom: 3px solid #007c82;
+}
+
 /* Rotated complexes names */
 
-.interactorsHeader {
+.spaceHolderHeaderOverflow {
   min-width: 130px;
   max-width: 130px;
   position: sticky;
@@ -85,6 +90,26 @@ thead {
   border: none;
 }
 
+.spaceHolder {
+  width: 1000px;
+  background-color: #007c82;
+  border-left: 1px solid white;
+}
+
+.interactorsHeader.overflow {
+  min-width: 130px;
+  max-width: 130px;
+  width: 130px;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background-color: white;
+  border-bottom: 3px solid #007c82;
+  height: 35px;
+  text-align: right;
+  color: #007c82;
+}
+
 /* Horizontal complexes name */
 
 .CN-table th.horizontal.interactorsHeader {
@@ -126,22 +151,3 @@ a {
   color: white;
 }
 
-.spaceHolder {
-  width: 1000px;
-  background-color: #007c82;
-  border-left: 1px solid white;
-}
-
-.spaceHolderHeader {
-  min-width: 130px;
-  max-width: 130px;
-  width: 130px;
-  position: sticky;
-  left: 0;
-  z-index: 4;
-  background-color: white;
-  border-bottom: 3px solid #007c82;
-  height: 35px;
-  text-align: right;
-  color: #007c82;
-}

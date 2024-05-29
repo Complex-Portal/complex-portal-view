@@ -29,5 +29,10 @@ i:not(.small) {
   text-wrap: nowrap;
   text-align: end;
   padding-right: 5px;
+  /*display: inline;*/
 }
 
+.nameCompact {
+  display: inline-flex;
+  width: -webkit-fill-available;
+}
