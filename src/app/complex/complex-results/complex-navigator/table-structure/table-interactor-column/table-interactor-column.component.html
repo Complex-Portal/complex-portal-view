@@ -61,7 +61,8 @@
                    [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} interactors
               </div>
             </td>
-            <td class="subComponentColumn" [style]="ranges.length!=0 ? 'left:3ch':''">
+            <td class="subComponentColumn"
+                [ngClass]="complexes.length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'">
               <div>
                 <cp-table-interactor-name
                   [interactorName]="el.name"
