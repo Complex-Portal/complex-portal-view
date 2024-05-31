@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ToastrService} from 'ngx-toastr';
+import {Injectable} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+
 
 @Injectable()
 export class NotificationService {
-
   constructor(private toastrService: ToastrService) {
     toastrService.toastrConfig.closeButton = true; // displayedElements close button
     toastrService.toastrConfig.timeOut = 5000; // time to live
@@ -25,6 +25,15 @@ export class NotificationService {
     this.toastrService.info(announcementNotification, 'Just to let you know!', options);
   }
 
+  private addComplexNavigatorAnnouncementNotification(announcement: string) {
+    return this.toastrService.info(announcement, null, {
+      disableTimeOut: true,
+      closeButton: true,
+      progressBar: false,
+      positionClass: 'toast-right-under-header'
+    });
+  }
+
   private addHintNotification(hintNotification: string): void {
     this.toastrService.warning(hintNotification, 'Just to let you know!');
   }
@@ -44,5 +53,15 @@ export class NotificationService {
 
   public onFeatureNotAvailableYet() {
     this.addHintNotification('This feature is not available yet. But it is coming soon! :-)');
+  }
+
+  public complexNavigatorAnnouncement() {
+    return this.addComplexNavigatorAnnouncementNotification(
+      'Try out our new display: \n ' +
+      'the Complex Navigator!');
+  }
+
+  public closeAnnouncement(toastId: number): void {
+    this.toastrService.clear(toastId);
   }
 }

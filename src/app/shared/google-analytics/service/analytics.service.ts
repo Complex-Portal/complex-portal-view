@@ -10,7 +10,7 @@ export class AnalyticsService {
   }
 
   private invokeCustomEvent(value: Action, category: Category, label: string): void {
-    this.analytics.event(Action[value],  Category[category], label);
+    this.analytics.event(Action[value], Category[category], label);
   }
 
   public fireDownloadResourceEvent(site: Category, type: string): void {
@@ -65,5 +65,9 @@ export class AnalyticsService {
 
   public fireAPIRequestErrorEvent(api: Category, type: string) {
     this.invokeCustomEvent(Action.APIResquestError, api, type);
+  }
+
+  public rateComplexNavigator(rating: number) {
+    this.analytics.event(Action[Action.RatingComplexNavigator], Category[Category.complexNavigator], 'rating', rating);
   }
 }

@@ -1,9 +1,7 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ComplexResultsComponent } from './complex-results.component';
+import {ComplexResultsComponent} from './complex-results.component';
 
 describe('ComplexResultsComponent', () => {
   let component: ComplexResultsComponent;
@@ -11,9 +9,9 @@ describe('ComplexResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComplexResultsComponent ]
+      declarations: [ComplexResultsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

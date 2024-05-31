@@ -1,0 +1,38 @@
+a {
+  font-weight: bold;
+}
+
+a, a:visited {
+  color: #0e6f76;
+}
+
+i:not(.small) {
+  font-size: medium;
+}
+
+.nameAndIcons {
+  font-size: 14px;
+  display: flex;
+  width: inherit;
+  justify-content: end;
+}
+
+.inlineDisplay {
+  display: flex;
+  justify-content: end;
+}
+
+.name {
+  width: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-align: end;
+  padding-right: 5px;
+  /*display: inline;*/
+}
+
+.nameCompact {
+  display: inline-flex;
+  width: -webkit-fill-available;
+}

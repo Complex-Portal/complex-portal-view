@@ -1,0 +1,7 @@
+<div [ngClass]="topLineClass"></div>
+<cp-table-interactor-stoichiometry
+  *ngIf="!!interactorComponent"
+  [stoichiometryText]="interactorComponent.stochiometryText"
+  [stoichiometryValue]="interactorComponent.stochiometryValueFormatted"
+></cp-table-interactor-stoichiometry>
+<div [ngClass]="bottomLineClass"></div>

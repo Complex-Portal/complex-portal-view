@@ -1,6 +1,5 @@
-<div data-sticky-container>
-  <header id="masthead" class="masthead" data-sticky data-sticky-on="large" data-top-anchor="content:top"
-          data-btm-anchor="content:bottom">
+<div>
+  <header id="masthead" class="masthead">
     <!-- COMPLEX PORTAL HEADER SECTION -->
     <div class="masthead-inner row"> <!-- expanded -->
       <!-- local-title -->
@@ -14,31 +13,37 @@
       <div class="columns medium-6">
         <cp-local-search></cp-local-search>
       </div>
-
-      <!-- local-nav -->
-      <nav>
-        <ul id="local-nav" class="dropdown menu float-left" data-dropdown-menu="true" data-description="navigational">
-          <li routerLinkActive="active"><a routerLink="/home" routerLinkActive="active">Home</a></li>
-          <li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active">About</a></li>
-          <li routerLinkActive="active"><a routerLink="/documentation" routerLinkActive="active">Documentation</a></li>
-          <li routerLinkActive="active"><a routerLink="/basket" routerLinkActive="active" [ngClass]="{'animated flash': onChangeInBasket}" >Basket
-            <div routerLink="/basket" routerLinkActive="active" class="basket">
-              &nbsp;<strong>{{basketCount}}</strong>&nbsp;
-            </div></a>
-          </li>
-          <li routerLinkActive="active"><a href="{{complexPortalSupportUrl}}">Support <i class="icon icon-generic" data-icon="x"></i></a></li>
-        </ul>
-      </nav>
-      <!-- /local-nav -->
     </div>
   </header>
   <!-- END COMPLEX PORTAL HEADER SECTION -->
 
-<!--  <cp-progress-bar></cp-progress-bar>-->
+  <!--  <cp-progress-bar></cp-progress-bar>-->
 </div>
 
 <!---->
 <div id="content" role="main" class="row">
+
+  <!-- local-nav -->
+  <div class="masthead sticky-nav-container">
+    <nav>
+      <ul id="local-nav" class="dropdown menu float-left" data-dropdown-menu="true" data-description="navigational">
+        <li routerLinkActive="active"><a routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active">About</a></li>
+        <li routerLinkActive="active"><a routerLink="/documentation" routerLinkActive="active">Documentation</a></li>
+        <li routerLinkActive="active"><a routerLink="/basket" routerLinkActive="active"
+                                         [ngClass]="{'animated flash': onChangeInBasket}">Basket
+          <div routerLink="/basket" routerLinkActive="active" class="basket">
+            &nbsp;<strong>{{ basketCount }}</strong>&nbsp;
+          </div>
+        </a>
+        </li>
+        <li routerLinkActive="active"><a href="{{complexPortalSupportUrl}}">Support <i class="icon icon-generic"
+                                                                                       data-icon="x"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- /local-nav -->
   <!-- Suggested layout containers -->
   <section>
     <router-outlet></router-outlet>
