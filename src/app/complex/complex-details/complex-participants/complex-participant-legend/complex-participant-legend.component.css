@@ -1,0 +1,11 @@
+.gray-top-border {
+  border-top: 1px solid dimgray;
+}
+
+.small-row {
+  line-height: 1;
+}
+
+.no-padding-top {
+  padding-top: 0;
+}

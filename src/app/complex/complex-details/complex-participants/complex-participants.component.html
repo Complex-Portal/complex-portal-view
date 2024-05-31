@@ -1,4 +1,4 @@
-<div class="row" *ngIf="participants">
+<div class="row" *ngIf="allParticipants">
   <h2 class="float-left">Participants</h2>
   <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
   <div class="columns medium-12 no-pad-right no-pad-left">
@@ -34,56 +34,11 @@
       </div>
     </div>
     <div class="columns medium-6 padding-left-medium no-pad-right">
-      <table class="hover">
-        <thead>
-        <th>Legend</th>
-        <th>Description</th>
-        <th>Stoichiometry</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let participant of participants | slice:0:displayedElements">
-          <td style="background-color: #daf1e7">
-            <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
-              <cp-node-diagram [shape]="getLegendShape(participant.interactorType)"
-                               [color]="getLegendColor(participant)"
-                               [height]="participant.interactorType === 'stable complex' ? '35pt' : '30pt'"
-                               [borderColor]="participant.interactorType === 'stable complex' ? '#ffffff' : '#000000'"
-                               [borderWidth]="participant.interactorType === 'stable complex' ? 8 : 3"
-              ></cp-node-diagram>
-            </div>
-          </td>
-          <td>
-            <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
-              {{participant.name}} ({{participant.bioRole}})</b>
-            </div>
-            <div class="columns medium-12 no-pad-right no-pad-left">
-              <a *ngIf="participant.identifierLink" href="{{participant.identifierLink}}"
-                 target="_blank">{{participant.identifier}}
-                <i class="icon icon-generic small" data-icon="x"></i>
-              </a>
-            </div>
-            <div class="columns medium-12 no-pad-right no-pad-left">{{participant.description}}</div>
-          </td>
-          <td>
-            <div class="columns medium-12" style="text-align: center; vertical-align: middle;">
-              <p class="badge" *ngIf="participant.stochiometry">
-                {{getConvertedStochiometry(participant.stochiometry)}}</p>
-            </div>
-          </td>
-        </tr>
-        <tr class="text-center" style="background: white" *ngIf="displayedElements < participants.length">
-          <td>
-            <!--empty placeholder-->
-          </td>
-          <td>
-            <a class="label" (click)="displayedElements = participants.length">Show all</a>
-          </td>
-          <td>
-            <!--empty placeholder-->
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <cp-complex-participant-legend
+        [participants]="participantsWithSubcomponents"
+        [colorLegendGroups]="colorLegendGroups"
+        [complexAc]="complexAC">
+      </cp-complex-participant-legend>
     </div>
 
 

@@ -3,9 +3,22 @@ import {Participant} from '../../shared/model/complex-details/participant.model'
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import * as complexviewer from 'complexviewer';
-import {NodeShape} from '../shared/visualisation/node-diagram/node-diagram.component';
+import {ComplexPortalService} from '../../shared/service/complex-portal.service';
 
 let viewer: any;
+
+export class ComplexParticipant {
+  identifier: string;
+  colorLegendIdentifier: string;
+  identifierLink: string;
+  name: string;
+  description: string;
+  stochiometry: string;
+  bioRole: string;
+  interactorType: string;
+  participants: ComplexParticipant[];
+  expanded: boolean;
+}
 
 @Component({
   selector: 'cp-complex-participants',
@@ -16,11 +29,12 @@ let viewer: any;
 export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   private _participants: Participant[];
   private _complexAC: string;
-  private _complexMIJSON: string;
+  private _complexMIJSON: any;
   private _interactorChecked: boolean;
   private _colorLegendGroups: Map<string, string> = new Map<string, string>();
-  private _displayedElements = 5;
   private _hasInteracted: boolean;
+
+  participantsWithSubcomponents: ComplexParticipant[];
 
   annotations = {
     'MI Features': true,
@@ -29,12 +43,12 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     'Interactor': true,
   };
 
-  constructor(private googleAnalyticsService: AnalyticsService) {
+  constructor(private googleAnalyticsService: AnalyticsService, private complexPortalService: ComplexPortalService) {
     this._hasInteracted = false;
   }
 
   ngOnInit() {
-    this.sortParticipants();
+    this.loadParticipantsWithSubcomponents();
   }
 
   ngAfterViewInit() {
@@ -49,9 +63,9 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     setTimeout(() => this.updateColorLegend(viewer.getColorKeyJson()), 0);
   }
 
-  private sortParticipants() {
+  private sortParticipants(participants: ComplexParticipant[]) {
     // TODO: Sort participants in WS - GH issue #174
-    this.participants.sort(function (a, b) {
+    participants.sort(function (a, b) {
       if (a.interactorType < b.interactorType) {
         return -1;
       } else if (a.interactorType > b.interactorType) {
@@ -62,50 +76,65 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public getLegendShape(interactorType: string): NodeShape {
-    // TODO: maybe talk to OLS WS at some point, but it was easier to do it like this at the time. - GH issue #172
-    switch (interactorType) {
-      case 'small molecule':
-        return NodeShape.TRIANGLE;
-      case 'protein':
-      case 'peptide':
-        return NodeShape.ELLIPSE;
-      case 'stable complex':
-        return NodeShape.HEXAGON;
-      case 'molecule set':
-        return NodeShape.OCTAGON;
-      case 'single stranded deoxyribonucleic acid':
-      case 'double stranded deoxyribonucleic acid':
-        return NodeShape.PARALLELOGRAM;
-      case 'small nuclear rna':
-      case 'small nucleolar rna':
-      case 'ribosomal rna':
-      case 'messenger rna':
-      case 'transfer rna':
-      case 'signal recognition particle rna':
-      case 'ribonucleic acid':
-        return NodeShape.DIAMOND;
+  private loadParticipantsWithSubcomponents() {
+    this.participantsWithSubcomponents = [];
+
+    // First, we add the complex participants to participantsWithSubcomponents
+    for (const participant of this.participants) {
+      this.participantsWithSubcomponents.push(this.createComplexParticipant(participant));
+    }
+    // And we sort them
+    this.sortParticipants(this.participantsWithSubcomponents);
+
+    // Then, for each participant, if they are a subcomplex, we load the participants of the subcomplex
+    for (const participant of this.participantsWithSubcomponents) {
+      if (participant.interactorType === 'stable complex') {
+        this.loadParticipantsOfSubComplex(participant);
+      }
     }
   }
 
-  public getLegendColor(participant: Participant): string {
-    let color;
-    // TODO Talk to Colin to try a simple way to retrieve the colors .e.g. only by identifier
-    if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide')
-      && !participant.identifier.includes('-PRO') && participant.name) {
-      color = this.colorLegendGroups.get(participant.name.toUpperCase());
-    } else {
-      color = this.colorLegendGroups.get(participant.identifier.toUpperCase());
+  private createComplexParticipant(participant: Participant): ComplexParticipant {
+    let colorLegendIdentifier = participant.identifier;
+    if (participant.interactorType === 'stable complex') {
+      // The same complex may appear in the complex viewer with different colours, if it's part of the complex multiple times.
+      // So we need to check if a complex appears multiple times, and in that case, add a suffix to their id to match the id used
+      // for the color legend.
+      let participantsWithSameId = 0;
+      for (const p of this.participantsWithSubcomponents) {
+        if (p.identifier === participant.identifier) {
+          participantsWithSameId++;
+        }
+        participantsWithSameId += p.participants.filter(p2 => p.identifier === participant.identifier).length;
+      }
+      if (participantsWithSameId > 0) {
+        colorLegendIdentifier += '_' + (participantsWithSameId + 1);
+      }
     }
-    if (!color) {
-      color = '#ffffff';
-    }
-    return color;
+    return {
+      identifier: participant.identifier,
+      colorLegendIdentifier,
+      identifierLink: participant.identifierLink,
+      name: participant.name,
+      description: participant.description,
+      stochiometry: participant.stochiometry,
+      bioRole: participant.bioRole,
+      interactorType: participant.interactorType,
+      participants: [],
+      expanded: false,
+    };
   }
 
-  public getConvertedStochiometry(stochiometry: string): string {
-    // TODO: WS should send Stochiometry in right format already - GH issue #173
-    return stochiometry.split(',')[0].split(':')[1].trim();
+  private loadParticipantsOfSubComplex(complexParticipant: ComplexParticipant) {
+    this.complexPortalService.getComplexAc(complexParticipant.identifier)
+      .subscribe(complex => {
+        if (!!complex && !!complex.participants) {
+          for (const participant of complex.participants) {
+            complexParticipant.participants.push(this.createComplexParticipant(participant));
+          }
+        }
+        this.sortParticipants(complexParticipant.participants);
+      });
   }
 
   onChangeAnnotation(value: string) {
@@ -125,7 +154,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
         for (const legendDatum of legendData[group]) {
           // Because we only display interactors and complexes colors, we now that are certain.
           // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.replace(/.*_/, ''), legendDatum.certain.color);
+          this.colorLegendGroups.set(legendDatum.name.replace(/complex portal_/, ''), legendDatum.certain.color);
         }
       }
       if (group === 'Interactor') {
@@ -173,14 +202,6 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   @Input()
   set participants(value: Participant[]) {
     this._participants = value;
-  }
-
-  get displayedElements(): number {
-    return this._displayedElements;
-  }
-
-  set displayedElements(value: number) {
-    this._displayedElements = value;
   }
 
   get complexAC(): string {
