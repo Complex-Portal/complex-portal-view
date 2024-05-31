@@ -1,0 +1,80 @@
+.displayButton {
+  float: right;
+}
+
+.view-button {
+  float: unset;
+  width: 225px;
+  margin-right: 5px;
+  background-color: white;
+  color: #555;
+  border: 1px dotted #007c82;
+}
+
+.view-button:hover {
+  color: #007c82;
+  background-color: rgb(234, 234, 234);
+  border: transparent;
+  border-bottom: 1px dotted #007c82;
+}
+
+.selected,
+.selected:hover {
+  background-color: #007c82;
+  color: white;
+  opacity: 100%;
+}
+
+.new-tag {
+  color: red;
+  font-weight: bold;
+  font-size: x-small;
+}
+
+.new-tag-selected {
+  color: yellow;
+}
+
+.filterColumn {
+  width: calc(100rem * 0.22);
+}
+
+.leftAligned {
+  --global-margin: calc((100vw - 79rem) / -2);
+  --min-margin-left: calc(-100rem * 0.17);
+  margin-left: max(var(--global-margin), var(--min-margin-left));
+}
+
+.cnButton {
+  outline-offset: 0;
+  outline: rgba(0, 124, 130, 0.75) solid 1px;
+  animation: animateOutline 4s ease infinite;
+}
+
+@keyframes animateOutline {
+  0% {
+    outline-width: 1px;
+    outline-offset: 0;
+    outline-color: rgba(0, 124, 130, 0);
+  }
+
+  10% {
+    outline-color: rgba(0, 124, 130, 0.75);
+  }
+
+  50% {
+    outline-width: 6px;
+    outline-offset: 4px;
+    outline-color: rgba(0, 124, 130, 0);
+  }
+
+  100% {
+    outline-width: 6px;
+    outline-offset: 4px;
+    outline-color: rgba(102, 102, 102, 0);
+  }
+}
+
+.cnButton.selected {
+  animation: none;
+}

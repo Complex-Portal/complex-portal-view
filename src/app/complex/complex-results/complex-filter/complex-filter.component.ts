@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
+import {interactorTypeIcon} from '../../complex-portal-utils';
+import {organismIcon} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-filter',
@@ -13,10 +15,9 @@ export class ComplexFilterComponent implements OnInit {
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
-
   @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onInteractorTyoeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
@@ -70,7 +71,7 @@ export class ComplexFilterComponent implements OnInit {
       this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onInteractorTyoeFilterChanged.emit(this.interactorTypeFilter);
+    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter);
   }
 
   /**
@@ -132,5 +133,13 @@ export class ComplexFilterComponent implements OnInit {
   @Input()
   set interactorTypeFilter(value: string[]) {
     this._interactorTypeFilter = value;
+  }
+
+  public facetTypeIcon(facet): string {
+    return interactorTypeIcon(facet.name);
+  }
+
+  public facetOrganismIcon(facet): string {
+    return organismIcon(facet);
   }
 }

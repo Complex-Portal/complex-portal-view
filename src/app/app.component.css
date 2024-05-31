@@ -24,5 +24,23 @@
 
 /* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */
 .no-border-submenu {
-  border-right: 0 !important ;
+  border-right: 0 !important;
 }
+
+
+.sticky-nav-container {
+  --global-margin: calc((100vw - 79rem) / -2);
+  position: sticky;
+  top: 0;
+  background: #007c82;
+  margin-left: min(var(--global-margin), 0px);
+  padding: 0 calc(-1 * var(--global-margin));
+  width: 100vw;
+  z-index: 4;
+  border-bottom: 1px solid white;
+}
+
+.sticky-nav-container nav {
+  display: flex;
+}
+

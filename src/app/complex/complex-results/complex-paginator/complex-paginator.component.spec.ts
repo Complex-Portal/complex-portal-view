@@ -1,9 +1,7 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ComplexPaginatorComponent } from './complex-paginator.component';
+import {ComplexPaginatorComponent} from './complex-paginator.component';
 
 describe('ComplexPaginatorComponent', () => {
   let component: ComplexPaginatorComponent;
@@ -11,9 +9,9 @@ describe('ComplexPaginatorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComplexPaginatorComponent ]
+      declarations: [ComplexPaginatorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
