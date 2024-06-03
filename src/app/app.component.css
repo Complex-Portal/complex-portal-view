@@ -29,7 +29,7 @@
 
 
 .sticky-nav-container {
-  --global-margin: calc((100vw - 79rem) / -2);
+  --global-margin: calc((100vw - 80rem) / -2);
   position: sticky;
   top: 0;
   background: #007c82;
