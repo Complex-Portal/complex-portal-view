@@ -10,15 +10,29 @@ import {ComplexParticipant} from '../complex-participants.component';
 })
 export class ComplexParticipantLegendComponent {
 
-  @Input() participants: ComplexParticipant[];
+  @Input() participant: ComplexParticipant;
   @Input() colorLegendGroups: Map<string, string>;
-  @Input() complexAc: string;
+  @Input() parentComplexAcs: string[];
+  @Input() backgroundComplexId: string;
 
-  MIN_DISPLAYED_ELEMENTS = 5;
-  displayedElements = this.MIN_DISPLAYED_ELEMENTS;
+  getBackgroundStyle(): string {
+    const colour = this.colorLegendGroups.get(this.backgroundComplexId);
+    if (this.parentComplexAcs.length > 0) {
+      let backgroundStyle = 'background: linear-gradient(90deg, ';
+      let size = 5;
+      for (const ac of this.parentComplexAcs) {
+        backgroundStyle += this.colorLegendGroups.get(ac) + ' 0 ' + size + '%, ';
+        size += 5;
+      }
+      backgroundStyle += colour + ' 0)';
+      return backgroundStyle;
+    } else {
+      return 'background-color: ' + colour;
+    }
+  }
 
-  backgroundColour(id: string): string {
-    return this.colorLegendGroups.get(id);
+  getParentComplexAcs(): string[] {
+    return [...this.parentComplexAcs, this.backgroundComplexId];
   }
 
   public getLegendShape(interactorType: string): NodeShape {

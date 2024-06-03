@@ -9,3 +9,16 @@
 .no-padding-top {
   padding-top: 0;
 }
+
+.no-padding {
+  padding: 0;
+}
+
+.no-border {
+  border: none;
+}
+
+.centered-vertical {
+  text-align: center;
+  vertical-align: middle;
+}

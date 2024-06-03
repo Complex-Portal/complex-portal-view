@@ -43,6 +43,9 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     'Interactor': true,
   };
 
+  MIN_DISPLAYED_ELEMENTS = 5;
+  displayedElements = this.MIN_DISPLAYED_ELEMENTS;
+
   constructor(private googleAnalyticsService: AnalyticsService, private complexPortalService: ComplexPortalService) {
     this._hasInteracted = false;
   }
@@ -87,11 +90,28 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     this.sortParticipants(this.participantsWithSubcomponents);
 
     // Then, for each participant, if they are a subcomplex, we load the participants of the subcomplex
-    for (const participant of this.participantsWithSubcomponents) {
+    this.loadParticipantsOfSubComplexes(this.participantsWithSubcomponents);
+  }
+
+  private loadParticipantsOfSubComplexes(participants: ComplexParticipant[]) {
+    for (const participant of participants) {
       if (participant.interactorType === 'stable complex') {
         this.loadParticipantsOfSubComplex(participant);
       }
     }
+  }
+
+  private loadParticipantsOfSubComplex(complexParticipant: ComplexParticipant) {
+    this.complexPortalService.getComplexAc(complexParticipant.identifier)
+      .subscribe(complex => {
+        if (!!complex && !!complex.participants) {
+          for (const participant of complex.participants) {
+            complexParticipant.participants.push(this.createComplexParticipant(participant));
+          }
+        }
+        this.sortParticipants(complexParticipant.participants);
+        this.loadParticipantsOfSubComplexes(complexParticipant.participants);
+      });
   }
 
   private createComplexParticipant(participant: Participant): ComplexParticipant {
@@ -100,13 +120,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
       // The same complex may appear in the complex viewer with different colours, if it's part of the complex multiple times.
       // So we need to check if a complex appears multiple times, and in that case, add a suffix to their id to match the id used
       // for the color legend.
-      let participantsWithSameId = 0;
-      for (const p of this.participantsWithSubcomponents) {
-        if (p.identifier === participant.identifier) {
-          participantsWithSameId++;
-        }
-        participantsWithSameId += p.participants.filter(p2 => p2.identifier === participant.identifier).length;
-      }
+      const participantsWithSameId = this.getNumberOfParticipantsWithId(participant.identifier, this.participantsWithSubcomponents);
       if (participantsWithSameId > 0) {
         colorLegendIdentifier += '_' + (participantsWithSameId + 1);
       }
@@ -125,16 +139,17 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private loadParticipantsOfSubComplex(complexParticipant: ComplexParticipant) {
-    this.complexPortalService.getComplexAc(complexParticipant.identifier)
-      .subscribe(complex => {
-        if (!!complex && !!complex.participants) {
-          for (const participant of complex.participants) {
-            complexParticipant.participants.push(this.createComplexParticipant(participant));
-          }
-        }
-        this.sortParticipants(complexParticipant.participants);
-      });
+  private getNumberOfParticipantsWithId(identifier: string, participants: ComplexParticipant[]): number {
+    let participantsWithSameId = 0;
+    for (const p of participants) {
+      if (p.identifier === identifier) {
+        participantsWithSameId++;
+      }
+      if (p.participants.length > 0) {
+        participantsWithSameId += this.getNumberOfParticipantsWithId(identifier, p.participants);
+      }
+    }
+    return participantsWithSameId;
   }
 
   onChangeAnnotation(value: string) {

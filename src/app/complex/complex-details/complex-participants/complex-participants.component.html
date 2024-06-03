@@ -34,11 +34,35 @@
       </div>
     </div>
     <div class="columns medium-6 padding-left-medium no-pad-right">
-      <cp-complex-participant-legend
-        [participants]="participantsWithSubcomponents"
-        [colorLegendGroups]="colorLegendGroups"
-        [complexAc]="complexAC">
-      </cp-complex-participant-legend>
+      <table class="hover">
+        <thead>
+          <th style="width: 16%">Legend</th>
+          <th style="width: 64%">Description</th>
+          <th style="width: 20%">Stoichiometry</th>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let participant of participantsWithSubcomponents | slice:0:displayedElements; let i = index">
+            <tr class="gray-top-border">
+              <td colspan="3" class="no-padding">
+                <cp-complex-participant-legend
+                  [participant]="participant"
+                  [colorLegendGroups]="colorLegendGroups"
+                  [backgroundComplexId]="complexAC"
+                  [parentComplexAcs]="[]">
+                </cp-complex-participant-legend>
+              </td>
+            </tr>
+          </ng-container>
+          <tr class="text-center" style="background: white" *ngIf="MIN_DISPLAYED_ELEMENTS < participants.length">
+            <td colspan="3" *ngIf="displayedElements < participants.length">
+              <a class="label" (click)="displayedElements = participants.length">Show all participants</a>
+            </td>
+            <td colspan="3" *ngIf="displayedElements >= participants.length">
+              <a class="label" (click)="displayedElements = MIN_DISPLAYED_ELEMENTS">Hide participants</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
 
