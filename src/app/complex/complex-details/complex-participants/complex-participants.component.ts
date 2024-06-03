@@ -105,7 +105,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
         if (p.identifier === participant.identifier) {
           participantsWithSameId++;
         }
-        participantsWithSameId += p.participants.filter(p2 => p.identifier === participant.identifier).length;
+        participantsWithSameId += p.participants.filter(p2 => p2.identifier === participant.identifier).length;
       }
       if (participantsWithSameId > 0) {
         colorLegendIdentifier += '_' + (participantsWithSameId + 1);
