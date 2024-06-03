@@ -40,7 +40,7 @@
 }
 
 .leftAligned {
-  --global-margin: calc((100vw - 79rem) / -2);
+  --global-margin: calc((100vw - 80rem) / -2);
   --min-margin-left: calc(-100rem * 0.17);
   margin-left: max(var(--global-margin), var(--min-margin-left));
 }
