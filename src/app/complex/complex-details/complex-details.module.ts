@@ -44,6 +44,7 @@ import {ExternalResourcesComponent} from './complex-references/external-resource
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
 import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-diagram.component';
 import {ComplexModule} from '../complex.module';
+import {ComplexParticipantLegendComponent} from './complex-participants/complex-participant-legend/complex-participant-legend.component';
 
 @NgModule({
     imports: [
@@ -62,6 +63,7 @@ import {ComplexModule} from '../complex.module';
     ComplexExpressionComponent,
     ComplexDiseaseComponent,
     ComplexParticipantsComponent,
+    ComplexParticipantLegendComponent,
     ReactomeDiagramComponent,
     ReactomeCrossReferencesComponent,
     GoCrossreferencesComponent,
