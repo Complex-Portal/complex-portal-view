@@ -27,11 +27,15 @@ export class ComplexParticipant {
   encapsulation: ViewEncapsulation.None
 })
 export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
+
+  MIN_DISPLAYED_ELEMENTS = 5;
+
   private _participants: Participant[];
   private _complexAC: string;
   private _complexMIJSON: any;
   private _interactorChecked: boolean;
   private _colorLegendGroups: Map<string, string> = new Map<string, string>();
+  private _displayedElements = this.MIN_DISPLAYED_ELEMENTS;
   private _hasInteracted: boolean;
 
   participantsWithSubcomponents: ComplexParticipant[];
@@ -43,15 +47,13 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     'Interactor': true,
   };
 
-  MIN_DISPLAYED_ELEMENTS = 5;
-  displayedElements = this.MIN_DISPLAYED_ELEMENTS;
-
   constructor(private googleAnalyticsService: AnalyticsService, private complexPortalService: ComplexPortalService) {
     this._hasInteracted = false;
   }
 
   ngOnInit() {
-    this.loadParticipantsWithSubcomponents();
+    this.participantsWithSubcomponents = [];
+    this.loadParticipants(this.participants, this.participantsWithSubcomponents);
   }
 
   ngAfterViewInit() {
@@ -79,39 +81,22 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private loadParticipantsWithSubcomponents() {
-    this.participantsWithSubcomponents = [];
-
-    // First, we add the complex participants to participantsWithSubcomponents
-    for (const participant of this.participants) {
-      this.participantsWithSubcomponents.push(this.createComplexParticipant(participant));
+  private loadParticipants(participants: Participant[], complexParticipants: ComplexParticipant[]) {
+    // First, we add the complex participants to complexParticipants
+    for (const participant of participants) {
+      complexParticipants.push(this.createComplexParticipant(participant));
     }
+
     // And we sort them
-    this.sortParticipants(this.participantsWithSubcomponents);
+    this.sortParticipants(complexParticipants);
 
     // Then, for each participant, if they are a subcomplex, we load the participants of the subcomplex
-    this.loadParticipantsOfSubComplexes(this.participantsWithSubcomponents);
-  }
-
-  private loadParticipantsOfSubComplexes(participants: ComplexParticipant[]) {
-    for (const participant of participants) {
-      if (participant.interactorType === 'stable complex') {
-        this.loadParticipantsOfSubComplex(participant);
+    for (const complexParticipant of complexParticipants) {
+      if (complexParticipant.interactorType === 'stable complex') {
+        this.complexPortalService.getComplexAc(complexParticipant.identifier)
+          .subscribe(complex => this.loadParticipants(complex.participants, complexParticipant.participants));
       }
     }
-  }
-
-  private loadParticipantsOfSubComplex(complexParticipant: ComplexParticipant) {
-    this.complexPortalService.getComplexAc(complexParticipant.identifier)
-      .subscribe(complex => {
-        if (!!complex && !!complex.participants) {
-          for (const participant of complex.participants) {
-            complexParticipant.participants.push(this.createComplexParticipant(participant));
-          }
-        }
-        this.sortParticipants(complexParticipant.participants);
-        this.loadParticipantsOfSubComplexes(complexParticipant.participants);
-      });
   }
 
   private createComplexParticipant(participant: Participant): ComplexParticipant {
@@ -217,6 +202,14 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   @Input()
   set participants(value: Participant[]) {
     this._participants = value;
+  }
+
+  get displayedElements(): number {
+    return this._displayedElements;
+  }
+
+  set displayedElements(value: number) {
+    this._displayedElements = value;
   }
 
   get complexAC(): string {
