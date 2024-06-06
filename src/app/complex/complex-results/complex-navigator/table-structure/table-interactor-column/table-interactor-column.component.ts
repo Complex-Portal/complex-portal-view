@@ -314,4 +314,17 @@ export class TableInteractorColumnComponent implements OnChanges {
   isInteractorSortingSet() {
     return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
   }
+
+  getExpandedRowClass(i: number, length: number): string {
+    if (i === 0) {
+      if (length === 1) {
+        return 'singleExpandedRow';
+      } else {
+        return 'firstExpandedRow';
+      }
+    } else if (i === length - 1) {
+      return 'lastExpandedRow';
+    }
+    return null;
+  }
 }

@@ -100,6 +100,15 @@ a, a:visited {
   background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
 }
 
+.singleExpandedRow:after {
+  z-index: 40;
+  content: '';
+  position: absolute;
+  inset: -2px -1px -2px -1px;
+  pointer-events: none;
+  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px), linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
+}
+
 /* Interactors sorting label*/
 
 .interactorSeparation {
