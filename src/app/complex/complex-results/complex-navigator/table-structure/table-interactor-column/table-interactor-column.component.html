@@ -53,7 +53,7 @@
         <ng-container *ngIf="!!interactor.subComponents">
           <tr *ngFor="let el of interactor.subComponents; let j=index"
               class="expandedRows"
-              [ngClass]="{'firstExpandedRow': j === 0, 'lastExpandedRow': j === interactor.subComponents.length - 1}">
+              [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                 title="{{interactor.interactor.name}} interactors"
                 *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">

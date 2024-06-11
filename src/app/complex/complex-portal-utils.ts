@@ -110,7 +110,7 @@ export function organismIcon(organism: string): string {
 }
 
 function formatOrganismName(name: string): string {
-  if (name.includes(';')) {
+  if (!!name && name.includes(';')) {
     const end = name.indexOf(';');
     return name.substring(0, end);
   }
