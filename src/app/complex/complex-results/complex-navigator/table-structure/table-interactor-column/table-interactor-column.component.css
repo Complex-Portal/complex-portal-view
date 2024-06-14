@@ -120,7 +120,7 @@ a, a:visited {
   width: 1%;
   text-align: -webkit-center;
   position: sticky;
-  z-index: 4;
+  z-index: 31;
   left: 0;
 }
 
@@ -133,7 +133,6 @@ a, a:visited {
   color: white;
   line-height: 0.8;
   text-align: center;
-
 
   text-overflow: ellipsis;
   height: calc(var(--rowspanSize) * 48px);

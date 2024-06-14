@@ -11,18 +11,17 @@
 .ratingComponent {
   background-color: #007c82;
   padding: 5px;
-  width: 20%;
+  width: 350px;
   text-align: center;
-  margin-left: 92%;
-  margin-top: -5%;
   position: fixed;
   z-index: 5;
-  top: 20em;
-  left: -13%;
+  top: 54vh;
+  right: -350px;
   border: 1px solid white;
-  animation-name: ratingComponentMove;
-  animation-duration: 1s;
+  visibility: hidden;
+  animation: ratingComponentMove 1s forwards 7s;
 }
+
 
 .ratingComponent input {
   background-color: white;
@@ -40,10 +39,12 @@
 
 @keyframes ratingComponentMove {
   from {
-    left: 10%;
+    right: -10vw;
+    visibility: visible;
   }
   to {
-    left: -13%;
+    right: 3.2vw;
+    visibility: visible;
   }
 }
 

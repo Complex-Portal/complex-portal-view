@@ -131,5 +131,4 @@ export class TableStructureComponent implements OnChanges {
     }
     return unique;
   }
-
 }

@@ -16,7 +16,6 @@
 }
 
 .filters {
-  width: 120.5%;
   display: flex;
   justify-content: center;
   grid-gap: 10px;
