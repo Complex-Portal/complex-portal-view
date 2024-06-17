@@ -1,7 +1,7 @@
 table {
   --cols: 1;
   height: 1px;
-  width: calc(var(130px) + 70px * var(--cols) + 183px);
+  /*width: calc(130px + 70px * var(--cols) + 183px);*/
   overflow: scroll;
 }
 
@@ -10,8 +10,9 @@ table {
   position: sticky;
   left: 0;
   z-index: 5;
-  max-height: 45px;
-  min-height: 45px;
+  height: 45px;
+  /*max-height: 45px;*/
+  /*min-height: 45px;*/
   min-width: 130px;
   max-width: 130px;
   padding: 5px;
@@ -65,8 +66,8 @@ a, a:visited {
 .subComponentColumn {
   left: 0;
   z-index: 30;
-  max-height: 45px;
-  min-height: 45px;
+  height: 45px;
+
   min-width: 130px;
   max-width: 130px;
   padding: 5px;
@@ -150,3 +151,13 @@ a, a:visited {
   max-width: 114px;
 }
 
+/*!* NEEDED FOR SAFARI BROWSER*!*/
+@supports (-webkit-hyphens:none) {
+  .interactorsColumn {
+    height: auto;
+  }
+
+  .intStoich {
+    height: 45px;
+  }
+}

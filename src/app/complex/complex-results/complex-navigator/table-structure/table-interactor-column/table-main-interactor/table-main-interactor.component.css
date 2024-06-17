@@ -3,9 +3,11 @@
   margin-right: auto;
   min-width: 1%;
   max-width: 1%;
-  max-height: 80%;
-  min-height: 80%;
+  max-height: 50%;
+  min-height: 50%;
   z-index: 0;
+  /*position: relative;*/
+  height: 50%;
 }
 
 .verticalLine {
@@ -14,4 +16,24 @@
 
 .transparentVerticalLine {
   border-right: 0;
+}
+
+/*!*!* NEEDED FOR SAFARI BROWSER*!*!*/
+/*@supports (-webkit-hyphens:none) {*/
+/*  .verticalLine, .transparentVerticalLine {*/
+/*    max-height: -webkit-fill-available; !* mendatory for safari *!*/
+/*    min-height: -webkit-fill-available; !* mendatory for safari *!*/
+/*    !*margin-top: -29px;*!*/
+/*    !*margin-bottom: 29px;*!*/
+/*  }*/
+/*}*/
+
+
+/* NEEDED FOR FIREFOX BROWSER*/
+@-moz-document url-prefix() {
+  .verticalLine, .transparentVerticalLine {
+    max-height: 100% !important; /* gives the priority to the firefox setting */
+    min-height: 100% !important; /* gives the priority to the firefox setting */
+    margin-top: -29px;
+  }
 }
