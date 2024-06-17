@@ -13,13 +13,13 @@
       <tbody>
       <tr *ngFor="let key of getKeys(complexBasket)">
         <td>
-          <a [routerLink]="['/complex', complexBasket[key].id]">{{complexBasket[key].name}}</a>
+          <a [routerLink]="['/complex', complexBasket[key].id]">{{ complexBasket[key].name }}</a>
         </td>
         <td>
-          {{complexBasket[key].id}}
+          {{ complexBasket[key].id }}
         </td>
         <td>
-          {{complexBasket[key].organism}}
+          {{ complexBasket[key].organism }}
         </td>
         <td>
           <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span
@@ -28,11 +28,19 @@
       </tr>
       </tbody>
     </table>
+    <div class="ComplexNavigator">
+      <cp-complex-navigator
+        [complexSearch]="complexSearchBasket"
+        [interactors]="allInteractorsInComplexSearchBasket">
+      </cp-complex-navigator>
+    </div>
+
   </div>
   <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">
     <div class="callout">
       <h3>Your basket is currently empty. :'-(</h3>
-      <h5>Search for a complex and click on <i class="icon icon-generic" data-icon="b"></i>-symbol to create your own collection of favorite complexes.</h5>
+      <h5>Search for a complex and click on <i class="icon icon-generic" data-icon="b"></i>-symbol to create your own
+        collection of favorite complexes.</h5>
     </div>
   </div>
 </div>
