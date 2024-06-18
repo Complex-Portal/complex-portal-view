@@ -37,10 +37,13 @@
         <cp-complex-list class="listOfResults" *ngIf="DisplayType===LIST_VIEW"
                          [complexSearch]="complexSearch">
         </cp-complex-list>
-        <cp-complex-navigator class="Complex-navigator" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
-                              [complexSearch]="complexSearch"
-                              [interactors]="allInteractorsInComplexSearch">
-        </cp-complex-navigator>
+        <div class="ComplexNavigator" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
+             [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : ''">
+          <cp-complex-navigator class="Complex-navigator"
+                                [complexSearch]="complexSearch"
+                                [interactors]="allInteractorsInComplexSearch">
+          </cp-complex-navigator>
+        </div>
         <cp-complex-paginator [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)"></cp-complex-paginator>

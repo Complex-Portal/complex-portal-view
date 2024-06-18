@@ -1,17 +1,18 @@
-.ComplexNavigator {
-  width: 71.5vw;
-  float: left;
-  --global-margin: calc((100vw - 80rem) / -2);
-  --min-margin-left: calc(-100rem * 0.17);
-  margin-left: max(var(--global-margin), var(--min-margin-left));
-}
+/*.ComplexNavigator {*/
+/*  width: 71.5vw;*/
+/*  float: left;*/
+/*  --global-margin: calc((100vw - 80rem) / -2);*/
+/*  --min-margin-left: calc(-100rem * 0.17);*/
+/*  margin-left: max(var(--global-margin), var(--min-margin-left));*/
+/*}*/
 
-.smallCN {
-  width: 55vw;
-  float: right;
-  margin-left: auto;
-}
+/*.smallCN {*/
+/*  width: 55vw;*/
+/*  float: right;*/
+/*  margin-left: auto;*/
+/*}*/
 
 .smallCNButtons {
   width: 67.5vw;
 }
+
