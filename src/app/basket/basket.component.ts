@@ -4,9 +4,6 @@ import {BasketItem} from '../shared/basket/model/basketItem';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {ComplexPortalService} from '../complex/shared/service/complex-portal.service';
-import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
-import {Element} from '../complex/shared/model/complex-results/element.model';
-import {ComplexSearchResult} from '../complex/shared/model/complex-results/complex-search.model';
 
 @Component({
   selector: 'cp-basket',
