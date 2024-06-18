@@ -23,9 +23,11 @@ import {
 import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/complex-navigator-buttons.component';
 import {ComplexNavigatorRatingComponent} from './complex-navigator-rating/complex-navigator-rating.component';
 import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
+    RouterModule,
     CommonModule,
     ProgressSpinnerModule,
     MarkdownModule
@@ -43,8 +45,7 @@ import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress
     TableInteractorStoichiometryComponent,
     TableMainInteractorComponent,
     TableSubcomponentInteractorComponent,
-    ComplexNavigatorButtonsComponent,
-    ComplexNavigatorRatingComponent
+    ComplexNavigatorButtonsComponent
   ]
 })
 export class ComplexNavigatorModule {

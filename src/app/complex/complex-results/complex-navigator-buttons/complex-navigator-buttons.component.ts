@@ -22,7 +22,7 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
     this.updateDisplay();
   }
 
-  InteractorsSortingChanges(typeOfSorting: string) {
+  interactorsSortingChanges(typeOfSorting: string) {
     this.interactorsSortingChange.emit(typeOfSorting);
     if (this.typeOfDisplay === 'detailed') {
       if (typeOfSorting === 'Type') {

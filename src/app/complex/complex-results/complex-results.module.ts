@@ -8,6 +8,7 @@ import {ComplexListComponent} from './complex-list/complex-list.component';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {MarkdownModule} from 'ngx-markdown';
 import {ComplexNavigatorModule} from './complex-navigator/complex-navigator.module';
+import {ComplexNavigatorRatingComponent} from './complex-navigator/complex-navigator-rating/complex-navigator-rating.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ComplexNavigatorModule} from './complex-navigator/complex-navigator.modu
   declarations: [ComplexResultsComponent,
     ComplexListComponent,
     ComplexFilterComponent,
-    ComplexPaginatorComponent
+    ComplexPaginatorComponent,
+    ComplexNavigatorRatingComponent
   ]
 })
 export class ComplexResultsModule {

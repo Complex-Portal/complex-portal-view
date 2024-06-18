@@ -44,6 +44,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   enrichedComplexes: EnrichedComplex[];
   ranges: number[];
 
+  _timesAppearingByType: Map<string, number>;
 
   constructor(private complexPortalService: ComplexPortalService) {
   }
@@ -51,6 +52,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['interactors']) {
       this.enrichInteractors();
+      this.calculateTimesAppearing();
     }
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
@@ -204,26 +206,26 @@ export class TableInteractorColumnComponent implements OnChanges {
         } else if (this.enrichedInteractors[i].isSubComplex &&
           !!this.enrichedInteractors[i].subComponents &&
           this.enrichedInteractors[i].expanded) {
-            // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
-            // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
-            // In that case, the line could start or end on any of those subcomponents
-            for (let k = 0; k < this.enrichedInteractors[i].subComponents.length; k++) {
-              if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].subComponents[k].identifier, this.enrichedInteractors)) {
-                // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
-                // line as it may start in this interactor
-                enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
-                if (enrichedComplex.startInteractorIndex === i) {
-                  // The line starts in a subcomponent of the interactor, but not on the interactor itself,
-                  // so the line does not start in the interactor when expanded
-                  enrichedComplex.startInteractorIncludedWhenExpanded = false;
-                }
-                enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
-                // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
-                // line as it may start in this subcomponent
-                enrichedComplex.startSubComponentIndex = this.getMinValue(enrichedComplex.startSubComponentIndex, k);
-                enrichedComplex.endSubComponentIndex = this.getMaxValue(enrichedComplex.endSubComponentIndex, k);
+          // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
+          // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
+          // In that case, the line could start or end on any of those subcomponents
+          for (let k = 0; k < this.enrichedInteractors[i].subComponents.length; k++) {
+            if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].subComponents[k].identifier, this.enrichedInteractors)) {
+              // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
+              // line as it may start in this interactor
+              enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
+              if (enrichedComplex.startInteractorIndex === i) {
+                // The line starts in a subcomponent of the interactor, but not on the interactor itself,
+                // so the line does not start in the interactor when expanded
+                enrichedComplex.startInteractorIncludedWhenExpanded = false;
               }
+              enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
+              // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
+              // line as it may start in this subcomponent
+              enrichedComplex.startSubComponentIndex = this.getMinValue(enrichedComplex.startSubComponentIndex, k);
+              enrichedComplex.endSubComponentIndex = this.getMaxValue(enrichedComplex.endSubComponentIndex, k);
             }
+          }
         }
       }
     }
@@ -236,27 +238,45 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   public classifyInteractorsByType() {
-    this.enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType));
+    this.enrichedInteractors.sort((a, b) => {
+      if (b.interactor.interactorType === a.interactor.interactorType) {
+        return b.timesAppearing - a.timesAppearing;
+      } else {
+        const typeBTimesAppearing = this._timesAppearingByType.get(b.interactor.interactorType);
+        const typeATimesAppearing = this._timesAppearingByType.get(a.interactor.interactorType);
+        if (typeBTimesAppearing === typeATimesAppearing) {
+          return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
+        } else {
+          return typeBTimesAppearing - typeATimesAppearing;
+        }
+      }
+    });
     this.rangeOfInteractorType();
   }
 
   public classifyInteractorsByOccurrence() {
-    for (const oneInteractor of this.enrichedInteractors) {
-      for (const complex of this.complexes) {
-        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
-        if (!!match) {
-          if (!!match.stochiometryValue) {
-            oneInteractor.timesAppearing += match.stochiometryValue[0];
-          } else {
-            oneInteractor.timesAppearing += 1;
-          }
-        }
-      }
-    }
     this.enrichedInteractors.sort((a, b) =>
       b.timesAppearing - a.timesAppearing
     );
     this.ranges = [];
+  }
+
+  private calculateTimesAppearing() {
+    this._timesAppearingByType = new Map();
+    for (const oneInteractor of this.enrichedInteractors) {
+      for (const complex of this.complexes) {
+        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
+        if (!!match) {
+          oneInteractor.timesAppearing += 1;
+          if (this._timesAppearingByType.has(oneInteractor.interactor.interactorType)) {
+            const current = this._timesAppearingByType.get(oneInteractor.interactor.interactorType);
+            this._timesAppearingByType.set(oneInteractor.interactor.interactorType, current + 1);
+          } else {
+            this._timesAppearingByType.set(oneInteractor.interactor.interactorType, 1);
+          }
+        }
+      }
+    }
   }
 
   public rangeOfInteractorType() {

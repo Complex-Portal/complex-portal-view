@@ -37,7 +37,6 @@
 
 .filterColumn {
   width: 15vw;
-
 }
 
 .leftAligned {
@@ -45,6 +44,7 @@
   --min-margin-left: calc(-100rem * 0.17);
   margin-left: max(var(--global-margin), var(--min-margin-left));
   /*margin-left: 0;*/
+  /*background-color: #bca04d;*/
 }
 
 .cnButton {
@@ -89,12 +89,29 @@
   margin-left: max(var(--global-margin), var(--min-margin-left));
 }
 
+/*.ComplexNavigator {*/
+/*  width: 75vw;*/
+/*  float: right;*/
+/*  --global-margin: calc((100vw - 80rem) / -2);*/
+/*  --min-margin-left: calc(-100rem * 0.17);*/
+/*  margin-left: max(var(--global-margin), var(--min-margin-left));*/
+/*  padding-right: var(--min-margin-left);*/
+/*  padding-right: 5vw;*/
+/*  margin-right: var(--min-margin-left);*/
+/*  background-color: #6dab49;*/
+/*  !*margin-left: 15vw;*!*/
+/*  width: 100%;*/
+/*}*/
+
 .smallCN {
   width: 55vw;
   float: right;
   margin-left: auto;
 }
 
-.smallCNButtons {
-  width: 67.5vw;
+.changingOfDisplay {
+  /*display: grid;*/
+  /*float: left;*/
+  width: 65vw;
+  /*background-color: #0086b4;*/
 }

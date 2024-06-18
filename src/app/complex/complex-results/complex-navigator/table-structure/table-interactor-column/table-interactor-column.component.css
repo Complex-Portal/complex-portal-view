@@ -31,7 +31,7 @@ table {
 }
 
 .intStoich {
-  height: 45px;
+  height: 100%;
   max-width: 70px;
   min-width: 70px;
   font-size: medium;

@@ -32,6 +32,10 @@
   display: none;
 }
 
+label {
+  color: white;
+}
+
 .dropdown:hover .displaySize {
   display: flex;
   list-style: none;

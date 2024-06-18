@@ -1,5 +1,5 @@
 <div class="row" *ngIf="participantsWithSubcomponents">
-  <h2 class="float-left">Participants</h2>
+  <h2 class="float-left">Components</h2>
   <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
   <div class="columns medium-12 no-pad-right no-pad-left">
     <div class="columns medium-6 no-pad-left no-pad-right">
@@ -22,7 +22,7 @@
           </button>
           <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('Interactor')"
                   [ngClass]="{'icon-check': annotations['Interactor'], 'hollow': !annotations['Interactor']}">
-            Interactor
+            Component
           </button>
         </div>
         <div class="expanded button-group">
@@ -36,31 +36,32 @@
     <div class="columns medium-6 padding-left-medium no-pad-right">
       <table class="hover">
         <thead>
-          <th style="width: 16%">Legend</th>
-          <th style="width: 64%">Description</th>
-          <th style="width: 20%">Stoichiometry</th>
+        <th style="width: 16%">Legend</th>
+        <th style="width: 64%">Description</th>
+        <th style="width: 20%">Stoichiometry</th>
         </thead>
         <tbody>
-          <ng-container *ngFor="let participant of participantsWithSubcomponents | slice:0:displayedElements; let i = index">
-            <tr class="gray-top-border">
-              <td colspan="3" class="no-padding">
-                <cp-complex-participant-legend
-                  [participant]="participant"
-                  [colorLegendGroups]="colorLegendGroups"
-                  [backgroundComplexId]="complexAC"
-                  [parentComplexAcs]="[]">
-                </cp-complex-participant-legend>
-              </td>
-            </tr>
-          </ng-container>
-          <tr class="text-center" style="background: white" *ngIf="MIN_DISPLAYED_ELEMENTS < participants.length">
-            <td colspan="3" *ngIf="displayedElements < participants.length">
-              <a class="label" (click)="displayedElements = participants.length">Show all participants</a>
-            </td>
-            <td colspan="3" *ngIf="displayedElements >= participants.length">
-              <a class="label" (click)="displayedElements = MIN_DISPLAYED_ELEMENTS">Hide participants</a>
+        <ng-container
+          *ngFor="let participant of participantsWithSubcomponents | slice:0:displayedElements; let i = index">
+          <tr class="gray-top-border">
+            <td colspan="3" class="no-padding">
+              <cp-complex-participant-legend
+                [participant]="participant"
+                [colorLegendGroups]="colorLegendGroups"
+                [backgroundComplexId]="complexAC"
+                [parentComplexAcs]="[]">
+              </cp-complex-participant-legend>
             </td>
           </tr>
+        </ng-container>
+        <tr class="text-center" style="background: white" *ngIf="MIN_DISPLAYED_ELEMENTS < participants.length">
+          <td colspan="3" *ngIf="displayedElements < participants.length">
+            <a class="label" (click)="displayedElements = participants.length">Show all components</a>
+          </td>
+          <td colspan="3" *ngIf="displayedElements >= participants.length">
+            <a class="label" (click)="displayedElements = MIN_DISPLAYED_ELEMENTS">Hide components</a>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
