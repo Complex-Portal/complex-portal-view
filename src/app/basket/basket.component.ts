@@ -26,13 +26,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Basket');
-    this._query = this.createQuery(this._complexBasket);
-    this.complexSearchBasket = null;
-    this.allInteractorsInComplexSearchBasket = [];
-    this._complexes = [];
-    this.requestComplexesForNavigator();
-    console.log(this._complexes);
-    console.log(this.allInteractorsInComplexSearchBasket);
+    this.complexNavigatorLoading();
   }
 
   ngAfterViewInit(): void {
@@ -41,6 +35,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   deleteFromBasket(key: string): void {
     this._basketService.deleteFromBasket(key);
+    this.complexNavigatorLoading();
   }
 
   get complexBasket(): { [name: string]: BasketItem } {
@@ -96,4 +91,15 @@ export class BasketComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  complexNavigatorLoading() {
+    this._query = this.createQuery(this._complexBasket);
+    this.complexSearchBasket = null;
+    this.allInteractorsInComplexSearchBasket = [];
+    this._complexes = [];
+    this.requestComplexesForNavigator();
+    console.log(this._complexes);
+    console.log(this.allInteractorsInComplexSearchBasket);
+  }
+
 }

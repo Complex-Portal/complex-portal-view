@@ -30,23 +30,3 @@
 .transparentVerticalLine {
   border-right: 0;
 }
-
-/*!*!* NEEDED FOR SAFARI BROWSER*!*/
-/*@supports (-webkit-hyphens:none) {*/
-/*  .verticalLine, .transparentVerticalLine {*/
-/*    max-height: 23px; !* mendatory for safari *!*/
-/*    min-height: 23px; !* mendatory for safari *!*/
-/*    margin-top: -10px;*/
-/*    !*margin-bottom: 29px;*!*/
-/*  }*/
-/*}*/
-
-
-/*!* NEEDED FOR FIREFOX BROWSER*!*/
-/*@-moz-document url-prefix() {*/
-/*  .verticalLine, .transparentVerticalLine {*/
-/*    max-height: 100% !important; !* gives the priority to the firefox setting *!*/
-/*    min-height: 100% !important; !* gives the priority to the firefox setting *!*/
-/*    margin-top: -29px;*/
-/*  }*/
-/*}*/

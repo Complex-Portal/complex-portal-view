@@ -11,8 +11,6 @@ table {
   left: 0;
   z-index: 5;
   height: 45px;
-  /*max-height: 45px;*/
-  /*min-height: 45px;*/
   min-width: 130px;
   max-width: 130px;
   padding: 5px;
