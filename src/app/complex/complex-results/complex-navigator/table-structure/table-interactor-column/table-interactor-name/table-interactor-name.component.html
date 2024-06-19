@@ -19,26 +19,19 @@
     </a>
 
     <div class="nameCompact" *ngIf="!IDDisplay">
-      <div class="name" title="More complexes containing {{interactorName}}" *ngIf="!IDDisplay">
-        <a *ngIf="!IDDisplay"
-           [routerLink]="['/complex/search']"
-           [queryParams]="{query: interactorId, page: 1}"
-           target="_blank">
+      <div class="name" title="More information about containing {{interactorName}}" *ngIf="!IDDisplay">
+        <a href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
           {{ interactorName }}
         </a>
       </div>
-      <cp-table-interactor-external-link
-        *ngIf="!IDDisplay"
-        [interactorId]="interactorId"
-        [identifierLink]="identifierLink"
-        [interactorType]="interactorType"
-        [isMainInteractor]="isMainInteractor"
-        [IDDisplay]="IDDisplay"
-        (externalLinkVisible)="externalLinkVisibleHandler($event)">
-      </cp-table-interactor-external-link>
+      <a [routerLink]="['/complex/search']"
+         [queryParams]="{query: interactorId, page: 1}"
+         target="_blank">
+        <i class="icon icon-functional small" data-icon="1"
+           title="More complexes containing {{interactorName}}"></i>
+      </a>
     </div>
   </div>
-
   <cp-table-interactor-external-link
     *ngIf="IDDisplay"
     [interactorId]="interactorId"

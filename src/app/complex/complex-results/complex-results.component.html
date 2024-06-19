@@ -6,7 +6,7 @@
       <div class="row">
         <cp-complex-navigator-rating *ngIf="DisplayType=== COMPLEX_NAVIGATOR_VIEW">
         </cp-complex-navigator-rating>
-        <div class="displayButton columns medium-8" style="text-align: center; padding-left: 10px">
+        <div class="displayButton columns medium-8">
           <button type="submit" name="submit" class="button view-button"
                   (click)="setListView()" [ngClass]="{'selected': DisplayType === LIST_VIEW}">
             View list
@@ -30,14 +30,17 @@
         </cp-complex-filter>
       </div>
       <div class="columns medium-8">
-        <cp-complex-paginator [currentPageIndex]="currentPageIndex"
+        <cp-complex-paginator class="changingOfDisplay"
+                              [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)">
         </cp-complex-paginator>
-        <cp-complex-list class="listOfResults" *ngIf="DisplayType===LIST_VIEW"
-                         [complexSearch]="complexSearch">
-        </cp-complex-list>
-        <div class="ComplexNavigator" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
+        <div class="listOfResults">
+          <cp-complex-list *ngIf="DisplayType===LIST_VIEW"
+                           [complexSearch]="complexSearch">
+          </cp-complex-list>
+        </div>
+        <div class="ComplexNavigator changingOfDisplay" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
              [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : ''">
           <cp-complex-navigator class="Complex-navigator"
                                 [complexSearch]="complexSearch"

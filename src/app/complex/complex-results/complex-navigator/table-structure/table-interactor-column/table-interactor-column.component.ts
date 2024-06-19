@@ -45,6 +45,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   ranges: number[];
 
   _timesAppearingByType: Map<string, number>;
+  _timesAppearingByOrganism: Map<string, number>;
 
   constructor(private complexPortalService: ComplexPortalService) {
   }
@@ -52,7 +53,8 @@ export class TableInteractorColumnComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['interactors']) {
       this.enrichInteractors();
-      this.calculateTimesAppearing();
+      this.calculateTimesAppearingType();
+      this.calculateTimesAppearingOrganism();
     }
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
@@ -233,7 +235,19 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   public classifyInteractorsByOrganism() {
-    this.enrichedInteractors.sort((a, b) => b.interactor.organismName.localeCompare(a.interactor.organismName));
+    this.enrichedInteractors.sort((a, b) => {
+      if (b.interactor.organismName === a.interactor.organismName) {
+        return b.timesAppearing - a.timesAppearing;
+      } else {
+        const organismBTimesAppearing = this._timesAppearingByOrganism.get(b.interactor.organismName);
+        const organismATimesAppearing = this._timesAppearingByOrganism.get(a.interactor.organismName);
+        if (organismBTimesAppearing === organismATimesAppearing) {
+          return b.interactor.organismName.localeCompare(a.interactor.organismName);
+        } else {
+          return organismBTimesAppearing - organismATimesAppearing;
+        }
+      }
+    });
     this.rangeOfInteractorOrganism();
   }
 
@@ -261,7 +275,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.ranges = [];
   }
 
-  private calculateTimesAppearing() {
+  private calculateTimesAppearingType() {
     this._timesAppearingByType = new Map();
     for (const oneInteractor of this.enrichedInteractors) {
       for (const complex of this.complexes) {
@@ -273,6 +287,24 @@ export class TableInteractorColumnComponent implements OnChanges {
             this._timesAppearingByType.set(oneInteractor.interactor.interactorType, current + 1);
           } else {
             this._timesAppearingByType.set(oneInteractor.interactor.interactorType, 1);
+          }
+        }
+      }
+    }
+  }
+
+  private calculateTimesAppearingOrganism() {
+    this._timesAppearingByOrganism = new Map();
+    for (const oneInteractor of this.enrichedInteractors) {
+      for (const complex of this.complexes) {
+        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
+        if (!!match) {
+          oneInteractor.timesAppearing += 1;
+          if (this._timesAppearingByOrganism.has(oneInteractor.interactor.organismName)) {
+            const current = this._timesAppearingByOrganism.get(oneInteractor.interactor.organismName);
+            this._timesAppearingByOrganism.set(oneInteractor.interactor.organismName, current + 1);
+          } else {
+            this._timesAppearingByOrganism.set(oneInteractor.interactor.organismName, 1);
           }
         }
       }

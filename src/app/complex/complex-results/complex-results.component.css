@@ -1,5 +1,7 @@
 .displayButton {
-  float: right;
+  text-align: center;
+  width: 78vw;
+  /*background: antiquewhite;*/
 }
 
 .view-button {
@@ -41,7 +43,7 @@
 
 .leftAligned {
   --global-margin: calc((100vw - 80rem) / -2);
-  --min-margin-left: calc(-100rem * 0.17);
+  --min-margin-left: calc(-100rem * 1.17);
   margin-left: max(var(--global-margin), var(--min-margin-left));
 }
 
@@ -79,28 +81,6 @@
   animation: none;
 }
 
-.ComplexNavigator {
-  width: 71.5vw;
-  float: left;
-  --global-margin: calc((100vw - 80rem) / -2);
-  --min-margin-left: calc(-100rem * 0.17);
-  margin-left: max(var(--global-margin), var(--min-margin-left));
-}
-
-/*.ComplexNavigator {*/
-/*  width: 75vw;*/
-/*  float: right;*/
-/*  --global-margin: calc((100vw - 80rem) / -2);*/
-/*  --min-margin-left: calc(-100rem * 0.17);*/
-/*  margin-left: max(var(--global-margin), var(--min-margin-left));*/
-/*  padding-right: var(--min-margin-left);*/
-/*  padding-right: 5vw;*/
-/*  margin-right: var(--min-margin-left);*/
-/*  background-color: #6dab49;*/
-/*  !*margin-left: 15vw;*!*/
-/*  width: 100%;*/
-/*}*/
-
 .smallCN {
   width: 55vw;
   float: right;
@@ -108,8 +88,18 @@
 }
 
 .changingOfDisplay {
-  /*display: grid;*/
-  /*float: left;*/
-  width: 65vw;
-  /*background-color: #0086b4;*/
+  float: left;
+  width: 75vw;
+  margin-right: -2vw;
 }
+
+.column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
+  float: left !important;
+}
+
+/*.listOfResults {*/
+/*  !* float: inline-end; *!*/
+/*  width: 100%;*/
+/*  !* background: antiquewhite; *!*/
+/*  margin-left: 18vw;*/
+/*}*/
