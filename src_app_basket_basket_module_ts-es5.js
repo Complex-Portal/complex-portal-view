@@ -113,14 +113,13 @@
             } finally {
               _iterator.f();
             }
-            this._query = query;
             return query;
           }
         }, {
           key: "requestComplexesForNavigator",
           value: function requestComplexesForNavigator() {
             var _this = this;
-            this.complexPortalService.findComplex(this._query).subscribe(function (complexSearch) {
+            this.complexPortalService.findComplex(this.createQuery(this._complexBasket)).subscribe(function (complexSearch) {
               _this.complexSearchBasket = complexSearch;
               if (_this.complexSearchBasket.totalNumberOfResults !== 0) {
                 for (var i = 0; i < complexSearch.elements.length; i++) {
@@ -151,13 +150,10 @@
         }, {
           key: "complexNavigatorLoading",
           value: function complexNavigatorLoading() {
-            this._query = this.createQuery(this._complexBasket);
             this.complexSearchBasket = null;
             this.allInteractorsInComplexSearchBasket = [];
             this._complexes = [];
             this.requestComplexesForNavigator();
-            console.log(this._complexes);
-            console.log(this.allInteractorsInComplexSearchBasket);
           }
         }]);
         return BasketComponent;

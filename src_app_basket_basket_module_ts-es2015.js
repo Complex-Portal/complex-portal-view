@@ -75,11 +75,10 @@ let BasketComponent = class BasketComponent {
                 query += queryPerObject;
             }
         }
-        this._query = query;
         return query;
     }
     requestComplexesForNavigator() {
-        this.complexPortalService.findComplex(this._query).subscribe(complexSearch => {
+        this.complexPortalService.findComplex(this.createQuery(this._complexBasket)).subscribe(complexSearch => {
             this.complexSearchBasket = complexSearch;
             if (this.complexSearchBasket.totalNumberOfResults !== 0) {
                 for (let i = 0; i < complexSearch.elements.length; i++) {
@@ -94,13 +93,10 @@ let BasketComponent = class BasketComponent {
         });
     }
     complexNavigatorLoading() {
-        this._query = this.createQuery(this._complexBasket);
         this.complexSearchBasket = null;
         this.allInteractorsInComplexSearchBasket = [];
         this._complexes = [];
         this.requestComplexesForNavigator();
-        console.log(this._complexes);
-        console.log(this.allInteractorsInComplexSearchBasket);
     }
 };
 BasketComponent.ctorParameters = () => [
