@@ -19,8 +19,8 @@
     </a>
 
     <div class="nameCompact" *ngIf="!IDDisplay">
-      <div class="name" title="More information about containing {{interactorName}}" *ngIf="!IDDisplay">
-        <a href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
+      <div class="name" title="More information about {{interactorName}}" *ngIf="!IDDisplay">
+        <a *ngIf="!!identifierLink" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
           {{ interactorName }}
         </a>
       </div>

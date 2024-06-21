@@ -21,7 +21,6 @@ import {
   TableSubcomponentInteractorComponent
 } from './table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
 import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/complex-navigator-buttons.component';
-import {ComplexNavigatorRatingComponent} from './complex-navigator-rating/complex-navigator-rating.component';
 import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {RouterModule} from '@angular/router';
 

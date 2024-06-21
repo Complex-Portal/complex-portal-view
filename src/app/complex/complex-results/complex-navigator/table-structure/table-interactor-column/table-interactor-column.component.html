@@ -27,7 +27,7 @@
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
-            <a title="{{ interactor.interactor.name }} interactors" (click)="toggleSubcomplexExpandable(i)">
+            <a title="{{ interactor.interactor.name }} components" (click)="toggleSubcomplexExpandable(i)">
               Components
               <i class="icon icon-common" data-icon="&#xf078;"
                  style="font-size:small;
@@ -55,10 +55,10 @@
               class="expandedRows"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
-                title="{{interactor.interactor.name}} interactors"
+                title="{{interactor.interactor.name}} components"
                 *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
               <div class="interactorSeparationName"
-                   [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} interactors
+                   [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} components
               </div>
             </td>
             <td class="subComponentColumn"

@@ -53,6 +53,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['interactors']) {
       this.enrichInteractors();
+      this.interactorsTimesAppearing();
       this.calculateTimesAppearingType();
       this.calculateTimesAppearingOrganism();
     }
@@ -281,7 +282,6 @@ export class TableInteractorColumnComponent implements OnChanges {
       for (const complex of this.complexes) {
         const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
         if (!!match) {
-          oneInteractor.timesAppearing += 1;
           if (this._timesAppearingByType.has(oneInteractor.interactor.interactorType)) {
             const current = this._timesAppearingByType.get(oneInteractor.interactor.interactorType);
             this._timesAppearingByType.set(oneInteractor.interactor.interactorType, current + 1);
@@ -299,7 +299,6 @@ export class TableInteractorColumnComponent implements OnChanges {
       for (const complex of this.complexes) {
         const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
         if (!!match) {
-          oneInteractor.timesAppearing += 1;
           if (this._timesAppearingByOrganism.has(oneInteractor.interactor.organismName)) {
             const current = this._timesAppearingByOrganism.get(oneInteractor.interactor.organismName);
             this._timesAppearingByOrganism.set(oneInteractor.interactor.organismName, current + 1);
@@ -378,5 +377,20 @@ export class TableInteractorColumnComponent implements OnChanges {
       return 'lastExpandedRow';
     }
     return null;
+  }
+
+  interactorsTimesAppearing() {
+    for (const oneInteractor of this.enrichedInteractors) {
+      for (const complex of this.complexes) {
+        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
+        if (!!match) {
+          if (!!match.stochiometryValue) {
+            oneInteractor.timesAppearing += match.stochiometryValue[0];
+          } else {
+            oneInteractor.timesAppearing += 1;
+          }
+        }
+      }
+    }
   }
 }

@@ -15,7 +15,6 @@ import {Element} from '../complex/shared/model/complex-results/element.model';
 })
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
-  private _query: string;
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
   private _complexes: Element[];
@@ -65,12 +64,11 @@ export class BasketComponent implements OnInit, AfterViewInit {
         query += queryPerObject;
       }
     }
-    this._query = query;
     return query;
   }
 
   private requestComplexesForNavigator() {
-    this.complexPortalService.findComplex(this._query).subscribe(complexSearch => {
+    this.complexPortalService.findComplex(this.createQuery(this._complexBasket)).subscribe(complexSearch => {
       this.complexSearchBasket = complexSearch;
       if (this.complexSearchBasket.totalNumberOfResults !== 0) {
         for (let i = 0; i < complexSearch.elements.length; i++) {
@@ -93,13 +91,10 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   complexNavigatorLoading() {
-    this._query = this.createQuery(this._complexBasket);
     this.complexSearchBasket = null;
     this.allInteractorsInComplexSearchBasket = [];
     this._complexes = [];
     this.requestComplexesForNavigator();
-    console.log(this._complexes);
-    console.log(this.allInteractorsInComplexSearchBasket);
   }
 
 }
