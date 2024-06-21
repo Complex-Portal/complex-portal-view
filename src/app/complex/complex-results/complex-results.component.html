@@ -47,7 +47,8 @@
                                 [interactors]="allInteractorsInComplexSearch">
           </cp-complex-navigator>
         </div>
-        <cp-complex-paginator [currentPageIndex]="currentPageIndex"
+        <cp-complex-paginator class="changingOfDisplay"
+                              [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)"></cp-complex-paginator>
       </div>

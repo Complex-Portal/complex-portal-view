@@ -1,16 +1,15 @@
 .displayButton {
   text-align: center;
   width: 78vw;
-  /*background: antiquewhite;*/
 }
 
 .view-button {
-  float: unset;
   width: 225px;
   margin-right: 5px;
   background-color: white;
   color: #555;
   border: 1px dotted #007c82;
+  float: unset;
 }
 
 .view-button:hover {
@@ -24,7 +23,6 @@
 .selected:hover {
   background-color: #007c82;
   color: white;
-  opacity: 100%;
 }
 
 .new-tag {
@@ -53,32 +51,21 @@
   animation: animateOutline 4s ease infinite;
 }
 
+.cnButton.selected {
+  animation: none;
+}
+
 @keyframes animateOutline {
-  0% {
-    outline-width: 1px;
-    outline-offset: 0;
-    outline-color: rgba(0, 124, 130, 0);
-  }
-
-  10% {
-    outline-color: rgba(0, 124, 130, 0.75);
-  }
-
-  50% {
-    outline-width: 6px;
-    outline-offset: 4px;
-    outline-color: rgba(0, 124, 130, 0);
-  }
-
+  0%,
+  50%,
   100% {
     outline-width: 6px;
     outline-offset: 4px;
-    outline-color: rgba(102, 102, 102, 0);
+    outline-color: rgba(0, 124, 130, 0);
   }
-}
-
-.cnButton.selected {
-  animation: none;
+  10% {
+    outline-color: rgba(0, 124, 130, 0.75);
+  }
 }
 
 .smallCN {
@@ -93,13 +80,13 @@
   margin-right: -2vw;
 }
 
-.column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
+.column:last-child:not(:first-child),
+.columns:last-child:not(:first-child) {
   float: left !important;
 }
 
-/*.listOfResults {*/
-/*  !* float: inline-end; *!*/
-/*  width: 100%;*/
-/*  !* background: antiquewhite; *!*/
-/*  margin-left: 18vw;*/
-/*}*/
+.listOfResults {
+  width: 40vw;
+  margin-left: 15vw;
+  text-justify: distribute;
+}

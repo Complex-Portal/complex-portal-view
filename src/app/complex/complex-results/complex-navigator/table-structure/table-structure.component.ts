@@ -20,34 +20,11 @@ export class TableStructureComponent implements OnChanges {
   sortedComplexes: Element[] = [];
 
   ngOnChanges(): void {
-    this.classifyComplexesSize(); // ensure to always have the same base of comparison
     this.sortedComplexes = this.classifyComplexesSimilaritiesV2(this.complexSearch.elements);
-  }
-
-  classifyComplexesSize(): void {
-    const searchResult: Element[] = [...this.complexSearch.elements];
-    const complexesAndSizes: [Element, number][] = [];
-    for (const complex of searchResult) {
-      let totalLength = complex.interactors.length;
-      for (const complexInteractorChecked of complex.interactors) {
-        if (complexInteractorChecked.interactorType === 'stable complex') {
-          const subComplex: Element = searchResult.find(c => c.complexAC === complexInteractorChecked.identifier);
-          if (!!subComplex) {
-            totalLength += subComplex.interactors.length;
-          }
-        }
-      }
-      complexesAndSizes.push([complex, totalLength]);
-    }
-    complexesAndSizes.sort((a, b) => b[1] - a[1]);
-    for (let i = 0; i < searchResult.length; i++) {
-      this.complexSearch.elements[i] = complexesAndSizes[i][0];
-    }
   }
 
   private calculateSimilarity(complex1: Element, complex2: Element) {
     let similarities = 0;
-    const similarityArray: [Element, Element, number] = [complex1, complex2, similarities];
     for (const complex1Interactor of complex1.interactors) {
       // The interactor of complex 1 is a subcomplex
       if (complex1Interactor.interactorType === 'stable complex') {
@@ -102,44 +79,13 @@ export class TableStructureComponent implements OnChanges {
           }
         }
       }
-      similarityArray[2] = similarities;
     }
-    // console.log(similarityArray);
     return similarities;
-  }
-
-  private classifyComplexesSimilarities(complexesList: Element[]): Element[] {
-    const classifiedList: Element[][] = [];
-    // multidimensional array containing groups of complexes having similar interactors
-    for (const complex of complexesList) {
-      let similarInteractorFound = false;
-      for (const classification of classifiedList) {
-        const comparedComplex = classification[0];
-        const similarity = this.calculateSimilarity(complex, comparedComplex);
-        if (similarity >= 1) {
-          classification.push(complex);
-          similarInteractorFound = true; // goes to the next complex
-        }
-      }
-      if (!similarInteractorFound) {
-        classifiedList.push([complex]); // fill classifiedList with arrays of all the complexes in the list
-      }
-    }
-    const unique: Element[] = [];
-    for (const classification of classifiedList) {
-      for (const complex of classification) {
-        if (!unique.includes(complex)) {
-          unique.push(complex);
-        }
-      }
-    }
-    return unique;
   }
 
   classifyComplexesSimilaritiesV2(complexesList: Element[]) {
     const comparedComplexes: [Element, Element, number][] = [];
     const finalList: Element[] = [];
-
     for (const complex of complexesList) {
       for (const comparedComplex of complexesList) {
         // for unique comparison
@@ -149,17 +95,6 @@ export class TableStructureComponent implements OnChanges {
       }
     }
     comparedComplexes.sort((a, b) => b[2] - a[2]); // sorting by similarityScore
-
-    // const complexesOrderedSet = new Set<Element>(); // used to have unique complexes
-    // for (const [complex1, complex2] of comparedComplexes) {
-    //   if (!complexesOrderedSet.has(complex1)) {
-    //     complexesOrderedSet.add(complex1);
-    //   }
-    //   if (!complexesOrderedSet.has(complex2)) {
-    //     complexesOrderedSet.add(complex2);
-    //   }
-    // }
-
     const complexesOrderedSet = this.uniqueComplexesListOrderedBySimilarity(comparedComplexes);
     // to be used in the table as a 1D array
     for (const complex of complexesOrderedSet) {
@@ -170,18 +105,42 @@ export class TableStructureComponent implements OnChanges {
 
   uniqueComplexesListOrderedBySimilarity(complexesListSimilarities: [Element, Element, number][]) {
     const complexesOrderedSet = new Set<Element>();
-    for (const [complex1, complex2, similarityScore] of complexesListSimilarities) {
+    // for (const [complex1, complex2, similarityScore] of complexesListSimilarities) {
+    //   if (complexesOrderedSet.size === this.complexSearch.elements.length) {
+    //     return complexesOrderedSet;
+    //   }
+    //   if (similarityScore !== 0) {
+    //     if (!complexesOrderedSet.has(complex1)) {
+    //       complexesOrderedSet.add(complex1);
+    //     }
+    //     if (!complexesOrderedSet.has(complex2)) {
+    //       complexesOrderedSet.add(complex2);
+    //     }
+    //     for (const [complex3, complex4, similarityScore2nd] of complexesListSimilarities) {
+    //       if (complex1 === complex3 && (similarityScore2nd !== 0) && (complex2 !== complex4)) {
+    //         if (!complexesOrderedSet.has(complex4)) {
+    //           complexesOrderedSet.add(complex4);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    for (let i = 0; i < complexesListSimilarities.length; i++) {
+      const complex1 = complexesListSimilarities[i][0];
+      const complex2 = complexesListSimilarities[i][1];
+      const similarityScore = complexesListSimilarities[i][2];
       if (similarityScore !== 0) {
-        // console.log(complex1.complexAC, complex2.complexAC, similarityScore);
         if (!complexesOrderedSet.has(complex1)) {
           complexesOrderedSet.add(complex1);
         }
         if (!complexesOrderedSet.has(complex2)) {
           complexesOrderedSet.add(complex2);
         }
-        for (const [complex3, complex4, similarityScore2nd] of complexesListSimilarities) {
+        for (let j = i + 1; j < complexesListSimilarities.length; j++) {
+          const complex3 = complexesListSimilarities[j][0];
+          const complex4 = complexesListSimilarities[j][1];
+          const similarityScore2nd = complexesListSimilarities[j][2];
           if (complex1 === complex3 && similarityScore2nd !== 0) {
-            // console.log(complex3.complexAC, complex4.complexAC, similarityScore2nd);
             if (!complexesOrderedSet.has(complex4)) {
               complexesOrderedSet.add(complex4);
             }
