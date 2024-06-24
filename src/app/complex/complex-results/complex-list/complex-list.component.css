@@ -2,3 +2,15 @@
   width: 100%;
   text-align: justify;
 }
+
+.container {
+  display: inline-flex;
+}
+
+.basketButton {
+  padding-top: 10px;
+}
+
+.complexesAndDescription {
+  padding: 10px
+}

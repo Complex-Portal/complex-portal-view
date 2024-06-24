@@ -70,6 +70,8 @@ export class BasketComponent implements OnInit, AfterViewInit {
   private requestComplexesForNavigator() {
     this.complexPortalService.findComplex(this.createQuery(this._complexBasket)).subscribe(complexSearch => {
       this.complexSearchBasket = complexSearch;
+      // complexSearch.totalNumberOfResults = this.
+      console.log(this.complexSearchBasket);
       if (this.complexSearchBasket.totalNumberOfResults !== 0) {
         for (let i = 0; i < complexSearch.elements.length; i++) {
           this._complexes.push(complexSearch.elements[i]);
@@ -95,6 +97,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.allInteractorsInComplexSearchBasket = [];
     this._complexes = [];
     this.requestComplexesForNavigator();
+    // console.log(this._complexes);
   }
 
 }

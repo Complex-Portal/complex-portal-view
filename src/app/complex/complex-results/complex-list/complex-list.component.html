@@ -1,14 +1,25 @@
 <ul class="no-bullet">
   <li *ngFor="let complex of complexSearch.elements">
-    <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
-    <div class="description" style="background-color: white">
-      <b>Complex AC:</b> {{ complex.complexAC }} / <b>Organism:</b> ({{ complex.organismName }})<br>
-      <b>Description:</b>
-      <div *ngIf="complex.description.length <= 250">
-        {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+    <div class="container">
+      <div class="basketButton">
+        <a class="button"
+           (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
+           [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                         data-icon="b"></span></a>
       </div>
-      <div *ngIf="complex.description.length > 250">
-        {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+      <div class="complexesAndDescription">
+        <h3>
+          <a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
+        <div class="description" style="background-color: white">
+          <b>Complex AC:</b> {{ complex.complexAC }} / <b>Organism:</b> ({{ complex.organismName }})<br>
+          <b>Description:</b>
+          <div *ngIf="complex.description.length <= 250">
+            {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+          </div>
+          <div *ngIf="complex.description.length > 250">
+            {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+          </div>
+        </div>
       </div>
     </div>
   </li>
