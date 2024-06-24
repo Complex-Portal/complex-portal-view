@@ -2349,7 +2349,7 @@
           key: "addComplexNavigatorAnnouncementNotification",
           value: function addComplexNavigatorAnnouncementNotification(announcement) {
             return this.toastrService.info(announcement, null, {
-              disableTimeOut: true,
+              disableTimeOut: false,
               closeButton: true,
               progressBar: false,
               positionClass: 'toast-right-under-header'
