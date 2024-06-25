@@ -23,6 +23,7 @@ import {
 import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/complex-navigator-buttons.component';
 import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {RouterModule} from '@angular/router';
+import {ComplexListDisplayButtonsComponent} from './complex-list-display-buttons/complex-list-display-buttons.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import {RouterModule} from '@angular/router';
     MarkdownModule
   ],
   exports: [
-    ComplexNavigatorComponent
+    ComplexNavigatorComponent,
+    ComplexListDisplayButtonsComponent
   ],
   declarations: [
     ComplexNavigatorComponent,
@@ -44,7 +46,8 @@ import {RouterModule} from '@angular/router';
     TableInteractorStoichiometryComponent,
     TableMainInteractorComponent,
     TableSubcomponentInteractorComponent,
-    ComplexNavigatorButtonsComponent
+    ComplexNavigatorButtonsComponent,
+    ComplexListDisplayButtonsComponent
   ]
 })
 export class ComplexNavigatorModule {

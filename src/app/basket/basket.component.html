@@ -1,7 +1,13 @@
 <div class="margin-top-large margin-bottom-large">
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
     <h1>Personal complex collection</h1>
-    <table class="hover">
+    <div class="row">
+      <cp-complex-list-display-buttons
+        [displayType]="DisplayType"
+        (displayTypeChange)="onDisplayTypeChange($event)">
+      </cp-complex-list-display-buttons>
+    </div>
+    <table class="hover" *ngIf="!this.isDisplayComplexNavigatorView()">
       <thead>
       <tr>
         <th>Name</th>
@@ -28,12 +34,20 @@
       </tr>
       </tbody>
     </table>
-    <div class="ComplexNavigator">
-      <cp-complex-navigator
-        [complexSearch]="complexSearchBasket"
-        [interactors]="allInteractorsInComplexSearchBasket">
-      </cp-complex-navigator>
-    </div>
+    <ng-container *ngIf="complexSearchBasket;else loadingSpinner">
+      <div class="ComplexNavigator" *ngIf="isDisplayComplexNavigatorView()">
+        <cp-complex-navigator
+          [complexSearch]="complexSearchBasket"
+          [interactors]="allInteractorsInComplexSearchBasket"
+          [canAddComplexesToBasket]="false"
+          [canRemoveComplexesFromBasket]="true"
+          (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+        </cp-complex-navigator>
+      </div>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <cp-progress-spinner></cp-progress-spinner>
+    </ng-template>
 
   </div>
   <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">

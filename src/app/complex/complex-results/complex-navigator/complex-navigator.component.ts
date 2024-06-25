@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 
@@ -11,6 +11,10 @@ import {Interactor} from '../../shared/model/complex-results/interactor.model';
 export class ComplexNavigatorComponent {
   @Input() complexSearch: ComplexSearchResult;
   @Input() interactors: Interactor[];
+  @Input() canAddComplexesToBasket: boolean;
+  @Input() canRemoveComplexesFromBasket: boolean;
+  @Output() onComplexRemovedFromBasket: EventEmitter<string> = new EventEmitter<string>();
+
   interactorsSorting = 'Occurrence';
   organismIconDisplay = true;
   interactorTypeDisplay = true;
