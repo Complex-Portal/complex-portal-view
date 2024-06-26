@@ -12,7 +12,10 @@
                       [interactorsSorting]="interactorsSorting"
                       [organismIconDisplay]="organismIconDisplay"
                       [interactorTypeDisplay]="interactorTypeDisplay"
-                      [IDDisplay]="IDDisplay">
+                      [IDDisplay]="IDDisplay"
+                      [canAddComplexesToBasket]="canAddComplexesToBasket"
+                      [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket"
+                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
   </cp-table-structure>
 </div>
 

@@ -53,7 +53,6 @@ export class TableInteractorColumnComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes['interactors']) {
       this.enrichInteractors();
-      this.interactorsTimesAppearing();
       this.calculateTimesAppearing();
     }
     this.classifyInteractors();
@@ -341,21 +340,6 @@ export class TableInteractorColumnComponent implements OnChanges {
       return 'lastExpandedRow';
     }
     return null;
-  }
-
-  interactorsTimesAppearing() {
-    for (const oneInteractor of this.enrichedInteractors) {
-      for (const complex of this.complexes) {
-        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
-        if (!!match) {
-          if (!!match.stochiometryValue) {
-            oneInteractor.timesAppearing += match.stochiometryValue[0];
-          } else {
-            oneInteractor.timesAppearing += 1;
-          }
-        }
-      }
-    }
   }
 
   private calculateTimesAppearing() {

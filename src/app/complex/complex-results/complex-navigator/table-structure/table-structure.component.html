@@ -3,7 +3,10 @@
        (scroll)="body.scrollLeft = header.scrollLeft" #header>
 
     <cp-table-header [complexes]="sortedComplexes"
-                     [interactorsSorting]="interactorsSorting">
+                     [interactorsSorting]="interactorsSorting"
+                     [canAddComplexesToBasket]="canAddComplexesToBasket"
+                     [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket"
+                     (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
     </cp-table-header>
   </div>
   <div class="interactors"

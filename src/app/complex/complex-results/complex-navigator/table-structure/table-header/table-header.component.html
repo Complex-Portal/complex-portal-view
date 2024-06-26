@@ -8,20 +8,30 @@
         Components
       </th>
       <th class="horizontal" *ngFor="let complex of complexes">
-        <a [routerLink]="['/complex', complex.complexAC]"
-           title="{{complex.complexAC}}"
-           target="_blank">
-          <div>
-            <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
-              <div class="line"></div>
-                <div class="horizontal-label">
-                  <i class="{{iconOrganism(complex.organismName)}}"></i>
-                  <i class="icon icon-generic small" data-icon="x"></i>
-                  {{ complex.complexName }}
-                </div>
-            </span>
-          </div>
-        </a>
+        <div class="horizontal-label">
+          <a class="button basketButton"
+             *ngIf="canAddComplexesToBasket"
+             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
+             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                           data-icon="b"></span></a>
+          <a class="button basketButton"
+             *ngIf="canRemoveComplexesFromBasket"
+             (click)="removeComplex(complex.complexAC)"
+             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                            data-icon="b"></span></a>
+          <a [routerLink]="['/complex', complex.complexAC]"
+             title="{{complex.complexAC}}"
+             target="_blank">
+            <div>
+              <span title="{{ complex.complexName }} - {{ complex.complexAC}}">
+                <div class="line"></div>
+                <i class="{{iconOrganism(complex.organismName)}}"></i>
+                <i class="icon icon-generic small" data-icon="x"></i>
+                {{ complex.complexName }}
+              </span>
+            </div>
+          </a>
+        </div>
       </th>
     </tr>
     </thead>
@@ -61,7 +71,22 @@
         Components
       </th>
       <ng-container *ngFor=" let complex of complexes;">
-        <th class="iconOrganism"><i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>
+        <th class="iconOrganism">
+          <div>
+            <a class="button basketButton"
+               *ngIf="canAddComplexesToBasket"
+               (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
+               [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                             data-icon="b"></span></a>
+            <a class="button basketButton"
+               *ngIf="canRemoveComplexesFromBasket"
+               (click)="removeComplex(complex.complexAC)"
+               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                              data-icon="b"></span></a>
+          </div>
+          <div>
+            <i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>
+          </div>
         </th>
       </ng-container>
       <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>

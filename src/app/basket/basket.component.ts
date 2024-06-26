@@ -6,7 +6,11 @@ import {Title} from '@angular/platform-browser';
 import {ComplexPortalService} from '../complex/shared/service/complex-portal.service';
 import {ComplexSearchResult} from '../complex/shared/model/complex-results/complex-search.model';
 import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
-import {Element} from '../complex/shared/model/complex-results/element.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {
+  COMPLEX_NAVIGATOR_VIEW,
+  LIST_VIEW
+} from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 
 @Component({
   selector: 'cp-basket',
@@ -17,15 +21,39 @@ export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
-  private _complexes: Element[];
+  DisplayType: string;
 
-  constructor(private _basketService: BasketService, private titleService: Title, private complexPortalService: ComplexPortalService) {
+  constructor(private _basketService: BasketService,
+              private titleService: Title,
+              private complexPortalService: ComplexPortalService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this._complexBasket = this._basketService.complexBasket;
   }
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Basket');
     this.complexNavigatorLoading();
+    this.route.fragment.subscribe(fragment => {
+      if (fragment === COMPLEX_NAVIGATOR_VIEW) {
+        this.DisplayType = COMPLEX_NAVIGATOR_VIEW;
+      } else {
+        this.DisplayType = LIST_VIEW;
+      }
+    });
+  }
+
+  onDisplayTypeChange(displayType: string) {
+    if (this.DisplayType !== displayType) {
+      this.DisplayType = displayType;
+      this.router.navigate([], {
+        fragment: this.DisplayType
+      });
+    }
+  }
+
+  isDisplayComplexNavigatorView(): boolean {
+    return this.DisplayType === COMPLEX_NAVIGATOR_VIEW;
   }
 
   ngAfterViewInit(): void {
@@ -34,6 +62,15 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   deleteFromBasket(key: string): void {
     this._basketService.deleteFromBasket(key);
+    this.complexNavigatorLoading();
+  }
+
+  deleteComplexFromBasket(complexAc: string): void {
+    for (const key of this.getKeys(this.complexBasket)) {
+      if (this.complexBasket[key].id === complexAc) {
+        this._basketService.deleteFromBasket(key);
+      }
+    }
     this.complexNavigatorLoading();
   }
 
@@ -56,25 +93,18 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   private createQuery(object: any): string {
-    let query = '';
-    for (const key of this.getKeys(object)) {
-      if (object[key] !== undefined) {
-        let queryPerObject = ' complex_id:';
-        queryPerObject += object[key].id;
-        query += queryPerObject;
-      }
-    }
-    return query;
+    return 'complex_id:' + Object.values(object).map((v: BasketItem) => v.id).join(',');
   }
 
   private requestComplexesForNavigator() {
-    this.complexPortalService.findComplex(this.createQuery(this._complexBasket)).subscribe(complexSearch => {
-      this.complexSearchBasket = complexSearch;
+    const pageSize = Object.values(this._complexBasket).length;
+    this.complexPortalService.findComplex(this.createQuery(this._complexBasket), [], [], [], 1, pageSize)
+      .subscribe(complexSearch => {
+        this.complexSearchBasket = complexSearch;
       // complexSearch.totalNumberOfResults = this.
       console.log(this.complexSearchBasket);
       if (this.complexSearchBasket.totalNumberOfResults !== 0) {
         for (let i = 0; i < complexSearch.elements.length; i++) {
-          this._complexes.push(complexSearch.elements[i]);
           for (const component of complexSearch.elements[i].interactors) {
             if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
               this.allInteractorsInComplexSearchBasket.push(
@@ -95,7 +125,6 @@ export class BasketComponent implements OnInit, AfterViewInit {
   complexNavigatorLoading() {
     this.complexSearchBasket = null;
     this.allInteractorsInComplexSearchBasket = [];
-    this._complexes = [];
     this.requestComplexesForNavigator();
     // console.log(this._complexes);
   }
