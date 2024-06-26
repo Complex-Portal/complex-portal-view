@@ -41,7 +41,7 @@ thead {
   color: white;
   border-left: 1px solid white;
   font-size: medium;
-  height: 35px;
+  height: 70px;
 }
 
 .tilted-label {
@@ -105,7 +105,7 @@ thead {
   z-index: 4;
   background-color: white;
   border-bottom: 3px solid #007c82;
-  height: 35px;
+  height: 70px;
   text-align: right;
   color: #007c82;
 }
@@ -149,5 +149,10 @@ a:visited {
 
 a {
   color: white;
+}
+
+.basketButton {
+  padding: 0;
+  margin: 0;
 }
 

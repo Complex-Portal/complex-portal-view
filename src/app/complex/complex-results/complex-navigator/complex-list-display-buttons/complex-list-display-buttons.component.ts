@@ -9,6 +9,7 @@ export const COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
   styleUrls: ['./complex-list-display-buttons.component.css']
 })
 export class ComplexListDisplayButtonsComponent {
+
   @Input() displayType: string;
   @Output() displayTypeChange = new EventEmitter<string>();
 

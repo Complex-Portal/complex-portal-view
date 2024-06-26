@@ -1,71 +1,11 @@
-.displayButton {
-  text-align: center;
-  width: 78vw;
-}
-
-.view-button {
-  width: 225px;
-  margin-right: 5px;
-  background-color: white;
-  color: #555;
-  border: 1px dotted #007c82;
-  float: unset;
-}
-
-.view-button:hover {
-  color: #007c82;
-  background-color: rgb(234, 234, 234);
-  border: transparent;
-  border-bottom: 1px dotted #007c82;
-}
-
-.selected,
-.selected:hover {
-  background-color: #007c82;
-  color: white;
-}
-
-.new-tag {
-  color: red;
-  font-weight: bold;
-  font-size: x-small;
-}
-
-.new-tag-selected {
-  color: yellow;
-}
-
 .filterColumn {
   width: 15vw;
 }
 
 .leftAligned {
   --global-margin: calc((100vw - 80rem) / -2);
-  --min-margin-left: calc(-100rem * 1.17);
+  --min-margin-left: calc(-100rem * 0.17);
   margin-left: max(var(--global-margin), var(--min-margin-left));
-}
-
-.cnButton {
-  outline-offset: 0;
-  outline: rgba(0, 124, 130, 0.75) solid 1px;
-  animation: animateOutline 4s ease infinite;
-}
-
-.cnButton.selected {
-  animation: none;
-}
-
-@keyframes animateOutline {
-  0%,
-  50%,
-  100% {
-    outline-width: 6px;
-    outline-offset: 4px;
-    outline-color: rgba(0, 124, 130, 0);
-  }
-  10% {
-    outline-color: rgba(0, 124, 130, 0.75);
-  }
 }
 
 .smallCN {
