@@ -5,15 +5,3 @@
   vertical-align: middle;
   padding: 15px
 }
-
-.alert-message {
-  display: inline-flex;
-}
-
-.alert-button-div {
-  padding-left: 16px;
-}
-
-.alert-button {
-  font-size: large;
-}
