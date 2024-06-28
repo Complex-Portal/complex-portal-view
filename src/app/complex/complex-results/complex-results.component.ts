@@ -192,6 +192,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   set complexSearch(value: ComplexSearchResult) {
     this._complexSearch = value;
+    this.redirectToComplexDetailsPageIfOneResult();
     this.setFirstDisplayType();
   }
 
@@ -262,26 +263,31 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  redirectToComplexDetailsPageIfOneResult(): void {
+    // No filters and only one result, then we redirect to complex details page
+    // This allows users to enable filters to see even one result without redirecting them out from the results page,
+    // but we ensure redirection of a new search has only one result.
+    if (this.getFilterCount() === 0 && this._complexSearch.totalNumberOfResults === 1) {
+      const complexId = this._complexSearch.elements[0].complexAC;
+      if (!!complexId) {
+        // For some reason this is needed so the navigate call works
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+          return false;
+        };
+        this.router.navigate(['/complex', complexId]);
+      }
+    }
+  }
+
 
   setFirstDisplayType(): void {
     if (!this.DisplayType) {
-      if (this._complexSearch.totalNumberOfResults === 1) {
-        const complexId = this._complexSearch.elements[0].complexAC;
-        if (!!complexId) {
-          // For some reason this is needed so the navigate call works
-          this.router.routeReuseStrategy.shouldReuseRoute = function () {
-            return false;
-          };
-          this.router.navigate(['/complex', complexId]);
-        }
+      // Currently the list view is the default, as we are just launching the navigator view
+      // Later on we can change the default view to be the list or navigator view based on number of results
+      if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
+        this.setComplexNavigatorView();
       } else {
-        // Currently the list view is the default, as we are just launching the navigator view
-        // Later on we can change the default view to be the list or navigator view based on number of results
-        if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
-          this.setComplexNavigatorView();
-        } else {
-          this.setListView();
-        }
+        this.setListView();
       }
     }
   }
