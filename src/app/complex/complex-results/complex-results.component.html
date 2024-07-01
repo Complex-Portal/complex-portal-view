@@ -23,7 +23,7 @@
         </cp-complex-filter>
       </div>
       <div class="columns medium-8">
-        <cp-complex-paginator class="changingOfDisplay"
+        <cp-complex-paginator class="paginator"
                               [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)">
@@ -33,8 +33,8 @@
                            [complexSearch]="complexSearch">
           </cp-complex-list>
         </div>
-        <div class="ComplexNavigator changingOfDisplay" *ngIf="isDisplayComplexNavigatorView()"
-             [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : ''">
+        <div class="ComplexNavigator" *ngIf="isDisplayComplexNavigatorView()"
+             [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
           <cp-complex-navigator class="Complex-navigator"
                                 [complexSearch]="complexSearch"
                                 [interactors]="allInteractorsInComplexSearch"
@@ -42,7 +42,7 @@
                                 [canRemoveComplexesFromBasket]="false">
           </cp-complex-navigator>
         </div>
-        <cp-complex-paginator class="changingOfDisplay"
+        <cp-complex-paginator class="paginator"
                               [currentPageIndex]="currentPageIndex"
                               [lastPageIndex]="lastPageIndex"
                               (onPageChange)="onPageChange($event)"></cp-complex-paginator>
