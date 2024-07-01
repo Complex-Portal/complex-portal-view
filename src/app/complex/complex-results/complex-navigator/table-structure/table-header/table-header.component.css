@@ -116,6 +116,7 @@ thead {
   background-color: white;
   border-bottom: 3px solid #007c82;
   height: 70px;
+  line-height: 70px;
   text-align: right;
   color: #007c82;
 }
