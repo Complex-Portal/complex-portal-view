@@ -36,7 +36,8 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
+    <thead class="tableHeadOverflow" *ngIf="complexes.length>6"
+           [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">

@@ -51,7 +51,6 @@ thead {
   overflow: hidden;
 }
 
-
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
   --intHeader: 130px;
@@ -60,6 +59,17 @@ thead {
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
+  overflow: hidden;
+}
+
+.CN-table .tableHeadOverflowWithSorting tr {
+  --cols: 1;
+  --intHeader: 130px;
+  --parentWidth: 100%;
+  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+  display: grid;
+  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
+  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder) - 3ch);
   overflow: hidden;
 }
 
