@@ -9,16 +9,6 @@
       </th>
       <th class="horizontal" *ngFor="let complex of complexes">
         <div class="horizontal-label">
-          <a class="button basketButton"
-             *ngIf="canAddComplexesToBasket"
-             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
-             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                           data-icon="b"></span></a>
-          <a class="button basketButton"
-             *ngIf="canRemoveComplexesFromBasket"
-             (click)="removeComplex(complex.complexAC)"
-             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                            data-icon="b"></span></a>
           <a [routerLink]="['/complex', complex.complexAC]"
              title="{{complex.complexAC}}"
              target="_blank">
@@ -31,6 +21,16 @@
               </span>
             </div>
           </a>
+          <a class="button basketButton"
+             *ngIf="canAddComplexesToBasket"
+             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
+             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                           data-icon="b"></span></a>
+          <a class="button basketButton"
+             *ngIf="canRemoveComplexesFromBasket"
+             (click)="removeComplex(complex.complexAC)"
+             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                            data-icon="b"></span></a>
         </div>
       </th>
     </tr>
