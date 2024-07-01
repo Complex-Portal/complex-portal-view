@@ -1,3 +1,7 @@
 .ComplexNavigator {
   float: left;
 }
+
+.smallCN {
+  width: 100%;
+}

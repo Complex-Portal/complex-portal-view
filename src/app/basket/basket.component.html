@@ -37,7 +37,8 @@
     </table>
     <div *ngIf="isDisplayComplexNavigatorView()">
       <ng-container *ngIf="complexSearchBasket;else loadingSpinner">
-        <div class="ComplexNavigator">
+        <div class="ComplexNavigator"
+             [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
           <cp-complex-navigator
             [complexSearch]="complexSearchBasket"
             [interactors]="allInteractorsInComplexSearchBasket"
