@@ -29,8 +29,8 @@
           <a class="button basketButton"
              *ngIf="canRemoveComplexesFromBasket"
              (click)="removeComplex(complex.complexAC)"
-             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                            data-icon="b"></span></a>
+             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
+                                                                            data-icon="d"></span></a>
         </div>
       </th>
     </tr>
@@ -82,8 +82,8 @@
             <a class="button basketButton"
                *ngIf="canRemoveComplexesFromBasket"
                (click)="removeComplex(complex.complexAC)"
-               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                              data-icon="b"></span></a>
+               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
+                                                                              data-icon="d"></span></a>
           </div>
           <div>
             <i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>
