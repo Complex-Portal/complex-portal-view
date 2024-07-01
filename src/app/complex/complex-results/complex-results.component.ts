@@ -195,8 +195,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   set complexSearch(value: ComplexSearchResult) {
     this._complexSearch = value;
-    this.redirectToComplexDetailsPageIfOneResult();
-    this.setFirstDisplayType();
+    this.processSearchResults();
   }
 
   get lastPageIndex(): number {
@@ -279,7 +278,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  redirectToComplexDetailsPageIfOneResult(): void {
+  processSearchResults(): void {
     // No filters and only one result, then we redirect to complex details page
     // This allows users to enable filters to see even one result without redirecting them out from the results page,
     // but we ensure redirection of a new search has only one result.
@@ -292,11 +291,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         };
         this.router.navigate(['/complex', complexId]);
       }
-    }
-  }
-
-  private setFirstDisplayType(): void {
-    if (!this.DisplayType) {
+    } else if (!this.DisplayType) {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
       if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
