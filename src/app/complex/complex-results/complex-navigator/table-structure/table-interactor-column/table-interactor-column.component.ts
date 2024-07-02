@@ -4,9 +4,11 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {findInteractorInComplex} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {throwError} from 'rxjs/internal/observable/throwError';
 
 export class EnrichedInteractor {
   interactor: Interactor;
@@ -47,7 +49,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   _timesAppearingByType: Map<string, number>;
   _timesAppearingByOrganism: Map<string, number>;
 
-  constructor(private complexPortalService: ComplexPortalService) {
+  constructor(private complexPortalService: ComplexPortalService, private http: HttpClient) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,6 +59,11 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
+
+    this.usePanther(this.testProtein, this.testOrganism);
+    // this.useOrthoDB(this.testProtein);
+    // this.useOMA(this.testProtein);
+    // this.uniprotIDfromOMA(this.testProtein);
   }
 
   private classifyInteractors(): void {
@@ -365,5 +372,148 @@ export class TableInteractorColumnComponent implements OnChanges {
         }
       }
     }
+  }
+
+  private handleError(err: HttpErrorResponse | any): Observable<any> {
+    if (err.error instanceof Error) {
+      return throwError(err);
+    } else {
+      console.error(err.message ? err.message : err.toString());
+    }
+  }
+
+  //// OMA TESTS
+
+  public orthologsOMA;
+
+  useOMA(proteinID: string) {
+    this.getOMAorthologs(proteinID).subscribe(() => {
+      console.log('OMA');
+      console.log(this.orthologsOMA);
+    });
+  }
+
+  getOMAorthologs(proteinID: string) {
+    const URLtoOrthologs = 'https://omabrowser.org/api/protein/' + proteinID + '/orthologs/';
+    return (this.http.get(URLtoOrthologs).pipe(
+      catchError(this.handleError)))
+      .pipe(map((orthologs) => {
+        this.orthologsOMA = orthologs;
+      }));
+  }
+
+  uniprotIDfromOMA(proteinID: string) {
+    let orthologsID = [];
+    this.getOMAorthologs(proteinID).subscribe(() => {
+      for (let i = 0; i < this.orthologsOMA.length; i++) {
+        const urlToXref = this.orthologsOMA[i].entry_url + '/xref/';
+        this.accessToXrefOMA(urlToXref).subscribe(() => {
+          for (let j = 0; j < this.xrefsOMA.length; j++) {
+            if (this.xrefsOMA[j].source === 'UniProtKB/TrEMBL' || this.xrefsOMA[j].source === 'UniProtKB/SwissProt') {
+              orthologsID.push(this.xrefsOMA[j].xref);
+            }
+          }
+        });
+      }
+      console.log('OMA ORTHOLOGS: ');
+      console.log(orthologsID);
+    });
+  }
+
+  public xrefsOMA;
+
+  accessToXrefOMA(url: string) {
+    return (this.http.get(url).pipe(
+      catchError(this.handleError)))
+      .pipe(map((xrefs) => {
+        this.xrefsOMA = xrefs;
+      }));
+  }
+
+  //// PANTHER TESTS
+
+  targetOrganism = '';
+  public pantherResults: Observable<void>;
+  testProtein = 'Q05471'; // UniProt AC
+  testOrganism = '559292'; // testProtein Organism
+  allOrganisms = ['1235996', '1263720', '2697049', '694009', '7955', '3702', '6523', '7787', '7788', '208964', '9823', '8732'
+    , '243277', '284812', '9615', '8355', '9940', '9986', '9913', '9606', '10090', '83333', '562', '9031', '10116', '7227', '3702', '6239'
+    , '559292'];
+
+  targetOrganismWithoutInput(inputOrganism: string) {
+    let targetOrganismList = '';
+    for (const organismTaxon of this.allOrganisms) {
+      if (organismTaxon !== inputOrganism) {
+        targetOrganismList += '%2C' + organismTaxon;
+      }
+    }
+    this.targetOrganism = targetOrganismList;
+  }
+
+  getPantherOrthologsObservable(proteinID: string, organismID: string) {
+    this.targetOrganismWithoutInput(organismID);
+    const URLtoPanther = 'https://pantherdb.org/services/oai/pantherdb/ortholog/matchortho?geneInputList=' + proteinID +
+      '&organism=' + organismID + '&targetOrganism=' + this.targetOrganism + '&orthologType=all';
+    return (this.http.get(URLtoPanther).pipe(
+      catchError(this.handleError)));
+  }
+
+  pantherOrthologsData(proteinID: string, organismID: string) {
+    return this.getPantherOrthologsObservable(proteinID, organismID)
+      .pipe(map((results) => {
+        this.pantherResults = results;
+      }));
+  }
+
+  usePanther(proteinID: string, organismID: string) {
+    this.pantherOrthologsData(proteinID, organismID).subscribe(() => {
+      console.log('PANTHER');
+      console.log(this.pantherResults);
+      
+    });
+  }
+
+  //// ORTHODB TESTS
+
+  public proteinOrthoDB;
+  public orthologsOrthoDB;
+  public orthologsList;
+
+  useOrthoDB(proteinID: string) {
+    this.getOrthoDBprotein(this.testProtein).subscribe(() => {
+      let ortholosIDOrthoDB = [];
+      const size: number = +this.proteinOrthoDB.count - 1;
+      this.orthologsOrthoDB = this.proteinOrthoDB.bigdata[size].id;
+      this.getOrthoDBOrthologs(this.orthologsOrthoDB).subscribe(() => {
+        console.log('ORTHODB');
+        console.log(this.orthologsList);
+        for (let i = 0; i < this.orthologsOrthoDB.length; i++) {
+          // for (let j = 0; j < this.orthologsList.data[i].genes[0].uniprot; j++) {}
+          if (this.orthologsList.data[i].genes[0].uniprot) {
+            ortholosIDOrthoDB.push(this.orthologsList.data[i].genes[0].uniprot.id);
+          }
+        }
+        console.log(ortholosIDOrthoDB);
+      });
+    });
+
+  }
+
+  getOrthoDBprotein(proteinID: string) {
+    const URLtoProteinID = 'https://data.orthodb.org/current/search?query=' + proteinID;
+    return (this.http.get(URLtoProteinID).pipe(
+      catchError(this.handleError)))
+      .pipe(map((protein) => {
+        this.proteinOrthoDB = protein;
+      }));
+  }
+
+  getOrthoDBOrthologs(orthoDBprotID: string) {
+    const URLtoProteinID = 'https://data.orthodb.org/current/orthologs?id=' + orthoDBprotID;
+    return (this.http.get(URLtoProteinID).pipe(
+      catchError(this.handleError)))
+      .pipe(map((protein) => {
+        this.orthologsList = protein;
+      }));
   }
 }
