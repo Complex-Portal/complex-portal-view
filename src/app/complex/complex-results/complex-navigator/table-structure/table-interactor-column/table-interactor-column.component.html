@@ -45,7 +45,7 @@
             ></cp-table-main-interactor>
           </td>
         </ng-container>
-        <div class="spaceHolder" *ngIf="complexes.length>6"
+        <div *ngIf="complexes.length>6"
              [ngClass]="isInteractorSortingSet() ? 'spaceHolderWithSorting' : 'spaceHolder'"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->

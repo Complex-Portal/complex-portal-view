@@ -93,7 +93,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   private createQuery(object: any): string {
-    return 'complex_id:' + Object.values(object).map((v: BasketItem) => v.id).join(',');
+    return 'complex_id: ' + Object.values(object).map((v: BasketItem) => v.id).join(',');
   }
 
   private requestComplexesForNavigator() {
