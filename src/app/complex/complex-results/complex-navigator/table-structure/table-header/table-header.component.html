@@ -9,16 +9,6 @@
       </th>
       <th class="horizontal" *ngFor="let complex of complexes">
         <div class="horizontal-label">
-          <a class="button basketButton"
-             *ngIf="canAddComplexesToBasket"
-             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
-             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                           data-icon="b"></span></a>
-          <a class="button basketButton"
-             *ngIf="canRemoveComplexesFromBasket"
-             (click)="removeComplex(complex.complexAC)"
-             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                            data-icon="b"></span></a>
           <a [routerLink]="['/complex', complex.complexAC]"
              title="{{complex.complexAC}}"
              target="_blank">
@@ -31,12 +21,23 @@
               </span>
             </div>
           </a>
+          <a class="button basketButton"
+             *ngIf="canAddComplexesToBasket"
+             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
+             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
+                                                                           data-icon="b"></span></a>
+          <a class="button basketButton"
+             *ngIf="canRemoveComplexesFromBasket"
+             (click)="removeComplex(complex.complexAC)"
+             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
+                                                                            data-icon="d"></span></a>
         </div>
       </th>
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length>6">
+    <thead class="tableHeadOverflow" *ngIf="complexes.length>6"
+           [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="complexes.length>15 ? '185px':''">
@@ -81,8 +82,8 @@
             <a class="button basketButton"
                *ngIf="canRemoveComplexesFromBasket"
                (click)="removeComplex(complex.complexAC)"
-               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                              data-icon="b"></span></a>
+               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
+                                                                              data-icon="d"></span></a>
           </div>
           <div>
             <i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>

@@ -35,20 +35,23 @@
       </tr>
       </tbody>
     </table>
-    <ng-container *ngIf="complexSearchBasket;else loadingSpinner">
-      <div class="ComplexNavigator" *ngIf="isDisplayComplexNavigatorView()">
-        <cp-complex-navigator
-          [complexSearch]="complexSearchBasket"
-          [interactors]="allInteractorsInComplexSearchBasket"
-          [canAddComplexesToBasket]="false"
-          [canRemoveComplexesFromBasket]="true"
-          (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
-        </cp-complex-navigator>
-      </div>
-    </ng-container>
-    <ng-template #loadingSpinner>
-      <cp-progress-spinner></cp-progress-spinner>
-    </ng-template>
+    <div *ngIf="isDisplayComplexNavigatorView()">
+      <ng-container *ngIf="complexSearchBasket;else loadingSpinner">
+        <div class="ComplexNavigator"
+             [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
+          <cp-complex-navigator
+            [complexSearch]="complexSearchBasket"
+            [interactors]="allInteractorsInComplexSearchBasket"
+            [canAddComplexesToBasket]="false"
+            [canRemoveComplexesFromBasket]="true"
+            (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+          </cp-complex-navigator>
+        </div>
+      </ng-container>
+      <ng-template #loadingSpinner>
+        <cp-progress-spinner></cp-progress-spinner>
+      </ng-template>
+    </div>
 
   </div>
   <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">
