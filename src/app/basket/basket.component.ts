@@ -101,32 +101,29 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.complexPortalService.findComplex(this.createQuery(this._complexBasket), [], [], [], 1, pageSize)
       .subscribe(complexSearch => {
         this.complexSearchBasket = complexSearch;
-      // complexSearch.totalNumberOfResults = this.
-      console.log(this.complexSearchBasket);
-      if (this.complexSearchBasket.totalNumberOfResults !== 0) {
-        for (let i = 0; i < complexSearch.elements.length; i++) {
-          for (const component of complexSearch.elements[i].interactors) {
-            if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
-              this.allInteractorsInComplexSearchBasket.push(
-                new Interactor(
-                  component.identifier,
-                  component.identifierLink,
-                  component.name,
-                  component.description,
-                  component.interactorType,
-                  component.organismName));
+        if (this.complexSearchBasket.totalNumberOfResults !== 0) {
+          for (let i = 0; i < complexSearch.elements.length; i++) {
+            for (const component of complexSearch.elements[i].interactors) {
+              if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
+                this.allInteractorsInComplexSearchBasket.push(
+                  new Interactor(
+                    component.identifier,
+                    component.identifierLink,
+                    component.name,
+                    component.description,
+                    component.interactorType,
+                    component.organismName));
+              }
             }
           }
         }
-      }
-    });
+      });
   }
 
   complexNavigatorLoading() {
     this.complexSearchBasket = null;
     this.allInteractorsInComplexSearchBasket = [];
     this.requestComplexesForNavigator();
-    // console.log(this._complexes);
   }
 
 }

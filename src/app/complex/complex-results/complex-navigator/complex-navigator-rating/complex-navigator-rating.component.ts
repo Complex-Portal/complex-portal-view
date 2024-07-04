@@ -21,7 +21,6 @@ export class ComplexNavigatorRatingComponent implements OnInit {
 
   selectRating(rating: number) {
     this.selectedRating = rating;
-    // console.log(`Selected rating: ${rating}`);
     this.analyticsService.rateComplexNavigator(this.selectedRating);
     localStorage.setItem(COMPLEX_NAVIGATOR_RATING, 'true');
     setTimeout(() => this.hidden = true, 2000);

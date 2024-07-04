@@ -49,6 +49,15 @@ export class TableInteractorColumnComponent implements OnChanges {
   _timesAppearingByType: Map<string, number>;
   _timesAppearingByOrganism: Map<string, number>;
 
+  testProtein = 'P25788'; // UniProt AC
+  allOrganismsTaxons = ['1235996', '1263720', '2697049', '694009', '7955', '3702', '6523', '7787', '7788', '208964', '9823', '8732'
+    , '243277', '284812', '9615', '8355', '9940', '9986', '9913', '9606', '10090', '83333', '562', '9031', '10116', '7227', '3702', '6239'
+    , '559292'];
+  public proteinOrthoDB;
+  public orthologsOrthoDB;
+  public orthologsList;
+  public componentsID = [];
+
   constructor(private complexPortalService: ComplexPortalService, private http: HttpClient) {
   }
 
@@ -59,11 +68,9 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
-
-    this.usePanther(this.testProtein, this.testOrganism);
     // this.useOrthoDB(this.testProtein);
-    // this.useOMA(this.testProtein);
-    // this.uniprotIDfromOMA(this.testProtein);
+    this.createComponentsIDs();
+    this.createOrthologsGroup();
   }
 
   private classifyInteractors(): void {
@@ -382,59 +389,10 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
   }
 
-  //// OMA TESTS
-
-  public orthologsOMA;
-
-  useOMA(proteinID: string) {
-    this.getOMAorthologs(proteinID).subscribe(() => {
-      console.log('OMA');
-      console.log(this.orthologsOMA);
-    });
-  }
-
-  getOMAorthologs(proteinID: string) {
-    const URLtoOrthologs = 'https://omabrowser.org/api/protein/' + proteinID + '/orthologs/';
-    return (this.http.get(URLtoOrthologs).pipe(
-      catchError(this.handleError)))
-      .pipe(map((orthologs) => {
-        this.orthologsOMA = orthologs;
-      }));
-  }
-
-  uniprotIDfromOMA(proteinID: string) {
-    let orthologsID = [];
-    this.getOMAorthologs(proteinID).subscribe(() => {
-      for (let i = 0; i < this.orthologsOMA.length; i++) {
-        const urlToXref = this.orthologsOMA[i].entry_url + '/xref/';
-        this.accessToXrefOMA(urlToXref).subscribe(() => {
-          for (let j = 0; j < this.xrefsOMA.length; j++) {
-            if (this.xrefsOMA[j].source === 'UniProtKB/TrEMBL' || this.xrefsOMA[j].source === 'UniProtKB/SwissProt') {
-              orthologsID.push(this.xrefsOMA[j].xref);
-            }
-          }
-        });
-      }
-      console.log('OMA ORTHOLOGS: ');
-      console.log(orthologsID);
-    });
-  }
-
-  public xrefsOMA;
-
-  accessToXrefOMA(url: string) {
-    return (this.http.get(url).pipe(
-      catchError(this.handleError)))
-      .pipe(map((xrefs) => {
-        this.xrefsOMA = xrefs;
-      }));
-  }
-
   //// PANTHER TESTS
 
   targetOrganism = '';
   public pantherResults: Observable<void>;
-  testProtein = 'Q05471'; // UniProt AC
   testOrganism = '559292'; // testProtein Organism
   allOrganisms = ['1235996', '1263720', '2697049', '694009', '7955', '3702', '6523', '7787', '7788', '208964', '9823', '8732'
     , '243277', '284812', '9615', '8355', '9940', '9986', '9913', '9606', '10090', '83333', '562', '9031', '10116', '7227', '3702', '6239'
@@ -469,34 +427,29 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.pantherOrthologsData(proteinID, organismID).subscribe(() => {
       console.log('PANTHER');
       console.log(this.pantherResults);
-      
     });
   }
 
   //// ORTHODB TESTS
 
-  public proteinOrthoDB;
-  public orthologsOrthoDB;
-  public orthologsList;
+  public ids;
 
   useOrthoDB(proteinID: string) {
-    this.getOrthoDBprotein(this.testProtein).subscribe(() => {
-      let ortholosIDOrthoDB = [];
-      const size: number = +this.proteinOrthoDB.count - 1;
-      this.orthologsOrthoDB = this.proteinOrthoDB.bigdata[size].id;
-      this.getOrthoDBOrthologs(this.orthologsOrthoDB).subscribe(() => {
-        console.log('ORTHODB');
-        console.log(this.orthologsList);
-        for (let i = 0; i < this.orthologsOrthoDB.length; i++) {
-          // for (let j = 0; j < this.orthologsList.data[i].genes[0].uniprot; j++) {}
-          if (this.orthologsList.data[i].genes[0].uniprot) {
-            ortholosIDOrthoDB.push(this.orthologsList.data[i].genes[0].uniprot.id);
+    const orthologsIDOrthoDB = [];
+    if (proteinID != null) {
+      this.getOrthoDBprotein(proteinID).subscribe(() => {
+        this.orthologsOrthoDB = this.proteinOrthoDB.data[0]; // correspond to all the organisms in the DB
+        this.getOrthoDBOrthologs(this.orthologsOrthoDB).subscribe(() => {
+          for (let i = 0; i < this.orthologsList.data.length; i++) {
+            const organismTaxon = this.formatOrganismID(this.orthologsList.data[i].organism.id);
+            if (this.orthologsList.data[i].genes[0].uniprot && this.isPartOfComplexPortalOrganisms(organismTaxon)) {
+              orthologsIDOrthoDB.push(this.orthologsList.data[i].genes[0].uniprot.id);
+            }
           }
-        }
-        console.log(ortholosIDOrthoDB);
+        });
       });
-    });
-
+    }
+    return orthologsIDOrthoDB;
   }
 
   getOrthoDBprotein(proteinID: string) {
@@ -515,5 +468,41 @@ export class TableInteractorColumnComponent implements OnChanges {
       .pipe(map((protein) => {
         this.orthologsList = protein;
       }));
+  }
+
+  formatOrganismID(name: string): string {
+    if (!!name && name.includes('_')) {
+      const end = name.indexOf('_');
+      return name.substring(0, end);
+    }
+    return name;
+  }
+
+  isPartOfComplexPortalOrganisms(organismTaxon: string): boolean {
+    return this.allOrganismsTaxons.includes(organismTaxon);
+  }
+
+  createOrthologsGroup() {
+    const allGroups = new Set();
+    for (const component of this.interactors) {
+      if (component.interactorType === 'protein') {
+        const groups = this.useOrthoDB(component.identifier);
+        allGroups.add(groups);
+      }
+    }
+    console.log(allGroups);
+    return allGroups;
+  }
+
+  checkIfInList(proteinID: string) {
+    return this.componentsID.includes(proteinID);
+  }
+
+  createComponentsIDs() {
+    for (const component of this.interactors) {
+      if (component.interactorType === 'protein') {
+        this.componentsID.push(component.identifier);
+      }
+    }
   }
 }
