@@ -91,33 +91,5 @@
         </ng-container>
       </ng-container>
     </ng-container>
-
-    <!--    <ng-container *ngFor="let orthologGroup of orthologsGroups; let j=index">-->
-    <!--      <tr class="interactorsColumn"> {{ orthologGroup.groupID }}-->
-    <!--        <div>-->
-    <!--          <a title="Orthologs" (click)="orthologGroup.orthologyExpanded = !orthologGroup.orthologyExpanded">-->
-    <!--            Orthologs-->
-    <!--            <i class="icon icon-common" data-icon="&#xf078;"-->
-    <!--               style="font-size:small;-->
-    <!--                "></i>-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <td> {{ orthologsStoichiometry(orthologGroup, complexes[0]) }}</td>-->
-    <!--      </tr>-->
-    <!--      <ng-container *ngIf="orthologGroup.orthologyExpanded">-->
-    <!--        <tr *ngFor="let ortholog of orthologGroup.groupComponents" class="interactorsColumn">-->
-    <!--          <cp-table-interactor-name-->
-    <!--            [interactorName]="ortholog.interactor.name"-->
-    <!--            [interactorType]="ortholog.interactor.interactorType"-->
-    <!--            [interactorId]="ortholog.interactor.identifier"-->
-    <!--            [interactorOrganism]="ortholog.interactor.organismName"-->
-    <!--            [identifierLink]="ortholog.interactor.identifierLink"-->
-    <!--            [organismIconDisplay]="organismIconDisplay"-->
-    <!--            [interactorTypeDisplay]="interactorTypeDisplay"-->
-    <!--            [IDDisplay]="IDDisplay"-->
-    <!--          ></cp-table-interactor-name>-->
-    <!--        </tr>-->
-    <!--      </ng-container>-->
-    <!--    </ng-container>-->
   </table>
 </div>
