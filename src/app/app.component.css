@@ -33,7 +33,6 @@
   position: sticky;
   top: 0;
   background: #007c82;
-  margin-left: min(var(--global-margin), 0px);
   padding: 0 calc(-1 * var(--global-margin));
   width: 100vw;
   z-index: 4;

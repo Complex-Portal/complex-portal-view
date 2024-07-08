@@ -28,4 +28,12 @@ export class ComplexListComponent implements OnInit {
   isInBasket(complexAC: string): boolean {
     return this.basketService.isInBasket(complexAC);
   }
+
+  toggleBasket(complexName: string, complexAC: string, complexOrganism: string) {
+    if (this.isInBasket(complexAC)) {
+      this.removeComplexFromBasket(complexAC);
+    } else {
+      this.saveComplex(complexName, complexAC, complexOrganism);
+    }
+  }
 }

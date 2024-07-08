@@ -5,7 +5,7 @@
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
           <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
-              title="{{oneType[0]}}">
+              [matTooltip]="oneType[0]">
             <div class="interactorNameContainer" [style.--rowspanSize]="oneType[1]">
               {{ oneType[0] }}
             </div>
@@ -26,7 +26,8 @@
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
-            <a title="{{ interactor.interactor.name }} components" (click)="toggleSubcomplexExpandable(i)">
+            <a (click)="toggleSubcomplexExpandable(i)"
+               [matTooltip]="interactor.interactor.name + ' components'">
               Components
               <i class="icon icon-common" data-icon="&#xf078;"
                  style="font-size:small;
@@ -54,7 +55,7 @@
               class="expandedRows"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
-                title="{{interactor.interactor.name}} components"
+                [matTooltip]="interactor.interactor.name + ' components'"
                 *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
               <div class="interactorSeparationName"
                    [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} components
@@ -91,33 +92,5 @@
         </ng-container>
       </ng-container>
     </ng-container>
-
-    <!--    <ng-container *ngFor="let orthologGroup of orthologsGroups; let j=index">-->
-    <!--      <tr class="interactorsColumn"> {{ orthologGroup.groupID }}-->
-    <!--        <div>-->
-    <!--          <a title="Orthologs" (click)="orthologGroup.orthologyExpanded = !orthologGroup.orthologyExpanded">-->
-    <!--            Orthologs-->
-    <!--            <i class="icon icon-common" data-icon="&#xf078;"-->
-    <!--               style="font-size:small;-->
-    <!--                "></i>-->
-    <!--          </a>-->
-    <!--        </div>-->
-    <!--        <td> {{ orthologsStoichiometry(orthologGroup, complexes[0]) }}</td>-->
-    <!--      </tr>-->
-    <!--      <ng-container *ngIf="orthologGroup.orthologyExpanded">-->
-    <!--        <tr *ngFor="let ortholog of orthologGroup.groupComponents" class="interactorsColumn">-->
-    <!--          <cp-table-interactor-name-->
-    <!--            [interactorName]="ortholog.interactor.name"-->
-    <!--            [interactorType]="ortholog.interactor.interactorType"-->
-    <!--            [interactorId]="ortholog.interactor.identifier"-->
-    <!--            [interactorOrganism]="ortholog.interactor.organismName"-->
-    <!--            [identifierLink]="ortholog.interactor.identifierLink"-->
-    <!--            [organismIconDisplay]="organismIconDisplay"-->
-    <!--            [interactorTypeDisplay]="interactorTypeDisplay"-->
-    <!--            [IDDisplay]="IDDisplay"-->
-    <!--          ></cp-table-interactor-name>-->
-    <!--        </tr>-->
-    <!--      </ng-container>-->
-    <!--    </ng-container>-->
   </table>
 </div>

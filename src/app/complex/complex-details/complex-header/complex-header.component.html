@@ -13,13 +13,14 @@
             <span class="icon icon-functional " data-icon="="> Download</span></a>
         </div>
         <div class="columns small-12 medium-6 no-pad-left">
-          <a class="button primary expanded" data-equalizer-watch (click)="saveComplex()"
-             [ngClass]="{'hidden': isInBasket()}"><span class="icon icon-generic medium "
-                                                        data-icon="b"> Add to basket</span></a>
-          <a class="button primary expanded" data-equalizer-watch (click)="removeComplexFromBasket()"
-             [ngClass]="{'hidden': !isInBasket()}"><span class="icon icon-functional medium "
-                                                         data-icon="d"> Remove from basket</span></a>
-
+          <a class="button primary expanded" (click)="toggleBasket(complexName,complexAC,complexSpecies)">
+            <img class="basket-icons"
+                 [src]="'assets/images/icons/' + (isInBasket() ? 'remove_from' : 'add_to') + '_basket.svg'"
+                 width="15" height="15" alt="basket"
+                 [matTooltip]="isInBasket() ? 'Remove from basket' : 'Add to basket'"/>
+            <ng-container *ngIf="isInBasket()">Remove from basket</ng-container>
+            <ng-container *ngIf="!isInBasket()">Add to basket</ng-container>
+          </a>
         </div>
       </div>
     </div>

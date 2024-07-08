@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~litemol/dist/css/LiteMol-plugin-light.min.css";
 
+.mat-tooltip {
+  background-color: #353535 !important;
+  font-size: 10pt !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
 
 /*based on https://github.com/ebiwd/EBI-Pattern-library/issues/25#issuecomment-287742227*/
 .button.ebi-background:hover {

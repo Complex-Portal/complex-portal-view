@@ -1,4 +1,4 @@
-<div class="externalLinkContainer" title="More information about {{interactorId}}">
+<div class="externalLinkContainer" [matTooltip]="'More information about ' + interactorId">
   <a *ngIf="externalLinkVisible" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
     {{ interactorId }}
     <i class="icon icon-generic small" data-icon="x" title="More information about {{ interactorId }}"></i>

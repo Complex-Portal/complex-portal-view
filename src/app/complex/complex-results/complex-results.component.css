@@ -1,40 +1,9 @@
-.filterColumn {
-  width: 15vw;
-}
-
-.leftAligned {
-  --global-margin: calc((100vw - 80rem) / -2);
-  --min-margin-left: calc(-100rem * 0.3);
-  margin-left: max(var(--global-margin), var(--min-margin-left));
-}
-
-.smallCN {
-  width: 55vw !important;
-}
-
-.largeCN {
-  width: 67vw !important;
-}
-
 .ComplexNavigator {
-  float: left;
-  margin-right: -2vw;
-  margin-left: auto;
-}
-
-.paginator {
-  float: left;
-  width: 75vw;
-  margin-right: -2vw;
-}
-
-.column:last-child:not(:first-child),
-.columns:last-child:not(:first-child) {
-  float: left !important;
+  width: 100%;
 }
 
 .listOfResults {
-  width: 40vw;
-  margin-left: 17vw;
-  text-justify: distribute;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }

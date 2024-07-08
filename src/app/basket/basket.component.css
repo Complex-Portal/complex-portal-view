@@ -1,7 +1,5 @@
-/*.ComplexNavigator {*/
-/*  float: left;*/
-/*}*/
-
-.smallCN {
-  width: 100%;
+.ComplexNavigator, .hover {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }

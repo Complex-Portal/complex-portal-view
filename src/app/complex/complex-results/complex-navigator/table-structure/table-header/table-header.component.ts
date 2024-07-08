@@ -27,6 +27,14 @@ export class TableHeaderComponent {
     return organismIcon(organismName);
   }
 
+  toggleBasket(complexName: string, complexAC: string, complexOrganism: string) {
+    if (this.isInBasket(complexAC)) {
+      this.removeComplex(complexAC);
+    } else {
+      this.saveComplex(complexName, complexAC, complexOrganism);
+    }
+  }
+
   saveComplex(complexName: string, complexAC: string, complexOrganism: string) {
     this.basketService.saveInBasket(complexName, complexAC, complexOrganism);
   }

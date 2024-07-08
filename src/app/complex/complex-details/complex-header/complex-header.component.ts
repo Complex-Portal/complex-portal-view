@@ -90,4 +90,13 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
     const key = this.basketService.getKey(this._complexAC);
     this.basketService.deleteFromBasket(key);
   }
+
+  toggleBasket(complexName: string, complexAC: string, complexOrganism: string) {
+    if (this.isInBasket()) {
+      this.removeComplexFromBasket();
+    } else {
+      this.saveComplex();
+    }
+  }
+
 }

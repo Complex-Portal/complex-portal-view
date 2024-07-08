@@ -1,5 +1,5 @@
 .description {
-  width: 100%;
+  width: 90%;
   text-align: justify;
 }
 
@@ -7,14 +7,17 @@
   display: inline-flex;
 }
 
-/*.basketButton {*/
-/*  padding-top: 10px;*/
-/*}*/
-
 .complexesAndDescription {
-  padding: 10px
+  padding: 10px;
+  width: 95%
 }
 
-.hidden {
-  display: none;
+.basketButtonContainer {
+  width: fit-content;
+  height: fit-content;
+  margin-top: 10px;
+}
+
+.basket-icons {
+  margin-left: 5px;
 }

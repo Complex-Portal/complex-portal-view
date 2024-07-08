@@ -4,11 +4,10 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {catchError, map} from 'rxjs/operators';
-import {findInteractorInComplex, orthologsStoichiometry} from './complex-navigator-utils';
+import {map} from 'rxjs/operators';
+import {findInteractorInComplex} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {throwError} from 'rxjs/internal/observable/throwError';
+
 
 export class EnrichedInteractor {
   interactor: Interactor;
@@ -29,13 +28,6 @@ export class EnrichedComplex {
   startInteractorIncludedWhenExpanded: boolean;
 }
 
-export class OrthologsGroup {
-  groupID: string;
-  groupComponents: EnrichedInteractor[];
-  orthologyHidden: boolean;
-  orthologyExpanded: boolean;
-}
-
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -51,30 +43,12 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
-  orthologsGroups: OrthologsGroup[];
   ranges: number[];
 
   _timesAppearingByType: Map<string, number>;
   _timesAppearingByOrganism: Map<string, number>;
 
-  testProtein = 'P25788'; // UniProt AC
-  allOrganismsTaxons = ['1235996', '1263720', '2697049', '694009', '7955', '3702', '6523', '7787', '7788', '208964', '9823', '8732'
-    , '243277', '284812', '9615', '8355', '9940', '9986', '9913', '9606', '10090', '83333', '562', '9031', '10116', '7227', '3702', '6239'
-    , '559292'];
-  public proteinOrthoDB;
-  public orthologsOrthoDB;
-  public orthologsList;
-  public componentsID = [];
-
-  pantherTestData =
-    'HUMAN|HGNC=9534|UniProtKB=P28066\tDROME|FlyBase=FBgn0016697|UniProtKB=Q95083\tLDO\tBilateria\tPTHR11599\n' +
-    'HUMAN|HGNC=9532|UniProtKB=P25788\tRAT|RGD=61844|UniProtKB=P18422\tLDO\tEuarchontoglires\tPTHR11599\n' +
-    'HUMAN|HGNC=9535|UniProtKB=P60900\tRAT|RGD=61849|UniProtKB=P60901\tLDO\tEuarchontoglires\tPTHR11599\n' +
-    'HUMAN|HGNC=9530|UniProtKB=P25786\tRAT|RGD=61841|UniProtKB=P18420\tLDO\tEuarchontoglires\tPTHR11599\n' +
-    'HUMAN|HGNC=9537|UniProtKB=P20618\tRAT|RGD=621092|UniProtKB=P18421\tLDO\tEuarchontoglires\tPTHR32194\n' +
-    'HUMAN|HGNC=9533|UniProtKB=P25789\tRAT|RGD=61846|UniProtKB=P21670\tLDO\tEuarchontoglires\tPTHR11599\n';
-
-  constructor(private complexPortalService: ComplexPortalService, private http: HttpClient) {
+  constructor(private complexPortalService: ComplexPortalService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -84,10 +58,6 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
     this.classifyInteractors();
     this.calculateAllStartAndEndIndexes();
-    // this.useOrthoDB(this.testProtein);
-    // this.createComponentsIDs();
-    // this.createOrthologsGroup();
-    this.orthologsGroupsPanther();
   }
 
   private classifyInteractors(): void {
@@ -104,7 +74,6 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private enrichInteractors() {
     this.enrichedInteractors = [];
-    // const returnedEnrichedInteractors = [];
     for (const interactor of this.interactors) {
       const isSubComplex = interactor.interactorType === 'stable complex';
       const newEnrichedInteractor: EnrichedInteractor = {
@@ -399,217 +368,4 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
   }
 
-  private handleError(err: HttpErrorResponse | any): Observable<any> {
-    if (err.error instanceof Error) {
-      return throwError(err);
-    } else {
-      console.error(err.message ? err.message : err.toString());
-    }
-  }
-
-  //// PANTHER TESTS
-
-  targetOrganism = '';
-  public pantherResults: Observable<void>;
-  testOrganism = '559292'; // testProtein Organism
-  allOrganisms = ['1235996', '1263720', '2697049', '694009', '7955', '3702', '6523', '7787', '7788', '208964', '9823', '8732'
-    , '243277', '284812', '9615', '8355', '9940', '9986', '9913', '9606', '10090', '83333', '562', '9031', '10116', '7227', '3702', '6239'
-    , '559292'];
-
-  targetOrganismWithoutInput(inputOrganism: string) {
-    let targetOrganismList = '';
-    for (const organismTaxon of this.allOrganisms) {
-      if (organismTaxon !== inputOrganism) {
-        targetOrganismList += '%2C' + organismTaxon;
-      }
-    }
-    this.targetOrganism = targetOrganismList;
-  }
-
-  getPantherOrthologsObservable(proteinID: string, organismID: string) {
-    this.targetOrganismWithoutInput(organismID);
-    const URLtoPanther = 'https://pantherdb.org/services/oai/pantherdb/ortholog/matchortho?geneInputList=' + proteinID +
-      '&organism=' + organismID + '&targetOrganism=' + this.targetOrganism + '&orthologType=all';
-    return (this.http.get(URLtoPanther).pipe(
-      catchError(this.handleError)));
-  }
-
-  pantherOrthologsData(proteinID: string, organismID: string) {
-    return this.getPantherOrthologsObservable(proteinID, organismID)
-      .pipe(map((results) => {
-        this.pantherResults = results;
-      }));
-  }
-
-  usePanther(proteinID: string, organismID: string) {
-    this.pantherOrthologsData(proteinID, organismID).subscribe(() => {
-      console.log('PANTHER');
-      console.log(this.pantherResults);
-    });
-  }
-
-  //// ORTHODB TESTS
-
-  public ids;
-
-  useOrthoDB(proteinID: string) {
-    const orthologsIDOrthoDB = [];
-    if (proteinID != null) {
-      this.getOrthoDBprotein(proteinID).subscribe(() => {
-        this.orthologsOrthoDB = this.proteinOrthoDB.data[0]; // correspond to all the organisms in the DB
-        this.getOrthoDBOrthologs(this.orthologsOrthoDB).subscribe(() => {
-          for (let i = 0; i < this.orthologsList.data.length; i++) {
-            const organismTaxon = this.formatOrganismID(this.orthologsList.data[i].organism.id);
-            if (this.orthologsList.data[i].genes[0].uniprot && this.isPartOfComplexPortalOrganisms(organismTaxon)) {
-              orthologsIDOrthoDB.push(this.orthologsList.data[i].genes[0].uniprot.id);
-            }
-          }
-        });
-      });
-    }
-    return orthologsIDOrthoDB;
-  }
-
-  getOrthoDBprotein(proteinID: string) {
-    const URLtoProteinID = 'https://data.orthodb.org/current/search?query=' + proteinID;
-    return (this.http.get(URLtoProteinID).pipe(
-      catchError(this.handleError)))
-      .pipe(map((protein) => {
-        this.proteinOrthoDB = protein;
-      }));
-  }
-
-  getOrthoDBOrthologs(orthoDBprotID: string) {
-    const URLtoProteinID = 'https://data.orthodb.org/current/orthologs?id=' + orthoDBprotID;
-    return (this.http.get(URLtoProteinID).pipe(
-      catchError(this.handleError)))
-      .pipe(map((protein) => {
-        this.orthologsList = protein;
-      }));
-  }
-
-  formatOrganismID(name: string): string {
-    if (!!name && name.includes('_')) {
-      const end = name.indexOf('_');
-      return name.substring(0, end);
-    }
-    return name;
-  }
-
-  isPartOfComplexPortalOrganisms(organismTaxon: string): boolean {
-    return this.allOrganismsTaxons.includes(organismTaxon);
-  }
-
-  public idsprot = [];
-
-  createOrthologsGroup() {
-    const allGroups = new Set();
-    for (const component of this.interactors) {
-      if (component.interactorType === 'protein') {
-        const groups = this.useOrthoDB(component.identifier);
-        allGroups.add(groups);
-        this.idsprot.push(component.identifier);
-      }
-    }
-    console.log(this.idsprot);
-    // console.log(allGroups);
-    return allGroups;
-  }
-
-  checkIfInList(proteinID: string) {
-    return this.componentsID.includes(proteinID);
-  }
-
-  createComponentsIDs() {
-    for (const component of this.interactors) {
-      if (component.interactorType === 'protein') {
-        this.componentsID.push(component.identifier);
-      }
-    }
-  }
-
-  //// PANTHER SAVED FILE TESTS
-
-  orthologsGroupsPanther() {
-    const mappedData = Array.from(this.extractIdsToMap(this.pantherTestData));
-    const groups = this.retrieveGroups();
-    this.orthologsGroups = [];
-
-    for (const groupID of groups) {
-      const groupComponents: Interactor[] = [];
-      for (const [uniprotID, pantherID] of mappedData) {
-        if (pantherID === groupID) {
-          const interactor = this.interactors.find(foundInteractor => foundInteractor.identifier === uniprotID);
-          if (interactor) {
-            groupComponents.push(interactor);
-          }
-        }
-      }
-      const groupComponentsEnriched = this.enrichInteractorsPanther(groupComponents);
-      const newOrthologsGroup: OrthologsGroup = {
-        groupID: groupID as string,
-        groupComponents: groupComponentsEnriched,
-        orthologyHidden: true,
-        orthologyExpanded: false
-      };
-      this.orthologsGroups.push(newOrthologsGroup);
-    }
-  }
-
-  private enrichInteractorsPanther(listOfInteractors: Interactor[]): EnrichedInteractor[] {
-    const returnedEnrichedInteractors = [];
-    for (const interactor of listOfInteractors) {
-      const isSubComplex = interactor.interactorType === 'stable complex';
-      const newEnrichedInteractor: EnrichedInteractor = {
-        interactor,
-        hidden: false,
-        isSubComplex,
-        expanded: false,
-        subComponents: null,
-        partOfComplex: [],
-        timesAppearing: 0,
-      };
-      if (isSubComplex) {
-        this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
-      }
-      returnedEnrichedInteractors.push(newEnrichedInteractor);
-    }
-    return returnedEnrichedInteractors;
-  }
-
-  retrieveGroups() {
-    const mappedData = Array.from(this.extractIdsToMap(this.pantherTestData));
-    const groups = new Set;
-    for (let i = 0; i < mappedData.length; i++) {
-      const groupID: string = mappedData[i][1];
-      groups.add(groupID);
-    }
-    return groups;
-  }
-
-  extractIdsToMap(input: string): Map<string, string> {
-    const uniprotKBRegex = /UniProtKB=([A-Z0-9]+)/g;
-    const PTHRRegex = /PTHR\d+/g;
-
-    const uniprotAndPTHR: Map<string, string> = new Map();
-    let match;
-    let lastPTHR = '';
-
-    const PTHRMatches = Array.from(input.matchAll(PTHRRegex)).map(matches => ({id: matches[0], index: matches.index}));
-
-    while ((match = uniprotKBRegex.exec(input)) !== null) {
-      const uniprotKBId = match[1];
-      for (const PTHRMatch of PTHRMatches) {
-        if (PTHRMatch.index < match.index) {
-          lastPTHR = PTHRMatch.id;
-        } else {
-          break;
-        }
-      }
-      if (lastPTHR) {
-        uniprotAndPTHR.set(uniprotKBId, lastPTHR);
-      }
-    }
-    return uniprotAndPTHR;
-  }
 }

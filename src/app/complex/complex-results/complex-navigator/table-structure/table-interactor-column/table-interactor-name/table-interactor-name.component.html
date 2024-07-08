@@ -2,24 +2,24 @@
   <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType==='stable complex'}">
     <i *ngIf="organismIconDisplay"
        class="{{interactorOrganismIcon}}"
-       title="{{interactorOrganism}}"></i>
+       [matTooltip]="interactorOrganism"></i>
 
     <i *ngIf="interactorTypeDisplay"
        class="{{interactorTypeIcon}}"
-       title="{{interactorType}}"></i>
+       [matTooltip]="interactorType"></i>
 
-    <div class="name" title="{{interactorId}}" *ngIf="IDDisplay"> {{ interactorName }}
+    <div class="name" *ngIf="IDDisplay" [matTooltip]="interactorId"> {{ interactorName }}
     </div>
     <a *ngIf="IDDisplay"
        [routerLink]="['/complex/search']"
        [queryParams]="{query: interactorId, page: 1}"
        target="_blank">
       <i class="icon icon-functional small" data-icon="1"
-         title="More complexes containing {{interactorName}}"></i>
+         [matTooltip]="'More complexes containing ' + interactorName "></i>
     </a>
 
     <div class="nameCompact" *ngIf="!IDDisplay">
-      <div class="name" title="More information about {{interactorName}}" *ngIf="!IDDisplay">
+      <div class="name" *ngIf="!IDDisplay" [matTooltip]="'More information about ' + interactorName">
         <a *ngIf="!!identifierLink" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
           {{ interactorName }}
         </a>
@@ -28,7 +28,7 @@
          [queryParams]="{query: interactorId, page: 1}"
          target="_blank">
         <i class="icon icon-functional small" data-icon="1"
-           title="More complexes containing {{interactorName}}"></i>
+           [matTooltip]="'More complexes containing ' + interactorName "></i>
       </a>
     </div>
   </div>

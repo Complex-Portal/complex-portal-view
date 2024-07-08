@@ -1,6 +1,5 @@
 .displayButton {
   text-align: center;
-  width: 100%;
 }
 
 .view-button {
@@ -9,7 +8,6 @@
   background-color: white;
   color: #555;
   border: 1px dotted #007c82;
-  float: unset;
 }
 
 .view-button:hover {
