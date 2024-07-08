@@ -21,16 +21,18 @@
               </span>
             </div>
           </a>
-          <a class="button basketButton"
-             *ngIf="canAddComplexesToBasket"
-             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
-             [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                           data-icon="b"></span></a>
-          <a class="button basketButton"
-             *ngIf="canRemoveComplexesFromBasket"
-             (click)="removeComplex(complex.complexAC)"
-             [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
-                                                                            data-icon="d"></span></a>
+          <a class="button basketButtonActive"
+             [ngClass]="{'hidden':isInBasket(complex.complexAC)}"
+             (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"><span
+            class="icon icon-generic medium "
+            data-icon="b"
+            title="Add complex to basket"></span></a>
+          <a class="button"
+             *ngIf="isInBasket(complex.complexAC)"
+             [ngClass]="{'hidden':!isInBasket(complex.complexAC)}"
+             (click)="removeComplex(complex.complexAC)"><span class="icon icon-functional medium "
+                                                              data-icon="d"
+                                                              title="Remove complex from basket"></span></a>
         </div>
       </th>
     </tr>
@@ -74,16 +76,17 @@
       <ng-container *ngFor=" let complex of complexes;">
         <th class="iconOrganism">
           <div>
-            <a class="button basketButton"
-               *ngIf="canAddComplexesToBasket"
-               (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
-               [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                             data-icon="b"></span></a>
-            <a class="button basketButton"
-               *ngIf="canRemoveComplexesFromBasket"
-               (click)="removeComplex(complex.complexAC)"
-               [ngClass]="{'disabled': !isInBasket(complex.complexAC)}"><span class="icon icon-functional medium "
-                                                                              data-icon="d"></span></a>
+            <a class="button basketButtonActive"
+               [ngClass]="{'hidden':isInBasket(complex.complexAC)}"
+               (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"><span
+              class="icon icon-generic medium "
+              data-icon="b"
+              title="Add complex to basket"></span></a>
+            <a class="button"
+               *ngIf="isInBasket(complex.complexAC)"
+               [ngClass]="{'hidden':!isInBasket(complex.complexAC)}"
+               (click)="removeComplex(complex.complexAC)"><span class="icon icon-functional medium "
+                                                                data-icon="d" title="Remove complex from basket"></span></a>
           </div>
           <div>
             <i class="{{iconOrganism(complex.organismName)}}" title="{{complex.organismName}}"></i>

@@ -7,10 +7,14 @@
   display: inline-flex;
 }
 
-.basketButton {
-  padding-top: 10px;
-}
+/*.basketButton {*/
+/*  padding-top: 10px;*/
+/*}*/
 
 .complexesAndDescription {
   padding: 10px
+}
+
+.hidden {
+  display: none;
 }

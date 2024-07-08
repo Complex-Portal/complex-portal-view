@@ -20,6 +20,11 @@ export class ComplexListComponent implements OnInit {
     this.basketService.saveInBasket(complexName, complexAC, complexOrganism);
   }
 
+  removeComplexFromBasket(complexAC: string) {
+    const key = this.basketService.getKey(complexAC);
+    this.basketService.deleteFromBasket(key);
+  }
+
   isInBasket(complexAC: string): boolean {
     return this.basketService.isInBasket(complexAC);
   }

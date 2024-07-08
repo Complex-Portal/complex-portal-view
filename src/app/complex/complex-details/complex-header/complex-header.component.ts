@@ -85,4 +85,9 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   isInBasket(): boolean {
     return this.basketService.isInBasket(this._complexAC);
   }
+
+  removeComplexFromBasket() {
+    const key = this.basketService.getKey(this._complexAC);
+    this.basketService.deleteFromBasket(key);
+  }
 }

@@ -2,10 +2,18 @@
   <li *ngFor="let complex of complexSearch.elements">
     <div class="container">
       <div class="basketButton">
+        <a class="button basketButtonActive"
+           [ngClass]="{'hidden':isInBasket(complex.complexAC)}"
+           (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"><span
+          class="icon icon-generic medium "
+          data-icon="b"
+          title="Add complex to the basket"></span></a>
         <a class="button"
-           (click)="saveComplex(complex.complexName,complex.complexAC,complex.organismName)"
-           [ngClass]="{'disabled': isInBasket(complex.complexAC)}"><span class="icon icon-generic medium "
-                                                                         data-icon="b"></span></a>
+           *ngIf="isInBasket(complex.complexAC)"
+           [ngClass]="{'hidden':!isInBasket(complex.complexAC)}"
+           (click)="removeComplexFromBasket(complex.complexAC)"><span class="icon icon-functional medium "
+                                                                      data-icon="d"
+                                                                      title="Remove complex from the basket"></span></a>
       </div>
       <div class="complexesAndDescription">
         <h3>

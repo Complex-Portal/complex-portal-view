@@ -69,4 +69,8 @@ export class BasketService {
   public getBasketCount(): number {
     return Object.keys(this._complexBasket).length;
   }
+
+  getKey(id: string): string {
+    return Md5.hashStr(id).toString();
+  }
 }

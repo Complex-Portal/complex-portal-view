@@ -1,9 +1,9 @@
 <div class="row">
   <div class="columns medium-12 callout">
     <div class="columns medium-12 no-pad-left float-left">
-      <h2>{{complexName}}</h2>
-      <h3>ComplexAc: {{complexAC}}</h3>
-      <h3><i>{{complexSpecies}}</i></h3>
+      <h2>{{ complexName }}</h2>
+      <h3>ComplexAc: {{ complexAC }}</h3>
+      <h3><i>{{ complexSpecies }}</i></h3>
     </div>
     <div class="columns medium-4  float-left">
       <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
@@ -14,8 +14,12 @@
         </div>
         <div class="columns small-12 medium-6 no-pad-left">
           <a class="button primary expanded" data-equalizer-watch (click)="saveComplex()"
-             [ngClass]="{'disabled': isInBasket()}"><span class="icon icon-generic medium "
-                                                          data-icon="b"> Basket</span></a>
+             [ngClass]="{'hidden': isInBasket()}"><span class="icon icon-generic medium "
+                                                        data-icon="b"> Add to basket</span></a>
+          <a class="button primary expanded" data-equalizer-watch (click)="removeComplexFromBasket()"
+             [ngClass]="{'hidden': !isInBasket()}"><span class="icon icon-functional medium "
+                                                         data-icon="d"> Remove from basket</span></a>
+
         </div>
       </div>
     </div>

@@ -36,6 +36,7 @@ export function organismIcon(organism: string): string {
     case 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)':
     case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
     case 'Saccharomyces cerevisiae; 559292':
+    case 'Saccharomyces cerevisiae':
       return 'icon icon-species icon-yeast';
     case 'Escherichia coli (strain K12)':
     case 'Escherichia coli':
@@ -54,24 +55,31 @@ export function organismIcon(organism: string): string {
       return 'icon icon-species icon-c-elegans';
     case 'Gallus gallus':
     case 'Gallus gallus (Chicken); 9031':
+    case 'Gallus gallus (Chicken)':
       return 'icon icon-species icon-chicken';
     case 'Drosophila melanogaster':
     case 'Drosophila melanogaster (Fruit fly); 7227':
+    case 'Drosophila melanogaster (Fruit fly)':
       return 'icon icon-species icon-fly';
     case 'Bos taurus':
     case 'Bos taurus (Bovine); 9913':
+    case 'Bos taurus (Bovine)':
       return 'icon icon-species icon-cow';
     case 'Oryctolagus cuniculus':
     case 'Oryctolagus cuniculus (Rabbit); 9986':
+    case 'Oryctolagus cuniculus (Rabbit)':
       return 'icon icon-species icon-rabbit';
     case 'Ovis aries':
     case 'Ovis aries (Sheep); 9940':
+    case 'Ovis aries (Sheep)':
       return 'icon icon-species icon-sheep';
     case 'Xenopus laevis':
     case 'Xenopus laevis (African clawed frog); 8355':
+    case 'Xenopus laevis (African clawed frog)':
       return 'icon icon-species icon-frog';
     case 'Canis lupus familiaris':
     case 'Canis familiaris (dog); 9615':
+    case 'Canis familiaris (dog)':
       return 'icon icon-species icon-dog';
     case 'Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)':
     case 'Vibrio cholerae; 243277':
@@ -81,6 +89,7 @@ export function organismIcon(organism: string): string {
       return 'assets/images/EMBL_Species_RattleSnake.svg';
     case 'Sus scrofa':
     case 'Sus scrofa (Pig); 9823':
+    case 'Sus scrofa (Pig)':
       return 'icon icon-species icon-pig';
     case 'Torpedo marmorata':
     case 'Tetronarce californica':
@@ -92,9 +101,11 @@ export function organismIcon(organism: string): string {
       return 'icon icon-species icon-snail';
     case 'Arabidopsis thaliana':
     case 'Arabidopsis thaliana (Mouse-ear cress); 3702':
+    case 'Arabidopsis thaliana (Mouse-ear cress)':
       return 'icon icon-species icon-brassica';
     case 'Danio rerio':
     case 'Danio rerio (Zebrafish); 7955':
+    case 'Danio rerio (Zebrafish)':
       return 'icon icon-species icon-zebrafish';
     case 'Severe acute respiratory syndrome coronavirus':
     case 'Human SARS coronavirus; 694009' :

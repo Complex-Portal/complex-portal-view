@@ -32,6 +32,8 @@ export class TableHeaderComponent {
   }
 
   removeComplex(complexAC: string): void {
+    const key = this.basketService.getKey(complexAC);
+    this.basketService.deleteFromBasket(key);
     this.onComplexRemovedFromBasket.emit(complexAC);
   }
 

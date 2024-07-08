@@ -1,6 +1,7 @@
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {EnrichedInteractor} from './table-interactor-column.component';
+import {EnrichedInteractor, OrthologsGroup} from './table-interactor-column.component';
+
 
 export class ComponentWithStoichiometry {
   identifier: string;
@@ -162,8 +163,21 @@ function formatStoichiometryValues(stoichiometry: [number, number]): string {
 
 function getStoichiometryText(stoichiometry: [number, number]): string {
   if (!!stoichiometry) {
-      return 'Stoichiometry values: minValue: ' + stoichiometry[0] + ', maxValue: ' + stoichiometry[1];
+    return 'Stoichiometry values: minValue: ' + stoichiometry[0] + ', maxValue: ' + stoichiometry[1];
   } else {
     return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
   }
+}
+
+export function orthologsStoichiometry(orthologsGroup: OrthologsGroup, complex: Element) {
+  let stoichiometryAdded: [number, number];
+  for (const ortholog of orthologsGroup.groupComponents) {
+    if (findInteractorInComplex(complex, ortholog.interactor.identifier, orthologsGroup.groupComponents)) {
+      const foundInteractor = findInteractorInComplex(complex, ortholog.interactor.identifier, orthologsGroup.groupComponents);
+      console.log(foundInteractor.identifier + ' ' + foundInteractor.stochiometryValue);
+      stoichiometryAdded[0] += foundInteractor.stochiometryValue[0];
+    }
+  }
+  console.log(stoichiometryAdded);
+  return stoichiometryAdded;
 }
