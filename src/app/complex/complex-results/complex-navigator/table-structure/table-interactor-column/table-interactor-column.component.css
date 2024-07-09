@@ -57,9 +57,13 @@ a, a:visited {
   color: #0e6f76;
 }
 
-/*.spaceHolder {*/
-/*  width: 183px;*/
-/*}*/
+.spaceHolder {
+  width: 183px;
+}
+
+.spaceHolderWithSorting {
+  width: calc(183px - 3ch);
+}
 
 .subComponentColumn {
   left: 0;
