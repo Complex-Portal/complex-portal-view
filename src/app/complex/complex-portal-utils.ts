@@ -26,8 +26,6 @@ export function interactorTypeIcon(type: string): string {
 
 export function organismIcon(organism: string): string {
   const formattedName = formatOrganismName(organism);
-
-  console.log(formattedName);
   switch (formattedName) {
     case 'Homo sapiens':
       return 'icon icon-species icon-human';
@@ -80,7 +78,7 @@ export function organismIcon(organism: string): string {
     case 'Human betacoronavirus':
       return 'icon icon-species icon-virus';
   }
-  return ' ';
+  return '';
 }
 
 function formatOrganismName(name: string): string {
