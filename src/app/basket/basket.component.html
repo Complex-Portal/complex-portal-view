@@ -2,7 +2,7 @@
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
     <h2>Personal collection of favourite complexes</h2>
     <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
-    <a class="button primary columns medium-2"
+    <a class="button primary columns medium-2 deleteAllButton"
        (click)="deleteAllComplexes()">
       <i class="icon icon-functional" data-icon="d"></i>
       Remove all complexes
