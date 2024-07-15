@@ -1,8 +1,11 @@
 table {
   --cols: 1;
   height: 1px;
-  /*width: calc(130px + 70px * var(--cols) + 183px);*/
   overflow: scroll;
+}
+
+.inheritedWidth {
+  width: inherit;
 }
 
 /* interactors column */

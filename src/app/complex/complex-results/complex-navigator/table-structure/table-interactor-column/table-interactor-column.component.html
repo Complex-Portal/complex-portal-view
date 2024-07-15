@@ -1,5 +1,6 @@
 <div class="Complex-navigator">
   <table class="interactors-table"
+         [ngClass]="{'inheritedWidth': complexes.length > 6}"
          [style.--cols]="complexes.length">
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
