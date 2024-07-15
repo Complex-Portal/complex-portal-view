@@ -5,7 +5,8 @@ table {
 }
 
 .inheritedWidth {
-  width: inherit;
+  /*width: inherit;*/
+  width: calc(130px + var(--cols) * 70px + 183px);
 }
 
 /* interactors column */

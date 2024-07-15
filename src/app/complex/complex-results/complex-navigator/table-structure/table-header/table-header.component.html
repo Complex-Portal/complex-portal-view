@@ -37,7 +37,7 @@
            [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
-        [style.--sizeSpaceHolder]="complexes.length>=15 ? '185px':''">
+        [style.--sizeSpaceHolder]="'185px'">
       <th class="spaceHolderHeaderOverflow"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
       </th>
@@ -56,12 +56,12 @@
           </div>
         </a>
       </th>
-      <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>
+      <div class="spaceHolder"></div>
     </tr>
     <!-- icons row -->
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
-        [style.--sizeSpaceHolder]="complexes.length>=15 ? '185px':''">
+        [style.--sizeSpaceHolder]="'185px'">
       <th class="interactorsHeader overflow"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Components
@@ -81,7 +81,7 @@
           </div>
         </th>
       </ng-container>
-      <div class="spaceHolder" [style]="complexes.length<15 ? 'max-width: inherit;min-width: inherit':''"></div>
+      <div class="spaceHolder"></div>
     </tr>
     </thead>
   </table>
