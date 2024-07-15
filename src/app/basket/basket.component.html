@@ -2,6 +2,12 @@
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
     <h2>Personal collection of favourite complexes</h2>
     <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
+    <a class="button primary columns medium-2"
+       (click)="deleteAllComplexes()"> Remove all the complexes
+      <img class="basket-icons"
+           [src]="'assets/images/icons/remove_from_basket.svg'"
+           width="18" height="18" alt="basket"/>
+    </a>
     <div class="row">
       <cp-complex-list-display-buttons
         [displayType]="DisplayType"
@@ -29,8 +35,13 @@
           {{ complexBasket[key].organism }}
         </td>
         <td>
-          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span
-            class="icon icon-functional" data-icon="d"></span></a>
+          <!--          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span-->
+          <!--            class="icon icon-functional" data-icon="d"></span></a>-->
+          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)">
+            <img class="basket-icons"
+                 [src]="'assets/images/icons/remove_from_basket.svg'"
+                 width="20" height="20" alt="basket"/>
+          </a>
         </td>
       </tr>
       </tbody>

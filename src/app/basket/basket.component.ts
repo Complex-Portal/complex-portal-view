@@ -126,4 +126,8 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.requestComplexesForNavigator();
   }
 
+  deleteAllComplexes() {
+    Object.values(this._complexBasket).map((v: BasketItem) => this.deleteComplexFromBasket(v.id));
+  }
+
 }
