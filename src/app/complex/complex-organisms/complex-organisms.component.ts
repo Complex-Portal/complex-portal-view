@@ -2,8 +2,8 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {Title} from '@angular/platform-browser';
-import {SpeciesFacet} from '../shared/model/complex-results/facets/species_f.model';
 import {ComplexOrganisms} from '../shared/model/complex-organism/complex-organism.model';
+import {Facet} from '../shared/model/complex-results/facet.model';
 
 @Component({
   selector: 'cp-complex-organisms',
@@ -31,7 +31,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
     // TODO: When new species in CP, we need to add it here to at the image.
     // TODO: Currently we the organism name and count from species facets doing a * search.
     // TODO: The ComplexOrganisms object extends the facet object.
-    this.complexPortalService.getComplexOrganisms().subscribe((speciesFacets: SpeciesFacet[]) => {
+    this.complexPortalService.getComplexOrganisms().subscribe((speciesFacets: Facet[]) => {
       const organisms: ComplexOrganisms[] = <ComplexOrganisms[]> speciesFacets;
       for (let i = 0; i < organisms.length; i++) {
         switch (organisms[i].name) {

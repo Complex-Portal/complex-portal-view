@@ -78,14 +78,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         for (let i = 0; i < complexSearch.elements.length; i++) {
           for (const component of complexSearch.elements[i].interactors) {
             if (!this._allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
-              this._allInteractorsInComplexSearch.push(
-                new Interactor(
-                  component.identifier,
-                  component.identifierLink,
-                  component.name,
-                  component.description,
-                  component.interactorType,
-                  component.organismName));
+              this._allInteractorsInComplexSearch.push(component);
             }
           }
         }

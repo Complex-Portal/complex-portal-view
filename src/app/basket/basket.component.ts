@@ -93,7 +93,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   private createQuery(object: any): string {
-    return 'complex_id: ' + Object.values(object).map((v: BasketItem) => v.id).join(',');
+    return 'complex_id:' + Object.values(object).map((v: BasketItem) => v.id).join(',');
   }
 
   private requestComplexesForNavigator() {
@@ -105,14 +105,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < complexSearch.elements.length; i++) {
             for (const component of complexSearch.elements[i].interactors) {
               if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
-                this.allInteractorsInComplexSearchBasket.push(
-                  new Interactor(
-                    component.identifier,
-                    component.identifierLink,
-                    component.name,
-                    component.description,
-                    component.interactorType,
-                    component.organismName));
+                this.allInteractorsInComplexSearchBasket.push(component);
               }
             }
           }
