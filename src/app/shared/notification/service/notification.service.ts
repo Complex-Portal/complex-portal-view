@@ -44,11 +44,11 @@ export class NotificationService {
   }
 
   public onAddedComplexToBasket(id: string) {
-    this.addSuccessNotification('Stored ' + id + ' in your basket!');
+    this.addSuccessNotification('Added ' + id + ' to your basket!');
   }
 
   public onRemovedComplexFromBasket(id: string) {
-    this.addSuccessNotification('Removed ' + id + ' in your basket!');
+    this.addSuccessNotification('Removed ' + id + ' from your basket!');
   }
 
   public onFeatureNotAvailableYet() {
