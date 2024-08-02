@@ -12,3 +12,7 @@
 .deleteAllButton {
   width: 225px;
 }
+
+h2 {
+  line-height: 1;
+}

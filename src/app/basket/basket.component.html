@@ -1,12 +1,14 @@
 <div class="margin-top-large margin-bottom-large">
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
-    <h2>Personal collection of favourite complexes</h2>
+    <h2>Personal collection of favourite complexes
+
+      <a class="button primary columns medium-2 deleteAllButton float-right"
+         (click)="deleteAllComplexes()">
+        <i class="icon icon-common" data-icon=""></i>
+        Remove all complexes
+      </a>
+    </h2>
     <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
-    <a class="button primary columns medium-2 deleteAllButton"
-       (click)="deleteAllComplexes()">
-      <i class="icon icon-functional" data-icon="d"></i>
-      Remove all complexes
-    </a>
     <div class="row">
       <cp-complex-list-display-buttons
         [displayType]="DisplayType"
@@ -37,9 +39,8 @@
           <!--          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span-->
           <!--            class="icon icon-functional" data-icon="d"></span></a>-->
           <a class="button primary columns medium-12" (click)="deleteFromBasket(key)">
-            <img class="basket-icons"
-                 [src]="'assets/images/icons/remove_from_basket.svg'"
-                 width="20" height="20" alt="basket"/>
+            <i class="icon icon-common" data-icon=""></i>
+
           </a>
         </td>
       </tr>
@@ -67,9 +68,7 @@
   <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">
     <div class="callout">
       <h3>Your basket is currently empty. :'(</h3>
-      <h5>Search for a complex and click on <img class="basket-icons"
-                                                 [src]="'assets/images/icons/add_to_basket_black.svg'"
-                                                 width="20" height="20" alt="basket"/> symbol to create your own
+      <h5>Search for a complex and click on <i class="icon icon-common" data-icon=""></i> symbol to create your own
         collection of favorite complexes.</h5>
     </div>
   </div>

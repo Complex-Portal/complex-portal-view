@@ -14,18 +14,18 @@
         </div>
         <div class="columns small-12 medium-6 no-pad-left">
           <a class="button primary expanded" (click)="toggleBasket(complexName,complexAC,complexSpecies)">
-            <img class="basket-icons"
-                 [src]="'assets/images/icons/' + (isInBasket() ? 'remove_from' : 'add_to') + '_basket.svg'"
-                 width="15" height="15" alt="basket"
-                 [matTooltip]="isInBasket() ? 'Remove from basket' : 'Add to basket'"/>
-            <ng-container *ngIf="isInBasket()">Remove from basket</ng-container>
-            <ng-container *ngIf="!isInBasket()">Add to basket</ng-container>
           </a>
         </div>
       </div>
     </div>
     <div class="columns medium-8  float-right">
       <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
+              <ng-container *ngIf="isInBasket(); else add">
+                <i class="icon icon-common" data-icon=''></i> Remove from basket
+              </ng-container>
+              <ng-template #add>
+                <i class="icon icon-common" data-icon=""></i> Add to basket
+              </ng-template>
     </div>
     <cp-download-modal [complexAC]="complexAC"></cp-download-modal>
   </div>

@@ -23,10 +23,7 @@
         </div>
         <div class="basketButton">
           <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
-            <img class="basket-icons"
-                 [src]="'assets/images/icons/' + (isInBasket(complex.complexAC) ? 'remove_from' : 'add_to') + '_basket.svg'"
-                 width="20" height="20" alt="basket"
-                 [matTooltip]="isInBasket(complex.complexAC) ? 'Remove from basket' : 'Add to basket'"/>
+            <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
           </a>
         </div>
       </th>
@@ -71,10 +68,7 @@
         <th class="iconOrganism" [class.predicted]="complex.predicted">
           <div>
             <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
-              <img class="basket-icons"
-                   [src]="'assets/images/icons/' + (isInBasket(complex.complexAC) ? 'remove_from' : 'add_to') + '_basket.svg'"
-                   width="20" height="20" alt="basket"
-                   [matTooltip]="isInBasket(complex.complexAC) ? 'Remove from basket' : 'Add to basket'"/>
+              <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
             </a>
           </div>
           <div>
