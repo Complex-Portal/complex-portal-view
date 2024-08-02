@@ -10,6 +10,7 @@ import {MarkdownModule} from 'ngx-markdown';
 import {ComplexNavigatorModule} from './complex-navigator/complex-navigator.module';
 import {ComplexNavigatorRatingComponent} from './complex-navigator/complex-navigator-rating/complex-navigator-rating.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ComplexModule} from '../complex.module';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ]),
     CommonModule,
     ProgressSpinnerModule, MarkdownModule,
-    ComplexNavigatorModule, MatTooltipModule
+    ComplexNavigatorModule, MatTooltipModule, ComplexModule
   ],
   exports: [],
   declarations: [ComplexResultsComponent,
