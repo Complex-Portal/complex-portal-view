@@ -20,7 +20,8 @@ export class GxaHeatmapComponent implements OnInit {
   ngOnInit() {
     switch (this._complexSpecies) {
       case 'Homo sapiens; 9606':
-        this._experimentId = 'E-MTAB-5214';
+        // this._experimentId = 'E-MTAB-5214';
+        this._experimentId = 'E-MTAB-2836';
         break;
       case 'Mus musculus; 10090':
         this._experimentId = 'E-MTAB-4644';

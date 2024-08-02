@@ -8,7 +8,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-expression.component.css']
 })
 export class ComplexExpressionComponent implements OnInit {
-  private _gxa;
+  private _gxa = null;
   private _participants: Participant[];
   private _complexSpecies: string;
   private _crossReferences: CrossReference[];
