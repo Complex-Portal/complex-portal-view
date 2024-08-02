@@ -12,7 +12,7 @@
 
 /*based on https://github.com/ebiwd/EBI-Pattern-library/issues/25#issuecomment-287742227*/
 .button.ebi-background:hover {
-  background: #007c82;
+  background: var(--primary);
 }
 
 .button.services-background:hover {

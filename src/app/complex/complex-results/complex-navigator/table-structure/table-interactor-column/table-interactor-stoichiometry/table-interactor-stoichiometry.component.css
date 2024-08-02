@@ -3,7 +3,7 @@
   width: 4ch;
   height: 4ch;
   border-radius: 4ch;
-  background-color: #0e6f76;
+  background-color: var(--primary);
   text-align: center;
   padding-top: 0.5ch;
   color: white;

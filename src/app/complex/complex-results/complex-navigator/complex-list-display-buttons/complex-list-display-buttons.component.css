@@ -7,19 +7,19 @@
   margin-right: 5px;
   background-color: white;
   color: #555;
-  border: 1px dotted #007c82;
+  border: 1px dotted var(--primary);
 }
 
 .view-button:hover {
-  color: #007c82;
+  color: var(--primary);
   background-color: rgb(234, 234, 234);
   border: transparent;
-  border-bottom: 1px dotted #007c82;
+  border-bottom: 1px dotted var(--primary);
 }
 
 .selected,
 .selected:hover {
-  background-color: #007c82;
+  background-color: var(--primary);
   color: white;
 }
 

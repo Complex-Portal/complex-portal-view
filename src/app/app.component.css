@@ -5,7 +5,7 @@
   line-height: 1;
   white-space: nowrap;
   cursor: default;
-  color: #007c82;
+  color: var(--primary);
   background-color: white;
   display: inline;
 }
@@ -18,7 +18,7 @@
   white-space: nowrap;
   cursor: default;
   color: white;
-  background-color: #007c82;
+  background-color: var(--primary);
   display: inline;
 }
 
@@ -32,7 +32,7 @@
   --global-margin: calc((100vw - 80rem) / -2);
   position: sticky;
   top: 0;
-  background: #007c82;
+  background: var(--primary);
   padding: 0 calc(-1 * var(--global-margin));
   width: 100vw;
   z-index: 4;

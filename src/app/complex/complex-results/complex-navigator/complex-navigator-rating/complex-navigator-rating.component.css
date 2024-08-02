@@ -9,7 +9,7 @@
 }
 
 .ratingComponent {
-  background-color: #007c82;
+  background-color: var(--primary);
   padding: 5px;
   width: 350px;
   text-align: center;
@@ -25,7 +25,7 @@
 
 .ratingComponent input {
   background-color: white;
-  color: #007c82;
+  color: var(--primary);
 }
 
 .text {

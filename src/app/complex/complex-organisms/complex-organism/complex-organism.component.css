@@ -1,12 +1,12 @@
 .icon {
   font-size: 100px;
-  color: #007c82;
+  color: var(--primary);
 }
 
 .asset-icon {
   width: 100px;
   height: 101px;
-  background-color: #007c82;
+  background-color: var(--primary);
 }
 
 a {
@@ -33,7 +33,7 @@ div.actions {
 
 .species-button {
   padding: 1em;
-  color: #007c82;
+  color: var(--primary);
   border-radius: 20%;
   margin: 1em;
   border: none;
@@ -42,11 +42,11 @@ div.actions {
 
 .species-button:hover {
   opacity: 0.9;
-  box-shadow: 0 0 20px #007c82;
+  box-shadow: 0 0 20px var(--primary);
 }
 
 button.download-button {
-  border: 2px solid #007c82;
+  border: 2px solid var(--primary);
   border-radius: 25px;
-  color: #007c82;
+  color: var(--primary);
 }
