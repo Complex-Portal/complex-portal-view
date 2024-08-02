@@ -147,24 +147,14 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_SelectedAnno, value);
   }
 
-  private updateColorLegend(legendData: { [p: string]: ColorLegend[] }) {
+  private updateColorLegend(legendData: Legend) {
     this.colorLegendGroups.clear();
-    for (const group of Object.keys(legendData)) {
-      if (group === 'Complex') {
-        for (const legendDatum of legendData[group]) {
-          // Because we only display interactors and complexes colors, we now that are certain.
-          // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.replace(/complex portal_/, ''), legendDatum.certain.color);
-        }
-      }
-      if (group === 'Interactor') {
-        for (const legendDatum of legendData[group]) {
-          // Because we only display interactors and complexes colors, we now that are certain.
-          // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color);
-        }
-      }
-    }
+    // Because we only display interactors and complexes colors, we now that are certain.
+    // If features are shown in the feature follow the same way that IntAct Portal
+    legendData.Complex?.forEach(complex => this.colorLegendGroups.set(complex.name.replace(/complex portal_/, ''), complex.certain.color));
+    // Because we only display interactors and complexes colors, we now that are certain.
+    // If features are shown in the feature follow the same way that IntAct Portal
+    legendData.Interactor?.forEach(interactor => this.colorLegendGroups.set(interactor.name.toUpperCase(), interactor.certain.color));
   }
 
 
@@ -320,6 +310,15 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
     blob = null;
   }
+}
+
+
+interface Legend {
+  Complex?: ColorLegend[] ;
+  Interactor?: ColorLegend[];
+  'MI Features'?: ColorLegend[];
+
+  [key: string]: ColorLegend[] | undefined;
 }
 
 // These classes are needed to map the json coming from the viewer to the object
