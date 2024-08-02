@@ -5,27 +5,29 @@
       <h3>ComplexAc: {{ complexAC }}</h3>
       <h3><i>{{ complexSpecies }}</i></h3>
     </div>
-    <div class="columns medium-4  float-left">
-      <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
-           data-equalize-on="medium" id="large-button-grid">
-        <div class="columns small-12 medium-6 no-pad-left">
-          <a class="button primary expanded" data-equalizer-watch data-open="downloadModal">
-            <span class="icon icon-functional " data-icon="="> Download</span></a>
-        </div>
-        <div class="columns small-12 medium-6 no-pad-left">
-          <a class="button primary expanded" (click)="toggleBasket(complexName,complexAC,complexSpecies)">
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="columns medium-8  float-right">
-      <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
+    <div class="row expanded">
+      <div class="columns medium-4 no-padding">
+        <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
+             data-equalize-on="medium" id="large-button-grid">
+          <div class="columns small-12 medium-6 no-pad-left">
+            <a class="button primary expanded no-margin" data-equalizer-watch data-open="downloadModal">
+              <span class="icon icon-functional " data-icon="="> Download</span></a>
+          </div>
+          <div class="columns small-12 medium-6 no-pad-left">
+            <a class="button primary expanded no-margin" (click)="toggleBasket(complexName,complexAC,complexSpecies)">
               <ng-container *ngIf="isInBasket(); else add">
                 <i class="icon icon-common" data-icon=''></i> Remove from basket
               </ng-container>
               <ng-template #add>
                 <i class="icon icon-common" data-icon=""></i> Add to basket
               </ng-template>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="columns medium-8 no-padding ">
+        <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
+      </div>
     </div>
     <cp-download-modal [complexAC]="complexAC"></cp-download-modal>
   </div>

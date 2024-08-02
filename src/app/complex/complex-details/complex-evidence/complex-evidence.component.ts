@@ -35,31 +35,39 @@ export class ComplexEvidenceComponent implements OnInit {
         switch (this._ecoXRef.identifier) {
           case ('ECO:0000353'):
             this._ecoXRef.description = 'physical interaction evidence';
-            this._flaskSymbol = 'E';
+            this._flaskSymbol = 'E'; // Full
             break;
           case ('ECO:0005610'):
             this._ecoXRef.description = 'inferred by homology';
-            this._flaskSymbol = 'C';
+            this._flaskSymbol = 'C'; // 40%
             break;
           case ('ECO:0005544'):
             this._ecoXRef.description = 'inferred by orthology';
-            this._flaskSymbol = 'C';
+            this._flaskSymbol = 'C'; // 40%
             break;
           case ('ECO:0005546'):
             this._ecoXRef.description = 'inferred by paralogy';
-            this._flaskSymbol = 'C';
+            this._flaskSymbol = 'C'; // 40%
             break;
           case ('ECO:0005547'):
             this._ecoXRef.description = 'inferred by curator';
-            this._flaskSymbol = 'B';
+            this._flaskSymbol = 'B'; // Empty
             break;
           case ('ECO:0005543'):
             this._ecoXRef.description = 'inferred from mixed species evidence';
-            this._flaskSymbol = 'E';
+            this._flaskSymbol = 'E'; // Full
             break;
           case ('ECO:0005542'):
             this._ecoXRef.description = 'inferred from single species evidence';
-            this._flaskSymbol = 'E';
+            this._flaskSymbol = 'E'; // Full
+            break;
+          case ('ECO:0007653'):
+            this._ecoXRef.description = 'machine-learning prediction';
+            this._flaskSymbol = '';
+            break;
+          case ('ECO:0008006'):
+            this._ecoXRef.description = 'deep-learning prediction';
+            this._flaskSymbol = '';
             break;
         }
       }
