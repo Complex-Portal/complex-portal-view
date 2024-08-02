@@ -20,6 +20,8 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _agonists: string[];
   private _antagonists: string[];
 
+  hasFunction = false;
+
   constructor() {
   }
 
@@ -33,24 +35,28 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
       const database = this.crossReferences[i].database;
 
       if (database === 'gene ontology') {
+        this.hasFunction = true;
         if (this.goXRefs === undefined) {
           this.goXRefs = [];
         }
         this.goXRefs.push(crossRef);
       }
       if (database === 'intenz') {
+        this.hasFunction = true;
         if (this.intenzXRefs === undefined) {
           this.intenzXRefs = [];
         }
         this.intenzXRefs.push(new IntEnzCrossReference(crossRef));
       }
       if (database === 'reactome') {
+        this.hasFunction = true;
         if (this.reactomeXRefs === undefined) {
           this.reactomeXRefs = [];
         }
         this.reactomeXRefs.push(crossRef);
       }
       if (database === 'rhea') {
+        this.hasFunction = true;
         if (this.rheaXRefs === undefined) {
           this.rheaXRefs = [];
         }
