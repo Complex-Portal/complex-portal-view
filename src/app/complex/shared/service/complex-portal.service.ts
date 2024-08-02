@@ -8,10 +8,10 @@ import {environment} from '../../../../environments/environment';
 
 import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
-import {SpeciesFacet} from '../model/complex-results/facets/species_f.model';
 import {Observable} from 'rxjs/Observable';
 import {throwError} from 'rxjs/internal/observable/throwError';
 import {Element} from '../model/complex-results/element.model';
+import {Facet} from '../model/complex-results/facet.model';
 
 const baseURL = environment.complex_ws_base_url;
 
@@ -28,8 +28,14 @@ export class ComplexPortalService {
    */
   getComplex(ac: string): Observable<ComplexDetails> {
     const url = `${baseURL}/details/${ac}`;
-    return this.http.get(url).pipe(
-      catchError(this.handleError));
+    // TODO Remove random predicted when real predicted complexes available
+    return this.http.get<ComplexDetails>(url).pipe(
+      map(data => {
+        data.predicted = Math.random() < 0.5;
+        return data;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   /**
@@ -39,15 +45,21 @@ export class ComplexPortalService {
    */
   getComplexAc(complexAc: string): Observable<ComplexDetails> {
     const url = `${baseURL}/complex/${complexAc}`;
-    return this.http.get(url).pipe(
-      catchError(this.handleError));
+    // TODO Remove random predicted when real predicted complexes available
+    return this.http.get<ComplexDetails>(url).pipe(
+      map(data => {
+        data.predicted = Math.random() < 0.5;
+        return data;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   /**
    *
-   * @returns {Observable<SpeciesFacet[]>}
+   * @returns {Observable<Facet[]>}
    */
-  getComplexOrganisms(): Observable<SpeciesFacet[]> {
+  getComplexOrganisms(): Observable<Facet[]> {
     return this.findComplex('*').pipe(map((complexSearchResult: ComplexSearchResult) => {
       return complexSearchResult.facets['species_f'];
     }));
@@ -98,7 +110,13 @@ export class ComplexPortalService {
       .set('facets', facets)
       .set('filters', filters);
 
-    return this.http.get(baseURL + '/search/' + query, {params: params}).pipe(
+    // TODO Remove random predicted when real predicted complexes available
+    return this.http.get<ComplexSearchResult>(baseURL + '/search/' + query, {params: params}).pipe(
+      map(result => {
+          result.elements.forEach(e => e.predicted = Math.random() < 0.5);
+          return result;
+        }
+      ),
       catchError(this.handleError));
   }
 
