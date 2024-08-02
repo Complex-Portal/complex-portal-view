@@ -10,23 +10,21 @@
       <b>Species</b>
       <ul class="no-bullet">
         <li *ngFor="let facet of facets.species_f">
-          <div [ngSwitch]="isSelected(facet.name, spicesFilter)">
-            <div *ngSwitchCase="true">
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeSpeciesFilter(filter.value, filter.checked)" checked>
-              {{ facet.name }}
-              ({{ facet.count }})
-              <i class="{{ facetOrganismIcon(facet.name) }}"
-                 style="font-size: large;"></i>
-            </div>
-            <div *ngSwitchDefault>
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeSpeciesFilter(filter.value, filter.checked)"> {{ facet.name }} ({{ facet.count }})
+          <label [matTooltip]="facet.name">
+            <input type="checkbox" #filter value="{{facet.name}}"
+                   (change)="changeSpeciesFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, spicesFilter)">
 
-              <i class="{{ facetOrganismIcon(facet.name) }}"
-                 style="font-size: large;"></i>
-            </div>
-          </div>
+            <span>
+              <i *ngIf="facetOrganismIcon(facet.name).startsWith('icon'); else img"
+                 [ngClass]="facetOrganismIcon(facet.name)" style="font-size: large;"></i>
+            <ng-template #img>
+              <img [src]="facetOrganismIcon(facet.name)" alt="" width="18px" height="18px"/>
+            </ng-template>
+            </span>
+
+            {{ facet.name | species:true }} ({{ facet.count }})
+          </label>
         </li>
       </ul>
     </div>
@@ -35,18 +33,13 @@
       <b>Biological Role</b>
       <ul class="no-bullet">
         <li *ngFor="let facet of facets.pbiorole_f">
-          <div [ngSwitch]="isSelected(facet.name, bioRoleFilter)">
-            <div *ngSwitchCase="true">
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)" checked> {{ facet.name }}
-              ({{ facet.count }})
-            </div>
-            <div *ngSwitchDefault>
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"> {{ facet.name }}
-              ({{ facet.count }})
-            </div>
-          </div>
+          <label>
+            <input type="checkbox" #filter value="{{facet.name}}"
+                   (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, bioRoleFilter)">
+
+            {{ facet.name }} ({{ facet.count }})
+          </label>
         </li>
       </ul>
     </div>
@@ -56,22 +49,16 @@
       <b>Component Type</b>
       <ul class="no-bullet">
         <li *ngFor="let facet of facets.ptype_f">
-          <div [ngSwitch]="isSelected(facet.name, interactorTypeFilter)">
-            <div *ngSwitchCase="true">
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)" checked> {{ facet.name }}
-              ({{ facet.count }})
-              <i class="{{ facetTypeIcon(facet) }}"
-                 style="font-size: large;"></i>
-            </div>
-            <div *ngSwitchDefault>
-              <input type="checkbox" #filter value="{{facet.name}}"
-                     (change)="changeInteractorTypeFilter(filter.value, filter.checked)"> {{ facet.name }}
-              ({{ facet.count }})
-              <i class="{{ facetTypeIcon(facet) }}"
-                 style="font-size: large;"></i>
-            </div>
-          </div>
+          <label>
+            <input type="checkbox" #filter value="{{facet.name}}"
+                   (change)="changeInteractorTypeFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, interactorTypeFilter)">
+
+            <span >
+              <i [ngClass]="facetTypeIcon(facet.name)" style="font-size: large;"></i>
+            </span>
+            {{ facet.name }} ({{ facet.count }})
+          </label>
         </li>
       </ul>
     </div>
