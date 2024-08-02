@@ -1,4 +1,4 @@
-<section>
+<section [class.predicted]="complexDetails?.predicted">
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
@@ -51,8 +51,9 @@
         </div>
       </div>
       <div class="columns medium-12">
-        <cp-complex-footer *ngIf="complexDetails;"
-                           [institute]="complexDetails.institution"></cp-complex-footer>
+        <cp-complex-footer *ngIf="complexDetails"
+                           [institute]="complexDetails.institution"
+                           [predicted]="complexDetails.predicted"></cp-complex-footer>
       </div>
     </div>
     <ng-template #loadingSpinner>

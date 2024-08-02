@@ -38,7 +38,7 @@
         </td>
         <!-- Interactors' stoichiometry -->
         <ng-container *ngFor="let complex of enrichedComplexes">
-          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}">
+          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}" [class.predicted]="complex.complex.predicted">
             <cp-table-main-interactor
               [complex]="complex"
               [i]="i"
