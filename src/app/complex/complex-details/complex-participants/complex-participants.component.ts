@@ -9,7 +9,6 @@ let viewer: any;
 
 export class ComplexParticipant {
   identifier: string;
-  colorLegendIdentifier: string;
   identifierLink: string;
   name: string;
   description: string;
@@ -100,19 +99,8 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   }
 
   private createComplexParticipant(participant: Participant): ComplexParticipant {
-    let colorLegendIdentifier = participant.identifier;
-    if (participant.interactorType === 'stable complex') {
-      // The same complex may appear in the complex viewer with different colours, if it's part of the complex multiple times.
-      // So we need to check if a complex appears multiple times, and in that case, add a suffix to their id to match the id used
-      // for the color legend.
-      const participantsWithSameId = this.getNumberOfParticipantsWithId(participant.identifier, this.participantsWithSubcomponents);
-      if (participantsWithSameId > 0) {
-        colorLegendIdentifier += '_' + (participantsWithSameId + 1);
-      }
-    }
     return {
       identifier: participant.identifier,
-      colorLegendIdentifier,
       identifierLink: participant.identifierLink,
       name: participant.name,
       description: participant.description,

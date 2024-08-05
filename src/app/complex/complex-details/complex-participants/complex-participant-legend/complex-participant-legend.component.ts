@@ -69,7 +69,7 @@ export class ComplexParticipantLegendComponent {
       && !participant.identifier.includes('-PRO') && participant.name) {
       color = this.colorLegendGroups.get(participant.name.toUpperCase());
     } else {
-      color = this.colorLegendGroups.get(participant.colorLegendIdentifier.toUpperCase());
+      color = this.colorLegendGroups.get(participant.identifier.toUpperCase());
     }
     if (!color) {
       color = '#ffffff';
