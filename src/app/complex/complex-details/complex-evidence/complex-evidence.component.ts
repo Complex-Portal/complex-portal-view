@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
 
 @Component({
   selector: 'cp-complex-evidence',
@@ -7,9 +8,11 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-evidence.component.css']
 })
 export class ComplexEvidenceComponent implements OnInit {
-  private _crossReferences: CrossReference[];
+
   private _ecoXRef: CrossReference;
   private _intactXRefs: CrossReference[];
+  @Input()
+  complex: ComplexDetails;
   private _flaskSymbol: string;
 
 
@@ -26,9 +29,9 @@ export class ComplexEvidenceComponent implements OnInit {
    * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
    */
   private findXRefs(): void {
-    for (let i = 0; i < this._crossReferences.length; i++) {
-      const crossRef = this._crossReferences[i];
-      const database = this._crossReferences[i].database;
+    for (let i = 0; i < this.complex.crossReferences.length; i++) {
+      const crossRef = this.complex.crossReferences[i];
+      const database = this.complex.crossReferences[i].database;
 
       if (database === 'evidence ontology') {
         this._ecoXRef = crossRef;
@@ -64,10 +67,14 @@ export class ComplexEvidenceComponent implements OnInit {
           case ('ECO:0007653'):
             this._ecoXRef.description = 'machine-learning prediction';
             this._flaskSymbol = '';
+            // TODO remove this setter once the API support predicted field
+            this.complex.predicted = true;
             break;
           case ('ECO:0008006'):
             this._ecoXRef.description = 'deep-learning prediction';
             this._flaskSymbol = '';
+            // TODO remove this setter once the API support predicted field
+            this.complex.predicted = true;
             break;
         }
       }
@@ -80,14 +87,6 @@ export class ComplexEvidenceComponent implements OnInit {
     }
   }
 
-  get crossReferences(): CrossReference[] {
-    return this._crossReferences;
-  }
-
-  @Input()
-  set crossReferences(value: CrossReference[]) {
-    this._crossReferences = value;
-  }
 
   get ecoXRef(): CrossReference {
     return this._ecoXRef;

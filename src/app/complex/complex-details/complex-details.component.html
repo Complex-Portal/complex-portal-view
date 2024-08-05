@@ -2,11 +2,7 @@
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
-        <cp-complex-header *ngIf="complexDetails;else loadingSpinner"
-                           [complexAC]="complexDetails.complexAc"
-                           [complexName]="complexDetails.name"
-                           [complexSpecies]="complexDetails.species"
-                           [crossReferences]="complexDetails.crossReferences"></cp-complex-header>
+        <cp-complex-header *ngIf="complexDetails;else loadingSpinner" [complex]="complexDetails"></cp-complex-header>
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">

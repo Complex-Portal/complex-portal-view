@@ -1,9 +1,9 @@
 <div class="row">
   <div class="columns medium-12 callout">
     <div class="columns medium-12 no-pad-left float-left">
-      <h2>{{ complexName }}</h2>
-      <h3>ComplexAc: {{ complexAC }}</h3>
-      <h3><i>{{ complexSpecies }}</i></h3>
+      <h2>{{ complex.name }}</h2>
+      <h3>ComplexAc: {{ complex.complexAc }}</h3>
+      <h3><i>{{ complex.species }}</i></h3>
     </div>
     <div class="row expanded">
       <div class="columns medium-4 no-padding">
@@ -14,7 +14,7 @@
               <span class="icon icon-functional " data-icon="="> Download</span></a>
           </div>
           <div class="columns small-12 medium-6 no-pad-left">
-            <a class="button primary expanded no-margin" (click)="toggleBasket(complexName,complexAC,complexSpecies)">
+            <a class="button primary expanded no-margin" (click)="toggleBasket()">
               <ng-container *ngIf="isInBasket(); else add">
                 <i class="icon icon-common" data-icon=''></i> Remove from basket
               </ng-container>
@@ -26,9 +26,9 @@
         </div>
       </div>
       <div class="columns medium-8 no-padding ">
-        <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
+        <cp-complex-evidence [complex]="complex"></cp-complex-evidence>
       </div>
     </div>
-    <cp-download-modal [complexAC]="complexAC"></cp-download-modal>
+    <cp-download-modal [complexAC]="complex.ac"></cp-download-modal>
   </div>
 </div>
