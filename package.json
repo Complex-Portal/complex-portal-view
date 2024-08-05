@@ -6,7 +6,7 @@
   "scripts": {
     "ng-high-memory": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider; ng serve --proxy-config proxy-gxa.conf.json",
     "start-with-proxy": "ng serve --proxy-config proxy.conf.json",
     "publish-gh-pages": "rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration production --base-href \"https://complex-portal.github.io/complex-portal-view/\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view",
     "publish-test-gh-pages": "rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration test --base-href \"https://complex-portal.github.io/complex-portal-view/\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view",

@@ -1,0 +1,11 @@
+{
+  "/gxa/*": {
+    "target": "https://ebi.ac.uk/gxa/",
+    "pathRewrite": {
+      "^/gxa/": ""
+    },
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

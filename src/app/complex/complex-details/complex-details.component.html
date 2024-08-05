@@ -28,8 +28,9 @@
                                  [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
         </div>
         <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-expression *ngIf="complexDetails && gxa;"
+          <cp-complex-expression *ngIf="complexDetails && gxa && complexMIJSON;"
                                  [gxa]="gxa"
+                                 [complexMIJSON]="complexMIJSON"
                                  [participants]="complexDetails.participants"
                                  [complexSpecies]="complexDetails.species"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
