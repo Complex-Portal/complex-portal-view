@@ -20,8 +20,8 @@ export class GxaHeatmapComponent implements OnInit {
   }
 
   exceptions = new Map<string, string>([
-    ['homo sapiens', 'E-GTEX-8'],
-    ['mus musculus', 'E-MTAB-4644'],
+    // ['homo sapiens', 'E-GTEX-8'],
+    // ['mus musculus', 'E-MTAB-4644'],
   ]);
 
   ngOnInit() {
