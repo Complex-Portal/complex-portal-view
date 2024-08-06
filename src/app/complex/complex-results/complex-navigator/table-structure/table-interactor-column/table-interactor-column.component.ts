@@ -28,6 +28,14 @@ export class EnrichedComplex {
   startInteractorIncludedWhenExpanded: boolean;
 }
 
+export class OrthologsGroup {
+  groupID: string;
+  geneName: string;
+  groupComponents: EnrichedInteractor[];
+  orthologyHidden: boolean;
+  orthologyExpanded: boolean;
+}
+
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -44,6 +52,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
   ranges: number[];
+  orthologGroups: OrthologsGroup[];
 
   _timesAppearingByType: Map<string, number>;
   _timesAppearingByOrganism: Map<string, number>;
@@ -368,4 +377,54 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
   }
 
+  public classifyInteractorsByOrthologID() {
+    const interactorsWithOrthologsId = this.fetchProteinWithOrthologId();
+    interactorsWithOrthologsId.sort((a, b) =>
+      b.dbCrossReferenceList.dbName.panther - a.dbCrossReferenceList.dbName.panther
+    );
+
+    for (let i = 0; i < interactorsWithOrthologsId.length; i++) {
+      const oneGroup: Set<EnrichedInteractor> = new Set();
+      if (interactorsWithOrthologsId[i].xref === interactorsWithOrthologsId[i + 1].xref && interactorsWithOrthologsId[i + 1] !== null) {
+        oneGroup.add(interactorsWithOrthologsId[i]).add(interactorsWithOrthologsId[i + 1]);
+      }
+      if (interactorsWithOrthologsId[i].xref !== interactorsWithOrthologsId[i + 1]) {
+        const orthologGroupXref = interactorsWithOrthologsId[i].xrefName;
+        const orthologsGroupGene = this.fetchGeneName(oneGroup);
+        const newOrthologsGroup: OrthologsGroup = {
+          groupID: orthologGroupXref,
+          geneName: orthologsGroupGene,
+          groupComponents: oneGroup,
+          orthologyHidden: true,
+          orthologyExpanded: false,
+        };
+        this.orthologGroups.push(newOrthologsGroup);
+        oneGroup.clear();
+      }
+    }
+  }
+
+  fetchGeneName(orthologGroup: Set<EnrichedInteractor>) {
+    let mainGeneName: string;
+    const biggestTimeAppearing = 0;
+    for (const interactor of orthologGroup) {
+      if (interactor.interactor.organismName === 'homo sapiens') {
+        mainGeneName = interactor.interactor.geneName;
+      }
+      if (interactor.interactor.organismName !== 'homo sapiens' && interactor.timesAppearing > biggestTimeAppearing) {
+        mainGeneName = interactor.interactor.geneName;
+      }
+      return mainGeneName;
+    }
+  }
+
+  public fetchProteinWithOrthologId() {
+    let interactorsWithOrthologsId: EnrichedInteractor[];
+    for (const interactor of this.enrichedInteractors) {
+      if (interactor.interactor.dbReferences.type === 'panther') {
+        interactorsWithOrthologsId.push(interactor);
+      }
+    }
+    return interactorsWithOrthologsId;
+  }
 }
