@@ -33,7 +33,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   saveComplex() {
-    this.basketService.saveInBasket(this.complex.name, this.complex.complexAc, this.complex.species);
+    this.basketService.saveInBasket(this.complex);
   }
 
   get jsonURL(): string {
@@ -49,8 +49,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   removeComplexFromBasket() {
-    const key = this.basketService.getKey(this.complex.complexAc);
-    this.basketService.deleteFromBasket(key);
+    this.basketService.deleteFromBasket(this.complex.complexAc);
   }
 
   toggleBasket() {

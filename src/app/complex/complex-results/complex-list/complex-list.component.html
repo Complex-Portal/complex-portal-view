@@ -2,9 +2,9 @@
   <li *ngFor="let complex of complexSearch.elements">
     <div class="container">
       <div class="basketButtonContainer"
-           [matTooltip]="isInBasket(complex.complexAC) ? 'Remove from basket' : 'Add to basket'">
-        <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
-          <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
+           [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
+        <a class="button" (click)="toggleBasket(complex)">
+          <i class="icon icon-common" [attr.data-icon]="isInBasket(complex) ? '':''"></i>
         </a>
       </div>
       <div class="complexesAndDescription">

@@ -5,8 +5,7 @@ import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 @Component({
   selector: 'cp-gxa-heatmap',
   templateUrl: 'gxa-heatmap.component.html',
-  styleUrls: ['gxa-heatmap.component.css'],
-  providers: [SpeciesPipe]
+  styleUrls: ['gxa-heatmap.component.css']
 })
 export class GxaHeatmapComponent implements OnInit {
   private _gxa;
