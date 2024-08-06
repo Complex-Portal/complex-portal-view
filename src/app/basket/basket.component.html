@@ -1,7 +1,21 @@
 <div class="margin-top-large margin-bottom-large">
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
-    <h1>Personal complex collection</h1>
-    <table class="hover">
+    <h2>Personal collection of favourite complexes
+
+      <a class="button primary columns medium-2 deleteAllButton float-right"
+         (click)="deleteAllComplexes()">
+        <i class="icon icon-common" data-icon=""></i>
+        Remove all complexes
+      </a>
+    </h2>
+    <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
+    <div class="row">
+      <cp-complex-list-display-buttons
+        [displayType]="DisplayType"
+        (displayTypeChange)="onDisplayTypeChange($event)">
+      </cp-complex-list-display-buttons>
+    </div>
+    <table class="hover" *ngIf="!this.isDisplayComplexNavigatorView()">
       <thead>
       <tr>
         <th>Name</th>
@@ -13,26 +27,49 @@
       <tbody>
       <tr *ngFor="let key of getKeys(complexBasket)">
         <td>
-          <a [routerLink]="['/complex', complexBasket[key].id]">{{complexBasket[key].name}}</a>
+          <a [routerLink]="['/complex', complexBasket[key].id]">{{ complexBasket[key].name }}</a>
         </td>
         <td>
-          {{complexBasket[key].id}}
+          {{ complexBasket[key].id }}
         </td>
         <td>
-          {{complexBasket[key].organism}}
+          {{ complexBasket[key].organism }}
         </td>
         <td>
-          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span
-            class="icon icon-functional" data-icon="d"></span></a>
+          <!--          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span-->
+          <!--            class="icon icon-functional" data-icon="d"></span></a>-->
+          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)">
+            <i class="icon icon-common" data-icon=""></i>
+
+          </a>
         </td>
       </tr>
       </tbody>
     </table>
+    <div *ngIf="isDisplayComplexNavigatorView()" class="columns medium-12">
+      <ng-container *ngIf="complexSearchBasket;else loadingSpinner">
+        <div class="ComplexNavigator"
+             [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
+          <cp-complex-navigator
+            [complexSearch]="complexSearchBasket"
+            [interactors]="allInteractorsInComplexSearchBasket"
+            [canAddComplexesToBasket]="false"
+            [canRemoveComplexesFromBasket]="true"
+            (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+          </cp-complex-navigator>
+        </div>
+      </ng-container>
+      <ng-template #loadingSpinner>
+        <cp-progress-spinner></cp-progress-spinner>
+      </ng-template>
+    </div>
+
   </div>
   <div *ngIf="isComplexBasketEmpty()" class="columns medium-12">
     <div class="callout">
-      <h3>Your basket is currently empty. :'-(</h3>
-      <h5>Search for a complex and click on <i class="icon icon-generic" data-icon="b"></i>-symbol to create your own collection of favorite complexes.</h5>
+      <h3>Your basket is currently empty. :'(</h3>
+      <h5>Search for a complex and click on <i class="icon icon-common" data-icon=""></i> symbol to create your own
+        collection of favorite complexes.</h5>
     </div>
   </div>
 </div>

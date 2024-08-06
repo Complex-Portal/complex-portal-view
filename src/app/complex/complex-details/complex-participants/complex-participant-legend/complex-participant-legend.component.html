@@ -1,58 +1,58 @@
-      <tr>
-        <td class="centered-vertical" style="{{'width: 16%; ' + getBackgroundStyle()}}">
-          <div class="columns medium-12 centered-vertical">
-            <cp-node-diagram [shape]="getLegendShape(participant.interactorType)"
-                             [color]="getLegendColor(participant)"
-                             [height]="participant.interactorType === 'stable complex' ? '35pt' : '30pt'"
-                             [borderColor]="participant.interactorType === 'stable complex' ? '#ffffff' : '#000000'"
-                             [borderWidth]="participant.interactorType === 'stable complex' ? 8 : 3"
-            ></cp-node-diagram>
-          </div>
-        </td>
-        <td style="width: 64%">
-          <div class="columns medium-12 no-pad-right no-pad-left"><b>{{participant.interactorType}} -
-            {{participant.name}} ({{participant.bioRole}})</b>
-          </div>
-          <div class="columns medium-12 no-pad-right no-pad-left">
-            <a *ngIf="participant.identifierLink" href="{{participant.identifierLink}}"
-               target="_blank">{{participant.identifier}}
-              <i class="icon icon-generic small" data-icon="x"></i>
-            </a>
-          </div>
-          <div class="columns medium-12 no-pad-right no-pad-left">{{participant.description}}</div>
-        </td>
-        <td style="width: 20%">
-          <div class="columns medium-12 centered-vertical">
-            <p class="badge" *ngIf="participant.stochiometry">
-              {{getConvertedStochiometry(participant.stochiometry)}}</p>
-          </div>
-        </td>
-      </tr>
-      <ng-container *ngIf="participant.participants.length > 0">
-        <tr></tr>
-        <tr class="text-center small-row" *ngIf="participant.participants.length > 0">
-          <td style="{{getBackgroundStyle()}}"></td>
-          <td colspan="2" *ngIf="participant.expanded" class="no-padding-top">
-            <a class="label" (click)="participant.expanded = false">Hide subcomponents</a>
-          </td>
-          <td colspan="2" *ngIf="!participant.expanded" class="no-padding-top">
-            <a class="label" (click)="participant.expanded = true">Show subcomponents</a>
-          </td>
-        </tr>
-      </ng-container>
-      <ng-container *ngIf="participant.expanded">
-        <tbody class="no-border">
-        <ng-container *ngFor="let subparticipant of participant.participants">
-        <tr>
-          <td colspan="3" class="no-padding">
-            <cp-complex-participant-legend
-              [participant]="subparticipant"
-              [colorLegendGroups]="colorLegendGroups"
-              [backgroundComplexId]="participant.colorLegendIdentifier"
-              [parentComplexAcs]="getParentComplexAcs()">
-            </cp-complex-participant-legend>
-          </td>
-        </tr>
-        </ng-container>
-        </tbody>
-      </ng-container>
+<tr>
+  <td class="centered-vertical" style="{{'width: 16%; ' + getBackgroundStyle()}}">
+    <div class="columns medium-12 centered-vertical">
+      <cp-node-diagram [shape]="getLegendShape(participant.interactorType)"
+                       [color]="getLegendColor(participant)"
+                       [height]="participant.interactorType === 'stable complex' ? '35pt' : '30pt'"
+                       [borderColor]="participant.interactorType === 'stable complex' ? '#ffffff' : '#000000'"
+                       [borderWidth]="participant.interactorType === 'stable complex' ? 8 : 3"
+      ></cp-node-diagram>
+    </div>
+  </td>
+  <td style="width: 64%">
+    <div class="columns medium-12 no-pad-right no-pad-left"><b>{{ participant.interactorType }} -
+      {{ participant.name }} ({{ participant.bioRole }})</b>
+    </div>
+    <div class="columns medium-12 no-pad-right no-pad-left">
+      <a *ngIf="participant.identifierLink" href="{{participant.identifierLink}}"
+         target="_blank">{{ participant.identifier }}
+        <i class="icon icon-generic small" data-icon="x"></i>
+      </a>
+    </div>
+    <div class="columns medium-12 no-pad-right no-pad-left">{{ participant.description }}</div>
+  </td>
+  <td style="width: 20%">
+    <div class="columns medium-12 centered-vertical">
+      <p class="badge" *ngIf="participant.stochiometry">
+        {{ getConvertedStochiometry(participant.stochiometry) }}</p>
+    </div>
+  </td>
+</tr>
+<ng-container *ngIf="participant.participants.length > 0">
+  <tr></tr>
+  <tr class="text-center small-row" *ngIf="participant.participants.length > 0">
+    <td style="{{getBackgroundStyle()}}"></td>
+    <td colspan="2" *ngIf="participant.expanded" class="no-padding-top">
+      <a class="label" (click)="participant.expanded = false">Hide components</a>
+    </td>
+    <td colspan="2" *ngIf="!participant.expanded" class="no-padding-top">
+      <a class="label" (click)="participant.expanded = true">Show components</a>
+    </td>
+  </tr>
+</ng-container>
+<ng-container *ngIf="participant.expanded">
+  <tbody class="no-border">
+  <ng-container *ngFor="let subparticipant of participant.participants">
+    <tr>
+      <td colspan="3" class="no-padding">
+        <cp-complex-participant-legend
+          [participant]="subparticipant"
+          [colorLegendGroups]="colorLegendGroups"
+          [backgroundComplexId]="participant.identifier"
+          [parentComplexAcs]="getParentComplexAcs()">
+        </cp-complex-participant-legend>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</ng-container>

@@ -28,91 +28,62 @@ export function organismIcon(organism: string): string {
   const formattedName = formatOrganismName(organism);
   switch (formattedName) {
     case 'Homo sapiens':
-    case 'Homo sapiens; 9606':
       return 'icon icon-species icon-human';
     case 'Mus musculus':
-    case 'Mus musculus; 10090':
       return 'icon icon-species icon-mouse';
-    case 'Saccharomyces cerevisiae (strain ATCC 204508 / S288c)':
-    case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
-    case 'Saccharomyces cerevisiae; 559292':
+    case 'Schizosaccharomyces pombe':
+    case 'Saccharomyces cerevisiae':
       return 'icon icon-species icon-yeast';
-    case 'Escherichia coli (strain K12)':
     case 'Escherichia coli':
-    case 'Escherichia coli (strain K12); 83333':
-    case 'Escherichia coli; 562':
-    case 'Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 ' +
-    '/ JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)':
-    case 'Pseudomonas aeruginosa (strain ATCC 15692 / PAO1 / 1C / PRS 101 / LMG 12228); 208964':
+    case 'Pseudomonas aeruginosa':
       return 'icon icon-species icon-ecoli';
     case 'Rattus norvegicus':
-    case 'Rattus norvegicus (Rat)':
-    case 'Rattus norvegicus (Rat); 10116':
       return 'icon icon-species icon-rat';
     case 'Caenorhabditis elegans':
-    case 'Caenorhabditis elegans; 6239':
       return 'icon icon-species icon-c-elegans';
     case 'Gallus gallus':
-    case 'Gallus gallus (Chicken); 9031':
       return 'icon icon-species icon-chicken';
     case 'Drosophila melanogaster':
-    case 'Drosophila melanogaster (Fruit fly); 7227':
       return 'icon icon-species icon-fly';
     case 'Bos taurus':
-    case 'Bos taurus (Bovine); 9913':
       return 'icon icon-species icon-cow';
     case 'Oryctolagus cuniculus':
-    case 'Oryctolagus cuniculus (Rabbit); 9986':
       return 'icon icon-species icon-rabbit';
     case 'Ovis aries':
-    case 'Ovis aries (Sheep); 9940':
       return 'icon icon-species icon-sheep';
     case 'Xenopus laevis':
-    case 'Xenopus laevis (African clawed frog); 8355':
       return 'icon icon-species icon-frog';
-    case 'Canis lupus familiaris':
-    case 'Canis familiaris (dog); 9615':
+    case 'Canis lupus':
+    case 'Canis familiaris':
       return 'icon icon-species icon-dog';
-    case 'Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)':
-    case 'Vibrio cholerae; 243277':
+    case 'Vibrio cholerae':
       return 'assets/images/EMBL_Species_Vibrio_cholerae.svg';
-    case 'Crotalus durissus terrificus':
-    case 'Crotalus durissus terrificus; 8732':
+    case 'Crotalus durissus':
       return 'assets/images/EMBL_Species_RattleSnake.svg';
     case 'Sus scrofa':
-    case 'Sus scrofa (Pig); 9823':
       return 'icon icon-species icon-pig';
     case 'Torpedo marmorata':
     case 'Tetronarce californica':
-    case 'Torpedo marmorata; 7788':
-    case 'Torpedo californica (Pacific electric ray); 7787':
       return 'icon icon-species icon-ray';
     case 'Lymnaea stagnalis':
-    case 'Lymnaea stagnalis; 6523':
       return 'icon icon-species icon-snail';
     case 'Arabidopsis thaliana':
-    case 'Arabidopsis thaliana (Mouse-ear cress); 3702':
       return 'icon icon-species icon-brassica';
     case 'Danio rerio':
-    case 'Danio rerio (Zebrafish); 7955':
       return 'icon icon-species icon-zebrafish';
-    case 'Severe acute respiratory syndrome coronavirus':
-    case 'Human SARS coronavirus; 694009' :
-    case 'SARS-CoV-2; 2697049':
-    case 'Severe acute respiratory syndrome coronavirus 2':
-    case 'Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012)':
-    case 'Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012) (Betacoronavirus England 1); 1263720':
-    case 'Human betacoronavirus 2c EMC/2012':
-    case 'Human betacoronavirus 2c EMC/2012; 1235996':
+    case 'Severe acute':
+    case 'Human SARS' :
+    case 'SARS-CoV-2':
+    case 'Middle East':
+    case 'Human betacoronavirus':
       return 'icon icon-species icon-virus';
   }
-  return ' ';
+  return '';
 }
 
 function formatOrganismName(name: string): string {
-  if (!!name && name.includes(';')) {
-    const end = name.indexOf(';');
-    return name.substring(0, end);
-  }
-  return name;
+  return (name || '?')
+    .split(';')[0]
+    .split(' ').slice(0, 2)
+    .join(' ');
 }

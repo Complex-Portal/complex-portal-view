@@ -2,8 +2,8 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
-import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
+import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
 
 @Component({
   selector: 'cp-complex-header',
@@ -12,20 +12,18 @@ import {AnalyticsService} from '../../../shared/google-analytics/service/analyti
 })
 export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
-  private _complexAC: string;
-  private _complexName: string;
-  private _complexSpecies: string;
-  private _crossReferences: CrossReference[];
+  @Input()
+  complex: ComplexDetails;
   private _jsonURL: string;
 
   constructor(private basketService: BasketService, private ga: AnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
-    const urlAc = environment.complex_ws_base_url + '/details/' + this._complexAC;
-    const urlComplexAc = environment.complex_ws_base_url + '/complex/' + this._complexAC;
+    const urlAc = environment.complex_ws_base_url + '/details/' + this.complex.complexAc;
+    const urlComplexAc = environment.complex_ws_base_url + '/complex/' + this.complex.complexAc;
 
-    this._jsonURL = this._complexAC.startsWith('EBI-') ? urlAc : urlComplexAc;
+    this._jsonURL = this.complex.complexAc.startsWith('EBI-') ? urlAc : urlComplexAc;
 
   }
 
@@ -35,43 +33,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   saveComplex() {
-    this.basketService.saveInBasket(this._complexName, this._complexAC, this._complexSpecies);
-  }
-
-  get complexAC(): string {
-    return this._complexAC;
-  }
-
-  @Input()
-  set complexAC(value: string) {
-    this._complexAC = value;
-  }
-
-  get complexName(): string {
-    return this._complexName;
-  }
-
-  @Input()
-  set complexName(value: string) {
-    this._complexName = value;
-  }
-
-  get complexSpecies(): string {
-    return this._complexSpecies;
-  }
-
-  @Input()
-  set complexSpecies(value: string) {
-    this._complexSpecies = value;
-  }
-
-  get crossReferences(): CrossReference[] {
-    return this._crossReferences;
-  }
-
-  @Input()
-  set crossReferences(value: CrossReference[]) {
-    this._crossReferences = value;
+    this.basketService.saveInBasket(this.complex.name, this.complex.complexAc, this.complex.species);
   }
 
   get jsonURL(): string {
@@ -83,6 +45,20 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   isInBasket(): boolean {
-    return this.basketService.isInBasket(this._complexAC);
+    return this.basketService.isInBasket(this.complex.complexAc);
   }
+
+  removeComplexFromBasket() {
+    const key = this.basketService.getKey(this.complex.complexAc);
+    this.basketService.deleteFromBasket(key);
+  }
+
+  toggleBasket() {
+    if (this.isInBasket()) {
+      this.removeComplexFromBasket();
+    } else {
+      this.saveComplex();
+    }
+  }
+
 }

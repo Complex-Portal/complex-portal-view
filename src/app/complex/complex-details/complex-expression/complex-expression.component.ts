@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
+import {MIJson} from 'complexviewer';
 
 @Component({
   selector: 'cp-complex-expression',
@@ -8,19 +9,22 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-expression.component.css']
 })
 export class ComplexExpressionComponent implements OnInit {
-  private _gxa;
+  private _gxa = null;
   private _participants: Participant[];
   private _complexSpecies: string;
   private _crossReferences: CrossReference[];
   private _gxaParamsQueries: string;
   private _goCellularXRefs: CrossReference[];
 
+  @Input()
+  complexMIJSON: MIJson;
+
   constructor() {
   }
 
   ngOnInit() {
     this.findXRefs();
-    this.findGXAQueryies();
+    this.findGXAQueries();
   }
 
   private findXRefs() {
@@ -38,16 +42,14 @@ export class ComplexExpressionComponent implements OnInit {
     }
   }
 
-  private findGXAQueryies() {
-    for (let i = 0; i < this._participants.length; i++) {
-      if (this._participants[i].interactorType === 'protein') {
-        if (this._gxaParamsQueries === undefined) {
-          this.gxaParamsQueries = this._participants[i].identifier;
-        } else {
-          this.gxaParamsQueries += ' ' + this._participants[i].identifier;
-        }
-      }
-    }
+  private findGXAQueries() {
+    this.gxaParamsQueries = [...new Set(this.complexMIJSON.data
+      .filter(e => e.object === 'interactor')
+      .map(e => e.identifier)
+      .filter(i => i.db === 'uniprotkb')
+      .map(i => i.id)
+      .map(id => id.split('-')[0])) // extract canonical id
+    ].join(' ');
   }
 
   get gxa() {

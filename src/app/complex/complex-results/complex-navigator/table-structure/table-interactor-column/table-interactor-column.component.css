@@ -1,8 +1,12 @@
 table {
   --cols: 1;
   height: 1px;
-  width: calc(var(130px) + 70px * var(--cols) + 183px);
   overflow: scroll;
+}
+
+.inheritedWidth {
+  /*width: inherit;*/
+  width: calc(130px + var(--cols) * 70px + 183px);
 }
 
 /* interactors column */
@@ -10,8 +14,7 @@ table {
   position: sticky;
   left: 0;
   z-index: 5;
-  max-height: 45px;
-  min-height: 45px;
+  height: 45px;
   min-width: 130px;
   max-width: 130px;
   padding: 5px;
@@ -30,7 +33,7 @@ table {
 }
 
 .intStoich {
-  height: 45px;
+  height: 100%;
   max-width: 70px;
   min-width: 70px;
   font-size: medium;
@@ -62,11 +65,14 @@ a, a:visited {
   width: 183px;
 }
 
+.spaceHolderWithSorting {
+  width: calc(183px - 3ch);
+}
+
 .subComponentColumn {
   left: 0;
   z-index: 30;
-  max-height: 45px;
-  min-height: 45px;
+  height: 45px;
   min-width: 130px;
   max-width: 130px;
   padding: 5px;
@@ -120,7 +126,7 @@ a, a:visited {
   width: 1%;
   text-align: -webkit-center;
   position: sticky;
-  z-index: 4;
+  z-index: 31;
   left: 0;
 }
 
@@ -133,7 +139,6 @@ a, a:visited {
   color: white;
   line-height: 0.8;
   text-align: center;
-
 
   text-overflow: ellipsis;
   height: calc(var(--rowspanSize) * 48px);
@@ -151,3 +156,14 @@ a, a:visited {
   max-width: 114px;
 }
 
+/*/* NEEDED FOR SAFARI BROWSER*/
+@supports (-webkit-hyphens:none) {
+  .interactorsColumn {
+    height: 45px !important;
+  }
+
+  .intStoich {
+    height: 45px;
+    overflow-y: visible;
+  }
+}

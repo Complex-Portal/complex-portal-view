@@ -16,7 +16,8 @@
 }
 
 .filters {
-  width: 120.5%;
+  /*width: 120.5%;*/
+
   display: flex;
   justify-content: center;
   grid-gap: 10px;
@@ -33,11 +34,15 @@
   display: none;
 }
 
+label {
+  color: white;
+}
+
 .dropdown:hover .displaySize {
   display: flex;
   list-style: none;
   width: 300px;
-  background-color: #007c82;
+  background-color: var(--primary);
   color: white;
   margin-top: -15px;
   flex-direction: row;
@@ -49,7 +54,7 @@
 
 .dropdown:hover .displaySize li {
   width: 200px;
-  background-color: #007c82;
+  background-color: var(--primary);
   margin-left: -21px;
   text-align: left;
   padding-left: 6px;

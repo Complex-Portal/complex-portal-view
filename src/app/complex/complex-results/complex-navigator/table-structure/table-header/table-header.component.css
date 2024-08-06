@@ -17,7 +17,7 @@ thead {
 
 .spaceHolderSorting {
   width: 3ch;
-  border-bottom: 3px solid #007c82;
+  border-bottom: 3px solid var(--primary);
 }
 
 /* Rotated complexes names */
@@ -28,7 +28,7 @@ thead {
   position: sticky;
   left: 0;
   z-index: 4;
-  color: #007c82;
+  color: var(--primary);
   background-color: white;
   padding-top: 173px;
   text-align: right;
@@ -37,11 +37,11 @@ thead {
 .iconOrganism {
   position: sticky;
   text-align: center;
-  background-color: #007c82;
+  background-color: var(--primary);
   color: white;
   border-left: 1px solid white;
   font-size: medium;
-  height: 35px;
+  height: 60px;
 }
 
 .tilted-label {
@@ -51,7 +51,6 @@ thead {
   overflow: hidden;
 }
 
-
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
   --intHeader: 130px;
@@ -60,6 +59,17 @@ thead {
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
+  overflow: hidden;
+}
+
+.CN-table .tableHeadOverflowWithSorting tr {
+  --cols: 1;
+  --intHeader: 130px;
+  --parentWidth: 100%;
+  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+  display: grid;
+  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
+  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder) - 3ch);
   overflow: hidden;
 }
 
@@ -85,14 +95,14 @@ thead {
   width: 100%;
   height: 100%;
   align-content: center;
-  background-color: #007c82;
+  background-color: var(--primary);
   padding: 0 0 0 70px;
   border: none;
 }
 
 .spaceHolder {
-  width: 1000px;
-  background-color: #007c82;
+  width: 183px;
+  background-color: var(--primary);
   border-left: 1px solid white;
 }
 
@@ -104,10 +114,11 @@ thead {
   left: 0;
   z-index: 4;
   background-color: white;
-  border-bottom: 3px solid #007c82;
-  height: 35px;
+  border-bottom: 3px solid var(--primary);
+  height: 60px;
+  line-height: 70px;
   text-align: right;
-  color: #007c82;
+  color: var(--primary);
 }
 
 /* Horizontal complexes name */
@@ -119,9 +130,9 @@ thead {
   font-size: medium;
   border-left: none;
   text-align: right;
-  color: #007c82;
+  color: var(--primary);
   background-color: white;
-  border-bottom: 3px solid #007c82;
+  border-bottom: 3px solid var(--primary);
 }
 
 .horizontal-label {
@@ -135,7 +146,7 @@ thead {
 
 .CN-table th.horizontal {
   color: white;
-  background-color: #007c82;
+  background-color: var(--primary);
   border-left: 1px solid white;
   min-width: 80px;
   max-width: 80px;
@@ -151,3 +162,16 @@ a {
   color: white;
 }
 
+
+.basket-icons {
+  margin-left: 5px;
+}
+
+.button {
+  padding: 0;
+  margin: 0;
+}
+
+.basketButton {
+  text-align: center;
+}

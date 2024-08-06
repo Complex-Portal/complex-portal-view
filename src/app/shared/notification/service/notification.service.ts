@@ -27,7 +27,7 @@ export class NotificationService {
 
   private addComplexNavigatorAnnouncementNotification(announcement: string) {
     return this.toastrService.info(announcement, null, {
-      disableTimeOut: true,
+      disableTimeOut: false,
       closeButton: true,
       progressBar: false,
       positionClass: 'toast-right-under-header'
@@ -44,11 +44,11 @@ export class NotificationService {
   }
 
   public onAddedComplexToBasket(id: string) {
-    this.addSuccessNotification('Stored ' + id + ' in your basket!');
+    this.addSuccessNotification('Added ' + id + ' to your basket!');
   }
 
   public onRemovedComplexFromBasket(id: string) {
-    this.addSuccessNotification('Removed ' + id + ' in your basket!');
+    this.addSuccessNotification('Removed ' + id + ' from your basket!');
   }
 
   public onFeatureNotAvailableYet() {

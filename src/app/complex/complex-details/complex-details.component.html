@@ -1,12 +1,8 @@
-<section>
+<section [class.predicted]="complexDetails?.predicted">
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
-        <cp-complex-header *ngIf="complexDetails;else loadingSpinner"
-                           [complexAC]="complexDetails.complexAc"
-                           [complexName]="complexDetails.name"
-                           [complexSpecies]="complexDetails.species"
-                           [crossReferences]="complexDetails.crossReferences"></cp-complex-header>
+        <cp-complex-header *ngIf="complexDetails;else loadingSpinner" [complex]="complexDetails"></cp-complex-header>
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">
@@ -32,8 +28,9 @@
                                  [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
         </div>
         <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-expression *ngIf="complexDetails && gxa;"
+          <cp-complex-expression *ngIf="complexDetails && gxa && complexMIJSON;"
                                  [gxa]="gxa"
+                                 [complexMIJSON]="complexMIJSON"
                                  [participants]="complexDetails.participants"
                                  [complexSpecies]="complexDetails.species"
                                  [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
@@ -51,8 +48,9 @@
         </div>
       </div>
       <div class="columns medium-12">
-        <cp-complex-footer *ngIf="complexDetails;"
-                           [institute]="complexDetails.institution"></cp-complex-footer>
+        <cp-complex-footer *ngIf="complexDetails"
+                           [institute]="complexDetails.institution"
+                           [predicted]="complexDetails.predicted"></cp-complex-footer>
       </div>
     </div>
     <ng-template #loadingSpinner>

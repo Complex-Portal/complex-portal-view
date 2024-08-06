@@ -22,5 +22,5 @@ input#mce-EMAIL.email {
 
 input#mc-embedded-subscribe.button {
   width: 100% !important;
-  background-color: #007c82
+  background-color: var(--primary)
 }

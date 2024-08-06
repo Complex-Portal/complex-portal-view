@@ -1,5 +1,5 @@
 <div class="ComplexNavigator">
-  <div class="Buttons">
+  <div class="Buttons" [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCNButtons' : ''">
     <cp-complex-navigator-buttons
       [(interactorsSorting)]="interactorsSorting"
       [(organismIconDisplay)]="organismIconDisplay"
@@ -12,7 +12,10 @@
                       [interactorsSorting]="interactorsSorting"
                       [organismIconDisplay]="organismIconDisplay"
                       [interactorTypeDisplay]="interactorTypeDisplay"
-                      [IDDisplay]="IDDisplay">
+                      [IDDisplay]="IDDisplay"
+                      [canAddComplexesToBasket]="canAddComplexesToBasket"
+                      [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket"
+                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
   </cp-table-structure>
 </div>
 

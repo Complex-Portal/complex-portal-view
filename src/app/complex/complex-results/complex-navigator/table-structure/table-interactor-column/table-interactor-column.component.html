@@ -1,12 +1,12 @@
 <div class="Complex-navigator">
   <table class="interactors-table"
+         [ngClass]="{'inheritedWidth': complexes.length > 6}"
          [style.--cols]="complexes.length">
-    <!--         [style]="complexes.length>8 ? 'width: calc(130px + 70px * var(&#45;&#45;cols) + 183px)':''">-->
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
           <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
-              title="{{oneType[0]}}">
+              [matTooltip]="oneType[0]">
             <div class="interactorNameContainer" [style.--rowspanSize]="oneType[1]">
               {{ oneType[0] }}
             </div>
@@ -27,8 +27,9 @@
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
-            <a title="{{ interactor.interactor.name }} interactors" (click)="toggleSubcomplexExpandable(i)">
-              Interactors
+            <a (click)="toggleSubcomplexExpandable(i)"
+               [matTooltip]="interactor.interactor.name + ' components'">
+              Components
               <i class="icon icon-common" data-icon="&#xf078;"
                  style="font-size:small;
                 "></i>
@@ -37,7 +38,7 @@
         </td>
         <!-- Interactors' stoichiometry -->
         <ng-container *ngFor="let complex of enrichedComplexes">
-          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}">
+          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}" [class.predicted]="complex.complex.predicted">
             <cp-table-main-interactor
               [complex]="complex"
               [i]="i"
@@ -45,7 +46,7 @@
             ></cp-table-main-interactor>
           </td>
         </ng-container>
-        <div class="spaceHolder" *ngIf="complexes.length>6"
+        <div *ngIf="complexes.length>6"
              [ngClass]="isInteractorSortingSet() ? 'spaceHolderWithSorting' : 'spaceHolder'"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->
@@ -55,14 +56,15 @@
               class="expandedRows"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
-                title="{{interactor.interactor.name}} interactors"
+                [matTooltip]="interactor.interactor.name + ' components'"
                 *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
               <div class="interactorSeparationName"
-                   [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} interactors
+                   [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} components
               </div>
             </td>
             <td class="subComponentColumn"
-                [ngClass]="complexes.length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'">
+                [ngClass]="complexes.length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
+                [style]="ranges.length!=0 ? 'left:3ch':''">
               <div>
                 <cp-table-interactor-name
                   [interactorName]="el.name"

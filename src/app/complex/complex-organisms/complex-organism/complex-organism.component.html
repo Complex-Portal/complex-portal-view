@@ -14,7 +14,7 @@
 
       </div>
       <ng-template #fontIcon style="mask: 5px; accent-color: #0a0a0a">
-        <span [attr.data-icon]="organism.symbol" style="color: #007c82"
+        <span [attr.data-icon]="organism.symbol" style="color: var(--primary)"
               [ngClass]="{'icon ': true,'icon-species': organism.symbol !== '?', 'icon-functional': organism.symbol === '?'}">
         </span>
       </ng-template>

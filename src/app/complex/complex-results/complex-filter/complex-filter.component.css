@@ -1,0 +1,14 @@
+input {
+  margin: 0;
+  vertical-align: middle;
+}
+.icon, img {
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+label {
+  line-height: 1.8;
+  vertical-align: middle;
+
+}

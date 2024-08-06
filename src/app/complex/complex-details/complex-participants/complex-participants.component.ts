@@ -9,7 +9,6 @@ let viewer: any;
 
 export class ComplexParticipant {
   identifier: string;
-  colorLegendIdentifier: string;
   identifierLink: string;
   name: string;
   description: string;
@@ -100,19 +99,8 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
   }
 
   private createComplexParticipant(participant: Participant): ComplexParticipant {
-    let colorLegendIdentifier = participant.identifier;
-    if (participant.interactorType === 'stable complex') {
-      // The same complex may appear in the complex viewer with different colours, if it's part of the complex multiple times.
-      // So we need to check if a complex appears multiple times, and in that case, add a suffix to their id to match the id used
-      // for the color legend.
-      const participantsWithSameId = this.getNumberOfParticipantsWithId(participant.identifier, this.participantsWithSubcomponents);
-      if (participantsWithSameId > 0) {
-        colorLegendIdentifier += '_' + (participantsWithSameId + 1);
-      }
-    }
     return {
       identifier: participant.identifier,
-      colorLegendIdentifier,
       identifierLink: participant.identifierLink,
       name: participant.name,
       description: participant.description,
@@ -147,24 +135,14 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     this.googleAnalyticsService.fireInteractionWithViewerEvent(Category.InteractionViewer_SelectedAnno, value);
   }
 
-  private updateColorLegend(legendData: { [p: string]: ColorLegend[] }) {
+  private updateColorLegend(legendData: Legend) {
     this.colorLegendGroups.clear();
-    for (const group of Object.keys(legendData)) {
-      if (group === 'Complex') {
-        for (const legendDatum of legendData[group]) {
-          // Because we only display interactors and complexes colors, we now that are certain.
-          // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.replace(/complex portal_/, ''), legendDatum.certain.color);
-        }
-      }
-      if (group === 'Interactor') {
-        for (const legendDatum of legendData[group]) {
-          // Because we only display interactors and complexes colors, we now that are certain.
-          // If features are shown in the feature follow the same way that IntAct Portal
-          this.colorLegendGroups.set(legendDatum.name.toUpperCase(), legendDatum.certain.color);
-        }
-      }
-    }
+    // Because we only display interactors and complexes colors, we now that are certain.
+    // If features are shown in the feature follow the same way that IntAct Portal
+    legendData.Complex?.forEach(complex => this.colorLegendGroups.set(complex.name.replace(/complex portal_/, ''), complex.certain.color));
+    // Because we only display interactors and complexes colors, we now that are certain.
+    // If features are shown in the feature follow the same way that IntAct Portal
+    legendData.Interactor?.forEach(interactor => this.colorLegendGroups.set(interactor.name.toUpperCase(), interactor.certain.color));
   }
 
 
@@ -320,6 +298,15 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
     blob = null;
   }
+}
+
+
+interface Legend {
+  Complex?: ColorLegend[] ;
+  Interactor?: ColorLegend[];
+  'MI Features'?: ColorLegend[];
+
+  [key: string]: ColorLegend[] | undefined;
 }
 
 // These classes are needed to map the json coming from the viewer to the object

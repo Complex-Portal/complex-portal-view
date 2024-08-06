@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Participant} from '../../../../shared/model/complex-details/participant.model';
+import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 
 @Component({
   selector: 'cp-gxa-heatmap',
   templateUrl: 'gxa-heatmap.component.html',
-  styleUrls: ['gxa-heatmap.component.css']
+  styleUrls: ['gxa-heatmap.component.css'],
+  providers: [SpeciesPipe]
 })
 export class GxaHeatmapComponent implements OnInit {
   private _gxa;
@@ -14,47 +16,32 @@ export class GxaHeatmapComponent implements OnInit {
   private _isLoaded = true;
   private _experimentId: string;
 
-  constructor() {
+  constructor(private species: SpeciesPipe) {
   }
 
-  ngOnInit() {
-    switch (this._complexSpecies) {
-      case 'Homo sapiens; 9606':
-        this._experimentId = 'E-MTAB-5214';
-        break;
-      case 'Mus musculus; 10090':
-        this._experimentId = 'E-MTAB-4644';
-        break;
-      case 'Rattus norvegicus; 10116':
-        this._experimentId = 'E-GEOD-53960';
-        break;
-      case 'Gallus gallus (Chicken); 9031':
-        this._experimentId = 'E-MTAB-2797';
-        break;
-      case 'Caenorhabditis elegans; 6239':
-        this._experimentId = 'E-MTAB-2812';
-        break;
-      case 'Sus scrofa (Pig); 9823':
-        this._experimentId = 'E-MTAB-5895';
-        break;
-      default:
-        this._isLoaded = false;
-    }
+  exceptions = new Map<string, string>([
+    // ['homo sapiens', 'E-GTEX-8'],
+    // ['mus musculus', 'E-MTAB-4644'],
+  ]);
 
-    if (this._experimentId) {
-      const context = this;
-      this._gxa.render({
-        target: 'highchartsContainer',
-        experiment: this._experimentId,
-        atlasUrl: 'https://www.ebi.ac.uk/gxa/',
-        query: {
-          gene: this.gxaParamsQueries
-        },
-        fail: function () {
-          context._isLoaded = false;
-        }
-      });
-    }
+  ngOnInit() {
+    this._complexSpecies = this.species.transform(this.complexSpecies, false).toLowerCase();
+
+    this._experimentId = this.exceptions.get(this._complexSpecies);
+
+    const context = this;
+    this._gxa.render({
+      target: 'highchartsContainer',
+      experiment: this._experimentId || 'reference',
+      atlasUrl: 'https://www.ebi.ac.uk/gxa/',
+      query: {
+        gene: this.gxaParamsQueries,
+        species: this._complexSpecies
+      },
+      fail: function () {
+        context._isLoaded = false;
+      }
+    });
   }
 
   get gxa() {
@@ -64,15 +51,6 @@ export class GxaHeatmapComponent implements OnInit {
   @Input()
   set gxa(value) {
     this._gxa = value;
-  }
-
-  get participants(): Participant[] {
-    return this._participants;
-  }
-
-  @Input()
-  set participants(value: Participant[]) {
-    this._participants = value;
   }
 
   get complexSpecies(): string {

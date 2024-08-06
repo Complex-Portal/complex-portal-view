@@ -2,6 +2,7 @@ import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedInteractor} from './table-interactor-column.component';
 
+
 export class ComponentWithStoichiometry {
   identifier: string;
   stochiometryValue: [number, number];
@@ -162,7 +163,7 @@ function formatStoichiometryValues(stoichiometry: [number, number]): string {
 
 function getStoichiometryText(stoichiometry: [number, number]): string {
   if (!!stoichiometry) {
-      return 'Stoichiometry values: minValue: ' + stoichiometry[0] + ', maxValue: ' + stoichiometry[1];
+    return 'Stoichiometry values: minValue: ' + stoichiometry[0] + ', maxValue: ' + stoichiometry[1];
   } else {
     return 'No stoichiometry data available'; // sometimes we don't have the stoichiometry value
   }

@@ -1,27 +1,34 @@
 <div class="row">
   <div class="columns medium-12 callout">
     <div class="columns medium-12 no-pad-left float-left">
-      <h2>{{complexName}}</h2>
-      <h3>ComplexAc: {{complexAC}}</h3>
-      <h3><i>{{complexSpecies}}</i></h3>
+      <h2>{{ complex.name }}</h2>
+      <h3>ComplexAc: {{ complex.complexAc }}</h3>
+      <h3><i>{{ complex.species }}</i></h3>
     </div>
-    <div class="columns medium-4  float-left">
-      <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
-           data-equalize-on="medium" id="large-button-grid">
-        <div class="columns small-12 medium-6 no-pad-left">
-          <a class="button primary expanded" data-equalizer-watch data-open="downloadModal">
-            <span class="icon icon-functional " data-icon="="> Download</span></a>
-        </div>
-        <div class="columns small-12 medium-6 no-pad-left">
-          <a class="button primary expanded" data-equalizer-watch (click)="saveComplex()"
-             [ngClass]="{'disabled': isInBasket()}"><span class="icon icon-generic medium "
-                                                          data-icon="b"> Basket</span></a>
+    <div class="row expanded">
+      <div class="columns medium-4 no-padding">
+        <div class="row button-grid small-up-12 medium-up-12 large-up-12" data-equalizer
+             data-equalize-on="medium" id="large-button-grid">
+          <div class="columns small-12 medium-6 no-pad-left">
+            <a class="button primary expanded no-margin" data-equalizer-watch data-open="downloadModal">
+              <span class="icon icon-functional " data-icon="="> Download</span></a>
+          </div>
+          <div class="columns small-12 medium-6 no-pad-left">
+            <a class="button primary expanded no-margin" (click)="toggleBasket()">
+              <ng-container *ngIf="isInBasket(); else add">
+                <i class="icon icon-common" data-icon=''></i> Remove from basket
+              </ng-container>
+              <ng-template #add>
+                <i class="icon icon-common" data-icon=""></i> Add to basket
+              </ng-template>
+            </a>
+          </div>
         </div>
       </div>
+      <div class="columns medium-8 no-padding ">
+        <cp-complex-evidence [complex]="complex"></cp-complex-evidence>
+      </div>
     </div>
-    <div class="columns medium-8  float-right">
-      <cp-complex-evidence [crossReferences]="crossReferences"></cp-complex-evidence>
-    </div>
-    <cp-download-modal [complexAC]="complexAC"></cp-download-modal>
+    <cp-download-modal [complexAC]="complex.ac"></cp-download-modal>
   </div>
 </div>

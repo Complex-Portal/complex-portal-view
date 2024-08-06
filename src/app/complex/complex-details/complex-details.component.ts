@@ -23,7 +23,7 @@ export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy
   private _complexDetails: ComplexDetails;
   private _complexMIJSON: any;
   private _query: string;
-  private _gxa;
+  private _gxa = null;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationService,
               private googleAnalyticsService: AnalyticsService, private complexPortalService: ComplexPortalService,

@@ -6,8 +6,12 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./complex-footer.component.css']
 })
 export class ComplexFooterComponent implements OnInit {
-  private _institute;
-  private _comment;
+  @Input()
+  institute: string;
+  @Input()
+  comment: string;
+  @Input()
+  predicted = false;
 
   constructor() {
   }
@@ -15,21 +19,4 @@ export class ComplexFooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  get institute() {
-    return this._institute;
-  }
-
-  @Input()
-  set institute(value) {
-    this._institute = value;
-  }
-
-  get comment() {
-    return this._comment;
-  }
-
-  @Input()
-  set comment(value) {
-    this._comment = value;
-  }
 }

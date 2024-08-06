@@ -8,7 +8,7 @@
     "declaration": false,
     "experimentalDecorators": true,
     "lib": [
-      "es6",
+      "ES2020",
       "dom"
     ],
     "mapRoot": "./",

@@ -1,51 +1,59 @@
-<div class="margin-top-large margin-bottom-large row">
+<div class="margin-top-large margin-bottom-large row expanded">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
     <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
-      <h2 class="padding-left-large leftAligned">Total number of
-        results: {{ complexSearch.totalNumberOfResults }} </h2>
-      <div class="row">
-        <cp-complex-navigator-rating *ngIf="DisplayType=== COMPLEX_NAVIGATOR_VIEW">
-        </cp-complex-navigator-rating>
-        <div class="displayButton columns medium-8" style="text-align: center; padding-left: 10px">
-          <button type="submit" name="submit" class="button view-button"
-                  (click)="setListView()" [ngClass]="{'selected': DisplayType === LIST_VIEW}">
-            View list
-          </button>
-          <button type="submit" name="submit" class="button view-button cnButton"
-                  (click)="setComplexNavigatorView()" [ngClass]="{'selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}">
-            View Complex Navigator
-            <span class="new-tag" [ngClass]="{'new-tag-selected': DisplayType === COMPLEX_NAVIGATOR_VIEW}">NEW!</span>
-          </button>
+      <h2 class="padding-left-large">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>
+      <div class="row expanded">
+        <div class="columns medium-12">
+          <cp-complex-navigator-rating *ngIf="isDisplayComplexNavigatorView()">
+          </cp-complex-navigator-rating>
+
+        </div>
+
+        <div class="columns medium-12 large-2 no-padding">
+          <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
+                             [spicesFilter]="spicesFilter"
+                             [bioRoleFilter]="bioRoleFilter"
+                             [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
+                             (onResetAllFilters)="onResetAllFilters()"
+                             (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
+                             (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
+                             (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
+          </cp-complex-filter>
+        </div>
+        <div class="columns medium-12 large-10">
+          <div class="paginatorAndDisplay">
+            <cp-complex-list-display-buttons
+              [displayType]="DisplayType"
+              (displayTypeChange)="onDisplayTypeChange($event)">
+            </cp-complex-list-display-buttons>
+            <cp-complex-paginator class="paginator"
+                                  [currentPageIndex]="currentPageIndex"
+                                  [lastPageIndex]="lastPageIndex"
+                                  (onPageChange)="onPageChange($event)">
+            </cp-complex-paginator>
+          </div>
+          <div class="listOfResults">
+            <cp-complex-list *ngIf="!isDisplayComplexNavigatorView()"
+                             [complexSearch]="complexSearch">
+            </cp-complex-list>
+          </div>
+          <div class="ComplexNavigator" *ngIf="isDisplayComplexNavigatorView()"
+               [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
+            <cp-complex-navigator class="Complex-navigator"
+                                  [complexSearch]="complexSearch"
+                                  [interactors]="allInteractorsInComplexSearch"
+                                  [canAddComplexesToBasket]="true"
+                                  [canRemoveComplexesFromBasket]="false">
+            </cp-complex-navigator>
+          </div>
+          <cp-complex-paginator class="paginator"
+                                [currentPageIndex]="currentPageIndex"
+                                [lastPageIndex]="lastPageIndex"
+                                (onPageChange)="onPageChange($event)"></cp-complex-paginator>
         </div>
       </div>
-      <div class="columns medium-4 filterColumn leftAligned">
-        <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
-                           [spicesFilter]="spicesFilter"
-                           [bioRoleFilter]="bioRoleFilter"
-                           [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
-                           (onResetAllFilters)="onResetAllFilters()"
-                           (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
-                           (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                           (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
-        </cp-complex-filter>
-      </div>
-      <div class="columns medium-8">
-        <cp-complex-paginator [currentPageIndex]="currentPageIndex"
-                              [lastPageIndex]="lastPageIndex"
-                              (onPageChange)="onPageChange($event)">
-        </cp-complex-paginator>
-        <cp-complex-list class="listOfResults" *ngIf="DisplayType===LIST_VIEW"
-                         [complexSearch]="complexSearch">
-        </cp-complex-list>
-        <cp-complex-navigator class="Complex-navigator" *ngIf="DisplayType===COMPLEX_NAVIGATOR_VIEW"
-                              [complexSearch]="complexSearch"
-                              [interactors]="allInteractorsInComplexSearch">
-        </cp-complex-navigator>
-        <cp-complex-paginator [currentPageIndex]="currentPageIndex"
-                              [lastPageIndex]="lastPageIndex"
-                              (onPageChange)="onPageChange($event)"></cp-complex-paginator>
-      </div>
     </div>
+
 
     <div class="columns medium-12 callout alert" *ngIf="complexSearch.totalNumberOfResults === 0">
       <h2>No Complex Portal results found</h2>

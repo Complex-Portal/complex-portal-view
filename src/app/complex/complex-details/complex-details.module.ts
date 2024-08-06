@@ -45,16 +45,18 @@ import {DownloadModalComponent} from './complex-header/download-modal/download-m
 import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-diagram.component';
 import {ComplexModule} from '../complex.module';
 import {ComplexParticipantLegendComponent} from './complex-participants/complex-participant-legend/complex-participant-legend.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
-    imports: [
-        RouterModule.forChild([
-            {path: '', component: ComplexDetailsComponent},
-        ]),
-        CommonModule,
-        ProgressSpinnerModule,
-        ComplexModule
-    ],
+  imports: [
+    RouterModule.forChild([
+      {path: '', component: ComplexDetailsComponent},
+    ]),
+    CommonModule,
+    ProgressSpinnerModule,
+    ComplexModule,
+    MatTooltipModule
+  ],
   declarations: [
     ComplexDetailsComponent,
     ComplexHeaderComponent,

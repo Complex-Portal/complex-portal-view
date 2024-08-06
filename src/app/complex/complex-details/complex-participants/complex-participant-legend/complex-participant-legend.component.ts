@@ -21,7 +21,7 @@ export class ComplexParticipantLegendComponent {
       let backgroundStyle = 'background: linear-gradient(90deg, ';
       let size = 5;
       for (const ac of this.parentComplexAcs) {
-        backgroundStyle += this.colorLegendGroups.get(ac) + ' 0 ' + size + '%, ';
+        backgroundStyle += `${this.colorLegendGroups.get(ac)} 0 ${size}%, `;
         size += 5;
       }
       backgroundStyle += colour + ' 0)';
@@ -63,12 +63,13 @@ export class ComplexParticipantLegendComponent {
 
   public getLegendColor(participant: ComplexParticipant): string {
     let color;
+    // console.log(this.colorLegendGroups)
     // TODO Talk to Colin to try a simple way to retrieve the colors .e.g. only by identifier
     if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide')
       && !participant.identifier.includes('-PRO') && participant.name) {
       color = this.colorLegendGroups.get(participant.name.toUpperCase());
     } else {
-      color = this.colorLegendGroups.get(participant.colorLegendIdentifier.toUpperCase());
+      color = this.colorLegendGroups.get(participant.identifier.toUpperCase());
     }
     if (!color) {
       color = '#ffffff';
