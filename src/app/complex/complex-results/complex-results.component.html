@@ -1,6 +1,6 @@
 <div class="margin-top-large margin-bottom-large row expanded">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
-    <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
+    <div class="columns medium-12" *ngIf="!noResults()">
       <h2 class="padding-left-large">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row expanded">
         <div class="columns medium-12">
@@ -21,7 +21,7 @@
                              (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
           </cp-complex-filter>
         </div>
-        <div class="columns medium-12 large-10" *ngIf="complexSearch.totalNumberOfResults !== 0">
+        <div class="columns medium-12 large-10" *ngIf="!noResultsAfterFilter()">
           <div class="paginatorAndDisplay">
             <cp-complex-list-display-buttons
               [displayType]="DisplayType"
@@ -53,7 +53,7 @@
                                 (onPageChange)="onPageChange($event)"></cp-complex-paginator>
         </div>
 
-        <div class="columns medium-12 large-10" *ngIf="complexSearch.totalNumberOfResults === 0">
+        <div class="columns medium-12 large-10" *ngIf="noResultsAfterFilter()">
           <div class="listOfResults">
             <h3>No Complex Portal results found with the selected filters</h3>
           </div>
@@ -62,7 +62,7 @@
     </div>
 
 
-    <div class="columns medium-12 callout alert" *ngIf="complexSearch.totalNumberOfResults === 0">
+    <div class="columns medium-12 callout alert" *ngIf="noResults()">
       <h2>No Complex Portal results found</h2>
       <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>
       <h4>Please consider refining your terms:</h4>

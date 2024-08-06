@@ -295,4 +295,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  noResults(): boolean {
+    // If we have no results and no facets, then the search returned no results at all
+    return this.complexSearch.totalNumberOfResults === 0 && Object.keys(this.complexSearch.facets).length === 0;
+  }
+
+  noResultsAfterFilter(): boolean {
+    // If we have no results but we have facets, then the search returned results, but they have been filtered
+    return this.complexSearch.totalNumberOfResults === 0 && Object.keys(this.complexSearch.facets).length !== 0;
+  }
+
 }
