@@ -18,19 +18,20 @@ const baseURL = environment.complex_ws_base_url;
 @Injectable()
 export class ComplexPortalService {
 
-  // Tag used by SOLR to exclude the filters from the facets counts.
-  // We use the same tag for all facet fields.
-  private static TAG_EXCLUDE_FILTER_LABEL = 'TAG_EX_FILTER';
+  // Tags used by SOLR to exclude the filters from the facets counts.
+  private static SPECIES_FACET_TAG = 'SPECIES';
+  private static COMPONENT_TYPE_FACET_TAG = 'COMP_TYPE';
+  private static BIO_ROLE_FACET_TAG = 'BIO_ROLE';
+
   private static SPECIES_FACET_FIELD = 'species_f';
   private static COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
   private static BIO_ROLE_FACET_FIELD = 'pbiorole_f';
-  // Filters needs to be prefixed with a tag, to be able to exclude them in the facets
-  private static FILTER_TAG = '{!tag=' + ComplexPortalService.TAG_EXCLUDE_FILTER_LABEL + '}';
-  // Facets need to be prefixed with the exclude field set to the tag used on the filters
+
+  // Facets need to be prefixed with the exclude field set to the tags used on the filters
   private static FACETS = [
-    '{!ex= ' + ComplexPortalService.TAG_EXCLUDE_FILTER_LABEL + '}' + ComplexPortalService.SPECIES_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.TAG_EXCLUDE_FILTER_LABEL + '}' + ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.TAG_EXCLUDE_FILTER_LABEL + '}' + ComplexPortalService.BIO_ROLE_FACET_FIELD
+    '{!ex= ' + ComplexPortalService.SPECIES_FACET_TAG + '}' + ComplexPortalService.SPECIES_FACET_FIELD,
+    '{!ex= ' + ComplexPortalService.COMPONENT_TYPE_FACET_TAG + '}' + ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
+    '{!ex= ' + ComplexPortalService.BIO_ROLE_FACET_TAG + '}' + ComplexPortalService.BIO_ROLE_FACET_FIELD
   ].join(',');
 
   constructor(private http: HttpClient) {
@@ -107,13 +108,14 @@ export class ComplexPortalService {
 
     let filters = '';
     if (speciesFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.SPECIES_FACET_FIELD, speciesFilter);
+      filters += this.buildFilterParam(ComplexPortalService.SPECIES_FACET_FIELD, ComplexPortalService.SPECIES_FACET_TAG, speciesFilter);
     }
     if (bioRoleFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.BIO_ROLE_FACET_FIELD, bioRoleFilter);
+      filters += this.buildFilterParam(ComplexPortalService.BIO_ROLE_FACET_FIELD, ComplexPortalService.BIO_ROLE_FACET_TAG, bioRoleFilter);
     }
     if (interactorTypeFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.COMPONENT_TYPE_FACET_FIELD, interactorTypeFilter);
+      filters += this.buildFilterParam(
+        ComplexPortalService.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService.COMPONENT_TYPE_FACET_TAG, interactorTypeFilter);
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
@@ -134,8 +136,9 @@ export class ComplexPortalService {
       catchError(this.handleError));
   }
 
-  private buildFilterParam(filterField: string, filterValues: string[]): string {
-    return ComplexPortalService.FILTER_TAG + filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
+  private buildFilterParam(filterField: string, filterTag: string, filterValues: string[]): string {
+    // Filters needs to be prefixed with a tag, to be able to exclude them in the facets counts
+    return '{!tag=' + filterTag + '}' + filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
   }
 
   private handleError(err: HttpErrorResponse | any): Observable<any> {
@@ -148,7 +151,6 @@ export class ComplexPortalService {
 
   getSimplifiedComplex(complexAc: string): Observable<Element> {
     const url = `${baseURL}/complex-simplified/${complexAc}`;
-    // const url = `${baseURL}/complex-simplified/${complexAc}`;
     return this.http.get(url).pipe(
       catchError(this.handleError));
   }
