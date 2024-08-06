@@ -112,19 +112,6 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private getNumberOfParticipantsWithId(identifier: string, participants: ComplexParticipant[]): number {
-    let participantsWithSameId = 0;
-    for (const p of participants) {
-      if (p.identifier === identifier) {
-        participantsWithSameId++;
-      }
-      if (p.participants.length > 0) {
-        participantsWithSameId += this.getNumberOfParticipantsWithId(identifier, p.participants);
-      }
-    }
-    return participantsWithSameId;
-  }
-
   onChangeAnnotation(value: string) {
     const display = !this.annotations[value];
 
