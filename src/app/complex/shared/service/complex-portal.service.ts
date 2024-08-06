@@ -93,13 +93,13 @@ export class ComplexPortalService {
 
     let filters = '';
     if (speciesFilter.length !== 0) {
-      filters += 'species_f:(' + '"' + speciesFilter.join('"AND"') + '"' + '),';
+      filters += 'species_f:(' + '"' + speciesFilter.join('"OR"') + '"' + '),';
     }
     if (bioRoleFilter.length !== 0) {
-      filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('"AND"') + '"' + '),';
+      filters += 'pbiorole_f:(' + '"' + bioRoleFilter.join('"OR"') + '"' + '),';
     }
     if (interactorTypeFilter.length !== 0) {
-      filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"AND"') + '"' + '),';
+      filters += 'ptype_f:(' + '"' + interactorTypeFilter.join('"OR"') + '"' + '),';
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
@@ -117,6 +117,15 @@ export class ComplexPortalService {
           // return result;
         // }
       // ),
+      catchError(this.handleError));
+  }
+
+  findComplexFacets(query: string, facets = 'species_f,ptype_f,pbiorole_f'): Observable<ComplexSearchResult> {
+    /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
+    const params = new HttpParams()
+      .set('facets', facets);
+
+    return this.http.get<ComplexSearchResult>(baseURL + '/search/' + query, {params: params}).pipe(
       catchError(this.handleError));
   }
 

@@ -11,6 +11,7 @@ import {
   COMPLEX_NAVIGATOR_VIEW,
   LIST_VIEW
 } from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
+import {Facets} from '../shared/model/complex-results/facets.model';
 
 @Component({
   selector: 'cp-complex-results',
@@ -20,6 +21,7 @@ import {
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private _query: string;
   private _complexSearch: ComplexSearchResult;
+  private _complexSearchNoFilters: ComplexSearchResult;
   private _spicesFilter: string[];
   private _bioRoleFilter: string[];
   private _interactorTypeFilter: string[];
@@ -69,6 +71,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
 
   private requestComplexResults() {
+    this.complexPortalService.findComplexFacets(this.query).subscribe(complexSearch => {
+      this.complexSearchNoFilters = complexSearch;
+    });
     this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
       this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
@@ -189,6 +194,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   set complexSearch(value: ComplexSearchResult) {
     this._complexSearch = value;
     this.processSearchResults();
+  }
+
+  get complexSearchNoFilters(): ComplexSearchResult {
+    return this._complexSearchNoFilters;
+  }
+
+  set complexSearchNoFilters(value: ComplexSearchResult) {
+    this._complexSearchNoFilters = value;
   }
 
   get lastPageIndex(): number {
