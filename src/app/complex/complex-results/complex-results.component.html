@@ -1,6 +1,6 @@
 <div class="margin-top-large margin-bottom-large row expanded">
   <ng-container *ngIf="complexSearch;else loadingSpinner">
-    <div class="columns medium-12" *ngIf="complexSearchNoFilters.totalNumberOfResults !== 0">
+    <div class="columns medium-12" *ngIf="complexSearch.totalNumberOfResults !== 0">
       <h2 class="padding-left-large">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>
       <div class="row expanded">
         <div class="columns medium-12">
@@ -14,7 +14,7 @@
                              [spicesFilter]="spicesFilter"
                              [bioRoleFilter]="bioRoleFilter"
                              [interactorTypeFilter]="interactorTypeFilter"
-                             [facets]="complexSearchNoFilters.facets"
+                             [facets]="complexSearch.facets"
                              (onResetAllFilters)="onResetAllFilters()"
                              (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
                              (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
@@ -62,7 +62,7 @@
     </div>
 
 
-    <div class="columns medium-12 callout alert" *ngIf="complexSearchNoFilters.totalNumberOfResults === 0">
+    <div class="columns medium-12 callout alert" *ngIf="complexSearch.totalNumberOfResults === 0">
       <h2>No Complex Portal results found</h2>
       <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>
       <h4>Please consider refining your terms:</h4>
