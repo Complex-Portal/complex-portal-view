@@ -27,21 +27,20 @@ export class TableHeaderComponent {
     return organismIcon(organismName);
   }
 
-  toggleBasket(complexName: string, complexAC: string, complexOrganism: string) {
-    if (this.isInBasket(complexAC)) {
-      this.removeComplex(complexAC);
+  toggleBasket(complex: Element) {
+    if (this.isInBasket(complex.complexAC)) {
+      this.removeComplex(complex.complexAC);
     } else {
-      this.saveComplex(complexName, complexAC, complexOrganism);
+      this.saveComplex(complex);
     }
   }
 
-  saveComplex(complexName: string, complexAC: string, complexOrganism: string) {
-    this.basketService.saveInBasket(complexName, complexAC, complexOrganism);
+  saveComplex(complex: Element) {
+    this.basketService.saveInBasket(complex);
   }
 
   removeComplex(complexAC: string): void {
-    const key = this.basketService.getKey(complexAC);
-    this.basketService.deleteFromBasket(key);
+    this.basketService.deleteFromBasket(complexAC);
     this.onComplexRemovedFromBasket.emit(complexAC);
   }
 

@@ -22,7 +22,7 @@
           </a>
         </div>
         <div class="basketButton">
-          <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
+          <a class="button" (click)="toggleBasket(complex)">
             <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
           </a>
         </div>
@@ -30,7 +30,7 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length>6"
+    <thead class="tableHeadOverflow" *ngIf="complexes.length > 6"
            [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
     <tr [style.--cols]="complexes.length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
@@ -67,7 +67,7 @@
       <ng-container *ngFor=" let complex of complexes;">
         <th class="iconOrganism" [class.predicted]="complex.predicted">
           <div>
-            <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
+            <a class="button" (click)="toggleBasket(complex)">
               <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
             </a>
           </div>

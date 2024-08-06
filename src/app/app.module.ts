@@ -11,7 +11,6 @@ import {ReactomeService} from './complex/complex-details/complex-function/reacto
 import {EuroPmcService} from './complex/complex-details/complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
 import {OlsService} from './shared/ols/service/ols.service';
 import {BasketService} from './shared/basket/service/basket.service';
-import {Md5} from 'ts-md5/dist/md5';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
@@ -31,6 +30,7 @@ import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 import {environment} from '../environments/environment';
 import {FooterComponent} from './footer/footer.component';
+import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import {FooterComponent} from './footer/footer.component';
     OlsService,
     BasketService,
     LocalStorageService,
-    Md5,
+    SpeciesPipe,
     AnalyticsService,
     SearchService
   ],
