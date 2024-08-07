@@ -6,11 +6,13 @@ html {
   --primary: #007c82;
   --primary-2: oklch(from var(--primary) calc(l - 0.2) c h);
   --background-colour: #eaeaea;
+  --on-primary: #ffffff;
 }
 
 .predicted {
-  --primary: #374a4b;
-  --background-colour: #ccc4e5;
+  --primary: #cce4e6;
+  --background-colour: #f8f8f8;
+  --on-primary: #007c83;
 }
 
 a {
@@ -32,6 +34,11 @@ h1 {
 
 h2 {
   color: var(--primary);
+}
+
+.predicted h2,
+.predicted .label{
+  color: var(--on-primary);
 }
 
 h3 {
@@ -56,17 +63,18 @@ a.icon-link:hover {
 .button,
 .button.primary {
   background-color: var(--primary);
+  color: var(--on-primary);
 }
 
 a.tag:hover {
-  color: #fff;
+  color: var(--on-primary);
 }
 
 .tabs-title > a:hover,
 .button.hover,
 .button.primary:hover,
 .button.primary:focus {
-  background: oklch(from var(--primary) l c h / 90%) ;
+  background: oklch(from var(--primary) l c h / 90%);
 }
 
 .tabs-title > a:focus,
@@ -85,6 +93,7 @@ a.tag:hover {
 
 .badge {
   background: var(--primary);
+  color: var(--on-primary);
 }
 
 /* end */
@@ -98,16 +107,29 @@ a.intact-background,
   background: var(--primary);
 }
 
-a.button {
-  color: #ffffff !important;
+a.button,
+.button {
+  color: var(--on-primary);
   background: var(--primary);
 }
 
 .button:focus,
 .button:hover,
 .button.hover {
+  color: var(--on-primary);
   background-color: var(--primary);
   opacity: 0.9;
+}
+
+.button.hollow {
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.predicted .button.hollow {
+  color: var(--on-primary);
+  border: 1px solid var(--on-primary);
 }
 
 .button.disabled,
@@ -135,12 +157,12 @@ a.button {
 
 .accordion-item.is-active > .accordion-title {
   background-color: var(--primary);
-  color: #ffffff;
+  color: var(--on-primary);
 }
 
 .accordion-item.is-active > .accordion-title:hover, .accordion-title:hover {
   background-color: var(--primary);
-  color: #ffffff;
+  color: var(--on-primary);
   opacity: 0.9;
 }
 
@@ -198,6 +220,7 @@ a:visited {
 .alert-panel h3 {
   color: var(--primary);
 }
+
 /***************** Tool tips **********************/
 /* Tooltip container */
 .tool-tip {
@@ -209,7 +232,7 @@ a:visited {
 .tool-tip .tool-tip-text {
   visibility: hidden;
   width: 120px;
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
   text-align: center;
   padding: 5px 5px;
