@@ -6,7 +6,7 @@
   background-color: var(--primary);
   text-align: center;
   padding-top: 0.5ch;
-  color: white;
+  color: var(--on-primary);
   font-size: small;
   margin-left: auto;
   margin-right: auto;

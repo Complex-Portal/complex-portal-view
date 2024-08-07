@@ -23,6 +23,7 @@
 }
 
 .predictedOrCuratedLabel {
-  background-color: var(--background-colour);
-  padding: 5px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  padding: 4px 8px;;
 }
