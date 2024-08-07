@@ -6,13 +6,11 @@ html {
   --primary: #007c82;
   --primary-2: oklch(from var(--primary) calc(l - 0.2) c h);
   --background-colour: #eaeaea;
-  --background-colour-2: #007c82;
 }
 
 .predicted {
   --primary: #374a4b;
   --background-colour: #ccc4e5;
-  --background-colour-2: #6e657e;
 }
 
 a {

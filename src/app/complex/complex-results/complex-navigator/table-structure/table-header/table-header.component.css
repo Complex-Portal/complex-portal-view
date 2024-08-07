@@ -37,7 +37,7 @@ thead {
 .iconOrganism {
   position: sticky;
   text-align: center;
-  background-color: var(--background-colour-2);
+  background-color: var(--primary);
   color: white;
   border-left: 1px solid white;
   font-size: medium;
@@ -95,7 +95,7 @@ thead {
   width: 100%;
   height: 100%;
   align-content: center;
-  background-color: var(--background-colour-2);
+  background-color: var(--primary);
   padding: 0 0 0 70px;
   border: none;
 }
@@ -170,7 +170,7 @@ a {
 .button {
   padding: 0;
   margin: 0;
-  background-color: var(--background-colour-2);
+  background-color: var(--primary);
 }
 
 .basketButton {
