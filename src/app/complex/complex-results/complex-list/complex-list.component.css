@@ -21,3 +21,8 @@
 .basket-icons {
   margin-left: 5px;
 }
+
+.predictedOrCuratedLabel {
+  background-color: var(--background-colour);
+  padding: 5px;
+}
