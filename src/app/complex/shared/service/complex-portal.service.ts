@@ -30,10 +30,10 @@ export class ComplexPortalService {
     const url = `${baseURL}/details/${ac}`;
     // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexDetails>(url).pipe(
-      // map(data => {
-      //   data.predicted = Math.random() < 0.5;
-      //   return data;
-      // }),
+      map(data => {
+        data.predicted = Math.random() < 0.5;
+        return data;
+      }),
       catchError(this.handleError)
     );
   }
@@ -47,10 +47,10 @@ export class ComplexPortalService {
     const url = `${baseURL}/complex/${complexAc}`;
     // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexDetails>(url).pipe(
-      // map(data => {
-      //   data.predicted = Math.random() < 0.5;
-      //   return data;
-      // }),
+      map(data => {
+        data.predicted = Math.random() < 0.5;
+        return data;
+      }),
       catchError(this.handleError)
     );
   }
@@ -112,11 +112,11 @@ export class ComplexPortalService {
 
     // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexSearchResult>(baseURL + '/search/' + query, {params: params}).pipe(
-      // map(result => {
-          // result.elements.forEach(e => e.predicted = Math.random() < 0.5);
-          // return result;
-        // }
-      // ),
+      map(result => {
+          result.elements.forEach(e => e.predicted = Math.random() < 0.5);
+          return result;
+        }
+      ),
       catchError(this.handleError));
   }
 

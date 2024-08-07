@@ -7,3 +7,11 @@ h2 {
   overflow-wrap: break-word;
 }
 
+.custom-background {
+  background: var(--background-colour);
+}
+
+.right-align {
+  text-align: right;
+}
+
