@@ -157,7 +157,7 @@ a.button,
 
 .accordion-item.is-active > .accordion-title {
   background-color: var(--primary);
-  color: #var(--on-primary);
+  color: var(--on-primary);
 }
 
 .accordion-item.is-active > .accordion-title:hover, .accordion-title:hover {
