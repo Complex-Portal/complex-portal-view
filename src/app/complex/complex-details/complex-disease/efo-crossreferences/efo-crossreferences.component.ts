@@ -27,34 +27,19 @@ export class EfoCrossreferencesComponent implements OnInit {
    */
   private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
-      if (this.crossReferences[i].identifier.split(':')[0] === 'EFO') {
+      const xrefDatabase = this.crossReferences[i].identifier.split(':')[0].toUpperCase();
+      if (xrefDatabase === 'EFO') {
         this.olsService.getEfoName(this.crossReferences[i].identifier).subscribe(
-          response => {
-            this._crossReferences[i].description = response._embedded.terms[0].label;
-          },
-          error => {
-            this.notificationService.onAPIRequestError('OLS');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_efo, error.status ? error.status : 'unknown');
-          });
-      } else if (this.crossReferences[i].identifier.split(':')[0] === 'Orphanet') {
+          response => this._crossReferences[i].description = this.getOlsResponseLabel(response),
+          error => this.logOlsError(error, Category.ols_efo));
+      } else if (xrefDatabase === 'ORPHANET' || xrefDatabase === 'ORDO') {
         this.olsService.getOrphaNetName(this.crossReferences[i].identifier).subscribe(
-          response => {
-            this._crossReferences[i].description = response._embedded.terms[0].label;
-          },
-          error => {
-            this.notificationService.onAPIRequestError('OLS');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_orphanet, error.status ? error.status : 'unknown');
-          });
-      } else if (this.crossReferences[i].identifier.split(':')[0] === 'MONDO' ||
-        this.crossReferences[i].identifier.split(':')[0] === 'HP') {
+          response => this._crossReferences[i].description = this.getOlsResponseLabel(response),
+          error => this.logOlsError(error, Category.ols_orphanet));
+      } else if (xrefDatabase === 'MONDO' || xrefDatabase === 'HP') {
         this.olsService.getOboName(this.crossReferences[i].identifier).subscribe(
-          response => {
-            this._crossReferences[i].description = response._embedded.terms[0].label;
-          },
-          error => {
-            this.notificationService.onAPIRequestError('OLS');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_obo, error.status ? error.status : 'unknown');
-          });
+          response => this._crossReferences[i].description = this.getOlsResponseLabel(response),
+          error => this.logOlsError(error, Category.ols_obo));
       }
     }
   }
@@ -74,5 +59,14 @@ export class EfoCrossreferencesComponent implements OnInit {
 
   set displayedElements(value: number) {
     this._displayedElements = value;
+  }
+
+  private getOlsResponseLabel(response: any): string {
+    return response._embedded.terms[0].label;
+  }
+
+  private logOlsError(error: any, category: Category) {
+    this.notificationService.onAPIRequestError('OLS');
+    this.googleAnalyticsService.fireAPIRequestErrorEvent(category, error.status ? error.status : 'unknown');
   }
 }
