@@ -44,7 +44,6 @@
       </ul>
     </div>
 
-
     <div *ngIf="facets.ptype_f">
       <b>Component Type</b>
       <ul class="no-bullet">
@@ -62,7 +61,38 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f">
+
+    <div *ngIf="facets.predicted_complex_f">
+      <b>Complex Type</b>
+      <ul class="no-bullet">
+        <li *ngFor="let facet of facets.predicted_complex_f">
+          <label>
+            <input type="checkbox" #filter value="{{facet.name}}"
+                   (change)="changePredictedFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, predictedFilter)">
+
+            {{ formatPredictedFacetValue(facet.name) }} ({{ facet.count }})
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="facets.evidence_type_f">
+      <b>Evidence Type</b>
+      <ul class="no-bullet">
+        <li *ngFor="let facet of facets.evidence_type_f">
+          <label>
+            <input type="checkbox" #filter value="{{facet.name}}"
+                   (change)="changeEvidenceTypeFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, evidenceTypeFilter)">
+
+            {{ formatEvidenceTypeFacetValue(facet.name) }} ({{ facet.count }})
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.evidence_type_f">
       <h6>No filters available</h6>
     </div>
   </div>

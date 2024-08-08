@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
-import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
+import {ecoCodeName, interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-filter',
@@ -10,13 +10,18 @@ import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
 })
 export class ComplexFilterComponent implements OnInit {
 
-  private _facets: Facets;
-  private _spicesFilter: string[];
-  private _bioRoleFilter: string[];
-  private _interactorTypeFilter: string[];
+  @Input() facets: Facets;
+  @Input() spicesFilter: string[];
+  @Input() bioRoleFilter: string[];
+  @Input() interactorTypeFilter: string[];
+  @Input() predictedFilter: string[];
+  @Input() evidenceTypeFilter: string[];
+
   @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onPredictedFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onEvidenceTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
@@ -73,6 +78,28 @@ export class ComplexFilterComponent implements OnInit {
     this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter);
   }
 
+  public changePredictedFilter(filter: string, status: boolean) {
+    if (status) {
+      this.predictedFilter.push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
+    } else {
+      this.predictedFilter.splice(this.predictedFilter.indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
+    }
+    this.onPredictedFilterChanged.emit(this.predictedFilter);
+  }
+
+  public changeEvidenceTypeFilter(filter: string, status: boolean) {
+    if (status) {
+      this.evidenceTypeFilter.push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
+    } else {
+      this.evidenceTypeFilter.splice(this.evidenceTypeFilter.indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
+    }
+    this.onEvidenceTypeFilterChanged.emit(this.evidenceTypeFilter);
+  }
+
   /**
    * Emit event to parent component to remove all filters
    */
@@ -85,7 +112,8 @@ export class ComplexFilterComponent implements OnInit {
    * @returns {boolean} true is any filter array contains an filter
    */
   public anyFiltersSelected() {
-    return (this._spicesFilter.length !== 0 || this._bioRoleFilter.length !== 0 || this._interactorTypeFilter.length !== 0);
+    return this.spicesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
+      this.predictedFilter.length !== 0 || this.evidenceTypeFilter.length !== 0;
   }
 
   /**
@@ -98,47 +126,23 @@ export class ComplexFilterComponent implements OnInit {
     return filter.indexOf(element) !== -1;
   }
 
-  get facets(): Facets {
-    return this._facets;
-  }
-
-  @Input()
-  set facets(value: Facets) {
-    this._facets = value;
-  }
-
-  get spicesFilter(): string[] {
-    return this._spicesFilter;
-  }
-
-  @Input()
-  set spicesFilter(value: string[]) {
-    this._spicesFilter = value;
-  }
-
-  get bioRoleFilter(): string[] {
-    return this._bioRoleFilter;
-  }
-
-  @Input()
-  set bioRoleFilter(value: string[]) {
-    this._bioRoleFilter = value;
-  }
-
-  get interactorTypeFilter(): string[] {
-    return this._interactorTypeFilter;
-  }
-
-  @Input()
-  set interactorTypeFilter(value: string[]) {
-    this._interactorTypeFilter = value;
-  }
-
   public facetTypeIcon(facet: string): string {
     return interactorTypeIcon(facet);
   }
 
   public facetOrganismIcon(facet): string {
     return organismIcon(facet);
+  }
+
+  formatPredictedFacetValue(facetName: string): string {
+    if (facetName === 'true') {
+      return 'Predicted Complex';
+    } else {
+      return 'Manually curated complex';
+    }
+  }
+
+  formatEvidenceTypeFacetValue(facetName: string): string {
+    return ecoCodeName(facetName);
   }
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
+import {ecoCodeName, ecoCodeSymbol} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-evidence',
@@ -35,48 +36,8 @@ export class ComplexEvidenceComponent implements OnInit {
 
       if (database === 'evidence ontology') {
         this._ecoXRef = crossRef;
-        switch (this._ecoXRef.identifier) {
-          case ('ECO:0000353'):
-            this._ecoXRef.description = 'physical interaction evidence';
-            this._flaskSymbol = 'E'; // Full
-            break;
-          case ('ECO:0005610'):
-            this._ecoXRef.description = 'inferred by homology';
-            this._flaskSymbol = 'C'; // 40%
-            break;
-          case ('ECO:0005544'):
-            this._ecoXRef.description = 'inferred by orthology';
-            this._flaskSymbol = 'C'; // 40%
-            break;
-          case ('ECO:0005546'):
-            this._ecoXRef.description = 'inferred by paralogy';
-            this._flaskSymbol = 'C'; // 40%
-            break;
-          case ('ECO:0005547'):
-            this._ecoXRef.description = 'inferred by curator';
-            this._flaskSymbol = 'B'; // Empty
-            break;
-          case ('ECO:0005543'):
-            this._ecoXRef.description = 'inferred from mixed species evidence';
-            this._flaskSymbol = 'E'; // Full
-            break;
-          case ('ECO:0005542'):
-            this._ecoXRef.description = 'inferred from single species evidence';
-            this._flaskSymbol = 'E'; // Full
-            break;
-          case ('ECO:0007653'):
-            this._ecoXRef.description = 'machine-learning prediction';
-            this._flaskSymbol = '';
-            // TODO remove this setter once the API support predicted field
-            this.complex.predicted = true;
-            break;
-          case ('ECO:0008006'):
-            this._ecoXRef.description = 'deep-learning prediction';
-            this._flaskSymbol = '';
-            // TODO remove this setter once the API support predicted field
-            this.complex.predicted = true;
-            break;
-        }
+        this._ecoXRef.description = ecoCodeName(this._ecoXRef.identifier);
+        this._flaskSymbol = ecoCodeSymbol(this._ecoXRef.identifier);
       }
       if (database === 'intact') {
         if (this._intactXRefs === undefined) {

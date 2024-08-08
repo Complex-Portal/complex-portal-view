@@ -81,6 +81,63 @@ export function organismIcon(organism: string): string {
   return '';
 }
 
+export function ecoCodeName(ecoCode: string): string {
+  switch (ecoCode) {
+    case ('ECO:0005547'):
+      return 'inferred by curator';
+    case ('ECO:0000353'):
+      return 'physical interaction evidence';
+    case ('ECO:0005610'):
+      return 'inferred by homology';
+    case ('ECO:0005544'):
+      return 'inferred by orthology';
+    case ('ECO:0005546'):
+      return 'inferred by paralogy';
+    case ('ECO:0005543'):
+      return 'inferred from mixed species evidence';
+    case ('ECO:0005542'):
+      return 'inferred from single species evidence';
+    // TODO: review new ECO code labels below
+    //  two new ones for UniPlex import and other existing ones that had no label set yet
+    case ('ECO:0000269'):
+      return 'experimental evidence used in manual assertion';
+    case ('ECO:0000314'):
+      return 'direct assay evidence used in manual assertion';
+    case ('ECO:0007653'):
+      return 'automatically integrated combinatorial prediction';
+    case ('ECO:0008004'):
+      return 'machine learning prediction';
+    case ('ECO:0008006'):
+      return 'deep learning prediction';
+    default:
+      return null;
+  }
+}
+
+export function ecoCodeSymbol(ecoCode: string): string {
+  switch (ecoCode) {
+    case ('ECO:0005547'):
+      return 'B'; // Empty
+    case ('ECO:0000353'):
+    case ('ECO:0005543'):
+    case ('ECO:0005542'):
+      return 'E'; // Full
+    case ('ECO:0005610'):
+    case ('ECO:0005544'):
+    case ('ECO:0005546'):
+      return 'C'; // 40%
+    case ('ECO:0008006'):
+    case ('ECO:0007653'):
+    case ('ECO:0008004'):
+      return ''; // Chip
+    // TODO: what icon should we use for the two ECO codes below?
+    case ('ECO:0000314'):
+    case ('ECO:0000269'):
+    default:
+      return null;
+  }
+}
+
 function formatOrganismName(name: string): string {
   return (name || '?')
     .split(';')[0]

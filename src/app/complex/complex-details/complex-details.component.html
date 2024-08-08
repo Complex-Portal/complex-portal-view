@@ -1,4 +1,4 @@
-<section [class.predicted]="complexDetails?.predicted">
+<section [class.predicted]="complexDetails?.predictedComplex">
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
@@ -50,7 +50,7 @@
       <div class="columns medium-12">
         <cp-complex-footer *ngIf="complexDetails"
                            [institute]="complexDetails.institution"
-                           [predicted]="complexDetails.predicted"></cp-complex-footer>
+                           [predicted]="complexDetails.predictedComplex"></cp-complex-footer>
       </div>
     </div>
     <ng-template #loadingSpinner>

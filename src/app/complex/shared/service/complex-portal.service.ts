@@ -22,16 +22,22 @@ export class ComplexPortalService {
   private static SPECIES_FACET_TAG = 'SPECIES';
   private static COMPONENT_TYPE_FACET_TAG = 'COMP_TYPE';
   private static BIO_ROLE_FACET_TAG = 'BIO_ROLE';
+  private static PREDICTED_FACET_TAG = 'PREDICTED';
+  private static EVIDENCE_TYPE_FACET_TAG = 'EVIDENCE_TYPE';
 
   private static SPECIES_FACET_FIELD = 'species_f';
   private static COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
   private static BIO_ROLE_FACET_FIELD = 'pbiorole_f';
+  private static PREDICTED_FACET_FIELD = 'predicted_complex_f';
+  private static EVIDENCE_TYPE_FACET_FIELD = 'evidence_type_f';
 
   // Facets need to be prefixed with the exclude field set to the tags used on the filters
   private static FACETS = [
     '{!ex= ' + ComplexPortalService.SPECIES_FACET_TAG + '}' + ComplexPortalService.SPECIES_FACET_FIELD,
     '{!ex= ' + ComplexPortalService.COMPONENT_TYPE_FACET_TAG + '}' + ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.BIO_ROLE_FACET_TAG + '}' + ComplexPortalService.BIO_ROLE_FACET_FIELD
+    '{!ex= ' + ComplexPortalService.BIO_ROLE_FACET_TAG + '}' + ComplexPortalService.BIO_ROLE_FACET_FIELD,
+    '{!ex= ' + ComplexPortalService.PREDICTED_FACET_TAG + '}' + ComplexPortalService.PREDICTED_FACET_FIELD,
+    '{!ex= ' + ComplexPortalService.EVIDENCE_TYPE_FACET_TAG + '}' + ComplexPortalService.EVIDENCE_TYPE_FACET_FIELD
   ].join(',');
 
   constructor(private http: HttpClient) {
@@ -44,12 +50,7 @@ export class ComplexPortalService {
    */
   getComplex(ac: string): Observable<ComplexDetails> {
     const url = `${baseURL}/details/${ac}`;
-    // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexDetails>(url).pipe(
-      // map(data => {
-      //   data.predicted = Math.random() < 0.5;
-      //   return data;
-      // }),
       catchError(this.handleError)
     );
   }
@@ -61,12 +62,7 @@ export class ComplexPortalService {
    */
   getComplexAc(complexAc: string): Observable<ComplexDetails> {
     const url = `${baseURL}/complex/${complexAc}`;
-    // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexDetails>(url).pipe(
-      // map(data => {
-      //   data.predicted = Math.random() < 0.5;
-      //   return data;
-      // }),
       catchError(this.handleError)
     );
   }
@@ -91,19 +87,34 @@ export class ComplexPortalService {
     return this.http.get(baseURL + '/export/' + ac).pipe(catchError(this.handleError));
   }
 
+  findComplexNoFilters(query: string,
+                       currentPageIndex = 1,
+                       pageSize = 10,
+                       format = 'json'): Observable<ComplexSearchResult> {
+    return this.findComplex(query, [], [], [], [], [], currentPageIndex, pageSize, format);
+  }
+
   /**
    * Find a complex based on indexed term
    * @param query
    * @param speciesFilter
    * @param bioRoleFilter
    * @param interactorTypeFilter
+   * @param predictedFilter
+   * @param evidenceTypeFilter
    * @param currentPageIndex
    * @param pageSize
    * @param format
    * @returns {Observable<ComplexSearchResult>}
    */
-  findComplex(query: string, speciesFilter: string[] = [], bioRoleFilter: string[] = [],
-              interactorTypeFilter: string[] = [], currentPageIndex = 1, pageSize = 10,
+  findComplex(query: string,
+              speciesFilter: string[] = [],
+              bioRoleFilter: string[] = [],
+              interactorTypeFilter: string[] = [],
+              predictedFilter: string[] = [],
+              evidenceTypeFilter: string[] = [],
+              currentPageIndex = 1,
+              pageSize = 10,
               format = 'json'): Observable<ComplexSearchResult> {
 
     let filters = '';
@@ -117,6 +128,14 @@ export class ComplexPortalService {
       filters += this.buildFilterParam(
         ComplexPortalService.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService.COMPONENT_TYPE_FACET_TAG, interactorTypeFilter);
     }
+    if (predictedFilter.length !== 0) {
+      filters += this.buildFilterParam(
+        ComplexPortalService.PREDICTED_FACET_FIELD, ComplexPortalService.PREDICTED_FACET_TAG, predictedFilter);
+    }
+    if (evidenceTypeFilter.length !== 0) {
+      filters += this.buildFilterParam(
+        ComplexPortalService.EVIDENCE_TYPE_FACET_FIELD, ComplexPortalService.EVIDENCE_TYPE_FACET_TAG, evidenceTypeFilter);
+    }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
     const params = new HttpParams()
@@ -126,13 +145,7 @@ export class ComplexPortalService {
       .set('facets', ComplexPortalService.FACETS)
       .set('filters', filters);
 
-    // TODO Remove random predicted when real predicted complexes available
     return this.http.get<ComplexSearchResult>(baseURL + '/search/' + query, {params: params}).pipe(
-      // map(result => {
-          // result.elements.forEach(e => e.predicted = Math.random() < 0.5);
-          // return result;
-        // }
-      // ),
       catchError(this.handleError));
   }
 

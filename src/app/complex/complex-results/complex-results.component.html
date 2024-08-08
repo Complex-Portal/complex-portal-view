@@ -10,15 +10,19 @@
         </div>
 
         <div class="columns medium-12 large-2 no-padding">
-          <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
+          <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter && predictedFilter && evidenceTypeFilter"
                              [spicesFilter]="spicesFilter"
                              [bioRoleFilter]="bioRoleFilter"
                              [interactorTypeFilter]="interactorTypeFilter"
+                             [predictedFilter]="predictedFilter"
+                             [evidenceTypeFilter]="evidenceTypeFilter"
                              [facets]="complexSearch.facets"
                              (onResetAllFilters)="onResetAllFilters()"
                              (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
                              (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                             (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
+                             (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)"
+                             (onPredictedFilterChanged)="onPredictedFilterChanged($event)"
+                             (onEvidenceTypeFilterChanged)="onEvidenceTypeFilterChanged($event)">
           </cp-complex-filter>
         </div>
         <div class="columns medium-12 large-10">

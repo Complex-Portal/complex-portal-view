@@ -7,7 +7,7 @@
       <th class="interactorsHeader horizontal">
         Components
       </th>
-      <th class="horizontal" *ngFor="let complex of complexes" [class.predicted]="complex.predicted">
+      <th class="horizontal" *ngFor="let complex of complexes" [class.predicted]="complex.predictedComplex">
         <div class="horizontal-label">
           <a [routerLink]="['/complex', complex.complexAC]"
              target="_blank">
@@ -39,7 +39,7 @@
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
       </th>
       <th class="rotate" *ngFor="let complex of complexes"
-          [class.predicted]="complex.predicted"
+          [class.predicted]="complex.predictedComplex"
           [style.--cols]="complexes.length">
         <a [routerLink]="['/complex', complex.complexAC]"
            [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
@@ -65,7 +65,7 @@
         Components
       </th>
       <ng-container *ngFor=" let complex of complexes;">
-        <th class="iconOrganism" [class.predicted]="complex.predicted">
+        <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
           <div>
             <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
               <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>

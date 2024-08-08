@@ -98,7 +98,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   private requestComplexesForNavigator() {
     const pageSize = Object.values(this._complexBasket).length;
-    this.complexPortalService.findComplex(this.createQuery(this._complexBasket), [], [], [], 1, pageSize)
+    this.complexPortalService.findComplexNoFilters(this.createQuery(this._complexBasket), 1, pageSize)
       .subscribe(complexSearch => {
         this.complexSearchBasket = complexSearch;
         if (this.complexSearchBasket.totalNumberOfResults !== 0) {

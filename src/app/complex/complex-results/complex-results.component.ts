@@ -18,12 +18,14 @@ import {
   styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  private _query: string;
-  private _complexSearch: ComplexSearchResult;
-  private _spicesFilter: string[];
-  private _bioRoleFilter: string[];
-  private _interactorTypeFilter: string[];
-  private _allInteractorsInComplexSearch: Interactor[] = [];
+  public query: string;
+  public complexSearch: ComplexSearchResult;
+  public spicesFilter: string[];
+  public bioRoleFilter: string[];
+  public interactorTypeFilter: string[];
+  public predictedFilter: string[];
+  public evidenceTypeFilter: string[];
+  public allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
   toast;
 
@@ -41,7 +43,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
-    this._allInteractorsInComplexSearch = [];
+    this.allInteractorsInComplexSearch = [];
     this.route.fragment.subscribe(fragment => {
       if (fragment === COMPLEX_NAVIGATOR_VIEW) {
         this.DisplayType = COMPLEX_NAVIGATOR_VIEW;
@@ -51,10 +53,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.route
         .queryParams
         .subscribe(queryParams => {
-          this._query = queryParams['query'];
-          this._spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
-          this._bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
-          this._interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
+          this.query = queryParams['query'];
+          this.spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
+          this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
+          this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
+          this.predictedFilter = queryParams['predicted'] ? queryParams['predicted'].split('+') : [];
+          this.evidenceTypeFilter = queryParams['evidenceType'] ? queryParams['evidenceType'].split('+') : [];
           this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
           // TODO This is out for now, but CP-84 (JIRA )should fix that!!
           // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -70,15 +74,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   private requestComplexResults() {
     this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
-      this.interactorTypeFilter, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
+      this.interactorTypeFilter, this.predictedFilter, this.evidenceTypeFilter,
+      this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
-      this._allInteractorsInComplexSearch = [];
+      this.allInteractorsInComplexSearch = [];
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
           for (const component of complexSearch.elements[i].interactors) {
-            if (!this._allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
-              this._allInteractorsInComplexSearch.push(component);
+            if (!this.allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
+              this.allInteractorsInComplexSearch.push(component);
             }
           }
         }
@@ -92,16 +97,22 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
    */
   private reloadPage(): void {
     const queryParams: NavigationExtras = {};
-    queryParams['query'] = this._query;
+    queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
-    if (this._spicesFilter !== undefined && this._spicesFilter.length !== 0) {
+    if (this.spicesFilter !== undefined && this.spicesFilter.length !== 0) {
       queryParams['species'] = this.prepareFiltersForParams(this.spicesFilter);
     }
-    if (this._bioRoleFilter !== undefined && this._bioRoleFilter.length !== 0) {
-      queryParams['bioRole'] = this.prepareFiltersForParams(this._bioRoleFilter);
+    if (this.bioRoleFilter !== undefined && this.bioRoleFilter.length !== 0) {
+      queryParams['bioRole'] = this.prepareFiltersForParams(this.bioRoleFilter);
     }
-    if (this._interactorTypeFilter !== undefined && this._interactorTypeFilter.length !== 0) {
-      queryParams['interactorType'] = this.prepareFiltersForParams(this._interactorTypeFilter);
+    if (this.interactorTypeFilter !== undefined && this.interactorTypeFilter.length !== 0) {
+      queryParams['interactorType'] = this.prepareFiltersForParams(this.interactorTypeFilter);
+    }
+    if (this.predictedFilter !== undefined && this.predictedFilter.length !== 0) {
+      queryParams['predicted'] = this.prepareFiltersForParams(this.predictedFilter);
+    }
+    if (this.evidenceTypeFilter !== undefined && this.evidenceTypeFilter.length !== 0) {
+      queryParams['evidenceType'] = this.prepareFiltersForParams(this.evidenceTypeFilter);
     }
     this.router.navigate([], {
       queryParams,
@@ -120,7 +131,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   private getFilterCount(): number {
-    return this._spicesFilter.length + this._interactorTypeFilter.length + this._bioRoleFilter.length;
+    return this.spicesFilter.length + this.interactorTypeFilter.length + this.bioRoleFilter.length +
+      this.predictedFilter.length + this.evidenceTypeFilter.length;
   }
 
   /**
@@ -136,6 +148,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.spicesFilter = [];
     this.bioRoleFilter = [];
     this.interactorTypeFilter = [];
+    this.predictedFilter = [];
+    this.evidenceTypeFilter = [];
     this.currentPageIndex = 1;
     this.reloadPage();
   }
@@ -158,12 +172,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  get query(): string {
-    return this._query;
+  public onPredictedFilterChanged(filter: string[]): void {
+    this.predictedFilter = filter;
+    this.currentPageIndex = 1;
+    this.reloadPage();
   }
 
-  set query(value) {
-    this._query = value;
+  public onEvidenceTypeFilterChanged(filter: string[]): void {
+    this.evidenceTypeFilter = filter;
+    this.currentPageIndex = 1;
+    this.reloadPage();
   }
 
   get currentPageIndex(): number {
@@ -180,15 +198,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     } else {
       this._listCurrentPage = value;
     }
-  }
-
-  get complexSearch(): ComplexSearchResult {
-    return this._complexSearch;
-  }
-
-  set complexSearch(value: ComplexSearchResult) {
-    this._complexSearch = value;
-    this.processSearchResults();
   }
 
   get lastPageIndex(): number {
@@ -213,34 +222,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     } else {
       return this._listPageSize;
     }
-  }
-
-  get spicesFilter(): string[] {
-    return this._spicesFilter;
-  }
-
-  set spicesFilter(value: string[]) {
-    this._spicesFilter = value;
-  }
-
-  get bioRoleFilter(): string[] {
-    return this._bioRoleFilter;
-  }
-
-  set bioRoleFilter(value: string[]) {
-    this._bioRoleFilter = value;
-  }
-
-  get interactorTypeFilter(): string[] {
-    return this._interactorTypeFilter;
-  }
-
-  set interactorTypeFilter(value: string[]) {
-    this._interactorTypeFilter = value;
-  }
-
-  public get allInteractorsInComplexSearch(): Interactor[] {
-    return this._allInteractorsInComplexSearch;
   }
 
   onDisplayTypeChange(displayType: string) {
@@ -275,8 +256,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     // No filters and only one result, then we redirect to complex details page
     // This allows users to enable filters to see even one result without redirecting them out from the results page,
     // but we ensure redirection of a new search has only one result.
-    if (this.getFilterCount() === 0 && this._complexSearch.totalNumberOfResults === 1) {
-      const complexId = this._complexSearch.elements[0].complexAC;
+    if (this.getFilterCount() === 0 && this.complexSearch.totalNumberOfResults === 1) {
+      const complexId = this.complexSearch.elements[0].complexAC;
       if (!!complexId) {
         // For some reason this is needed so the navigate call works
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -287,7 +268,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     } else if (!this.DisplayType) {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
-      if (this._complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
+      if (this.complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
         this.setComplexNavigatorView();
       } else {
         this.setListView();
