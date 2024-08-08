@@ -22,5 +22,6 @@ export enum Category {
   details,
   basket,
   search,
-  complexNavigator
+  complexNavigator,
+  ols_obo,
 }

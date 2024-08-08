@@ -45,6 +45,16 @@ export class EfoCrossreferencesComponent implements OnInit {
             this.notificationService.onAPIRequestError('OLS');
             this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_orphanet, error.status ? error.status : 'unknown');
           });
+      } else if (this.crossReferences[i].identifier.split(':')[0] === 'MONDO' ||
+        this.crossReferences[i].identifier.split(':')[0] === 'HP') {
+        this.olsService.getOboName(this.crossReferences[i].identifier).subscribe(
+          response => {
+            this._crossReferences[i].description = response._embedded.terms[0].label;
+          },
+          error => {
+            this.notificationService.onAPIRequestError('OLS');
+            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.ols_obo, error.status ? error.status : 'unknown');
+          });
       }
     }
   }
