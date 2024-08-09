@@ -98,7 +98,7 @@ let BasketComponent = class BasketComponent {
         return Object.keys(object);
     }
     createQuery(object) {
-        return 'complex_id: ' + Object.values(object).map((v) => v.id).join(',');
+        return 'complex_id:(' + Object.values(object).map((v) => '"' + v.id + '"').join(',') + ')';
     }
     requestComplexesForNavigator() {
         const pageSize = Object.values(this._complexBasket).length;

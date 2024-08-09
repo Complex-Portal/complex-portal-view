@@ -143,9 +143,9 @@
         }, {
           key: "createQuery",
           value: function createQuery(object) {
-            return 'complex_id: ' + Object.values(object).map(function (v) {
-              return v.id;
-            }).join(',');
+            return 'complex_id:(' + Object.values(object).map(function (v) {
+              return '"' + v.id + '"';
+            }).join(',') + ')';
           }
         }, {
           key: "requestComplexesForNavigator",
