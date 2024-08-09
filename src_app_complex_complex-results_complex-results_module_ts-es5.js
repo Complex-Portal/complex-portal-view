@@ -181,7 +181,8 @@
         }, {
           key: "formatEvidenceTypeFacetValue",
           value: function formatEvidenceTypeFacetValue(facetName) {
-            return (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.ecoCodeName)(facetName);
+            var evidenceTypeName = (0, _complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.ecoCodeName)(facetName);
+            return evidenceTypeName || facetName;
           }
         }]);
         return ComplexFilterComponent;
