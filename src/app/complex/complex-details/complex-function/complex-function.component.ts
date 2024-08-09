@@ -10,7 +10,7 @@ import {IntEnzCrossReference} from '../../shared/model/complex-details/intenz-cr
 })
 export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _crossReferences: CrossReference[];
-  private _functionDescription: string;
+  private _functionDescription: string[];
   private _goXRefs: CrossReference[];
   private _intenzXRefs: IntEnzCrossReference[];
   private _reactomeXRefs: CrossReference[];
@@ -79,12 +79,12 @@ export class ComplexFunctionComponent implements OnInit, AfterViewInit {
     this._crossReferences = value;
   }
 
-  get functionDescription(): string {
+  get functionDescription(): string[] {
     return this._functionDescription;
   }
 
   @Input()
-  set functionDescription(value: string) {
+  set functionDescription(value: string[]) {
     this._functionDescription = value;
   }
 

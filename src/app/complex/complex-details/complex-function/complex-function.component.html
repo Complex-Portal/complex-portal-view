@@ -18,13 +18,15 @@
     <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs && goXRefs.length !== 0">
       <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>
     </div>
-    <div id="agonists" class="columns medium-6 no-pad-left" *ngIf="agonists && agonists.length !== 0">
-      <cp-agonists [agonists]="agonists"></cp-agonists>
+    <div class="columns medium-12 no-pad-left">
+      <div id="agonists" class="columns medium-6 no-pad-left no-pad-right" *ngIf="agonists && agonists.length !== 0">
+        <cp-agonists [agonists]="agonists"></cp-agonists>
+      </div>
+      <div id="antagonists" class="columns medium-6 no-pad-left no-pad-right" *ngIf="antagonists && antagonists.length !== 0">
+        <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
+      </div>
     </div>
-    <div id="antagonists" class="columns medium-6 no-pad-left" *ngIf="antagonists && antagonists.length !== 0">
-      <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
-    </div>
-    <div id="reactomeXRefs" class="columns medium-12" *ngIf="reactomeXRefs && reactomeXRefs.length !== 0">
+    <div id="reactomeXRefs" class="columns medium-12 no-pad-left" *ngIf="reactomeXRefs && reactomeXRefs.length !== 0">
       <cp-reactome-cross-references [crossReferences]="reactomeXRefs"></cp-reactome-cross-references>
     </div>
   </div>

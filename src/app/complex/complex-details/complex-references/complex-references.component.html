@@ -9,10 +9,10 @@
       <cp-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></cp-euro-pmc-crossreferences>
     </div>
     <div class="columns medium-12 no-pad-left">
-      <div id="synonyms" class="columns medium-6 no-pad-left" *ngIf="synonyms">
+      <div id="synonyms" class="columns medium-6 no-pad-left no-pad-right" *ngIf="synonyms">
         <cp-synonyms [synonyms]="synonyms"></cp-synonyms>
       </div>
-      <div id="systematicName" class="columns medium-6 no-pad-left" *ngIf="systematicName">
+      <div id="systematicName" class="columns medium-6 no-pad-left no-pad-right" *ngIf="systematicName">
         <cp-systematic-name [systematicName]="systematicName"></cp-systematic-name>
       </div>
     </div>

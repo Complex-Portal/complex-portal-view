@@ -37,7 +37,7 @@
       </tr>
       </tbody>
     </table>
-    <div class="columns medium-12 no-pad-left" *ngIf="selectedComplex && selectedPathway">
+    <div class="columns medium-12 no-pad-left no-pad-right" *ngIf="selectedComplex && selectedPathway">
       <cp-reactome-diagram [reactomeComplexe]="reactomeComplexes" [reactomePathways]="reactomePathways"
                            [selectedComplex]="selectedComplex"
                            [selectedPathway]="selectedPathway"></cp-reactome-diagram>
