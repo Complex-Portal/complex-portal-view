@@ -5,11 +5,12 @@
 
 .container {
   display: inline-flex;
+  width: -webkit-fill-available;
 }
 
 .complexesAndDescription {
   padding: 10px;
-  width: 95%
+  width: 95%;
 }
 
 .basketButtonContainer {
@@ -25,5 +26,5 @@
 .predictedOrCuratedLabel {
   background-color: var(--primary);
   color: var(--on-primary);
-  padding: 4px 8px;;
+  padding: 4px 8px;
 }
