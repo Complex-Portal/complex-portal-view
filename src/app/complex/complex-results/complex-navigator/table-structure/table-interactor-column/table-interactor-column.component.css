@@ -50,11 +50,11 @@ i:not(.small) {
 }
 
 tr:nth-child(even) {
-  background-color: #dfeced;
+  background-color: #f7f7f7;
 }
 
 tr:nth-child(odd) {
-  background-color: #f7f9fa;
+  background-color: #fff;
 }
 
 a, a:visited {
