@@ -8,7 +8,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 })
 export class EmdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];
-  private _displayedElements = 5;
+  displayedElements = 5;
 
   constructor() {
   }
@@ -23,9 +23,5 @@ export class EmdbCrossreferencesComponent implements OnInit {
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
-  }
-
-  get displayedElements(): number {
-    return this._displayedElements;
   }
 }
