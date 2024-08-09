@@ -28,10 +28,27 @@ label {
   border: 1px solid black;
 }
 
-
 input:checked ~ .count {
   background: var(--primary);
   color: var(--on-primary);
   font-weight: bold;
   border: 1px solid var(--primary);
+}
+
+.stars {
+  /*display: flex;*/
+  gap: 4px;
+}
+
+.stars .icon {
+  font-size: 12pt;
+}
+.empty {
+  color: lightgray;
+}
+
+.full {
+  color: var(--primary);
+  -webkit-text-stroke: 1px var(--on-primary);
+  text-shadow: 0 0 4px var(--primary);
 }
