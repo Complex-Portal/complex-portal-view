@@ -1,24 +1,30 @@
 <ul class="no-bullet">
-  <li *ngFor="let complex of complexSearch.elements">
+  <li *ngFor="let complex of complexSearch.elements" [class.predicted]="complex.predictedComplex">
     <div class="container">
       <div class="basketButtonContainer"
-           [matTooltip]="isInBasket(complex.complexAC) ? 'Remove from basket' : 'Add to basket'">
-        <a class="button" (click)="toggleBasket(complex.complexName,complex.complexAC,complex.organismName)">
-          <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
+           [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
+        <a class="button" (click)="toggleBasket(complex)">
+          <i class="icon icon-common" [attr.data-icon]="isInBasket(complex) ? '':''"></i>
         </a>
       </div>
       <div class="complexesAndDescription">
         <h3>
           <a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
         <div class="description" style="background-color: white">
-          <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}<br>
-          <b *ngIf="complex.description.length > 0">Description:</b>
-          <div *ngIf="complex.description.length > 0 && complex.description.length <= 250">
-            {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
-          </div>
-          <div *ngIf="complex.description.length > 250">
-            {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
-          </div>
+          <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
+          <ng-container *ngIf="complex.predictedComplex">
+            · <b>Predicted complex</b>
+          </ng-container>
+          <br>
+          <ng-container *ngIf="complex.description">
+            <b>Description:</b>
+            <div *ngIf="complex.description.length <= 250">
+              {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+            </div>
+            <div *ngIf="complex.description.length > 250">
+              {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

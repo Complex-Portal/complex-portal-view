@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {BasketService} from '../../../shared/basket/service/basket.service';
+import {Element} from '../../shared/model/complex-results/element.model';
 
 @Component({
   selector: 'cp-complex-list',
@@ -16,24 +17,24 @@ export class ComplexListComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveComplex(complexName: string, complexAC: string, complexOrganism: string) {
-    this.basketService.saveInBasket(complexName, complexAC, complexOrganism);
+
+  saveComplex(complex: Element) {
+    this.basketService.saveInBasket(complex);
   }
 
-  removeComplexFromBasket(complexAC: string) {
-    const key = this.basketService.getKey(complexAC);
-    this.basketService.deleteFromBasket(key);
+  removeComplexFromBasket(complex: Element) {
+    this.basketService.deleteFromBasket(complex.complexAC);
   }
 
-  isInBasket(complexAC: string): boolean {
-    return this.basketService.isInBasket(complexAC);
+  isInBasket(complex: Element): boolean {
+    return this.basketService.isInBasket(complex.complexAC);
   }
 
-  toggleBasket(complexName: string, complexAC: string, complexOrganism: string) {
-    if (this.isInBasket(complexAC)) {
-      this.removeComplexFromBasket(complexAC);
+  toggleBasket(complex: Element) {
+    if (this.isInBasket(complex)) {
+      this.removeComplexFromBasket(complex);
     } else {
-      this.saveComplex(complexName, complexAC, complexOrganism);
+      this.saveComplex(complex);
     }
   }
 }

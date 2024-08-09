@@ -35,6 +35,16 @@ export class OlsService {
       catchError(this.handleError));
   }
 
+  /**
+   * Get a name of mondo xref
+   * @param id
+   * @returns {Observable<R>}
+   */
+  getOboName(id: string) {
+    return this.http.get(baseURL + '/efo/terms?iri=http://purl.obolibrary.org/obo/' + id.replace(':', '_')).pipe(
+      catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse | any): Observable<any> {
     if (err.error instanceof Error) {
       return throwError(err);

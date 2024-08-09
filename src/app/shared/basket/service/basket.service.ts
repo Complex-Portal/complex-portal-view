@@ -1,9 +1,11 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
-import {Md5} from 'ts-md5/dist/md5';
+import {Element} from '../../../complex/shared/model/complex-results/element.model';
 import {NotificationService} from '../../notification/service/notification.service';
 import {AnalyticsService} from '../../google-analytics/service/analytics.service';
 import {LocalStorageService} from '../../local-storage/service/local-storage.service';
+import {ComplexDetails} from '../../../complex/shared/model/complex-details/complex-details.model';
+import {SpeciesPipe} from '../../../complex/shared/pipe/species.pipe';
 
 const COMPLEX_STORE = 'cp_complex_store';
 
@@ -12,7 +14,11 @@ export class BasketService {
   private _complexBasket: { [name: string]: BasketItem } = {};
   public onBasketCountChanged$: EventEmitter<number>;
 
-  constructor(private notificationService: NotificationService, private googleAnalyticsService: AnalyticsService) {
+  constructor(
+    private notificationService: NotificationService,
+    private googleAnalyticsService: AnalyticsService,
+    private species: SpeciesPipe
+  ) {
     this.onBasketCountChanged$ = new EventEmitter<number>();
     this.initialiseBasket();
   }
@@ -27,29 +33,45 @@ export class BasketService {
       for (let i = 0; i < keys.length; i++) {
         const complex = complexStore[keys[i]];
         if (complex) {
-          this._complexBasket[keys[i]] = new BasketItem(complex._name, complex._id, complex._date, complex._organism);
+          this._complexBasket[keys[i]] = complex;
         }
       }
     }
   }
 
-  public saveInBasket(name: string, id: string, organism: string): void {
-    const newBasketItem = new BasketItem(name, id, new Date(), organism);
+  private isElement(complex: Element | ComplexDetails): complex is Element {
+    return (complex as Element).complexAC !== undefined;
+  }
 
-    if (!this.isInBasket(id)) {
-      this._complexBasket[Md5.hashStr(id).toString()] = newBasketItem;
+  public saveInBasket(complex: Element | ComplexDetails): void {
+    const item: BasketItem = this.isElement(complex) ? {
+      id: complex.complexAC,
+      name: complex.complexName,
+      organism: complex.organismName,
+      predicted: complex.predicted,
+      date: new Date()
+    } : {
+      id: complex.complexAc,
+      name: complex.name,
+      organism: complex.species,
+      predicted: complex.predicted,
+      date: new Date(),
+    };
+
+    item.organism = this.species.transform(item.organism, false);
+
+    if (!this.isInBasket(item.id)) {
+      this._complexBasket[item.id] = item;
       LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
       this.onBasketCountChanged$.emit(this.getBasketCount());
 
-      this.googleAnalyticsService.fireAddToBasketEvent(id);
-      this.notificationService.onAddedComplexToBasket(id);
+      this.googleAnalyticsService.fireAddToBasketEvent(item.id);
+      this.notificationService.onAddedComplexToBasket(item.id);
     }
   }
 
-  public deleteFromBasket(key: string): void {
-    const id = this._complexBasket[key].id;
-
-    delete this._complexBasket[key];
+  public deleteFromBasket(id: string): void {
+    delete this._complexBasket[id];
     LocalStorageService.saveInLocalStorage(COMPLEX_STORE, this._complexBasket);
     this.onBasketCountChanged$.emit(this.getBasketCount());
 
@@ -58,8 +80,7 @@ export class BasketService {
   }
 
   public isInBasket(id: string): boolean {
-    const key: string = Md5.hashStr(id).toString();
-    return !!this._complexBasket[key];
+    return !!this._complexBasket[id];
   }
 
   get complexBasket() {
@@ -68,9 +89,5 @@ export class BasketService {
 
   public getBasketCount(): number {
     return Object.keys(this._complexBasket).length;
-  }
-
-  getKey(id: string): string {
-    return Md5.hashStr(id).toString();
   }
 }
