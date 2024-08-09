@@ -136,9 +136,9 @@ export class ComplexFilterComponent implements OnInit {
 
   formatPredictedFacetValue(facetName: string): string {
     if (facetName === 'true') {
-      return 'Predicted Complex';
+      return 'Predicted complex';
     } else {
-      return 'Manually curated complex';
+      return 'Curated complex';
     }
   }
 

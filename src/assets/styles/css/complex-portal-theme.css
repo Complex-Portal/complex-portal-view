@@ -37,7 +37,7 @@ h2 {
 }
 
 .predicted h2,
-.predicted .label{
+.predicted .label {
   color: var(--on-primary);
 }
 
@@ -64,6 +64,13 @@ a.icon-link:hover {
 .button.primary {
   background-color: var(--primary);
   color: var(--on-primary);
+}
+
+.tag {
+  background-color: var(--primary) !important;
+  color: var(--on-primary) !important;
+  padding: 4px 8px;
+  font-weight: bold;
 }
 
 a.tag:hover {

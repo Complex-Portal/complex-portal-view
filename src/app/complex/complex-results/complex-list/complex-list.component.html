@@ -12,7 +12,7 @@
           <a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
         <div class="description" style="background-color: white">
           <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
-          · <b class="predictedOrCuratedLabel">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
+          · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
           <br>
           <ng-container *ngIf="complex.description">
             <b>Description:</b>
