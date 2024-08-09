@@ -13,8 +13,10 @@
     </ng-container>
   </div>
 
-  <div>
-    <h3 *ngIf="flaskSymbol" class="icon icon-common float-left no-margin" [attr.data-icon]="flaskSymbol"></h3>
+
+
+  <div class="stars">
+    <i *ngFor="let star of stars" class="icon icon-common icon-star" [ngClass]="star"></i>
   </div>
 </div>
 

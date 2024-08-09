@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
-import {ecoCodeName, ecoCodeSymbol} from '../../complex-portal-utils';
+import {ecoCodeName, ecoCodeStar} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-evidence',
@@ -14,7 +14,7 @@ export class ComplexEvidenceComponent implements OnInit {
   private _intactXRefs: CrossReference[];
   @Input()
   complex: ComplexDetails;
-  private _flaskSymbol: string;
+  stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
 
 
   constructor() {
@@ -37,7 +37,7 @@ export class ComplexEvidenceComponent implements OnInit {
       if (database === 'evidence ontology') {
         this._ecoXRef = crossRef;
         this._ecoXRef.description = ecoCodeName(this._ecoXRef.identifier);
-        this._flaskSymbol = ecoCodeSymbol(this._ecoXRef.identifier);
+        this.star(ecoCodeStar(this._ecoXRef.identifier) || 3);
       }
       if (database === 'intact') {
         if (this._intactXRefs === undefined) {
@@ -45,6 +45,14 @@ export class ComplexEvidenceComponent implements OnInit {
         }
         this._intactXRefs.push(crossRef);
       }
+    }
+  }
+
+
+  star(amount: number) {
+    this.stars.fill('full');
+    if (amount < this.stars.length) {
+      this.stars.fill('empty', amount);
     }
   }
 
@@ -65,7 +73,4 @@ export class ComplexEvidenceComponent implements OnInit {
     this._intactXRefs = value;
   }
 
-  get flaskSymbol(): string {
-    return this._flaskSymbol;
-  }
 }

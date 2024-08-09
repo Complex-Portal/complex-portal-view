@@ -84,19 +84,19 @@ export function organismIcon(organism: string): string {
 export function ecoCodeName(ecoCode: string): string {
   switch (ecoCode) {
     case ('ECO:0005547'):
-      return 'inferred by curator';
+      return 'curator inference';
     case ('ECO:0000353'):
       return 'physical interaction evidence';
     case ('ECO:0005610'):
-      return 'inferred by homology';
+      return 'homology inference';
     case ('ECO:0005544'):
-      return 'inferred by orthology';
+      return 'orthology inference';
     case ('ECO:0005546'):
-      return 'inferred by paralogy';
+      return 'paralogy inference';
     case ('ECO:0005543'):
-      return 'inferred from mixed species evidence';
+      return 'mixed species evidence inference';
     case ('ECO:0005542'):
-      return 'inferred from single species evidence';
+      return 'single species evidence inference';
     // TODO: review ECO codes below, which we did not have a label for
     case ('ECO:0007751'):
       return 'inferential evidence used in manual assertion';
@@ -116,25 +116,25 @@ export function ecoCodeName(ecoCode: string): string {
   }
 }
 
-export function ecoCodeSymbol(ecoCode: string): string {
+export function ecoCodeStar(ecoCode: string): number {
   switch (ecoCode) {
-    case ('ECO:0005547'):
-      return 'B'; // Empty
-    case ('ECO:0000353'):
-    case ('ECO:0005543'):
-    case ('ECO:0005542'):
-      return 'E'; // Full
-    case ('ECO:0005610'):
-    case ('ECO:0005544'):
-    case ('ECO:0005546'):
-      return 'C'; // 40%
-    case ('ECO:0008006'):
-    case ('ECO:0007653'):
-    case ('ECO:0008004'):
-      return ''; // Chip
-    // TODO: what icon should we use for the two ECO codes below?
-    case ('ECO:0000314'):
-    case ('ECO:0000269'):
+    case ('ECO:0000353'): // physical interaction evidence
+    case ('ECO:0000314'): // direct assay evidence used in manual assertion
+    case ('ECO:0000269'): // experimental evidence used in manual assertion
+      return 5;
+    case ('ECO:0005610'): // inferred by homology
+    case ('ECO:0005544'): // inferred by orthology
+    case ('ECO:0005546'): // inferred by paralogy
+    case ('ECO:0005542'): // inferred from single species evidence
+    case ('ECO:0005543'): // inferred from mixed species evidence
+      return 4;
+    case ('ECO:0005547'): // inferred by curator
+      return 3;
+    case ('ECO:0007653'): // automatically integrated combinatorial prediction
+      return 2;
+    case ('ECO:0008006'): // deep learning prediction
+    case ('ECO:0008004'): // machine learning prediction
+      return 1;
     default:
       return null;
   }
