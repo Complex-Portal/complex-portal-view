@@ -27,7 +27,7 @@
           <label [matTooltip]="facet.name">
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changeSpeciesFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, spicesFilter)">
+                   [checked]="isSelected(facet.name, speciesFilter)">
 
             <span>
               <i *ngIf="facetOrganismIcon(facet.name).startsWith('icon'); else img"

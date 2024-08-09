@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
@@ -20,13 +20,17 @@ import {
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
   complexSearch: ComplexSearchResult;
-  spicesFilter: string[];
-  bioRoleFilter: string[];
-  interactorTypeFilter: string[];
-  predictedFilter: string[];
-  evidenceTypeFilter: string[];
+
   allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
+
+  filters = {
+    species: [],
+    bioRole: [],
+    interactorType: [],
+    predicted: [],
+    evidenceType: [],
+  };
 
   private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
@@ -54,11 +58,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
         .queryParams
         .subscribe(queryParams => {
           this.query = queryParams['query'];
-          this.spicesFilter = queryParams['species'] ? queryParams['species'].split('+') : [];
-          this.bioRoleFilter = queryParams['bioRole'] ? queryParams['bioRole'].split('+') : [];
-          this.interactorTypeFilter = queryParams['interactorType'] ? queryParams['interactorType'].split('+') : [];
-          this.predictedFilter = queryParams['predicted'] ? queryParams['predicted'].split('+') : [];
-          this.evidenceTypeFilter = queryParams['evidenceType'] ? queryParams['evidenceType'].split('+') : [];
+          Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
           this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
           // TODO This is out for now, but CP-84 (JIRA )should fix that!!
           // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -73,8 +73,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
 
   private requestComplexResults() {
-    this.complexPortalService.findComplex(this.query, this.spicesFilter, this.bioRoleFilter,
-      this.interactorTypeFilter, this.predictedFilter, this.evidenceTypeFilter,
+    this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole,
+      this.filters.interactorType, this.filters.predicted, this.filters.evidenceType,
       this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       this.processSearchResults();
@@ -100,21 +100,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
-    if (this.spicesFilter !== undefined && this.spicesFilter.length !== 0) {
-      queryParams['species'] = this.prepareFiltersForParams(this.spicesFilter);
-    }
-    if (this.bioRoleFilter !== undefined && this.bioRoleFilter.length !== 0) {
-      queryParams['bioRole'] = this.prepareFiltersForParams(this.bioRoleFilter);
-    }
-    if (this.interactorTypeFilter !== undefined && this.interactorTypeFilter.length !== 0) {
-      queryParams['interactorType'] = this.prepareFiltersForParams(this.interactorTypeFilter);
-    }
-    if (this.predictedFilter !== undefined && this.predictedFilter.length !== 0) {
-      queryParams['predicted'] = this.prepareFiltersForParams(this.predictedFilter);
-    }
-    if (this.evidenceTypeFilter !== undefined && this.evidenceTypeFilter.length !== 0) {
-      queryParams['evidenceType'] = this.prepareFiltersForParams(this.evidenceTypeFilter);
-    }
+
+    Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
+
     this.router.navigate([], {
       queryParams,
       fragment: this.DisplayType
@@ -127,13 +115,19 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private prepareFiltersForParams(filter: string[]): string {
-    return filter.toString().replace(/,/g, '+');
+  private encodeURL(filter: string[], filterName: string, params: Params): string {
+    if (filter !== undefined && filter.length !== 0) {
+      params[filterName] = filter.join().replace(/ /g, '_');
+    }
+    return params[filterName];
+  }
+
+  private decodeURL(filterName: string, params: Params): string[] {
+    return params[filterName] ? params[filterName].replace(/_/g, ' ').split(',') : [];
   }
 
   private getFilterCount(): number {
-    return this.spicesFilter.length + this.interactorTypeFilter.length + this.bioRoleFilter.length +
-      this.predictedFilter.length + this.evidenceTypeFilter.length;
+    return Object.values(this.filters).reduce((total, f) => total + f.length, 0);
   }
 
   /**
@@ -146,41 +140,37 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   public onResetAllFilters(): void {
-    this.spicesFilter = [];
-    this.bioRoleFilter = [];
-    this.interactorTypeFilter = [];
-    this.predictedFilter = [];
-    this.evidenceTypeFilter = [];
+    Object.keys(this.filters).forEach(f => this.filters[f] = []);
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
-  public onSpicesFilterChanged(filter: string[]): void {
-    this.spicesFilter = filter;
+  public onSpeciesFilterChanged(filter: string[]): void {
+    this.filters.species = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
   public onBiologicalRoleFilterChanged(filter: string[]): void {
-    this.bioRoleFilter = filter;
+    this.filters.bioRole = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
   public onInteractorTypeFilterChanged(filter: string[]): void {
-    this.interactorTypeFilter = filter;
+    this.filters.interactorType = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
   public onPredictedFilterChanged(filter: string[]): void {
-    this.predictedFilter = filter;
+    this.filters.predicted = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
 
   public onEvidenceTypeFilterChanged(filter: string[]): void {
-    this.evidenceTypeFilter = filter;
+    this.filters.evidenceType = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }

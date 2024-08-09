@@ -11,7 +11,7 @@ import {ecoCodeName, interactorTypeIcon, organismIcon} from '../../complex-porta
 export class ComplexFilterComponent implements OnInit {
 
   @Input() facets: Facets;
-  @Input() spicesFilter: string[];
+  @Input() speciesFilter: string[];
   @Input() bioRoleFilter: string[];
   @Input() interactorTypeFilter: string[];
   @Input() predictedFilter: string[];
@@ -37,13 +37,13 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
-      this.spicesFilter.push(filter);
+      this.speciesFilter.push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.spicesFilter.splice(this.spicesFilter.indexOf(filter), 1);
+      this.speciesFilter.splice(this.speciesFilter.indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onSpicesFilterChanged.emit(this.spicesFilter);
+    this.onSpicesFilterChanged.emit(this.speciesFilter);
   }
 
   /**
@@ -112,7 +112,7 @@ export class ComplexFilterComponent implements OnInit {
    * @returns {boolean} true is any filter array contains an filter
    */
   public anyFiltersSelected() {
-    return this.spicesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
+    return this.speciesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
       this.predictedFilter.length !== 0 || this.evidenceTypeFilter.length !== 0;
   }
 
