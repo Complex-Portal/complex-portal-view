@@ -143,6 +143,7 @@ export class ComplexFilterComponent implements OnInit {
   }
 
   formatEvidenceTypeFacetValue(facetName: string): string {
-    return ecoCodeName(facetName);
+    const evidenceTypeName = ecoCodeName(facetName);
+    return evidenceTypeName || facetName;
   }
 }

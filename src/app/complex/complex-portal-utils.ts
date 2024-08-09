@@ -97,18 +97,20 @@ export function ecoCodeName(ecoCode: string): string {
       return 'inferred from mixed species evidence';
     case ('ECO:0005542'):
       return 'inferred from single species evidence';
-    // TODO: review new ECO code labels below
-    //  two new ones for UniPlex import and other existing ones that had no label set yet
+    // TODO: review ECO codes below, which we did not have a label for
+    case ('ECO:0007751'):
+      return 'inferential evidence used in manual assertion';
     case ('ECO:0000269'):
       return 'experimental evidence used in manual assertion';
     case ('ECO:0000314'):
       return 'direct assay evidence used in manual assertion';
+    case ('ECO:0008006'):
+      return 'deep learning prediction';
+    // TODO: review new ECO codes below added for UniPlex complexes
     case ('ECO:0007653'):
       return 'automatically integrated combinatorial prediction';
     case ('ECO:0008004'):
       return 'machine learning prediction';
-    case ('ECO:0008006'):
-      return 'deep learning prediction';
     default:
       return null;
   }
