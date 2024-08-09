@@ -18,17 +18,17 @@ import {
   styleUrls: ['./complex-results.component.css'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
-  public query: string;
-  public complexSearch: ComplexSearchResult;
-  public spicesFilter: string[];
-  public bioRoleFilter: string[];
-  public interactorTypeFilter: string[];
-  public predictedFilter: string[];
-  public evidenceTypeFilter: string[];
-  public allInteractorsInComplexSearch: Interactor[] = [];
+  query: string;
+  complexSearch: ComplexSearchResult;
+  spicesFilter: string[];
+  bioRoleFilter: string[];
+  interactorTypeFilter: string[];
+  predictedFilter: string[];
+  evidenceTypeFilter: string[];
+  allInteractorsInComplexSearch: Interactor[] = [];
   DisplayType: string;
-  toast;
 
+  private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
   private _navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
   private _listCurrentPage: number;
@@ -77,6 +77,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.interactorTypeFilter, this.predictedFilter, this.evidenceTypeFilter,
       this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
+      this.processSearchResults();
       this.allInteractorsInComplexSearch = [];
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
@@ -240,14 +241,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   private setListView() {
-    this.toast = this.notificationService.complexNavigatorAnnouncement();
+    this._toast = this.notificationService.complexNavigatorAnnouncement();
     this.reloadPage();
   }
 
   private setComplexNavigatorView() {
-    if (!!this.toast) {
-      this.notificationService.closeAnnouncement(this.toast.toastId);
-      this.toast = null;
+    if (!!this._toast) {
+      this.notificationService.closeAnnouncement(this._toast.toastId);
+      this._toast = null;
     }
     this.reloadPage();
   }
