@@ -15,14 +15,14 @@
                              [bioRoleFilter]="filters.bioRole"
                              [interactorTypeFilter]="filters.interactorType"
                              [predictedFilter]="filters.predicted"
-                             [evidenceTypeFilter]="filters.evidenceType"
+                             [starsFilter]="filters.stars"
                              [facets]="complexSearch.facets"
                              (onResetAllFilters)="onResetAllFilters()"
                              (onSpeciesFilterChanged)="onSpeciesFilterChanged($event)"
                              (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
                              (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)"
                              (onPredictedFilterChanged)="onPredictedFilterChanged($event)"
-                             (onEvidenceTypeFilterChanged)="onEvidenceTypeFilterChanged($event)">
+                             (onStarsFilterChanged)="onStarsFilterChanged($event)">
           </cp-complex-filter>
         </div>
         <div class="columns medium-12 large-10">

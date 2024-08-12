@@ -13,31 +13,24 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {Element} from '../model/complex-results/element.model';
 import {Facet} from '../model/complex-results/facet.model';
 
-const baseURL = environment.complex_ws_base_url;
+// const baseURL = environment.complex_ws_base_url;
+const baseURL = 'http://localhost:9090/intact/complex-ws';
 
 @Injectable()
 export class ComplexPortalService {
-
-  // Tags used by SOLR to exclude the filters from the facets counts.
-  private static SPECIES_FACET_TAG = 'SPECIES';
-  private static COMPONENT_TYPE_FACET_TAG = 'COMP_TYPE';
-  private static BIO_ROLE_FACET_TAG = 'BIO_ROLE';
-  private static PREDICTED_FACET_TAG = 'PREDICTED';
-  private static EVIDENCE_TYPE_FACET_TAG = 'EVIDENCE_TYPE';
 
   private static SPECIES_FACET_FIELD = 'species_f';
   private static COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
   private static BIO_ROLE_FACET_FIELD = 'pbiorole_f';
   private static PREDICTED_FACET_FIELD = 'predicted_complex_f';
-  private static EVIDENCE_TYPE_FACET_FIELD = 'evidence_type_f';
+  private static STARS_FACET_FIELD = 'stars_f';
 
-  // Facets need to be prefixed with the exclude field set to the tags used on the filters
   private static FACETS = [
-    '{!ex= ' + ComplexPortalService.SPECIES_FACET_TAG + '}' + ComplexPortalService.SPECIES_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.COMPONENT_TYPE_FACET_TAG + '}' + ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.BIO_ROLE_FACET_TAG + '}' + ComplexPortalService.BIO_ROLE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.PREDICTED_FACET_TAG + '}' + ComplexPortalService.PREDICTED_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService.EVIDENCE_TYPE_FACET_TAG + '}' + ComplexPortalService.EVIDENCE_TYPE_FACET_FIELD
+    ComplexPortalService.SPECIES_FACET_FIELD,
+    ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
+    ComplexPortalService.BIO_ROLE_FACET_FIELD,
+    ComplexPortalService.PREDICTED_FACET_FIELD,
+    ComplexPortalService.STARS_FACET_FIELD
   ].join(',');
 
   constructor(private http: HttpClient) {
@@ -101,7 +94,7 @@ export class ComplexPortalService {
    * @param bioRoleFilter
    * @param interactorTypeFilter
    * @param predictedFilter
-   * @param evidenceTypeFilter
+   * @param starsFilter
    * @param currentPageIndex
    * @param pageSize
    * @param format
@@ -112,29 +105,26 @@ export class ComplexPortalService {
               bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [],
               predictedFilter: string[] = [],
-              evidenceTypeFilter: string[] = [],
+              starsFilter: string[] = [],
               currentPageIndex = 1,
               pageSize = 10,
               format = 'json'): Observable<ComplexSearchResult> {
 
     let filters = '';
     if (speciesFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.SPECIES_FACET_FIELD, ComplexPortalService.SPECIES_FACET_TAG, speciesFilter);
+      filters += this.buildFilterParam(ComplexPortalService.SPECIES_FACET_FIELD, speciesFilter);
     }
     if (bioRoleFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.BIO_ROLE_FACET_FIELD, ComplexPortalService.BIO_ROLE_FACET_TAG, bioRoleFilter);
+      filters += this.buildFilterParam(ComplexPortalService.BIO_ROLE_FACET_FIELD, bioRoleFilter);
     }
     if (interactorTypeFilter.length !== 0) {
-      filters += this.buildFilterParam(
-        ComplexPortalService.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService.COMPONENT_TYPE_FACET_TAG, interactorTypeFilter);
+      filters += this.buildFilterParam(ComplexPortalService.COMPONENT_TYPE_FACET_FIELD, interactorTypeFilter);
     }
     if (predictedFilter.length !== 0) {
-      filters += this.buildFilterParam(
-        ComplexPortalService.PREDICTED_FACET_FIELD, ComplexPortalService.PREDICTED_FACET_TAG, predictedFilter);
+      filters += this.buildFilterParam(ComplexPortalService.PREDICTED_FACET_FIELD, predictedFilter);
     }
-    if (evidenceTypeFilter.length !== 0) {
-      filters += this.buildFilterParam(
-        ComplexPortalService.EVIDENCE_TYPE_FACET_FIELD, ComplexPortalService.EVIDENCE_TYPE_FACET_TAG, evidenceTypeFilter);
+    if (starsFilter.length !== 0) {
+      filters += this.buildFilterParam(ComplexPortalService.STARS_FACET_FIELD, starsFilter);
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
@@ -149,9 +139,8 @@ export class ComplexPortalService {
       catchError(this.handleError));
   }
 
-  private buildFilterParam(filterField: string, filterTag: string, filterValues: string[]): string {
-    // Filters needs to be prefixed with a tag, to be able to exclude them in the facets counts
-    return '{!tag=' + filterTag + '}' + filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
+  private buildFilterParam(filterField: string, filterValues: string[]): string {
+    return filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
   }
 
   private handleError(err: HttpErrorResponse | any): Observable<any> {

@@ -83,65 +83,6 @@ export function organismIcon(organism: string): string {
   return '';
 }
 
-export function ecoCodeName(ecoCode: string): string {
-  switch (ecoCode) {
-    case ('ECO:0005547'):
-      return 'curator inference';
-    case ('ECO:0000353'):
-      return 'physical interaction evidence';
-    case ('ECO:0005610'):
-      return 'homology inference';
-    case ('ECO:0005544'):
-      return 'orthology inference';
-    case ('ECO:0005546'):
-      return 'paralogy inference';
-    case ('ECO:0005543'):
-      return 'mixed species evidence inference';
-    case ('ECO:0005542'):
-      return 'single species evidence inference';
-    // TODO: review ECO codes below, which we did not have a label for
-    case ('ECO:0007751'):
-      return 'inferential evidence used in manual assertion';
-    case ('ECO:0000269'):
-      return 'experimental evidence used in manual assertion';
-    case ('ECO:0000314'):
-      return 'direct assay evidence used in manual assertion';
-    case ('ECO:0008006'):
-      return 'deep learning prediction';
-    // TODO: review new ECO codes below added for UniPlex complexes
-    case ('ECO:0007653'):
-      return 'automatically integrated combinatorial prediction';
-    case ('ECO:0008004'):
-      return 'machine learning prediction';
-    default:
-      return null;
-  }
-}
-
-export function ecoCodeStar(ecoCode: string): number {
-  switch (ecoCode) {
-    case ('ECO:0000353'): // physical interaction evidence
-    case ('ECO:0000314'): // direct assay evidence used in manual assertion
-    case ('ECO:0000269'): // experimental evidence used in manual assertion
-      return 5;
-    case ('ECO:0005610'): // inferred by homology
-    case ('ECO:0005544'): // inferred by orthology
-    case ('ECO:0005546'): // inferred by paralogy
-    case ('ECO:0005542'): // inferred from single species evidence
-    case ('ECO:0005543'): // inferred from mixed species evidence
-      return 4;
-    case ('ECO:0005547'): // inferred by curator
-      return 3;
-    case ('ECO:0007653'): // automatically integrated combinatorial prediction
-      return 2;
-    case ('ECO:0008006'): // deep learning prediction
-    case ('ECO:0008004'): // machine learning prediction
-      return 1;
-    default:
-      return null;
-  }
-}
-
 function formatOrganismName(name: string): string {
   return (name || '?')
     .split(';')[0]
