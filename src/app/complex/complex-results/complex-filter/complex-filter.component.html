@@ -20,14 +20,14 @@
       </ul>
     </div>
 
-    <div *ngIf="facets.stars_f">
-      <b>Stars</b>
+    <div *ngIf="facets.confidence_score_f">
+      <b>Confidence Score</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.stars_f" [class.predicted]="facet.name === '1' || facet.name === '2'">
+        <li *ngFor="let facet of facets.confidence_score_f" [class.predicted]="facet.name === '1' || facet.name === '2'">
           <label>
             <input type="checkbox" #filter value="{{facet.name}}"
-                   (change)="changeStarFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, starsFilter)">
+                   (change)="changeConfidenceScoreFilter(filter.value, filter.checked)"
+                   [checked]="isSelected(facet.name, confidenceScoreFilter)">
 
             <span class="stars">
               <i *ngFor="let star of getStars(facet.name)" class="icon icon-common icon-star" [ngClass]="star"></i>
@@ -94,7 +94,7 @@
       </ul>
     </div>
 
-    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.stars_f">
+    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.confidence_score_f">
       <h6>No filters available</h6>
     </div>
   </div>

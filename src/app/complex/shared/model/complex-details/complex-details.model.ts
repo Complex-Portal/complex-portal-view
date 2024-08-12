@@ -21,7 +21,7 @@ export interface ComplexDetails {
   crossReferences: CrossReference[];
   predictedComplex?: boolean;
   evidenceType?: {
-    stars: number;
+    confidenceScore: number;
     searchURL: string;
     description: string;
     identifier: string;

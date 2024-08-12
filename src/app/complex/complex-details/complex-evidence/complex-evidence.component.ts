@@ -24,7 +24,7 @@ export class ComplexEvidenceComponent implements OnInit {
   }
 
   private formatEvidenceOntologyStars(): void {
-    this._star(this.complex.evidenceType?.stars || 3);
+    this._star(this.complex.evidenceType?.confidenceScore || 3);
   }
 
   /**

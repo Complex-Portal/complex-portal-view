@@ -15,13 +15,13 @@ export class ComplexFilterComponent implements OnInit {
   @Input() bioRoleFilter: string[];
   @Input() interactorTypeFilter: string[];
   @Input() predictedFilter: string[];
-  @Input() starsFilter: string[];
+  @Input() confidenceScoreFilter: string[];
 
   @Output() onSpeciesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onPredictedFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onStarsFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() onConfidenceScoreFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
@@ -89,15 +89,15 @@ export class ComplexFilterComponent implements OnInit {
     this.onPredictedFilterChanged.emit(this.predictedFilter);
   }
 
-  public changeStarFilter(filter: string, status: boolean) {
+  public changeConfidenceScoreFilter(filter: string, status: boolean) {
     if (status) {
-      this.starsFilter.push(filter);
+      this.confidenceScoreFilter.push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.starsFilter.splice(this.starsFilter.indexOf(filter), 1);
+      this.confidenceScoreFilter.splice(this.confidenceScoreFilter.indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onStarsFilterChanged.emit(this.starsFilter);
+    this.onConfidenceScoreFilterChanged.emit(this.confidenceScoreFilter);
   }
 
   /**
@@ -113,7 +113,7 @@ export class ComplexFilterComponent implements OnInit {
    */
   public anyFiltersSelected() {
     return this.speciesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
-      this.predictedFilter.length !== 0 || this.starsFilter.length !== 0;
+      this.predictedFilter.length !== 0 || this.confidenceScoreFilter.length !== 0;
   }
 
   /**

@@ -29,7 +29,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     bioRole: [],
     interactorType: [],
     predicted: [],
-    stars: [],
+    confidenceScore: [],
   };
 
   private _toast;
@@ -74,7 +74,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   private requestComplexResults() {
     this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole,
-      this.filters.interactorType, this.filters.predicted, this.filters.stars,
+      this.filters.interactorType, this.filters.predicted, this.filters.confidenceScore,
       this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       this.processSearchResults();
@@ -169,8 +169,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  public onStarsFilterChanged(filter: string[]): void {
-    this.filters.stars = filter;
+  public onConfidenceScoreFilterChanged(filter: string[]): void {
+    this.filters.confidenceScore = filter;
     this.currentPageIndex = 1;
     this.reloadPage();
   }

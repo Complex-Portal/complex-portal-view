@@ -22,14 +22,14 @@ export class ComplexPortalService {
   private static COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
   private static BIO_ROLE_FACET_FIELD = 'pbiorole_f';
   private static PREDICTED_FACET_FIELD = 'predicted_complex_f';
-  private static STARS_FACET_FIELD = 'stars_f';
+  private static CONFIDENCE_SCORE_FACET_FIELD = 'confidence_score_f';
 
   private static FACETS = [
     ComplexPortalService.SPECIES_FACET_FIELD,
     ComplexPortalService.COMPONENT_TYPE_FACET_FIELD,
     ComplexPortalService.BIO_ROLE_FACET_FIELD,
     ComplexPortalService.PREDICTED_FACET_FIELD,
-    ComplexPortalService.STARS_FACET_FIELD
+    ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD
   ].join(',');
 
   constructor(private http: HttpClient) {
@@ -93,7 +93,7 @@ export class ComplexPortalService {
    * @param bioRoleFilter
    * @param interactorTypeFilter
    * @param predictedFilter
-   * @param starsFilter
+   * @param confidenceScoreFilter
    * @param currentPageIndex
    * @param pageSize
    * @param format
@@ -104,7 +104,7 @@ export class ComplexPortalService {
               bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [],
               predictedFilter: string[] = [],
-              starsFilter: string[] = [],
+              confidenceScoreFilter: string[] = [],
               currentPageIndex = 1,
               pageSize = 10,
               format = 'json'): Observable<ComplexSearchResult> {
@@ -122,8 +122,8 @@ export class ComplexPortalService {
     if (predictedFilter.length !== 0) {
       filters += this.buildFilterParam(ComplexPortalService.PREDICTED_FACET_FIELD, predictedFilter);
     }
-    if (starsFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.STARS_FACET_FIELD, starsFilter);
+    if (confidenceScoreFilter.length !== 0) {
+      filters += this.buildFilterParam(ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD, confidenceScoreFilter);
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/

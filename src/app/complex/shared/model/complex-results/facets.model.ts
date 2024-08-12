@@ -7,5 +7,5 @@ export interface Facets {
   species_f: Facet[];
   pbiorole_f: Facet[];
   predicted_complex_f: Facet[];
-  stars_f: Facet[];
+  confidence_score_f: Facet[];
 }
