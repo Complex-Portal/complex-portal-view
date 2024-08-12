@@ -58,7 +58,7 @@ const routes = [
     },
     {
         path: 'basket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js-src_app_complex_comple-8a6e67"), __webpack_require__.e("default-src_app_complex_complex-results_complex-navigator_complex-navigator_module_ts"), __webpack_require__.e("src_app_basket_basket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/basket/basket.module */ 55801)).then(m => m.BasketModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js"), __webpack_require__.e("default-src_app_complex_complex-results_complex-navigator_complex-navigator_module_ts"), __webpack_require__.e("src_app_basket_basket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/basket/basket.module */ 55801)).then(m => m.BasketModule)
     },
     {
         path: 'about',
@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": function() { return /* binding */ AppComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */ 75158);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */ 75158);
 /* harmony import */ var _app_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.css */ 6849);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ 92340);
@@ -224,7 +224,7 @@ AppComponent.ctorParameters = () => [
 AppComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'cp-root',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_app_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], AppComponent);
@@ -546,12 +546,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexPortalService": function() { return /* binding */ ComplexPortalService; }
 /* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 18293);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 33927);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 53882);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../environments/environment */ 92340);
-/* harmony import */ var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/observable/throwError */ 76859);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 18293);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 33927);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 53882);
+/* harmony import */ var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/internal/observable/throwError */ 76859);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -563,8 +562,8 @@ var ComplexPortalService_1;
 
 
 
-
-const baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_ws_base_url;
+// const baseURL = environment.complex_ws_base_url;
+const baseURL = 'http://localhost:9090/intact/complex-ws';
 let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
     constructor(http) {
         this.http = http;
@@ -576,7 +575,7 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      */
     getComplex(ac) {
         const url = `${baseURL}/details/${ac}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
     /**
      * Get a specific complex from the WS
@@ -585,14 +584,14 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      */
     getComplexAc(complexAc) {
         const url = `${baseURL}/complex/${complexAc}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
     /**
      *
      * @returns {Observable<Facet[]>}
      */
     getComplexOrganisms() {
-        return this.findComplex('*').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)((complexSearchResult) => {
+        return this.findComplex('*').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)((complexSearchResult) => {
             return complexSearchResult.facets['species_f'];
         }));
     }
@@ -603,7 +602,7 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
      */
     getComplexMIJSON(ac) {
-        return this.http.get(baseURL + '/export/' + ac).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
+        return this.http.get(baseURL + '/export/' + ac).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
     findComplexNoFilters(query, currentPageIndex = 1, pageSize = 10, format = 'json') {
         return this.findComplex(query, [], [], [], [], [], currentPageIndex, pageSize, format);
@@ -615,45 +614,44 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      * @param bioRoleFilter
      * @param interactorTypeFilter
      * @param predictedFilter
-     * @param evidenceTypeFilter
+     * @param starsFilter
      * @param currentPageIndex
      * @param pageSize
      * @param format
      * @returns {Observable<ComplexSearchResult>}
      */
-    findComplex(query, speciesFilter = [], bioRoleFilter = [], interactorTypeFilter = [], predictedFilter = [], evidenceTypeFilter = [], currentPageIndex = 1, pageSize = 10, format = 'json') {
+    findComplex(query, speciesFilter = [], bioRoleFilter = [], interactorTypeFilter = [], predictedFilter = [], starsFilter = [], currentPageIndex = 1, pageSize = 10, format = 'json') {
         let filters = '';
         if (speciesFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.SPECIES_FACET_FIELD, ComplexPortalService_1.SPECIES_FACET_TAG, speciesFilter);
+            filters += this.buildFilterParam(ComplexPortalService_1.SPECIES_FACET_FIELD, speciesFilter);
         }
         if (bioRoleFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.BIO_ROLE_FACET_FIELD, ComplexPortalService_1.BIO_ROLE_FACET_TAG, bioRoleFilter);
+            filters += this.buildFilterParam(ComplexPortalService_1.BIO_ROLE_FACET_FIELD, bioRoleFilter);
         }
         if (interactorTypeFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService_1.COMPONENT_TYPE_FACET_TAG, interactorTypeFilter);
+            filters += this.buildFilterParam(ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD, interactorTypeFilter);
         }
         if (predictedFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.PREDICTED_FACET_FIELD, ComplexPortalService_1.PREDICTED_FACET_TAG, predictedFilter);
+            filters += this.buildFilterParam(ComplexPortalService_1.PREDICTED_FACET_FIELD, predictedFilter);
         }
-        if (evidenceTypeFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.EVIDENCE_TYPE_FACET_FIELD, ComplexPortalService_1.EVIDENCE_TYPE_FACET_TAG, evidenceTypeFilter);
+        if (starsFilter.length !== 0) {
+            filters += this.buildFilterParam(ComplexPortalService_1.STARS_FACET_FIELD, starsFilter);
         }
         /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
-        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpParams()
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpParams()
             .set('first', ((currentPageIndex * pageSize) - pageSize).toString())
             .set('number', pageSize.toString())
             .set('format', format)
             .set('facets', ComplexPortalService_1.FACETS)
             .set('filters', filters);
-        return this.http.get(baseURL + '/search/' + query, { params: params }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
+        return this.http.get(baseURL + '/search/' + query, { params: params }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
-    buildFilterParam(filterField, filterTag, filterValues) {
-        // Filters needs to be prefixed with a tag, to be able to exclude them in the facets counts
-        return '{!tag=' + filterTag + '}' + filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
+    buildFilterParam(filterField, filterValues) {
+        return filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
     }
     handleError(err) {
         if (err.error instanceof Error) {
-            return (0,rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__.throwError)(err);
+            return (0,rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__.throwError)(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -661,33 +659,26 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
     }
     getSimplifiedComplex(complexAc) {
         const url = `${baseURL}/complex-simplified/${complexAc}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
     }
 };
-// Tags used by SOLR to exclude the filters from the facets counts.
-ComplexPortalService.SPECIES_FACET_TAG = 'SPECIES';
-ComplexPortalService.COMPONENT_TYPE_FACET_TAG = 'COMP_TYPE';
-ComplexPortalService.BIO_ROLE_FACET_TAG = 'BIO_ROLE';
-ComplexPortalService.PREDICTED_FACET_TAG = 'PREDICTED';
-ComplexPortalService.EVIDENCE_TYPE_FACET_TAG = 'EVIDENCE_TYPE';
 ComplexPortalService.SPECIES_FACET_FIELD = 'species_f';
 ComplexPortalService.COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
 ComplexPortalService.BIO_ROLE_FACET_FIELD = 'pbiorole_f';
 ComplexPortalService.PREDICTED_FACET_FIELD = 'predicted_complex_f';
-ComplexPortalService.EVIDENCE_TYPE_FACET_FIELD = 'evidence_type_f';
-// Facets need to be prefixed with the exclude field set to the tags used on the filters
+ComplexPortalService.STARS_FACET_FIELD = 'stars_f';
 ComplexPortalService.FACETS = [
-    '{!ex= ' + ComplexPortalService_1.SPECIES_FACET_TAG + '}' + ComplexPortalService_1.SPECIES_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService_1.COMPONENT_TYPE_FACET_TAG + '}' + ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService_1.BIO_ROLE_FACET_TAG + '}' + ComplexPortalService_1.BIO_ROLE_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService_1.PREDICTED_FACET_TAG + '}' + ComplexPortalService_1.PREDICTED_FACET_FIELD,
-    '{!ex= ' + ComplexPortalService_1.EVIDENCE_TYPE_FACET_TAG + '}' + ComplexPortalService_1.EVIDENCE_TYPE_FACET_FIELD
+    ComplexPortalService_1.SPECIES_FACET_FIELD,
+    ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD,
+    ComplexPortalService_1.BIO_ROLE_FACET_FIELD,
+    ComplexPortalService_1.PREDICTED_FACET_FIELD,
+    ComplexPortalService_1.STARS_FACET_FIELD
 ].join(',');
 ComplexPortalService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
 ];
 ComplexPortalService = ComplexPortalService_1 = __decorate([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)()
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)()
 ], ComplexPortalService);
 
 
@@ -705,7 +696,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DownloadComponent": function() { return /* binding */ DownloadComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_download_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./download.component.html */ 30251);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_download_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./download.component.html */ 30251);
 /* harmony import */ var _download_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./download.component.css */ 86433);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_loading_indicators_progress_bar_progress_bar_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/loading-indicators/progress-bar/progress-bar.component */ 57040);
@@ -771,7 +762,7 @@ DownloadComponent.ctorParameters = () => [
 DownloadComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'cp-download',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_download_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_download_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_download_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], DownloadComponent);
@@ -791,7 +782,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FooterComponent": function() { return /* binding */ FooterComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_footer_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./footer.component.html */ 70090);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_footer_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./footer.component.html */ 70090);
 /* harmony import */ var _footer_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./footer.component.css */ 63357);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -817,7 +808,7 @@ FooterComponent.propDecorators = {
 FooterComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-local-footer',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_footer_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_footer_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_footer_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], FooterComponent);
@@ -884,7 +875,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomeComponent": function() { return /* binding */ HomeComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./home.component.html */ 91659);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./home.component.html */ 91659);
 /* harmony import */ var _home_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.component.css */ 92698);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_loading_indicators_progress_bar_progress_bar_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/loading-indicators/progress-bar/progress-bar.component */ 57040);
@@ -960,7 +951,7 @@ HomeComponent.ctorParameters = () => [
 HomeComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'cp-home',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_home_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], HomeComponent);
@@ -1035,7 +1026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NewsletterSubscriptionComponent": function() { return /* binding */ NewsletterSubscriptionComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_newsletter_subscription_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./newsletter-subscription.component.html */ 70670);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_newsletter_subscription_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./newsletter-subscription.component.html */ 70670);
 /* harmony import */ var _newsletter_subscription_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newsletter-subscription.component.css */ 49413);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1057,7 +1048,7 @@ NewsletterSubscriptionComponent.ctorParameters = () => [];
 NewsletterSubscriptionComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-newsletter-subscription',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_newsletter_subscription_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_newsletter_subscription_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_newsletter_subscription_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], NewsletterSubscriptionComponent);
@@ -1077,7 +1068,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TileMenuComponent": function() { return /* binding */ TileMenuComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tile_menu_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tile-menu.component.html */ 49414);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tile_menu_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tile-menu.component.html */ 49414);
 /* harmony import */ var _tile_menu_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tile-menu.component.css */ 67811);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_notification_service_notification_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/notification/service/notification.service */ 30048);
@@ -1148,7 +1139,7 @@ TileMenuComponent.ctorParameters = () => [
 TileMenuComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'cp-tile-menu',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tile_menu_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tile_menu_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_tile_menu_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TileMenuComponent);
@@ -1168,7 +1159,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TwitterDisplayComponent": function() { return /* binding */ TwitterDisplayComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_twitter_display_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./twitter-display.component.html */ 34270);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_twitter_display_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./twitter-display.component.html */ 34270);
 /* harmony import */ var _twitter_display_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./twitter-display.component.css */ 66566);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1217,7 +1208,7 @@ TwitterDisplayComponent.ctorParameters = () => [];
 TwitterDisplayComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-twitter-display',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_twitter_display_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_twitter_display_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_twitter_display_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TwitterDisplayComponent);
@@ -1237,7 +1228,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AboutComponent": function() { return /* binding */ AboutComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_about_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./about.component.html */ 68809);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_about_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./about.component.html */ 68809);
 /* harmony import */ var _about_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./about.component.css */ 70332);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
@@ -1284,7 +1275,7 @@ AboutComponent.ctorParameters = () => [
 AboutComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'cp-about',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_about_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_about_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_about_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], AboutComponent);
@@ -1304,7 +1295,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DocumentationComponent": function() { return /* binding */ DocumentationComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_documentation_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./documentation.component.html */ 5090);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_documentation_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./documentation.component.html */ 5090);
 /* harmony import */ var _documentation_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./documentation.component.css */ 83791);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
@@ -1341,7 +1332,7 @@ DocumentationComponent.ctorParameters = () => [
 DocumentationComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'cp-documentation',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_documentation_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_documentation_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_documentation_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], DocumentationComponent);
@@ -1361,7 +1352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "OntologiesComponent": function() { return /* binding */ OntologiesComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_ontologies_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./ontologies.component.html */ 43501);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_ontologies_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./ontologies.component.html */ 43501);
 /* harmony import */ var _ontologies_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ontologies.component.css */ 5014);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 71258);
@@ -1394,7 +1385,7 @@ OntologiesComponent.ctorParameters = () => [
 OntologiesComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'cp-ontologies',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_ontologies_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_ontologies_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_ontologies_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], OntologiesComponent);
@@ -1414,7 +1405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SearchComponent": function() { return /* binding */ SearchComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.component.html */ 64303);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.component.html */ 64303);
 /* harmony import */ var _search_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.component.css */ 61326);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_google_analytics_types_category_enum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/google-analytics/types/category.enum */ 86335);
@@ -1446,7 +1437,7 @@ SearchComponent.ctorParameters = () => [
 SearchComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'cp-search',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_search_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SearchComponent);
@@ -1466,7 +1457,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LocalSearchComponent": function() { return /* binding */ LocalSearchComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_local_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./local-search.component.html */ 71009);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_local_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./local-search.component.html */ 71009);
 /* harmony import */ var _local_search_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./local-search.component.css */ 20597);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 71258);
@@ -1543,7 +1534,7 @@ LocalSearchComponent.ctorParameters = () => [
 LocalSearchComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'cp-local-search',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_local_search_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_local_search_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_local_search_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], LocalSearchComponent);
@@ -1890,7 +1881,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ProgressBarComponent": function() { return /* binding */ ProgressBarComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_bar_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./progress-bar.component.html */ 86234);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_bar_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./progress-bar.component.html */ 86234);
 /* harmony import */ var _progress_bar_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./progress-bar.component.css */ 57814);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1939,7 +1930,7 @@ ProgressBarComponent.ctorParameters = () => [];
 ProgressBarComponent = ProgressBarComponent_1 = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-progress-bar',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_bar_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_bar_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_progress_bar_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ProgressBarComponent);
@@ -2383,7 +2374,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module) {
 
 "use strict";
-module.exports = ".basket {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: var(--primary);\n  background-color: white;\n  display: inline;\n}\n\n.basket.active {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: white;\n  background-color: var(--primary);\n  display: inline;\n}\n\n/* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */\n\n.no-border-submenu {\n  border-right: 0 !important;\n}\n\n.sticky-nav-container {\n  --global-margin: calc((100vw - 80rem) / -2);\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  background: var(--primary);\n  padding: 0 calc(-1 * var(--global-margin));\n  width: 100vw;\n  z-index: 4;\n  border-bottom: 1px solid white;\n}\n\n.sticky-nav-container nav {\n  display: flex;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsY0FBYztFQUNkLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YscUJBQXFCO0VBQ3JCLHVCQUF1QjtFQUN2QixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsY0FBYztFQUNkLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsWUFBWTtFQUNaLGdDQUFnQztFQUNoQyxlQUFlO0FBQ2pCOztBQUVBLHdFQUF3RTs7QUFDeEU7RUFDRSwwQkFBMEI7QUFDNUI7O0FBR0E7RUFDRSwyQ0FBMkM7RUFDM0Msd0JBQWdCO0VBQWhCLGdCQUFnQjtFQUNoQixNQUFNO0VBQ04sMEJBQTBCO0VBQzFCLDBDQUEwQztFQUMxQyxZQUFZO0VBQ1osVUFBVTtFQUNWLDhCQUE4QjtBQUNoQzs7QUFFQTtFQUNFLGFBQWE7QUFDZiIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYXNrZXQge1xuICBwYWRkaW5nOiAwLjJyZW0gMDtcbiAgYm9yZGVyLXJhZGl1czogMnB4O1xuICBmb250LXNpemU6IDAuOHJlbTtcbiAgbGluZS1oZWlnaHQ6IDE7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIGN1cnNvcjogZGVmYXVsdDtcbiAgY29sb3I6IHZhcigtLXByaW1hcnkpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuXG4uYmFza2V0LmFjdGl2ZSB7XG4gIHBhZGRpbmc6IDAuMnJlbSAwO1xuICBib3JkZXItcmFkaXVzOiAycHg7XG4gIGZvbnQtc2l6ZTogMC44cmVtO1xuICBsaW5lLWhlaWdodDogMTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgY3Vyc29yOiBkZWZhdWx0O1xuICBjb2xvcjogd2hpdGU7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLXByaW1hcnkpO1xuICBkaXNwbGF5OiBpbmxpbmU7XG59XG5cbi8qIE5BVklHQVRJT04gU1VCTUVOVSBPVkVSUklERSBFQkktR0xPQkFMIFRPIFJFTU9WRSBBIFdISVRFIFJJR0hUIExJTkUgKi9cbi5uby1ib3JkZXItc3VibWVudSB7XG4gIGJvcmRlci1yaWdodDogMCAhaW1wb3J0YW50O1xufVxuXG5cbi5zdGlja3ktbmF2LWNvbnRhaW5lciB7XG4gIC0tZ2xvYmFsLW1hcmdpbjogY2FsYygoMTAwdncgLSA4MHJlbSkgLyAtMik7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZDogdmFyKC0tcHJpbWFyeSk7XG4gIHBhZGRpbmc6IDAgY2FsYygtMSAqIHZhcigtLWdsb2JhbC1tYXJnaW4pKTtcbiAgd2lkdGg6IDEwMHZ3O1xuICB6LWluZGV4OiA0O1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgd2hpdGU7XG59XG5cbi5zdGlja3ktbmF2LWNvbnRhaW5lciBuYXYge1xuICBkaXNwbGF5OiBmbGV4O1xufVxuXG4iXX0= */";
+module.exports = ".basket {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: var(--primary);\n  background-color: white;\n  display: inline;\n}\n\n.basket.active {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: white;\n  background-color: var(--primary);\n  display: inline;\n}\n\n/* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */\n\n.no-border-submenu {\n  border-right: 0 !important;\n}\n\n.sticky-nav-container {\n  --global-margin: calc((100vw - 80rem) / -2);\n  position: sticky;\n  top: 0;\n  background: var(--primary);\n  padding: 0 calc(-1 * var(--global-margin));\n  width: 100vw;\n  z-index: 4;\n  border-bottom: 1px solid white;\n}\n\n.sticky-nav-container nav {\n  display: flex;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsY0FBYztFQUNkLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YscUJBQXFCO0VBQ3JCLHVCQUF1QjtFQUN2QixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsY0FBYztFQUNkLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsWUFBWTtFQUNaLGdDQUFnQztFQUNoQyxlQUFlO0FBQ2pCOztBQUVBLHdFQUF3RTs7QUFDeEU7RUFDRSwwQkFBMEI7QUFDNUI7O0FBR0E7RUFDRSwyQ0FBMkM7RUFDM0MsZ0JBQWdCO0VBQ2hCLE1BQU07RUFDTiwwQkFBMEI7RUFDMUIsMENBQTBDO0VBQzFDLFlBQVk7RUFDWixVQUFVO0VBQ1YsOEJBQThCO0FBQ2hDOztBQUVBO0VBQ0UsYUFBYTtBQUNmIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJhc2tldCB7XG4gIHBhZGRpbmc6IDAuMnJlbSAwO1xuICBib3JkZXItcmFkaXVzOiAycHg7XG4gIGZvbnQtc2l6ZTogMC44cmVtO1xuICBsaW5lLWhlaWdodDogMTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgY3Vyc29yOiBkZWZhdWx0O1xuICBjb2xvcjogdmFyKC0tcHJpbWFyeSk7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBkaXNwbGF5OiBpbmxpbmU7XG59XG5cbi5iYXNrZXQuYWN0aXZlIHtcbiAgcGFkZGluZzogMC4ycmVtIDA7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgZm9udC1zaXplOiAwLjhyZW07XG4gIGxpbmUtaGVpZ2h0OiAxO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBjdXJzb3I6IGRlZmF1bHQ7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tcHJpbWFyeSk7XG4gIGRpc3BsYXk6IGlubGluZTtcbn1cblxuLyogTkFWSUdBVElPTiBTVUJNRU5VIE9WRVJSSURFIEVCSS1HTE9CQUwgVE8gUkVNT1ZFIEEgV0hJVEUgUklHSFQgTElORSAqL1xuLm5vLWJvcmRlci1zdWJtZW51IHtcbiAgYm9yZGVyLXJpZ2h0OiAwICFpbXBvcnRhbnQ7XG59XG5cblxuLnN0aWNreS1uYXYtY29udGFpbmVyIHtcbiAgLS1nbG9iYWwtbWFyZ2luOiBjYWxjKCgxMDB2dyAtIDgwcmVtKSAvIC0yKTtcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAwO1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1wcmltYXJ5KTtcbiAgcGFkZGluZzogMCBjYWxjKC0xICogdmFyKC0tZ2xvYmFsLW1hcmdpbikpO1xuICB3aWR0aDogMTAwdnc7XG4gIHotaW5kZXg6IDQ7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB3aGl0ZTtcbn1cblxuLnN0aWNreS1uYXYtY29udGFpbmVyIG5hdiB7XG4gIGRpc3BsYXk6IGZsZXg7XG59XG5cbiJdfQ== */";
 
 /***/ }),
 
@@ -2526,7 +2517,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"complex-portal-view","version":"1.0.3","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng-high-memory":"node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng","ng":"ng","start":"export NODE_OPTIONS=--openssl-legacy-provider; ng serve --proxy-config proxy-gxa.conf.json","start-with-proxy":"ng serve --proxy-config proxy.conf.json","publish-gh-pages":"export NODE_OPTIONS=--openssl-legacy-provider;rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration production --base-href \\"https://complex-portal.github.io/complex-portal-view/\\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view","publish-test-gh-pages":"export NODE_OPTIONS=--openssl-legacy-provider;rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration test --base-href \\"https://complex-portal.github.io/complex-portal-view/\\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view","build-prod":"export NODE_OPTIONS=--openssl-legacy-provider;rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production --base-href \\"/complexportal/\\"","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^12.2.12","@angular/cdk":"^12.2.12","@angular/common":"^12.2.12","@angular/compiler":"^12.2.12","@angular/core":"^12.2.12","@angular/forms":"^12.2.12","@angular/material":"^12.2.12","@angular/platform-browser":"^12.2.12","@angular/platform-browser-dynamic":"^12.2.12","@angular/router":"^12.2.12","@ebi-gene-expression-group/anatomogram":"^2.4.0","@swissprot/rhea-reaction-visualizer":"0.0.23","@types/estree":"^1.0.0","angular-cli-ghpages":"^0.5.2","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"^2.2.2","core-js":"^2.5.3","ebi-framework":"1.3.8","expose-loader":"^5.0.0","jquery":"^3.4.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ngx-google-analytics":"^11.2.1","ngx-markdown":"^12.0.1","ngx-page-scroll":"^7.0.6","ngx-page-scroll-core":"^7.0.6","ngx-toastr":"^12.1.0","npm":"^5.7.1","react":"^16.14.0","rxjs":"^6.6.7","rxjs-compat":"^6.6.7","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","tslib":"^2.0.0","zone.js":"~0.11.4"},"devDependencies":{"@angular-devkit/build-angular":"~12.2.12","@angular/cli":"^12.2.12","@angular/compiler-cli":"^12.2.12","@angular/language-service":"^12.2.12","@types/complexviewer":"^2.1.0","@types/foundation":"~5.5.30","@types/jasmine":"~3.6.0","@types/jquery":"^3.3.36","@types/node":"~14.0.1","codelyzer":"^6.0.0","jasmine-core":"^5.2.0","jasmine-spec-reporter":"^7.0.0","karma":"^6.4.4","karma-chrome-launcher":"^3.2.0","karma-cli":"^2.0.0","karma-coverage-istanbul-reporter":"^3.0.3","karma-jasmine":"^5.1.0","karma-jasmine-html-reporter":"^2.1.0","protractor":"~7.0.0","ts-node":"^5.0.1","tslint":"~6.1.0","typescript":"~4.3.5"}}');
+module.exports = JSON.parse('{"name":"complex-portal-view","version":"1.0.3","license":"The Apache Software License, Version 2.0","angular-cli":{},"scripts":{"ng-high-memory":"node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng","ng":"ng","start":"export NODE_OPTIONS=--openssl-legacy-provider; ng serve --proxy-config proxy-gxa.conf.json","start-with-proxy":"ng serve --proxy-config proxy.conf.json","publish-gh-pages":"rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration production --base-href \\"https://complex-portal.github.io/complex-portal-view/\\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view","publish-test-gh-pages":"rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --output-path=dist --configuration test --base-href \\"https://complex-portal.github.io/complex-portal-view/\\"; sudo ngh -r https://github.com/Complex-Portal/complex-portal-view","build-prod":"rm -rf dist; node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production --base-href \\"/complexportal/\\"","test":"ng test","pree2e":"webdriver-manager update --standalone false --gecko false","e2e":"protractor"},"private":true,"dependencies":{"@angular/animations":"^12.2.12","@angular/cdk":"^12.2.12","@angular/common":"^12.2.12","@angular/compiler":"^12.2.12","@angular/core":"^12.2.12","@angular/forms":"^12.2.12","@angular/material":"^12.2.12","@angular/platform-browser":"^12.2.12","@angular/platform-browser-dynamic":"^12.2.12","@angular/router":"^12.2.12","@ebi-gene-expression-group/anatomogram":"^2.4.0","@swissprot/rhea-reaction-visualizer":"0.0.23","@types/estree":"^1.0.0","angular-cli-ghpages":"^0.5.2","animate.css":"^3.5.2","classlist.js":"^1.1.20150312","complexviewer":"^2.2.2","core-js":"^2.5.3","ebi-framework":"1.3.8","expose-loader":"^5.0.0","jquery":"^3.4.1","litemol":"https://github.com/dsehnal/LiteMol/tarball/master","ngx-google-analytics":"^11.2.1","ngx-markdown":"^12.0.1","ngx-page-scroll":"^7.0.6","ngx-page-scroll-core":"^7.0.6","ngx-toastr":"^12.1.0","npm":"^5.7.1","react":"^16.14.0","rxjs":"^6.6.7","rxjs-compat":"^6.6.7","ts-helpers":"^1.1.2","ts-md5":"^1.2.4","tslib":"^2.0.0","zone.js":"~0.11.4"},"devDependencies":{"@angular-devkit/build-angular":"~12.2.12","@angular/cli":"^12.2.12","@angular/compiler-cli":"^12.2.12","@angular/language-service":"^12.2.12","@types/complexviewer":"^2.1.0","@types/foundation":"~5.5.30","@types/jasmine":"~3.6.0","@types/jquery":"^3.3.36","@types/node":"~14.0.1","codelyzer":"^6.0.0","jasmine-core":"^5.2.0","jasmine-spec-reporter":"^7.0.0","karma":"^6.4.4","karma-chrome-launcher":"^3.2.0","karma-cli":"^2.0.0","karma-coverage-istanbul-reporter":"^3.0.3","karma-jasmine":"^5.1.0","karma-jasmine-html-reporter":"^2.1.0","protractor":"~7.0.0","ts-node":"^5.0.1","tslint":"~6.1.0","typescript":"~4.3.5"}}');
 
 /***/ })
 

@@ -36,11 +36,11 @@ ComplexModule = __decorate([
                 },
                 {
                     path: 'search',
-                    loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js-src_app_complex_comple-8a6e67"), __webpack_require__.e("default-src_app_complex_complex-results_complex-navigator_complex-navigator_module_ts"), __webpack_require__.e("src_app_complex_complex-results_complex-results_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/complex/complex-results/complex-results.module */ 79555)).then(m => m.ComplexResultsModule)
+                    loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js"), __webpack_require__.e("default-src_app_complex_complex-results_complex-navigator_complex-navigator_module_ts"), __webpack_require__.e("src_app_complex_complex-results_complex-results_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/complex/complex-results/complex-results.module */ 79555)).then(m => m.ComplexResultsModule)
                 },
                 {
                     path: ':id',
-                    loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js-src_app_complex_comple-8a6e67"), __webpack_require__.e("src_app_complex_complex-details_complex-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/complex/complex-details/complex-details.module */ 81613)).then(m => m.ComplexDetailsModule)
+                    loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_loading-indicators_progress-spinner_progress-spinner_module_ts"), __webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js"), __webpack_require__.e("src_app_complex_complex-details_complex-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! app/complex/complex-details/complex-details.module */ 81613)).then(m => m.ComplexDetailsModule)
                 },
             ]),
             _angular_common__WEBPACK_IMPORTED_MODULE_3__.CommonModule,

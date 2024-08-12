@@ -469,7 +469,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ProgressSpinnerComponent": function() { return /* binding */ ProgressSpinnerComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_spinner_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./progress-spinner.component.html */ 78530);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_spinner_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./progress-spinner.component.html */ 78530);
 /* harmony import */ var _progress_spinner_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./progress-spinner.component.css */ 77890);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -534,7 +534,7 @@ ProgressSpinnerComponent.propDecorators = {
 ProgressSpinnerComponent = ProgressSpinnerComponent_1 = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-progress-spinner',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_spinner_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_progress_spinner_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_progress_spinner_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ProgressSpinnerComponent);

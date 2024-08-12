@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexFilterComponent": function() { return /* binding */ ComplexFilterComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_filter_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-filter.component.html */ 22830);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_filter_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-filter.component.html */ 22830);
 /* harmony import */ var _complex_filter_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-filter.component.css */ 87165);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/google-analytics/service/analytics.service */ 96242);
@@ -34,54 +34,10 @@ let ComplexFilterComponent = class ComplexFilterComponent {
         this.onBiologicalRoleFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
         this.onInteractorTypeFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
         this.onPredictedFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
-        this.onEvidenceTypeFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
+        this.onStarsFilterChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
         this.onResetAllFilters = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
     }
     ngOnInit() {
-    }
-    set facets(values) {
-        this._facets = values;
-        this.starsFacet = [];
-        const countGroupedByStars = new Map();
-        if (this._facets.evidence_type_f) {
-            for (const facet of this._facets.evidence_type_f) {
-                const starNumber = (0,_complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.ecoCodeStar)(facet.name);
-                if (!!starNumber) {
-                    // const starNumberStr = String(starNumber);
-                    if (countGroupedByStars.has(starNumber)) {
-                        const number = countGroupedByStars.get(starNumber);
-                        countGroupedByStars.set(starNumber, number + facet.count);
-                    }
-                    else {
-                        countGroupedByStars.set(starNumber, facet.count);
-                    }
-                }
-            }
-            countGroupedByStars.forEach((count, stars) => {
-                this.starsFacet.push({
-                    name: String(stars),
-                    starsNumber: stars,
-                    count: count,
-                    stars: this.getStars(stars)
-                });
-            });
-            this.starsFacet.sort((a, b) => b.starsNumber - a.starsNumber);
-        }
-    }
-    get facets() {
-        return this._facets;
-    }
-    set evidenceTypeFilter(values) {
-        this._evidenceTypeFilter = values;
-        this.starsFilter = [];
-        for (const evidenceType of this._evidenceTypeFilter) {
-            const starNumber = (0,_complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.ecoCodeStar)(evidenceType);
-            if (starNumber !== null) {
-                if (!this.starsFilter.includes(String(starNumber))) {
-                    this.starsFilter.push(String(starNumber));
-                }
-            }
-        }
     }
     /**
      *
@@ -142,16 +98,6 @@ let ComplexFilterComponent = class ComplexFilterComponent {
         }
         this.onPredictedFilterChanged.emit(this.predictedFilter);
     }
-    // public changeEvidenceTypeFilter(filter: string, status: boolean) {
-    //   if (status) {
-    //     this._evidenceTypeFilter.push(filter);
-    //     this.googleAnalyticsService.fireAddedFilterEvent(filter);
-    //   } else {
-    //     this._evidenceTypeFilter.splice(this._evidenceTypeFilter.indexOf(filter), 1);
-    //     this.googleAnalyticsService.fireRemovedFilterEvent(filter);
-    //   }
-    //   this.onEvidenceTypeFilterChanged.emit(this._evidenceTypeFilter);
-    // }
     changeStarFilter(filter, status) {
         if (status) {
             this.starsFilter.push(filter);
@@ -161,20 +107,7 @@ let ComplexFilterComponent = class ComplexFilterComponent {
             this.starsFilter.splice(this.starsFilter.indexOf(filter), 1);
             this.googleAnalyticsService.fireRemovedFilterEvent(filter);
         }
-        for (const evidenceTypeFacet of this._facets.evidence_type_f) {
-            const stars = (0,_complex_portal_utils__WEBPACK_IMPORTED_MODULE_3__.ecoCodeStar)(evidenceTypeFacet.name);
-            if (!!stars) {
-                if (String(stars) === filter) {
-                    if (status) {
-                        this._evidenceTypeFilter.push(evidenceTypeFacet.name);
-                    }
-                    else {
-                        this._evidenceTypeFilter.splice(this._evidenceTypeFilter.indexOf(evidenceTypeFacet.name), 1);
-                    }
-                }
-            }
-        }
-        this.onEvidenceTypeFilterChanged.emit(this._evidenceTypeFilter);
+        this.onStarsFilterChanged.emit(this.starsFilter);
     }
     /**
      * Emit event to parent component to remove all filters
@@ -188,7 +121,7 @@ let ComplexFilterComponent = class ComplexFilterComponent {
      */
     anyFiltersSelected() {
         return this.speciesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
-            this.predictedFilter.length !== 0 || this._evidenceTypeFilter.length !== 0;
+            this.predictedFilter.length !== 0 || this.starsFilter.length !== 0;
     }
     /**
      *
@@ -213,11 +146,10 @@ let ComplexFilterComponent = class ComplexFilterComponent {
             return 'Curated complex';
         }
     }
-    // formatEvidenceTypeFacetValue(facetName: string): string {
-    //   const evidenceTypeName = ecoCodeName(facetName);
-    //   return evidenceTypeName || facetName;
-    // }
     getStars(amount) {
+        return this._getStars(Number(amount));
+    }
+    _getStars(amount) {
         const stars = ['empty', 'empty', 'empty', 'empty', 'empty'];
         stars.fill('full');
         if (amount < stars.length) {
@@ -230,23 +162,23 @@ ComplexFilterComponent.ctorParameters = () => [
     { type: _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_2__.AnalyticsService }
 ];
 ComplexFilterComponent.propDecorators = {
+    facets: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
     speciesFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
     bioRoleFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
     interactorTypeFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
     predictedFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
+    starsFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
     onSpeciesFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
     onBiologicalRoleFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
     onInteractorTypeFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
     onPredictedFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
-    onEvidenceTypeFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
-    onResetAllFilters: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
-    facets: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
-    evidenceTypeFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }]
+    onStarsFilterChanged: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }],
+    onResetAllFilters: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }]
 };
 ComplexFilterComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'cp-complex-filter',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_filter_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_filter_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_filter_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ComplexFilterComponent);
@@ -265,7 +197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexListComponent": function() { return /* binding */ ComplexListComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_list_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-list.component.html */ 3122);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_list_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-list.component.html */ 3122);
 /* harmony import */ var _complex_list_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-list.component.css */ 17554);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_basket_service_basket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/basket/service/basket.service */ 69510);
@@ -312,7 +244,7 @@ ComplexListComponent.propDecorators = {
 ComplexListComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
         selector: 'cp-complex-list',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_list_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_list_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_list_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ComplexListComponent);
@@ -331,7 +263,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexNavigatorRatingComponent": function() { return /* binding */ ComplexNavigatorRatingComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_rating_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-navigator-rating.component.html */ 45831);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_rating_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-navigator-rating.component.html */ 45831);
 /* harmony import */ var _complex_navigator_rating_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-navigator-rating.component.css */ 2405);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _shared_google_analytics_service_analytics_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/google-analytics/service/analytics.service */ 96242);
@@ -367,7 +299,7 @@ ComplexNavigatorRatingComponent.ctorParameters = () => [
 ComplexNavigatorRatingComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
         selector: 'cp-complex-navigator-rating',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_rating_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_navigator_rating_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_navigator_rating_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ComplexNavigatorRatingComponent);
@@ -386,7 +318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexPaginatorComponent": function() { return /* binding */ ComplexPaginatorComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_paginator_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-paginator.component.html */ 65123);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_paginator_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-paginator.component.html */ 65123);
 /* harmony import */ var _complex_paginator_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-paginator.component.css */ 71945);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -483,7 +415,7 @@ ComplexPaginatorComponent.propDecorators = {
 ComplexPaginatorComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'cp-complex-paginator',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_paginator_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_paginator_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_paginator_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ComplexPaginatorComponent);
@@ -502,7 +434,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexResultsComponent": function() { return /* binding */ ComplexResultsComponent; }
 /* harmony export */ });
-/* harmony import */ var _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-results.component.html */ 13182);
+/* harmony import */ var _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./complex-results.component.html */ 13182);
 /* harmony import */ var _complex_results_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./complex-results.component.css */ 23654);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 71258);
@@ -542,7 +474,7 @@ let ComplexResultsComponent = class ComplexResultsComponent {
             bioRole: [],
             interactorType: [],
             predicted: [],
-            evidenceType: [],
+            stars: [],
         };
         this._listPageSize = 15; // This is where we set the size of the pages for list view
         this._navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
@@ -573,7 +505,7 @@ let ComplexResultsComponent = class ComplexResultsComponent {
     ngAfterViewInit() {
     }
     requestComplexResults() {
-        this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole, this.filters.interactorType, this.filters.predicted, this.filters.evidenceType, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
+        this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole, this.filters.interactorType, this.filters.predicted, this.filters.stars, this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
             this.complexSearch = complexSearch;
             this.processSearchResults();
             this.allInteractorsInComplexSearch = [];
@@ -654,8 +586,8 @@ let ComplexResultsComponent = class ComplexResultsComponent {
         this.currentPageIndex = 1;
         this.reloadPage();
     }
-    onEvidenceTypeFilterChanged(filter) {
-        this.filters.evidenceType = filter;
+    onStarsFilterChanged(filter) {
+        this.filters.stars = filter;
         this.currentPageIndex = 1;
         this.reloadPage();
     }
@@ -761,7 +693,7 @@ ComplexResultsComponent.ctorParameters = () => [
 ComplexResultsComponent = __decorate([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'cp-complex-results',
-        template: _Users_eragueneau_WebstormProjects_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        template: _Users_jmedina_IdeaProjects_ComplexPortal_complex_portal_view_node_modules_ngtools_webpack_src_loaders_direct_resource_js_complex_results_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_complex_results_component_css__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ComplexResultsComponent);
@@ -844,7 +776,7 @@ ComplexResultsModule = __decorate([
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-common\" data-icon=\"\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.predicted_complex_f\">\n      <b>Complex Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.predicted_complex_f\" [class.predicted]=\"facet.name === 'true'\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changePredictedFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, predictedFilter)\">\n            <span class=\"tag\">{{ formatPredictedFacetValue(facet.name) }}</span><span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"starsFacet\">\n      <b>Stars</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of starsFacet\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeStarFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, starsFilter)\">\n\n            <span class=\"stars\">\n              <i *ngFor=\"let star of facet.stars\" class=\"icon icon-common icon-star\" [ngClass]=\"star\"></i>\n            </span>\n            <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <label [matTooltip]=\"facet.name\">\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, speciesFilter)\">\n\n            <span>\n              <i *ngIf=\"facetOrganismIcon(facet.name).startsWith('icon'); else img\"\n                 [ngClass]=\"facetOrganismIcon(facet.name)\" style=\"font-size: large;\"></i>\n            <ng-template #img>\n              <img [src]=\"facetOrganismIcon(facet.name)\" alt=\"\" width=\"18px\" height=\"18px\"/>\n            </ng-template>\n            </span>\n\n            {{ facet.name | species:true }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, bioRoleFilter)\">\n\n            {{ facet.name }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Component Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, interactorTypeFilter)\">\n\n            <span >\n              <i [ngClass]=\"facetTypeIcon(facet.name)\" style=\"font-size: large;\"></i>\n            </span>\n            {{ facet.name }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n<!--    <div *ngIf=\"facets.evidence_type_f\">-->\n<!--      <b>Evidence Type</b>-->\n<!--      <ul class=\"no-bullet\">-->\n<!--        <li *ngFor=\"let facet of facets.evidence_type_f\">-->\n<!--          <label>-->\n<!--            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"-->\n<!--                   (change)=\"changeEvidenceTypeFilter(filter.value, filter.checked)\"-->\n<!--                   [checked]=\"isSelected(facet.name, evidenceTypeFilter)\">-->\n\n<!--            {{ formatEvidenceTypeFacetValue(facet.name) }} <span class=\"count\">{{ facet.count }}</span>-->\n<!--          </label>-->\n<!--        </li>-->\n<!--      </ul>-->\n<!--    </div>-->\n\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.evidence_type_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"filters row\">\n  <div class=\"columns medium-6\"><h3>Filters</h3></div>\n  <div class=\"columns medium-6\">\n    <div *ngIf=\"anyFiltersSelected()\">\n      <a class=\"button\" (click)=\"resetAllFilters()\"><i class=\"icon icon-common\" data-icon=\"\"></i> Reset filters</a>\n    </div>\n  </div>\n  <div class=\"columns medium-12\">\n    <div *ngIf=\"facets.predicted_complex_f\">\n      <b>Complex Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.predicted_complex_f\" [class.predicted]=\"facet.name === 'true'\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changePredictedFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, predictedFilter)\">\n            <span class=\"tag\">{{ formatPredictedFacetValue(facet.name) }}</span><span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.stars_f\">\n      <b>Stars</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.stars_f\" [class.predicted]=\"facet.name === '1' || facet.name === '2'\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeStarFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, starsFilter)\">\n\n            <span class=\"stars\">\n              <i *ngFor=\"let star of getStars(facet.name)\" class=\"icon icon-common icon-star\" [ngClass]=\"star\"></i>\n            </span>\n            <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.species_f\">\n      <b>Species</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.species_f\">\n          <label [matTooltip]=\"facet.name\">\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeSpeciesFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, speciesFilter)\">\n\n            <span>\n              <i *ngIf=\"facetOrganismIcon(facet.name).startsWith('icon'); else img\"\n                 [ngClass]=\"facetOrganismIcon(facet.name)\" style=\"font-size: large;\"></i>\n            <ng-template #img>\n              <img [src]=\"facetOrganismIcon(facet.name)\" alt=\"\" width=\"18px\" height=\"18px\"/>\n            </ng-template>\n            </span>\n\n            {{ facet.name | species:true }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.pbiorole_f\">\n      <b>Biological Role</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.pbiorole_f\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeBiologicalRoleFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, bioRoleFilter)\">\n\n            {{ facet.name }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"facets.ptype_f\">\n      <b>Component Type</b>\n      <ul class=\"no-bullet\">\n        <li *ngFor=\"let facet of facets.ptype_f\">\n          <label>\n            <input type=\"checkbox\" #filter value=\"{{facet.name}}\"\n                   (change)=\"changeInteractorTypeFilter(filter.value, filter.checked)\"\n                   [checked]=\"isSelected(facet.name, interactorTypeFilter)\">\n\n            <span >\n              <i [ngClass]=\"facetTypeIcon(facet.name)\" style=\"font-size: large;\"></i>\n            </span>\n            {{ facet.name }} <span class=\"count\">{{ facet.count }}</span>\n          </label>\n        </li>\n      </ul>\n    </div>\n\n    <div *ngIf=\"!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.stars_f\">\n      <h6>No filters available</h6>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -888,7 +820,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"margin-top-large margin-bottom-large row expanded\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"row expanded\">\n        <div class=\"columns medium-12\">\n          <cp-complex-navigator-rating *ngIf=\"isDisplayComplexNavigatorView()\">\n          </cp-complex-navigator-rating>\n\n        </div>\n\n        <div class=\"columns medium-12 large-2 no-padding\">\n          <cp-complex-filter *ngIf=\"filters\"\n                             [speciesFilter]=\"filters.species\"\n                             [bioRoleFilter]=\"filters.bioRole\"\n                             [interactorTypeFilter]=\"filters.interactorType\"\n                             [predictedFilter]=\"filters.predicted\"\n                             [evidenceTypeFilter]=\"filters.evidenceType\"\n                             [facets]=\"complexSearch.facets\"\n                             (onResetAllFilters)=\"onResetAllFilters()\"\n                             (onSpeciesFilterChanged)=\"onSpeciesFilterChanged($event)\"\n                             (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                             (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\"\n                             (onPredictedFilterChanged)=\"onPredictedFilterChanged($event)\"\n                             (onEvidenceTypeFilterChanged)=\"onEvidenceTypeFilterChanged($event)\">\n          </cp-complex-filter>\n        </div>\n        <div class=\"columns medium-12 large-10\">\n          <div class=\"paginatorAndDisplay\">\n            <cp-complex-list-display-buttons\n              [displayType]=\"DisplayType\"\n              (displayTypeChange)=\"onDisplayTypeChange($event)\">\n            </cp-complex-list-display-buttons>\n            <cp-complex-paginator class=\"paginator\"\n                                  [currentPageIndex]=\"currentPageIndex\"\n                                  [lastPageIndex]=\"lastPageIndex\"\n                                  (onPageChange)=\"onPageChange($event)\">\n            </cp-complex-paginator>\n          </div>\n          <div class=\"listOfResults\">\n            <cp-complex-list *ngIf=\"!isDisplayComplexNavigatorView()\"\n                             [complexSearch]=\"complexSearch\">\n            </cp-complex-list>\n          </div>\n          <div class=\"ComplexNavigator\" *ngIf=\"isDisplayComplexNavigatorView()\"\n               [ngClass]=\"complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'\">\n            <cp-complex-navigator class=\"Complex-navigator\"\n                                  [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [canAddComplexesToBasket]=\"true\"\n                                  [canRemoveComplexesFromBasket]=\"false\">\n            </cp-complex-navigator>\n          </div>\n          <cp-complex-paginator class=\"paginator\"\n                                [currentPageIndex]=\"currentPageIndex\"\n                                [lastPageIndex]=\"lastPageIndex\"\n                                (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        </div>\n      </div>\n    </div>\n\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"margin-top-large margin-bottom-large row expanded\">\n  <ng-container *ngIf=\"complexSearch;else loadingSpinner\">\n    <div class=\"columns medium-12\" *ngIf=\"complexSearch.totalNumberOfResults !== 0\">\n      <h2 class=\"padding-left-large\">Total number of results: {{ complexSearch.totalNumberOfResults }} </h2>\n      <div class=\"row expanded\">\n        <div class=\"columns medium-12\">\n          <cp-complex-navigator-rating *ngIf=\"isDisplayComplexNavigatorView()\">\n          </cp-complex-navigator-rating>\n\n        </div>\n\n        <div class=\"columns medium-12 large-2 no-padding\">\n          <cp-complex-filter *ngIf=\"filters\"\n                             [speciesFilter]=\"filters.species\"\n                             [bioRoleFilter]=\"filters.bioRole\"\n                             [interactorTypeFilter]=\"filters.interactorType\"\n                             [predictedFilter]=\"filters.predicted\"\n                             [starsFilter]=\"filters.stars\"\n                             [facets]=\"complexSearch.facets\"\n                             (onResetAllFilters)=\"onResetAllFilters()\"\n                             (onSpeciesFilterChanged)=\"onSpeciesFilterChanged($event)\"\n                             (onBiologicalRoleFilterChanged)=\"onBiologicalRoleFilterChanged($event)\"\n                             (onInteractorTypeFilterChanged)=\"onInteractorTypeFilterChanged($event)\"\n                             (onPredictedFilterChanged)=\"onPredictedFilterChanged($event)\"\n                             (onStarsFilterChanged)=\"onStarsFilterChanged($event)\">\n          </cp-complex-filter>\n        </div>\n        <div class=\"columns medium-12 large-10\">\n          <div class=\"paginatorAndDisplay\">\n            <cp-complex-list-display-buttons\n              [displayType]=\"DisplayType\"\n              (displayTypeChange)=\"onDisplayTypeChange($event)\">\n            </cp-complex-list-display-buttons>\n            <cp-complex-paginator class=\"paginator\"\n                                  [currentPageIndex]=\"currentPageIndex\"\n                                  [lastPageIndex]=\"lastPageIndex\"\n                                  (onPageChange)=\"onPageChange($event)\">\n            </cp-complex-paginator>\n          </div>\n          <div class=\"listOfResults\">\n            <cp-complex-list *ngIf=\"!isDisplayComplexNavigatorView()\"\n                             [complexSearch]=\"complexSearch\">\n            </cp-complex-list>\n          </div>\n          <div class=\"ComplexNavigator\" *ngIf=\"isDisplayComplexNavigatorView()\"\n               [ngClass]=\"complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'\">\n            <cp-complex-navigator class=\"Complex-navigator\"\n                                  [complexSearch]=\"complexSearch\"\n                                  [interactors]=\"allInteractorsInComplexSearch\"\n                                  [canAddComplexesToBasket]=\"true\"\n                                  [canRemoveComplexesFromBasket]=\"false\">\n            </cp-complex-navigator>\n          </div>\n          <cp-complex-paginator class=\"paginator\"\n                                [currentPageIndex]=\"currentPageIndex\"\n                                [lastPageIndex]=\"lastPageIndex\"\n                                (onPageChange)=\"onPageChange($event)\"></cp-complex-paginator>\n        </div>\n      </div>\n    </div>\n\n\n    <div class=\"columns medium-12 callout alert\" *ngIf=\"complexSearch.totalNumberOfResults === 0\">\n      <h2>No Complex Portal results found</h2>\n      <h3>We're sorry but we couldn't find anything that matched your search for: <b>{{ query }}</b></h3>\n      <h4>Please consider refining your terms:</h4>\n      <ul>\n        <li>Make sure all words are spelled correctly</li>\n        <li>Try different keywords</li>\n        <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>\n        <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results\n          than \"bike shed\"\n        </li>\n      </ul>\n    </div>\n  </ng-container>\n  <ng-template #loadingSpinner>\n    <cp-progress-spinner [query]=\"query\"></cp-progress-spinner>\n  </ng-template>\n</div>\n");
 
 /***/ }),
 
@@ -908,7 +840,7 @@ module.exports = "input {\n  margin: 0;\n  vertical-align: middle;\n}\n\n.icon, 
   \*********************************************************************************/
 /***/ (function(module) {
 
-module.exports = ".description {\n  width: 90%;\n  text-align: justify;\n}\n\n.container {\n  display: inline-flex;\n  width: -webkit-fill-available;\n}\n\n.complexesAndDescription {\n  padding: 10px;\n  width: 95%;\n}\n\n.basketButtonContainer {\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  margin-top: 10px;\n}\n\n.basket-icons {\n  margin-left: 5px;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbGlzdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVTtFQUNWLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLG9CQUFvQjtFQUNwQiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsVUFBVTtBQUNaOztBQUVBO0VBQ0UsMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0I7RUFDbEIsMkJBQW1CO0VBQW5CLHdCQUFtQjtFQUFuQixtQkFBbUI7RUFDbkIsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCIiwiZmlsZSI6ImNvbXBsZXgtbGlzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmRlc2NyaXB0aW9uIHtcbiAgd2lkdGg6IDkwJTtcbiAgdGV4dC1hbGlnbjoganVzdGlmeTtcbn1cblxuLmNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGlubGluZS1mbGV4O1xuICB3aWR0aDogLXdlYmtpdC1maWxsLWF2YWlsYWJsZTtcbn1cblxuLmNvbXBsZXhlc0FuZERlc2NyaXB0aW9uIHtcbiAgcGFkZGluZzogMTBweDtcbiAgd2lkdGg6IDk1JTtcbn1cblxuLmJhc2tldEJ1dHRvbkNvbnRhaW5lciB7XG4gIHdpZHRoOiBmaXQtY29udGVudDtcbiAgaGVpZ2h0OiBmaXQtY29udGVudDtcbiAgbWFyZ2luLXRvcDogMTBweDtcbn1cblxuLmJhc2tldC1pY29ucyB7XG4gIG1hcmdpbi1sZWZ0OiA1cHg7XG59XG5cbiJdfQ== */";
+module.exports = ".description {\n  width: 90%;\n  text-align: justify;\n}\n\n.container {\n  display: inline-flex;\n  width: -webkit-fill-available;\n}\n\n.complexesAndDescription {\n  padding: 10px;\n  width: 95%;\n}\n\n.basketButtonContainer {\n  width: -moz-fit-content;\n  width: fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  margin-top: 10px;\n}\n\n.basket-icons {\n  margin-left: 5px;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbGlzdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVTtFQUNWLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLG9CQUFvQjtFQUNwQiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsVUFBVTtBQUNaOztBQUVBO0VBQ0UsdUJBQWtCO0VBQWxCLGtCQUFrQjtFQUNsQix3QkFBbUI7RUFBbkIsbUJBQW1CO0VBQ25CLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJjb21wbGV4LWxpc3QuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kZXNjcmlwdGlvbiB7XG4gIHdpZHRoOiA5MCU7XG4gIHRleHQtYWxpZ246IGp1c3RpZnk7XG59XG5cbi5jb250YWluZXIge1xuICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcbiAgd2lkdGg6IC13ZWJraXQtZmlsbC1hdmFpbGFibGU7XG59XG5cbi5jb21wbGV4ZXNBbmREZXNjcmlwdGlvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIHdpZHRoOiA5NSU7XG59XG5cbi5iYXNrZXRCdXR0b25Db250YWluZXIge1xuICB3aWR0aDogZml0LWNvbnRlbnQ7XG4gIGhlaWdodDogZml0LWNvbnRlbnQ7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG59XG5cbi5iYXNrZXQtaWNvbnMge1xuICBtYXJnaW4tbGVmdDogNXB4O1xufVxuXG4iXX0= */";
 
 /***/ }),
 
@@ -918,7 +850,7 @@ module.exports = ".description {\n  width: 90%;\n  text-align: justify;\n}\n\n.c
   \***************************************************************************************************************************/
 /***/ (function(module) {
 
-module.exports = ".star {\n  font-size: 1.5em;\n  cursor: pointer;\n  color: white;\n}\n\n.star.selected {\n  color: gold;\n}\n\n.ratingComponent {\n  background-color: var(--primary);\n  padding: 5px;\n  width: 350px;\n  text-align: center;\n  position: fixed;\n  z-index: 5;\n  top: 54vh;\n  right: -350px;\n  border: 1px solid white;\n  visibility: hidden;\n  -webkit-animation: ratingComponentMove 1s forwards 7s;\n          animation: ratingComponentMove 1s forwards 7s;\n}\n\n.ratingComponent input {\n  background-color: white;\n  color: var(--primary);\n}\n\n.text {\n  display: -webkit-box;\n  color: white;\n  width: 96%;\n  text-align: -webkit-center;\n  padding-left: 10px;\n  margin-bottom: -15px;\n}\n\n@-webkit-keyframes ratingComponentMove {\n  from {\n    right: -10vw;\n    visibility: visible;\n  }\n  to {\n    right: 4vw;\n    visibility: visible;\n  }\n}\n\n@keyframes ratingComponentMove {\n  from {\n    right: -10vw;\n    visibility: visible;\n  }\n  to {\n    right: 4vw;\n    visibility: visible;\n  }\n}\n\n.buttonContainer {\n  width: 100%;\n  height: 1ch;\n  text-align: end;\n  padding-right: 5px;\n}\n\n.close {\n  color: white;\n}\n\n.ratingComponentStars {\n  padding-bottom: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbmF2aWdhdG9yLXJhdGluZy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQ0FBZ0M7RUFDaEMsWUFBWTtFQUNaLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLFVBQVU7RUFDVixTQUFTO0VBQ1QsYUFBYTtFQUNiLHVCQUF1QjtFQUN2QixrQkFBa0I7RUFDbEIscURBQTZDO1VBQTdDLDZDQUE2QztBQUMvQzs7QUFHQTtFQUNFLHVCQUF1QjtFQUN2QixxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSxvQkFBb0I7RUFDcEIsWUFBWTtFQUNaLFVBQVU7RUFDViwwQkFBMEI7RUFDMUIsa0JBQWtCO0VBQ2xCLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFO0lBQ0UsWUFBWTtJQUNaLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsVUFBVTtJQUNWLG1CQUFtQjtFQUNyQjtBQUNGOztBQVRBO0VBQ0U7SUFDRSxZQUFZO0lBQ1osbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxVQUFVO0lBQ1YsbUJBQW1CO0VBQ3JCO0FBQ0Y7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztFQUNYLGVBQWU7RUFDZixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckIiLCJmaWxlIjoiY29tcGxleC1uYXZpZ2F0b3ItcmF0aW5nLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RhciB7XG4gIGZvbnQtc2l6ZTogMS41ZW07XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc3Rhci5zZWxlY3RlZCB7XG4gIGNvbG9yOiBnb2xkO1xufVxuXG4ucmF0aW5nQ29tcG9uZW50IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tcHJpbWFyeSk7XG4gIHBhZGRpbmc6IDVweDtcbiAgd2lkdGg6IDM1MHB4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgei1pbmRleDogNTtcbiAgdG9wOiA1NHZoO1xuICByaWdodDogLTM1MHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCB3aGl0ZTtcbiAgdmlzaWJpbGl0eTogaGlkZGVuO1xuICBhbmltYXRpb246IHJhdGluZ0NvbXBvbmVudE1vdmUgMXMgZm9yd2FyZHMgN3M7XG59XG5cblxuLnJhdGluZ0NvbXBvbmVudCBpbnB1dCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBjb2xvcjogdmFyKC0tcHJpbWFyeSk7XG59XG5cbi50ZXh0IHtcbiAgZGlzcGxheTogLXdlYmtpdC1ib3g7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgd2lkdGg6IDk2JTtcbiAgdGV4dC1hbGlnbjogLXdlYmtpdC1jZW50ZXI7XG4gIHBhZGRpbmctbGVmdDogMTBweDtcbiAgbWFyZ2luLWJvdHRvbTogLTE1cHg7XG59XG5cbkBrZXlmcmFtZXMgcmF0aW5nQ29tcG9uZW50TW92ZSB7XG4gIGZyb20ge1xuICAgIHJpZ2h0OiAtMTB2dztcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xuICB9XG4gIHRvIHtcbiAgICByaWdodDogNHZ3O1xuICAgIHZpc2liaWxpdHk6IHZpc2libGU7XG4gIH1cbn1cblxuLmJ1dHRvbkNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDFjaDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBwYWRkaW5nLXJpZ2h0OiA1cHg7XG59XG5cbi5jbG9zZSB7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuLnJhdGluZ0NvbXBvbmVudFN0YXJzIHtcbiAgcGFkZGluZy1ib3R0b206IDVweDtcbn1cbiJdfQ== */";
+module.exports = ".star {\n  font-size: 1.5em;\n  cursor: pointer;\n  color: white;\n}\n\n.star.selected {\n  color: gold;\n}\n\n.ratingComponent {\n  background-color: var(--primary);\n  padding: 5px;\n  width: 350px;\n  text-align: center;\n  position: fixed;\n  z-index: 5;\n  top: 54vh;\n  right: -350px;\n  border: 1px solid white;\n  visibility: hidden;\n  animation: ratingComponentMove 1s forwards 7s;\n}\n\n.ratingComponent input {\n  background-color: white;\n  color: var(--primary);\n}\n\n.text {\n  display: -webkit-box;\n  color: white;\n  width: 96%;\n  text-align: -webkit-center;\n  padding-left: 10px;\n  margin-bottom: -15px;\n}\n\n@keyframes ratingComponentMove {\n  from {\n    right: -10vw;\n    visibility: visible;\n  }\n  to {\n    right: 4vw;\n    visibility: visible;\n  }\n}\n\n.buttonContainer {\n  width: 100%;\n  height: 1ch;\n  text-align: end;\n  padding-right: 5px;\n}\n\n.close {\n  color: white;\n}\n\n.ratingComponentStars {\n  padding-bottom: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBsZXgtbmF2aWdhdG9yLXJhdGluZy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQ0FBZ0M7RUFDaEMsWUFBWTtFQUNaLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLFVBQVU7RUFDVixTQUFTO0VBQ1QsYUFBYTtFQUNiLHVCQUF1QjtFQUN2QixrQkFBa0I7RUFDbEIsNkNBQTZDO0FBQy9DOztBQUdBO0VBQ0UsdUJBQXVCO0VBQ3ZCLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLG9CQUFvQjtFQUNwQixZQUFZO0VBQ1osVUFBVTtFQUNWLDBCQUEwQjtFQUMxQixrQkFBa0I7RUFDbEIsb0JBQW9CO0FBQ3RCOztBQUVBO0VBQ0U7SUFDRSxZQUFZO0lBQ1osbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxVQUFVO0lBQ1YsbUJBQW1CO0VBQ3JCO0FBQ0Y7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztFQUNYLGVBQWU7RUFDZixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckIiLCJmaWxlIjoiY29tcGxleC1uYXZpZ2F0b3ItcmF0aW5nLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RhciB7XG4gIGZvbnQtc2l6ZTogMS41ZW07XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc3Rhci5zZWxlY3RlZCB7XG4gIGNvbG9yOiBnb2xkO1xufVxuXG4ucmF0aW5nQ29tcG9uZW50IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tcHJpbWFyeSk7XG4gIHBhZGRpbmc6IDVweDtcbiAgd2lkdGg6IDM1MHB4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgei1pbmRleDogNTtcbiAgdG9wOiA1NHZoO1xuICByaWdodDogLTM1MHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCB3aGl0ZTtcbiAgdmlzaWJpbGl0eTogaGlkZGVuO1xuICBhbmltYXRpb246IHJhdGluZ0NvbXBvbmVudE1vdmUgMXMgZm9yd2FyZHMgN3M7XG59XG5cblxuLnJhdGluZ0NvbXBvbmVudCBpbnB1dCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBjb2xvcjogdmFyKC0tcHJpbWFyeSk7XG59XG5cbi50ZXh0IHtcbiAgZGlzcGxheTogLXdlYmtpdC1ib3g7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgd2lkdGg6IDk2JTtcbiAgdGV4dC1hbGlnbjogLXdlYmtpdC1jZW50ZXI7XG4gIHBhZGRpbmctbGVmdDogMTBweDtcbiAgbWFyZ2luLWJvdHRvbTogLTE1cHg7XG59XG5cbkBrZXlmcmFtZXMgcmF0aW5nQ29tcG9uZW50TW92ZSB7XG4gIGZyb20ge1xuICAgIHJpZ2h0OiAtMTB2dztcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xuICB9XG4gIHRvIHtcbiAgICByaWdodDogNHZ3O1xuICAgIHZpc2liaWxpdHk6IHZpc2libGU7XG4gIH1cbn1cblxuLmJ1dHRvbkNvbnRhaW5lciB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDFjaDtcbiAgdGV4dC1hbGlnbjogZW5kO1xuICBwYWRkaW5nLXJpZ2h0OiA1cHg7XG59XG5cbi5jbG9zZSB7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuLnJhdGluZ0NvbXBvbmVudFN0YXJzIHtcbiAgcGFkZGluZy1ib3R0b206IDVweDtcbn1cbiJdfQ== */";
 
 /***/ }),
 
