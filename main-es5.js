@@ -607,15 +607,17 @@
         /* harmony export */
       });
       /* harmony import */
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! rxjs/operators */18293);
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! rxjs/operators */18293);
       /* harmony import */
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! rxjs/operators */33927);
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! rxjs/operators */33927);
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/core */2316);
+      var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! @angular/core */2316);
       /* harmony import */
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/common/http */53882);
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/common/http */53882);
       /* harmony import */
-      var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! rxjs/internal/observable/throwError */76859);
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../environments/environment */92340);
+      /* harmony import */
+      var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! rxjs/internal/observable/throwError */76859);
       var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
         var c = arguments.length,
           r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -624,9 +626,7 @@
         return c > 3 && r && Object.defineProperty(target, key, r), r;
       };
       var ComplexPortalService_1;
-
-      // const baseURL = environment.complex_ws_base_url;
-      var baseURL = 'http://localhost:9090/intact/complex-ws';
+      var baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_ws_base_url;
       var _ComplexPortalService = ComplexPortalService_1 = /*#__PURE__*/function () {
         function ComplexPortalService(http) {
           _classCallCheck(this, ComplexPortalService);
@@ -641,7 +641,7 @@
           key: "getComplex",
           value: function getComplex(ac) {
             var url = "".concat(baseURL, "/details/").concat(ac);
-            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
           }
           /**
            * Get a specific complex from the WS
@@ -652,7 +652,7 @@
           key: "getComplexAc",
           value: function getComplexAc(complexAc) {
             var url = "".concat(baseURL, "/complex/").concat(complexAc);
-            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
           }
           /**
            *
@@ -661,7 +661,7 @@
         }, {
           key: "getComplexOrganisms",
           value: function getComplexOrganisms() {
-            return this.findComplex('*').pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(function (complexSearchResult) {
+            return this.findComplex('*').pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(function (complexSearchResult) {
               return complexSearchResult.facets['species_f'];
             }));
           }
@@ -674,7 +674,7 @@
         }, {
           key: "getComplexMIJSON",
           value: function getComplexMIJSON(ac) {
-            return this.http.get(baseURL + '/export/' + ac).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+            return this.http.get(baseURL + '/export/' + ac).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
           }
         }, {
           key: "findComplexNoFilters",
@@ -725,10 +725,10 @@
               filters += this.buildFilterParam(ComplexPortalService_1.STARS_FACET_FIELD, starsFilter);
             }
             /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
-            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpParams().set('first', (currentPageIndex * pageSize - pageSize).toString()).set('number', pageSize.toString()).set('format', format).set('facets', ComplexPortalService_1.FACETS).set('filters', filters);
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpParams().set('first', (currentPageIndex * pageSize - pageSize).toString()).set('number', pageSize.toString()).set('format', format).set('facets', ComplexPortalService_1.FACETS).set('filters', filters);
             return this.http.get(baseURL + '/search/' + query, {
               params: params
-            }).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+            }).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
           }
         }, {
           key: "buildFilterParam",
@@ -739,7 +739,7 @@
           key: "handleError",
           value: function handleError(err) {
             if (err.error instanceof Error) {
-              return (0, rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__.throwError)(err);
+              return (0, rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__.throwError)(err);
             } else {
               console.error(err.message ? err.message : err.toString());
             }
@@ -748,7 +748,7 @@
           key: "getSimplifiedComplex",
           value: function getSimplifiedComplex(complexAc) {
             var url = "".concat(baseURL, "/complex-simplified/").concat(complexAc);
-            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+            return this.http.get(url).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
           }
         }]);
         return ComplexPortalService;
@@ -761,10 +761,10 @@
       _ComplexPortalService.FACETS = [ComplexPortalService_1.SPECIES_FACET_FIELD, ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService_1.BIO_ROLE_FACET_FIELD, ComplexPortalService_1.PREDICTED_FACET_FIELD, ComplexPortalService_1.STARS_FACET_FIELD].join(',');
       _ComplexPortalService.ctorParameters = function () {
         return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient
         }];
       };
-      _ComplexPortalService = ComplexPortalService_1 = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)()], _ComplexPortalService);
+      _ComplexPortalService = ComplexPortalService_1 = __decorate([(0, _angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)()], _ComplexPortalService);
 
       /***/
     },

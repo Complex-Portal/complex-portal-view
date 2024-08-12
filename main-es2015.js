@@ -546,11 +546,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComplexPortalService": function() { return /* binding */ ComplexPortalService; }
 /* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 18293);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 33927);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 53882);
-/* harmony import */ var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/internal/observable/throwError */ 76859);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 18293);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 33927);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 53882);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../environments/environment */ 92340);
+/* harmony import */ var rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/observable/throwError */ 76859);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -562,8 +563,8 @@ var ComplexPortalService_1;
 
 
 
-// const baseURL = environment.complex_ws_base_url;
-const baseURL = 'http://localhost:9090/intact/complex-ws';
+
+const baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.complex_ws_base_url;
 let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
     constructor(http) {
         this.http = http;
@@ -575,7 +576,7 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      */
     getComplex(ac) {
         const url = `${baseURL}/details/${ac}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
     }
     /**
      * Get a specific complex from the WS
@@ -584,14 +585,14 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      */
     getComplexAc(complexAc) {
         const url = `${baseURL}/complex/${complexAc}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
     }
     /**
      *
      * @returns {Observable<Facet[]>}
      */
     getComplexOrganisms() {
-        return this.findComplex('*').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)((complexSearchResult) => {
+        return this.findComplex('*').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)((complexSearchResult) => {
             return complexSearchResult.facets['species_f'];
         }));
     }
@@ -602,7 +603,7 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      * TODO: Define MI-JSON maybe, but as we don't work with it and only pass it on we never implemented the model
      */
     getComplexMIJSON(ac) {
-        return this.http.get(baseURL + '/export/' + ac).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+        return this.http.get(baseURL + '/export/' + ac).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
     }
     findComplexNoFilters(query, currentPageIndex = 1, pageSize = 10, format = 'json') {
         return this.findComplex(query, [], [], [], [], [], currentPageIndex, pageSize, format);
@@ -638,20 +639,20 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
             filters += this.buildFilterParam(ComplexPortalService_1.STARS_FACET_FIELD, starsFilter);
         }
         /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
-        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpParams()
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpParams()
             .set('first', ((currentPageIndex * pageSize) - pageSize).toString())
             .set('number', pageSize.toString())
             .set('format', format)
             .set('facets', ComplexPortalService_1.FACETS)
             .set('filters', filters);
-        return this.http.get(baseURL + '/search/' + query, { params: params }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+        return this.http.get(baseURL + '/search/' + query, { params: params }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
     }
     buildFilterParam(filterField, filterValues) {
         return filterField + ':(' + '"' + filterValues.join('"OR"') + '"' + '),';
     }
     handleError(err) {
         if (err.error instanceof Error) {
-            return (0,rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_3__.throwError)(err);
+            return (0,rxjs_internal_observable_throwError__WEBPACK_IMPORTED_MODULE_4__.throwError)(err);
         }
         else {
             console.error(err.message ? err.message : err.toString());
@@ -659,7 +660,7 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
     }
     getSimplifiedComplex(complexAc) {
         const url = `${baseURL}/complex-simplified/${complexAc}`;
-        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.catchError)(this.handleError));
+        return this.http.get(url).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError));
     }
 };
 ComplexPortalService.SPECIES_FACET_FIELD = 'species_f';
@@ -675,10 +676,10 @@ ComplexPortalService.FACETS = [
     ComplexPortalService_1.STARS_FACET_FIELD
 ].join(',');
 ComplexPortalService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }
 ];
 ComplexPortalService = ComplexPortalService_1 = __decorate([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)()
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)()
 ], ComplexPortalService);
 
 
