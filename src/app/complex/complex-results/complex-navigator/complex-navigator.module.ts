@@ -24,7 +24,7 @@ import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/com
 import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {RouterModule} from '@angular/router';
 import {ComplexListDisplayButtonsComponent} from './complex-list-display-buttons/complex-list-display-buttons.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
 
 @NgModule({
   imports: [

@@ -15,7 +15,7 @@ import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/pro
 import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatLegacyProgressBarModule as MatProgressBarModule} from '@angular/material/legacy-progress-bar';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {AnalyticsService} from './shared/google-analytics/service/analytics.service';
 import {LocalStorageService} from './shared/local-storage/service/local-storage.service';

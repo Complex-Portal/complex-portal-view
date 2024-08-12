@@ -4,7 +4,7 @@ import {ComplexOrganismComponent} from './complex-organism/complex-organism.comp
 import {ComplexOrganismsComponent} from './complex-organisms.component';
 import {RouterModule} from '@angular/router';
 import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
-import {MatButtonModule} from '@angular/material/button';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
 
 @NgModule({
   imports: [RouterModule.forChild([

@@ -9,7 +9,7 @@ import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-sp
 import {MarkdownModule} from 'ngx-markdown';
 import {ComplexNavigatorModule} from './complex-navigator/complex-navigator.module';
 import {ComplexNavigatorRatingComponent} from './complex-navigator/complex-navigator-rating/complex-navigator-rating.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
 import {ComplexModule} from '../complex.module';
 
 
