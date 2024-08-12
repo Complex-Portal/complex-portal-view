@@ -134,7 +134,6 @@
       }
     }
   },
-  "defaultProject": "complex-portal-view",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "cp",
