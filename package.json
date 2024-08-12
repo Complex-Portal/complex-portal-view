@@ -17,16 +17,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^12.2.12",
+    "@angular/animations": "^13.4.0",
     "@angular/cdk": "^12.2.12",
-    "@angular/common": "^12.2.12",
-    "@angular/compiler": "^12.2.12",
-    "@angular/core": "^12.2.12",
-    "@angular/forms": "^12.2.12",
+    "@angular/common": "^13.4.0",
+    "@angular/compiler": "^13.4.0",
+    "@angular/core": "^13.4.0",
+    "@angular/forms": "^13.4.0",
     "@angular/material": "^12.2.12",
-    "@angular/platform-browser": "^12.2.12",
-    "@angular/platform-browser-dynamic": "^12.2.12",
-    "@angular/router": "^12.2.12",
+    "@angular/platform-browser": "^13.4.0",
+    "@angular/platform-browser-dynamic": "^13.4.0",
+    "@angular/router": "^13.4.0",
     "@ebi-gene-expression-group/anatomogram": "^2.4.0",
     "@swissprot/rhea-reaction-visualizer": "0.0.23",
     "@types/estree": "^1.0.0",
@@ -54,10 +54,10 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.12",
-    "@angular/cli": "^12.2.12",
-    "@angular/compiler-cli": "^12.2.12",
-    "@angular/language-service": "^12.2.12",
+    "@angular-devkit/build-angular": "~13.3.11",
+    "@angular/cli": "^13.3.11",
+    "@angular/compiler-cli": "^13.4.0",
+    "@angular/language-service": "^13.4.0",
     "@types/complexviewer": "^2.1.0",
     "@types/foundation": "~5.5.30",
     "@types/jasmine": "~3.6.0",
@@ -75,6 +75,6 @@
     "protractor": "~7.0.0",
     "ts-node": "^5.0.1",
     "tslint": "~6.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.4"
   }
 }
