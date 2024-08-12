@@ -13,8 +13,7 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {Element} from '../model/complex-results/element.model';
 import {Facet} from '../model/complex-results/facet.model';
 
-// const baseURL = environment.complex_ws_base_url;
-const baseURL = 'http://localhost:9090/intact/complex-ws';
+const baseURL = environment.complex_ws_base_url;
 
 @Injectable()
 export class ComplexPortalService {
