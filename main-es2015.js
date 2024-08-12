@@ -615,13 +615,13 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
      * @param bioRoleFilter
      * @param interactorTypeFilter
      * @param predictedFilter
-     * @param starsFilter
+     * @param confidenceScoreFilter
      * @param currentPageIndex
      * @param pageSize
      * @param format
      * @returns {Observable<ComplexSearchResult>}
      */
-    findComplex(query, speciesFilter = [], bioRoleFilter = [], interactorTypeFilter = [], predictedFilter = [], starsFilter = [], currentPageIndex = 1, pageSize = 10, format = 'json') {
+    findComplex(query, speciesFilter = [], bioRoleFilter = [], interactorTypeFilter = [], predictedFilter = [], confidenceScoreFilter = [], currentPageIndex = 1, pageSize = 10, format = 'json') {
         let filters = '';
         if (speciesFilter.length !== 0) {
             filters += this.buildFilterParam(ComplexPortalService_1.SPECIES_FACET_FIELD, speciesFilter);
@@ -635,8 +635,8 @@ let ComplexPortalService = ComplexPortalService_1 = class ComplexPortalService {
         if (predictedFilter.length !== 0) {
             filters += this.buildFilterParam(ComplexPortalService_1.PREDICTED_FACET_FIELD, predictedFilter);
         }
-        if (starsFilter.length !== 0) {
-            filters += this.buildFilterParam(ComplexPortalService_1.STARS_FACET_FIELD, starsFilter);
+        if (confidenceScoreFilter.length !== 0) {
+            filters += this.buildFilterParam(ComplexPortalService_1.CONFIDENCE_SCORE_FACET_FIELD, confidenceScoreFilter);
         }
         /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
         const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpParams()
@@ -667,13 +667,13 @@ ComplexPortalService.SPECIES_FACET_FIELD = 'species_f';
 ComplexPortalService.COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
 ComplexPortalService.BIO_ROLE_FACET_FIELD = 'pbiorole_f';
 ComplexPortalService.PREDICTED_FACET_FIELD = 'predicted_complex_f';
-ComplexPortalService.STARS_FACET_FIELD = 'stars_f';
+ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD = 'confidence_score_f';
 ComplexPortalService.FACETS = [
     ComplexPortalService_1.SPECIES_FACET_FIELD,
     ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD,
     ComplexPortalService_1.BIO_ROLE_FACET_FIELD,
     ComplexPortalService_1.PREDICTED_FACET_FIELD,
-    ComplexPortalService_1.STARS_FACET_FIELD
+    ComplexPortalService_1.CONFIDENCE_SCORE_FACET_FIELD
 ].join(',');
 ComplexPortalService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }

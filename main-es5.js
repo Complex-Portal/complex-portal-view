@@ -691,7 +691,7 @@
            * @param bioRoleFilter
            * @param interactorTypeFilter
            * @param predictedFilter
-           * @param starsFilter
+           * @param confidenceScoreFilter
            * @param currentPageIndex
            * @param pageSize
            * @param format
@@ -704,7 +704,7 @@
             var bioRoleFilter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
             var interactorTypeFilter = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
             var predictedFilter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
-            var starsFilter = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+            var confidenceScoreFilter = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
             var currentPageIndex = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1;
             var pageSize = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 10;
             var format = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'json';
@@ -721,8 +721,8 @@
             if (predictedFilter.length !== 0) {
               filters += this.buildFilterParam(ComplexPortalService_1.PREDICTED_FACET_FIELD, predictedFilter);
             }
-            if (starsFilter.length !== 0) {
-              filters += this.buildFilterParam(ComplexPortalService_1.STARS_FACET_FIELD, starsFilter);
+            if (confidenceScoreFilter.length !== 0) {
+              filters += this.buildFilterParam(ComplexPortalService_1.CONFIDENCE_SCORE_FACET_FIELD, confidenceScoreFilter);
             }
             /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
             var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpParams().set('first', (currentPageIndex * pageSize - pageSize).toString()).set('number', pageSize.toString()).set('format', format).set('facets', ComplexPortalService_1.FACETS).set('filters', filters);
@@ -757,8 +757,8 @@
       _ComplexPortalService.COMPONENT_TYPE_FACET_FIELD = 'ptype_f';
       _ComplexPortalService.BIO_ROLE_FACET_FIELD = 'pbiorole_f';
       _ComplexPortalService.PREDICTED_FACET_FIELD = 'predicted_complex_f';
-      _ComplexPortalService.STARS_FACET_FIELD = 'stars_f';
-      _ComplexPortalService.FACETS = [ComplexPortalService_1.SPECIES_FACET_FIELD, ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService_1.BIO_ROLE_FACET_FIELD, ComplexPortalService_1.PREDICTED_FACET_FIELD, ComplexPortalService_1.STARS_FACET_FIELD].join(',');
+      _ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD = 'confidence_score_f';
+      _ComplexPortalService.FACETS = [ComplexPortalService_1.SPECIES_FACET_FIELD, ComplexPortalService_1.COMPONENT_TYPE_FACET_FIELD, ComplexPortalService_1.BIO_ROLE_FACET_FIELD, ComplexPortalService_1.PREDICTED_FACET_FIELD, ComplexPortalService_1.CONFIDENCE_SCORE_FACET_FIELD].join(',');
       _ComplexPortalService.ctorParameters = function () {
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient
