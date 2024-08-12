@@ -45,7 +45,7 @@ import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], {relativeLinkResolution: 'legacy'}),
+    RouterModule.forRoot([], {}),
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
