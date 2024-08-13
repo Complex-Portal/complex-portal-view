@@ -269,19 +269,16 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
     let blob = dataURItoBlob(content);
 
-    if (navigator.msSaveOrOpenBlob) {
-      navigator.msSaveOrOpenBlob(blob, fileName);
-    } else {
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      // Give filename you wish to download
-      a.download = fileName;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(a.href); // clear up url reference to blob so it can be g.c.'ed
-    }
+
+    const a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    // Give filename you wish to download
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(a.href); // clear up url reference to blob so it can be g.c.'ed
 
     blob = null;
   }
@@ -289,7 +286,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
 
 interface Legend {
-  Complex?: ColorLegend[] ;
+  Complex?: ColorLegend[];
   Interactor?: ColorLegend[];
   'MI Features'?: ColorLegend[];
 
