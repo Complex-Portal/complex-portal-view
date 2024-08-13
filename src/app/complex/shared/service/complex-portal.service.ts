@@ -1,7 +1,7 @@
 import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 import {environment} from '../../../../environments/environment';
 
