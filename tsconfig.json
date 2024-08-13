@@ -1,33 +1,25 @@
-/* To learn more about this file see: https://angular.io/guide/typescript-configuration. */
 {
-  "compileOnSave": false,
+  "files": [
+    "src/main.ts",
+    "polyfills.ts"
+  ],
   "compilerOptions": {
-    "baseUrl": "./",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
+    "baseUrl": "tsconfig",
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
     "lib": [
-      "ES2022",
+      "ES2020",
       "dom"
+    ],
+    "mapRoot": "./",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "outDir": "dist/out-tsc",
+    "sourceMap": true,
+    "target": "es2015",
+    "downlevelIteration": true,
+    "typeRoots": [
+      "./node_modules/@types"
     ]
-  },
-  "angularCompilerOptions": {
-    "disableTypeScriptVersionCheck": true,
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
   }
 }
