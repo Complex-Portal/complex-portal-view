@@ -32,6 +32,13 @@ export class DownloadModalComponent implements OnInit {
     window.open(complexURLxml25, '_blank');
   }
 
+  goToComplexWSComplexTabFormat(): void {
+    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
+
+    const complexURLxml25 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=tsv';
+    window.open(complexURLxml25, '_blank');
+  }
+
   goToComplexWSXml30Format(): void {
     this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
 
