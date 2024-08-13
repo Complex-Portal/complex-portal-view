@@ -20,4 +20,10 @@ export interface ComplexDetails {
   participants: Participant[];
   crossReferences: CrossReference[];
   predictedComplex?: boolean;
+  evidenceType?: {
+    confidenceScore: number;
+    searchURL: string;
+    description: string;
+    identifier: string;
+  };
 }

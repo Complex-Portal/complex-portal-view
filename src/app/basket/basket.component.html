@@ -28,6 +28,7 @@
       <tr *ngFor="let key of getKeys(complexBasket)" [class.predicted]="complexBasket[key].predicted">
         <td>
           <a [routerLink]="['/complex', complexBasket[key].id]">{{ complexBasket[key].name }}</a>
+          · <b class="tag">{{ !complexBasket[key].predicted ? 'Curated' : 'Predicted'}} complex</b>
         </td>
         <td>
           {{ complexBasket[key].id }}
