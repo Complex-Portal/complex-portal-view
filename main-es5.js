@@ -2611,7 +2611,7 @@
       var COMPLEX_BASE_URL = 'https://wwwdev.ebi.ac.uk/';
       var LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
       var REACTOME_BASE_URL = 'https://reactome.org';
-      var INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
+      var INTACT_FTP_BASE_URL = 'https://ftp.ebi.ac.uk/pub/databases/intact/';
       var COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
       var COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/uniplex-import/';
       var INTACT_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Intact-Portal/intact-portal-documentation/master/';
