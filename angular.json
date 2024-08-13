@@ -78,21 +78,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "complex-portal-view:build"
+            "buildTarget": "complex-portal-view:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "complex-portal-view:build:production"
+              "buildTarget": "complex-portal-view:build:production"
             },
             "test": {
-              "browserTarget": "complex-portal-view:build:test"
+              "buildTarget": "complex-portal-view:build:test"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "complex-portal-view:build"
+            "buildTarget": "complex-portal-view:build"
           }
         },
         "test": {
