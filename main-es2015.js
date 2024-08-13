@@ -2156,7 +2156,7 @@ const LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 const REACTOME_BASE_URL = 'https://reactome.org';
 const INTACT_FTP_BASE_URL = 'ftp://ftp.ebi.ac.uk/pub/databases/intact/';
 const COMPLEX__FTP_BASE_URL = INTACT_FTP_BASE_URL + 'complex/';
-const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/master/';
+const COMPLEX_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Complex-Portal/complex-portal-documentation/uniplex-import/';
 const INTACT_PORTAL_DOCUMENTATION_URL = 'https://raw.githubusercontent.com/Intact-Portal/intact-portal-documentation/master/';
 const environment = {
     production: false,
@@ -2463,7 +2463,7 @@ module.exports = "/* See this issue to understand why we need ng-deep https://gi
 /***/ (function(module) {
 
 "use strict";
-module.exports = "/* See this issue to understand why we need ng-deep https://github.com/jfcere/ngx-markdown/issues/56*/\nmarkdown ::ng-deep h1 {\n  font-size: xx-large;\n}\nmarkdown ::ng-deep h2 {\n  font-size: x-large;\n}\nmarkdown ::ng-deep h3 {\n  font-size: large;\n}\nmarkdown ::ng-deep img {\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  height: 100px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRvY3VtZW50YXRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxxR0FBcUc7QUFDckc7RUFDRSxtQkFBbUI7QUFDckI7QUFDQTtFQUNFLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxjQUFjO0VBQ2QsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixhQUFhO0FBQ2YiLCJmaWxlIjoiZG9jdW1lbnRhdGlvbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogU2VlIHRoaXMgaXNzdWUgdG8gdW5kZXJzdGFuZCB3aHkgd2UgbmVlZCBuZy1kZWVwIGh0dHBzOi8vZ2l0aHViLmNvbS9qZmNlcmUvbmd4LW1hcmtkb3duL2lzc3Vlcy81NiovXG5tYXJrZG93biA6Om5nLWRlZXAgaDEge1xuICBmb250LXNpemU6IHh4LWxhcmdlO1xufVxubWFya2Rvd24gOjpuZy1kZWVwIGgyIHtcbiAgZm9udC1zaXplOiB4LWxhcmdlO1xufVxubWFya2Rvd24gOjpuZy1kZWVwIGgzIHtcbiAgZm9udC1zaXplOiBsYXJnZTtcbn1cbm1hcmtkb3duIDo6bmctZGVlcCBpbWcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luOiAwIGF1dG87XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgaGVpZ2h0OiAxMDBweDtcbn1cbiJdfQ== */";
+module.exports = "/* See this issue to understand why we need ng-deep https://github.com/jfcere/ngx-markdown/issues/56*/\nmarkdown ::ng-deep h1 {\n  font-size: xx-large;\n}\nmarkdown ::ng-deep h2 {\n  font-size: x-large;\n}\nmarkdown ::ng-deep h3 {\n  font-size: large;\n}\nmarkdown ::ng-deep img {\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  /*height: 100px;*/\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRvY3VtZW50YXRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxxR0FBcUc7QUFDckc7RUFDRSxtQkFBbUI7QUFDckI7QUFDQTtFQUNFLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxjQUFjO0VBQ2QsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixpQkFBaUI7QUFDbkIiLCJmaWxlIjoiZG9jdW1lbnRhdGlvbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogU2VlIHRoaXMgaXNzdWUgdG8gdW5kZXJzdGFuZCB3aHkgd2UgbmVlZCBuZy1kZWVwIGh0dHBzOi8vZ2l0aHViLmNvbS9qZmNlcmUvbmd4LW1hcmtkb3duL2lzc3Vlcy81NiovXG5tYXJrZG93biA6Om5nLWRlZXAgaDEge1xuICBmb250LXNpemU6IHh4LWxhcmdlO1xufVxubWFya2Rvd24gOjpuZy1kZWVwIGgyIHtcbiAgZm9udC1zaXplOiB4LWxhcmdlO1xufVxubWFya2Rvd24gOjpuZy1kZWVwIGgzIHtcbiAgZm9udC1zaXplOiBsYXJnZTtcbn1cbm1hcmtkb3duIDo6bmctZGVlcCBpbWcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luOiAwIGF1dG87XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgLypoZWlnaHQ6IDEwMHB4OyovXG59XG4iXX0= */";
 
 /***/ }),
 
