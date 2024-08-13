@@ -12,5 +12,5 @@ markdown ::ng-deep img {
   display: block;
   margin: 0 auto;
   text-align: center;
-  height: 100px;
+  /*height: 100px;*/
 }
