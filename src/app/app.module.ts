@@ -14,8 +14,8 @@ import {BasketService} from './shared/basket/service/basket.service';
 import {ProgressBarComponent} from './shared/loading-indicators/progress-bar/progress-bar.component';
 import {ToastrModule} from 'ngx-toastr';
 import {LocalSearchComponent} from './search/local-search/local-search.component';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatLegacyProgressBarModule as MatProgressBarModule} from '@angular/material/legacy-progress-bar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {OntologiesComponent} from './ontologies/ontologies.component';
 import {AnalyticsService} from './shared/google-analytics/service/analytics.service';
 import {LocalStorageService} from './shared/local-storage/service/local-storage.service';
@@ -31,6 +31,8 @@ import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-goog
 import {environment} from '../environments/environment';
 import {FooterComponent} from './footer/footer.component';
 import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
+import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
+
 
 @NgModule({
   declarations: [
@@ -44,11 +46,11 @@ import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
     FooterComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     RouterModule.forRoot([], {}),
     FormsModule,
     HttpClientModule,
-    NoopAnimationsModule,
     ToastrModule.forRoot(),
     NgxPageScrollCoreModule.forRoot({scrollOffset: 50}),
     MatProgressBarModule,
@@ -57,6 +59,7 @@ import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
     NgxGoogleAnalyticsRouterModule,
     HomeModule,
     AppRoutingModule,
+    ProgressSpinnerComponent,
   ],
   providers: [
     ComplexPortalService,

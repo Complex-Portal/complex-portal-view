@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {BasketComponent} from './basket.component';
 import {ComplexNavigatorModule} from '../complex/complex-results/complex-navigator/complex-navigator.module';
-import {ProgressSpinnerModule} from '../shared/loading-indicators/progress-spinner/progress-spinner.module';
+import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -11,7 +11,7 @@ import {ProgressSpinnerModule} from '../shared/loading-indicators/progress-spinn
   ]),
     CommonModule,
     ComplexNavigatorModule,
-    ProgressSpinnerModule
+    ProgressSpinnerComponent
   ],
   declarations: [BasketComponent]
 })

@@ -3,15 +3,15 @@ import {CommonModule} from '@angular/common';
 import {ComplexOrganismComponent} from './complex-organism/complex-organism.component';
 import {ComplexOrganismsComponent} from './complex-organisms.component';
 import {RouterModule} from '@angular/router';
-import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
-import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
+import {MatButtonModule} from '@angular/material/button';
+import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
     {path: '', component: ComplexOrganismsComponent}
   ]),
     CommonModule,
-    ProgressSpinnerModule,
+    ProgressSpinnerComponent,
     MatButtonModule
   ],
   declarations: [ComplexOrganismsComponent,
