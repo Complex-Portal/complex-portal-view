@@ -2,7 +2,7 @@ import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation} from '@angul
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
-import * as complexviewer from 'complexviewer';
+import {App as ComplexViewer} from 'complexviewer';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
 
 let viewer: any;
@@ -57,7 +57,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     $('cp-complex-participants').foundation();
-    viewer = new complexviewer.App(document.getElementById('networkContainer'));
+    viewer = new ComplexViewer(document.getElementById('networkContainer'));
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
     for (const key of Object.keys(this.annotations)) {

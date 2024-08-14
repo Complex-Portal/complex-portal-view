@@ -43,3 +43,4 @@ Thumbs.db
 
 #Ignore the on the flight created .js files
 src/app/**/*.js
+/.yalc/

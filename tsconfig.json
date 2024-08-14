@@ -1,7 +1,7 @@
 {
   "files": [
     "src/main.ts",
-    "polyfills.ts"
+    "src/polyfills.ts",
   ],
   "compilerOptions": {
     "baseUrl": "tsconfig",
@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "lib": [
-      "ES2020",
+      "ES2022",
       "dom"
     ],
     "mapRoot": "./",
@@ -17,7 +17,7 @@
     "moduleResolution": "node",
     "outDir": "dist/out-tsc",
     "sourceMap": true,
-    "target": "es2015",
+    "target": "ES2022",
     "typeRoots": [
       "./node_modules/@types"
     ]

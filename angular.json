@@ -9,21 +9,15 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "customWebpackConfig": {
-              "path": "./webpack.config.js"
-            },
             "outputPath": "dist",
-            "allowedCommonJsDependencies": [
-              "litemol",
-              "util",
-              "intersectionjs"
-            ],
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "tsConfig": "tsconfig.json",
-            "polyfills": "polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -35,16 +29,13 @@
               "node_modules/animate.css/animate.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/ebi-framework/libraries/foundation-6/js/foundation.js",
               "node_modules/ebi-framework/js/foundationExtendEBI.js",
-              "node_modules/ebi-framework/js/script.js",
-              "node_modules/complexviewer/dist/complexviewer.js"
+              "node_modules/ebi-framework/js/script.js"
             ],
             "aot": false,
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -56,7 +47,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
