@@ -31652,4 +31652,37 @@ function patchCommon(Zone2) {
 var Zone$1 = loadZone();
 patchCommon(Zone$1);
 patchBrowser(Zone$1);
+/*! Bundled license information:
+
+@angular/compiler/fesm2022/compiler.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/compiler/fesm2022/compiler.mjs:
+  (*!
+   * @license
+   * Copyright Google LLC All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   *)
+  (**
+   *
+   * @license
+   * Copyright Google LLC All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   *)
+
+zone.js/fesm2015/zone.js:
+  (**
+   * @license Angular v<unknown>
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+*/
 //# sourceMappingURL=polyfills.js.map

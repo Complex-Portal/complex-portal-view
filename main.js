@@ -3,10 +3,10 @@ import {
   NgxPageScrollCoreModule,
   OlsService,
   ReactomeService
-} from "./chunk-JKX7NA7U.js";
+} from "./chunk-7DPSB2PZ.js";
 import {
   MarkdownModule
-} from "./chunk-FDEZDPFJ.js";
+} from "./chunk-EU7EGZ5R.js";
 import {
   AUTO_STYLE,
   AnimationGroupPlayer,
@@ -19,7 +19,7 @@ import {
   sequence,
   style,
   ɵPRE_STYLE
-} from "./chunk-4YU3Q6PZ.js";
+} from "./chunk-2VCLLS4E.js";
 import {
   AnalyticsService,
   Category,
@@ -30,10 +30,10 @@ import {
   ProgressBarComponent,
   ProgressSpinnerComponent,
   environment
-} from "./chunk-2OKYUNHS.js";
+} from "./chunk-VAAOO3WK.js";
 import {
   SpeciesPipe
-} from "./chunk-JCGHHBMG.js";
+} from "./chunk-JD75RUVK.js";
 import {
   ANIMATION_MODULE_TYPE,
   ActivatedRoute,
@@ -108,7 +108,7 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-2DYKJXQN.js";
+} from "./chunk-I4WWFSLP.js";
 
 // package.json
 var require_package = __commonJS({
@@ -31307,11 +31307,11 @@ var __decorate6 = function(decorators, target, key, desc) {
 var routes = [
   {
     path: "complex",
-    loadChildren: () => import("./complex.module-QN6NRF3H.js").then((m) => m.ComplexModule)
+    loadChildren: () => import("./complex.module-Y6SF37IM.js").then((m) => m.ComplexModule)
   },
   {
     path: "basket",
-    loadChildren: () => import("./basket.module-E24ELOSO.js").then((m) => m.BasketModule)
+    loadChildren: () => import("./basket.module-KOCQXC5X.js").then((m) => m.BasketModule)
   },
   {
     path: "about",
@@ -36369,4 +36369,58 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule, {
   preserveWhitespaces: true
 });
+/*! Bundled license information:
+
+@angular/compiler/fesm2022/compiler.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/compiler/fesm2022/compiler.mjs:
+  (*!
+   * @license
+   * Copyright Google LLC All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   *)
+  (**
+   *
+   * @license
+   * Copyright Google LLC All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   *)
+
+@angular/platform-browser-dynamic/fesm2022/platform-browser-dynamic.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/forms/fesm2022/forms.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/animations/fesm2022/browser.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/platform-browser/fesm2022/animations.mjs:
+  (**
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+*/
 //# sourceMappingURL=main.js.map
