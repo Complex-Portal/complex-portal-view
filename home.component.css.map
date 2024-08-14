@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/home/home.component.css"],
+  "sourcesContent": [".definition {\n  background: #cde4e5;\n  font-family: \"Lato-Regular\", Helvetica, Arial, sans-serif;\n  border-radius: 4px;\n  vertical-align: middle;\n  padding: 15px\n}\n"],
+  "mappings": "AAAA,CAAC,WACC,WAAY,QACZ,YAAa,YAAc,CAAE,SAAS,CAAE,KAAK,CAAE,WAFjD,cAGiB,IACf,eAAgB,OAJlB,QAKW,IACX",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/basket/basket.component.css"],
+  "sourcesContent": [".ComplexNavigator, .hover {\n  width: 70%;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.basket-icons {\n  margin-left: 5px;\n  margin-bottom: 5px;\n}\n\n.deleteAllButton {\n  width: 225px;\n}\n\nh2 {\n  line-height: 1;\n}\n"],
+  "mappings": "AAAA,CAAC,iBAAkB,CAAC,MAClB,MAAO,IACP,YAAa,KACb,aAAc,IAChB,CAEA,CAAC,aACC,YAAa,IACb,cAAe,GACjB,CAEA,CAAC,gBACC,MAAO,KACT,CAEA,GACE,YAAa,CACf",
+  "names": []
+}

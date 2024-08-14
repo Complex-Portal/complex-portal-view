@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component.css"],
+  "sourcesContent": [".verticalLine, .transparentVerticalLine {\n  margin-left: auto;\n  margin-right: auto;\n  min-width: 1%;\n  max-width: 1%;\n  max-height: 50%;\n  min-height: 50%;\n  z-index: 0;\n}\n\n.verticalLine {\n  border-right: 3px solid #0e6f76;\n}\n\n.transparentVerticalLine {\n  border-right: 0;\n}\n"],
+  "mappings": "AAAA,CAAC,aAAc,CAAC,wBACd,YAAa,KACb,aAAc,KACd,UAAW,GACX,UAAW,GACX,WAAY,IACZ,WAAY,IACZ,QAAS,CACX,CAEA,CAVC,aAWC,aAAc,IAAI,MAAM,OAC1B,CAEA,CAdgB,wBAed,aAAc,CAChB",
+  "names": []
+}

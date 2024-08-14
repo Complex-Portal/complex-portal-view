@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.component.css"],
+  "sourcesContent": [".basket {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: var(--primary);\n  background-color: white;\n  display: inline;\n}\n\n.basket.active {\n  padding: 0.2rem 0;\n  border-radius: 2px;\n  font-size: 0.8rem;\n  line-height: 1;\n  white-space: nowrap;\n  cursor: default;\n  color: white;\n  background-color: var(--primary);\n  display: inline;\n}\n\n/* NAVIGATION SUBMENU OVERRIDE EBI-GLOBAL TO REMOVE A WHITE RIGHT LINE */\n.no-border-submenu {\n  border-right: 0 !important;\n}\n\n\n.sticky-nav-container {\n  --global-margin: calc((100vw - 80rem) / -2);\n  position: sticky;\n  top: 0;\n  background: var(--primary);\n  padding: 0 calc(-1 * var(--global-margin));\n  width: 100vw;\n  z-index: 4;\n  border-bottom: 1px solid white;\n}\n\n.sticky-nav-container nav {\n  display: flex;\n}\n\n"],
+  "mappings": "AAAA,CAAC,OAAD,QACW,MAAO,EADlB,cAEiB,IACf,UAAW,MACX,YAAa,EACb,YAAa,OACb,OAAQ,QACR,MAAO,IAAI,WACX,iBAAkB,KAClB,QAAS,MACX,CAEA,CAZC,MAYM,CAAC,OAZR,QAaW,MAAO,EAblB,cAciB,IACf,UAAW,MACX,YAAa,EACb,YAAa,OACb,OAAQ,QACR,MAAO,KACP,iBAAkB,IAAI,WACtB,QAAS,MACX,CAGA,CAAC,kBACC,aAAc,WAChB,CAGA,CAAC,qBACC,iBAAiB,KAAM,OAAM,EAAE,MAAO,CAAE,KACxC,SAAU,OACV,IAAK,EACL,WAAY,IAAI,WAChB,QAAS,EAAE,KAAK,GAAG,EAAE,IAAI,kBACzB,MAAO,MACP,QAAS,EACT,cAAe,IAAI,MAAM,KAC3B,CAEA,CAXC,qBAWqB,IACpB,QAAS,IACX",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-external-link/table-interactor-external-link.component.css"],
+  "sourcesContent": ["a {\n  font-weight: normal;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\ni:not(.small) {\n  font-size: large;\n}\n\n.externalLinkContainer {\n  justify-content: end;\n  grid-gap: 5px;\n  font-size: 14px;\n  line-break: anywhere;\n  word-break: break-word;\n}\n"],
+  "mappings": "AAAA,EACE,YAAa,GACf,CAEA,EAAG,CAAC,SACF,MAAO,OACT,CAEA,CAAC,KAAK,CAAC,OACL,UAAW,KACb,CAEA,CAAC,sBACC,gBAAiB,IACjB,SAAU,IACV,UAAW,KACX,WAAY,SACZ,WAAY,UACd",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/home/twitter-display/twitter-display.component.css"],
+  "sourcesContent": ["#twitter {\n  max-height: 400px;\n}\n\nh3 {\n  border-bottom:solid;\n  border-color: #5ca23561;\n}\n"],
+  "mappings": "AAAA,CAAC,QACC,WAAY,KACd,CAEA,GACE,cAAc,MACd,aAAc,SAChB",
+  "names": []
+}
