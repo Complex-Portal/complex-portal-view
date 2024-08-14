@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/home/newsletter-subscription/newsletter-subscription.component.css"],
-  "sourcesContent": ["/*noinspection CssUnknownTarget*/\n@import \"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\";\n\nh3 {\n  border-bottom:solid;\n  border-color: #5ca23561;\n}\n\n#mc_embed_signup {\n  background: #fff;\n  clear: left;\n  font: 14px Helvetica, Arial, sans-serif;\n}\n\n#mc_embed_signup form {\n  padding: 0;\n}\n\ninput#mce-EMAIL.email {\n  width: 100% !important;\n}\n\ninput#mc-embedded-subscribe.button {\n  width: 100% !important;\n  background-color: var(--primary)\n}\n"],
-  "mappings": ";;;AAGA;AACE,iBAAc;AACd,gBAAc;AAChB;AAEA,CAAC;AACC,cAAY;AACZ,SAAO;AACP;AAAA,IAAM,KAAK,SAAS;AAAA,IAAE,KAAK;AAAA,IAAE;AAC/B;AAEA,CANC,gBAMgB;AACf,WAAS;AACX;AAEA,KAAK,CAAC,SAAS,CAAC;AACd,SAAO;AACT;AAEA,KAAK,CAAC,qBAAqB,CAAC;AAC1B,SAAO;AACP,oBAAkB,IAAI;AACxB;",
-  "names": []
-}

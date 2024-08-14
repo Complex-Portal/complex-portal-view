@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/complex-details/complex-participants/complex-participant-legend/complex-participant-legend.component.css"],
-  "sourcesContent": [".gray-top-border {\n  border-top: 1px solid dimgray;\n}\n\n.small-row {\n  line-height: 1;\n}\n\n.no-padding-top {\n  padding-top: 0;\n}\n\n.no-padding {\n  padding: 0;\n}\n\n.no-border {\n  border: none;\n}\n\n.centered-vertical {\n  text-align: center;\n  vertical-align: middle;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,cAAY,IAAI,MAAM;AACxB;AAEA,CAAC;AACC,eAAa;AACf;AAEA,CAAC;AACC,eAAa;AACf;AAEA,CAAC;AACC,WAAS;AACX;AAEA,CAAC;AACC,UAAQ;AACV;AAEA,CAAC;AACC,cAAY;AACZ,kBAAgB;AAClB;",
-  "names": []
-}

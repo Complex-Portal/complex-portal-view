@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/complex-results/complex-filter/complex-filter.component.css"],
-  "sourcesContent": ["input {\n  margin: 0;\n  vertical-align: middle;\n}\n\n.icon, img {\n  vertical-align: middle;\n  margin: 0 2px;\n}\n\nlabel {\n  line-height: 1.8;\n  vertical-align: middle;\n}\n\n.count {\n  padding: 0 4px;\n  border-radius: 50px;\n  border: 1px solid black;\n  font-size: small;\n}\n\n.tag ~ .count {\n  margin-left: 6px;\n}\n\n.predicted .count {\n  border: 1px solid black;\n}\n\ninput:checked ~ .count {\n  background: var(--primary);\n  color: var(--on-primary);\n  font-weight: bold;\n  border: 1px solid var(--primary);\n}\n\n.stars {\n  /*display: flex;*/\n  gap: 4px;\n}\n\n.stars .icon {\n  font-size: 12pt;\n}\n.empty {\n  color: lightgray;\n}\n\n.full {\n  color: var(--primary);\n  -webkit-text-stroke: 1px var(--on-primary);\n  text-shadow: 0 0 4px var(--primary);\n}\n"],
-  "mappings": ";AAAA;AACE,UAAQ;AACR,kBAAgB;AAClB;AAEA,CAAC;AAAM;AACL,kBAAgB;AAChB,UAAQ,EAAE;AACZ;AAEA;AACE,eAAa;AACb,kBAAgB;AAClB;AAEA,CAAC;AACC,WAAS,EAAE;AACX,iBAAe;AACf,UAAQ,IAAI,MAAM;AAClB,aAAW;AACb;AAEA,CAAC,IAAI,EAAE,CAPN;AAQC,eAAa;AACf;AAEA,CAAC,UAAU,CAXV;AAYC,UAAQ,IAAI,MAAM;AACpB;AAEA,KAAK,SAAS,EAAE,CAff;AAgBC,cAAY,IAAI;AAChB,SAAO,IAAI;AACX,eAAa;AACb,UAAQ,IAAI,MAAM,IAAI;AACxB;AAEA,CAAC;AAEC,OAAK;AACP;AAEA,CALC,MAKM,CArCN;AAsCC,aAAW;AACb;AACA,CAAC;AACC,SAAO;AACT;AAEA,CAAC;AACC,SAAO,IAAI;AACX,uBAAqB,IAAI,IAAI;AAC7B,eAAa,EAAE,EAAE,IAAI,IAAI;AAC3B;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/complex-organisms/complex-organism/complex-organism.component.css"],
-  "sourcesContent": [".icon {\n  font-size: 100px;\n  color: var(--primary);\n}\n\n.asset-icon {\n  width: 100px;\n  height: 101px;\n  background-color: var(--primary);\n}\n\na {\n  align-self: center;\n}\n\n.card {\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);\n  padding: 1.5em 1em;\n  border-radius: 12px;\n  height: 100%;\n}\n\n.flex-spacer {\n  flex: 1;\n}\n\ndiv.actions {\n  text-align: center;\n}\n\n.species-button {\n  padding: 1em;\n  color: var(--primary);\n  border-radius: 20%;\n  margin: 1em;\n  border: none;\n  cursor: pointer;\n}\n\n.species-button:hover {\n  opacity: 0.9;\n  box-shadow: 0 0 20px var(--primary);\n}\n\nbutton.download-button {\n  border: 2px solid var(--primary);\n  border-radius: 25px;\n  color: var(--primary);\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,SAAO,IAAI;AACb;AAEA,CAAC;AACC,SAAO;AACP,UAAQ;AACR,oBAAkB,IAAI;AACxB;AAEA;AACE,cAAY;AACd;AAEA,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,cAAY;AACZ,cAAY,EAAE,EAAE,IAAI,EAAE,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AACpC,WAAS,MAAM;AACf,iBAAe;AACf,UAAQ;AACV;AAEA,CAAC;AACC,QAAM;AACR;AAEA,GAAG,CAAC;AACF,cAAY;AACd;AAEA,CAAC;AACC,WAAS;AACT,SAAO,IAAI;AACX,iBAAe;AACf,UAAQ;AACR,UAAQ;AACR,UAAQ;AACV;AAEA,CATC,cASc;AACb,WAAS;AACT,cAAY,EAAE,EAAE,KAAK,IAAI;AAC3B;AAEA,MAAM,CAAC;AACL,UAAQ,IAAI,MAAM,IAAI;AACtB,iBAAe;AACf,SAAO,IAAI;AACb;",
-  "names": []
-}

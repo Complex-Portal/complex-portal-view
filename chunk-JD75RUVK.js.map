@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/shared/pipe/species.pipe.ts"],
-  "sourcesContent": ["import {Pipe, PipeTransform} from '@angular/core';\n\n@Pipe({\n  name: 'species',\n  pure: true\n})\nexport class SpeciesPipe implements PipeTransform {\n  exceptions = new Map<string, string>([\n    ['Severe acute respiratory syndrome coronavirus', 'SARS-CoV'],\n    ['Severe acute respiratory syndrome coronavirus 2', 'SARS-CoV-2'],\n    ['Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012)', 'MERS-CoV'],\n  ]);\n\n  transform(value: string, short = false): string {\n    const words = value.replace(';', '').split(' ');\n    return this.exceptions.get(value) || (\n      short ?\n        words[0].charAt(0) + '. ' + words[1] :\n        words.slice(0, 2).join(' ')\n    );\n  }\n\n}\n"],
-  "mappings": ";;;;;;;;;;;;AAMO,IAAM,cAAN,MAAMA,aAAW;EAAjB;AACL,sCAAa,oBAAI,IAAoB;MACnC,CAAC,iDAAiD,UAAU;MAC5D,CAAC,mDAAmD,YAAY;MAChE,CAAC,iGAAiG,UAAU;KAC7G;;EAED,UAAU,OAAe,QAAQ,OAAK;AACpC,UAAM,QAAQ,MAAM,QAAQ,KAAK,EAAE,EAAE,MAAM,GAAG;AAC9C,WAAO,KAAK,WAAW,IAAI,KAAK,MAC9B,QACE,MAAM,CAAC,EAAE,OAAO,CAAC,IAAI,OAAO,MAAM,CAAC,IACnC,MAAM,MAAM,GAAG,CAAC,EAAE,KAAK,GAAG;EAEhC;;AAdW,cAAW,WAAA;EAJvB,KAAK;IACJ,MAAM;IACN,MAAM;GACP;GACY,WAAW;",
-  "names": ["SpeciesPipe"]
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/complex-details/shared/visualisation/node-diagram/node-diagram.component.css"],
-  "sourcesContent": [".node-diagram {\n  vertical-align: middle;\n  height: 20pt;\n}\n\n.node-diagram text {\n  user-select: text;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,kBAAgB;AAChB,UAAQ;AACV;AAEA,CALC,aAKa;AACZ,uBAAa;AAAb,eAAa;AACf;",
-  "names": []
-}

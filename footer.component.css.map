@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/footer/footer.component.css"],
-  "sourcesContent": ["footer a {\n  text-decoration:none;\n  border-width: 0;\n}\n\na, a:visited {\n  border: none;\n  padding: 2px;\n}\n\na img {\n  max-height: 75px;\n  max-width: 175px;\n  padding: 2px;\n}\n"],
-  "mappings": ";AAAA,OAAO;AACL,mBAAgB;AAChB,gBAAc;AAChB;AAEA;AAAG,CAAC;AACF,UAAQ;AACR,WAAS;AACX;AAEA,EAAE;AACA,cAAY;AACZ,aAAW;AACX,WAAS;AACX;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-stoichiometry/table-interactor-stoichiometry.component.css"],
-  "sourcesContent": ["\n.stoichNum {\n  width: 4ch;\n  height: 4ch;\n  border-radius: 4ch;\n  background-color: var(--primary);\n  text-align: center;\n  padding-top: 0.5ch;\n  color: var(--on-primary);\n  font-size: small;\n  margin-left: auto;\n  margin-right: auto;\n  position: relative;\n  z-index: 1;\n}\n"],
-  "mappings": ";AACA,CAAC;AACC,SAAO;AACP,UAAQ;AACR,iBAAe;AACf,oBAAkB,IAAI;AACtB,cAAY;AACZ,eAAa;AACb,SAAO,IAAI;AACX,aAAW;AACX,eAAa;AACb,gBAAc;AACd,YAAU;AACV,WAAS;AACX;",
-  "names": []
-}
