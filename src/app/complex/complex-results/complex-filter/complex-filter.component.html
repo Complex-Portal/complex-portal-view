@@ -6,28 +6,28 @@
     </div>
   </div>
   <div class="columns medium-12">
-    <div *ngIf="facets.predicted_complex_f">
+    <div *ngIf="facets().predicted_complex_f">
       <b>Complex Type</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.predicted_complex_f" [class.predicted]="facet.name === 'true'">
+        <li *ngFor="let facet of facets().predicted_complex_f" [class.predicted]="facet.name === 'true'">
           <label>
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changePredictedFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, predictedFilter)">
+                   [checked]="isSelected(facet.name, predictedFilter())">
             <span class="tag">{{ formatPredictedFacetValue(facet.name) }}</span><span class="count">{{ facet.count }}</span>
           </label>
         </li>
       </ul>
     </div>
 
-    <div *ngIf="facets.confidence_score_f">
+    <div *ngIf="facets().confidence_score_f">
       <b>Confidence Score</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.confidence_score_f" [class.predicted]="facet.name === '1' || facet.name === '2'">
+        <li *ngFor="let facet of facets().confidence_score_f" [class.predicted]="facet.name === '1' || facet.name === '2'">
           <label>
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changeConfidenceScoreFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, confidenceScoreFilter)">
+                   [checked]="isSelected(facet.name, confidenceScoreFilter())">
 
             <span class="stars">
               <i *ngFor="let star of getStars(facet.name)" class="icon icon-common icon-star" [ngClass]="star"></i>
@@ -38,14 +38,14 @@
       </ul>
     </div>
 
-    <div *ngIf="facets.species_f">
+    <div *ngIf="facets().species_f">
       <b>Species</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.species_f">
+        <li *ngFor="let facet of facets().species_f">
           <label [matTooltip]="facet.name">
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changeSpeciesFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, speciesFilter)">
+                   [checked]="isSelected(facet.name, speciesFilter())">
 
             <span>
               <i *ngIf="facetOrganismIcon(facet.name).startsWith('icon'); else img"
@@ -61,14 +61,14 @@
       </ul>
     </div>
 
-    <div *ngIf="facets.pbiorole_f">
+    <div *ngIf="facets().pbiorole_f">
       <b>Biological Role</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.pbiorole_f">
+        <li *ngFor="let facet of facets().pbiorole_f">
           <label>
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, bioRoleFilter)">
+                   [checked]="isSelected(facet.name, bioRoleFilter())">
 
             {{ facet.name }} <span class="count">{{ facet.count }}</span>
           </label>
@@ -76,14 +76,14 @@
       </ul>
     </div>
 
-    <div *ngIf="facets.ptype_f">
+    <div *ngIf="facets().ptype_f">
       <b>Component Type</b>
       <ul class="no-bullet">
-        <li *ngFor="let facet of facets.ptype_f">
+        <li *ngFor="let facet of facets().ptype_f">
           <label>
             <input type="checkbox" #filter value="{{facet.name}}"
                    (change)="changeInteractorTypeFilter(filter.value, filter.checked)"
-                   [checked]="isSelected(facet.name, interactorTypeFilter)">
+                   [checked]="isSelected(facet.name, interactorTypeFilter())">
 
             <span >
               <i [ngClass]="facetTypeIcon(facet.name)" style="font-size: large;"></i>
@@ -94,7 +94,7 @@
       </ul>
     </div>
 
-    <div *ngIf="!facets.species_f && !facets.pbiorole_f && !facets.ptype_f && !facets.predicted_complex_f && !facets.confidence_score_f">
+    <div *ngIf="!facets().species_f && !facets().pbiorole_f && !facets().ptype_f && !facets().predicted_complex_f && !facets().confidence_score_f">
       <h6>No filters available</h6>
     </div>
   </div>

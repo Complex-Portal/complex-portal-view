@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
+import {Component, model, OnInit} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
@@ -6,52 +6,47 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
   styleUrls: ['./complex-navigator-buttons.component.css']
 })
 export class ComplexNavigatorButtonsComponent implements OnInit {
-  @Output() interactorsSortingChange = new EventEmitter<string>();
-  @Output() organismIconDisplayChange = new EventEmitter<boolean>();
-  @Output() interactorTypeDisplayChange = new EventEmitter<boolean>();
-  @Output() IDDisplayChange = new EventEmitter<boolean>();
+  interactorsSorting = model<string>();
+  organismIconDisplay = model<boolean>();
+  interactorTypeDisplay = model<boolean>();
+  idDisplay = model<boolean>();
 
-  @Input() interactorsSorting: string;
-  @Input() organismIconDisplay: boolean;
-  @Input() interactorTypeDisplay: boolean;
-  @Input() IDDisplay: boolean;
-
-  typeOfDisplay: string;
+  typeOfDisplay: 'compact' | 'detailed';
 
   ngOnInit() {
     this.updateDisplay();
   }
 
   interactorsSortingChanges(typeOfSorting: string) {
-    this.interactorsSortingChange.emit(typeOfSorting);
+    this.interactorsSorting.set(typeOfSorting);
     if (this.typeOfDisplay === 'detailed') {
       if (typeOfSorting === 'Type') {
-        this.interactorTypeDisplay = false;
-        this.organismIconDisplay = true;
+        this.interactorTypeDisplay.set(false);
+        this.organismIconDisplay.set(true);
       } else if (typeOfSorting === 'Organism') {
-        this.organismIconDisplay = false;
-        this.interactorTypeDisplay = true;
+        this.organismIconDisplay.set(false);
+        this.interactorTypeDisplay.set(true);
       }
       this.updateDisplay();
     }
   }
 
-  DisplayingOrganism() {
-    this.organismIconDisplay = !this.organismIconDisplay;
+  toggleOrganism() {
+    this.organismIconDisplay.update(v => !v);
     this.updateDisplay();
   }
 
-  DisplayingType() {
-    this.interactorTypeDisplay = !this.interactorTypeDisplay;
+  toggleType() {
+    this.interactorTypeDisplay.update(v => !v);
     this.updateDisplay();
   }
 
-  DisplayingID() {
-    this.IDDisplay = !this.IDDisplay;
+  toggleId() {
+    this.idDisplay.update(v => !v);
     this.updateDisplay();
   }
 
-  setDisplayType(type: string) {
+  setDisplayType(type: 'compact' | 'detailed') {
     if (type === 'compact') {
       this.compactDisplay();
     } else if (type === 'detailed') {
@@ -60,34 +55,24 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   }
 
   compactDisplay() {
-    this.organismIconDisplay = false;
-    this.interactorTypeDisplay = false;
-    this.IDDisplay = false;
+    this.organismIconDisplay.set(false);
+    this.interactorTypeDisplay.set(false);
+    this.idDisplay.set(false);
     this.typeOfDisplay = 'compact';
-    this.changesEmitter();
   }
 
   detailedDisplay() {
-    this.organismIconDisplay = true;
-    this.interactorTypeDisplay = true;
-    this.IDDisplay = true;
+    this.organismIconDisplay.set(true);
+    this.interactorTypeDisplay.set(true);
+    this.idDisplay.set(true);
     this.typeOfDisplay = 'detailed';
-    this.changesEmitter();
   }
 
   updateDisplay() {
-    if (this.organismIconDisplay || this.interactorTypeDisplay || this.IDDisplay) {
+    if (this.organismIconDisplay() || this.interactorTypeDisplay() || this.idDisplay()) {
       this.typeOfDisplay = 'detailed';
     } else {
       this.typeOfDisplay = 'compact';
     }
-    this.changesEmitter();
   }
-
-  changesEmitter() {
-    this.organismIconDisplayChange.emit(this.organismIconDisplay);
-    this.interactorTypeDisplayChange.emit(this.interactorTypeDisplay);
-    this.IDDisplayChange.emit(this.IDDisplay);
-  }
-
 }

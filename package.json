@@ -31,7 +31,7 @@
     "@swissprot/rhea-reaction-visualizer": "0.0.23",
     "angular-cli-ghpages": "^0.5.2",
     "animate.css": "^3.5.2",
-    "complexviewer": "^2.2.3",
+    "complexviewer": "^2.2.4",
     "core-js": "^2.5.3",
     "ebi-framework": "1.3.8",
     "expose-loader": "^5.0.0",

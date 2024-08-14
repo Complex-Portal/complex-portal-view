@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, input } from '@angular/core';
 import {NodeShape} from '../../shared/visualisation/node-diagram/node-diagram.component';
 import {ComplexParticipant} from '../complex-participants.component';
 
@@ -10,18 +10,18 @@ import {ComplexParticipant} from '../complex-participants.component';
 })
 export class ComplexParticipantLegendComponent {
 
-  @Input() participant: ComplexParticipant;
-  @Input() colorLegendGroups: Map<string, string>;
-  @Input() parentComplexAcs: string[];
-  @Input() backgroundComplexId: string;
+  participant = input<ComplexParticipant>();
+  colorLegendGroups = input<Map<string, string>>();
+  parentComplexAcs = input<string[]>();
+  backgroundComplexId = input<string>();
 
   getBackgroundStyle(): string {
-    const colour = this.colorLegendGroups.get(this.backgroundComplexId);
-    if (this.parentComplexAcs.length > 0) {
+    const colour = this.colorLegendGroups().get(this.backgroundComplexId());
+    if (this.parentComplexAcs().length > 0) {
       let backgroundStyle = 'background: linear-gradient(90deg, ';
       let size = 5;
-      for (const ac of this.parentComplexAcs) {
-        backgroundStyle += `${this.colorLegendGroups.get(ac)} 0 ${size}%, `;
+      for (const ac of this.parentComplexAcs()) {
+        backgroundStyle += `${this.colorLegendGroups().get(ac)} 0 ${size}%, `;
         size += 5;
       }
       backgroundStyle += colour + ' 0)';
@@ -32,7 +32,7 @@ export class ComplexParticipantLegendComponent {
   }
 
   getParentComplexAcs(): string[] {
-    return [...this.parentComplexAcs, this.backgroundComplexId];
+    return [...this.parentComplexAcs(), this.backgroundComplexId()];
   }
 
   public getLegendShape(interactorType: string): NodeShape {
@@ -67,9 +67,9 @@ export class ComplexParticipantLegendComponent {
     // TODO Talk to Colin to try a simple way to retrieve the colors .e.g. only by identifier
     if ((participant.interactorType === 'protein' || participant.interactorType === 'peptide')
       && !participant.identifier.includes('-PRO') && participant.name) {
-      color = this.colorLegendGroups.get(participant.name.toUpperCase());
+      color = this.colorLegendGroups().get(participant.name.toUpperCase());
     } else {
-      color = this.colorLegendGroups.get(participant.identifier.toUpperCase());
+      color = this.colorLegendGroups().get(participant.identifier.toUpperCase());
     }
     if (!color) {
       color = '#ffffff';
@@ -81,5 +81,4 @@ export class ComplexParticipantLegendComponent {
     // TODO: WS should send Stochiometry in right format already - GH issue #173
     return stochiometry.split(',')[0].split(':')[1].trim();
   }
-
 }

@@ -1,8 +1,8 @@
 <div class="container">
-  <div *ngIf="complex.evidenceType || intactXRefs">
+  <div *ngIf="complex().evidenceType || intactXRefs">
     Evidence by
-    <a href="{{complex.evidenceType.searchURL}}" target="_blank">
-      {{ complex.evidenceType.description ? complex.evidenceType.description : complex.evidenceType.identifier }}
+    <a href="{{complex().evidenceType.searchURL}}" target="_blank">
+      {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
       <i class="icon icon-generic small" data-icon="x"></i>
     </a>
     <ng-container *ngIf="intactXRefs">

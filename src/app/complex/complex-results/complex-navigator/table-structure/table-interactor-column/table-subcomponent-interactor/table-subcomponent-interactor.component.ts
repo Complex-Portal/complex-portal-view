@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, OnChanges, input, computed} from '@angular/core';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
 import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-navigator-utils';
@@ -9,29 +9,23 @@ import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-na
   styleUrls: ['./table-subcomponent-interactor.component.css']
 })
 
-export class TableSubcomponentInteractorComponent implements OnChanges {
-  @Input() complex: EnrichedComplex;
-  @Input() i: number;
-  @Input() j: number;
-  @Input() enrichedInteractors: EnrichedInteractor[];
+export class TableSubcomponentInteractorComponent {
+  complex = input<EnrichedComplex>();
+  i = input<number>();
+  j = input<number>();
+  enrichedInteractors = input<EnrichedInteractor[]>();
 
-  interactorComponent: ComponentWithStoichiometry;
-  displayTopLineClass: string;
-  displayBottomLineClass: string;
-
-  ngOnChanges(): void {
-    this.interactorComponent = findInteractorInComplex(this.complex.complex, this.el.identifier, this.enrichedInteractors);
-    this.displayTopLineClass = this.displayTopLineClassExpanded(this.complex, this.i, this.j);
-    this.displayBottomLineClass = this.displayBottomLineClassExpanded(this.complex, this.i, this.j);
-  }
+  interactorComponent = computed(() => findInteractorInComplex(this.complex().complex, this.el.identifier, this.enrichedInteractors()));
+  displayTopLineClass = computed(() => this.displayTopLineClassExpanded(this.complex(), this.i(), this.j()));
+  displayBottomLineClass = computed(() => this.displayBottomLineClassExpanded(this.complex(), this.i(), this.j()));
 
 
   get interactor(): EnrichedInteractor {
-    return this.enrichedInteractors[this.i];
+    return this.enrichedInteractors()[this.i()];
   }
 
   get el(): ComplexComponent {
-    return this.enrichedInteractors[this.i].subComponents[this.j];
+    return this.enrichedInteractors()[this.i()].subComponents[this.j()];
   }
 
   public displayTopLineClassExpanded(complex: EnrichedComplex, interactorIndex: number, subComponentIndex: number): string {
@@ -94,7 +88,7 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
         // start on any subcomponent.
         // Otherwise, it starts on the subcomponent with the index subComponentIndex
         return !complex.complex.interactors.some(component =>
-          this.enrichedInteractors[interactorIndex].interactor.identifier === component.identifier);
+          this.enrichedInteractors()[interactorIndex].interactor.identifier === component.identifier);
 
       }
     }
@@ -111,5 +105,4 @@ export class TableSubcomponentInteractorComponent implements OnChanges {
     }
     return false;
   }
-
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit, output, input } from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
@@ -10,19 +10,19 @@ import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
 })
 export class ComplexFilterComponent implements OnInit {
 
-  @Input() facets: Facets;
-  @Input() speciesFilter: string[];
-  @Input() bioRoleFilter: string[];
-  @Input() interactorTypeFilter: string[];
-  @Input() predictedFilter: string[];
-  @Input() confidenceScoreFilter: string[];
+  facets = input<Facets>();
+  speciesFilter = input<string[]>();
+  bioRoleFilter = input<string[]>();
+  interactorTypeFilter = input<string[]>();
+  predictedFilter = input<string[]>();
+  confidenceScoreFilter = input<string[]>();
 
-  @Output() onSpeciesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onPredictedFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onConfidenceScoreFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
+  onSpeciesFilterChanged = output<string[]>();
+  onBiologicalRoleFilterChanged = output<string[]>();
+  onInteractorTypeFilterChanged = output<string[]>();
+  onPredictedFilterChanged = output<string[]>();
+  onConfidenceScoreFilterChanged = output<string[]>();
+  onResetAllFilters = output<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
   }
@@ -37,13 +37,13 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
-      this.speciesFilter.push(filter);
+      this.speciesFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.speciesFilter.splice(this.speciesFilter.indexOf(filter), 1);
+      this.speciesFilter().splice(this.speciesFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onSpeciesFilterChanged.emit(this.speciesFilter);
+    this.onSpeciesFilterChanged.emit(this.speciesFilter());
   }
 
   /**
@@ -53,13 +53,13 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
     if (status) {
-      this.bioRoleFilter.push(filter);
+      this.bioRoleFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.bioRoleFilter.splice(this.bioRoleFilter.indexOf(filter), 1);
+      this.bioRoleFilter().splice(this.bioRoleFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter);
+    this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter());
   }
 
   /**
@@ -69,35 +69,35 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeInteractorTypeFilter(filter: string, status: boolean) {
     if (status) {
-      this.interactorTypeFilter.push(filter);
+      this.interactorTypeFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
+      this.interactorTypeFilter().splice(this.interactorTypeFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter);
+    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter());
   }
 
   public changePredictedFilter(filter: string, status: boolean) {
     if (status) {
-      this.predictedFilter.push(filter);
+      this.predictedFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.predictedFilter.splice(this.predictedFilter.indexOf(filter), 1);
+      this.predictedFilter().splice(this.predictedFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onPredictedFilterChanged.emit(this.predictedFilter);
+    this.onPredictedFilterChanged.emit(this.predictedFilter());
   }
 
   public changeConfidenceScoreFilter(filter: string, status: boolean) {
     if (status) {
-      this.confidenceScoreFilter.push(filter);
+      this.confidenceScoreFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.confidenceScoreFilter.splice(this.confidenceScoreFilter.indexOf(filter), 1);
+      this.confidenceScoreFilter().splice(this.confidenceScoreFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onConfidenceScoreFilterChanged.emit(this.confidenceScoreFilter);
+    this.onConfidenceScoreFilterChanged.emit(this.confidenceScoreFilter());
   }
 
   /**
@@ -112,8 +112,8 @@ export class ComplexFilterComponent implements OnInit {
    * @returns {boolean} true is any filter array contains an filter
    */
   public anyFiltersSelected() {
-    return this.speciesFilter.length !== 0 || this.bioRoleFilter.length !== 0 || this.interactorTypeFilter.length !== 0 ||
-      this.predictedFilter.length !== 0 || this.confidenceScoreFilter.length !== 0;
+    return this.speciesFilter().length !== 0 || this.bioRoleFilter().length !== 0 || this.interactorTypeFilter().length !== 0 ||
+      this.predictedFilter().length !== 0 || this.confidenceScoreFilter().length !== 0;
   }
 
   /**

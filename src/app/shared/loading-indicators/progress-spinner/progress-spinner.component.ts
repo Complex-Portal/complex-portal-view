@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, input, OnInit} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CommonModule} from '@angular/common';
 
@@ -13,8 +13,7 @@ export class ProgressSpinnerComponent implements OnInit {
   private static show: boolean;
   color: 'primary' | 'secondary' = 'primary';
   mode: 'indeterminate' | 'determinate' = 'indeterminate';
-  @Input()
-  query: string;
+  query = input<string>();
   takesLonger: boolean;
 
   public static display(): void {

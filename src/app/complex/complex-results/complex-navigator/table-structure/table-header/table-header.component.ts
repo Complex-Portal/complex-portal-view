@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, output, input } from '@angular/core';
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {organismIcon} from '../../../../complex-portal-utils';
 import {BasketService} from '../../../../../shared/basket/service/basket.service';
@@ -10,17 +10,17 @@ import {BasketService} from '../../../../../shared/basket/service/basket.service
 })
 
 export class TableHeaderComponent {
-  @Input() complexes: Element[];
-  @Input() interactorsSorting: string;
-  @Input() canAddComplexesToBasket: boolean;
-  @Input() canRemoveComplexesFromBasket: boolean;
-  @Output() onComplexRemovedFromBasket: EventEmitter<string> = new EventEmitter<string>();
+  complexes = input<Element[]>();
+  interactorsSorting = input<string>();
+  canAddComplexesToBasket = input<boolean>();
+  canRemoveComplexesFromBasket = input<boolean>();
+  onComplexRemovedFromBasket = output<string>();
 
   constructor(private basketService: BasketService) {
   }
 
   isInteractorSortingSet() {
-    return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+    return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
   }
 
   iconOrganism(organismName: string) {

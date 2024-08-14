@@ -1,11 +1,11 @@
 <div class="displayButton columns medium-12" [ngClass]="">
-  <button type="submit" name="submit" class="button view-button"
-          (click)="setListView()" [ngClass]="{'selected': !isDisplayComplexNavigatorView()}">
+  <button class="button view-button"
+          (click)="setListView()" [class.selected]="displayType() === 'view_list'">
     View list
   </button>
-  <button type="submit" name="submit" class="button view-button cnButton"
-          (click)="setComplexNavigatorView()" [ngClass]="{'selected': isDisplayComplexNavigatorView()}">
+  <button class="button view-button cnButton"
+          (click)="setComplexNavigatorView()" [class.selected]="displayType() === 'view_complex_navigator'">
     View Complex Navigator
-    <span class="new-tag" [ngClass]="{'new-tag-selected': displayType === isDisplayComplexNavigatorView()}">NEW!</span>
+    <span class="new-tag" [ngClass]="{'new-tag-selected': displayType() === 'view_complex_navigator'}">NEW!</span>
   </button>
 </div>

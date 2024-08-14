@@ -1,5 +1,5 @@
 <ul class="no-bullet">
-  <li *ngFor="let complex of complexSearch.elements" [class.predicted]="complex.predictedComplex">
+  <li *ngFor="let complex of complexSearch().elements" [class.predicted]="complex.predictedComplex">
     <div class="container">
       <div class="basketButtonContainer"
            [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">

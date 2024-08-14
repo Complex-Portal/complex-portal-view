@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation, input } from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
