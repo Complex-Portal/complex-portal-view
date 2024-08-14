@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/complex/complex-results/complex-results.component.css"],
   "sourcesContent": [".listOfResults {\n  width: 70%;\n  margin-left: auto;\n  margin-right: auto;\n}\n"],
-  "mappings": "AAAA,CAAC,cACC,MAAO,IACP,YAAa,KACb,aAAc,IAChB",
+  "mappings": ";AAAA,CAAC;AACC,SAAO;AACP,eAAa;AACb,gBAAc;AAChB;",
   "names": []
 }

@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/complex/complex-results/complex-navigator/table-structure/table-structure.component.css"],
   "sourcesContent": [".complexNavigatorTable {\n  border-collapse: separate;\n  height: 100%;\n}\n\n.header {\n  position: sticky;\n  top: 20px;\n  z-index: 2;\n  overflow-x: auto;\n  overflow-y: hidden;\n  transform: rotateX(180deg);\n}\n\n.interactors {\n  z-index: 1;\n  position: relative;\n  overflow-y: hidden;\n}\n"],
-  "mappings": "AAAA,CAAC,sBACC,gBAAiB,SACjB,OAAQ,IACV,CAEA,CAAC,OACC,SAAU,OACV,IAAK,KACL,QAAS,EACT,WAAY,KACZ,WAAY,OACZ,UAAW,QAAQ,OACrB,CAEA,CAAC,YACC,QAAS,EACT,SAAU,SACV,WAAY,MACd",
+  "mappings": ";AAAA,CAAC;AACC,mBAAiB;AACjB,UAAQ;AACV;AAEA,CAAC;AACC,YAAU;AACV,OAAK;AACL,WAAS;AACT,cAAY;AACZ,cAAY;AACZ,aAAW,QAAQ;AACrB;AAEA,CAAC;AACC,WAAS;AACT,YAAU;AACV,cAAY;AACd;",
   "names": []
 }

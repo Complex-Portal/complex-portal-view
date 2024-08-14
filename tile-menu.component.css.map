@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/home/tile-menu/tile-menu.component.css"],
   "sourcesContent": [".menu-blue {\n  background-color: #005c82;\n}\n\n.menu-gold {\n  background-color: #bca04d;\n}\n"],
-  "mappings": "AAAA,CAAC,UACC,iBAAkB,OACpB,CAEA,CAAC,UACC,iBAAkB,OACpB",
+  "mappings": ";AAAA,CAAC;AACC,oBAAkB;AACpB;AAEA,CAAC;AACC,oBAAkB;AACpB;",
   "names": []
 }

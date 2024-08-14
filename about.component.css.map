@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/navigation/about/about.component.css"],
   "sourcesContent": ["/* See this issue to understand why we need ng-deep https://github.com/jfcere/ngx-markdown/issues/56*/\nmarkdown ::ng-deep h1 {\n  font-size: xx-large;\n}\nmarkdown ::ng-deep h2 {\n  font-size: x-large;\n}\nmarkdown ::ng-deep h3 {\n  font-size: large;\n}\nmarkdown ::ng-deep img {\n  display: block;\n  margin: 0 auto;\n  text-align: center;\n  height: 100px;\n}\n"],
-  "mappings": "AACA,SAAS,UAAU,GACjB,UAAW,QACb,CACA,SAAS,UAAU,GACjB,UAAW,OACb,CACA,SAAS,UAAU,GACjB,UAAW,KACb,CACA,SAAS,UAAU,IACjB,QAAS,MAXX,OAYU,EAAE,KACV,WAAY,OACZ,OAAQ,KACV",
+  "mappings": ";AACA,SAAS,UAAU;AACjB,aAAW;AACb;AACA,SAAS,UAAU;AACjB,aAAW;AACb;AACA,SAAS,UAAU;AACjB,aAAW;AACb;AACA,SAAS,UAAU;AACjB,WAAS;AACT,UAAQ,EAAE;AACV,cAAY;AACZ,UAAQ;AACV;",
   "names": []
 }

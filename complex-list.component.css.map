@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/complex/complex-results/complex-list/complex-list.component.css"],
   "sourcesContent": [".description {\n  width: 90%;\n  text-align: justify;\n}\n\n.container {\n  display: inline-flex;\n  width: -webkit-fill-available;\n}\n\n.complexesAndDescription {\n  padding: 10px;\n  width: 95%;\n}\n\n.basketButtonContainer {\n  width: fit-content;\n  height: fit-content;\n  margin-top: 10px;\n}\n\n.basket-icons {\n  margin-left: 5px;\n}\n\n"],
-  "mappings": "AAAA,CAAC,YACC,MAAO,IACP,WAAY,OACd,CAEA,CAAC,UACC,QAAS,YACT,MAAO,sBACT,CAEA,CAAC,wBAVD,QAWW,KACT,MAAO,GACT,CAEA,CAAC,sBACC,MAAO,YACP,OAAQ,YACR,WAAY,IACd,CAEA,CAAC,aACC,YAAa,GACf",
+  "mappings": ";AAAA,CAAC;AACC,SAAO;AACP,cAAY;AACd;AAEA,CAAC;AACC,WAAS;AACT,SAAO;AACT;AAEA,CAAC;AACC,WAAS;AACT,SAAO;AACT;AAEA,CAAC;AACC,SAAO;AACP,UAAQ;AACR,cAAY;AACd;AAEA,CAAC;AACC,eAAa;AACf;",
   "names": []
 }

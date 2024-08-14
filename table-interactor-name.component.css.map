@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/complex/complex-results/complex-navigator/table-structure/table-interactor-column/table-interactor-name/table-interactor-name.component.css"],
   "sourcesContent": ["a {\n  font-weight: bold;\n}\n\na, a:visited {\n  color: #0e6f76;\n}\n\ni:not(.small) {\n  font-size: medium;\n}\n\n.nameAndIcons {\n  font-size: 14px;\n  display: flex;\n  width: inherit;\n  justify-content: flex-end;\n}\n\n.inlineDisplay {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.name {\n  width: inherit;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  text-wrap: nowrap;\n  text-align: end;\n  padding-right: 5px;\n}\n\n.nameCompact {\n  display: inline-flex;\n  width: -webkit-fill-available;\n}\n"],
-  "mappings": "AAAA,EACE,YAAa,GACf,CAEA,EAAG,CAAC,SACF,MAAO,OACT,CAEA,CAAC,KAAK,CAAC,OACL,UAAW,MACb,CAEA,CAAC,aACC,UAAW,KACX,QAAS,KACT,MAAO,QACP,gBAAiB,QACnB,CAEA,CAAC,cACC,QAAS,KACT,gBAAiB,QACnB,CAEA,CAAC,KACC,MAAO,QACP,cAAe,SACf,SAAU,OACV,UAAW,OACX,WAAY,IACZ,cAAe,GACjB,CAEA,CAAC,YACC,QAAS,YACT,MAAO,sBACT",
+  "mappings": ";AAAA;AACE,eAAa;AACf;AAEA;AAAG,CAAC;AACF,SAAO;AACT;AAEA,CAAC,KAAK,CAAC;AACL,aAAW;AACb;AAEA,CAAC;AACC,aAAW;AACX,WAAS;AACT,SAAO;AACP,mBAAiB;AACnB;AAEA,CAAC;AACC,WAAS;AACT,mBAAiB;AACnB;AAEA,CAAC;AACC,SAAO;AACP,iBAAe;AACf,YAAU;AACV,aAAW;AACX,cAAY;AACZ,iBAAe;AACjB;AAEA,CAAC;AACC,WAAS;AACT,SAAO;AACT;",
   "names": []
 }

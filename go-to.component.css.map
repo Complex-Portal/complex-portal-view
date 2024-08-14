@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["src/app/complex/complex-details/shared/go-to/go-to.component.css"],
   "sourcesContent": [".selected {\n  /*font-weight: bold;*/\n  cursor: not-allowed;\n}\n\n/*.default {*/\n  /*font-weight: normal;*/\n/*}*/\n\n/*.hidden {*/\n  /*visibility: hidden;*/\n/*}*/\n"],
-  "mappings": "AAAA,CAAC,SAEC,OAAQ,WACV",
+  "mappings": ";AAAA,CAAC;AAEC,UAAQ;AACV;",
   "names": []
 }
