@@ -6,34 +6,12 @@
   </p>
   <div class="row button-grid small-up-1 medium-up-4 large-up-4 margin-top-xlarge no-pad-right"
        data-equalize-on="medium" id="large-button-grid">
-    <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center"
-         (click)="goToComplexWSXml25Format()">
-        <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
-        <h5 class="white-color">PSI-MI XML 2.5</h5>
+    <div class="column  padding-bottom-large" *ngFor="let format of formats()">
+      <a class="button medium-12 columns text-center" [href]="format.url">
+        <h3 class="icon icon-fileformats  white-color" [class.disabled]="format.disabled" [attr.data-icon]="format.icon"></h3>
+        <h5 class="white-color">{{format.name}}</h5>
       </a>
     </div>
-    <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center"
-         (click)="goToComplexWSXml30Format()">
-                <h3 class="icon icon-fileformats  white-color" data-icon="1"></h3>
-        <h5 class="white-color">PSI-MI XML 3.0</h5>
-      </a>
-    </div>
-    <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center disabled">
-        <h3 class="icon icon-fileformats  white-color" data-icon="v"></h3>
-        <h5 class="white-color">ComplexTab</h5>
-      </a>
-    </div>
-    <div class="column  padding-bottom-large">
-      <a class="button medium-12 columns text-center"
-         (click)="goToComplexWSJsonFormat()">
-        <h3 class="icon icon-fileformats white-color" data-icon="J"></h3>
-        <h5 class="white-color">PSI-MI JSON</h5>
-      </a>
-    </div>
-  </div>
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
