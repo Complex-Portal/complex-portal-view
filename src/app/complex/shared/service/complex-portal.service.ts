@@ -1,15 +1,13 @@
 import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 
 import {environment} from '../../../../environments/environment';
-
+import {Observable, throwError} from 'rxjs';
 
 import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
-import {Observable} from 'rxjs/Observable';
-import {throwError} from 'rxjs/internal/observable/throwError';
 import {Element} from '../model/complex-results/element.model';
 import {Facet} from '../model/complex-results/facet.model';
 
@@ -151,9 +149,7 @@ export class ComplexPortalService {
   }
 
   getSimplifiedComplex(complexAc: string): Observable<Element> {
-    const url = `${baseURL}/complex-simplified/${complexAc}`;
-    return this.http.get(url).pipe(
-      catchError(this.handleError));
+    return this.http.get(`${baseURL}/complex-simplified/${complexAc}`).pipe(catchError(this.handleError));
   }
 
 }

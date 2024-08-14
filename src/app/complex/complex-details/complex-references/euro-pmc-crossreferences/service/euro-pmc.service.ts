@@ -6,7 +6,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {environment} from '../../../../../../environments/environment';
 import {EuroPMCResponse} from '../model/EuroPMCResponse';
 import {throwError} from 'rxjs/internal/observable/throwError';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 const baseURL = environment.europepmc_base_url;
 

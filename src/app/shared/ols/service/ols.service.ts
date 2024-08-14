@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {throwError} from 'rxjs/internal/observable/throwError';
 
 const baseURL = environment.ols_base_url;
