@@ -2,7 +2,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ComplexPortalService} from './complex/shared/service/complex-portal.service';
@@ -34,41 +34,47 @@ import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 
-@NgModule({ declarations: [
-        AppComponent,
-        ProgressBarComponent,
-        LocalSearchComponent,
-        OntologiesComponent,
-        AboutComponent,
-        DownloadComponent,
-        DocumentationComponent,
-        FooterComponent
-    ],
-    bootstrap: [AppComponent], imports: [BrowserAnimationsModule,
-        BrowserModule,
-        RouterModule.forRoot([], {}),
-        FormsModule,
-        ToastrModule.forRoot(),
-        NgxPageScrollCoreModule.forRoot({ scrollOffset: 50 }),
-        MatProgressBarModule,
-        MarkdownModule.forRoot(),
-        NgxGoogleAnalyticsModule.forRoot(environment.analytics_id),
-        NgxGoogleAnalyticsRouterModule,
-        HomeModule,
-        AppRoutingModule,
-        ProgressSpinnerComponent], providers: [
-        ComplexPortalService,
-        NotificationService,
-        ReactomeService,
-        EuroPmcService,
-        OlsService,
-        BasketService,
-        LocalStorageService,
-        SpeciesPipe,
-        AnalyticsService,
-        SearchService,
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    ProgressBarComponent,
+    LocalSearchComponent,
+    OntologiesComponent,
+    AboutComponent,
+    DownloadComponent,
+    DocumentationComponent,
+    FooterComponent
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    RouterModule.forRoot([], {}),
+    FormsModule,
+    ToastrModule.forRoot(),
+    NgxPageScrollCoreModule.forRoot({scrollOffset: 50}),
+    MatProgressBarModule,
+    MarkdownModule.forRoot(),
+    NgxGoogleAnalyticsModule.forRoot(environment.analytics_id),
+    NgxGoogleAnalyticsRouterModule,
+    HomeModule,
+    AppRoutingModule,
+    ProgressSpinnerComponent
+  ],
+  providers: [
+    ComplexPortalService,
+    NotificationService,
+    ReactomeService,
+    EuroPmcService,
+    OlsService,
+    BasketService,
+    LocalStorageService,
+    SpeciesPipe,
+    AnalyticsService,
+    SearchService,
+    provideHttpClient(withInterceptorsFromDi())
+  ],
+  bootstrap: [AppComponent]
+})
 
 export class AppModule {
   // To debug routing problems uncomment following code
