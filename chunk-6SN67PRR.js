@@ -1,4 +1,4 @@
-import{a as b,b as p,e as _}from"./chunk-FMN6WBXG.js";import"./chunk-2KXQA66R.js";import"./chunk-VDNG76UK.js";import{o as v}from"./chunk-YMCJUFMT.js";import{D as C,b as f,h as B}from"./chunk-7Q6ZDWGY.js";import"./chunk-LEWSQDVT.js";import{Ab as k,Bb as g,Cb as y,Ea as d,h as i,nb as u,xb as x,ya as h}from"./chunk-TSD2EAZW.js";var S=`<div class="margin-top-large margin-bottom-large">
+import{a as b,b as p,e as _}from"./chunk-J4G7B5ZJ.js";import"./chunk-2KXQA66R.js";import"./chunk-VDNG76UK.js";import{o as v}from"./chunk-YMCJUFMT.js";import{D as C,b as f,h as B}from"./chunk-7Q6ZDWGY.js";import"./chunk-LEWSQDVT.js";import{Ab as k,Bb as g,Cb as y,Ea as d,h as i,nb as u,xb as x,ya as h}from"./chunk-TSD2EAZW.js";var S=`<div class="margin-top-large margin-bottom-large">
   <div *ngIf="!isComplexBasketEmpty()" class="columns medium-12">
     <h2>Personal collection of favourite complexes
 
