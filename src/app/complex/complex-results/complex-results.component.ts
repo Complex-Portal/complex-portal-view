@@ -8,7 +8,7 @@ import {AnalyticsService} from '../../shared/google-analytics/service/analytics.
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
-import {take} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'cp-complex-results',
@@ -46,25 +46,24 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this.allInteractorsInComplexSearch = [];
-    this.route.fragment.pipe(take(1)).subscribe(fragment => {
-      if (fragment === SearchDisplay.navigator) {
-        this.displayType = SearchDisplay.navigator;
-      } else {
-        this.displayType = SearchDisplay.list;
-      }
+    this.route.fragment.pipe(
+      tap(f => {
+        if (f === SearchDisplay.navigator) {
+          this.displayType = SearchDisplay.navigator;
+        } else if (f === SearchDisplay.list) {
+          this.displayType = SearchDisplay.list;
+        }
+      }),
+      switchMap(f => this.route.queryParams)
+    ).subscribe(queryParams => {
+      this.query = queryParams['query'];
+      Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
+      this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
+      // TODO This is out for now, but CP-84 (JIRA )should fix that!!
+      // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
+      this.requestComplexResults();
+      document.body.scrollTop = 0;
     });
-
-
-    this.route.queryParams
-      .subscribe(queryParams => {
-        this.query = queryParams['query'];
-        Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
-        this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
-        // TODO This is out for now, but CP-84 (JIRA )should fix that!!
-        // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
-        this.requestComplexResults();
-        document.body.scrollTop = 0;
-      });
   }
 
   ngAfterViewInit(): void {

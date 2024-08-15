@@ -1,6 +1,6 @@
 <div class="displayButton columns medium-12" [ngClass]="">
   <button class="button view-button"
-          (click)="setListView()" [class.selected]="displayType() === SearchDisplay.list">
+          (click)="setListView()" [class.selected]="displayType() !== SearchDisplay.navigator">
     View list
   </button>
   <button class="button view-button cnButton"
