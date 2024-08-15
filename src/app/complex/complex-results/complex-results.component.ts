@@ -215,7 +215,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   onDisplayTypeChange(displayType: SearchDisplay) {
     if (this.displayType !== displayType) {
-      this.displayType = displayType;
       if (displayType === SearchDisplay.list) {
         this.setListView();
       } else if (displayType === SearchDisplay.navigator) {
@@ -230,6 +229,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   private setListView() {
     this._toast = this.notificationService.complexNavigatorAnnouncement();
+    this.displayType = SearchDisplay.list;
     this.reloadPage();
   }
 
@@ -238,6 +238,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.notificationService.closeAnnouncement(this._toast.toastId);
       this._toast = null;
     }
+    this.displayType = SearchDisplay.navigator;
     this.reloadPage();
   }
 

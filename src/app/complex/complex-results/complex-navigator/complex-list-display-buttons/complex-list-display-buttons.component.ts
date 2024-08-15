@@ -13,7 +13,7 @@ export enum SearchDisplay {
 })
 export class ComplexListDisplayButtonsComponent {
 
-  displayType = model<SearchDisplay>(SearchDisplay.list);
+  displayType = model<SearchDisplay>();
 
   setListView() {
     this.displayType.set(SearchDisplay.list);
