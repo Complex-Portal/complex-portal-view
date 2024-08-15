@@ -248,10 +248,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     if (this.getFilterCount() === 0 && this.complexSearch.totalNumberOfResults === 1) {
       const complexId = this.complexSearch.elements[0].complexAC;
       if (!!complexId) {
-        // For some reason this is needed so the navigate call works
-        this.router.routeReuseStrategy.shouldReuseRoute = function () {
-          return false;
-        };
         this.router.navigate(['/complex', complexId]);
       }
     } else if (!this.displayType) {
