@@ -15,7 +15,7 @@ export class TableInteractorNameComponent implements OnInit {
   identifierLink = input<string>();
   organismIconDisplay = input<boolean>();
   interactorTypeDisplay = input<boolean>();
-  IDDisplay = input<boolean>();
+  idDisplay = input<boolean>();
   isMainInteractor = input<boolean>();
   interactorTypeIcon: string;
   interactorOrganismIcon: string;

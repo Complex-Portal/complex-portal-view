@@ -8,9 +8,9 @@
        class="{{interactorTypeIcon}}"
        [matTooltip]="interactorType()"></i>
 
-    <div class="name" *ngIf="IDDisplay()" [matTooltip]="interactorId()"> {{ interactorName() }}
+    <div class="name" *ngIf="idDisplay()" [matTooltip]="interactorId()"> {{ interactorName() }}
     </div>
-    <a *ngIf="IDDisplay()"
+    <a *ngIf="idDisplay()"
        [routerLink]="['/complex/search']"
        [queryParams]="{query: interactorId(), page: 1}"
        target="_blank">
@@ -18,8 +18,8 @@
          [matTooltip]="'More complexes containing ' + interactorName() "></i>
     </a>
 
-    <div class="nameCompact" *ngIf="!IDDisplay()">
-      <div class="name" *ngIf="!IDDisplay()" [matTooltip]="'More information about ' + interactorName()">
+    <div class="nameCompact" *ngIf="!idDisplay()">
+      <div class="name" *ngIf="!idDisplay()" [matTooltip]="'More information about ' + interactorName()">
         <a *ngIf="!!identifierLink()" href="{{identifierLink()}}" target="_blank" class="externalLinkContainer">
           {{ interactorName() }}
         </a>
@@ -33,12 +33,12 @@
     </div>
   </div>
   <cp-table-interactor-external-link
-    *ngIf="IDDisplay()"
+    *ngIf="idDisplay()"
     [interactorId]="interactorId()"
     [identifierLink]="identifierLink()"
     [interactorType]="interactorType()"
     [isMainInteractor]="isMainInteractor()"
-    [IDDisplay]="IDDisplay()"
+    [idDisplay]="idDisplay()"
     (externalLinkVisible)="externalLinkVisibleHandler($event)">
   </cp-table-interactor-external-link>
 </div>

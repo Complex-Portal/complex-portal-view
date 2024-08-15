@@ -11,7 +11,7 @@ export class TableInteractorExternalLinkComponent implements OnInit {
   identifierLink = input<string>();
   interactorType = input<string>();
   isMainInteractor = input<boolean>();
-  IDDisplay = input<boolean>();
+  idDisplay = input<boolean>();
 
   externalLinkVisible = output<boolean>();
 
