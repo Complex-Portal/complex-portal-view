@@ -11,16 +11,17 @@ import {ComplexNavigatorRatingComponent} from './complex-navigator/complex-navig
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ComplexModule} from '../complex.module';
 import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {TruncatePipe} from '../../shared/truncate/truncate.pipe';
 
 
 @NgModule({
-  imports: [RouterModule.forChild([
-    {path: '', component: ComplexResultsComponent},
-  ]),
-    CommonModule,
-    ProgressSpinnerComponent, MarkdownModule,
-    ComplexNavigatorModule, MatTooltipModule, ComplexModule
-  ],
+    imports: [RouterModule.forChild([
+        {path: '', component: ComplexResultsComponent},
+    ]),
+        CommonModule,
+        ProgressSpinnerComponent, MarkdownModule,
+        ComplexNavigatorModule, MatTooltipModule, ComplexModule, TruncatePipe
+    ],
   exports: [],
   declarations: [ComplexResultsComponent,
     ComplexListComponent,

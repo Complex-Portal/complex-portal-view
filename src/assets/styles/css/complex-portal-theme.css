@@ -1,7 +1,7 @@
 /*
   Colour palette: Complex-Portal
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 html {
   --primary: #007c82;
   --primary-2: oklch(from var(--primary) calc(l - 0.2) c h);
@@ -13,6 +13,10 @@ html {
   --primary: #cce4e6;
   --background-colour: #f8f8f8;
   --on-primary: #007c83;
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 a {
