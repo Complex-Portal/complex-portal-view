@@ -7,10 +7,7 @@ import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
-import {
-  COMPLEX_NAVIGATOR_VIEW,
-  LIST_VIEW, SearchDisplay
-} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
+import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
 
 @Component({
@@ -50,10 +47,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle('Complex Portal - Results');
     this.allInteractorsInComplexSearch = [];
     this.route.fragment.pipe(take(1)).subscribe(fragment => {
-      if (fragment === COMPLEX_NAVIGATOR_VIEW) {
-        this.displayType = COMPLEX_NAVIGATOR_VIEW;
+      if (fragment === SearchDisplay.navigator) {
+        this.displayType = SearchDisplay.navigator;
       } else {
-        this.displayType = LIST_VIEW;
+        this.displayType = SearchDisplay.list;
       }
     });
 
@@ -178,7 +175,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get currentPageIndex(): number {
-    if (this.displayType === COMPLEX_NAVIGATOR_VIEW) {
+    if (this.displayType === SearchDisplay.navigator) {
       return this._navigatorCurrentPage;
     } else {
       return this._listCurrentPage;
@@ -186,7 +183,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   set currentPageIndex(value: number) {
-    if (this.displayType === COMPLEX_NAVIGATOR_VIEW) {
+    if (this.displayType === SearchDisplay.navigator) {
       this._navigatorCurrentPage = value;
     } else {
       this._listCurrentPage = value;
@@ -194,7 +191,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get lastPageIndex(): number {
-    if (this.displayType === COMPLEX_NAVIGATOR_VIEW) {
+    if (this.displayType === SearchDisplay.navigator) {
       return this._navigatorLastPageIndex;
     } else {
       return this._listLastPageIndex;
@@ -202,7 +199,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   set lastPageIndex(value: number) {
-    if (this.displayType === COMPLEX_NAVIGATOR_VIEW) {
+    if (this.displayType === SearchDisplay.navigator) {
       this._navigatorLastPageIndex = value;
     } else {
       this._listLastPageIndex = value;
@@ -210,7 +207,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get pageSize(): number {
-    if (this.displayType === COMPLEX_NAVIGATOR_VIEW) {
+    if (this.displayType === SearchDisplay.navigator) {
       return this._navigatorPageSize;
     } else {
       return this._listPageSize;
@@ -220,16 +217,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   onDisplayTypeChange(displayType: SearchDisplay) {
     if (this.displayType !== displayType) {
       this.displayType = displayType;
-      if (displayType === LIST_VIEW) {
+      if (displayType === SearchDisplay.list) {
         this.setListView();
-      } else if (displayType === COMPLEX_NAVIGATOR_VIEW) {
+      } else if (displayType === SearchDisplay.navigator) {
         this.setComplexNavigatorView();
       }
     }
   }
 
   isDisplayComplexNavigatorView(): boolean {
-    return this.displayType === COMPLEX_NAVIGATOR_VIEW;
+    return this.displayType === SearchDisplay.navigator;
   }
 
   private setListView() {

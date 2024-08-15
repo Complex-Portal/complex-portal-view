@@ -8,8 +8,7 @@ import {ComplexSearchResult} from '../complex/shared/model/complex-results/compl
 import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
-  COMPLEX_NAVIGATOR_VIEW,
-  LIST_VIEW, SearchDisplay
+  SearchDisplay
 } from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
 
@@ -36,10 +35,10 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle('Complex Portal - Basket');
     this.complexNavigatorLoading();
     this.route.fragment.pipe(take(1)).subscribe(fragment => {
-      if (fragment === COMPLEX_NAVIGATOR_VIEW) {
-        this.displayType = COMPLEX_NAVIGATOR_VIEW;
+      if (fragment === SearchDisplay.navigator) {
+        this.displayType = SearchDisplay.navigator;
       } else {
-        this.displayType = LIST_VIEW;
+        this.displayType = SearchDisplay.list;
       }
     });
   }
@@ -52,7 +51,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   isDisplayComplexNavigatorView(): boolean {
-    return this.displayType === COMPLEX_NAVIGATOR_VIEW;
+    return this.displayType === SearchDisplay.navigator;
   }
 
   ngAfterViewInit(): void {

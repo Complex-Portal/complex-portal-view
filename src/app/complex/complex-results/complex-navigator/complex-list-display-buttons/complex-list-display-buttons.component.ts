@@ -1,9 +1,10 @@
 import {Component, output, input, model} from '@angular/core';
 
-export const LIST_VIEW = 'view_list';
-export const COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
 
-export type SearchDisplay = 'view_list' | 'view_complex_navigator';
+export enum SearchDisplay {
+  list = 'view_list',
+  navigator = 'view_navigator',
+}
 
 @Component({
   selector: 'cp-complex-list-display-buttons',
@@ -12,13 +13,15 @@ export type SearchDisplay = 'view_list' | 'view_complex_navigator';
 })
 export class ComplexListDisplayButtonsComponent {
 
-  displayType = model<SearchDisplay>('view_list');
+  displayType = model<SearchDisplay>(SearchDisplay.list);
 
   setListView() {
-    this.displayType.set(LIST_VIEW);
+    this.displayType.set(SearchDisplay.list);
   }
 
   setComplexNavigatorView() {
-    this.displayType.set(COMPLEX_NAVIGATOR_VIEW);
+    this.displayType.set(SearchDisplay.navigator);
   }
+
+  protected readonly SearchDisplay = SearchDisplay;
 }
