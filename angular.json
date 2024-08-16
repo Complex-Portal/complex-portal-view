@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/styles/css/complex-portal-theme.css",
+              "src/assets/styles/css/complex-portal-theme.scss",
               "node_modules/complexviewer/src/css/xinet.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/styles/scss/material.scss",
