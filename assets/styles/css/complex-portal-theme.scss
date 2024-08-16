@@ -2,21 +2,12 @@
   Colour palette: Complex-Portal
 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 html {
   --primary: #007c82;
   --primary-2: oklch(from var(--primary) calc(l - 0.2) c h);
   --background-colour: #eaeaea;
   --on-primary: #ffffff;
-}
-
-.predicted {
-  --primary: #cce4e6;
-  --background-colour: #f8f8f8;
-  --on-primary: #007c83;
-  font-family: "Roboto Flex", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
 }
 
 a {
@@ -38,11 +29,6 @@ h1 {
 
 h2 {
   color: var(--primary);
-}
-
-.predicted h2,
-.predicted .label {
-  color: var(--on-primary);
 }
 
 h3 {
@@ -136,11 +122,6 @@ a.button,
   background-color: white;
   color: var(--primary);
   border: 1px solid var(--primary);
-}
-
-.predicted .button.hollow {
-  color: var(--on-primary);
-  border: 1px solid var(--on-primary);
 }
 
 .button.disabled,
@@ -295,3 +276,30 @@ a:visited {
 }
 
 /*********** END HOME PAGE SECTION *******************************/
+
+
+.predicted {
+  --primary: #cce4e6;
+  --background-colour: #f8f8f8;
+  --on-primary: #007c83;
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+
+  dl dt a,
+  a.label,
+  .label,
+  a:hover,
+  a:focus,
+  a:active,
+  h2,
+  .label {
+    color: var(--on-primary);
+  }
+
+  .button.hollow {
+    color: var(--on-primary);
+    border: 1px solid var(--on-primary);
+  }
+}
