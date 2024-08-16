@@ -14,10 +14,10 @@
     <div id="assemblies" class="columns medium-12 no-pad-left" *ngIf="assemblies && assemblies.length !== 0">
       <cp-assemblies [assemblies]="assemblies"></cp-assemblies>
     </div>
-    <div id="pdbXRefs" class="columns medium-12" *ngIf="pdbXRefs">
+    <div id="pdbXRefs" class="columns medium-12 no-pad-left" *ngIf="pdbXRefs">
       <cp-pdb-crossreferences [crossReferences]="pdbXRefs"></cp-pdb-crossreferences>
     </div>
-    <div id="emdbXRefs" class="columns medium-12" *ngIf="emdbXRefs">
+    <div id="emdbXRefs" class="columns medium-12 no-pad-left" *ngIf="emdbXRefs">
       <cp-emdb-crossreferences [crossReferences]="emdbXRefs"></cp-emdb-crossreferences>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -7,7 +7,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
   styleUrls: ['./complex-properties.component.css']
 })
 export class ComplexPropertiesComponent implements OnInit {
-  private _propertiesDescription: string;
+  private _propertiesDescription: string[];
   private _crossReferences: CrossReference[];
   private _pdbXRefs: CrossReference[];
   private _emdbXRefs: CrossReference[];
@@ -52,12 +52,12 @@ export class ComplexPropertiesComponent implements OnInit {
     }
   }
 
-  get propertiesDescription(): string {
+  get propertiesDescription(): string[] {
     return this._propertiesDescription;
   }
 
   @Input()
-  set propertiesDescription(value: string) {
+  set propertiesDescription(value: string[]) {
     this._propertiesDescription = value;
   }
 

@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, input } from '@angular/core';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {Router} from '@angular/router';
 import {Category} from '../../../shared/google-analytics/types/category.enum';

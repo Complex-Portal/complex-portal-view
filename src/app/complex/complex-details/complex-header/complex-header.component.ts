@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, input } from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
@@ -12,18 +12,17 @@ import {ComplexDetails} from '../../shared/model/complex-details/complex-details
 })
 export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
-  @Input()
-  complex: ComplexDetails;
+  complex = input<ComplexDetails>();
   private _jsonURL: string;
 
   constructor(private basketService: BasketService, private ga: AnalyticsService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
-    const urlAc = environment.complex_ws_base_url + '/details/' + this.complex.complexAc;
-    const urlComplexAc = environment.complex_ws_base_url + '/complex/' + this.complex.complexAc;
+    const urlAc = environment.complex_ws_base_url + '/details/' + this.complex().complexAc;
+    const urlComplexAc = environment.complex_ws_base_url + '/complex/' + this.complex().complexAc;
 
-    this._jsonURL = this.complex.complexAc.startsWith('EBI-') ? urlAc : urlComplexAc;
+    this._jsonURL = this.complex().complexAc.startsWith('EBI-') ? urlAc : urlComplexAc;
 
   }
 
@@ -33,7 +32,7 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   saveComplex() {
-    this.basketService.saveInBasket(this.complex);
+    this.basketService.saveInBasket(this.complex());
   }
 
   get jsonURL(): string {
@@ -45,11 +44,11 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
   }
 
   isInBasket(): boolean {
-    return this.basketService.isInBasket(this.complex.complexAc);
+    return this.basketService.isInBasket(this.complex().complexAc);
   }
 
   removeComplexFromBasket() {
-    this.basketService.deleteFromBasket(this.complex.complexAc);
+    this.basketService.deleteFromBasket(this.complex().complexAc);
   }
 
   toggleBasket() {
@@ -59,5 +58,4 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
       this.saveComplex();
     }
   }
-
 }

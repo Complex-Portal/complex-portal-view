@@ -1,25 +1,25 @@
 {
   "files": [
-    "main.ts",
-    "polyfills.ts"
+    "src/main.ts",
+    "src/polyfills.ts",
   ],
   "compilerOptions": {
-    "baseUrl": "",
+    "baseUrl": "tsconfig",
     "declaration": false,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "lib": [
-      "ES2020",
+      "ES2022",
       "dom"
     ],
     "mapRoot": "./",
     "module": "es2020",
     "moduleResolution": "node",
-    "outDir": "../dist/out-tsc",
+    "outDir": "dist/out-tsc",
     "sourceMap": true,
-    "target": "es2015",
-    "downlevelIteration": true,
+    "target": "ES2022",
     "typeRoots": [
-      "../node_modules/@types"
+      "./node_modules/@types"
     ]
   }
 }

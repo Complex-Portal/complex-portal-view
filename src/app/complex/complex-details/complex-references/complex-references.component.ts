@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -11,7 +11,7 @@ export class ComplexReferencesComponent implements OnInit {
   private _pubmedXRefs: CrossReference[];
   private _externalResources: CrossReference[];
   private _synonyms: string[];
-  private _systematicName: string[];
+  private _systematicName: string;
 
   constructor() {
   }
@@ -74,12 +74,12 @@ export class ComplexReferencesComponent implements OnInit {
     this._synonyms = value;
   }
 
-  get systematicName(): string[] {
+  get systematicName(): string {
     return this._systematicName;
   }
 
   @Input()
-  set systematicName(value: string[]) {
+  set systematicName(value: string) {
     this._systematicName = value;
   }
 }

@@ -36,6 +36,8 @@ export function organismIcon(organism: string): string {
       return 'icon icon-species icon-yeast';
     case 'Escherichia coli':
     case 'Pseudomonas aeruginosa':
+    case 'Klebsiella pneumoniae':
+    case 'Chlamydomonas reinhardtii':
       return 'icon icon-species icon-ecoli';
     case 'Rattus norvegicus':
       return 'icon icon-species icon-rat';

@@ -1,44 +1,44 @@
 <div class="container">
-  <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType==='stable complex'}">
-    <i *ngIf="organismIconDisplay"
+  <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
+    <i *ngIf="organismIconDisplay()"
        class="{{interactorOrganismIcon}}"
-       [matTooltip]="interactorOrganism"></i>
+       [matTooltip]="interactorOrganism()"></i>
 
-    <i *ngIf="interactorTypeDisplay"
+    <i *ngIf="interactorTypeDisplay()"
        class="{{interactorTypeIcon}}"
-       [matTooltip]="interactorType"></i>
+       [matTooltip]="interactorType()"></i>
 
-    <div class="name" *ngIf="IDDisplay" [matTooltip]="interactorId"> {{ interactorName }}
+    <div class="name" *ngIf="idDisplay()" [matTooltip]="interactorId()"> {{ interactorName() }}
     </div>
-    <a *ngIf="IDDisplay"
+    <a *ngIf="idDisplay()"
        [routerLink]="['/complex/search']"
-       [queryParams]="{query: interactorId, page: 1}"
+       [queryParams]="{query: interactorId(), page: 1}"
        target="_blank">
       <i class="icon icon-functional small" data-icon="1"
-         [matTooltip]="'More complexes containing ' + interactorName "></i>
+         [matTooltip]="'More complexes containing ' + interactorName() "></i>
     </a>
 
-    <div class="nameCompact" *ngIf="!IDDisplay">
-      <div class="name" *ngIf="!IDDisplay" [matTooltip]="'More information about ' + interactorName">
-        <a *ngIf="!!identifierLink" href="{{identifierLink}}" target="_blank" class="externalLinkContainer">
-          {{ interactorName }}
+    <div class="nameCompact" *ngIf="!idDisplay()">
+      <div class="name" *ngIf="!idDisplay()" [matTooltip]="'More information about ' + interactorName()">
+        <a *ngIf="!!identifierLink()" href="{{identifierLink()}}" target="_blank" class="externalLinkContainer">
+          {{ interactorName() }}
         </a>
       </div>
       <a [routerLink]="['/complex/search']"
-         [queryParams]="{query: interactorId, page: 1}"
+         [queryParams]="{query: interactorId(), page: 1}"
          target="_blank">
         <i class="icon icon-functional small" data-icon="1"
-           [matTooltip]="'More complexes containing ' + interactorName "></i>
+           [matTooltip]="'More complexes containing ' + interactorName() "></i>
       </a>
     </div>
   </div>
   <cp-table-interactor-external-link
-    *ngIf="IDDisplay"
-    [interactorId]="interactorId"
-    [identifierLink]="identifierLink"
-    [interactorType]="interactorType"
-    [isMainInteractor]="isMainInteractor"
-    [IDDisplay]="IDDisplay"
+    *ngIf="idDisplay()"
+    [interactorId]="interactorId()"
+    [identifierLink]="identifierLink()"
+    [interactorType]="interactorType()"
+    [isMainInteractor]="isMainInteractor()"
+    [idDisplay]="idDisplay()"
     (externalLinkVisible)="externalLinkVisibleHandler($event)">
   </cp-table-interactor-external-link>
 </div>

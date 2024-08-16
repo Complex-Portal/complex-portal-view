@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 
 @Component({
   selector: 'cp-table-interactor-stoichiometry',
@@ -6,6 +6,6 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./table-interactor-stoichiometry.component.css']
 })
 export class TableInteractorStoichiometryComponent {
-  @Input() stoichiometryText: string;
-  @Input() stoichiometryValue: string;
+  stoichiometryText = input<string>();
+  stoichiometryValue = input<string>();
 }

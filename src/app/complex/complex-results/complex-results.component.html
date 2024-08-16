@@ -10,20 +10,25 @@
         </div>
 
         <div class="columns medium-12 large-2 no-padding">
-          <cp-complex-filter *ngIf="spicesFilter && bioRoleFilter && interactorTypeFilter"
-                             [spicesFilter]="spicesFilter"
-                             [bioRoleFilter]="bioRoleFilter"
-                             [interactorTypeFilter]="interactorTypeFilter" [facets]="complexSearch.facets"
+          <cp-complex-filter *ngIf="filters"
+                             [speciesFilter]="filters.species"
+                             [bioRoleFilter]="filters.bioRole"
+                             [interactorTypeFilter]="filters.interactorType"
+                             [predictedFilter]="filters.predicted"
+                             [confidenceScoreFilter]="filters.confidenceScore"
+                             [facets]="complexSearch.facets"
                              (onResetAllFilters)="onResetAllFilters()"
-                             (onSpicesFilterChanged)="onSpicesFilterChanged($event)"
+                             (onSpeciesFilterChanged)="onSpeciesFilterChanged($event)"
                              (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                             (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)">
+                             (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)"
+                             (onPredictedFilterChanged)="onPredictedFilterChanged($event)"
+                             (onConfidenceScoreFilterChanged)="onConfidenceScoreFilterChanged($event)">
           </cp-complex-filter>
         </div>
         <div class="columns medium-12 large-10">
           <div class="paginatorAndDisplay">
             <cp-complex-list-display-buttons
-              [displayType]="DisplayType"
+              [displayType]="displayType"
               (displayTypeChange)="onDisplayTypeChange($event)">
             </cp-complex-list-display-buttons>
             <cp-complex-paginator class="paginator"
@@ -64,8 +69,7 @@
         <li>Try different keywords</li>
         <li>Be more precise: use gene or protein IDs, e.g. Ndc80 or Q04571</li>
         <li>Remove quotes around phrases to search for each word individually. bike shed will often show more results
-          than
-          "bike shed"
+          than "bike shed"
         </li>
       </ul>
     </div>

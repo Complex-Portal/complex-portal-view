@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input } from '@angular/core';
 
 @Component({
   selector: 'cp-complex-paginator',
@@ -10,7 +10,7 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
   private _currentPageIndex: number;
   private _pagination: any;
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter<number>();
+  onPageChange = output<number>();
 
 
   constructor() {

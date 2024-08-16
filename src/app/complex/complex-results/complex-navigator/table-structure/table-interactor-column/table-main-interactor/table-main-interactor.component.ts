@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, input, OnChanges} from '@angular/core';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
 import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-navigator-utils';
 
@@ -8,9 +8,9 @@ import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-na
   styleUrls: ['./table-main-interactor.component.css']
 })
 export class TableMainInteractorComponent implements OnChanges {
-  @Input() complex: EnrichedComplex;
-  @Input() i: number;
-  @Input() enrichedInteractors: EnrichedInteractor[];
+  complex = input<EnrichedComplex>();
+  i = input<number>();
+  enrichedInteractors = input<EnrichedInteractor[]>();
 
   interactorComponent: ComponentWithStoichiometry;
   topLineClass: string;
@@ -18,13 +18,13 @@ export class TableMainInteractorComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.interactorComponent = findInteractorInComplex(
-      this.complex.complex, this.interactor.interactor.identifier, this.enrichedInteractors);
-    this.topLineClass = this.displayTopLineClass(this.complex, this.i);
-    this.bottomLineClass = this.displayBottomLineClass(this.complex, this.i);
+      this.complex().complex, this.interactor.interactor.identifier, this.enrichedInteractors());
+    this.topLineClass = this.displayTopLineClass(this.complex(), this.i());
+    this.bottomLineClass = this.displayBottomLineClass(this.complex(), this.i());
   }
 
   get interactor(): EnrichedInteractor {
-    return this.enrichedInteractors[this.i];
+    return this.enrichedInteractors()[this.i()];
   }
 
   public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
@@ -61,7 +61,7 @@ export class TableMainInteractorComponent implements OnChanges {
       if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
         // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
         // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
-        if (this.enrichedInteractors[interactorIndex].isSubComplex && this.enrichedInteractors[interactorIndex].expanded) {
+        if (this.enrichedInteractors()[interactorIndex].isSubComplex && this.enrichedInteractors()[interactorIndex].expanded) {
           if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
             return true;
           }
@@ -76,7 +76,7 @@ export class TableMainInteractorComponent implements OnChanges {
     // The line starts at this interactor or on any of its subcomponents
     if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
 
-      if (!this.enrichedInteractors[interactorIndex].isSubComplex) {
+      if (!this.enrichedInteractors()[interactorIndex].isSubComplex) {
         // If the interactor is not a subcomplex, then the interactor has no subcomponents and the line starts in it
         return true;
       }
@@ -98,7 +98,7 @@ export class TableMainInteractorComponent implements OnChanges {
 
       // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
       // the line does not end in this interactor, and it must cross through to the subcomponents
-      if (this.enrichedInteractors[interactorIndex].isSubComplex && this.enrichedInteractors[interactorIndex].expanded) {
+      if (this.enrichedInteractors()[interactorIndex].isSubComplex && this.enrichedInteractors()[interactorIndex].expanded) {
         if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
           return false;
         }
@@ -107,5 +107,4 @@ export class TableMainInteractorComponent implements OnChanges {
     }
     return false;
   }
-
 }

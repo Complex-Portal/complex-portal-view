@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, OnChanges, output, input, computed} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {Element} from '../../../shared/model/complex-results/element.model';
@@ -9,25 +9,21 @@ import {ComplexComponent} from '../../../shared/model/complex-results/complex-co
   templateUrl: './table-structure.component.html',
   styleUrls: ['./table-structure.component.css']
 })
-export class TableStructureComponent implements OnChanges {
-  @Input() complexSearch: ComplexSearchResult;
-  @Input() interactors: Interactor[];
-  @Input() interactorsSorting: string;
-  @Input() organismIconDisplay: boolean;
-  @Input() interactorTypeDisplay: boolean;
-  @Input() IDDisplay: boolean;
-  @Input() canAddComplexesToBasket: boolean;
-  @Input() canRemoveComplexesFromBasket: boolean;
-  @Output() onComplexRemovedFromBasket: EventEmitter<string> = new EventEmitter<string>();
+export class TableStructureComponent {
+  complexSearch = input<ComplexSearchResult>();
+  interactors = input<Interactor[]>();
+  interactorsSorting = input<string>();
+  organismIconDisplay = input<boolean>();
+  interactorTypeDisplay = input<boolean>();
+  idDisplay = input<boolean>();
+  canAddComplexesToBasket = input<boolean>();
+  canRemoveComplexesFromBasket = input<boolean>();
+  onComplexRemovedFromBasket = output<string>();
 
-  sortedComplexes: Element[] = [];
-
-  ngOnChanges(): void {
-    this.sortedComplexes = this.classifyComplexesSimilaritiesV2(this.complexSearch.elements);
-  }
+  sortedComplexes = computed(() => this.classifyComplexesSimilaritiesV2(this.complexSearch().elements));
 
   private getComponentAsComplex(component: ComplexComponent): Element | undefined {
-    return this.complexSearch.elements.find(interactor => interactor.complexAC === component.identifier);
+    return this.complexSearch().elements.find(interactor => interactor.complexAC === component.identifier);
   }
 
   private getAllComponents(complex?: Element, components: ComplexComponent[] = []): ComplexComponent[] {
@@ -87,12 +83,12 @@ export class TableStructureComponent implements OnChanges {
             complexesOrderedSet.add(complex4);
           }
         }
-        if (complexesOrderedSet.size === this.complexSearch.elements.length) {
+        if (complexesOrderedSet.size === this.complexSearch().elements.length) {
           // All complexes have been added, we can return and stop the loops
           return complexesOrderedSet;
         }
       }
-      if (complexesOrderedSet.size === this.complexSearch.elements.length) {
+      if (complexesOrderedSet.size === this.complexSearch().elements.length) {
         // All complexes have been added, we can return and stop the loops
         return complexesOrderedSet;
       }

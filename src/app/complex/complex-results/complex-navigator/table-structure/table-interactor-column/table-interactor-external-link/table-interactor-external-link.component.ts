@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, input, OnInit, output} from '@angular/core';
 
 @Component({
   selector: 'cp-table-interactor-external-link',
@@ -7,24 +7,24 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class TableInteractorExternalLinkComponent implements OnInit {
 
-  @Input() interactorId: string;
-  @Input() identifierLink: string;
-  @Input() interactorType: string;
-  @Input() isMainInteractor: boolean;
-  @Input() IDDisplay: boolean;
+  interactorId = input<string>();
+  identifierLink = input<string>();
+  interactorType = input<string>();
+  isMainInteractor = input<boolean>();
+  idDisplay = input<boolean>();
 
-  @Output() externalLinkVisible: EventEmitter<boolean> = new EventEmitter<boolean>();
+  externalLinkVisible = output<boolean>();
 
   ngOnInit(): void {
     this.showExternalLink();
   }
 
   showExternalLink(): boolean {
-    if (this.isMainInteractor && this.interactorType === 'stable complex') {
+    if (this.isMainInteractor() && this.interactorType() === 'stable complex') {
       this.externalLinkVisible.emit(false);
       return false;
     }
-    this.externalLinkVisible.emit(!!this.identifierLink);
-    return !!this.identifierLink;
+    this.externalLinkVisible.emit(!!this.identifierLink());
+    return !!this.identifierLink();
   }
 }

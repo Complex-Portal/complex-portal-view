@@ -2,11 +2,11 @@
   <div class="columns medium-12 no-pad-left" *ngIf="(gxa && gxaParamsQueries) || goCellularXRefs">
     <h2 class="float-left">Expression and Cellular Location</h2>
     <cp-go-to class="float-right" [sectionName]="'Expression and Cellular Location'"></cp-go-to>
-    <div class="columns medium-12">
+    <div class="columns medium-12 no-pad-left">
       <cp-gxa-heatmap *ngIf="gxa && gxaParamsQueries && complexSpecies" [gxa]="gxa" [gxaParamsQueries]="gxaParamsQueries"
                       [complexSpecies]="complexSpecies"></cp-gxa-heatmap>
     </div>
-    <div class="columns medium-12">
+    <div class="columns medium-12 no-pad-left">
       <cp-go-celluar-crossreference *ngIf="goCellularXRefs"
                                     [crossReferences]="goCellularXRefs"></cp-go-celluar-crossreference>
     </div>

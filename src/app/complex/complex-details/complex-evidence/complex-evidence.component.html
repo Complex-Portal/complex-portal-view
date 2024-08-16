@@ -1,9 +1,10 @@
 <div class="container">
-  <div *ngIf="ecoXRef || intactXRefs">
+  <div *ngIf="complex().evidenceType || intactXRefs">
     Evidence by
-    <a href="{{ecoXRef.searchURL}}"
-       target="_blank"> {{ ecoXRef.description ? ecoXRef.description : ecoXRef.identifier }} <i
-      class="icon icon-generic small" data-icon="x"></i></a>
+    <a href="{{complex().evidenceType.searchURL}}" target="_blank">
+      {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
+      <i class="icon icon-generic small" data-icon="x"></i>
+    </a>
     <ng-container *ngIf="intactXRefs">
       in IntAct
       <ng-container *ngFor="let crossReference of intactXRefs;let isLast=last">
@@ -13,8 +14,10 @@
     </ng-container>
   </div>
 
-  <div>
-    <h3 *ngIf="flaskSymbol" class="icon icon-common float-left no-margin" [attr.data-icon]="flaskSymbol"></h3>
+
+
+  <div class="stars">
+    <i *ngFor="let star of stars" class="icon icon-common icon-star" [ngClass]="star"></i>
   </div>
 </div>
 

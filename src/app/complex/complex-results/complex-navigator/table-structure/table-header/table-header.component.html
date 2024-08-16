@@ -1,18 +1,18 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- When table is not overflowing -->
-    <thead class="tableHead" *ngIf="complexes.length<=6">
+    <thead class="tableHead" *ngIf="complexes().length<=6">
     <tr>
       <th *ngIf="isInteractorSortingSet()" class="spaceHolderSorting"></th>
       <th class="interactorsHeader horizontal">
         Components
       </th>
-      <th class="horizontal" *ngFor="let complex of complexes" [class.predicted]="complex.predicted">
-        <div class="horizontal-label">
+      <th class="horizontal" *ngFor="let complex of complexes()" [class.predicted]="complex.predictedComplex">
+        <div>
           <a [routerLink]="['/complex', complex.complexAC]"
              target="_blank">
             <div>
-              <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName">
+              <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName" class="horizontal-label">
                 <div class="line"></div>
                 <i class="{{iconOrganism(complex.organismName)}}"></i>
                 <i class="icon icon-generic small" data-icon="x"></i>
@@ -30,17 +30,17 @@
     </tr>
     </thead>
     <!-- When table is overflowing -->
-    <thead class="tableHeadOverflow" *ngIf="complexes.length > 6"
+    <thead class="tableHeadOverflow" *ngIf="complexes().length > 6"
            [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
-    <tr [style.--cols]="complexes.length"
+    <tr [style.--cols]="complexes().length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="'185px'">
       <th class="spaceHolderHeaderOverflow"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
       </th>
-      <th class="rotate" *ngFor="let complex of complexes"
-          [class.predicted]="complex.predicted"
-          [style.--cols]="complexes.length">
+      <th class="rotate" *ngFor="let complex of complexes()"
+          [class.predicted]="complex.predictedComplex"
+          [style.--cols]="complexes().length">
         <a [routerLink]="['/complex', complex.complexAC]"
            [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
            target="_blank">
@@ -57,15 +57,15 @@
       <div class="spaceHolder"></div>
     </tr>
     <!-- icons row -->
-    <tr [style.--cols]="complexes.length"
+    <tr [style.--cols]="complexes().length"
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="'185px'">
       <th class="interactorsHeader overflow"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Components
       </th>
-      <ng-container *ngFor=" let complex of complexes;">
-        <th class="iconOrganism" [class.predicted]="complex.predicted">
+      <ng-container *ngFor=" let complex of complexes();">
+        <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
           <div>
             <a class="button" (click)="toggleBasket(complex)">
               <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
