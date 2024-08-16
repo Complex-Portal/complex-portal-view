@@ -8,11 +8,11 @@
         Components
       </th>
       <th class="horizontal" *ngFor="let complex of complexes()" [class.predicted]="complex.predictedComplex">
-        <div class="horizontal-label">
+        <div>
           <a [routerLink]="['/complex', complex.complexAC]"
              target="_blank">
             <div>
-              <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName">
+              <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName" class="horizontal-label">
                 <div class="line"></div>
                 <i class="{{iconOrganism(complex.organismName)}}"></i>
                 <i class="icon icon-generic small" data-icon="x"></i>

@@ -142,6 +142,7 @@ thead {
   white-space: nowrap;
   overflow: hidden;
   margin: auto;
+  display: block;
 }
 
 .CN-table th.horizontal {
