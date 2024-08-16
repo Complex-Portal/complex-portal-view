@@ -23,24 +23,20 @@ export class DownloadModalComponent implements OnInit {
   formats: Signal<Format[]> = computed(() => [
     {icon: '1', name: 'PSI-MI XML 2.5', filename: `${this.complexAC()}.xml`, url: `${base}/export/${this.complexAC()}?format=xml25`},
     {icon: '1', name: 'PSI-MI XML 3.0', filename: `${this.complexAC()}.xml`, url: `${base}/export/${this.complexAC()}?format=xml25`},
-    {
-      icon: 'v',
-      name: 'ComplexTab',
-      filename: `${this.complexAC()}.tsv`,
-      url: `${base}/export/${this.complexAC()}?format=tab`,
-      disabled: true
-    },
+    {icon: 'v', name: 'ComplexTab', filename: `${this.complexAC()}.tsv`, url: `${base}/export/${this.complexAC()}?format=tsv`},
     {icon: 'J', name: 'PSI-MI JSON', filename: `${this.complexAC()}.json`, url: `${base}/export/${this.complexAC()}`},
   ]);
 
-  download(url: string, filename: string) {
-    fetch(url).then(t => t.blob().then((b) => {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(b);
-      a.setAttribute('download', filename);
-      a.click();
-      a.remove();
-    }));
+  download(format: Format) {
+    if (!format.disabled) {
+      fetch(format.url).then(t => t.blob().then((b) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(b);
+        a.setAttribute('download', format.filename);
+        a.click();
+        a.remove();
+      }));
+    }
   }
 
   constructor(private googleAnalyticsService: AnalyticsService) {
