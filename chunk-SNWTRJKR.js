@@ -1,4 +1,4 @@
-import{a as Q}from"./chunk-XROBIGU3.js";import{a as Y}from"./chunk-GWJAPECR.js";import{o as X}from"./chunk-UTJEYDHL.js";import{C as J,g as K}from"./chunk-HX4DVKQW.js";import{a as $}from"./chunk-KAY5JEJM.js";import{Ba as d,Da as l,Ea as m,Fb as U,Ha as G,eb as y,h as o,ia as f,ja as c,qb as W,s as M,v as P,ya as g}from"./chunk-RD2FM4QS.js";var Z=`<div class="ComplexNavigator">
+import{a as Q}from"./chunk-WUW3CFQD.js";import{a as Y}from"./chunk-4T5D3YNV.js";import{o as X}from"./chunk-GQTIVNO3.js";import{C as J,g as K}from"./chunk-JHLYVLYJ.js";import{a as $}from"./chunk-6JFLSNBU.js";import{Ca as d,Ea as l,Fa as m,Gb as U,Ia as G,fb as y,h as o,ia as f,ja as c,rb as W,s as M,v as P,za as g}from"./chunk-6LTPJDRH.js";var Z=`<div class="ComplexNavigator">
   <div class="Buttons" [ngClass]="complexSearch().totalNumberOfResults <=6 ? 'smallCNButtons' : ''">
     <cp-complex-navigator-buttons
       [(interactorsSorting)]="interactorsSorting"
