@@ -1,6 +1,6 @@
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {EnrichedInteractor} from './table-interactor-column.component';
+import {EnrichedInteractor} from '../enriched-interactors.model';
 
 
 export class ComponentWithStoichiometry {

@@ -2,9 +2,9 @@
   <table class="interactors-table"
          [ngClass]="{'inheritedWidth': complexes().length > 6}"
          [style.--cols]="complexes().length">
-    <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
+    <ng-container *ngFor=" let interactor of enrichedInteractors.interactors; let i=index">
       <tr *ngIf="!interactor.hidden">
-        <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
+        <ng-container *ngFor="let oneType of enrichedInteractors.ranges" class="interactorsOrdering">
           <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
               [matTooltip]="oneType[0]">
             <div class="interactorNameContainer" [style.--rowspanSize]="oneType[1]">
@@ -14,7 +14,7 @@
         </ng-container>
         <td class="interactorsColumn"
             [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
-            [style]="ranges.length!=0 ? 'left:3ch':''">
+            [style]="enrichedInteractors.ranges.length!=0 ? 'left:3ch':''">
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
             [interactorType]="interactor.interactor.interactorType"
@@ -43,7 +43,7 @@
             <cp-table-main-interactor
               [complex]="complex"
               [i]="i"
-              [enrichedInteractors]="enrichedInteractors"
+              [enrichedInteractors]="enrichedInteractors.interactors"
             ></cp-table-main-interactor>
           </td>
         </ng-container>
@@ -65,7 +65,7 @@
             </td>
             <td class="subComponentColumn"
                 [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
-                [style]="ranges.length!=0 ? 'left:3ch':''">
+                [style]="enrichedInteractors.ranges.length!=0 ? 'left:3ch':''">
               <div>
                 <cp-table-interactor-name
                   [interactorName]="el.name"
@@ -85,7 +85,7 @@
                   [complex]="complex"
                   [i]="i"
                   [j]="j"
-                  [enrichedInteractors]="enrichedInteractors"
+                  [enrichedInteractors]="enrichedInteractors.interactors"
                 ></cp-table-subcomponent-interactor>
               </td>
             </ng-container>
