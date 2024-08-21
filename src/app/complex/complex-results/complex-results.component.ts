@@ -20,7 +20,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   complexSearch: ComplexSearchResult;
 
   allInteractorsInComplexSearch: Interactor[] = [];
-  displayType: SearchDisplay;
+  _displayType: SearchDisplay;
 
   filters = {
     species: [],
@@ -49,12 +49,12 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.route.fragment.pipe(
       tap(f => {
         if (f === SearchDisplay.navigator) {
-          this.displayType = SearchDisplay.navigator;
+          this._displayType = SearchDisplay.navigator;
         } else if (f === SearchDisplay.list) {
-          this.displayType = SearchDisplay.list;
+          this._displayType = SearchDisplay.list;
         }
       }),
-      switchMap(f => this.route.queryParams)
+      switchMap(_ => this.route.queryParams)
     ).subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
@@ -174,7 +174,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get currentPageIndex(): number {
-    if (this.displayType === SearchDisplay.navigator) {
+    if (this._displayType === SearchDisplay.navigator) {
       return this._navigatorCurrentPage;
     } else {
       return this._listCurrentPage;
@@ -182,7 +182,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   set currentPageIndex(value: number) {
-    if (this.displayType === SearchDisplay.navigator) {
+    if (this._displayType === SearchDisplay.navigator) {
       this._navigatorCurrentPage = value;
     } else {
       this._listCurrentPage = value;
@@ -190,7 +190,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get lastPageIndex(): number {
-    if (this.displayType === SearchDisplay.navigator) {
+    if (this._displayType === SearchDisplay.navigator) {
       return this._navigatorLastPageIndex;
     } else {
       return this._listLastPageIndex;
@@ -198,7 +198,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   set lastPageIndex(value: number) {
-    if (this.displayType === SearchDisplay.navigator) {
+    if (this._displayType === SearchDisplay.navigator) {
       this._navigatorLastPageIndex = value;
     } else {
       this._listLastPageIndex = value;
@@ -206,15 +206,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   }
 
   get pageSize(): number {
-    if (this.displayType === SearchDisplay.navigator) {
+    if (this._displayType === SearchDisplay.navigator) {
       return this._navigatorPageSize;
     } else {
       return this._listPageSize;
     }
   }
 
-  onDisplayTypeChange(displayType: SearchDisplay) {
-    if (this.displayType !== displayType) {
+  set displayType(displayType: SearchDisplay) {
+    if (this._displayType !== displayType) {
+      this._displayType = displayType;
       if (displayType === SearchDisplay.list) {
         this.setListView();
       } else if (displayType === SearchDisplay.navigator) {
@@ -223,13 +224,17 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  get displayType(): SearchDisplay {
+    return this._displayType;
+  }
+
   isDisplayComplexNavigatorView(): boolean {
-    return this.displayType === SearchDisplay.navigator;
+    return this._displayType === SearchDisplay.navigator;
   }
 
   private setListView() {
     this._toast = this.notificationService.complexNavigatorAnnouncement();
-    this.displayType = SearchDisplay.list;
+    this._displayType = SearchDisplay.list;
     this.reloadPage();
   }
 
@@ -238,7 +243,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.notificationService.closeAnnouncement(this._toast.toastId);
       this._toast = null;
     }
-    this.displayType = SearchDisplay.navigator;
+    this._displayType = SearchDisplay.navigator;
     this.reloadPage();
   }
 
@@ -251,7 +256,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       if (!!complexId) {
         this.router.navigate(['/complex', complexId]);
       }
-    } else if (!this.displayType) {
+    } else if (!this._displayType) {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
       if (this.complexSearch.totalNumberOfResults <= this._navigatorPageSize) {

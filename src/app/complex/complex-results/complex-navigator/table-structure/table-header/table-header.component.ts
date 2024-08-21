@@ -12,8 +12,6 @@ import {BasketService} from '../../../../../shared/basket/service/basket.service
 export class TableHeaderComponent {
   complexes = input<Element[]>();
   interactorsSorting = input<string>();
-  canAddComplexesToBasket = input<boolean>();
-  canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
   constructor(private basketService: BasketService) {

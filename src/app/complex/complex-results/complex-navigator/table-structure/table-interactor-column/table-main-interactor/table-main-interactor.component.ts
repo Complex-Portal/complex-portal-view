@@ -1,27 +1,21 @@
-import {Component, input, OnChanges} from '@angular/core';
+import {Component, computed, input} from '@angular/core';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
-import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-navigator-utils';
+import {findInteractorInComplex} from '../complex-navigator-utils';
 
 @Component({
   selector: 'cp-table-main-interactor',
   templateUrl: './table-main-interactor.component.html',
   styleUrls: ['./table-main-interactor.component.css']
 })
-export class TableMainInteractorComponent implements OnChanges {
+export class TableMainInteractorComponent {
   complex = input<EnrichedComplex>();
   i = input<number>();
   enrichedInteractors = input<EnrichedInteractor[]>();
 
-  interactorComponent: ComponentWithStoichiometry;
-  topLineClass: string;
-  bottomLineClass: string;
-
-  ngOnChanges(): void {
-    this.interactorComponent = findInteractorInComplex(
-      this.complex().complex, this.interactor.interactor.identifier, this.enrichedInteractors());
-    this.topLineClass = this.displayTopLineClass(this.complex(), this.i());
-    this.bottomLineClass = this.displayBottomLineClass(this.complex(), this.i());
-  }
+  interactorComponent = computed(() =>
+    findInteractorInComplex(this.complex().complex, this.interactor.interactor.identifier, this.enrichedInteractors()));
+  topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.i()));
+  bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.i()));
 
   get interactor(): EnrichedInteractor {
     return this.enrichedInteractors()[this.i()];

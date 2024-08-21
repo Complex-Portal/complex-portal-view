@@ -1,7 +1,7 @@
-import {Component, OnChanges, input, computed} from '@angular/core';
+import {Component, input, computed} from '@angular/core';
 import {ComplexComponent} from '../../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
-import {ComponentWithStoichiometry, findInteractorInComplex} from '../complex-navigator-utils';
+import {findInteractorInComplex} from '../complex-navigator-utils';
 
 @Component({
   selector: 'cp-table-subcomponent-interactor',
@@ -15,7 +15,8 @@ export class TableSubcomponentInteractorComponent {
   j = input<number>();
   enrichedInteractors = input<EnrichedInteractor[]>();
 
-  interactorComponent = computed(() => findInteractorInComplex(this.complex().complex, this.el.identifier, this.enrichedInteractors()));
+  interactorComponent = computed(() =>
+    findInteractorInComplex(this.complex().complex, this.el.identifier, this.enrichedInteractors()));
   displayTopLineClass = computed(() => this.displayTopLineClassExpanded(this.complex(), this.i(), this.j()));
   displayBottomLineClass = computed(() => this.displayBottomLineClassExpanded(this.complex(), this.i(), this.j()));
 

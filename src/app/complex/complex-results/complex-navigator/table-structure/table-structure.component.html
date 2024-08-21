@@ -4,8 +4,6 @@
 
     <cp-table-header [complexes]="sortedComplexes()"
                      [interactorsSorting]="interactorsSorting()"
-                     [canAddComplexesToBasket]="canAddComplexesToBasket()"
-                     [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket()"
                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
     </cp-table-header>
   </div>
