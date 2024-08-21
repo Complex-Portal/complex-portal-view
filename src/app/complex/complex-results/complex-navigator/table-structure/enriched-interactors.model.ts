@@ -10,8 +10,20 @@ export class EnrichedInteractor {
   isSubComplex: boolean;
   expanded: boolean;
   subComponents: ComplexComponent[];
-  partOfComplex: number[];
   timesAppearing: number;
+
+  constructor(interactor: Interactor, isSubComplex: boolean) {
+    this.interactor = interactor;
+    this.isSubComplex = isSubComplex;
+    this.hidden = false;
+    this.expanded = false;
+    this.timesAppearing = 0;
+    this.subComponents = null;
+  }
+
+  isExpandedSubComplex(): boolean {
+    return this.isSubComplex && !!this.subComponents && this.expanded;
+  }
 }
 
 export class EnrichedInteractors {
@@ -30,12 +42,6 @@ export class EnrichedInteractors {
 
   get ranges(): [string, number, number, number][] {
     return this._ranges;
-}
-
-  isExpandedSubComplex(interactorIndex: number): boolean {
-    return this._interactors[interactorIndex].isSubComplex &&
-      !!this._interactors[interactorIndex].subComponents &&
-      this._interactors[interactorIndex].expanded;
   }
 
   toggleSubcomplexExpandable(interactorIndex: number): void {
@@ -176,7 +182,7 @@ export class EnrichedInteractors {
         }
       }
       if (!this._interactors[i + 1]
-        || (this._interactors[i].isSubComplex && this._interactors[i].expanded)
+        || (this._interactors[i].isExpandedSubComplex())
         || this._interactors[i].interactor.interactorType !== this._interactors[i + 1].interactor.interactorType) {
         if (start !== null) {
           oneType.push(this._interactors[i].interactor.interactorType, length, start);
@@ -202,7 +208,7 @@ export class EnrichedInteractors {
         }
       }
       if (!this._interactors[i + 1]
-        || (this._interactors[i].isSubComplex && this._interactors[i].expanded)
+        || (this._interactors[i].isExpandedSubComplex())
         || this._interactors[i].interactor.organismName !== this._interactors[i + 1].interactor.organismName) {
         if (start !== null) {
           oneType.push(this.species.transform(this._interactors[i].interactor.organismName), length, start);

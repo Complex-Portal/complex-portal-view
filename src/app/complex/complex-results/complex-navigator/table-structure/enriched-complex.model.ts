@@ -25,7 +25,7 @@ export class EnrichedComplex {
 
         if (!!enrichedInteractors.findInteractorInComplex(i, this.complex)) {
           this.updateInteractorIndexes(enrichedInteractors, i);
-        } else if (enrichedInteractors.isExpandedSubComplex(i)) {
+        } else if (enrichedInteractors.interactors[i].isExpandedSubComplex()) {
           // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
           // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
           // In that case, the line could start or end on any of those subcomponents
@@ -51,7 +51,7 @@ export class EnrichedComplex {
       if (this._startInteractorIndex < interactorIndex && this._endInteractorIndex === interactorIndex) {
         // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
         // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
-        if (enrichedInteractors[interactorIndex].isSubComplex && enrichedInteractors[interactorIndex].expanded) {
+        if (enrichedInteractors[interactorIndex].isExpandedSubComplex()) {
           if (this._startSubComponentIndex != null && this._endSubComponentIndex != null) {
             return true;
           }
@@ -88,7 +88,7 @@ export class EnrichedComplex {
 
       // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
       // the line does not end in this interactor, and it must cross through to the subcomponents
-      if (enrichedInteractors[interactorIndex].isSubComplex && enrichedInteractors[interactorIndex].expanded) {
+      if (enrichedInteractors[interactorIndex].isExpandedSubComplex()) {
         if (this._startSubComponentIndex != null && this._endSubComponentIndex != null) {
           return false;
         }
@@ -159,7 +159,7 @@ export class EnrichedComplex {
     this._endInteractorIndex = this.getMaxValue(this._endInteractorIndex, interactorIndex);
 
     // The interactor is a subcomplex
-    if (enrichedInteractors.isExpandedSubComplex(interactorIndex)) {
+    if (enrichedInteractors.interactors[interactorIndex].isExpandedSubComplex()) {
       // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
       // of it. That means we need a line connecting all the subcomponents.
       // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell

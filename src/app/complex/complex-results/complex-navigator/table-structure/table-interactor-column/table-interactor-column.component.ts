@@ -49,15 +49,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     const enrichedInteractors: EnrichedInteractor[] = [];
     for (const interactor of this.interactors()) {
       const isSubComplex = interactor.interactorType === 'stable complex';
-      const newEnrichedInteractor: EnrichedInteractor = {
-        interactor,
-        hidden: false,
-        isSubComplex,
-        expanded: false,
-        subComponents: null,
-        partOfComplex: [],
-        timesAppearing: 0,
-      };
+      const newEnrichedInteractor = new EnrichedInteractor(interactor, isSubComplex);
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
       }
