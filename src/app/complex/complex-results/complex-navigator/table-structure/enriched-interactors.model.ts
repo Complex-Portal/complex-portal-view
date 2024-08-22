@@ -32,8 +32,8 @@ export class EnrichedInteractors {
   _timesAppearingByOrganism: Map<string, number>;
   _ranges: [string, number, number, number][]; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
 
-  constructor(interactors: EnrichedInteractor[], private species: SpeciesPipe) {
-    this._interactors = interactors;
+  constructor(private species: SpeciesPipe) {
+    this._interactors = [];
   }
 
   get interactors(): EnrichedInteractor[] {
@@ -91,7 +91,7 @@ export class EnrichedInteractors {
     }
   }
 
-  classifyInteractors(interactorsSorting: string): void {
+  classifyInteractors(interactorsSorting: string): EnrichedInteractor[] {
     if (!!interactorsSorting && !!this._interactors && this._interactors.length > 0) {
       if (interactorsSorting === 'Type') {
         this.classifyInteractorsByType();
@@ -101,6 +101,7 @@ export class EnrichedInteractors {
         this.classifyInteractorsByOccurrence();
       }
     }
+    return this._interactors;
   }
 
   private collapseAllButOne(interactorIndex: number): void {
