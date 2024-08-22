@@ -1,4 +1,4 @@
-import{A as at,B as zt,C as Dt,a as tt,b as ht,c as X,f as wt,g as _t,h as c,v as kt,z as N}from"./chunk-JHLYVLYJ.js";import{$ as s,$a as z,Ba as dt,Bb as gt,Ca as h,Ea as k,Fb as xt,Gb as yt,Ia as Q,U as ct,V as J,W as u,X as g,Xa as x,Ya as st,Za as lt,_a as w,a as it,aa as l,ab as _,b as mt,cb as pt,da as y,db as ut,h as v,ha as i,hb as n,ka as m,lb as ft,oa as p,rb as vt}from"./chunk-6LTPJDRH.js";var Ct=`<div class="card" *ngIf="organism.symbol">
+import{A as at,B as zt,C as Dt,a as tt,b as ht,c as X,f as wt,g as _t,h as c,v as kt,z as N}from"./chunk-VCUDXDI7.js";import{$ as s,$a as z,Ba as dt,Ca as h,Cb as gt,Ea as k,Gb as xt,Hb as yt,Ia as Q,U as ct,V as J,W as u,X as g,Xa as x,Ya as st,Za as lt,_a as w,a as it,aa as l,ab as _,b as mt,cb as pt,da as y,db as ut,h as v,ha as i,ib as n,ka as m,mb as ft,oa as p,sb as vt}from"./chunk-QLATQDYN.js";var Ct=`<div class="card" *ngIf="organism.symbol">
   <div class="medium-12">
     <b>{{organism.scientificName}}</b><br>
     {{organism.nameDetails}}
