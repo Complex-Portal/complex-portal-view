@@ -60,7 +60,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   deleteFromBasket(key: string): void {
     this._basketService.deleteFromBasket(key);
-    this.complexNavigatorLoading();
+    this.removeComplexFromSearchResult(this.complexBasket[key].id);
   }
 
   deleteComplexFromBasket(complexAc: string): void {
@@ -69,7 +69,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
         this._basketService.deleteFromBasket(key);
       }
     }
-    this.complexNavigatorLoading();
+    this.removeComplexFromSearchResult(complexAc);
   }
 
   get complexBasket(): { [name: string]: BasketItem } {
@@ -99,22 +99,37 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.complexPortalService.findComplexNoFilters(this.createQuery(this._complexBasket), 1, pageSize)
       .subscribe(complexSearch => {
         this.complexSearchBasket = complexSearch;
-        if (this.complexSearchBasket.totalNumberOfResults !== 0) {
-          for (let i = 0; i < complexSearch.elements.length; i++) {
-            for (const component of complexSearch.elements[i].interactors) {
-              if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
-                this.allInteractorsInComplexSearchBasket.push(component);
-              }
-            }
+        this.setAllInteractorsFromComplexSearch();
+      });
+  }
+
+  private setAllInteractorsFromComplexSearch(): void {
+    this.allInteractorsInComplexSearchBasket = [];
+    if (this.complexSearchBasket.totalNumberOfResults !== 0) {
+      for (let i = 0; i < this.complexSearchBasket.elements.length; i++) {
+        for (const component of this.complexSearchBasket.elements[i].interactors) {
+          if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
+            this.allInteractorsInComplexSearchBasket.push(component);
           }
         }
-      });
+      }
+    }
   }
 
   complexNavigatorLoading() {
     this.complexSearchBasket = null;
     this.allInteractorsInComplexSearchBasket = [];
     this.requestComplexesForNavigator();
+  }
+
+  removeComplexFromSearchResult(complexId: string) {
+    this.complexSearchBasket = {
+      size: this.complexSearchBasket.size - 1,
+      totalNumberOfResults: this.complexSearchBasket.totalNumberOfResults - 1,
+      elements: this.complexSearchBasket.elements.filter(complex => complex.complexAC === complexId),
+      facets: null,
+    };
+    this.setAllInteractorsFromComplexSearch();
   }
 
   deleteAllComplexes() {
