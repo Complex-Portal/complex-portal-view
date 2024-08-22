@@ -7,6 +7,7 @@ export class EnrichedComplex {
   _endInteractorIndex: number;
   _startSubComponentIndex: number;
   _endSubComponentIndex: number;
+  _startInteractorIncludedWhenExpanded: boolean;
 
 
   constructor(complex: Element) {
@@ -15,6 +16,7 @@ export class EnrichedComplex {
     this._endInteractorIndex = null;
     this._startSubComponentIndex = null;
     this._endSubComponentIndex = null;
+    this._startInteractorIncludedWhenExpanded = true;
   }
 
   calculateStartAndEndIndexes(enrichedInteractors: EnrichedInteractors): void {
@@ -74,7 +76,7 @@ export class EnrichedComplex {
       // If the interactor is actually part of the complex, the line starts in this interactor
       // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the interactor itself, as it is
       // not part of the complex.
-      if (this._startSubComponentIndex === -1) {
+      if (this._startInteractorIncludedWhenExpanded) {
         return true;
       }
     }
@@ -156,6 +158,10 @@ export class EnrichedComplex {
     // The interactor is part of the complex, we update the start and end indices for the interactors
     // line as it may start in this interactor
     this._startInteractorIndex = this.getMinValue(this._startInteractorIndex, interactorIndex);
+    if (this._startInteractorIndex === interactorIndex) {
+      // The line starts in this interactor, so the line always starts in this interactor, even when expanded
+      this._startInteractorIncludedWhenExpanded = true;
+    }
     this._endInteractorIndex = this.getMaxValue(this._endInteractorIndex, interactorIndex);
 
     // The interactor is a subcomplex
@@ -173,6 +179,11 @@ export class EnrichedComplex {
     // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
     // line as it may start in this interactor
     this._startInteractorIndex = this.getMinValue(this._startInteractorIndex, interactorIndex);
+    if (this._startInteractorIndex === interactorIndex) {
+      // The line starts in a subcomponent of the interactor, but not on the interactor itself,
+      // so the line does not start in the interactor when expanded
+      this._startInteractorIncludedWhenExpanded = false;
+    }
     this._endInteractorIndex = this.getMaxValue(this._endInteractorIndex, interactorIndex);
     // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
     // line as it may start in this subcomponent
