@@ -137,3 +137,8 @@ text.tooltip {
   padding: 0;
 }
 
+.participant-row {
+  display: inline-table;
+  width: 100%;
+}
+
