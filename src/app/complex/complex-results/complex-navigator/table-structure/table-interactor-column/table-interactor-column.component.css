@@ -6,7 +6,8 @@ table {
 
 .inheritedWidth {
   /*width: inherit;*/
-  width: calc(130px + var(--cols) * 70px + 183px);
+  --col-width: max(calc(1000px / var(--cols)), 70px);
+  width: calc(130px + var(--cols) * var(--col-width) + 183px);
 }
 
 /* interactors column */
@@ -33,16 +34,18 @@ table {
 }
 
 .intStoich {
+  --col-width: max(calc(1000px / var(--cols)), 70px);
   height: 100%;
-  max-width: 70px;
-  min-width: 70px;
+  max-width: var(--col-width);
+  min-width: var(--col-width);
   font-size: medium;
   text-align: end;
   z-index: 1;
 }
 
 .intStoichFixedWidth {
-  width: 70px;
+  --col-width: max(calc(1000px / var(--cols)), 70px);
+  width: var(--col-width);
 }
 
 i:not(.small) {

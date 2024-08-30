@@ -42,6 +42,7 @@
           [class.predicted]="complex.predictedComplex"
           [style.--cols]="complexes().length">
         <a [routerLink]="['/complex', complex.complexAC]"
+           [style.--cols]="complexes().length"
            [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
            target="_blank">
           <div>
@@ -61,6 +62,7 @@
         [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
         [style.--sizeSpaceHolder]="'185px'">
       <th class="interactorsHeader overflow"
+          [style.--cols]="complexes().length"
           [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
         Components
       </th>

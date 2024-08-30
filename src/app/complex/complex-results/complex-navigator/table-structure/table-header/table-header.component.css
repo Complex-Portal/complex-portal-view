@@ -55,10 +55,11 @@ thead {
   --cols: 1;
   --intHeader: 130px;
   --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+  --col-width: max(calc(1000px / var(--cols)), 70px);
+  --sizeSpaceHolder: calc(var(--parentWidth) - var(--col-width) * var(--cols) - var(--intHeader));
   display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
+  grid-template-columns: var(--intHeader) repeat(auto-fit, var(--col-width));
+  width: calc(var(--intHeader) + var(--col-width) * var(--cols) + var(--sizeSpaceHolder));
   overflow: hidden;
 }
 
@@ -66,23 +67,27 @@ thead {
   --cols: 1;
   --intHeader: 130px;
   --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+  --col-width: max(calc(1000px / var(--cols)), 70px);
+  --sizeSpaceHolder: calc(var(--parentWidth) - var(--col-width) * var(--cols) - var(--intHeader));
   display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder) - 3ch);
+  grid-template-columns: var(--intHeader) repeat(auto-fit, var(--col-width));
+  width: calc(var(--intHeader) + var(--col-width) * var(--cols) + var(--sizeSpaceHolder) - 3ch);
   overflow: hidden;
 }
 
 .CN-table .tableHeadOverflow th.rotate {
+  --col-width: max(calc(228px + calc(1720px / var(--cols))), 350px);
+  --col-left: max(calc(728px / var(--cols)), 52px);
+  --col-height: max(calc(var(--col-left) - 1px), 51px);
   position: relative;
-  width: 350px;
-  height: 51px !important;
+  width: var(--col-width);
+  height: var(--col-height) !important;
   color: var(--on-primary);
   font-size: 14px;
   text-align: left;
   border: 1px solid white;
   top: 70px;
-  left: -52px;
+  left: calc(-1 * var(--col-left));
   display: flex;
   align-items: center;
   align-content: center;
@@ -92,11 +97,12 @@ thead {
 }
 
 .CN-table .tableHeadOverflow th.rotate a {
+  --col-width: max(calc(1150px / var(--cols)), 70px);
   width: 100%;
   height: 100%;
   align-content: center;
   background-color: var(--primary);
-  padding: 0 0 0 70px;
+  padding: 0 0 0 var(--col-width);
   border: none;
 }
 
@@ -107,6 +113,7 @@ thead {
 }
 
 .interactorsHeader.overflow {
+  --col-width: max(calc(1000px / var(--cols)), 70px);
   min-width: 130px;
   max-width: 130px;
   width: 130px;
@@ -116,7 +123,7 @@ thead {
   background-color: var(--on-primary);
   border-bottom: 3px solid var(--primary);
   height: 60px;
-  line-height: 70px;
+  line-height: var(--col-width);
   text-align: right;
   color: var(--primary);
 }
