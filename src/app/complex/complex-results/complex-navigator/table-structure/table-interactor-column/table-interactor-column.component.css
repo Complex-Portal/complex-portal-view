@@ -34,10 +34,9 @@ table {
 }
 
 .intStoich {
-  --col-width: max(calc(1000px / var(--cols)), 70px);
   height: 100%;
-  max-width: var(--col-width);
-  min-width: var(--col-width);
+  max-width: 70px;
+  min-width: 70px;
   font-size: medium;
   text-align: end;
   z-index: 1;
@@ -46,6 +45,8 @@ table {
 .intStoichFixedWidth {
   --col-width: max(calc(1000px / var(--cols)), 70px);
   width: var(--col-width);
+  max-width: var(--col-width);
+  min-width: var(--col-width);
 }
 
 i:not(.small) {
