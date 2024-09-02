@@ -8,11 +8,11 @@ import {DocumentationComponent} from './navigation/documentation/documentation.c
 const routes: Routes = [
   {
     path: 'complex',
-    loadChildren: () => import('app/complex/complex.module').then(m => m.ComplexModule)
+    loadChildren: () => import('./complex/complex.module').then(m => m.ComplexModule)
   },
   {
     path: 'basket',
-    loadChildren: () => import('app/basket/basket.module').then(m => m.BasketModule)
+    loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule)
   },
   {
     path: 'about',
@@ -38,6 +38,6 @@ const routes: Routes = [
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
 })
 export class AppRoutingModule {}

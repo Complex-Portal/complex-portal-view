@@ -14,12 +14,12 @@ i:not(.small) {
   font-size: 14px;
   display: flex;
   width: inherit;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .inlineDisplay {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .name {

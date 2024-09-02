@@ -1,7 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, computed, input, OnInit, Signal} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
-import {Category} from '../../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
+
+const base = environment.complex_ws_base_url;
+
+interface Format {
+  icon: string;
+  name: string;
+  filename: string;
+  url: string;
+  disabled?: boolean;
+}
 
 @Component({
   selector: 'cp-download-modal',
@@ -9,49 +18,30 @@ import {AnalyticsService} from '../../../../shared/google-analytics/service/anal
   styleUrls: ['./download-modal.component.css']
 })
 export class DownloadModalComponent implements OnInit {
-  private _complexAC: string;
+  complexAC = input.required<string>();
+
+  formats: Signal<Format[]> = computed(() => [
+    {icon: '1', name: 'PSI-MI XML 2.5', filename: `${this.complexAC()}.xml`, url: `${base}/export/${this.complexAC()}?format=xml25`},
+    {icon: '1', name: 'PSI-MI XML 3.0', filename: `${this.complexAC()}.xml`, url: `${base}/export/${this.complexAC()}?format=xml25`},
+    {icon: 'v', name: 'ComplexTab', filename: `${this.complexAC()}.tsv`, url: `${base}/export/${this.complexAC()}?format=tsv`},
+    {icon: 'J', name: 'PSI-MI JSON', filename: `${this.complexAC()}.json`, url: `${base}/export/${this.complexAC()}`},
+  ]);
+
+  download(format: Format) {
+    if (!format.disabled) {
+      fetch(format.url).then(t => t.blob().then((b) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(b);
+        a.setAttribute('download', format.filename);
+        a.click();
+        a.remove();
+      }));
+    }
+  }
 
   constructor(private googleAnalyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
-  }
-
-
-  goToComplexWSJsonFormat(): void {
-    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
-
-    const complexURLjson = environment.complex_ws_base_url + '/export/' + this._complexAC;
-    window.open(complexURLjson, '_blank');
-  }
-
-  goToComplexWSXml25Format(): void {
-    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
-
-    const complexURLxml25 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=xml25';
-    window.open(complexURLxml25, '_blank');
-  }
-
-  goToComplexWSComplexTabFormat(): void {
-    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
-
-    const complexURLxml25 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=tsv';
-    window.open(complexURLxml25, '_blank');
-  }
-
-  goToComplexWSXml30Format(): void {
-    this.googleAnalyticsService.fireDownloadResourceEvent(Category.details, 'ComplexWS');
-
-    const complexURLxml30 = environment.complex_ws_base_url + '/export/' + this._complexAC + '?format=xml30';
-    window.open(complexURLxml30, '_blank');
-  }
-
-  get complexAC(): string {
-    return this._complexAC;
-  }
-
-  @Input()
-  set complexAC(value: string) {
-    this._complexAC = value;
   }
 }

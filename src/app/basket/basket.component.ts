@@ -8,9 +8,9 @@ import {ComplexSearchResult} from '../complex/shared/model/complex-results/compl
 import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
-  COMPLEX_NAVIGATOR_VIEW,
-  LIST_VIEW
+  SearchDisplay
 } from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'cp-basket',
@@ -21,7 +21,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
-  DisplayType: string;
+  displayType: SearchDisplay;
 
   constructor(private _basketService: BasketService,
               private titleService: Title,
@@ -34,26 +34,24 @@ export class BasketComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Basket');
     this.complexNavigatorLoading();
-    this.route.fragment.subscribe(fragment => {
-      if (fragment === COMPLEX_NAVIGATOR_VIEW) {
-        this.DisplayType = COMPLEX_NAVIGATOR_VIEW;
+    this.route.fragment.pipe(take(1)).subscribe(fragment => {
+      if (fragment === SearchDisplay.navigator) {
+        this.displayType = SearchDisplay.navigator;
       } else {
-        this.DisplayType = LIST_VIEW;
+        this.displayType = SearchDisplay.list;
       }
     });
   }
 
-  onDisplayTypeChange(displayType: string) {
-    if (this.DisplayType !== displayType) {
-      this.DisplayType = displayType;
-      this.router.navigate([], {
-        fragment: this.DisplayType
-      });
+  onDisplayTypeChange(displayType: SearchDisplay) {
+    if (this.displayType !== displayType) {
+      this.displayType = displayType;
+      this.router.navigate([], {fragment: this.displayType});
     }
   }
 
   isDisplayComplexNavigatorView(): boolean {
-    return this.DisplayType === COMPLEX_NAVIGATOR_VIEW;
+    return this.displayType === SearchDisplay.navigator;
   }
 
   ngAfterViewInit(): void {

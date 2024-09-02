@@ -31,18 +31,18 @@
         </label>
         <ul class="detailedDisplayOptions">
           <li>
-            <input type="checkbox" name="organism" value="organism" class="checkbox" [checked]="organismIconDisplay"
-                   (change)="DisplayingOrganism()">
+            <input type="checkbox" name="organism" value="organism" class="checkbox" [checked]="organismIconDisplay()"
+                   (change)="toggleOrganism()">
             Organism
           </li>
           <li>
-            <input type="checkbox" name="type" value="type" class="checkbox" [checked]="interactorTypeDisplay"
-                   (change)="DisplayingType()">
+            <input type="checkbox" name="type" value="type" class="checkbox" [checked]="interactorTypeDisplay()"
+                   (change)="toggleType()">
             Type
           </li>
           <li>
-            <input type="checkbox" name="id" value="id" class="checkbox" [checked]="IDDisplay"
-                   (change)="DisplayingID()">
+            <input type="checkbox" name="id" value="id" class="checkbox" [checked]="idDisplay()"
+                   (change)="toggleId()">
             Interactor ID
           </li>
         </ul>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
 
 import {Pathway, ReactomeService} from './service/reactome.service';
@@ -16,8 +16,7 @@ import {forkJoin} from 'rxjs';
 })
 
 export class ReactomeCrossReferencesComponent implements OnInit {
-  @Input()
-  crossReferences: CrossReference[];
+  crossReferences = input<CrossReference[]>();
   reactomeComplexes: { [stId: string]: ReactomeComplex } = {};
   reactomePathways: { [stId: string]: ReactomePathway } = {};
   selectedComplex: string;
@@ -49,40 +48,41 @@ export class ReactomeCrossReferencesComponent implements OnInit {
    * *Info: One Complex can be in multiple pathways and one pathway can have multiple complexes.*
    */
   private mapComplexeToPathways(): void {
-    for (let i = 0; i < this.crossReferences.length; i++) {
+    for (let i = 0; i < this.crossReferences().length; i++) {
       forkJoin({
-        relatedPathways: this.reactomeService.findRelatedPathways(this.crossReferences[i].identifier),
-        complexName: this.reactomeService.getComplexName(this.crossReferences[i].identifier)
-      })
-        .subscribe(
-          response => {
-            const relatedPathways: Pathway[] = response.relatedPathways;
-            const complexName = response.complexName;
-            for (let count = 0; count < relatedPathways.length; count++) {
-              const pathway: Pathway = relatedPathways[count];
-              let currentPathway = this.reactomePathways[pathway.stId];
-              let currentComplex = this.reactomeComplexes[this.crossReferences[i].identifier];
-              if (currentPathway === undefined) {
-                currentPathway = this.reactomePathways[pathway.stId] = new ReactomePathway(pathway.stId);
-                currentPathway.name = pathway.displayName;
-              }
-              if (currentComplex === undefined) {
-                currentComplex = this.reactomeComplexes[this.crossReferences[i].identifier.toString()]
-                  = new ReactomeComplex(this.crossReferences[i].identifier);
-                currentComplex.name = complexName;
-              }
-              currentPathway.complexes.push(this.crossReferences[i].identifier);
-              currentComplex.pathways.push(pathway.stId);
-              if (i === this.crossReferences.length - 1 && count === relatedPathways.length - 1) {
-                this.selectComplexWithFirstPathway(Object.keys(this.reactomeComplexes).sort()[0]);
-                this.isDataLoaded = true;
-              }
+        relatedPathways: this.reactomeService.findRelatedPathways(this.crossReferences()[i].identifier),
+        complexName: this.reactomeService.getComplexName(this.crossReferences()[i].identifier)
+      }).subscribe({
+        next: response => {
+          const relatedPathways: Pathway[] = response.relatedPathways;
+          const complexName = response.complexName;
+          for (let count = 0; count < relatedPathways.length; count++) {
+            const pathway: Pathway = relatedPathways[count];
+            let currentPathway = this.reactomePathways[pathway.stId];
+            let currentComplex = this.reactomeComplexes[this.crossReferences()[i].identifier];
+            if (currentPathway === undefined) {
+              currentPathway = this.reactomePathways[pathway.stId] = new ReactomePathway(pathway.stId);
+              currentPathway.name = pathway.displayName;
             }
-          },
-          error => {
-            this.notificationService.onAPIRequestError('Reactome');
-            this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.reactome, error.status ? error.status : 'unknown');
-          });
+            if (currentComplex === undefined) {
+              currentComplex = this.reactomeComplexes[this.crossReferences()[i].identifier.toString()]
+                = new ReactomeComplex(this.crossReferences()[i].identifier);
+              currentComplex.name = complexName;
+            }
+            currentPathway.complexes.push(this.crossReferences()[i].identifier);
+            currentComplex.pathways.push(pathway.stId);
+            if (i === this.crossReferences().length - 1 && count === relatedPathways.length - 1) {
+              this.selectComplexWithFirstPathway(Object.keys(this.reactomeComplexes).sort()[0]);
+              this.isDataLoaded = true;
+            }
+          }
+        },
+
+        error: error => {
+          this.notificationService.onAPIRequestError('Reactome');
+          this.googleAnalyticsService.fireAPIRequestErrorEvent(Category.reactome, error.status ? error.status : 'unknown');
+        }
+      });
     }
   }
 

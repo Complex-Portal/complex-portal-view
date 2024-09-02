@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation, input } from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
-import * as complexviewer from 'complexviewer';
+import {App as ComplexViewer} from 'complexviewer';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
 
 let viewer: any;
@@ -57,7 +57,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     $('cp-complex-participants').foundation();
-    viewer = new complexviewer.App(document.getElementById('networkContainer'));
+    viewer = new ComplexViewer(document.getElementById('networkContainer'));
     viewer.readMIJSON(this.complexMIJSON, true);
     viewer.autoLayout();
     for (const key of Object.keys(this.annotations)) {
@@ -269,19 +269,16 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
     let blob = dataURItoBlob(content);
 
-    if (navigator.msSaveOrOpenBlob) {
-      navigator.msSaveOrOpenBlob(blob, fileName);
-    } else {
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      // Give filename you wish to download
-      a.download = fileName;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(a.href); // clear up url reference to blob so it can be g.c.'ed
-    }
+
+    const a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    // Give filename you wish to download
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(a.href); // clear up url reference to blob so it can be g.c.'ed
 
     blob = null;
   }
@@ -289,7 +286,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
 
 
 interface Legend {
-  Complex?: ColorLegend[] ;
+  Complex?: ColorLegend[];
   Interactor?: ColorLegend[];
   'MI Features'?: ColorLegend[];
 

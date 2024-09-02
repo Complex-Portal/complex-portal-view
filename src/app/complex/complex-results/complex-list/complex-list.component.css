@@ -23,3 +23,11 @@
   margin-left: 5px;
 }
 
+.predicted h3 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 22px;
+}
+

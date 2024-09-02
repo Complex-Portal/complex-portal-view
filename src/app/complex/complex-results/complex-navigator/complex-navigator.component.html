@@ -1,20 +1,20 @@
 <div class="ComplexNavigator">
-  <div class="Buttons" [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCNButtons' : ''">
+  <div class="Buttons" [ngClass]="complexSearch().totalNumberOfResults <=6 ? 'smallCNButtons' : ''">
     <cp-complex-navigator-buttons
       [(interactorsSorting)]="interactorsSorting"
       [(organismIconDisplay)]="organismIconDisplay"
       [(interactorTypeDisplay)]="interactorTypeDisplay"
-      [(IDDisplay)]="IDDisplay">
+      [(idDisplay)]="idDisplay">
     </cp-complex-navigator-buttons>
   </div>
-  <cp-table-structure [complexSearch]="complexSearch"
-                      [interactors]="interactors"
+  <cp-table-structure [complexSearch]="complexSearch()"
+                      [interactors]="interactors()"
                       [interactorsSorting]="interactorsSorting"
                       [organismIconDisplay]="organismIconDisplay"
                       [interactorTypeDisplay]="interactorTypeDisplay"
-                      [IDDisplay]="IDDisplay"
-                      [canAddComplexesToBasket]="canAddComplexesToBasket"
-                      [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket"
+                      [idDisplay]="idDisplay"
+                      [canAddComplexesToBasket]="canAddComplexesToBasket()"
+                      [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket()"
                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
   </cp-table-structure>
 </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 
 @Component({
@@ -23,7 +23,7 @@ export class ComplexReferencesComponent implements OnInit {
   private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];
-      const database = this._crossReferences[i].database;
+      const database = this._crossReferences[i].database.toLowerCase();
 
       if (database === 'pubmed') {
         if (this._pubmedXRefs === undefined) {
@@ -31,7 +31,7 @@ export class ComplexReferencesComponent implements OnInit {
         }
         this._pubmedXRefs.push(crossRef);
       }
-      if (database === 'signor' || database === 'matrixdb') {
+      if (database === 'signor' || database === 'matrixdb' || database === 'humap') {
         if (this._externalResources === undefined) {
           this._externalResources = [];
         }

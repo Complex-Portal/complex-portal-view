@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {interactorTypeIcon} from '../../../../../complex-portal-utils';
-import {organismIcon} from '../../../../../complex-portal-utils';
+import {Component, input, OnInit} from '@angular/core';
+import {interactorTypeIcon, organismIcon} from '../../../../../complex-portal-utils';
 
 @Component({
   selector: 'cp-table-interactor-name',
@@ -9,22 +8,22 @@ import {organismIcon} from '../../../../../complex-portal-utils';
 })
 export class TableInteractorNameComponent implements OnInit {
 
-  @Input() interactorName: string;
-  @Input() interactorType: string;
-  @Input() interactorId: string;
-  @Input() interactorOrganism: string;
-  @Input() identifierLink: string;
-  @Input() organismIconDisplay: boolean;
-  @Input() interactorTypeDisplay: boolean;
-  @Input() IDDisplay: boolean;
-  @Input() isMainInteractor: boolean;
+  interactorName = input<string>();
+  interactorType = input<string>();
+  interactorId = input<string>();
+  interactorOrganism = input<string>();
+  identifierLink = input<string>();
+  organismIconDisplay = input<boolean>();
+  interactorTypeDisplay = input<boolean>();
+  idDisplay = input<boolean>();
+  isMainInteractor = input<boolean>();
   interactorTypeIcon: string;
   interactorOrganismIcon: string;
   externalLinkVisible: boolean;
 
   ngOnInit(): void {
-    this.interactorTypeIcon = interactorTypeIcon(this.interactorType);
-    this.interactorOrganismIcon = organismIcon(this.interactorOrganism);
+    this.interactorTypeIcon = interactorTypeIcon(this.interactorType());
+    this.interactorOrganismIcon = organismIcon(this.interactorOrganism());
   }
 
   externalLinkVisibleHandler(isVisible: boolean): void {

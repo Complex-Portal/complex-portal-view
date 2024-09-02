@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
 
@@ -10,8 +10,7 @@ import {ComplexDetails} from '../../shared/model/complex-details/complex-details
 export class ComplexEvidenceComponent implements OnInit {
 
   intactXRefs: CrossReference[];
-  @Input()
-  complex: ComplexDetails;
+  complex = input<ComplexDetails>();
   stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
 
 
@@ -24,7 +23,7 @@ export class ComplexEvidenceComponent implements OnInit {
   }
 
   private formatEvidenceOntologyStars(): void {
-    this._star(this.complex.evidenceType?.confidenceScore || 3);
+    this._star(this.complex().evidenceType?.confidenceScore || 3);
   }
 
   /**
@@ -33,9 +32,9 @@ export class ComplexEvidenceComponent implements OnInit {
    * Also we add the flask symbol, which is for the icon. (Similar to the organism view)
    */
   private findXRefs(): void {
-    for (let i = 0; i < this.complex.crossReferences.length; i++) {
-      const crossRef = this.complex.crossReferences[i];
-      const database = this.complex.crossReferences[i].database;
+    for (let i = 0; i < this.complex().crossReferences.length; i++) {
+      const crossRef = this.complex().crossReferences[i];
+      const database = this.complex().crossReferences[i].database;
 
       if (database === 'intact') {
         if (this.intactXRefs === undefined) {
@@ -52,5 +51,4 @@ export class ComplexEvidenceComponent implements OnInit {
       this.stars.fill('empty', amount);
     }
   }
-
 }

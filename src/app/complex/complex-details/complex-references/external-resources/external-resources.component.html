@@ -7,7 +7,12 @@
       </thead>
       <tbody>
       <tr *ngFor="let crossReference of crossReferences">
-        <td><a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i></a></td>
+        <td>
+          <a *ngIf="!!crossReference.searchURL" href="{{crossReference.searchURL}}" target="_blank">
+            {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
+          </a>
+          <span *ngIf="!crossReference.searchURL">{{crossReference.identifier}}</span>
+        </td>
       </tr>
       </tbody>
     </table>

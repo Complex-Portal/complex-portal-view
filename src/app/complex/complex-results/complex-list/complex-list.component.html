@@ -1,5 +1,5 @@
 <ul class="no-bullet">
-  <li *ngFor="let complex of complexSearch.elements" [class.predicted]="complex.predictedComplex">
+  <li *ngFor="let complex of complexSearch().elements" [class.predicted]="complex.predictedComplex">
     <div class="container">
       <div class="basketButtonContainer"
            [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
@@ -8,20 +8,13 @@
         </a>
       </div>
       <div class="complexesAndDescription">
-        <h3>
-          <a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName }}</a></h3>
+        <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName | truncate:114 }}</a></h3>
         <div class="description" style="background-color: white">
           <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
           · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
           <br>
           <ng-container *ngIf="complex.description">
-            <b>Description:</b>
-            <div *ngIf="complex.description.length <= 250">
-              {{ complex.description }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
-            </div>
-            <div *ngIf="complex.description.length > 250">
-              {{ complex.description.substr(0, 250) }}<a [routerLink]="['/complex', complex.complexAC]">...</a>
-            </div>
+            <b>Description:</b> {{ complex.description | truncate:250}}
           </ng-container>
         </div>
       </div>

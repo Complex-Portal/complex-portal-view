@@ -1,12 +1,12 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, input, OnChanges, SimpleChanges} from '@angular/core';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {map} from 'rxjs/operators';
 import {findInteractorInComplex} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
+import {map} from 'rxjs/operators';
+import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 
 
 export class EnrichedInteractor {
@@ -34,21 +34,22 @@ export class EnrichedComplex {
   styleUrls: ['./table-interactor-column.component.css']
 })
 export class TableInteractorColumnComponent implements OnChanges {
-  @Input() complexes: Element[];
-  @Input() interactorsSorting: string;
-  @Input() interactors: Interactor[];
-  @Input() organismIconDisplay: boolean;
-  @Input() interactorTypeDisplay: boolean;
-  @Input() IDDisplay: boolean;
+  complexes = input<Element[]>([]);
+  interactorsSorting = input<string>();
+  interactors = input<Interactor[]>([]);
+  organismIconDisplay = input<boolean>(true);
+  interactorTypeDisplay = input<boolean>(true);
+  idDisplay = input<boolean>(true);
 
+  // TODO rework bellow to compute when needed from the inputs
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
-  ranges: number[];
+  ranges: [string, number, number, number][]; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
 
   _timesAppearingByType: Map<string, number>;
   _timesAppearingByOrganism: Map<string, number>;
 
-  constructor(private complexPortalService: ComplexPortalService) {
+  constructor(private complexPortalService: ComplexPortalService, private species: SpeciesPipe) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -61,10 +62,10 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private classifyInteractors(): void {
-    if (!!this.interactorsSorting && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
-      if (this.interactorsSorting === 'Type') {
+    if (!!this.interactorsSorting() && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
+      if (this.interactorsSorting() === 'Type') {
         this.classifyInteractorsByType();
-      } else if (this.interactorsSorting === 'Organism') {
+      } else if (this.interactorsSorting() === 'Organism') {
         this.classifyInteractorsByOrganism();
       } else {
         this.classifyInteractorsByOccurrence();
@@ -74,7 +75,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private enrichInteractors() {
     this.enrichedInteractors = [];
-    for (const interactor of this.interactors) {
+    for (const interactor of this.interactors()) {
       const isSubComplex = interactor.interactorType === 'stable complex';
       const newEnrichedInteractor: EnrichedInteractor = {
         interactor,
@@ -130,7 +131,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Element = this.complexes.find(complex => complex.complexAC === interactor.interactor.identifier);
+    const foundComplex: Element = this.complexes().find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.interactors);
     } else {
@@ -143,7 +144,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   private calculateAllStartAndEndIndexes(): void {
     this.enrichedComplexes = [];
 
-    for (const complex of this.complexes) {
+    for (const complex of this.complexes()) {
       this.enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
     }
   }
@@ -316,7 +317,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
         || this.enrichedInteractors[i].interactor.organismName !== this.enrichedInteractors[i + 1].interactor.organismName) {
         if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor.organismName, length, start);
+          oneType.push(this.species.transform(this.enrichedInteractors[i].interactor.organismName), length, start);
           ranges.push(oneType);
           start = null;
         }
@@ -327,7 +328,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   isInteractorSortingSet() {
-    return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+    return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
   }
 
   getExpandedRowClass(i: number, length: number): string {
@@ -350,7 +351,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     for (const oneInteractor of this.enrichedInteractors) {
       // Initialise times appearing for each interactor
       oneInteractor.timesAppearing = 0;
-      for (const complex of this.complexes) {
+      for (const complex of this.complexes()) {
         const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
         if (!!match) {
           // Update times appearing for the interactor

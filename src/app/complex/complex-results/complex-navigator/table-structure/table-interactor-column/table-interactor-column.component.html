@@ -1,7 +1,7 @@
 <div class="Complex-navigator">
   <table class="interactors-table"
-         [ngClass]="{'inheritedWidth': complexes.length > 6}"
-         [style.--cols]="complexes.length">
+         [ngClass]="{'inheritedWidth': complexes().length > 6}"
+         [style.--cols]="complexes().length">
     <ng-container *ngFor=" let interactor of enrichedInteractors; let i=index">
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
@@ -13,7 +13,7 @@
           </td>
         </ng-container>
         <td class="interactorsColumn"
-            [ngClass]="complexes.length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
+            [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
             [style]="ranges.length!=0 ? 'left:3ch':''">
           <cp-table-interactor-name
             [interactorName]="interactor.interactor.name"
@@ -21,9 +21,9 @@
             [interactorId]="interactor.interactor.identifier"
             [interactorOrganism]="interactor.interactor.organismName"
             [identifierLink]="interactor.interactor.identifierLink"
-            [organismIconDisplay]="organismIconDisplay"
-            [interactorTypeDisplay]="interactorTypeDisplay"
-            [IDDisplay]="IDDisplay"
+            [organismIconDisplay]="organismIconDisplay()"
+            [interactorTypeDisplay]="interactorTypeDisplay()"
+            [idDisplay]="idDisplay()"
           ></cp-table-interactor-name>
           <!-- Icon for the expandable -->
           <div class="container" *ngIf="interactor.isSubComplex">
@@ -38,7 +38,8 @@
         </td>
         <!-- Interactors' stoichiometry -->
         <ng-container *ngFor="let complex of enrichedComplexes">
-          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}" [class.predicted]="complex.complex.predictedComplex">
+          <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}"
+              [class.predicted]="complex.complex.predictedComplex">
             <cp-table-main-interactor
               [complex]="complex"
               [i]="i"
@@ -46,7 +47,7 @@
             ></cp-table-main-interactor>
           </td>
         </ng-container>
-        <div *ngIf="complexes.length>6"
+        <div *ngIf="complexes().length>6"
              [ngClass]="isInteractorSortingSet() ? 'spaceHolderWithSorting' : 'spaceHolder'"></div>
       </tr>
       <!-- Expandable menu for subcomplexes -->
@@ -57,13 +58,13 @@
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
             <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                 [matTooltip]="interactor.interactor.name + ' components'"
-                *ngIf="j === 0 && (interactorsSorting === 'Type' || interactorsSorting === 'Organism')">
+                *ngIf="j === 0 && (interactorsSorting() === 'Type' || interactorsSorting() === 'Organism')">
               <div class="interactorSeparationName"
                    [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }} components
               </div>
             </td>
             <td class="subComponentColumn"
-                [ngClass]="complexes.length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
+                [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
                 [style]="ranges.length!=0 ? 'left:3ch':''">
               <div>
                 <cp-table-interactor-name
@@ -72,14 +73,14 @@
                   [interactorId]="el.identifier"
                   [interactorOrganism]="interactor.interactor.organismName"
                   [identifierLink]="el.identifierLink"
-                  [organismIconDisplay]="organismIconDisplay"
-                  [interactorTypeDisplay]="interactorTypeDisplay"
-                  [IDDisplay]="IDDisplay"
+                  [organismIconDisplay]="organismIconDisplay()"
+                  [interactorTypeDisplay]="interactorTypeDisplay()"
+                  [idDisplay]="idDisplay()"
                 ></cp-table-interactor-name>
               </div>
             </td>
             <ng-container *ngFor="let complex of enrichedComplexes">
-              <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes.length > 6}">
+              <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}">
                 <cp-table-subcomponent-interactor
                   [complex]="complex"
                   [i]="i"

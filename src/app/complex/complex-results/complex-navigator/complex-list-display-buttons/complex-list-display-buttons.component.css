@@ -29,7 +29,7 @@
   font-size: x-small;
 }
 
-.new-tag-selected {
+.selected .new-tag {
   color: yellow;
 }
 
