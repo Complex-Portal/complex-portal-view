@@ -17,6 +17,7 @@ export class EnrichedInteractor {
   subComponents: ComplexComponent[];
   partOfComplex: number[];
   timesAppearing: number;
+  indexAppearing: number;
 }
 
 export class EnrichedComplex {
@@ -85,6 +86,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
+        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs.has(interactor.identifier))
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -234,6 +236,16 @@ export class TableInteractorColumnComponent implements OnChanges {
     return enrichedComplex;
   }
 
+  private compareFn = (a: EnrichedInteractor, b: EnrichedInteractor) =>
+    -(b.indexAppearing - a.indexAppearing) || // First by order of appearance (staircase effect)
+    -(b.timesAppearing - a.timesAppearing); // Then by reversed occurrence, in order to minimize edge length
+
+
+  public classifyInteractorsByOccurrence() {
+    this.enrichedInteractors.sort(this.compareFn);
+    this.ranges = [];
+  }
+
   public classifyInteractorsByOrganism() {
     this.enrichedInteractors.sort((a, b) => {
       if (b.interactor.organismName === a.interactor.organismName) {
@@ -292,32 +304,6 @@ export class TableInteractorColumnComponent implements OnChanges {
         || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
         if (start !== null) {
           oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
-          ranges.push(oneType);
-          start = null;
-        }
-        length = 0;
-      }
-    }
-    this.ranges = ranges;
-  }
-
-  public rangeOfInteractorOrganism() {
-    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-    let length = 0;
-    let start = null;
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      const oneType = [];
-      if (!this.enrichedInteractors[i].hidden) {
-        length += 1;
-        if (start === null) {
-          start = i;
-        }
-      }
-      if (!this.enrichedInteractors[i + 1]
-        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.organismName !== this.enrichedInteractors[i + 1].interactor.organismName) {
-        if (start !== null) {
-          oneType.push(this.species.transform(this.enrichedInteractors[i].interactor.organismName), length, start);
           ranges.push(oneType);
           start = null;
         }
