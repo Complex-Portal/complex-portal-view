@@ -247,47 +247,16 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   public classifyInteractorsByOrganism() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.organismName === a.interactor.organismName) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const organismBTimesAppearing = this._timesAppearingByOrganism.get(b.interactor.organismName);
-        const organismATimesAppearing = this._timesAppearingByOrganism.get(a.interactor.organismName);
-        if (organismBTimesAppearing === organismATimesAppearing) {
-          return b.interactor.organismName.localeCompare(a.interactor.organismName);
-        } else {
-          return organismBTimesAppearing - organismATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorOrganism();
+    this.enrichedInteractors.sort((a, b) => b.interactor.organismName.localeCompare(a.interactor.organismName) || this.compareFn(a, b));
+    this.calculateRangesBy('organismName');
   }
 
   public classifyInteractorsByType() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.interactorType === a.interactor.interactorType) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const typeBTimesAppearing = this._timesAppearingByType.get(b.interactor.interactorType);
-        const typeATimesAppearing = this._timesAppearingByType.get(a.interactor.interactorType);
-        if (typeBTimesAppearing === typeATimesAppearing) {
-          return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
-        } else {
-          return typeBTimesAppearing - typeATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorType();
+    this.enrichedInteractors.sort((a, b) => b.interactor.interactorType.localeCompare(a.interactor.interactorType) || this.compareFn(a, b));
+    this.calculateRangesBy('interactorType');
   }
 
-  public classifyInteractorsByOccurrence() {
-    this.enrichedInteractors.sort((a, b) =>
-      b.timesAppearing - a.timesAppearing
-    );
-    this.ranges = [];
-  }
-
-  public rangeOfInteractorType() {
+  public calculateRangesBy(key: keyof Interactor) {
     const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;
@@ -301,9 +270,9 @@ export class TableInteractorColumnComponent implements OnChanges {
       }
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
+        || this.enrichedInteractors[i].interactor[key] !== this.enrichedInteractors[i + 1].interactor[key]) {
         if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
+          oneType.push(this.enrichedInteractors[i].interactor[key], length, start);
           ranges.push(oneType);
           start = null;
         }
