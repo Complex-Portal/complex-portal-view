@@ -55,16 +55,25 @@ export class TableStructureComponent {
   }
 
   classifyComplexesSimilaritiesV2(complexesList: Element[]) {
-    const comparedComplexes: [Element, Element, number][] = [];
+    const comparedCuratedComplexes: [Element, Element, number][] = [];
+    const comparedPredictedComplexes: [Element, Element, number][] = [];
     for (const complex of complexesList) {
       for (const comparedComplex of complexesList) {
         // for unique comparison
         if (complex.complexAC >= comparedComplex.complexAC) {
-          comparedComplexes.push([complex, comparedComplex, this.calculateSimilarity(complex, comparedComplex)]);
+          // We always display curated complexes first, so we only compare curated vs curated and predicted vs predicted
+          if (complex.predictedComplex && comparedComplex.predictedComplex) {
+            comparedPredictedComplexes.push([complex, comparedComplex, this.calculateSimilarity(complex, comparedComplex)]);
+          } else if (!complex.predictedComplex && !comparedComplex.predictedComplex) {
+            comparedCuratedComplexes.push([complex, comparedComplex, this.calculateSimilarity(complex, comparedComplex)]);
+          }
         }
       }
     }
-    comparedComplexes.sort((a, b) => b[2] - a[2]); // sorting by similarityScore
+    comparedCuratedComplexes.sort((a, b) => b[2] - a[2]); // sorting by similarityScore
+    comparedPredictedComplexes.sort((a, b) => b[2] - a[2]); // sorting by similarityScore
+    // Single array with all curated complexes first (sorted) and then all predicted complexes (sorted)
+    const comparedComplexes: [Element, Element, number][] = [...comparedCuratedComplexes, ...comparedPredictedComplexes];
     const complexesOrderedSet = this.uniqueComplexesListOrderedBySimilarity(comparedComplexes);
     // to be used in the table as a 1D array
     return Array.from(complexesOrderedSet);
