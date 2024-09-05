@@ -6,9 +6,13 @@
       <tr *ngIf="!interactor.hidden">
         <ng-container *ngFor="let oneType of ranges" class="interactorsOrdering">
           <td *ngIf="oneType[2]===i" [attr.rowspan]="oneType[1]" class="interactorSeparation"
-              [matTooltip]="oneType[0]">
+              [matTooltip]="interactorsSorting() === 'Organism' ? (oneType[0] | species) : oneType[0]">
             <div class="interactorNameContainer" [style.--rowspanSize]="oneType[1]">
-              {{ oneType[0] }}
+              @if (interactorsSorting() === 'Organism') {
+                {{ oneType[0] | species:true }}
+              } @else {
+                {{ oneType[0] }}
+              }
             </div>
           </td>
         </ng-container>
