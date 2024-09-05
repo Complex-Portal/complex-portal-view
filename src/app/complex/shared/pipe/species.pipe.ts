@@ -7,6 +7,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SpeciesPipe implements PipeTransform {
   exceptions = new Map<string, string>([
+    ['chemical synthesis; -2', 'Chemical Synthesis'],
     ['Severe acute respiratory syndrome coronavirus', 'SARS-CoV'],
     ['Severe acute respiratory syndrome coronavirus 2', 'SARS-CoV-2'],
     ['Middle East respiratory syndrome-related coronavirus (isolate United Kingdom/H123990006/2012)', 'MERS-CoV'],
