@@ -88,7 +88,8 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
-        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs.has(interactor.identifier))
+        indexAppearing: this.complexes().findIndex(complex =>
+          !!complex.componentAcs && complex.componentAcs.has(interactor.identifier))
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
