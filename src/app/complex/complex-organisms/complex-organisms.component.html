@@ -1,14 +1,15 @@
 <div class="columns margin-top-large margin-bottom-large">
   <h1>Organisms</h1>
-  <ng-container *ngIf="organisms;else loadingSpinner">
+  @if (organisms) {
     <div class="columns medium-12" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); grid-gap: 1rem;">
-      <div class="medium-12" *ngFor="let organism of organisms" style="break-inside: avoid-column">
-        <cp-complex-organism [organism]="organism"></cp-complex-organism>
-      </div>
+      @for (organism of organisms; track organism.taxid) {
+        <div class="medium-12" style="break-inside: avoid-column">
+          <cp-complex-organism [organism]="organism"></cp-complex-organism>
+        </div>
+      }
     </div>
-  </ng-container>
-  <ng-template #loadingSpinner>
+  } @else {
     <cp-progress-spinner [query]="query"></cp-progress-spinner>
-  </ng-template>
+  }
 </div>
 

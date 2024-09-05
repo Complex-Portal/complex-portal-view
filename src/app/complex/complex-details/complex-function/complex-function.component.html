@@ -1,33 +1,49 @@
-<div class="row no-pad-left no-pad-right" *ngIf="hasFunction">
-  <div class="columns medium-12 no-pad-left no-pad-right">
-    <div class="columns medium-12 clearfix no-pad-left">
-      <h2 class="float-left">Function</h2>
-      <cp-go-to class="float-right" [sectionName]="'Function'"></cp-go-to>
-    </div>
-    <div id="description" class="columns medium-12 no-pad-left" *ngIf="functionDescription">
-      <p>{{functionDescription}}</p>
-    </div>
-    <div id="catalyticActivity"
-         class="columns medium-12 no-pad-left"
-         *ngIf="(intenzXRefs && intenzXRefs.length !== 0) || (rheaXRefs && rheaXRefs.length !== 0)">
-      <cp-catalytic-activity [intenzCrossReferences]="intenzXRefs" [rheaCrossReferences]="rheaXRefs"></cp-catalytic-activity>
-    </div>
-    <div id="ligands" class="columns medium-6 no-pad-left" *ngIf="ligands && ligands.length !== 0">
-      <cp-ligands [ligands]="ligands"></cp-ligands>
-    </div>
-    <div id="goXRefs" class="columns medium-12 no-pad-left" *ngIf="goXRefs && goXRefs.length !== 0">
-      <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>
-    </div>
-    <div class="columns medium-12 no-pad-left">
-      <div id="agonists" class="columns medium-6 no-pad-left no-pad-right" *ngIf="agonists && agonists.length !== 0">
-        <cp-agonists [agonists]="agonists"></cp-agonists>
+@if (hasFunction) {
+  <div class="row no-pad-left no-pad-right">
+    <div class="columns medium-12 no-pad-left no-pad-right">
+      <div class="columns medium-12 clearfix no-pad-left">
+        <h2 class="float-left">Function</h2>
+        <cp-go-to class="float-right" [sectionName]="'Function'"></cp-go-to>
       </div>
-      <div id="antagonists" class="columns medium-6 no-pad-left no-pad-right" *ngIf="antagonists && antagonists.length !== 0">
-        <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
+      @if (functionDescription) {
+        <div id="description" class="columns medium-12 no-pad-left">
+          <p>{{functionDescription}}</p>
+        </div>
+      }
+      @if ((intenzXRefs && intenzXRefs.length !== 0) || (rheaXRefs && rheaXRefs.length !== 0)) {
+        <div id="catalyticActivity"
+          class="columns medium-12 no-pad-left"
+          >
+          <cp-catalytic-activity [intenzCrossReferences]="intenzXRefs" [rheaCrossReferences]="rheaXRefs"></cp-catalytic-activity>
+        </div>
+      }
+      @if (ligands && ligands.length !== 0) {
+        <div id="ligands" class="columns medium-6 no-pad-left">
+          <cp-ligands [ligands]="ligands"></cp-ligands>
+        </div>
+      }
+      @if (goXRefs && goXRefs.length !== 0) {
+        <div id="goXRefs" class="columns medium-12 no-pad-left">
+          <cp-go-crossreferences [crossReferences]="goXRefs"></cp-go-crossreferences>
+        </div>
+      }
+      <div class="columns medium-12 no-pad-left">
+        @if (agonists && agonists.length !== 0) {
+          <div id="agonists" class="columns medium-6 no-pad-left no-pad-right">
+            <cp-agonists [agonists]="agonists"></cp-agonists>
+          </div>
+        }
+        @if (antagonists && antagonists.length !== 0) {
+          <div id="antagonists" class="columns medium-6 no-pad-left no-pad-right">
+            <cp-antagonists [antagonists]="antagonists"></cp-antagonists>
+          </div>
+        }
       </div>
-    </div>
-    <div id="reactomeXRefs" class="columns medium-12 no-pad-left" *ngIf="reactomeXRefs && reactomeXRefs.length !== 0">
-      <cp-reactome-cross-references [crossReferences]="reactomeXRefs"></cp-reactome-cross-references>
+      @if (reactomeXRefs && reactomeXRefs.length !== 0) {
+        <div id="reactomeXRefs" class="columns medium-12 no-pad-left">
+          <cp-reactome-cross-references [crossReferences]="reactomeXRefs"></cp-reactome-cross-references>
+        </div>
+      }
     </div>
   </div>
-</div>
+}

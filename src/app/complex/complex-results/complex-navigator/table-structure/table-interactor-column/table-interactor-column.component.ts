@@ -29,6 +29,12 @@ export class EnrichedComplex {
   startInteractorIncludedWhenExpanded: boolean;
 }
 
+interface Range {
+  value: string;
+  start: number;
+  length: number;
+}
+
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
@@ -45,7 +51,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   // TODO rework bellow to compute when needed from the inputs
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
-  ranges: [string, number, number, number][]; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+  ranges: Range[] = [];
 
   timesAppearingBy: { [k in keyof Interactor]?: Map<string, number> } = {
     interactorType: new Map<string, number>(),
@@ -258,23 +264,22 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   public calculateRangesBy(key: keyof Interactor) {
-    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+    const ranges: Range[] = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;
     for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      const oneType = [];
       if (!this.enrichedInteractors[i].hidden) {
         length += 1;
         if (start === null) {
           start = i;
         }
       }
+      const value = this.enrichedInteractors[i].interactor[key];
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor[key] !== this.enrichedInteractors[i + 1].interactor[key]) {
+        || value !== this.enrichedInteractors[i + 1].interactor[key]) {
         if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor[key], length, start);
-          ranges.push(oneType);
+          ranges.push({value, start, length});
           start = null;
         }
         length = 0;
