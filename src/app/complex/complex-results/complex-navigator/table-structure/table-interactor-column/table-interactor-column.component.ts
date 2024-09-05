@@ -94,7 +94,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
-        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs.has(interactor.identifier))
+        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs?.has(interactor.identifier)) || 0
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -306,6 +306,10 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private calculateTimesAppearing() {
+    for (const map of Object.values(this.timesAppearingBy)) {
+      map.clear();
+    }
+
     for (const oneInteractor of this.enrichedInteractors) {
       // Initialise times appearing for each interactor
       oneInteractor.timesAppearing = 0;
@@ -323,6 +327,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         }
       }
     }
+    console.log(this.timesAppearingBy);
   }
 
 }
