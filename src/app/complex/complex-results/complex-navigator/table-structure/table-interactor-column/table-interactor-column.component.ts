@@ -17,6 +17,7 @@ export class EnrichedInteractor {
   subComponents: ComplexComponent[];
   partOfComplex: number[];
   timesAppearing: number;
+  indexAppearing: number;
 }
 
 export class EnrichedComplex {
@@ -46,8 +47,10 @@ export class TableInteractorColumnComponent implements OnChanges {
   enrichedComplexes: EnrichedComplex[];
   ranges: [string, number, number, number][]; // [type of interactor, first occurrence, last occurrence, length of the occurrence]
 
-  _timesAppearingByType: Map<string, number>;
-  _timesAppearingByOrganism: Map<string, number>;
+  timesAppearingBy: { [k in keyof Interactor]?: Map<string, number> } = {
+    interactorType: new Map<string, number>(),
+    organismName: new Map<string, number>()
+  };
 
   constructor(private complexPortalService: ComplexPortalService, private species: SpeciesPipe) {
   }
@@ -64,9 +67,9 @@ export class TableInteractorColumnComponent implements OnChanges {
   private classifyInteractors(): void {
     if (!!this.interactorsSorting() && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
       if (this.interactorsSorting() === 'Type') {
-        this.classifyInteractorsByType();
+        this.classifyBy('interactorType');
       } else if (this.interactorsSorting() === 'Organism') {
-        this.classifyInteractorsByOrganism();
+        this.classifyBy('organismName');
       } else {
         this.classifyInteractorsByOccurrence();
       }
@@ -85,6 +88,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
+        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs.has(interactor.identifier))
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -234,74 +238,26 @@ export class TableInteractorColumnComponent implements OnChanges {
     return enrichedComplex;
   }
 
-  public classifyInteractorsByOrganism() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.organismName === a.interactor.organismName) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const organismBTimesAppearing = this._timesAppearingByOrganism.get(b.interactor.organismName);
-        const organismATimesAppearing = this._timesAppearingByOrganism.get(a.interactor.organismName);
-        if (organismBTimesAppearing === organismATimesAppearing) {
-          return b.interactor.organismName.localeCompare(a.interactor.organismName);
-        } else {
-          return organismBTimesAppearing - organismATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorOrganism();
+  private compareFn(a: EnrichedInteractor, b: EnrichedInteractor) {
+    return -(b.indexAppearing - a.indexAppearing) || // First by order of appearance (staircase effect)
+      -(b.timesAppearing - a.timesAppearing); // Then by reversed occurrence, in order to minimize edge length
   }
 
-  public classifyInteractorsByType() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.interactorType === a.interactor.interactorType) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const typeBTimesAppearing = this._timesAppearingByType.get(b.interactor.interactorType);
-        const typeATimesAppearing = this._timesAppearingByType.get(a.interactor.interactorType);
-        if (typeBTimesAppearing === typeATimesAppearing) {
-          return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
-        } else {
-          return typeBTimesAppearing - typeATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorType();
-  }
 
   public classifyInteractorsByOccurrence() {
-    this.enrichedInteractors.sort((a, b) =>
-      b.timesAppearing - a.timesAppearing
-    );
+    this.enrichedInteractors.sort(this.compareFn.bind(this));
     this.ranges = [];
   }
 
-  public rangeOfInteractorType() {
-    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-    let length = 0;
-    let start = null;
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      const oneType = [];
-      if (!this.enrichedInteractors[i].hidden) {
-        length += 1;
-        if (start === null) {
-          start = i;
-        }
-      }
-      if (!this.enrichedInteractors[i + 1]
-        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
-        if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
-          ranges.push(oneType);
-          start = null;
-        }
-        length = 0;
-      }
-    }
-    this.ranges = ranges;
+  public classifyBy(key: keyof Interactor) {
+    this.enrichedInteractors.sort((a, b) =>
+      this.timesAppearingBy[key].get(b.interactor[key]) - this.timesAppearingBy[key].get(a.interactor[key]) ||
+      b.interactor[key].localeCompare(a.interactor[key]) ||
+      this.compareFn(a, b));
+    this.calculateRangesBy(key);
   }
 
-  public rangeOfInteractorOrganism() {
+  public calculateRangesBy(key: keyof Interactor) {
     const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;
@@ -315,9 +271,9 @@ export class TableInteractorColumnComponent implements OnChanges {
       }
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.organismName !== this.enrichedInteractors[i + 1].interactor.organismName) {
+        || this.enrichedInteractors[i].interactor[key] !== this.enrichedInteractors[i + 1].interactor[key]) {
         if (start !== null) {
-          oneType.push(this.species.transform(this.enrichedInteractors[i].interactor.organismName), length, start);
+          oneType.push(this.enrichedInteractors[i].interactor[key], length, start);
           ranges.push(oneType);
           start = null;
         }
@@ -345,9 +301,6 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private calculateTimesAppearing() {
-    // Initialise times appearing by type or organism
-    this._timesAppearingByType = new Map();
-    this._timesAppearingByOrganism = new Map();
     for (const oneInteractor of this.enrichedInteractors) {
       // Initialise times appearing for each interactor
       oneInteractor.timesAppearing = 0;
@@ -356,14 +309,12 @@ export class TableInteractorColumnComponent implements OnChanges {
         if (!!match) {
           // Update times appearing for the interactor
           oneInteractor.timesAppearing += 1;
-          // Update times appearing for the interactor type
-          this._timesAppearingByType.set(
-            oneInteractor.interactor.interactorType,
-            (this._timesAppearingByType.get(oneInteractor.interactor.interactorType) || 0) + 1);
-          // Update times appearing for the interactor organism
-          this._timesAppearingByOrganism.set(
-            oneInteractor.interactor.organismName,
-            (this._timesAppearingByOrganism.get(oneInteractor.interactor.organismName) || 0) + 1);
+          // Update times appearing for the different properties
+          for (const key of Object.keys(this.timesAppearingBy)) {
+            const map = this.timesAppearingBy[key];
+            const value = oneInteractor.interactor[key];
+            map.set(value, (map.get(value) || 0) + 1);
+          }
         }
       }
     }

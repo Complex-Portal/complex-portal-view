@@ -2,13 +2,14 @@
   <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
     <i *ngIf="organismIconDisplay()"
        class="{{interactorOrganismIcon}}"
-       [matTooltip]="interactorOrganism()"></i>
+       [matTooltip]="interactorOrganism() | species"></i>
 
     <i *ngIf="interactorTypeDisplay()"
        class="{{interactorTypeIcon}}"
        [matTooltip]="interactorType()"></i>
 
-    <div class="name" *ngIf="idDisplay()" [matTooltip]="interactorId()"> {{ interactorName() }}
+    <div class="name" *ngIf="idDisplay()" [matTooltip]="interactorName()">
+      {{ interactorName() }}
     </div>
     <a *ngIf="idDisplay()"
        [routerLink]="['/complex/search']"
@@ -20,7 +21,7 @@
 
     <div class="nameCompact" *ngIf="!idDisplay()">
       <div class="name" *ngIf="!idDisplay()" [matTooltip]="'More information about ' + interactorName()">
-        <a *ngIf="!!identifierLink()" href="{{identifierLink()}}" target="_blank" class="externalLinkContainer">
+        <a *ngIf="!!identifierLink()" [href]="identifierLink()" target="_blank" class="externalLinkContainer">
           {{ interactorName() }}
         </a>
       </div>

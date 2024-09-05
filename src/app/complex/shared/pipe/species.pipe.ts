@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'species',
-  pure: true
+  pure: true,
+  standalone: true,
 })
 export class SpeciesPipe implements PipeTransform {
   exceptions = new Map<string, string>([
