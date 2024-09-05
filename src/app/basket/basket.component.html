@@ -3,7 +3,7 @@
     <div class="columns medium-12">
       <h2>Personal collection of favourite complexes
         <a class="button primary columns medium-2 deleteAllButton float-right"
-          (click)="deleteAllComplexes()">
+           (click)="deleteAllComplexes()">
           <i class="icon icon-common" data-icon=""></i>
           Remove all complexes
         </a>
@@ -18,65 +18,59 @@
       @if (!this.isDisplayComplexNavigatorView()) {
         <table class="hover">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>ID</th>
-              <th>Organism</th>
-              <th></th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Organism</th>
+            <th></th>
+          </tr>
           </thead>
           <tbody>
             @for (pair of complexBasket | keyvalue; track pair.key) {
               <tr [class.predicted]="pair.value.predicted">
                 <td>
                   <a [routerLink]="['/complex', pair.value.id]">{{ pair.value.name }}</a>
-                  · <b class="tag">{{ !complexBasket[pair].predicted ? 'Curated' : 'Predicted'}} complex</b>
+                  · <b class="tag">{{ !pair.value.predicted ? 'Curated' : 'Predicted' }} complex</b>
                 </td>
+                <td>{{ pair.value.id }}</td>
+                <td>{{ pair.value.organism }}</td>
                 <td>
-                  {{ pair.value.id }}
+                  <a class="button primary columns medium-12" (click)="deleteFromBasket(pair.key)">
+                    <i class="icon icon-common" data-icon=""></i>
+                  </a>
                 </td>
-                <td>
-                  {{ pair.value.organism }}
-                </td>
-                <td>
-                  <!--          <a class="button primary columns medium-12" (click)="deleteFromBasket(key)"> <span-->
-                <!--            class="icon icon-functional" data-icon="d"></span></a>-->
-                <a class="button primary columns medium-12" (click)="deleteFromBasket(pair.key)">
-                  <i class="icon icon-common" data-icon=""></i>
-                </a>
-              </td>
-            </tr>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+      @if (isDisplayComplexNavigatorView()) {
+        <div class="columns medium-12">
+          @if (complexSearchBasket) {
+            <div class="ComplexNavigator"
+                 [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
+              <cp-complex-navigator
+                [complexSearch]="complexSearchBasket"
+                [interactors]="allInteractorsInComplexSearchBasket"
+                [canAddComplexesToBasket]="false"
+                [canRemoveComplexesFromBasket]="true"
+                (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+              </cp-complex-navigator>
+            </div>
+          } @else {
+            <cp-progress-spinner></cp-progress-spinner>
           }
-        </tbody>
-      </table>
-    }
-    @if (isDisplayComplexNavigatorView()) {
-      <div class="columns medium-12">
-        @if (complexSearchBasket) {
-          <div class="ComplexNavigator"
-            [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
-            <cp-complex-navigator
-              [complexSearch]="complexSearchBasket"
-              [interactors]="allInteractorsInComplexSearchBasket"
-              [canAddComplexesToBasket]="false"
-              [canRemoveComplexesFromBasket]="true"
-              (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
-            </cp-complex-navigator>
-          </div>
-        } @else {
-          <cp-progress-spinner></cp-progress-spinner>
-        }
+        </div>
+      }
+    </div>
+  }
+  @if (isComplexBasketEmpty()) {
+    <div class="columns medium-12">
+      <div class="callout">
+        <h3>Your basket is currently empty. :'(</h3>
+        <h5>Search for a complex and click on <i class="icon icon-common" data-icon=""></i> symbol to create your own
+          collection of favorite complexes.</h5>
       </div>
-    }
-  </div>
-}
-@if (isComplexBasketEmpty()) {
-  <div class="columns medium-12">
-    <div class="callout">
-      <h3>Your basket is currently empty. :'(</h3>
-      <h5>Search for a complex and click on <i class="icon icon-common" data-icon=""></i> symbol to create your own
-    collection of favorite complexes.</h5>
-  </div>
-</div>
-}
+    </div>
+  }
 </div>
