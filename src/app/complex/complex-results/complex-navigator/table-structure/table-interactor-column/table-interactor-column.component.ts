@@ -327,7 +327,6 @@ export class TableInteractorColumnComponent implements OnChanges {
         }
       }
     }
-    console.log(this.timesAppearingBy);
   }
 
 }
