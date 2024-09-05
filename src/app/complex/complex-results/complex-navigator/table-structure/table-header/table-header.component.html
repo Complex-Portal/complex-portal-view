@@ -67,12 +67,18 @@
       <ng-container *ngFor=" let complex of complexes();">
         <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
           <div>
-            <a class="button" (click)="toggleBasket(complex)">
-              <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
-            </a>
+            @if (isInBasket(complex.complexAC)) {
+              <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Remove from basket'">
+                <i class="icon icon-common" data-icon=""></i>
+              </a>
+            } @else {
+              <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Add to basket'">
+                <i class="icon icon-common" data-icon=""></i>
+              </a>
+            }
           </div>
           <div>
-            <i class="{{iconOrganism(complex.organismName)}}" [matTooltip]="complex.organismName"></i>
+            <i class="{{iconOrganism(complex.organismName)}}" [matTooltip]="complex.organismName | species"></i>
           </div>
         </th>
       </ng-container>
