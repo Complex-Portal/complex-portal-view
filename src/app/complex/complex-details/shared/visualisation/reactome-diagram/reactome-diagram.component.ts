@@ -1,14 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, output, SimpleChanges, ViewChild} from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
 import {Category} from '../../../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../../../shared/google-analytics/service/analytics.service';
@@ -30,7 +20,7 @@ export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private _selectedPathway: string;
   private _hasInteracted: boolean;
   @ViewChild('diagramHolder', { static: true }) diagramHolder;
-  @Output() onLoaded = new EventEmitter<boolean>();
+  onLoaded = output<boolean>();
 
 
   constructor(private googleAnalyticsService: AnalyticsService) {

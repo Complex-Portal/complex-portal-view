@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, output, input, model} from '@angular/core';
 
-export const LIST_VIEW = 'view_list';
-export const COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
+
+export enum SearchDisplay {
+  list = 'view_list',
+  navigator = 'view_navigator',
+}
 
 @Component({
   selector: 'cp-complex-list-display-buttons',
@@ -10,21 +13,15 @@ export const COMPLEX_NAVIGATOR_VIEW = 'view_complex_navigator';
 })
 export class ComplexListDisplayButtonsComponent {
 
-  @Input() displayType: string;
-  @Output() displayTypeChange = new EventEmitter<string>();
+  displayType = model<SearchDisplay>();
 
   setListView() {
-    this.displayType = LIST_VIEW;
-    this.displayTypeChange.emit(this.displayType);
+    this.displayType.set(SearchDisplay.list);
   }
 
   setComplexNavigatorView() {
-    this.displayType = COMPLEX_NAVIGATOR_VIEW;
-    this.displayTypeChange.emit(this.displayType);
+    this.displayType.set(SearchDisplay.navigator);
   }
 
-  isDisplayComplexNavigatorView(): boolean {
-    return this.displayType === COMPLEX_NAVIGATOR_VIEW;
-  }
-
+  protected readonly SearchDisplay = SearchDisplay;
 }

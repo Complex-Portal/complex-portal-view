@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~litemol/dist/css/LiteMol-plugin-light.min.css";
+@import "litemol/dist/css/LiteMol-plugin-light.min.css";
 
-.mat-tooltip {
+.mat-mdc-tooltip {
   background-color: #353535 !important;
   font-size: 10pt !important;
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, input, OnInit} from '@angular/core';
 
 
 @Component({
@@ -8,13 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  @Input() environmentName: string;
-  @Input() version: string;
+  environmentName = input<string>();
+  version = input<string>();
 
   constructor() { }
 
   ngOnInit() {
     $('cp-footer').foundation();
   }
-
 }

@@ -1,60 +1,73 @@
-<section [class.predicted]="complexDetails?.predicted">
+<section [class.predicted]="complexDetails?.predictedComplex">
   <div id="main-content-area">
     <div class="columns medium-12">
       <div class="columns medium-12" style="margin-bottom: 30px">
-        <cp-complex-header *ngIf="complexDetails;else loadingSpinner" [complex]="complexDetails"></cp-complex-header>
+        @if (complexDetails) {
+          <cp-complex-header [complex]="complexDetails"></cp-complex-header>
+        } @else {
+          <cp-progress-spinner [query]="query"></cp-progress-spinner>
+        }
       </div>
       <div class="columns medium-12 no-pad-left no-pad-right" style="margin-bottom: 30px">
         <div id="participants" class="columns medium-12">
-        <!-- Noe: If I don't have here complexMIJSON it is failing loading -->
-          <cp-complex-participants *ngIf="complexDetails && complexMIJSON"
-                                   [participants]="complexDetails.participants"
-                                   [complexAC]="complexDetails.complexAc"
-                                   [complexMIJSON]="complexMIJSON"></cp-complex-participants>
+          <!-- Noe: If I don't have here complexMIJSON it is failing loading -->
+          @if (complexDetails && complexMIJSON) {
+            <cp-complex-participants
+              [participants]="complexDetails.participants"
+              [complexAC]="complexDetails.complexAc"
+            [complexMIJSON]="complexMIJSON"></cp-complex-participants>
+          }
         </div>
         <div id="function" class="columns medium-12 " style="margin-bottom: 30px">
-          <cp-complex-function *ngIf="complexDetails;"
-                               [functionDescription]="complexDetails.functions"
-                               [crossReferences]="complexDetails.crossReferences"
-                               [ligands]="complexDetails.ligands"
-                               [agonists]="complexDetails.agonists"
-                               [antagonists]="complexDetails.antagonists"></cp-complex-function>
+          @if (complexDetails;) {
+            <cp-complex-function
+              [functionDescription]="complexDetails.functions"
+              [crossReferences]="complexDetails.crossReferences"
+              [ligands]="complexDetails.ligands"
+              [agonists]="complexDetails.agonists"
+            [antagonists]="complexDetails.antagonists"></cp-complex-function>
+          }
         </div>
         <div id="properties" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-properties *ngIf="complexDetails;"
-                                 [propertiesDescription]="complexDetails.properties"
-                                 [comments]="complexDetails.comments"
-                                 [crossReferences]="complexDetails.crossReferences"
-                                 [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
+          @if (complexDetails;) {
+            <cp-complex-properties
+              [propertiesDescription]="complexDetails.properties"
+              [comments]="complexDetails.comments"
+              [crossReferences]="complexDetails.crossReferences"
+            [assemblies]="complexDetails.complexAssemblies"></cp-complex-properties>
+          }
         </div>
         <div id="expression" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-expression *ngIf="complexDetails && gxa && complexMIJSON;"
-                                 [gxa]="gxa"
-                                 [complexMIJSON]="complexMIJSON"
-                                 [participants]="complexDetails.participants"
-                                 [complexSpecies]="complexDetails.species"
-                                 [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
+          @if (complexDetails && gxa && complexMIJSON;) {
+            <cp-complex-expression
+              [gxa]="gxa"
+              [complexMIJSON]="complexMIJSON"
+              [participants]="complexDetails.participants"
+              [complexSpecies]="complexDetails.species"
+            [crossReferences]="complexDetails.crossReferences"></cp-complex-expression>
+          }
         </div>
         <div id="disease" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-disease *ngIf="complexDetails;"
-                              [diseaseDescriptions]="complexDetails.diseases"
-                              [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
+          @if (complexDetails;) {
+            <cp-complex-disease
+              [diseaseDescriptions]="complexDetails.diseases"
+            [crossReferences]="complexDetails.crossReferences"></cp-complex-disease>
+          }
         </div>
         <div id="references" class="columns medium-12" style="margin-bottom: 30px">
-          <cp-complex-references *ngIf="complexDetails;"
-                                 [crossReferences]="complexDetails.crossReferences"
-                                 [synonyms]="complexDetails.synonyms"
-                                 [systematicName]="complexDetails.systematicName"></cp-complex-references>
+          @if (complexDetails;) {
+            <cp-complex-references
+              [crossReferences]="complexDetails.crossReferences"
+              [synonyms]="complexDetails.synonyms"
+            [systematicName]="complexDetails.systematicName"></cp-complex-references>
+          }
         </div>
       </div>
-      <div class="columns medium-12">
-        <cp-complex-footer *ngIf="complexDetails"
-                           [institute]="complexDetails.institution"
-                           [predicted]="complexDetails.predicted"></cp-complex-footer>
-      </div>
-    </div>
-    <ng-template #loadingSpinner>
-      <cp-progress-spinner [query]="query"></cp-progress-spinner>
-    </ng-template>
-  </div>
+      <!--      <div class="columns medium-12">-->
+      <!--        <cp-complex-footer *ngIf="complexDetails"-->
+      <!--                           [institute]="complexDetails.institution"-->
+    <!--                           [predicted]="complexDetails.predictedComplex"></cp-complex-footer>-->
+  <!--      </div>-->
+</div>
+</div>
 </section>

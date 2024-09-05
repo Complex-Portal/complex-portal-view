@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit, output, input } from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
@@ -10,14 +10,19 @@ import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
 })
 export class ComplexFilterComponent implements OnInit {
 
-  private _facets: Facets;
-  private _spicesFilter: string[];
-  private _bioRoleFilter: string[];
-  private _interactorTypeFilter: string[];
-  @Output() onSpicesFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onBiologicalRoleFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onInteractorTypeFilterChanged: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() onResetAllFilters: EventEmitter<boolean> = new EventEmitter<boolean>();
+  facets = input<Facets>();
+  speciesFilter = input<string[]>();
+  bioRoleFilter = input<string[]>();
+  interactorTypeFilter = input<string[]>();
+  predictedFilter = input<string[]>();
+  confidenceScoreFilter = input<string[]>();
+
+  onSpeciesFilterChanged = output<string[]>();
+  onBiologicalRoleFilterChanged = output<string[]>();
+  onInteractorTypeFilterChanged = output<string[]>();
+  onPredictedFilterChanged = output<string[]>();
+  onConfidenceScoreFilterChanged = output<string[]>();
+  onResetAllFilters = output<boolean>();
 
   constructor(private googleAnalyticsService: AnalyticsService) {
   }
@@ -32,13 +37,13 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeSpeciesFilter(filter: string, status: boolean) {
     if (status) {
-      this.spicesFilter.push(filter);
+      this.speciesFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.spicesFilter.splice(this.spicesFilter.indexOf(filter), 1);
+      this.speciesFilter().splice(this.speciesFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onSpicesFilterChanged.emit(this.spicesFilter);
+    this.onSpeciesFilterChanged.emit(this.speciesFilter());
   }
 
   /**
@@ -48,13 +53,13 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeBiologicalRoleFilter(filter: string, status: boolean) {
     if (status) {
-      this.bioRoleFilter.push(filter);
+      this.bioRoleFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.bioRoleFilter.splice(this.bioRoleFilter.indexOf(filter), 1);
+      this.bioRoleFilter().splice(this.bioRoleFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter);
+    this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter());
   }
 
   /**
@@ -64,13 +69,35 @@ export class ComplexFilterComponent implements OnInit {
    */
   public changeInteractorTypeFilter(filter: string, status: boolean) {
     if (status) {
-      this.interactorTypeFilter.push(filter);
+      this.interactorTypeFilter().push(filter);
       this.googleAnalyticsService.fireAddedFilterEvent(filter);
     } else {
-      this.interactorTypeFilter.splice(this.interactorTypeFilter.indexOf(filter), 1);
+      this.interactorTypeFilter().splice(this.interactorTypeFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter);
+    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter());
+  }
+
+  public changePredictedFilter(filter: string, status: boolean) {
+    if (status) {
+      this.predictedFilter().push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
+    } else {
+      this.predictedFilter().splice(this.predictedFilter().indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
+    }
+    this.onPredictedFilterChanged.emit(this.predictedFilter());
+  }
+
+  public changeConfidenceScoreFilter(filter: string, status: boolean) {
+    if (status) {
+      this.confidenceScoreFilter().push(filter);
+      this.googleAnalyticsService.fireAddedFilterEvent(filter);
+    } else {
+      this.confidenceScoreFilter().splice(this.confidenceScoreFilter().indexOf(filter), 1);
+      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
+    }
+    this.onConfidenceScoreFilterChanged.emit(this.confidenceScoreFilter());
   }
 
   /**
@@ -85,7 +112,8 @@ export class ComplexFilterComponent implements OnInit {
    * @returns {boolean} true is any filter array contains an filter
    */
   public anyFiltersSelected() {
-    return (this._spicesFilter.length !== 0 || this._bioRoleFilter.length !== 0 || this._interactorTypeFilter.length !== 0);
+    return this.speciesFilter().length !== 0 || this.bioRoleFilter().length !== 0 || this.interactorTypeFilter().length !== 0 ||
+      this.predictedFilter().length !== 0 || this.confidenceScoreFilter().length !== 0;
   }
 
   /**
@@ -98,47 +126,32 @@ export class ComplexFilterComponent implements OnInit {
     return filter.indexOf(element) !== -1;
   }
 
-  get facets(): Facets {
-    return this._facets;
-  }
-
-  @Input()
-  set facets(value: Facets) {
-    this._facets = value;
-  }
-
-  get spicesFilter(): string[] {
-    return this._spicesFilter;
-  }
-
-  @Input()
-  set spicesFilter(value: string[]) {
-    this._spicesFilter = value;
-  }
-
-  get bioRoleFilter(): string[] {
-    return this._bioRoleFilter;
-  }
-
-  @Input()
-  set bioRoleFilter(value: string[]) {
-    this._bioRoleFilter = value;
-  }
-
-  get interactorTypeFilter(): string[] {
-    return this._interactorTypeFilter;
-  }
-
-  @Input()
-  set interactorTypeFilter(value: string[]) {
-    this._interactorTypeFilter = value;
-  }
-
   public facetTypeIcon(facet: string): string {
     return interactorTypeIcon(facet);
   }
 
   public facetOrganismIcon(facet): string {
     return organismIcon(facet);
+  }
+
+  formatPredictedFacetValue(facetName: string): string {
+    if (facetName === 'true') {
+      return 'Predicted complex';
+    } else {
+      return 'Curated complex';
+    }
+  }
+
+  public getStars(amount: string): ('empty' | 'full')[] {
+    return this._getStars(Number(amount));
+  }
+
+  private _getStars(amount: number): ('empty' | 'full')[] {
+    const stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
+    stars.fill('full');
+    if (amount < stars.length) {
+      stars.fill('empty', amount);
+    }
+    return stars;
   }
 }

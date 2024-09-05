@@ -2,6 +2,7 @@ input {
   margin: 0;
   vertical-align: middle;
 }
+
 .icon, img {
   vertical-align: middle;
   margin: 0 2px;
@@ -10,5 +11,44 @@ input {
 label {
   line-height: 1.8;
   vertical-align: middle;
+}
 
+.count {
+  padding: 0 4px;
+  border-radius: 50px;
+  border: 1px solid black;
+  font-size: small;
+}
+
+.tag ~ .count {
+  margin-left: 6px;
+}
+
+.predicted .count {
+  border: 1px solid black;
+}
+
+input:checked ~ .count {
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: bold;
+  border: 1px solid var(--primary);
+}
+
+.stars {
+  /*display: flex;*/
+  gap: 4px;
+}
+
+.stars .icon {
+  font-size: 12pt;
+}
+.empty {
+  color: lightgray;
+}
+
+.full {
+  color: var(--primary);
+  -webkit-text-stroke: 1px var(--on-primary);
+  text-shadow: 0 0 4px var(--primary);
 }

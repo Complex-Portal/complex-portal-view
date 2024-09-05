@@ -1,12 +1,12 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, input, OnChanges, SimpleChanges} from '@angular/core';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {map} from 'rxjs/operators';
 import {findInteractorInComplex} from './complex-navigator-utils';
 import {Element} from '../../../../shared/model/complex-results/element.model';
+import {map} from 'rxjs/operators';
+import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 
 
 export class EnrichedInteractor {
@@ -17,6 +17,7 @@ export class EnrichedInteractor {
   subComponents: ComplexComponent[];
   partOfComplex: number[];
   timesAppearing: number;
+  indexAppearing: number;
 }
 
 export class EnrichedComplex {
@@ -28,12 +29,10 @@ export class EnrichedComplex {
   startInteractorIncludedWhenExpanded: boolean;
 }
 
-export class OrthologsGroup {
-  groupID: string;
-  geneName: string;
-  groupComponents: EnrichedInteractor[];
-  orthologyHidden: boolean;
-  orthologyExpanded: boolean;
+interface Range {
+  value: string;
+  start: number;
+  length: number;
 }
 
 @Component({
@@ -42,22 +41,24 @@ export class OrthologsGroup {
   styleUrls: ['./table-interactor-column.component.css']
 })
 export class TableInteractorColumnComponent implements OnChanges {
-  @Input() complexes: Element[];
-  @Input() interactorsSorting: string;
-  @Input() interactors: Interactor[];
-  @Input() organismIconDisplay: boolean;
-  @Input() interactorTypeDisplay: boolean;
-  @Input() IDDisplay: boolean;
+  complexes = input<Element[]>([]);
+  interactorsSorting = input<string>();
+  interactors = input<Interactor[]>([]);
+  organismIconDisplay = input<boolean>(true);
+  interactorTypeDisplay = input<boolean>(true);
+  idDisplay = input<boolean>(true);
 
+  // TODO rework bellow to compute when needed from the inputs
   enrichedInteractors: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
-  ranges: number[];
-  orthologGroups: OrthologsGroup[];
+  ranges: Range[] = [];
 
-  _timesAppearingByType: Map<string, number>;
-  _timesAppearingByOrganism: Map<string, number>;
+  timesAppearingBy: { [k in keyof Interactor]?: Map<string, number> } = {
+    interactorType: new Map<string, number>(),
+    organismName: new Map<string, number>()
+  };
 
-  constructor(private complexPortalService: ComplexPortalService) {
+  constructor(private complexPortalService: ComplexPortalService, private species: SpeciesPipe) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -70,11 +71,11 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private classifyInteractors(): void {
-    if (!!this.interactorsSorting && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
-      if (this.interactorsSorting === 'Type') {
-        this.classifyInteractorsByType();
-      } else if (this.interactorsSorting === 'Organism') {
-        this.classifyInteractorsByOrganism();
+    if (!!this.interactorsSorting() && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
+      if (this.interactorsSorting() === 'Type') {
+        this.classifyBy('interactorType');
+      } else if (this.interactorsSorting() === 'Organism') {
+        this.classifyBy('organismName');
       } else {
         this.classifyInteractorsByOccurrence();
       }
@@ -83,7 +84,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private enrichInteractors() {
     this.enrichedInteractors = [];
-    for (const interactor of this.interactors) {
+    for (const interactor of this.interactors()) {
       const isSubComplex = interactor.interactorType === 'stable complex';
       const newEnrichedInteractor: EnrichedInteractor = {
         interactor,
@@ -93,6 +94,7 @@ export class TableInteractorColumnComponent implements OnChanges {
         subComponents: null,
         partOfComplex: [],
         timesAppearing: 0,
+        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs?.has(interactor.identifier)) || 0
       };
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
@@ -139,7 +141,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Element = this.complexes.find(complex => complex.complexAC === interactor.interactor.identifier);
+    const foundComplex: Element = this.complexes().find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.interactors);
     } else {
@@ -152,7 +154,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   private calculateAllStartAndEndIndexes(): void {
     this.enrichedComplexes = [];
 
-    for (const complex of this.complexes) {
+    for (const complex of this.complexes()) {
       this.enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
     }
   }
@@ -242,91 +244,42 @@ export class TableInteractorColumnComponent implements OnChanges {
     return enrichedComplex;
   }
 
-  public classifyInteractorsByOrganism() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.organismName === a.interactor.organismName) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const organismBTimesAppearing = this._timesAppearingByOrganism.get(b.interactor.organismName);
-        const organismATimesAppearing = this._timesAppearingByOrganism.get(a.interactor.organismName);
-        if (organismBTimesAppearing === organismATimesAppearing) {
-          return b.interactor.organismName.localeCompare(a.interactor.organismName);
-        } else {
-          return organismBTimesAppearing - organismATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorOrganism();
+  private compareFn(a: EnrichedInteractor, b: EnrichedInteractor) {
+    return -(b.indexAppearing - a.indexAppearing) || // First by order of appearance (staircase effect)
+      -(b.timesAppearing - a.timesAppearing); // Then by reversed occurrence, in order to minimize edge length
   }
 
-  public classifyInteractorsByType() {
-    this.enrichedInteractors.sort((a, b) => {
-      if (b.interactor.interactorType === a.interactor.interactorType) {
-        return b.timesAppearing - a.timesAppearing;
-      } else {
-        const typeBTimesAppearing = this._timesAppearingByType.get(b.interactor.interactorType);
-        const typeATimesAppearing = this._timesAppearingByType.get(a.interactor.interactorType);
-        if (typeBTimesAppearing === typeATimesAppearing) {
-          return b.interactor.interactorType.localeCompare(a.interactor.interactorType);
-        } else {
-          return typeBTimesAppearing - typeATimesAppearing;
-        }
-      }
-    });
-    this.rangeOfInteractorType();
-  }
 
   public classifyInteractorsByOccurrence() {
-    this.enrichedInteractors.sort((a, b) =>
-      b.timesAppearing - a.timesAppearing
-    );
+    this.enrichedInteractors.sort(this.compareFn.bind(this));
     this.ranges = [];
   }
 
-  public rangeOfInteractorType() {
-    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
-    let length = 0;
-    let start = null;
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      const oneType = [];
-      if (!this.enrichedInteractors[i].hidden) {
-        length += 1;
-        if (start === null) {
-          start = i;
-        }
-      }
-      if (!this.enrichedInteractors[i + 1]
-        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.interactorType !== this.enrichedInteractors[i + 1].interactor.interactorType) {
-        if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor.interactorType, length, start);
-          ranges.push(oneType);
-          start = null;
-        }
-        length = 0;
-      }
-    }
-    this.ranges = ranges;
+  public classifyBy(key: keyof Interactor) {
+    this.enrichedInteractors.sort((a, b) =>
+      this.timesAppearingBy[key].get(b.interactor[key]) - this.timesAppearingBy[key].get(a.interactor[key]) ||
+      b.interactor[key].localeCompare(a.interactor[key]) ||
+      this.compareFn(a, b));
+    this.calculateRangesBy(key);
   }
 
-  public rangeOfInteractorOrganism() {
-    const ranges = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+  public calculateRangesBy(key: keyof Interactor) {
+    const ranges: Range[] = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
     let length = 0;
     let start = null;
     for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      const oneType = [];
       if (!this.enrichedInteractors[i].hidden) {
         length += 1;
         if (start === null) {
           start = i;
         }
       }
+      const value = this.enrichedInteractors[i].interactor[key];
       if (!this.enrichedInteractors[i + 1]
         || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || this.enrichedInteractors[i].interactor.organismName !== this.enrichedInteractors[i + 1].interactor.organismName) {
+        || value !== this.enrichedInteractors[i + 1].interactor[key]) {
         if (start !== null) {
-          oneType.push(this.enrichedInteractors[i].interactor.organismName, length, start);
-          ranges.push(oneType);
+          ranges.push({value, start, length});
           start = null;
         }
         length = 0;
@@ -336,7 +289,7 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   isInteractorSortingSet() {
-    return this.interactorsSorting === 'Type' || this.interactorsSorting === 'Organism';
+    return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
   }
 
   getExpandedRowClass(i: number, length: number): string {
@@ -353,78 +306,27 @@ export class TableInteractorColumnComponent implements OnChanges {
   }
 
   private calculateTimesAppearing() {
-    // Initialise times appearing by type or organism
-    this._timesAppearingByType = new Map();
-    this._timesAppearingByOrganism = new Map();
+    for (const map of Object.values(this.timesAppearingBy)) {
+      map.clear();
+    }
+
     for (const oneInteractor of this.enrichedInteractors) {
       // Initialise times appearing for each interactor
       oneInteractor.timesAppearing = 0;
-      for (const complex of this.complexes) {
+      for (const complex of this.complexes()) {
         const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
         if (!!match) {
           // Update times appearing for the interactor
           oneInteractor.timesAppearing += 1;
-          // Update times appearing for the interactor type
-          this._timesAppearingByType.set(
-            oneInteractor.interactor.interactorType,
-            (this._timesAppearingByType.get(oneInteractor.interactor.interactorType) || 0) + 1);
-          // Update times appearing for the interactor organism
-          this._timesAppearingByOrganism.set(
-            oneInteractor.interactor.organismName,
-            (this._timesAppearingByOrganism.get(oneInteractor.interactor.organismName) || 0) + 1);
+          // Update times appearing for the different properties
+          for (const key of Object.keys(this.timesAppearingBy)) {
+            const map = this.timesAppearingBy[key];
+            const value = oneInteractor.interactor[key];
+            map.set(value, (map.get(value) || 0) + 1);
+          }
         }
       }
     }
   }
 
-  public classifyInteractorsByOrthologID() {
-    const interactorsWithOrthologsId = this.fetchProteinWithOrthologId();
-    interactorsWithOrthologsId.sort((a, b) =>
-      b.dbCrossReferenceList.dbName.panther - a.dbCrossReferenceList.dbName.panther
-    );
-
-    for (let i = 0; i < interactorsWithOrthologsId.length; i++) {
-      const oneGroup: Set<EnrichedInteractor> = new Set();
-      if (interactorsWithOrthologsId[i].xref === interactorsWithOrthologsId[i + 1].xref && interactorsWithOrthologsId[i + 1] !== null) {
-        oneGroup.add(interactorsWithOrthologsId[i]).add(interactorsWithOrthologsId[i + 1]);
-      }
-      if (interactorsWithOrthologsId[i].xref !== interactorsWithOrthologsId[i + 1]) {
-        const orthologGroupXref = interactorsWithOrthologsId[i].xrefName;
-        const orthologsGroupGene = this.fetchGeneName(oneGroup);
-        const newOrthologsGroup: OrthologsGroup = {
-          groupID: orthologGroupXref,
-          geneName: orthologsGroupGene,
-          groupComponents: oneGroup,
-          orthologyHidden: true,
-          orthologyExpanded: false,
-        };
-        this.orthologGroups.push(newOrthologsGroup);
-        oneGroup.clear();
-      }
-    }
-  }
-
-  fetchGeneName(orthologGroup: Set<EnrichedInteractor>) {
-    let mainGeneName: string;
-    const biggestTimeAppearing = 0;
-    for (const interactor of orthologGroup) {
-      if (interactor.interactor.organismName === 'homo sapiens') {
-        mainGeneName = interactor.interactor.geneName;
-      }
-      if (interactor.interactor.organismName !== 'homo sapiens' && interactor.timesAppearing > biggestTimeAppearing) {
-        mainGeneName = interactor.interactor.geneName;
-      }
-      return mainGeneName;
-    }
-  }
-
-  public fetchProteinWithOrthologId() {
-    let interactorsWithOrthologsId: EnrichedInteractor[];
-    for (const interactor of this.enrichedInteractors) {
-      if (interactor.interactor.dbReferences.type === 'panther') {
-        interactorsWithOrthologsId.push(interactor);
-      }
-    }
-    return interactorsWithOrthologsId;
-  }
 }

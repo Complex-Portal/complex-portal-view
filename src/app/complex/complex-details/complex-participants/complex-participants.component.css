@@ -125,11 +125,20 @@ text.tooltip {
   white-space: nowrap;
 }
 
+.button.secondary {
+  background: #343434;
+}
+
 .gray-top-border {
   border-top: 1px solid dimgray;
 }
 
 .no-padding {
   padding: 0;
+}
+
+.participant-row {
+  display: inline-table;
+  width: 100%;
 }
 

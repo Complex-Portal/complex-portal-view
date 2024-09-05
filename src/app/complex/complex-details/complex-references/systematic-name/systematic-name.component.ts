@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['systematic-name.component.css']
 })
 export class SystematicNameComponent implements OnInit {
-  private _systematicName: string[];
+  private _systematicName: string;
 
   constructor() {
   }
@@ -14,12 +14,12 @@ export class SystematicNameComponent implements OnInit {
   ngOnInit() {
   }
 
-  get systematicName(): string[] {
+  get systematicName(): string {
     return this._systematicName;
   }
 
   @Input()
-  set systematicName(value: string[]) {
+  set systematicName(value: string) {
     this._systematicName = value;
   }
 }

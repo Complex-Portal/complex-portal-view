@@ -2,22 +2,20 @@
   <div class="header"
        (scroll)="body.scrollLeft = header.scrollLeft" #header>
 
-    <cp-table-header [complexes]="sortedComplexes"
-                     [interactorsSorting]="interactorsSorting"
-                     [canAddComplexesToBasket]="canAddComplexesToBasket"
-                     [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket"
+    <cp-table-header [complexes]="sortedComplexes()"
+                     [interactorsSorting]="interactorsSorting()"
                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
     </cp-table-header>
   </div>
   <div class="interactors"
        (scroll)="header.scrollLeft = body.scrollLeft" #body>
     <cp-table-interactor-column
-      [complexes]="sortedComplexes"
-      [interactors]="interactors"
-      [interactorsSorting]="interactorsSorting"
-      [organismIconDisplay]="organismIconDisplay"
-      [interactorTypeDisplay]="interactorTypeDisplay"
-      [IDDisplay]="IDDisplay">
+      [complexes]="sortedComplexes()"
+      [interactors]="interactors()"
+      [interactorsSorting]="interactorsSorting()"
+      [organismIconDisplay]="organismIconDisplay()"
+      [interactorTypeDisplay]="interactorTypeDisplay()"
+      [idDisplay]="idDisplay()">
     </cp-table-interactor-column>
   </div>
   <div class="spaceHolder"></div>

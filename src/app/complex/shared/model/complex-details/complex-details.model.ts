@@ -19,5 +19,11 @@ export interface ComplexDetails {
   comments: string[];
   participants: Participant[];
   crossReferences: CrossReference[];
-  predicted?: boolean;
+  predictedComplex?: boolean;
+  evidenceType?: {
+    confidenceScore: number;
+    searchURL: string;
+    description: string;
+    identifier: string;
+  };
 }

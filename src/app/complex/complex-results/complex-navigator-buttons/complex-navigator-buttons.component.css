@@ -35,7 +35,7 @@
 }
 
 label {
-  color: white;
+  color: var(--on-primary);
 }
 
 .dropdown:hover .displaySize {
@@ -43,7 +43,7 @@ label {
   list-style: none;
   width: 300px;
   background-color: var(--primary);
-  color: white;
+  color: var(--on-primary);
   margin-top: -15px;
   flex-direction: row;
   position: absolute;

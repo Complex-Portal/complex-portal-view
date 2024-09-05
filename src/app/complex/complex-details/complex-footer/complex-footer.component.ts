@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, input } from '@angular/core';
 
 @Component({
   selector: 'cp-complex-footer',
@@ -6,17 +6,13 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./complex-footer.component.css']
 })
 export class ComplexFooterComponent implements OnInit {
-  @Input()
-  institute: string;
-  @Input()
-  comment: string;
-  @Input()
-  predicted = false;
+  institute = input<string>();
+  comment = input<string>();
+  predicted = input(false);
 
   constructor() {
   }
 
   ngOnInit() {
   }
-
 }

@@ -5,5 +5,5 @@ export interface ComplexSearchResult {
   size: number;
   totalNumberOfResults: number;
   elements: Element[];
-  facets: Facets[];
+  facets: Facets;
 }

@@ -1,13 +1,15 @@
 <div class="row">
-  <div class="columns medium-12 margin-top-medium">
+  <div class="columns medium-12 margin-top-medium no-pad-left">
     <h3>Assembly</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let assembly of assemblies">
-        <td>
-          {{assembly}}
-        </td>
-      </tr>
+        @for (assembly of assemblies; track assembly) {
+          <tr>
+            <td>
+              {{assembly}}
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

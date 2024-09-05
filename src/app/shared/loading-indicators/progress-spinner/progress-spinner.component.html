@@ -1,11 +1,13 @@
 <div class="small-5 small-centered columns">
-  <mat-progress-spinner style="margin:0 auto;"
-                       [attr.color]="color"
-                       [mode]="mode"
-                       [value]="0">
-  </mat-progress-spinner>
+  <mat-spinner style="margin:0 auto;"
+    [mode]="mode"
+    [color]="color">
+  </mat-spinner>
+
   <div style="text-align: center">
-    <h4>Loading {{query}}</h4>
-    <p *ngIf="takesLonger">This takes longer than usual. Bear with us!</p>
+    <h4>Loading {{ query() }}</h4>
+    @if (takesLonger) {
+      <p>This takes longer than usual. Bear with us!</p>
+    }
   </div>
 </div>

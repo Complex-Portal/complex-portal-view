@@ -48,13 +48,13 @@ export class BasketService {
       id: complex.complexAC,
       name: complex.complexName,
       organism: complex.organismName,
-      predicted: complex.predicted,
+      predicted: complex.predictedComplex,
       date: new Date()
     } : {
       id: complex.complexAc,
       name: complex.name,
       organism: complex.species,
-      predicted: complex.predicted,
+      predicted: complex.predictedComplex,
       date: new Date(),
     };
 

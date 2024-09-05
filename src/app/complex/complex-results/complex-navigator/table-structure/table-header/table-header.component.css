@@ -29,7 +29,7 @@ thead {
   left: 0;
   z-index: 4;
   color: var(--primary);
-  background-color: white;
+  background-color: var(--on-primary);
   padding-top: 173px;
   text-align: right;
 }
@@ -38,7 +38,7 @@ thead {
   position: sticky;
   text-align: center;
   background-color: var(--primary);
-  color: white;
+  color: var(--on-primary);
   border-left: 1px solid white;
   font-size: medium;
   height: 60px;
@@ -77,7 +77,7 @@ thead {
   position: relative;
   width: 350px;
   height: 51px !important;
-  color: white;
+  color: var(--on-primary);
   font-size: 14px;
   text-align: left;
   border: 1px solid white;
@@ -113,7 +113,7 @@ thead {
   position: sticky;
   left: 0;
   z-index: 4;
-  background-color: white;
+  background-color: var(--on-primary);
   border-bottom: 3px solid var(--primary);
   height: 60px;
   line-height: 70px;
@@ -131,7 +131,7 @@ thead {
   border-left: none;
   text-align: right;
   color: var(--primary);
-  background-color: white;
+  background-color: var(--on-primary);
   border-bottom: 3px solid var(--primary);
 }
 
@@ -142,6 +142,7 @@ thead {
   white-space: nowrap;
   overflow: hidden;
   margin: auto;
+  display: block;
 }
 
 .CN-table th.horizontal {
@@ -155,11 +156,11 @@ thead {
 }
 
 a:visited {
-  color: white;
+  color: var(--on-primary);
 }
 
 a {
-  color: white;
+  color: var(--on-primary);
 }
 
 

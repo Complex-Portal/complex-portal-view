@@ -38,7 +38,6 @@ import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {ReactomeService} from './complex-function/reactome-crossreferences/service/reactome.service';
 import {EuroPmcService} from './complex-references/euro-pmc-crossreferences/service/euro-pmc.service';
-import {ProgressSpinnerModule} from '../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {SectionService} from './shared/service/section/section.service';
 import {ExternalResourcesComponent} from './complex-references/external-resources/external-resources.component';
 import {DownloadModalComponent} from './complex-header/download-modal/download-modal.component';
@@ -46,6 +45,7 @@ import {NodeDiagramComponent} from './shared/visualisation/node-diagram/node-dia
 import {ComplexModule} from '../complex.module';
 import {ComplexParticipantLegendComponent} from './complex-participants/complex-participant-legend/complex-participant-legend.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [
@@ -53,7 +53,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
       {path: '', component: ComplexDetailsComponent},
     ]),
     CommonModule,
-    ProgressSpinnerModule,
+    ProgressSpinnerComponent,
     ComplexModule,
     MatTooltipModule
   ],

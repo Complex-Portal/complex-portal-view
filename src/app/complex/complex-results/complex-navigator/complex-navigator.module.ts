@@ -21,18 +21,22 @@ import {
   TableSubcomponentInteractorComponent
 } from './table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
 import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/complex-navigator-buttons.component';
-import {ProgressSpinnerModule} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.module';
 import {RouterModule} from '@angular/router';
 import {ComplexListDisplayButtonsComponent} from './complex-list-display-buttons/complex-list-display-buttons.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ProgressSpinnerComponent} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {ComplexModule} from '../../complex.module';
+import {SpeciesPipe} from '../../shared/pipe/species.pipe';
 
 @NgModule({
   imports: [
     RouterModule,
     CommonModule,
-    ProgressSpinnerModule,
+    ProgressSpinnerComponent,
     MarkdownModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ComplexModule,
+    SpeciesPipe
   ],
   exports: [
     ComplexNavigatorComponent,

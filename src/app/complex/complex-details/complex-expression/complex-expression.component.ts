@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, input } from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {MIJson} from 'complexviewer';
@@ -16,8 +16,7 @@ export class ComplexExpressionComponent implements OnInit {
   private _gxaParamsQueries: string;
   private _goCellularXRefs: CrossReference[];
 
-  @Input()
-  complexMIJSON: MIJson;
+  complexMIJSON = input<MIJson>();
 
   constructor() {
   }
@@ -43,7 +42,7 @@ export class ComplexExpressionComponent implements OnInit {
   }
 
   private findGXAQueries() {
-    this.gxaParamsQueries = [...new Set(this.complexMIJSON.data
+    this.gxaParamsQueries = [...new Set(this.complexMIJSON().data
       .filter(e => e.object === 'interactor')
       .map(e => e.identifier)
       .filter(i => i.db === 'uniprotkb')

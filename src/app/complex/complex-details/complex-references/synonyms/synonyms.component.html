@@ -1,19 +1,25 @@
 <div class="row">
-  <div class="columns medium-12" *ngIf="synonyms.length !== 0">
-    <h3>Synonyms ({{synonyms.length}})</h3>
-    <table class="hover">
-      <tbody>
-      <tr *ngFor="let synonym of synonyms | slice:0:displayedElements">
-        <td>
-          {{synonym}}
-        </td>
-      </tr>
-      <tr class="text-center"  style="background: white" *ngIf="displayedElements < synonyms.length">
-        <td>
-          <a class="label" (click)="displayedElements = synonyms.length">Show all</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  @if (synonyms.length !== 0) {
+    <div class="columns medium-12 no-pad-left">
+      <h3>Synonyms ({{synonyms.length}})</h3>
+      <table class="hover">
+        <tbody>
+          @for (synonym of synonyms | slice:0:displayedElements; track synonym) {
+            <tr>
+              <td>
+                {{synonym}}
+              </td>
+            </tr>
+          }
+          @if (displayedElements < synonyms.length) {
+            <tr class="text-center"  style="background: white">
+              <td>
+                <a class="label" (click)="displayedElements = synonyms.length">Show all</a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </div>

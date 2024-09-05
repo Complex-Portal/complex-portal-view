@@ -1,18 +1,22 @@
 <div class="row">
-  <div class="columns medium-12">
+  <div class="columns medium-12 no-pad-left">
     <h3>Agonists ({{agonists.length}})</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let agonist of agonists | slice:0:displayedElements">
-        <td>
-          {{agonist}}
-        </td>
-      </tr>
-      <tr class="text-center"  style="background: white" *ngIf="displayedElements < agonists.length">
-        <td>
-          <a class="label" (click)="displayedElements = agonists.length">Show all</a>
-        </td>
-      </tr>
+        @for (agonist of agonists | slice:0:displayedElements; track agonist) {
+          <tr>
+            <td>
+              {{agonist}}
+            </td>
+          </tr>
+        }
+        @if (displayedElements < agonists.length) {
+          <tr class="text-center"  style="background: white">
+            <td>
+              <a class="label" (click)="displayedElements = agonists.length">Show all</a>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

@@ -6,5 +6,6 @@ export interface Element {
   organismName: string;
   description: string;
   interactors: ComplexComponent[];
-  predicted?: boolean;
+  componentAcs?: Set<string>;
+  predictedComplex?: boolean;
 }

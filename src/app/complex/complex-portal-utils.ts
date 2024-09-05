@@ -36,6 +36,8 @@ export function organismIcon(organism: string): string {
       return 'icon icon-species icon-yeast';
     case 'Escherichia coli':
     case 'Pseudomonas aeruginosa':
+    case 'Klebsiella pneumoniae':
+    case 'Chlamydomonas reinhardtii':
       return 'icon icon-species icon-ecoli';
     case 'Rattus norvegicus':
       return 'icon icon-species icon-rat';
@@ -86,4 +88,49 @@ function formatOrganismName(name: string): string {
     .split(';')[0]
     .split(' ').slice(0, 2)
     .join(' ');
+}
+
+
+export type GroupedByPropertyArray<T, K extends keyof T> = T[][];
+
+export function groupBy<T, K extends keyof T>(arr: T[], property: K): Map<T[K], T[]> {
+  const groupsMap = new Map<T[K], T[]>();
+
+  // Group the elements by the specified property
+  arr.forEach(item => {
+    const key = item[property];
+    if (!groupsMap.has(key)) {
+      groupsMap.set(key, []);
+    }
+    groupsMap.get(key)!.push(item);
+  });
+  return groupsMap;
+}
+
+/**
+ * Groups an array of elements into an array of arrays based on a specified property.
+ * The groups are sorted based on the provided sorting function applied to the property values.
+ *
+ * @param arr - The input array of elements to be grouped.
+ * @param property - The property name to group the elements by.
+ * @param sortFn - A comparator function to sort the groups based on the property values.
+ *                 It should take two property values and return a number:
+ *                 negative if first < second,
+ *                 zero if first == second,
+ *                 positive if first > second.
+ * @returns An array of groups (arrays), each containing elements with the same property value,
+ *          ordered based on the sortFn.
+ */
+export function groupByPropertyToArray<T, K extends keyof T>(
+  arr: T[],
+  property: K,
+  sortFn: (a: T[K], b: T[K]) => number
+): GroupedByPropertyArray<T, K> {
+  const groupsMap = groupBy(arr, property);
+
+  // Extract the unique keys and sort them using the provided sort function
+  const sortedKeys = Array.from(groupsMap.keys()).sort(sortFn);
+
+  // Map the sorted keys to their corresponding groups
+  return sortedKeys.map(key => groupsMap.get(key)!);
 }

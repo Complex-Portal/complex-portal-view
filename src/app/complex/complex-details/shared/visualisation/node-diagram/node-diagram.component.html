@@ -1,26 +1,42 @@
-<svg viewBox="0 0 100 100" class="node-diagram" [ngStyle]="{'height': height}" #svg>
-  <g [ngSwitch]="shape" #shapeGroup>
-    <circle *ngSwitchCase="NodeShape.ELLIPSE"
-            r="47.57" cx="50%" cy="50%"/>
-    <path *ngSwitchCase="NodeShape.TRIANGLE"
-          d="m 50.714288,5.8194648 44.880439,91.4407922 -91.3680247,0 z"/>
-    <path *ngSwitchCase="NodeShape.DIAMOND"
-          d="M 2.6785714,50 49.821429,2.8007365 97.301851,49.604865 49.821429,97.123279 Z"/>
-    <path *ngSwitchCase="NodeShape.HEXAGON"
-          d="M 2.321,50 26.071429,9.7650222 H 73.398681 L 97.577186,50 73.398681,90.516137 H 26.071429 Z"/>
-    <path *ngSwitchCase="NodeShape.OCTAGON"
-          d="M 97.443707,69.535644 69.733981,97.361553 30.464356,97.443707 2.6384466,69.733981 2.5562928,30.464356 30.266019,2.6384466 69.535644,2.5562928 97.361553,30.266019 Z"/>
-    <rect *ngSwitchCase="NodeShape.ROUNDED_RECTANGLE"
-          width="95.125" height="95.125" ry="25" x="2.5" y="2.5"/>
-    <path *ngSwitchCase="NodeShape.PARALLELOGRAM"
+<svg viewBox="0 0 100 100" class="node-diagram" [ngStyle]="{'height': height()}" #svg>
+  <g #shapeGroup>
+    @switch (shape()) {
+      @case (NodeShape.ELLIPSE) {
+        <circle r="47.57" cx="50%" cy="50%"/>
+      }
+      @case (NodeShape.TRIANGLE) {
+        <path d="m 50.714288,5.8194648 44.880439,91.4407922 -91.3680247,0 z"/>
+      }
+      @case (NodeShape.DIAMOND) {
+        <path d="M 2.6785714,50 49.821429,2.8007365 97.301851,49.604865 49.821429,97.123279 Z"/>
+      }
+      @case (NodeShape.HEXAGON) {
+        <path d="M 2.321,50 26.071429,9.7650222 H 73.398681 L 97.577186,50 73.398681,90.516137 H 26.071429 Z"/>
+      }
+      @case (NodeShape.OCTAGON) {
+        <path d="M 97.443707,69.535644 69.733981,97.361553 30.464356,97.443707 2.6384466,69.733981 2.5562928,30.464356 30.266019,2.6384466 69.535644,2.5562928 97.361553,30.266019 Z"/>
+      }
+      @case (NodeShape.ROUNDED_RECTANGLE) {
+        <rect width="95.125" height="95.125" ry="25" x="2.5" y="2.5"/>
+      }
+      @case (NodeShape.PARALLELOGRAM) {
+        <path
           d="m4.1071 2.7838h44.523l47.084 94.477-47.023 0.17857z"/>
-    <path *ngSwitchCase="NodeShape.VEE"
+      }
+      @case (NodeShape.VEE) {
+        <path
           d="m2.5 2.4266 47.5 38.214 47.679-38.559-47.679 92.143z"/>
-    <path *ngSwitchCase="NodeShape.TAG"
+      }
+      @case (NodeShape.TAG) {
+        <path
           d="m1.9643 98.214-0.056406-96.306h48.092l47.302 47.697-47.302 48.59z"/>
+      }
+    }
   </g>
 
-  <text *ngIf="label !== null" fill="white" x="50%" y="52.5%" dominant-baseline="middle" text-anchor="middle" #labelElt>
-    {{label}}
-  </text>
+  @if (label() !== null) {
+    <text fill="white" x="50%" y="52.5%" dominant-baseline="middle" text-anchor="middle" #labelElt>
+      {{label()}}
+    </text>
+  }
 </svg>

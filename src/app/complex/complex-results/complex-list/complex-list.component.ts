@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, input } from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {Element} from '../../shared/model/complex-results/element.model';
@@ -9,7 +9,7 @@ import {Element} from '../../shared/model/complex-results/element.model';
   styleUrls: ['./complex-list.component.css']
 })
 export class ComplexListComponent implements OnInit {
-  @Input() complexSearch: ComplexSearchResult;
+  complexSearch = input<ComplexSearchResult>();
 
   constructor(private basketService: BasketService) {
   }

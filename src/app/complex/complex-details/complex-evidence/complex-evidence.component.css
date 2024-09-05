@@ -23,3 +23,30 @@ h3 {
   gap: 15px;
   align-items: center;
 }
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.stars .icon {
+  font-size: 16pt;
+}
+.empty {
+  color: lightgray;
+}
+
+.full {
+  color: var(--primary);
+  -webkit-text-stroke: 1px var(--on-primary);
+  text-shadow: 0 0 4px var(--primary);
+
+  /** GOLD SKEUOMORPHISM **/
+
+  /*-webkit-text-stroke: 1px goldenrod;*/
+  /*background: linear-gradient(133deg, goldenrod 42%, gold, goldenrod 66%);*/
+  /*-webkit-background-clip: text;*/
+  /*background-clip: text;*/
+  /*-webkit-text-fill-color: transparent;*/
+}
+
