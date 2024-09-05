@@ -4,6 +4,7 @@ import {Interactor} from '../../../shared/model/complex-results/interactor.model
 import {Element} from '../../../shared/model/complex-results/element.model';
 import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
+import {groupByPropertyToArray} from '../../../complex-portal-utils';
 
 @Component({
   selector: 'cp-table-structure',
@@ -30,11 +31,6 @@ export class TableStructureComponent {
   private calculateSimilarity(complex1: Element, complex2: Element) {
     if (complex1 === complex2) {
       return 1;
-    }
-
-    // Make predicted complex completely different to curated
-    if (complex1.predictedComplex !== complex2.predictedComplex) {
-      return -1;
     }
 
     const [components1, components2] = [complex1, complex2].map(this.getComponents.bind(this));
@@ -66,15 +62,24 @@ export class TableStructureComponent {
   }
 
   sortComplexBySimilarityClustering(complexesList: Element[]) {
-    const sm: number[][] = new Array(complexesList.length).fill(null).map(r => new Array(complexesList.length).fill(null));
-    complexesList.forEach((complex, i) => complexesList.forEach((comparedComplex, j) => {
-      if (i >= j) {
-        sm[i][j] = this.calculateSimilarity(complex, comparedComplex);
-        sm[j][i] = sm[i][j];
-      }
-    }));
-    const simMat = tf.tensor2d(sm);
-    return this.getSortedIndexFromChainedSimilarity(simMat).map(i => complexesList[i]);
+    // Group by predicted to cluster only inside the different groups, and place predicted after curated
+    const groups = groupByPropertyToArray(
+      complexesList,
+      'predictedComplex',
+      (a, b) => (a as unknown as number) - (b as unknown as number) // Makes false go before true
+    );
+
+    return groups.flatMap(group => {
+      // Calculate Similarity Matrix
+      const sm: number[][] = new Array(group.length).fill(null).map(r => new Array(group.length).fill(null));
+      group.forEach((complex, i) => group.forEach((comparedComplex, j) => {
+        if (i >= j) { // Avoid useless calculations
+          sm[i][j] = this.calculateSimilarity(complex, comparedComplex);
+          sm[j][i] = sm[i][j]; // Matrix is symmetric
+        }
+      }));
+      return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
+    });
   }
 
   /**
