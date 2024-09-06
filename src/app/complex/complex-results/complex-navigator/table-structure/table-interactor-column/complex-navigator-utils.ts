@@ -1,6 +1,6 @@
-import {Element} from '../../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {EnrichedInteractor} from '../enriched-interactors.model';
+import {NavigatorInteractor} from '../navigator-interactors.model';
 
 
 export class ComponentWithStoichiometry {
@@ -10,11 +10,11 @@ export class ComponentWithStoichiometry {
   stochiometryValueFormatted?: string;
 }
 
-export function findInteractorInComplex(complex: Element,
+export function findInteractorInComplex(complex: Complex,
                                         interactorId: string,
-                                        enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+                                        navigatorInteractors: NavigatorInteractor[]): ComponentWithStoichiometry {
 
-  const interactor = findInteractorInComplexComponents(complex.interactors, interactorId, enrichedInteractors);
+  const interactor = findInteractorInComplexComponents(complex.interactors, interactorId, navigatorInteractors);
   if (!!interactor) {
     return {
       identifier: interactor.identifier,
@@ -30,7 +30,7 @@ export function findInteractorInComplex(complex: Element,
 
 function findInteractorInComplexComponents(complexComponents: ComplexComponent[],
                                            interactorId: string,
-                                           enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+                                           navigatorInteractors: NavigatorInteractor[]): ComponentWithStoichiometry {
 
   // We look for the interactor in the complex, as one of the components, or as part of any subcomplex of the complex, recursively.
   // Even if we find a match for the interactor as one of the complex components, we keep looking at other components, as the interactor
@@ -41,7 +41,7 @@ function findInteractorInComplexComponents(complexComponents: ComplexComponent[]
 
   // We iterate through all the components of the complex to find matches
   for (const complexComponent of complexComponents) {
-    const interactorMatch = findInteractorInComplexComponent(complexComponent, interactorId, enrichedInteractors);
+    const interactorMatch = findInteractorInComplexComponent(complexComponent, interactorId, navigatorInteractors);
     if (!!interactorMatch) {
       // We found a match for the interactor, on this component, or on a subcomponent of it in the case of a subcomplex
       interactorFound = true;
@@ -75,7 +75,7 @@ function findInteractorInComplexComponents(complexComponents: ComplexComponent[]
 
 function findInteractorInComplexComponent(complexComponent: ComplexComponent,
                                           interactorId: string,
-                                          enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+                                          navigatorInteractors: NavigatorInteractor[]): ComponentWithStoichiometry {
 
   const componentStoichiometry = parseStoichiometryValues(complexComponent.stochiometry);
 
@@ -89,12 +89,12 @@ function findInteractorInComplexComponent(complexComponent: ComplexComponent,
 
   if (complexComponent.interactorType === 'stable complex') {
     // If the id does not match, and the component is a subcomplex, then we can look for the interactor in the subcomplex components
-    const complexComponentInteractor = enrichedInteractors.find(interactor =>
+    const complexComponentInteractor = navigatorInteractors.find(interactor =>
       interactor.interactor.identifier === complexComponent.identifier);
 
     if (!!complexComponentInteractor && !!complexComponentInteractor.subComponents) {
       const subComponentsMatch = findInteractorInComplexComponents(
-        complexComponentInteractor.subComponents, interactorId, enrichedInteractors);
+        complexComponentInteractor.subComponents, interactorId, navigatorInteractors);
 
       if (!!subComponentsMatch) {
         // We have found the interactor in the subcomplex

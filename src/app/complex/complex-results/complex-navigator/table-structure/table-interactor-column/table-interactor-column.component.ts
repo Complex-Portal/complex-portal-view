@@ -2,10 +2,10 @@ import {Component, input, computed, effect} from '@angular/core';
 import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
 import {Observable, of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {Element} from '../../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {map} from 'rxjs/operators';
-import {EnrichedComplex} from '../enriched-complex.model';
-import {EnrichedInteractor, EnrichedInteractors, Range} from '../enriched-interactors.model';
+import {NavigatorComplex} from '../navigator-complex.model';
+import {NavigatorInteractor, NavigatorInteractors, Range} from '../navigator-interactors.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 
 @Component({
@@ -14,63 +14,63 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
   styleUrls: ['./table-interactor-column.component.css']
 })
 export class TableInteractorColumnComponent {
-  complexes = input<Element[]>([]);
+  complexes = input<Complex[]>([]);
   interactorsSorting = input<string>();
   interactors = input<Interactor[]>([]);
   organismIconDisplay = input<boolean>(true);
   interactorTypeDisplay = input<boolean>(true);
   idDisplay = input<boolean>(true);
 
-  enrichedInteractors = computed(() => this.enrichInteractors(this.complexes(), this.interactors()));
+  navigatorInteractors = computed(() => this.enrichInteractors(this.complexes(), this.interactors()));
 
-  enrichedInteractorsArray: EnrichedInteractor[];
-  enrichedComplexes: EnrichedComplex[];
+  navigatorInteractorsArray: NavigatorInteractor[];
+  navigatorComplexes: NavigatorComplex[];
   ranges: Range[];
 
   constructor(private complexPortalService: ComplexPortalService) {
-    effect(() => this.sortInteractors(this.enrichedInteractors(), this.complexes(), this.interactorsSorting()));
+    effect(() => this.sortInteractors(this.navigatorInteractors(), this.complexes(), this.interactorsSorting()));
   }
 
-  private sortInteractors(enrichedInteractors: EnrichedInteractors,
-                          complexes: Element[],
+  private sortInteractors(navigatorInteractors: NavigatorInteractors,
+                          complexes: Complex[],
                           interactorsSorting: string): void {
-    if (!!enrichedInteractors && !!complexes) {
-      // When we sort, we update the local variable in the component instead of just sorting inside the enrichedInteractors object.
+    if (!!navigatorInteractors && !!complexes) {
+      // When we sort, we update the local variable in the component instead of just sorting inside the navigatorInteractors object.
       // This way we enforce an update on the objects used in the HTML and angular needs to re-run the signals to draw the table.
-      this.enrichedInteractorsArray = enrichedInteractors.classifyInteractors(interactorsSorting);
-      this.ranges = enrichedInteractors.ranges;
-      this.enrichedComplexes = this.createEnrichedComplexes(complexes, enrichedInteractors);
+      this.navigatorInteractorsArray = navigatorInteractors.classifyInteractors(interactorsSorting);
+      this.ranges = navigatorInteractors.ranges;
+      this.navigatorComplexes = this.createNavigatorComplexes(complexes, navigatorInteractors);
     }
   }
 
-  private enrichInteractors(complexes: Element[], interactors: Interactor[]): EnrichedInteractors {
-    const enrichedInteractors = new EnrichedInteractors();
+  private enrichInteractors(complexes: Complex[], interactors: Interactor[]): NavigatorInteractors {
+    const navigatorInteractors = new NavigatorInteractors();
     for (const interactor of interactors) {
       const isSubComplex = interactor.interactorType === 'stable complex';
-      const newEnrichedInteractor = new EnrichedInteractor(
+      const newNavigatorInteractor = new NavigatorInteractor(
         interactor,
         isSubComplex,
         complexes.findIndex(complex => complex.componentAcs?.has(interactor.identifier)) || 0);
       if (isSubComplex) {
-        this.loadSubInteractors(newEnrichedInteractor, complexes)
-          .subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
+        this.loadSubInteractors(newNavigatorInteractor, complexes)
+          .subscribe(subComponents => newNavigatorInteractor.subComponents = subComponents);
       }
-      enrichedInteractors.interactors.push(newEnrichedInteractor);
+      navigatorInteractors.interactors.push(newNavigatorInteractor);
     }
-    enrichedInteractors.calculateTimesAppearing(complexes);
-    return enrichedInteractors;
+    navigatorInteractors.calculateTimesAppearing(complexes);
+    return navigatorInteractors;
   }
 
   toggleSubcomplexExpandable(i: number): void {
-    this.enrichedInteractors().toggleSubcomplexExpandable(i);
+    this.navigatorInteractors().toggleSubcomplexExpandable(i);
     // Something has been expanded or collapsed, we need to sort and recalculate the start and end indexes for the lines
-    this.sortInteractors(this.enrichedInteractors(), this.complexes(), this.interactorsSorting());
+    this.sortInteractors(this.navigatorInteractors(), this.complexes(), this.interactorsSorting());
 
   }
 
-  private loadSubInteractors(interactor: EnrichedInteractor, complexes: Element[]): Observable<ComplexComponent[]> {
+  private loadSubInteractors(interactor: NavigatorInteractor, complexes: Complex[]): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Element = complexes.find(complex => complex.complexAC === interactor.interactor.identifier);
+    const foundComplex: Complex = complexes.find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.interactors);
     } else {
@@ -80,18 +80,18 @@ export class TableInteractorColumnComponent {
     }
   }
 
-  private createEnrichedComplexes(complexes: Element[], enrichedInteractors: EnrichedInteractors): EnrichedComplex[] {
-    const enrichedComplexes: EnrichedComplex[] = [];
+  private createNavigatorComplexes(complexes: Complex[], navigatorInteractors: NavigatorInteractors): NavigatorComplex[] {
+    const navigatorComplexes: NavigatorComplex[] = [];
     for (const complex of complexes) {
-      enrichedComplexes.push(new EnrichedComplex(complex));
+      navigatorComplexes.push(new NavigatorComplex(complex));
     }
-    this.calculateAllStartAndEndIndexes(enrichedInteractors, enrichedComplexes);
-    return enrichedComplexes;
+    this.calculateAllStartAndEndIndexes(navigatorInteractors, navigatorComplexes);
+    return navigatorComplexes;
   }
 
-  private calculateAllStartAndEndIndexes(enrichedInteractors: EnrichedInteractors, enrichedComplexes: EnrichedComplex[]): void {
-    for (const enrichedComplex of enrichedComplexes) {
-      enrichedComplex.calculateStartAndEndIndexes(enrichedInteractors);
+  private calculateAllStartAndEndIndexes(navigatorInteractors: NavigatorInteractors, navigatorComplexes: NavigatorComplex[]): void {
+    for (const navigatorComplex of navigatorComplexes) {
+      navigatorComplex.calculateStartAndEndIndexes(navigatorInteractors);
     }
   }
 

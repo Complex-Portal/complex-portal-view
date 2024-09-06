@@ -1,8 +1,8 @@
-import {Element} from '../../../shared/model/complex-results/element.model';
-import {EnrichedInteractor, EnrichedInteractors} from './enriched-interactors.model';
+import {Complex} from '../../../shared/model/complex-results/complex.model';
+import {NavigatorInteractor, NavigatorInteractors} from './navigator-interactors.model';
 
-export class EnrichedComplex {
-  complex: Element;
+export class NavigatorComplex {
+  complex: Complex;
   _startInteractorIndex: number;
   _endInteractorIndex: number;
   _startSubComponentIndex: number;
@@ -10,7 +10,7 @@ export class EnrichedComplex {
   _startInteractorIncludedWhenExpanded: boolean;
 
 
-  constructor(complex: Element) {
+  constructor(complex: Complex) {
     this.complex = complex;
     this._startInteractorIndex = null;
     this._endInteractorIndex = null;
@@ -19,20 +19,20 @@ export class EnrichedComplex {
     this._startInteractorIncludedWhenExpanded = true;
   }
 
-  calculateStartAndEndIndexes(enrichedInteractors: EnrichedInteractors): void {
+  calculateStartAndEndIndexes(navigatorInteractors: NavigatorInteractors): void {
     // We iterate through the interactors to find the first and last one part of the complex
     // We do this to be able to draw a line connecting all interactors in the complex
-    for (let i = 0; i < enrichedInteractors.interactors.length; i++) {
-      if (!enrichedInteractors.interactors[i].hidden) {
+    for (let i = 0; i < navigatorInteractors.interactors.length; i++) {
+      if (!navigatorInteractors.interactors[i].hidden) {
 
-        if (!!enrichedInteractors.findInteractorInComplex(i, this.complex)) {
-          this.updateInteractorIndexes(enrichedInteractors, i);
-        } else if (enrichedInteractors.interactors[i].isExpandedSubComplex()) {
+        if (!!navigatorInteractors.findInteractorInComplex(i, this.complex)) {
+          this.updateInteractorIndexes(navigatorInteractors, i);
+        } else if (navigatorInteractors.interactors[i].isExpandedSubComplex()) {
           // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
           // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
           // In that case, the line could start or end on any of those subcomponents
-          for (let j = 0; j < enrichedInteractors.interactors[i].subComponents.length; j++) {
-            if (!!enrichedInteractors.findSubcomponentInComplex(i, j, this.complex)) {
+          for (let j = 0; j < navigatorInteractors.interactors[i].subComponents.length; j++) {
+            if (!!navigatorInteractors.findSubcomponentInComplex(i, j, this.complex)) {
               this.updateSubcomponentIndexes(i, j);
             }
           }
@@ -41,7 +41,7 @@ export class EnrichedComplex {
     }
   }
 
-  doesLineCrossInteractorCell(enrichedInteractors: EnrichedInteractor[], interactorIndex: number): boolean {
+  doesLineCrossInteractorCell(navigatorInteractors: NavigatorInteractor[], interactorIndex: number): boolean {
     if (this._startInteractorIndex != null && this._endInteractorIndex != null) {
 
       // The line starts before this interactor and ends after, so it crosses through the interactor
@@ -53,7 +53,7 @@ export class EnrichedComplex {
       if (this._startInteractorIndex < interactorIndex && this._endInteractorIndex === interactorIndex) {
         // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
         // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
-        if (enrichedInteractors[interactorIndex].isExpandedSubComplex()) {
+        if (navigatorInteractors[interactorIndex].isExpandedSubComplex()) {
           if (this._startSubComponentIndex != null && this._endSubComponentIndex != null) {
             return true;
           }
@@ -64,11 +64,11 @@ export class EnrichedComplex {
     return false;
   }
 
-  doesLineStartOnInteractorCell(enrichedInteractors: EnrichedInteractor[], interactorIndex: number): boolean {
+  doesLineStartOnInteractorCell(navigatorInteractors: NavigatorInteractor[], interactorIndex: number): boolean {
     // The line starts at this interactor or on any of its subcomponents
     if (this._startInteractorIndex != null && this._startInteractorIndex === interactorIndex) {
 
-      if (!enrichedInteractors[interactorIndex].isSubComplex) {
+      if (!navigatorInteractors[interactorIndex].isSubComplex) {
         // If the interactor is not a subcomplex, then the interactor has no subcomponents and the line starts in it
         return true;
       }
@@ -84,13 +84,13 @@ export class EnrichedComplex {
     return false;
   }
 
-  doesLineEndOnInteractorCell(enrichedInteractors: EnrichedInteractor[], interactorIndex: number): boolean {
+  doesLineEndOnInteractorCell(navigatorInteractors: NavigatorInteractor[], interactorIndex: number): boolean {
     // The line ends at this interactor or on any of its subcomponents
     if (this._endInteractorIndex != null && this._endInteractorIndex === interactorIndex) {
 
       // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
       // the line does not end in this interactor, and it must cross through to the subcomponents
-      if (enrichedInteractors[interactorIndex].isExpandedSubComplex()) {
+      if (navigatorInteractors[interactorIndex].isExpandedSubComplex()) {
         if (this._startSubComponentIndex != null && this._endSubComponentIndex != null) {
           return false;
         }
@@ -128,7 +128,7 @@ export class EnrichedComplex {
     return false;
   }
 
-  doesLineStartOnSubcomponentCell(enrichedInteractors: EnrichedInteractor[], interactorIndex: number, subComponentIndex: number): boolean {
+  doesLineStartOnSubcomponentCell(navigatorInteractors: NavigatorInteractor[], interactorIndex: number, subComponentIndex: number): boolean {
     // The line starts at this interactor or on any of its subcomponents
     if (this._startInteractorIndex != null && this._startInteractorIndex === interactorIndex) {
       if (this._startSubComponentIndex != null && this._startSubComponentIndex === subComponentIndex) {
@@ -136,7 +136,7 @@ export class EnrichedComplex {
         // start on any subcomponent.
         // Otherwise, it starts on the subcomponent with the index subComponentIndex
         return !this.complex.interactors.some(component =>
-          enrichedInteractors[interactorIndex].interactor.identifier === component.identifier);
+          navigatorInteractors[interactorIndex].interactor.identifier === component.identifier);
 
       }
     }
@@ -154,7 +154,7 @@ export class EnrichedComplex {
     return false;
   }
 
-  private updateInteractorIndexes(enrichedInteractors: EnrichedInteractors, interactorIndex: number): void {
+  private updateInteractorIndexes(navigatorInteractors: NavigatorInteractors, interactorIndex: number): void {
     // The interactor is part of the complex, we update the start and end indices for the interactors
     // line as it may start in this interactor
     this._startInteractorIndex = this.getMinValue(this._startInteractorIndex, interactorIndex);
@@ -165,13 +165,13 @@ export class EnrichedComplex {
     this._endInteractorIndex = this.getMaxValue(this._endInteractorIndex, interactorIndex);
 
     // The interactor is a subcomplex
-    if (enrichedInteractors.interactors[interactorIndex].isExpandedSubComplex()) {
+    if (navigatorInteractors.interactors[interactorIndex].isExpandedSubComplex()) {
       // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
       // of it. That means we need a line connecting all the subcomponents.
       // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
       // and not at the first subcomponent
       this._startSubComponentIndex = -1;
-      this._endSubComponentIndex = enrichedInteractors.interactors[interactorIndex].subComponents.length - 1;
+      this._endSubComponentIndex = navigatorInteractors.interactors[interactorIndex].subComponents.length - 1;
     }
   }
 

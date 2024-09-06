@@ -1,7 +1,7 @@
 import {Component, computed, input} from '@angular/core';
 import {findInteractorInComplex} from '../complex-navigator-utils';
-import {EnrichedComplex} from '../../enriched-complex.model';
-import {EnrichedInteractor} from '../../enriched-interactors.model';
+import {NavigatorComplex} from '../../navigator-complex.model';
+import {NavigatorInteractor} from '../../navigator-interactors.model';
 
 @Component({
   selector: 'cp-table-main-interactor',
@@ -9,37 +9,37 @@ import {EnrichedInteractor} from '../../enriched-interactors.model';
   styleUrls: ['./table-main-interactor.component.css']
 })
 export class TableMainInteractorComponent {
-  complex = input<EnrichedComplex>();
+  complex = input<NavigatorComplex>();
   i = input<number>();
-  enrichedInteractors = input<EnrichedInteractor[]>();
+  navigatorInteractors = input<NavigatorInteractor[]>();
 
   interactorComponent = computed(() =>
-    findInteractorInComplex(this.complex().complex, this.interactor.interactor.identifier, this.enrichedInteractors()));
+    findInteractorInComplex(this.complex().complex, this.interactor.interactor.identifier, this.navigatorInteractors()));
   topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.i()));
   bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.i()));
 
-  get interactor(): EnrichedInteractor {
-    return this.enrichedInteractors()[this.i()];
+  get interactor(): NavigatorInteractor {
+    return this.navigatorInteractors()[this.i()];
   }
 
-  public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (complex.doesLineCrossInteractorCell(this.enrichedInteractors(), interactorIndex)) {
+  public displayTopLineClass(complex: NavigatorComplex, interactorIndex: number): string {
+    if (complex.doesLineCrossInteractorCell(this.navigatorInteractors(), interactorIndex)) {
       return 'verticalLine';
     }
-    if (complex.doesLineEndOnInteractorCell(this.enrichedInteractors(), interactorIndex) &&
-      !complex.doesLineStartOnInteractorCell(this.enrichedInteractors(), interactorIndex)) {
+    if (complex.doesLineEndOnInteractorCell(this.navigatorInteractors(), interactorIndex) &&
+      !complex.doesLineStartOnInteractorCell(this.navigatorInteractors(), interactorIndex)) {
       return 'verticalLine';
     }
 
     return 'transparentVerticalLine';
   }
 
-  public displayBottomLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (complex.doesLineCrossInteractorCell(this.enrichedInteractors(), interactorIndex)) {
+  public displayBottomLineClass(complex: NavigatorComplex, interactorIndex: number): string {
+    if (complex.doesLineCrossInteractorCell(this.navigatorInteractors(), interactorIndex)) {
       return 'verticalLine';
     }
-    if (complex.doesLineStartOnInteractorCell(this.enrichedInteractors(), interactorIndex) &&
-      !complex.doesLineEndOnInteractorCell(this.enrichedInteractors(), interactorIndex)) {
+    if (complex.doesLineStartOnInteractorCell(this.navigatorInteractors(), interactorIndex) &&
+      !complex.doesLineEndOnInteractorCell(this.navigatorInteractors(), interactorIndex)) {
       return 'verticalLine';
     }
 

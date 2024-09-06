@@ -2,7 +2,7 @@
   <table class="interactors-table"
          [ngClass]="{'inheritedWidth': complexes().length > 6}"
          [style.--cols]="complexes().length">
-    @for (interactor of enrichedInteractorsArray; track i; let i = $index) {
+    @for (interactor of navigatorInteractorsArray; track i; let i = $index) {
       @if (!interactor.hidden) {
         <tr>
           @for (range of ranges; track range.value) {
@@ -46,13 +46,13 @@
             }
           </td>
           <!-- Interactors' stoichiometry -->
-          @for (complex of enrichedComplexes; track complex.complex.complexAC) {
+          @for (complex of navigatorComplexes; track complex.complex.complexAC) {
             <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}"
                 [class.predicted]="complex.complex.predictedComplex">
               <cp-table-main-interactor
                 [complex]="complex"
                 [i]="i"
-                [enrichedInteractors]="enrichedInteractorsArray"
+                [navigatorInteractors]="navigatorInteractorsArray"
               ></cp-table-main-interactor>
             </td>
           }
@@ -95,17 +95,17 @@
                   ></cp-table-interactor-name>
                 </div>
               </td>
-              @for (complex of enrichedComplexes; track complex.complex.complexAC) {
+              @for (complex of navigatorComplexes; track complex.complex.complexAC) {
                 <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}">
                   <cp-table-subcomponent-interactor
                     [complex]="complex"
                     [i]="i"
                     [j]="j"
-                    [enrichedInteractors]="enrichedInteractorsArray"
+                    [navigatorInteractors]="navigatorInteractorsArray"
                   ></cp-table-subcomponent-interactor>
                 </td>
               }
-              @if (enrichedComplexes.length > 6) {
+              @if (navigatorComplexes.length > 6) {
                 <div class="spaceHolder"></div>
               }
             </tr>

@@ -1,6 +1,6 @@
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
-import {Element} from '../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../shared/model/complex-results/complex.model';
 import {ComponentWithStoichiometry, findInteractorInComplex} from './table-interactor-column/complex-navigator-utils';
 
 export interface Range {
@@ -9,7 +9,7 @@ export interface Range {
   length: number;
 }
 
-export class EnrichedInteractor {
+export class NavigatorInteractor {
   interactor: Interactor;
   hidden: boolean;
   isSubComplex: boolean;
@@ -33,8 +33,8 @@ export class EnrichedInteractor {
   }
 }
 
-export class EnrichedInteractors {
-  _interactors: EnrichedInteractor[];
+export class NavigatorInteractors {
+  _interactors: NavigatorInteractor[];
   _timesAppearingBy: { [k in keyof Interactor]?: Map<string, number> } = {
     interactorType: new Map<string, number>(),
     organismName: new Map<string, number>()
@@ -45,7 +45,7 @@ export class EnrichedInteractors {
     this._interactors = [];
   }
 
-  get interactors(): EnrichedInteractor[] {
+  get interactors(): NavigatorInteractor[] {
     return this._interactors;
   }
 
@@ -64,18 +64,18 @@ export class EnrichedInteractors {
     }
   }
 
-  findInteractorInComplex(interactorIndex: number, complex: Element): ComponentWithStoichiometry {
+  findInteractorInComplex(interactorIndex: number, complex: Complex): ComponentWithStoichiometry {
     return findInteractorInComplex(complex, this._interactors[interactorIndex].interactor.identifier, this._interactors);
   }
 
-  findSubcomponentInComplex(interactorIndex: number, subcomponentIndex: number, complex: Element): ComponentWithStoichiometry {
+  findSubcomponentInComplex(interactorIndex: number, subcomponentIndex: number, complex: Complex): ComponentWithStoichiometry {
     return findInteractorInComplex(
       complex,
       this._interactors[interactorIndex].subComponents[subcomponentIndex].identifier,
       this._interactors);
   }
 
-  calculateTimesAppearing(complexes: Element[]) {
+  calculateTimesAppearing(complexes: Complex[]) {
     // Initialise times appearing by type or organism
     for (const map of Object.values(this._timesAppearingBy)) {
       map.clear();
@@ -100,7 +100,7 @@ export class EnrichedInteractors {
     }
   }
 
-  classifyInteractors(interactorsSorting: string): EnrichedInteractor[] {
+  classifyInteractors(interactorsSorting: string): NavigatorInteractor[] {
     if (!!interactorsSorting && !!this._interactors && this._interactors.length > 0) {
       if (interactorsSorting === 'Type') {
         this.classifyBy('interactorType');
@@ -176,7 +176,7 @@ export class EnrichedInteractors {
     this._ranges = ranges;
   }
 
-  private compareFn(a: EnrichedInteractor, b: EnrichedInteractor) {
+  private compareFn(a: NavigatorInteractor, b: NavigatorInteractor) {
     return -(b.indexAppearing - a.indexAppearing) || // First by order of appearance (staircase effect)
       -(b.timesAppearing - a.timesAppearing); // Then by reversed occurrence, in order to minimize edge length
   }

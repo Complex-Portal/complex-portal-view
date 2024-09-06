@@ -1,7 +1,7 @@
 import {Component, computed, input, output} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
-import {Element} from '../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../shared/model/complex-results/complex.model';
 import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
@@ -24,11 +24,11 @@ export class TableStructureComponent {
 
   sortedComplexes = computed(() => this.sortComplexBySimilarityClustering(this.complexSearch().elements));
 
-  private getComponentAsComplex(component: ComplexComponent): Element | undefined {
+  private getComponentAsComplex(component: ComplexComponent): Complex | undefined {
     return this.complexSearch().elements.find(interactor => interactor.complexAC === component.identifier);
   }
 
-  private calculateSimilarity(complex1: Element, complex2: Element) {
+  private calculateSimilarity(complex1: Complex, complex2: Complex) {
     if (complex1 === complex2) {
       return 1;
     }
@@ -38,14 +38,14 @@ export class TableStructureComponent {
     return components1.intersection(components2).size / components1.union(components2).size;
   }
 
-  private getComponents(complex: Element): Set<string> {
+  private getComponents(complex: Complex): Set<string> {
     if (!complex.componentAcs) {
       complex.componentAcs = new Set<string>(this.getAllComponents(complex).map(component => component.identifier));
     }
     return complex.componentAcs;
   }
 
-  private getAllComponents(complex?: Element, components: ComplexComponent[] = []): ComplexComponent[] {
+  private getAllComponents(complex?: Complex, components: ComplexComponent[] = []): ComplexComponent[] {
     for (const component of complex.interactors) {
       if (component.interactorType === 'stable complex') {
         const subComplex = this.getComponentAsComplex(component);
@@ -61,7 +61,7 @@ export class TableStructureComponent {
     return components;
   }
 
-  sortComplexBySimilarityClustering(complexesList: Element[]) {
+  sortComplexBySimilarityClustering(complexesList: Complex[]) {
     // Group by predicted to cluster only inside the different groups, and place predicted after curated
     const groups = groupByPropertyToArray(
       complexesList,

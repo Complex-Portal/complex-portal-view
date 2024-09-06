@@ -1,6 +1,6 @@
 import {ComplexComponent} from './complex-component.model';
 
-export interface Element {
+export interface Complex {
   complexAC: string;
   complexName: string;
   organismName: string;

@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {BasketItem} from '../model/basketItem';
-import {Element} from '../../../complex/shared/model/complex-results/element.model';
+import {Complex} from '../../../complex/shared/model/complex-results/complex.model';
 import {NotificationService} from '../../notification/service/notification.service';
 import {AnalyticsService} from '../../google-analytics/service/analytics.service';
 import {LocalStorageService} from '../../local-storage/service/local-storage.service';
@@ -39,11 +39,11 @@ export class BasketService {
     }
   }
 
-  private isElement(complex: Element | ComplexDetails): complex is Element {
-    return (complex as Element).complexAC !== undefined;
+  private isElement(complex: Complex | ComplexDetails): complex is Complex {
+    return (complex as Complex).complexAC !== undefined;
   }
 
-  public saveInBasket(complex: Element | ComplexDetails): void {
+  public saveInBasket(complex: Complex | ComplexDetails): void {
     const item: BasketItem = this.isElement(complex) ? {
       id: complex.complexAC,
       name: complex.complexName,
