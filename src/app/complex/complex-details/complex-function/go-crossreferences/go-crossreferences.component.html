@@ -1,11 +1,15 @@
 <div class="row">
   <div class="columns medium-12 no-pad-left">
     <div class="columns medium-6 no-pad-left no-pad-right">
-      <cp-go-molecular-function *ngIf="molecularFunctions"
-                                [crossReferences]="molecularFunctions"></cp-go-molecular-function>
+      @if (molecularFunctions) {
+        <cp-go-molecular-function
+        [crossReferences]="molecularFunctions"></cp-go-molecular-function>
+      }
     </div>
     <div class="columns medium-6 no-pad-left no-pad-right">
-      <cp-go-biological-process *ngIf="biologicalProcess" [crossReferences]="biologicalProcess"></cp-go-biological-process>
+      @if (biologicalProcess) {
+        <cp-go-biological-process [crossReferences]="biologicalProcess"></cp-go-biological-process>
+      }
     </div>
   </div>
 </div>

@@ -25,6 +25,8 @@ import {RouterModule} from '@angular/router';
 import {ComplexListDisplayButtonsComponent} from './complex-list-display-buttons/complex-list-display-buttons.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ProgressSpinnerComponent} from '../../../shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {ComplexModule} from '../../complex.module';
+import {SpeciesPipe} from '../../shared/pipe/species.pipe';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import {ProgressSpinnerComponent} from '../../../shared/loading-indicators/progr
     CommonModule,
     ProgressSpinnerComponent,
     MarkdownModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ComplexModule,
+    SpeciesPipe
   ],
   exports: [
     ComplexNavigatorComponent,

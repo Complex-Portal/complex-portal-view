@@ -12,6 +12,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {ComplexModule} from '../complex.module';
 import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
 import {TruncatePipe} from '../../shared/truncate/truncate.pipe';
+import {SpeciesPipe} from '../shared/pipe/species.pipe';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import {TruncatePipe} from '../../shared/truncate/truncate.pipe';
     ]),
         CommonModule,
         ProgressSpinnerComponent, MarkdownModule,
-        ComplexNavigatorModule, MatTooltipModule, ComplexModule, TruncatePipe
+        ComplexNavigatorModule, MatTooltipModule, ComplexModule, TruncatePipe, SpeciesPipe
     ],
   exports: [],
   declarations: [ComplexResultsComponent,

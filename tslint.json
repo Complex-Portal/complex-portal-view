@@ -9,7 +9,7 @@
       true,
       "check-space"
     ],
-    "curly": true,
+    "curly": false,
     "eofline": true,
     "forin": true,
     "deprecation": {
@@ -35,8 +35,6 @@
       true,
       "debug",
       "info",
-      "time",
-      "timeEnd",
       "trace"
     ],
     "no-construct": true,
