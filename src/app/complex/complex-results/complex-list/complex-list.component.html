@@ -1,23 +1,25 @@
 <ul class="no-bullet">
-  <li *ngFor="let complex of complexSearch().elements" [class.predicted]="complex.predictedComplex">
-    <div class="container">
-      <div class="basketButtonContainer"
-           [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
-        <a class="button" (click)="toggleBasket(complex)">
-          <i class="icon icon-common" [attr.data-icon]="isInBasket(complex) ? '':''"></i>
-        </a>
-      </div>
-      <div class="complexesAndDescription">
-        <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName | truncate:114 }}</a></h3>
-        <div class="description" style="background-color: white">
-          <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
-          · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
-          <br>
-          <ng-container *ngIf="complex.description">
-            <b>Description:</b> {{ complex.description | truncate:250}}
-          </ng-container>
+  @for (complex of complexSearch().elements; track complex.complexAC) {
+    <li [class.predicted]="complex.predictedComplex">
+      <div class="container">
+        <div class="basketButtonContainer"
+          [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
+          <a class="button" (click)="toggleBasket(complex)">
+            <i class="icon icon-common" [attr.data-icon]="isInBasket(complex) ? '':''"></i>
+          </a>
         </div>
-      </div>
-    </div>
-  </li>
-</ul>
+        <div class="complexesAndDescription">
+          <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName | truncate:114 }}</a></h3>
+          <div class="description" style="background-color: white">
+            <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
+            · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
+            <br>
+              @if (complex.description) {
+                <b>Description:</b> {{ complex.description | truncate:250}}
+              }
+            </div>
+          </div>
+        </div>
+      </li>
+    }
+  </ul>

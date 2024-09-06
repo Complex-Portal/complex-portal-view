@@ -1,47 +1,59 @@
-<div class="row" *ngIf="isDataLoaded">
-  <div class="columns medium-12 no-pad-left">
-    <h3>Pathways</h3>
-    <table class="hover">
-      <thead>
-      <tr>
-        <th>Complex Identifier</th>
-        <th>Complex Name</th>
-        <th>Pathway Identifier</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let reactomeComplex of getSortedKeys(reactomeComplexes) | slice:0:displayedCrossReferences">
-        <td><a (click)="selectComplexWithFirstPathway(reactomeComplex)">{{reactomeComplex}}</a></td>
-        <td>{{reactomeComplexes[reactomeComplex].name}}</td>
-        <td>
-          <ul>
-            <li
-              *ngFor="let reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedRelatedPathways">
-              <a (click)="selectComplexByPathway(reactomeComplex, reactomePathway)">{{reactomePathway}}</a>
-            </li>
-            <li class="text-center no-bullet"
-                *ngIf="displayedRelatedPathways < reactomeComplexes[reactomeComplex].pathways.length">
-              <a class="label" (click)="displayedRelatedPathways = reactomeComplexes[reactomeComplex].pathways.length">Show
-                all</a>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white"
-          *ngIf="displayedCrossReferences < getObjectLength(reactomeComplexes)">
-        <td></td>
-        <td>
-          <a class="label" (click)="displayedCrossReferences = getObjectLength(reactomeComplexes)">Show all ({{getObjectLength(reactomeComplexes)}})</a>
-        </td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="columns medium-12 no-pad-left no-pad-right" *ngIf="selectedComplex && selectedPathway">
-      <cp-reactome-diagram [reactomeComplexe]="reactomeComplexes" [reactomePathways]="reactomePathways"
-                           [selectedComplex]="selectedComplex"
-                           [selectedPathway]="selectedPathway"></cp-reactome-diagram>
+@if (isDataLoaded) {
+  <div class="row">
+    <div class="columns medium-12 no-pad-left">
+      <h3>Pathways</h3>
+      <table class="hover">
+        <thead>
+          <tr>
+            <th>Complex Identifier</th>
+            <th>Complex Name</th>
+            <th>Pathway Identifier</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reactomeComplex of getSortedKeys(reactomeComplexes) | slice:0:displayedCrossReferences; track reactomeComplex) {
+            <tr>
+              <td><a (click)="selectComplexWithFirstPathway(reactomeComplex)">{{reactomeComplex}}</a></td>
+              <td>{{reactomeComplexes[reactomeComplex].name}}</td>
+              <td>
+                <ul>
+                  @for (reactomePathway of reactomeComplexes[reactomeComplex].pathways | slice:0:displayedRelatedPathways; track reactomePathway) {
+                    <li
+                      >
+                      <a (click)="selectComplexByPathway(reactomeComplex, reactomePathway)">{{reactomePathway}}</a>
+                    </li>
+                  }
+                  @if (displayedRelatedPathways < reactomeComplexes[reactomeComplex].pathways.length) {
+                    <li class="text-center no-bullet"
+                      >
+                      <a class="label" (click)="displayedRelatedPathways = reactomeComplexes[reactomeComplex].pathways.length">Show
+                      all</a>
+                    </li>
+                  }
+                </ul>
+              </td>
+            </tr>
+          }
+          @if (displayedCrossReferences < getObjectLength(reactomeComplexes)) {
+            <tr class="text-center" style="background: white"
+              >
+              <td></td>
+              <td>
+                <a class="label" (click)="displayedCrossReferences = getObjectLength(reactomeComplexes)">Show all ({{getObjectLength(reactomeComplexes)}})</a>
+              </td>
+              <td></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      @if (selectedComplex && selectedPathway) {
+        <div class="columns medium-12 no-pad-left no-pad-right">
+          <cp-reactome-diagram [reactomeComplexe]="reactomeComplexes" [reactomePathways]="reactomePathways"
+            [selectedComplex]="selectedComplex"
+          [selectedPathway]="selectedPathway"></cp-reactome-diagram>
+        </div>
+      }
     </div>
   </div>
-</div>
+}
 

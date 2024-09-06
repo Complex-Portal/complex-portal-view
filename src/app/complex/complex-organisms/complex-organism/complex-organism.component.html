@@ -1,32 +1,31 @@
-<div class="card" *ngIf="organism.symbol">
-  <div class="medium-12">
-    <b>{{organism.scientificName}}</b><br>
-    {{organism.nameDetails}}
-  </div>
-  <a href="https://www.uniprot.org/taxonomy/{{organism.taxid}}" target="_blank">{{organism.taxid}}</a>
-
-  <div class="flex-spacer"></div>
-
-  <div class="medium-12" style="text-align: center">
-    <button (click)="search(organism.name)" class="species-button">
-      <div class="icon asset-icon" *ngIf="organism.symbol.startsWith('assets'); else fontIcon"
-           [style]="maskStyle">
-
+@if (organism.symbol) {
+  <div class="card">
+    <div class="medium-12">
+      <b>{{organism.scientificName}}</b><br>
+      {{organism.nameDetails}}
+    </div>
+    <a href="https://www.uniprot.org/taxonomy/{{organism.taxid}}" target="_blank">{{organism.taxid}}</a>
+    <div class="flex-spacer"></div>
+    <div class="medium-12" style="text-align: center">
+      <button (click)="search(organism.name)" class="species-button">
+        @if (organism.symbol.startsWith('assets')) {
+          <div class="icon asset-icon"
+            [style]="maskStyle">
+          </div>
+        } @else {
+          <span [attr.data-icon]="organism.symbol" style="color: var(--primary)"
+            [ngClass]="{'icon ': true,'icon-species': organism.symbol !== '?', 'icon-functional': organism.symbol === '?'}">
+          </span>
+        }
+        <br>{{organism.count}}
+        </button>
       </div>
-      <ng-template #fontIcon style="mask: 5px; accent-color: #0a0a0a">
-        <span [attr.data-icon]="organism.symbol" style="color: var(--primary)"
-              [ngClass]="{'icon ': true,'icon-species': organism.symbol !== '?', 'icon-functional': organism.symbol === '?'}">
-        </span>
-      </ng-template>
-
-      <br>{{organism.count}}
-    </button>
-  </div>
-  <div class="actions">
-    <button mat-raised-button color="primary" (click)="goToComplexPSI25()">miXML 2.5</button>
-    <button mat-raised-button color="primary" (click)="goToComplexPSI30()">miXML 3.0</button>
-  </div>
-  <div class="actions margin-top-small">
-    <button mat-raised-button color="primary" (click)="goToComplexTAB()">ComplexTab</button>
-  </div>
-</div>
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="goToComplexPSI25()">miXML 2.5</button>
+        <button mat-raised-button color="primary" (click)="goToComplexPSI30()">miXML 3.0</button>
+      </div>
+      <div class="actions margin-top-small">
+        <button mat-raised-button color="primary" (click)="goToComplexTAB()">ComplexTab</button>
+      </div>
+    </div>
+  }

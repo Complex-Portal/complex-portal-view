@@ -1,73 +1,78 @@
-<div class="row" *ngIf="participantsWithSubcomponents">
-  <h2 class="float-left">Components</h2>
-  <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
-  <div class="columns medium-12 no-pad-right no-pad-left">
-    <div class="columns medium-6 no-pad-left no-pad-right">
-      <!-- complex viewer -->
-      <div class="columns medium-12 no-pad-left padding-right-medium margin-bottom-xlarge">
-        <div *ngIf="complexMIJSON" (click)="interactedWithViewer()" id="networkContainer"></div>
-
-        <div class="button-group expanded no-margin">
-          <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('MI Features')"
-                  [ngClass]="{'icon-check': annotations['MI Features'], 'hollow': !annotations['MI Features']}">
-            Binding <span class="show-for-large">Regions</span>
-          </button>
-          <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('UniprotKB')"
-                  [ngClass]="{'icon-check': annotations['UniprotKB'], 'hollow': !annotations['UniprotKB']}">
-            Uniprot <span class="show-for-large">Features</span>
-          </button>
-          <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('Superfamily')"
-                  [ngClass]="{'icon-check': annotations['Superfamily'], 'hollow': !annotations['Superfamily']}">
-            <span class="show-for-large">Super</span>Family
-          </button>
-          <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('Interactor')"
-                  [ngClass]="{'icon-check': annotations['Interactor'], 'hollow': !annotations['Interactor']}">
-            Component
-          </button>
-        </div>
-        <div class="expanded button-group">
-          <a class="button secondary" (click)="onExpandAll()">Expand All</a>
-          <a class="button secondary" (click)="onReset()">Collapse all</a>
-          <a class="button secondary" (click)="resetLayout()">Reset Layout</a>
-          <a class="button secondary" (click)="downloadAsSVG()">Export SVG</a>
+@if (participantsWithSubcomponents) {
+  <div class="row">
+    <h2 class="float-left">Components</h2>
+    <cp-go-to class="float-right" [sectionName]="'Participants'"></cp-go-to>
+    <div class="columns medium-12 no-pad-right no-pad-left">
+      <div class="columns medium-6 no-pad-left no-pad-right">
+        <!-- complex viewer -->
+        <div class="columns medium-12 no-pad-left padding-right-medium margin-bottom-xlarge">
+          @if (complexMIJSON) {
+            <div (click)="interactedWithViewer()" id="networkContainer"></div>
+          }
+          <div class="button-group expanded no-margin">
+            <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('MI Features')"
+              [ngClass]="{'icon-check': annotations['MI Features'], 'hollow': !annotations['MI Features']}">
+              Binding <span class="show-for-large">Regions</span>
+            </button>
+            <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('UniprotKB')"
+              [ngClass]="{'icon-check': annotations['UniprotKB'], 'hollow': !annotations['UniprotKB']}">
+              Uniprot <span class="show-for-large">Features</span>
+            </button>
+            <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('Superfamily')"
+              [ngClass]="{'icon-check': annotations['Superfamily'], 'hollow': !annotations['Superfamily']}">
+              <span class="show-for-large">Super</span>Family
+            </button>
+            <button class="button icon icon-common icon-spacer" (click)="onChangeAnnotation('Interactor')"
+              [ngClass]="{'icon-check': annotations['Interactor'], 'hollow': !annotations['Interactor']}">
+              Component
+            </button>
+          </div>
+          <div class="expanded button-group">
+            <a class="button secondary" (click)="onExpandAll()">Expand All</a>
+            <a class="button secondary" (click)="onReset()">Collapse all</a>
+            <a class="button secondary" (click)="resetLayout()">Reset Layout</a>
+            <a class="button secondary" (click)="downloadAsSVG()">Export SVG</a>
+          </div>
         </div>
       </div>
+      <div class="columns medium-6 padding-left-medium no-pad-right">
+        <table class="hover">
+          <thead>
+            <th style="width: 16%">Legend</th>
+            <th style="width: 64%">Description</th>
+            <th style="width: 20%">Stoichiometry</th>
+          </thead>
+          <tbody>
+            @for (participant of participantsWithSubcomponents | slice:0:displayedElements; track participant.identifier; let i = $index) {
+              <tr class="gray-top-border">
+                <td colspan="3" class="no-padding">
+                  <cp-complex-participant-legend
+                    class="participant-row"
+                    [participant]="participant"
+                    [colorLegendGroups]="colorLegendGroups"
+                    [backgroundComplexId]="complexAC"
+                    [parentComplexAcs]="[]">
+                  </cp-complex-participant-legend>
+                </td>
+              </tr>
+            }
+            @if (MIN_DISPLAYED_ELEMENTS < participants.length) {
+              <tr class="text-center" style="background: white">
+                @if (displayedElements < participants.length) {
+                  <td colspan="3">
+                    <a class="label" (click)="displayedElements = participants.length">Show all components</a>
+                  </td>
+                }
+                @if (displayedElements >= participants.length) {
+                  <td colspan="3">
+                    <a class="label" (click)="displayedElements = MIN_DISPLAYED_ELEMENTS">Hide components</a>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="columns medium-6 padding-left-medium no-pad-right">
-      <table class="hover">
-        <thead>
-        <th style="width: 16%">Legend</th>
-        <th style="width: 64%">Description</th>
-        <th style="width: 20%">Stoichiometry</th>
-        </thead>
-        <tbody>
-        <ng-container
-          *ngFor="let participant of participantsWithSubcomponents | slice:0:displayedElements; let i = index">
-          <tr class="gray-top-border">
-            <td colspan="3" class="no-padding">
-              <cp-complex-participant-legend
-                [participant]="participant"
-                [colorLegendGroups]="colorLegendGroups"
-                [backgroundComplexId]="complexAC"
-                [parentComplexAcs]="[]">
-              </cp-complex-participant-legend>
-            </td>
-          </tr>
-        </ng-container>
-        <tr class="text-center" style="background: white" *ngIf="MIN_DISPLAYED_ELEMENTS < participants.length">
-          <td colspan="3" *ngIf="displayedElements < participants.length">
-            <a class="label" (click)="displayedElements = participants.length">Show all components</a>
-          </td>
-          <td colspan="3" *ngIf="displayedElements >= participants.length">
-            <a class="label" (click)="displayedElements = MIN_DISPLAYED_ELEMENTS">Hide components</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-
   </div>
-
-
-</div>
+}

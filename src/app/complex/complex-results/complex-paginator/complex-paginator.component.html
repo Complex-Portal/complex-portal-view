@@ -1,15 +1,26 @@
 <div>
   <h5 class="text-center">{{ currentPageIndex }} of {{ lastPageIndex }}</h5>
   <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-    <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a
+    @if (currentPageIndex != 1) {
+      <li class="arrow unavailable" aria-disabled="true"><a
       (click)="getFirstPage()">&Lang; First</a></li>
-    <li class="arrow unavailable" *ngIf="currentPageIndex != 1" aria-disabled="true"><a
+    }
+    @if (currentPageIndex != 1) {
+      <li class="arrow unavailable" aria-disabled="true"><a
       (click)="getPreviousPage()">&lang; Previous</a></li>
-    <ng-container *ngFor="let index of pagination">
-      <li *ngIf="index[1] == 'true'" class="current"><span class="show-for-sr">You're on page</span>{{ index[0] }}</li>
-      <li *ngIf="index[1] == 'false'"><a (click)="getPage(index[0])">{{ index[0] }}</a></li>
-    </ng-container>
-    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getNextPage()">Next &rang;</a></li>
-    <li class="arrow" *ngIf="currentPageIndex != lastPageIndex"><a (click)="getLastPage()">Last &Rang;</a></li>
+    }
+    @for (index of pagination; track index.pageNumber) {
+      @if (index.isCurrent) {
+        <li class="current"><span class="show-for-sr">You're on page</span>{{ index.pageNumber }}</li>
+      } @else {
+        <li><a (click)="getPage(index.pageNumber)">{{ index.pageNumber }}</a></li>
+      }
+    }
+    @if (currentPageIndex != lastPageIndex) {
+      <li class="arrow"><a (click)="getNextPage()">Next &rang;</a></li>
+    }
+    @if (currentPageIndex != lastPageIndex) {
+      <li class="arrow"><a (click)="getLastPage()">Last &Rang;</a></li>
+    }
   </ul>
 </div>

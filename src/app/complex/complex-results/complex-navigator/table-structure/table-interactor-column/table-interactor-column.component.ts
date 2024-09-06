@@ -4,11 +4,9 @@ import {Observable, of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
 import {Element} from '../../../../shared/model/complex-results/element.model';
 import {map} from 'rxjs/operators';
-import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 import {EnrichedComplex} from '../enriched-complex.model';
-import {EnrichedInteractor, EnrichedInteractors} from '../enriched-interactors.model';
+import {EnrichedInteractor, EnrichedInteractors, Range} from '../enriched-interactors.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-
 
 @Component({
   selector: 'cp-table-interactor-column',
@@ -27,9 +25,9 @@ export class TableInteractorColumnComponent {
 
   enrichedInteractorsArray: EnrichedInteractor[];
   enrichedComplexes: EnrichedComplex[];
-  ranges: [string, number, number, number][];
+  ranges: Range[];
 
-  constructor(private complexPortalService: ComplexPortalService, private species: SpeciesPipe) {
+  constructor(private complexPortalService: ComplexPortalService) {
     effect(() => this.sortInteractors(this.enrichedInteractors(), this.complexes(), this.interactorsSorting()));
   }
 
@@ -46,10 +44,13 @@ export class TableInteractorColumnComponent {
   }
 
   private enrichInteractors(complexes: Element[], interactors: Interactor[]): EnrichedInteractors {
-    const enrichedInteractors = new EnrichedInteractors(this.species);
+    const enrichedInteractors = new EnrichedInteractors();
     for (const interactor of interactors) {
       const isSubComplex = interactor.interactorType === 'stable complex';
-      const newEnrichedInteractor = new EnrichedInteractor(interactor, isSubComplex);
+      const newEnrichedInteractor = new EnrichedInteractor(
+        interactor,
+        isSubComplex,
+        complexes.findIndex(complex => complex.componentAcs?.has(interactor.identifier)) || 0);
       if (isSubComplex) {
         this.loadSubInteractors(newEnrichedInteractor, complexes)
           .subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
