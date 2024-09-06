@@ -1,23 +1,27 @@
 <div class="container">
-  <div *ngIf="complex().evidenceType || intactXRefs">
-    Evidence by
-    <a href="{{complex().evidenceType.searchURL}}" target="_blank">
-      {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
-      <i class="icon icon-generic small" data-icon="x"></i>
-    </a>
-    <ng-container *ngIf="intactXRefs">
-      in IntAct
-      <ng-container *ngFor="let crossReference of intactXRefs;let isLast=last">
-        <a href="{{crossReference.searchURL}}" target="_blank"> {{ crossReference.identifier }} <i
+  @if (complex().evidenceType || intactXRefs) {
+    <div>
+      Evidence by
+      <a href="{{complex().evidenceType.searchURL}}" target="_blank">
+        {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
+        <i class="icon icon-generic small" data-icon="x"></i>
+      </a>
+      @if (intactXRefs) {
+        in IntAct
+        @for (crossReference of intactXRefs; track crossReference.identifier; let isLast = $last) {
+          <a href="{{crossReference.searchURL}}" target="_blank"> {{ crossReference.identifier }} <i
           class="icon icon-generic small" data-icon="x"></i></a>{{ isLast ? '' : ', ' }}
-      </ng-container>
-    </ng-container>
-  </div>
+        }
+      }
+    </div>
+  }
 
 
 
   <div class="stars">
-    <i *ngFor="let star of stars" class="icon icon-common icon-star" [ngClass]="star"></i>
+    @for (star of stars; let i = $index; track i) {
+      <i class="icon icon-common icon-star" [ngClass]="star"></i>
+    }
   </div>
 </div>
 

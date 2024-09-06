@@ -1,19 +1,29 @@
 <div class="row">
-  <div class="columns medium-12 no-pad-left" *ngIf="(diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs">
-    <h2 class="float-left">Diseases and Pathologies</h2>
-    <cp-go-to class="float-right" [sectionName]="'Diseases and Pathologies'"></cp-go-to>
-    <div id="description" class="columns medium-12 no-pad-left" *ngIf="diseaseDescriptions">
-      <ul class="no-bullet" *ngFor="let diseaseDescription of diseaseDescriptions">
-        <li>{{diseaseDescription}}</li>
-      </ul>
-    </div>
+  @if ((diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs) {
     <div class="columns medium-12 no-pad-left">
-      <div id="efoXRefs" class="columns medium-6 no-pad-left" *ngIf="efoXRefs">
-        <cp-efo-crossreferences [crossReferences]="efoXRefs"></cp-efo-crossreferences>
-      </div>
-      <div id="chemblXRefs" class="columns medium-6 no-pad-left" *ngIf="chemblXRefs">
-        <cp-chembl-crossreference [crossReferences]="chemblXRefs"></cp-chembl-crossreference>
+      <h2 class="float-left">Diseases and Pathologies</h2>
+      <cp-go-to class="float-right" [sectionName]="'Diseases and Pathologies'"></cp-go-to>
+      @if (diseaseDescriptions) {
+        <div id="description" class="columns medium-12 no-pad-left">
+          @for (diseaseDescription of diseaseDescriptions; track diseaseDescription) {
+            <ul class="no-bullet">
+              <li>{{diseaseDescription}}</li>
+            </ul>
+          }
+        </div>
+      }
+      <div class="columns medium-12 no-pad-left">
+        @if (efoXRefs) {
+          <div id="efoXRefs" class="columns medium-6 no-pad-left">
+            <cp-efo-crossreferences [crossReferences]="efoXRefs"></cp-efo-crossreferences>
+          </div>
+        }
+        @if (chemblXRefs) {
+          <div id="chemblXRefs" class="columns medium-6 no-pad-left">
+            <cp-chembl-crossreference [crossReferences]="chemblXRefs"></cp-chembl-crossreference>
+          </div>
+        }
       </div>
     </div>
-  </div>
+  }
 </div>

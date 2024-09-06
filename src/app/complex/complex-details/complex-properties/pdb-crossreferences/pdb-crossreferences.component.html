@@ -1,29 +1,37 @@
-<div class="row" *ngIf="isDataLoaded">
-  <div class="cloumns medium-12 no-pad-left">
-    <h3>3D Structure</h3>
-    <div class="columns medium-8 no-pad-left">
-      <cp-litmol-viewer *ngIf="selectedXRef" [selectedXRef]="selectedXRef"></cp-litmol-viewer>
-    </div>
-    <div class="columns medium-4">
-      <h4>Curated structures ({{crossReferences.length}}):</h4>
-      <table class="hover">
-        <tbody style="height: 400px; overflow-y: scroll;">
-        <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
-          <td>
-            <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
-          </td>
-          <td>
-            <a href="{{crossReference.searchURL}}" target="_blank"><img src="assets/images/pdbe_min_logo.png"> <i
-              class="icon icon-generic small" data-icon="x"></i></a>
-          </td>
-        </tr>
-        <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
-          <td>
-            <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+@if (isDataLoaded) {
+  <div class="row">
+    <div class="cloumns medium-12 no-pad-left">
+      <h3>3D Structure</h3>
+      <div class="columns medium-8 no-pad-left">
+        @if (selectedXRef) {
+          <cp-litmol-viewer [selectedXRef]="selectedXRef"></cp-litmol-viewer>
+        }
+      </div>
+      <div class="columns medium-4">
+        <h4>Curated structures ({{crossReferences.length}}):</h4>
+        <table class="hover">
+          <tbody style="height: 400px; overflow-y: scroll;">
+            @for (crossReference of crossReferences | slice:0:displayedElements; track crossReference.identifier) {
+              <tr>
+                <td>
+                  <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
+                </td>
+                <td>
+                  <a href="{{crossReference.searchURL}}" target="_blank"><img src="assets/images/pdbe_min_logo.png"> <i
+                  class="icon icon-generic small" data-icon="x"></i></a>
+                </td>
+              </tr>
+            }
+            @if (displayedElements < crossReferences.length) {
+              <tr class="text-center" style="background: white">
+                <td>
+                  <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+}

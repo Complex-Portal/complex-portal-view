@@ -1,38 +1,50 @@
 <ul class="goToMenu dropdown menu float-right" data-disable-hover="true" data-click-open="true"
-    data-close-on-click-inside="true" data-dropdown-menu>
+  data-close-on-click-inside="true" data-dropdown-menu>
   <li>
     <a class="label" style="font-size: 1.1rem" (click)="doCheckSection()"><i class="icon icon-functional"
-                                                                             data-icon="M"></i>Go to</a>
+    data-icon="M"></i>Go to</a>
     <ul class="menu">
       <li>
-        <a (click)="scrollToElement('participants')"
-           [ngClass]="{'selected': isSelected('Participants')}"
-           *ngIf="sectionService.participantsSection">Components</a>
+        @if (sectionService.participantsSection) {
+          <a (click)="scrollToElement('participants')"
+            [ngClass]="{'selected': isSelected('Participants')}"
+          >Components</a>
+        }
       </li>
       <li>
-        <a (click)="scrollToElement('function')"
-           [ngClass]="{'selected': isSelected('Function')}"
-           *ngIf="sectionService.functionSection">Function</a>
+        @if (sectionService.functionSection) {
+          <a (click)="scrollToElement('function')"
+            [ngClass]="{'selected': isSelected('Function')}"
+          >Function</a>
+        }
       </li>
       <li>
-        <a (click)="scrollToElement('properties')"
-           [ngClass]="{'selected': isSelected('Properties')}"
-           *ngIf="sectionService.propertiesSection">Properties</a>
+        @if (sectionService.propertiesSection) {
+          <a (click)="scrollToElement('properties')"
+            [ngClass]="{'selected': isSelected('Properties')}"
+          >Properties</a>
+        }
       </li>
       <li>
-        <a (click)="scrollToElement('expression')"
-           [ngClass]="{'selected': isSelected('Expression and Cellular Location')}"
-           *ngIf="sectionService.expressionSection">Expression and Cellular Location</a>
+        @if (sectionService.expressionSection) {
+          <a (click)="scrollToElement('expression')"
+            [ngClass]="{'selected': isSelected('Expression and Cellular Location')}"
+          >Expression and Cellular Location</a>
+        }
       </li>
       <li>
-        <a (click)="scrollToElement('disease')"
-           [ngClass]="{'selected': isSelected('Diseases and Pathologies')}"
-           *ngIf="sectionService.diseaseSection">Diseases and Pathologies</a>
+        @if (sectionService.diseaseSection) {
+          <a (click)="scrollToElement('disease')"
+            [ngClass]="{'selected': isSelected('Diseases and Pathologies')}"
+          >Diseases and Pathologies</a>
+        }
       </li>
       <li>
-        <a (click)="scrollToElement('references')"
-           [ngClass]="{'selected': isSelected('Additional Information')}"
-           *ngIf="sectionService.namesSection">Additional Information</a>
+        @if (sectionService.namesSection) {
+          <a (click)="scrollToElement('references')"
+            [ngClass]="{'selected': isSelected('Additional Information')}"
+          >Additional Information</a>
+        }
       </li>
     </ul>
   </li>

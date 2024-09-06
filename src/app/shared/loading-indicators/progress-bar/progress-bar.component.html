@@ -1,5 +1,7 @@
-<mat-progress-bar *ngIf="isDisplayed"
-                 [color]="color"
-                 [mode]="mode">
-</mat-progress-bar>
+@if (isDisplayed) {
+  <mat-progress-bar
+    [color]="color"
+    [mode]="mode">
+  </mat-progress-bar>
+}
 

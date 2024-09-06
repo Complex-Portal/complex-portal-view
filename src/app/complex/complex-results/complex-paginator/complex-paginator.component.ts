@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-paginator',
@@ -8,7 +8,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input } from
 export class ComplexPaginatorComponent implements OnInit, OnChanges {
   private _lastPageIndex: number;
   private _currentPageIndex: number;
-  private _pagination: any;
+  pagination: { pageNumber: number; isCurrent: boolean }[] = [];
 
   onPageChange = output<number>();
 
@@ -46,11 +46,7 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
       }
     }
     while (start <= end) {
-      if (start === this._currentPageIndex) {
-        this._pagination.push([[this._currentPageIndex], [true]]);
-      } else {
-        this._pagination.push([[start], [false]]);
-      }
+      this.pagination.push({pageNumber: start, isCurrent: this._currentPageIndex === start});
       start++;
     }
   }
@@ -91,13 +87,5 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
   @Input()
   set currentPageIndex(value) {
     this._currentPageIndex = value;
-  }
-
-  get pagination() {
-    return this._pagination;
-  }
-
-  set pagination(value) {
-    this._pagination = value;
   }
 }

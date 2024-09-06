@@ -3,18 +3,22 @@
     <h3>GO - Cellular Component ({{crossReferences.length}})</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let crossReference of crossReferences | slice:0:displayedElements">
-        <td>
-          <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.description}}
-            <i class="icon icon-generic small" data-icon="x"></i></a>
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < crossReferences.length">
-        <td>
-          <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        @for (crossReference of crossReferences | slice:0:displayedElements; track crossReference.identifier) {
+          <tr>
+            <td>
+              <a href="{{crossReference.searchURL}}" target="_blank">{{crossReference.description}}
+                <i class="icon icon-generic small" data-icon="x"></i></a>
+              </td>
+            </tr>
+          }
+          @if (displayedElements < crossReferences.length) {
+            <tr class="text-center" style="background: white">
+              <td>
+                <a class="label" (click)="displayedElements = crossReferences.length">Show all</a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>

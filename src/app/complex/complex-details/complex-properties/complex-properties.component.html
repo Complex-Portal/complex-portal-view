@@ -1,25 +1,39 @@
 <div class="row no-pad-left">
-  <div class="columns medium-12 no-pad-left" *ngIf="propertiesDescription || pdbXRefs || emdbXRefs">
-    <h2 class="float-left">Properties</h2>
-    <cp-go-to class="float-right" [sectionName]="'Properties'"></cp-go-to>
-    <div id="description" class="columns medium-12 no-pad-left" *ngIf="propertiesDescription">
-      {{propertiesDescription}}
+  @if (propertiesDescription || pdbXRefs || emdbXRefs) {
+    <div class="columns medium-12 no-pad-left">
+      <h2 class="float-left">Properties</h2>
+      <cp-go-to class="float-right" [sectionName]="'Properties'"></cp-go-to>
+      @if (propertiesDescription) {
+        <div id="description" class="columns medium-12 no-pad-left">
+          {{propertiesDescription}}
+        </div>
+      }
+      @if (comments  && comments.length !== 0) {
+        <div id="comment" class="columns medium-12 no-pad-left">
+          <h3>Comments</h3>
+          @for (comment of comments; track comment) {
+            <ul class="no-bullet">
+              <li>{{comment}}</li>
+            </ul>
+          }
+        </div>
+      }
+      @if (assemblies && assemblies.length !== 0) {
+        <div id="assemblies" class="columns medium-12 no-pad-left">
+          <cp-assemblies [assemblies]="assemblies"></cp-assemblies>
+        </div>
+      }
+      @if (pdbXRefs) {
+        <div id="pdbXRefs" class="columns medium-12 no-pad-left">
+          <cp-pdb-crossreferences [crossReferences]="pdbXRefs"></cp-pdb-crossreferences>
+        </div>
+      }
+      @if (emdbXRefs) {
+        <div id="emdbXRefs" class="columns medium-12 no-pad-left">
+          <cp-emdb-crossreferences [crossReferences]="emdbXRefs"></cp-emdb-crossreferences>
+        </div>
+      }
     </div>
-    <div id="comment" class="columns medium-12 no-pad-left" *ngIf="comments  && comments.length !== 0">
-      <h3>Comments</h3>
-      <ul class="no-bullet" *ngFor="let comment of comments">
-        <li>{{comment}}</li>
-      </ul>
-    </div>
-    <div id="assemblies" class="columns medium-12 no-pad-left" *ngIf="assemblies && assemblies.length !== 0">
-      <cp-assemblies [assemblies]="assemblies"></cp-assemblies>
-    </div>
-    <div id="pdbXRefs" class="columns medium-12 no-pad-left" *ngIf="pdbXRefs">
-      <cp-pdb-crossreferences [crossReferences]="pdbXRefs"></cp-pdb-crossreferences>
-    </div>
-    <div id="emdbXRefs" class="columns medium-12 no-pad-left" *ngIf="emdbXRefs">
-      <cp-emdb-crossreferences [crossReferences]="emdbXRefs"></cp-emdb-crossreferences>
-    </div>
-  </div>
+  }
 </div>
 

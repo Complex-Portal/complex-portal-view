@@ -3,16 +3,20 @@
     <h3>Antagonists ({{antagonists.length}})</h3>
     <table class="hover">
       <tbody>
-      <tr *ngFor="let antagonist of antagonists | slice:0:displayedElements">
-        <td>
-          {{antagonist}}
-        </td>
-      </tr>
-      <tr class="text-center" style="background: white" *ngIf="displayedElements < antagonists.length">
-        <td>
-          <a class="label" (click)="displayedElements = antagonists.length">Show all</a>
-        </td>
-      </tr>
+        @for (antagonist of antagonists | slice:0:displayedElements; track antagonist) {
+          <tr>
+            <td>
+              {{antagonist}}
+            </td>
+          </tr>
+        }
+        @if (displayedElements < antagonists.length) {
+          <tr class="text-center" style="background: white">
+            <td>
+              <a class="label" (click)="displayedElements = antagonists.length">Show all</a>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
