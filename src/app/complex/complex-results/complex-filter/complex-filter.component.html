@@ -16,9 +16,10 @@
             <li [class.predicted]="facet.name === 'true'">
               <label>
                 <input type="checkbox" #filter value="{{facet.name}}"
-                  (change)="changePredictedFilter(filter.value, filter.checked)"
-                  [checked]="isSelected(facet.name, predictedFilter())">
-                <span class="tag">{{ formatPredictedFacetValue(facet.name) }}</span><span class="count">{{ facet.count }}</span>
+                       (change)="changePredictedFilter(filter.value, filter.checked)"
+                       [checked]="isSelected(facet.name, predictedFilter())">
+                <span class="tag">{{ formatPredictedFacetValue(facet.name) }}</span><span
+                class="count">{{ facet.count }}</span>
               </label>
             </li>
           }
@@ -29,23 +30,22 @@
     @if (facets().confidence_score_f) {
       <div>
         <b>Confidence Score</b>
-        <ul class="no-bullet">
-          @for (facet of facets().confidence_score_f; track facet.name) {
-            <li [class.predicted]="facet.name === '1' || facet.name === '2'">
-              <label>
-                <input type="checkbox" #filter value="{{facet.name}}"
-                  (change)="changeConfidenceScoreFilter(filter.value, filter.checked)"
-                  [checked]="isSelected(facet.name, confidenceScoreFilter())">
-                <span class="stars">
-                  @for (star of getStars(facet.name); let i = $index; track i) {
-                    <i class="icon icon-common icon-star" [ngClass]="star"></i>
-                  }
-                </span>
-                <span class="count">{{ facet.count }}</span>
-              </label>
-            </li>
+        <div class="stars" [style.width.px]="confidenceWidth()">
+          @for (confidence of confidences(); let i = $index; track i) {
+            <div class="star-container" [class.predicted]="confidence.value <= 2"
+                 [matTooltip]="confidence.count.toString()">
+              <div class="block" [style.height.px]="confidence.height" [class.null]="confidence.count === 0"></div>
+              <i class="icon icon-common icon-star full"></i>
+            </div>
           }
-        </ul>
+        </div>
+        <div [style.margin-top.px]=" 0" class="custom-slider">
+          <mat-slider [max]="5" [min]="1" [step]="1" [showTickMarks]="true" style="transform: rotate(180deg)"
+                      [style.width.px]="confidenceWidth() - 15">
+            <input matSliderThumb [value]="6 - minConfidence()" (valueChange)="minConfidence.set(6 - $event)">
+          </mat-slider>
+          <span class="count" [class.checked]="minConfidence() !== 1">{{ totalCount() }}</span>
+        </div>
       </div>
     }
 
@@ -57,12 +57,12 @@
             <li>
               <label [matTooltip]="facet.name">
                 <input type="checkbox" #filter value="{{facet.name}}"
-                  (change)="changeSpeciesFilter(filter.value, filter.checked)"
-                  [checked]="isSelected(facet.name, speciesFilter())">
+                       (change)="changeSpeciesFilter(filter.value, filter.checked)"
+                       [checked]="isSelected(facet.name, speciesFilter())">
                 <span>
                   @if (facetOrganismIcon(facet.name).startsWith('icon')) {
                     <i
-                    [ngClass]="facetOrganismIcon(facet.name)" style="font-size: large;"></i>
+                      [ngClass]="facetOrganismIcon(facet.name)" style="font-size: large;"></i>
                   } @else {
                     <img [src]="facetOrganismIcon(facet.name)" alt="" width="18px" height="18px"/>
                   }
@@ -83,8 +83,8 @@
             <li>
               <label>
                 <input type="checkbox" #filter value="{{facet.name}}"
-                  (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"
-                  [checked]="isSelected(facet.name, bioRoleFilter())">
+                       (change)="changeBiologicalRoleFilter(filter.value, filter.checked)"
+                       [checked]="isSelected(facet.name, bioRoleFilter())">
                 {{ facet.name }} <span class="count">{{ facet.count }}</span>
               </label>
             </li>
@@ -101,9 +101,9 @@
             <li>
               <label>
                 <input type="checkbox" #filter value="{{facet.name}}"
-                  (change)="changeInteractorTypeFilter(filter.value, filter.checked)"
-                  [checked]="isSelected(facet.name, interactorTypeFilter())">
-                <span >
+                       (change)="changeInteractorTypeFilter(filter.value, filter.checked)"
+                       [checked]="isSelected(facet.name, interactorTypeFilter())">
+                <span>
                   <i [ngClass]="facetTypeIcon(facet.name)" style="font-size: large;"></i>
                 </span>
                 {{ facet.name }} <span class="count">{{ facet.count }}</span>

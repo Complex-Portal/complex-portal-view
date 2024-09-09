@@ -81,7 +81,7 @@ export class ComplexPortalService {
                        currentPageIndex = 1,
                        pageSize = 10,
                        format = 'json'): Observable<ComplexSearchResult> {
-    return this.findComplex(query, [], [], [], [], [], currentPageIndex, pageSize, format);
+    return this.findComplex(query, [], [], [], [], 1, currentPageIndex, pageSize, format);
   }
 
   /**
@@ -102,7 +102,7 @@ export class ComplexPortalService {
               bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [],
               predictedFilter: string[] = [],
-              confidenceScoreFilter: string[] = [],
+              confidenceScoreFilter = 1,
               currentPageIndex = 1,
               pageSize = 10,
               format = 'json'): Observable<ComplexSearchResult> {
@@ -120,8 +120,11 @@ export class ComplexPortalService {
     if (predictedFilter.length !== 0) {
       filters += this.buildFilterParam(ComplexPortalService.PREDICTED_FACET_FIELD, predictedFilter);
     }
-    if (confidenceScoreFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD, confidenceScoreFilter);
+    if (confidenceScoreFilter !== 1) {
+      filters += this.buildFilterParam(
+        ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD,
+        range(confidenceScoreFilter, 6).map(c => c.toString())
+      );
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
@@ -152,4 +155,27 @@ export class ComplexPortalService {
     return this.http.get(`${baseURL}/complex-simplified/${complexAc}`).pipe(catchError(this.handleError));
   }
 
+}
+
+function range(start: number, stop?: number, step = 1): number[] {
+  const result: number[] = [];
+
+  // If only one argument is provided, treat it as the stop value and set start to 0
+  if (stop === undefined) {
+    stop = start;
+    start = 0;
+  }
+
+  // Ensure the loop terminates correctly based on positive/negative step values
+  if (step > 0) {
+    for (let i = start; i < stop; i += step) {
+      result.push(i);
+    }
+  } else if (step < 0) {
+    for (let i = start; i > stop; i += step) {
+      result.push(i);
+    }
+  }
+
+  return result;
 }

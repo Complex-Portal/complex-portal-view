@@ -28,7 +28,8 @@ label {
   border: 1px solid black;
 }
 
-input:checked ~ .count {
+input:checked ~ .count,
+.count.checked {
   background: var(--primary);
   color: var(--on-primary);
   font-weight: bold;
@@ -36,13 +37,12 @@ input:checked ~ .count {
 }
 
 .stars {
-  /*display: flex;*/
-  gap: 4px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1px;
+  align-items: flex-end;
 }
 
-.stars .icon {
-  font-size: 12pt;
-}
 .empty {
   color: lightgray;
 }
@@ -51,4 +51,28 @@ input:checked ~ .count {
   color: var(--primary);
   -webkit-text-stroke: 1px var(--on-primary);
   text-shadow: 0 0 4px var(--primary);
+}
+
+.star-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  .block {
+    background-color: var(--primary);
+    width: 23px;
+    border-radius: 4px 4px 0 0;
+
+    &.null {
+      visibility: hidden;
+    }
+  }
+
+  .icon {
+    font-size: 12pt;
+    position: relative;
+    top: -11px;
+    height: 0;
+  }
 }

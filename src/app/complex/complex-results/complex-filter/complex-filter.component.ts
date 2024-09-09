@@ -1,12 +1,14 @@
-import {Component, OnInit, output, input } from '@angular/core';
+import {Component, computed, input, model, OnInit, output, ViewEncapsulation} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
+import {Options} from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'cp-complex-filter',
   templateUrl: './complex-filter.component.html',
-  styleUrls: ['./complex-filter.component.css']
+  styleUrls: ['./complex-filter.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ComplexFilterComponent implements OnInit {
 
@@ -15,14 +17,46 @@ export class ComplexFilterComponent implements OnInit {
   bioRoleFilter = input<string[]>();
   interactorTypeFilter = input<string[]>();
   predictedFilter = input<string[]>();
-  confidenceScoreFilter = input<string[]>();
 
   onSpeciesFilterChanged = output<string[]>();
   onBiologicalRoleFilterChanged = output<string[]>();
   onInteractorTypeFilterChanged = output<string[]>();
   onPredictedFilterChanged = output<string[]>();
-  onConfidenceScoreFilterChanged = output<string[]>();
   onResetAllFilters = output<boolean>();
+
+  options: Options = {
+    floor: 1,
+    ceil: 5,
+    showTicks: true,
+    showTicksValues: false,
+    showSelectionBarEnd: true,
+    hideLimitLabels: true,
+    hidePointerLabels: true,
+  };
+
+  confidenceHeight = input<number>(64);
+  confidenceWidth = input<number>(128);
+  minConfidence = model<number>(1);
+  maxConfidenceCount = computed(() =>
+    this.facets().confidence_score_f
+      .map(facet => facet.count)
+      .reduce((max, v) => v > max ? v : max)
+  );
+  confidences = computed(() => {
+      const confidences: { value: number, count: number, height: number }[] = new Array(5).fill(0).map((e, i) => ({
+        value: i + 1,
+        count: 0,
+        height: 0
+      }));
+      this.facets().confidence_score_f.forEach(f => {
+        const confidence = confidences[parseInt(f.name, 10) - 1];
+        confidence.count = f.count;
+        confidence.height = (this.confidenceHeight() * f.count / this.maxConfidenceCount());
+      });
+      return confidences;
+    }
+  );
+  totalCount = computed(() => this.confidences().slice(this.minConfidence() - 1).reduce((a, b) => a + b.count, 0));
 
   constructor(private googleAnalyticsService: AnalyticsService) {
   }
@@ -89,32 +123,18 @@ export class ComplexFilterComponent implements OnInit {
     this.onPredictedFilterChanged.emit(this.predictedFilter());
   }
 
-  public changeConfidenceScoreFilter(filter: string, status: boolean) {
-    if (status) {
-      this.confidenceScoreFilter().push(filter);
-      this.googleAnalyticsService.fireAddedFilterEvent(filter);
-    } else {
-      this.confidenceScoreFilter().splice(this.confidenceScoreFilter().indexOf(filter), 1);
-      this.googleAnalyticsService.fireRemovedFilterEvent(filter);
-    }
-    this.onConfidenceScoreFilterChanged.emit(this.confidenceScoreFilter());
-  }
-
   /**
    * Emit event to parent component to remove all filters
    */
   public resetAllFilters() {
+    this.minConfidence.set(1);
     this.onResetAllFilters.emit(true);
   }
 
-  /**
-   *
-   * @returns {boolean} true is any filter array contains an filter
-   */
-  public anyFiltersSelected() {
-    return this.speciesFilter().length !== 0 || this.bioRoleFilter().length !== 0 || this.interactorTypeFilter().length !== 0 ||
-      this.predictedFilter().length !== 0 || this.confidenceScoreFilter().length !== 0;
-  }
+  anyFiltersSelected = computed(() =>
+    this.speciesFilter().length !== 0 || this.bioRoleFilter().length !== 0 ||
+    this.interactorTypeFilter().length !== 0 || this.predictedFilter().length !== 0 ||
+    this.minConfidence() !== 1);
 
   /**
    *
@@ -155,3 +175,4 @@ export class ComplexFilterComponent implements OnInit {
     return stars;
   }
 }
+

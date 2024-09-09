@@ -17,14 +17,14 @@
                 [bioRoleFilter]="filters.bioRole"
                 [interactorTypeFilter]="filters.interactorType"
                 [predictedFilter]="filters.predicted"
-                [confidenceScoreFilter]="filters.confidenceScore"
                 [facets]="complexSearch.facets"
+                [minConfidence]="confidenceFilter"
                 (onResetAllFilters)="onResetAllFilters()"
                 (onSpeciesFilterChanged)="onSpeciesFilterChanged($event)"
                 (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
                 (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)"
                 (onPredictedFilterChanged)="onPredictedFilterChanged($event)"
-                (onConfidenceScoreFilterChanged)="onConfidenceScoreFilterChanged($event)">
+                (minConfidenceChange)="onConfidenceScoreFilterChanged($event)">
               </cp-complex-filter>
             }
           </div>

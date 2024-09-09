@@ -27,8 +27,9 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     bioRole: [],
     interactorType: [],
     predicted: [],
-    confidenceScore: [],
   };
+
+  confidenceFilter = 1;
 
   private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
@@ -58,6 +59,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     ).subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
+      this.confidenceFilter = Number(queryParams['score']);
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -72,7 +74,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   private requestComplexResults() {
     this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole,
-      this.filters.interactorType, this.filters.predicted, this.filters.confidenceScore,
+      this.filters.interactorType, this.filters.predicted, this.confidenceFilter,
       this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       this.processSearchResults();
@@ -98,6 +100,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
+    queryParams['score'] = this.confidenceFilter;
 
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
 
@@ -167,8 +170,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  public onConfidenceScoreFilterChanged(filter: string[]): void {
-    this.filters.confidenceScore = filter;
+  public onConfidenceScoreFilterChanged(min: number): void {
+    this.confidenceFilter = min;
     this.currentPageIndex = 1;
     this.reloadPage();
   }
