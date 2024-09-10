@@ -1,14 +1,19 @@
-import {Component, computed, input, model, OnInit, output, ViewEncapsulation} from '@angular/core';
+import {Component, computed, input, model, OnInit, output} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
-import {Options} from '@angular-slider/ngx-slider';
+
+interface Confidence {
+  value: number;
+  count: number;
+  label: string;
+  stars: string[];
+}
 
 @Component({
   selector: 'cp-complex-filter',
   templateUrl: './complex-filter.component.html',
-  styleUrls: ['./complex-filter.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./complex-filter.component.css']
 })
 export class ComplexFilterComponent implements OnInit {
 
@@ -24,39 +29,23 @@ export class ComplexFilterComponent implements OnInit {
   onPredictedFilterChanged = output<string[]>();
   onResetAllFilters = output<boolean>();
 
-  options: Options = {
-    floor: 1,
-    ceil: 5,
-    showTicks: true,
-    showTicksValues: false,
-    showSelectionBarEnd: true,
-    hideLimitLabels: true,
-    hidePointerLabels: true,
-  };
-
-  confidenceHeight = input<number>(64);
-  confidenceWidth = input<number>(128);
+  confidenceGap = input<number>(2);
   minConfidence = model<number>(1);
-  maxConfidenceCount = computed(() =>
-    this.facets().confidence_score_f
-      .map(facet => facet.count)
-      .reduce((max, v) => v > max ? v : max)
-  );
   confidences = computed(() => {
-      const confidences: { value: number, count: number, height: number }[] = new Array(5).fill(0).map((e, i) => ({
+      const confidences: Confidence[] = new Array(5).fill(0).map((e, i) => ({
         value: i + 1,
         count: 0,
-        height: 0
+        label: `${i + 1} star${i > 0 ? 's' : ''}`,
+        stars: this._getStars(i + 1)
       }));
       this.facets().confidence_score_f.forEach(f => {
         const confidence = confidences[parseInt(f.name, 10) - 1];
         confidence.count = f.count;
-        confidence.height = (this.confidenceHeight() * f.count / this.maxConfidenceCount());
       });
       return confidences;
     }
   );
-  totalCount = computed(() => this.confidences().slice(this.minConfidence() - 1).reduce((a, b) => a + b.count, 0));
+  reversedConfidence = computed(() => [...this.confidences()].reverse());
 
   constructor(private googleAnalyticsService: AnalyticsService) {
   }
@@ -162,9 +151,6 @@ export class ComplexFilterComponent implements OnInit {
     }
   }
 
-  public getStars(amount: string): ('empty' | 'full')[] {
-    return this._getStars(Number(amount));
-  }
 
   private _getStars(amount: number): ('empty' | 'full')[] {
     const stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];

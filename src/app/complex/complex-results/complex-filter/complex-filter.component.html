@@ -30,21 +30,25 @@
     @if (facets().confidence_score_f) {
       <div>
         <b>Confidence Score</b>
-        <div class="stars" [style.width.px]="confidenceWidth()">
-          @for (confidence of confidences(); let i = $index; track i) {
-            <div class="star-container" [class.predicted]="confidence.value <= 2"
-                 [matTooltip]="confidence.count.toString()">
-              <div class="block" [style.height.px]="confidence.height" [class.null]="confidence.count === 0"></div>
-              <i class="icon icon-common icon-star full"></i>
-            </div>
-          }
-        </div>
-        <div [style.margin-top.px]=" 0" class="custom-slider">
-          <mat-slider [max]="5" [min]="1" [step]="1" [showTickMarks]="true" style="transform: rotate(180deg)"
-                      [style.width.px]="confidenceWidth() - 15">
-            <input matSliderThumb [value]="6 - minConfidence()" (valueChange)="minConfidence.set(6 - $event)">
-          </mat-slider>
-          <span class="count" [class.checked]="minConfidence() !== 1">{{ totalCount() }}</span>
+        <div class="confidence-container">
+          <div class="slider-container" #sliderContainer>
+            <!-- -18 for knob size -->
+            <mat-slider [min]="1" [max]="5" [showTickMarks]="true" [style.width.px]="sliderContainer.clientHeight - 18">
+              <input matSliderThumb [value]="6 - minConfidence()" (valueChange)="minConfidence.set(6 - $event)">
+            </mat-slider>
+          </div>
+          <div class="stars" [style.gap.px]="confidenceGap()">
+            @for (confidence of reversedConfidence(); track confidence.value) {
+              <div class="star-container" [class.predicted]="confidence.value <= 2" [matTooltip]="confidence.label"
+                   [style.gap.px]="confidenceGap()" (click)="minConfidence.set(confidence.value)">
+                @for (star of confidence.stars; track $index) {
+                  <i class="icon icon-common icon-star" [ngClass]="star"></i>
+                }
+                <span class="count margin-left-small"
+                      [class.checked]="confidence.value >= minConfidence()">{{ confidence.count }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
     }
