@@ -97,6 +97,7 @@ export class TableStructureComponent {
     let currentIdx = tf.argMax(sm.sum(0)).arraySync() as number;  // Start with complex with most similarities
     idx.push(currentIdx);
 
+    const currentCluster: Set<number> = new Set<number>();
     for (let i = 1; i < sm.shape[0]; i++) {
       // Mask already selected indices
       const buffer = sm.bufferSync();
@@ -108,13 +109,23 @@ export class TableStructureComponent {
       // Find the closest complex to last selected
       const sm_i = sm.gather([currentIdx]).arraySync()[0] as number[];
       currentIdx = tf.argMax(sm_i).arraySync() as number;
-
+      sm_i.forEach((similarity, i) => {
+          if (similarity > 0) {
+            currentCluster.add(i);
+          }
+        }
+      );
       // If no similar entities (cluster ends), take the next complex with most similarities
       if (sm_i[currentIdx] === 0) {
-        currentIdx = tf.argMax(sm.sum(0)).arraySync() as number;
+        if (currentCluster.size !== 0) {
+          currentIdx = currentCluster.values().next().value; // Pick another one from the cluster
+        } else {
+          currentIdx = tf.argMax(sm.sum(0)).arraySync() as number; // If cluster is empty, take the next biggest cluster seed
+        }
       }
 
       idx.push(currentIdx);
+      currentCluster.delete(currentIdx);
     }
     return idx;
   }
