@@ -40,17 +40,20 @@ export class TableStructureComponent {
 
   private getComponents(complex: Element): Set<string> {
     if (!complex.componentAcs) {
-      complex.componentAcs = new Set<string>(this.getAllComponents(complex).map(component => component.identifier));
+      complex.componentAcs = new Set<string>(this.getAllComponents(complex, [], true).map(component => component.identifier));
     }
     return complex.componentAcs;
   }
 
-  private getAllComponents(complex?: Element, components: ComplexComponent[] = []): ComplexComponent[] {
+  private getAllComponents(complex?: Element, components: ComplexComponent[] = [], includeComplexes = false): ComplexComponent[] {
     for (const component of complex.interactors) {
       if (component.interactorType === 'stable complex') {
         const subComplex = this.getComponentAsComplex(component);
         if (subComplex) {
           components.push(...this.getAllComponents(subComplex));
+          if (includeComplexes) {
+            components.push(component);
+          }
         } else {
           components.push(component);
         }
