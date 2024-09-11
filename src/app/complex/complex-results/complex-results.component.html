@@ -13,18 +13,14 @@
           <div class="columns medium-12 large-2 no-padding">
             @if (filters) {
               <cp-complex-filter
-                [speciesFilter]="filters.species"
-                [bioRoleFilter]="filters.bioRole"
-                [interactorTypeFilter]="filters.interactorType"
-                [predictedFilter]="filters.predicted"
+                [(speciesFilter)]="filters.species"
+                [(bioRoleFilter)]="filters.bioRole"
+                [(interactorTypeFilter)]="filters.interactorType"
+                [(predictedFilter)]="filters.predicted"
+                [(minConfidence)]="confidenceFilter"
                 [facets]="complexSearch.facets"
-                [minConfidence]="confidenceFilter"
-                (onResetAllFilters)="onResetAllFilters()"
-                (onSpeciesFilterChanged)="onSpeciesFilterChanged($event)"
-                (onBiologicalRoleFilterChanged)="onBiologicalRoleFilterChanged($event)"
-                (onInteractorTypeFilterChanged)="onInteractorTypeFilterChanged($event)"
-                (onPredictedFilterChanged)="onPredictedFilterChanged($event)"
-                (minConfidenceChange)="onConfidenceScoreFilterChanged($event)">
+                (anyChange)="onAnyChange()"
+                (onResetAllFilters)="onResetAllFilters()">
               </cp-complex-filter>
             }
           </div>

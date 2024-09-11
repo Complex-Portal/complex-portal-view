@@ -131,6 +131,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     return Object.values(this.filters).reduce((total, f) => total + f.length, 0);
   }
 
+  public onAnyChange() {
+    this.currentPageIndex = 1;
+    this.reloadPage();
+  }
+
   /**
    *
    * @param pageIndex new page index after hitting the paginator to update the URL and reload content
@@ -142,36 +147,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   public onResetAllFilters(): void {
     Object.keys(this.filters).forEach(f => this.filters[f] = []);
-    this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onSpeciesFilterChanged(filter: string[]): void {
-    this.filters.species = filter;
-    this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onBiologicalRoleFilterChanged(filter: string[]): void {
-    this.filters.bioRole = filter;
-    this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onInteractorTypeFilterChanged(filter: string[]): void {
-    this.filters.interactorType = filter;
-    this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onPredictedFilterChanged(filter: string[]): void {
-    this.filters.predicted = filter;
-    this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onConfidenceScoreFilterChanged(min: number): void {
-    this.confidenceFilter = min;
+    this.confidenceFilter = 1;
     this.currentPageIndex = 1;
     this.reloadPage();
   }

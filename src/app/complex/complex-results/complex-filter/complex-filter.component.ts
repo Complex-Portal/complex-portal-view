@@ -1,4 +1,4 @@
-import {Component, computed, input, model, OnInit, output} from '@angular/core';
+import {Component, computed, input, model, OnInit, output, OutputRef} from '@angular/core';
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
@@ -18,19 +18,31 @@ interface Confidence {
 export class ComplexFilterComponent implements OnInit {
 
   facets = input<Facets>();
+
+  minConfidence = model<number>(1);
+
   speciesFilter = input<string[]>();
   bioRoleFilter = input<string[]>();
   interactorTypeFilter = input<string[]>();
   predictedFilter = input<string[]>();
 
-  onSpeciesFilterChanged = output<string[]>();
-  onBiologicalRoleFilterChanged = output<string[]>();
-  onInteractorTypeFilterChanged = output<string[]>();
-  onPredictedFilterChanged = output<string[]>();
+  speciesFilterChange = output<string[]>();
+  bioRoleFilterChange = output<string[]>();
+  interactorTypeFilterChange = output<string[]>();
+  predictedFilterChange = output<string[]>();
+
+  _allChanges: OutputRef<any>[] = [
+    this.speciesFilterChange,
+    this.bioRoleFilterChange,
+    this.interactorTypeFilterChange,
+    this.predictedFilterChange,
+    this.minConfidence
+  ];
+  anyChange = output<void>();
+
   onResetAllFilters = output<boolean>();
 
   confidenceGap = input<number>(2);
-  minConfidence = model<number>(1);
   confidences = computed(() => {
       const confidences: Confidence[] = new Array(5).fill(0).map((e, i) => ({
         value: i + 1,
@@ -48,6 +60,7 @@ export class ComplexFilterComponent implements OnInit {
   reversedConfidence = computed(() => [...this.confidences()].reverse());
 
   constructor(private googleAnalyticsService: AnalyticsService) {
+    this._allChanges.forEach(change => change.subscribe(() => setTimeout(() => this.anyChange.emit())));
   }
 
   ngOnInit() {
@@ -66,7 +79,7 @@ export class ComplexFilterComponent implements OnInit {
       this.speciesFilter().splice(this.speciesFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onSpeciesFilterChanged.emit(this.speciesFilter());
+    this.speciesFilterChange.emit(this.speciesFilter());
   }
 
   /**
@@ -82,7 +95,7 @@ export class ComplexFilterComponent implements OnInit {
       this.bioRoleFilter().splice(this.bioRoleFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onBiologicalRoleFilterChanged.emit(this.bioRoleFilter());
+    this.bioRoleFilterChange.emit(this.bioRoleFilter());
   }
 
   /**
@@ -98,7 +111,7 @@ export class ComplexFilterComponent implements OnInit {
       this.interactorTypeFilter().splice(this.interactorTypeFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onInteractorTypeFilterChanged.emit(this.interactorTypeFilter());
+    this.interactorTypeFilterChange.emit(this.interactorTypeFilter());
   }
 
   public changePredictedFilter(filter: string, status: boolean) {
@@ -109,7 +122,7 @@ export class ComplexFilterComponent implements OnInit {
       this.predictedFilter().splice(this.predictedFilter().indexOf(filter), 1);
       this.googleAnalyticsService.fireRemovedFilterEvent(filter);
     }
-    this.onPredictedFilterChanged.emit(this.predictedFilter());
+    this.predictedFilterChange.emit(this.predictedFilter());
   }
 
   /**
