@@ -120,11 +120,8 @@ export class ComplexPortalService {
     if (predictedFilter.length !== 0) {
       filters += this.buildFilterParam(ComplexPortalService.PREDICTED_FACET_FIELD, predictedFilter);
     }
-    if (confidenceScoreFilter !== 1) {
-      filters += this.buildFilterParam(
-        ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD,
-        range(confidenceScoreFilter, 6).map(c => c.toString())
-      );
+    if (!isNaN(confidenceScoreFilter) && confidenceScoreFilter !== 1) {
+      filters += this.buildFilterParam(ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD, [confidenceScoreFilter.toString()]);
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
