@@ -126,7 +126,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
     this.complexSearchBasket = {
       size: this.complexSearchBasket.size - 1,
       totalNumberOfResults: this.complexSearchBasket.totalNumberOfResults - 1,
-      elements: this.complexSearchBasket.elements.filter(complex => complex.complexAC === complexId),
+      elements: this.complexSearchBasket.elements.filter(complex => complex.complexAC !== complexId),
       facets: null,
     };
     this.setAllInteractorsFromComplexSearch();
