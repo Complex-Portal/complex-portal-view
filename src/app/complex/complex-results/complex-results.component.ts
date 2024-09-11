@@ -59,7 +59,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     ).subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
-      this.confidenceFilter = Number(queryParams['minConfidence']);
+      this.confidenceFilter = queryParams['minConfidence'] ? Number(queryParams['minConfidence']) : 1;
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
