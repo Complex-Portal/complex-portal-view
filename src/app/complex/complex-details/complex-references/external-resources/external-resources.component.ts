@@ -24,4 +24,8 @@ export class ExternalResourcesComponent implements OnInit {
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
   }
+
+  humapUrl(xref: CrossReference): string {
+    return 'https://humap3.proteincomplexes.org/displayComplexes?complex_key=' + xref.identifier;
+  }
 }
