@@ -63,7 +63,7 @@
               </a>
             </th>
           }
-          <div class="spaceHolder"></div>
+          <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
         </tr>
         <!-- icons row -->
         <tr [style.--cols]="complexes().length"
@@ -91,7 +91,7 @@
               </div>
             </th>
           }
-          <div class="spaceHolder"></div>
+          <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
         </tr>
       </thead>
     }

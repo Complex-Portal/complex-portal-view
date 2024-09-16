@@ -17,6 +17,10 @@ export class TableHeaderComponent {
   constructor(private basketService: BasketService) {
   }
 
+  anyPredictedComplex(): boolean {
+    return this.complexes().some(c => c.predictedComplex);
+  }
+
   isInteractorSortingSet() {
     return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
   }
