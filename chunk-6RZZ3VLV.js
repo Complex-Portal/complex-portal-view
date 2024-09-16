@@ -1,4 +1,4 @@
-import{D as at,E as zt,F as Dt,a as tt,b as ht,c as X,f as wt,g as _t,h as c,v as kt,z as N}from"./chunk-TWH4PXCF.js";import{$ as s,$a as st,Ea as dt,Eb as gt,Fa as h,Ha as k,Ib as xt,Jb as yt,La as Q,U as ct,V as J,W as u,X as g,_a as x,a as it,aa as l,ab as lt,b as mt,bb as w,cb as z,da as y,db as _,fb as pt,gb as ut,h as v,ha as i,ka as m,kb as n,oa as p,ob as ft,ub as vt}from"./chunk-EWXTXBCX.js";var Ct=`@if (organism.symbol) {
+import{D as at,E as zt,F as Dt,a as tt,b as ht,c as X,f as wt,g as _t,h as c,v as kt,z as N}from"./chunk-Q5V7UDJA.js";import{$ as s,$a as st,Ea as dt,Eb as gt,Fa as h,Ha as k,Ib as xt,Jb as yt,La as Q,U as ct,V as J,W as u,X as g,_a as x,a as it,aa as l,ab as lt,b as mt,bb as w,cb as z,da as y,db as _,fb as pt,gb as ut,h as v,ha as i,ka as m,kb as n,oa as p,ob as ft,ub as vt}from"./chunk-EWXTXBCX.js";var Ct=`@if (organism.symbol) {
   <div class="card">
     <div class="medium-12">
       <b>{{organism.scientificName}}</b><br>

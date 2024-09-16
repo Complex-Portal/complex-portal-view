@@ -1,4 +1,4 @@
-import{a as c,d as b}from"./chunk-RYYPRKG2.js";import"./chunk-UXQDEOE3.js";import"./chunk-2PCX5SGK.js";import{p as g}from"./chunk-VSKUC4HM.js";import{F as S,b as v,g as C}from"./chunk-TWH4PXCF.js";import"./chunk-4X7QSTOA.js";import{Eb as f,Fa as d,G as h,Hb as k,Ib as B,Jb as y,La as u,h as r,ub as x}from"./chunk-EWXTXBCX.js";var _=`<div class="margin-top-large margin-bottom-large">
+import{a as c,d as b}from"./chunk-5EWXVY4P.js";import"./chunk-UXQDEOE3.js";import"./chunk-CFGCRJR4.js";import{p as g}from"./chunk-XRPTPPZZ.js";import{F as S,b as v,g as C}from"./chunk-Q5V7UDJA.js";import"./chunk-ZPRBRQSS.js";import{Eb as f,Fa as d,G as h,Hb as k,Ib as B,Jb as y,La as u,h as r,ub as x}from"./chunk-EWXTXBCX.js";var _=`<div class="margin-top-large margin-bottom-large">
   @if (!isComplexBasketEmpty()) {
     <div class="columns medium-12">
       <h2>Personal collection of favourite complexes
