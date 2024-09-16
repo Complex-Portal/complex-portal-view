@@ -12,7 +12,7 @@
       <div>
         <b>Complex Type</b>
         <ul class="no-bullet">
-          @for (facet of facets().predicted_complex_f; track facet.name) {
+          @for (facet of sortedPredictedComplexFacets(); track facet.name) {
             <li [class.predicted]="facet.name === 'true'">
               <label>
                 <input type="checkbox" #filter value="{{facet.name}}"

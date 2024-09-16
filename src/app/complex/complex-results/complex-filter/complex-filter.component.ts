@@ -2,6 +2,7 @@ import {Component, computed, input, model, OnInit, output, OutputRef} from '@ang
 import {Facets} from '../../shared/model/complex-results/facets.model';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {interactorTypeIcon, organismIcon} from '../../complex-portal-utils';
+import {Facet} from '../../shared/model/complex-results/facet.model';
 
 interface Confidence {
   value: number;
@@ -156,6 +157,10 @@ export class ComplexFilterComponent implements OnInit {
     return organismIcon(facet);
   }
 
+  sortedPredictedComplexFacets(): Facet[] {
+    return this.facets().predicted_complex_f.sort((a, _) => a.name === 'true' ? 1 : -1);
+  }
+
   formatPredictedFacetValue(facetName: string): string {
     if (facetName === 'true') {
       return 'Predicted complex';
@@ -163,7 +168,6 @@ export class ComplexFilterComponent implements OnInit {
       return 'Curated complex';
     }
   }
-
 
   private _getStars(amount: number): ('empty' | 'full')[] {
     const stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
