@@ -13,16 +13,20 @@ import {ComplexModule} from '../complex.module';
 import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
 import {TruncatePipe} from '../../shared/truncate/truncate.pipe';
 import {SpeciesPipe} from '../shared/pipe/species.pipe';
+import {MatSlider, MatSliderRangeThumb, MatSliderThumb} from '@angular/material/slider';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
-    imports: [RouterModule.forChild([
-        {path: '', component: ComplexResultsComponent},
-    ]),
-        CommonModule,
-        ProgressSpinnerComponent, MarkdownModule,
-        ComplexNavigatorModule, MatTooltipModule, ComplexModule, TruncatePipe, SpeciesPipe
-    ],
+  imports: [RouterModule.forChild([
+    {path: '', component: ComplexResultsComponent},
+  ]),
+    CommonModule,
+    ProgressSpinnerComponent, MarkdownModule,
+    ComplexNavigatorModule, MatTooltipModule, ComplexModule,
+    TruncatePipe, SpeciesPipe, MatSlider, MatSliderThumb,
+    FormsModule, MatSliderRangeThumb
+  ],
   exports: [],
   declarations: [ComplexResultsComponent,
     ComplexListComponent,
