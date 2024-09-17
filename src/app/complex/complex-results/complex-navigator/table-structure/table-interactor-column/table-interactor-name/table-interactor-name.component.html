@@ -2,13 +2,13 @@
   <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
     @if (organismIconDisplay()) {
       <i
-        class="{{interactorOrganismIcon}}"
+        class="{{interactorOrganismIcon()}}"
       [matTooltip]="interactorOrganism() | species"></i>
     }
 
     @if (interactorTypeDisplay()) {
       <i
-        class="{{interactorTypeIcon}}"
+        class="{{interactorTypeIcon()}}"
       [matTooltip]="interactorType()"></i>
     }
 
