@@ -1,7 +1,7 @@
 import {Component, OnInit, input } from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {BasketService} from '../../../shared/basket/service/basket.service';
-import {Element} from '../../shared/model/complex-results/element.model';
+import {Complex} from '../../shared/model/complex-results/complex.model';
 
 @Component({
   selector: 'cp-complex-list',
@@ -18,19 +18,19 @@ export class ComplexListComponent implements OnInit {
   }
 
 
-  saveComplex(complex: Element) {
+  saveComplex(complex: Complex) {
     this.basketService.saveInBasket(complex);
   }
 
-  removeComplexFromBasket(complex: Element) {
+  removeComplexFromBasket(complex: Complex) {
     this.basketService.deleteFromBasket(complex.complexAC);
   }
 
-  isInBasket(complex: Element): boolean {
+  isInBasket(complex: Complex): boolean {
     return this.basketService.isInBasket(complex.complexAC);
   }
 
-  toggleBasket(complex: Element) {
+  toggleBasket(complex: Complex) {
     if (this.isInBasket(complex)) {
       this.removeComplexFromBasket(complex);
     } else {
