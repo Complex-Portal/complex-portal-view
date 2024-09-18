@@ -1,5 +1,5 @@
 import {Component, computed, input} from '@angular/core';
-import {findComponentWithMultipleIdsInComplex} from '../../../complex-navigator-utils';
+import {findComponentInComplex} from '../../../complex-navigator-utils';
 import {NavigatorComplex} from '../../model/navigator-complex.model';
 import {INavigatorComponent} from '../../model/navigator-component.model';
 
@@ -13,8 +13,8 @@ export class TableMainInteractorComponent {
   i = input<number>();
   navigatorComponents = input<INavigatorComponent[]>();
 
-  navigatorComponent = computed(() => findComponentWithMultipleIdsInComplex(
-    this.complex().complex, this.component.identifier, this.component.componentIds(), this.navigatorComponents()));
+  navigatorComponent = computed(() =>
+    findComponentInComplex(this.complex().complex, this.component.componentIds(), this.navigatorComponents()));
   topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.navigatorComponents(), this.i()));
   bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.navigatorComponents(), this.i()));
 

@@ -3,7 +3,7 @@ import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {NavigatorComplex} from '../model/navigator-complex.model';
 import {INavigatorComponent} from '../model/navigator-component.model';
 import {
-  findComponentInComplex, findComponentWithMultipleIdsInComplex,
+  findComponentInComplex,
   NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../../complex-navigator-utils';
@@ -146,9 +146,7 @@ export class TableInteractorColumnComponent {
     // We do this to be able to draw a line connecting all components in the complex
     for (let i = 0; i < this.navigatorComponents().length; i++) {
       if (!this.navigatorComponents()[i].hidden) {
-        if (!!findComponentWithMultipleIdsInComplex(
-          complex, this.navigatorComponents()[i].identifier, this.navigatorComponents()[i].componentIds(), this.navigatorComponents())) {
-
+        if (!!findComponentInComplex(complex, this.navigatorComponents()[i].componentIds(), this.navigatorComponents())) {
           this.updateComponentIndexes(navigatorComplex, i);
         } else if (this.navigatorComponents()[i].expanded) {
           // The component is not part of the complex, but it has subcomponents and it is expanded.
@@ -156,7 +154,7 @@ export class TableInteractorColumnComponent {
           // In that case, the line could start or end on any of those subcomponents
           for (let j = 0; j < this.navigatorComponents()[i].subComponents.length; j++) {
             if (!!findComponentInComplex(
-              complex, this.navigatorComponents()[i].subComponents[j].identifier, this.navigatorComponents())) {
+              complex, [this.navigatorComponents()[i].subComponents[j].identifier], this.navigatorComponents())) {
 
               this.updateSubcomponentIndexes(navigatorComplex, i, j);
             }
@@ -192,8 +190,7 @@ export class TableInteractorColumnComponent {
         // to know where the line ends
         for (let j = 0; j < navigatorComponent.subComponents.length; j++) {
           if (!!findComponentInComplex(
-            navigatorComplex.complex, navigatorComponent.subComponents[j].identifier, this.navigatorComponents())) {
-
+            navigatorComplex.complex, [navigatorComponent.subComponents[j].identifier], this.navigatorComponents())) {
             this.updateSubcomponentIndexes(navigatorComplex, componentIndex, j);
           }
         }
@@ -286,7 +283,7 @@ export class TableInteractorColumnComponent {
       // Initialise times appearing for each interactor
       component.timesAppearing = 0;
       for (const complex of complexes) {
-        const match = findComponentWithMultipleIdsInComplex(complex, component.identifier, component.componentIds(), navigatorComponents);
+        const match = findComponentInComplex(complex, component.componentIds(), navigatorComponents);
         if (!!match) {
           // Update times appearing for the interactor
           component.timesAppearing = component.timesAppearing + 1;

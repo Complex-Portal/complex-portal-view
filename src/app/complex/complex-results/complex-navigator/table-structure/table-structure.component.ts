@@ -6,7 +6,7 @@ import {ComplexComponent} from '../../../shared/model/complex-results/complex-co
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {
-  findComponentInComplex, findComponentWithMultipleIdsInComplex,
+  findComponentInComplex,
   NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../complex-navigator-utils';
@@ -126,9 +126,7 @@ export class TableStructureComponent {
     if (!complex.componentAcs) {
       complex.componentAcs = new Set<string>(
         navigatorComponents
-          .map(component =>
-            findComponentWithMultipleIdsInComplex(complex, component.identifier, component.componentIds(), navigatorComponents))
-          .filter(component => !!component)
+          .filter(component => findComponentInComplex(complex, component.componentIds(), navigatorComponents))
           .map(component => component.identifier));
     }
     return complex.componentAcs;
