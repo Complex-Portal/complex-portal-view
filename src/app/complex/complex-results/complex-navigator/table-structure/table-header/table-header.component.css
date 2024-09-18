@@ -23,8 +23,8 @@ thead {
 /* Rotated complexes names */
 
 .spaceHolderHeaderOverflow {
-  min-width: 130px;
-  max-width: 130px;
+  min-width: 230px;
+  max-width: 230px;
   position: sticky;
   left: 0;
   z-index: 4;
@@ -53,7 +53,7 @@ thead {
 
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
-  --intHeader: 130px;
+  --intHeader: 230px;
   --parentWidth: 100%;
   --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
   display: grid;
@@ -64,7 +64,7 @@ thead {
 
 .CN-table .tableHeadOverflowWithSorting tr {
   --cols: 1;
-  --intHeader: 130px;
+  --intHeader: 230px;
   --parentWidth: 100%;
   --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
   display: grid;
@@ -107,9 +107,9 @@ thead {
 }
 
 .interactorsHeader.overflow {
-  min-width: 130px;
-  max-width: 130px;
-  width: 130px;
+  min-width: 230px;
+  max-width: 230px;
+  width: 230px;
   position: sticky;
   left: 0;
   z-index: 4;

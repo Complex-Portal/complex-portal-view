@@ -40,10 +40,10 @@
       <thead class="tableHeadOverflow"
         [ngClass]="isComponentsSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
         <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isComponentsSortingSet() ? '156px':''"
+          [style.--intHeader]="isComponentsSortingSet() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
           <th class="spaceHolderHeaderOverflow"
-            [style]="isComponentsSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+            [style]="isComponentsSortingSet() ? 'min-width: 256px; max-width: 256px;':''">
           </th>
           @for (complex of complexes(); track complex.complexAC) {
             <th class="rotate"
@@ -67,10 +67,10 @@
         </tr>
         <!-- icons row -->
         <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isComponentsSortingSet() ? '156px':''"
+          [style.--intHeader]="isComponentsSortingSet() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
           <th class="interactorsHeader overflow"
-            [style]="isComponentsSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+            [style]="isComponentsSortingSet() ? 'min-width: 256px; max-width: 256px;':''">
             Components
           </th>
           @for ( complex of complexes(); track  complex.complexAC) {

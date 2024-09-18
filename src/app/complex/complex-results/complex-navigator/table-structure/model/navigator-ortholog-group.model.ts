@@ -29,12 +29,12 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
     for (let i = 0; i < this._subComponents.length; i++) {
       if (this._subComponents[i].organismName.includes('Homo sapiens')) {
         mainGeneName = this._subComponents[i].name;
-        return mainGeneName;
+        return 'Ortholog Gene: ' + mainGeneName;
       } else if (this._subComponents[i].timesAppearing > biggestTimeAppearing) {
         mainGeneName = this._subComponents[i].name;
       }
     }
-    return 'Gene: ' + mainGeneName;
+    return 'Ortholog Gene: ' + mainGeneName;
   }
 
   get interactorType(): string {
@@ -80,11 +80,11 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   }
 
   get expandTooltip(): string {
-    return this.name + ' members';
+    return this.expandLabel;
   }
 
   get expandLabel(): string {
-    return this.name + ' members';
+    return 'Ortholog group members';
   }
 
   get timesAppearing(): number {
