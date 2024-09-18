@@ -16,7 +16,7 @@ export class TableSubcomponentInteractorComponent {
   navigatorComponents = input<INavigatorComponent[]>();
 
   navigatorComponent = computed(() =>
-    findComponentInComplex(this.complex().complex, [this.subcomponent.identifier], this.navigatorComponents()));
+    findComponentInComplex(this.complex().complex, this.subcomponent.identifier, this.navigatorComponents()));
   displayTopLineClass = computed(() =>
     this.displayTopLineClassExpanded(this.complex(), this.navigatorComponents(), this.i(), this.j()));
   displayBottomLineClass = computed(() =>
