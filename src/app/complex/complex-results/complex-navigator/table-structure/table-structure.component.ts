@@ -78,9 +78,15 @@ export class TableStructureComponent {
 
     const newNavigatorComponents: INavigatorComponent[] = [];
     for (const [_, proteins] of Object.entries(groupedByOrthology)) {
-      const group = proteins[0].orthologsGroup;
-      const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
-      newNavigatorComponents.push(orthologsGroup);
+      if (proteins.length > 1) {
+        // Multiple proteins in the ortholog group
+        const group = proteins[0].orthologsGroup;
+        const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
+        newNavigatorComponents.push(orthologsGroup);
+      } else if (proteins.length === 1) {
+        // Single proteins in the ortholog group, there's no need to create the group, we just use the protein component
+        newNavigatorComponents.push(proteins[0]);
+      }
     }
     newNavigatorComponents.push(...interactorsWithoutGroup);
     return newNavigatorComponents;
