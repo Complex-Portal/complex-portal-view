@@ -8,7 +8,7 @@ import {Observable, throwError} from 'rxjs';
 
 import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
-import {Element} from '../model/complex-results/element.model';
+import {Complex} from '../model/complex-results/complex.model';
 import {Facet} from '../model/complex-results/facet.model';
 
 const baseURL = environment.complex_ws_base_url;
@@ -148,7 +148,7 @@ export class ComplexPortalService {
     }
   }
 
-  getSimplifiedComplex(complexAc: string): Observable<Element> {
+  getSimplifiedComplex(complexAc: string): Observable<Complex> {
     return this.http.get(`${baseURL}/complex-simplified/${complexAc}`).pipe(catchError(this.handleError));
   }
 

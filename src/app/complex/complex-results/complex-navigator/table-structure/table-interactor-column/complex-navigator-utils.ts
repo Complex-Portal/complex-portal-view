@@ -1,4 +1,4 @@
-import {Element} from '../../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {EnrichedInteractor} from './table-interactor-column.component';
 
@@ -10,7 +10,7 @@ export class ComponentWithStoichiometry {
   stochiometryValueFormatted?: string;
 }
 
-export function findInteractorInComplex(complex: Element,
+export function findInteractorInComplex(complex: Complex,
                                         interactorId: string,
                                         enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
 
