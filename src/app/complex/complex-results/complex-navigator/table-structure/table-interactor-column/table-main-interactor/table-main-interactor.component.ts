@@ -79,8 +79,8 @@ export class TableMainInteractorComponent {
     // The line starts at this component or on any of its subcomponents
     if (complex.startComponentIndex != null && complex.startComponentIndex === componentIndex) {
 
-      if (!navigatorComponents[componentIndex].hasSubComponents) {
-        // If the component does not have subcomponents, then the line starts in it
+      if (!navigatorComponents[componentIndex].expanded) {
+        // If the component is not expanded, then the line starts in it
         return true;
       }
       // If the component is expanded.

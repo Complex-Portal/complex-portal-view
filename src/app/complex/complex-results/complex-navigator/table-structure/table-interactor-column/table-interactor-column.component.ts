@@ -174,13 +174,13 @@ export class TableInteractorColumnComponent {
     navigatorComplex.startComponentIndex = this.getMinValue(navigatorComplex.startComponentIndex, componentIndex);
     navigatorComplex.endComponentIndex = this.getMaxValue(navigatorComplex.endComponentIndex, componentIndex);
 
-    // If the component has subcomponents, as the component is part of the complex, the line started at the component or before,
-    // so it must connect from the component to the subcomponents, so we start it at -1 to make sure it starts at the component cell
-    // and not at the first subcomponent
-    navigatorComplex.startSubComponentIndex = -1;
-
     const navigatorComponent: INavigatorComponent = this.navigatorComponents()[componentIndex];
     if (navigatorComponent.expanded) {
+      // If the component has subcomponents, as the component is part of the complex, the line started at the component or before,
+      // so it must connect from the component to the subcomponents, so we start it at -1 to make sure it starts at the component cell
+      // and not at the first subcomponent
+      navigatorComplex.startSubComponentIndex = -1;
+
       if (navigatorComponent.interactorType === 'stable complex') {
         // If the expanded component is a subcomplex, as the subcomplex is part of the complex, all its subcomponents are also part
         // of it. That means the line will connect to all the subcomponents
