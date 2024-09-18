@@ -12,4 +12,5 @@
   margin-right: auto;
   position: relative;
   z-index: 1;
+  box-shadow: 0px 0px 0px 1px #007C83FF;
 }
