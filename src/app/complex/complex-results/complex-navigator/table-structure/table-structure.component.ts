@@ -123,7 +123,7 @@ export class TableStructureComponent {
   }
 
   private getComponents(complex: Complex, navigatorComponents: INavigatorComponent[]): Set<string> {
-    if (!complex.componentAcs) {
+    if (!complex.componentAcs || complex.componentAcs.size === 0) {
       complex.componentAcs = new Set<string>(
         navigatorComponents
           .filter(component => findComponentInComplex(complex, component.componentIds(), navigatorComponents))
@@ -134,6 +134,12 @@ export class TableStructureComponent {
 
   sortComplexBySimilarityClustering(complexesList: Complex[], navigatorComponents: INavigatorComponent[]): Complex[] {
     let sortedComplexesList = complexesList;
+
+    sortedComplexesList.forEach(complex => {
+      if (!!complex.componentAcs) {
+        complex.componentAcs.clear();
+      }
+    });
 
     if (!!navigatorComponents && !!navigatorComponents && navigatorComponents.length > 0) {
       // Group by predicted to cluster only inside the different groups, and place predicted after curated
@@ -159,8 +165,7 @@ export class TableStructureComponent {
     // After the complexes have been sorted, we then set the index appearing for all components
     // so they are properly sorted later
     navigatorComponents.forEach(component => {
-      component.indexAppearing = sortedComplexesList.findIndex(complex =>
-        component.componentIds().some(componentId => complex.componentAcs?.has(componentId))) || 0;
+      component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
     });
 
     return sortedComplexesList;
