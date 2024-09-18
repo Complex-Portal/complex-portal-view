@@ -2,6 +2,7 @@ import {Component, output, input } from '@angular/core';
 import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {organismIcon} from '../../../../complex-portal-utils';
 import {BasketService} from '../../../../../shared/basket/service/basket.service';
+import {NavigatorComponentSorting} from '../../complex-navigator-utils';
 
 @Component({
   selector: 'cp-table-header',
@@ -11,7 +12,7 @@ import {BasketService} from '../../../../../shared/basket/service/basket.service
 
 export class TableHeaderComponent {
   complexes = input<Complex[]>();
-  interactorsSorting = input<string>();
+  componentsSorting = input<NavigatorComponentSorting>();
   onComplexRemovedFromBasket = output<string>();
 
   constructor(private basketService: BasketService) {
@@ -21,8 +22,8 @@ export class TableHeaderComponent {
     return this.complexes().some(c => c.predictedComplex);
   }
 
-  isInteractorSortingSet() {
-    return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
+  isComponentsSortingSet() {
+    return this.componentsSorting() === NavigatorComponentSorting.TYPE || this.componentsSorting() === NavigatorComponentSorting.ORGANISM;
   }
 
   iconOrganism(organismName: string) {

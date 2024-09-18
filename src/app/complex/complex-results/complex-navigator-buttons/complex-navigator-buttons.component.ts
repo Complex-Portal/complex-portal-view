@@ -1,4 +1,8 @@
 import {Component, model, OnInit} from '@angular/core';
+import {
+  NavigatorComponentGrouping,
+  NavigatorComponentSorting
+} from '../complex-navigator/complex-navigator-utils';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
@@ -6,19 +10,27 @@ import {Component, model, OnInit} from '@angular/core';
   styleUrls: ['./complex-navigator-buttons.component.css']
 })
 export class ComplexNavigatorButtonsComponent implements OnInit {
-  interactorsSorting = model<string>();
+  componentsSorting = model<NavigatorComponentSorting>();
+  componentsGrouping = model<NavigatorComponentGrouping>();
   organismIconDisplay = model<boolean>();
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
 
   typeOfDisplay: 'compact' | 'detailed';
 
+  protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
+  protected readonly NavigatorComponentGrouping = NavigatorComponentGrouping;
+
   ngOnInit() {
     this.updateDisplay();
   }
 
-  interactorsSortingChanges(typeOfSorting: string) {
-    this.interactorsSorting.set(typeOfSorting);
+  componentsGroupingChanges(typeOfGrouping: NavigatorComponentGrouping) {
+    this.componentsGrouping.set(typeOfGrouping);
+  }
+
+  componentsSortingChanges(typeOfSorting: NavigatorComponentSorting) {
+    this.componentsSorting.set(typeOfSorting);
     if (this.typeOfDisplay === 'detailed') {
       if (typeOfSorting === 'Type') {
         this.interactorTypeDisplay.set(false);

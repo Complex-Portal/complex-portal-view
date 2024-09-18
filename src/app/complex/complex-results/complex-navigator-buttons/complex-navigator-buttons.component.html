@@ -1,15 +1,23 @@
 <div class="filters">
   <div class="sortingInteractors">
+    <input type="submit" name="classificationButton" value="Group components" class="button">
+    <div class="typeOfSorting">
+      <input type="button" name="occurrenceClassification" value="No Grouping" class="button"
+             (click)="componentsGroupingChanges(NavigatorComponentGrouping.DEFAULT)">
+      <input type="button" name="typeClassification" value="Orthology" class="button"
+             (click)="componentsGroupingChanges(NavigatorComponentGrouping.ORTHOLOGY)">
+    </div>
+  </div>
+
+  <div class="sortingInteractors">
     <input type="submit" name="classificationButton" value="Sort components" class="button">
     <div class="typeOfSorting">
-      <input type="button" name="occurrenceClassification" value="Occurrence" class="button"
-             (click)="interactorsSortingChanges('Occurrence')">
+      <input type="button" name="occurrenceClassification" value="Default" class="button"
+             (click)="componentsSortingChanges(NavigatorComponentSorting.DEFAULT)">
       <input type="button" name="typeClassification" value="Type" class="button"
-             (click)="interactorsSortingChanges('Type')">
+             (click)="componentsSortingChanges(NavigatorComponentSorting.TYPE)">
       <input type="button" name="organismClassification" value="Organism" class="button"
-             (click)="interactorsSortingChanges('Organism')">
-      <!--      <input type="submit" name="geneClassification" value="Orthology (Not available yet)" class="button"-->
-      <!--             (click)="InteractorsSortingChanges('Orthology')">-->
+             (click)="componentsSortingChanges(NavigatorComponentSorting.ORGANISM)">
     </div>
   </div>
 
@@ -43,7 +51,7 @@
           <li>
             <input type="checkbox" name="id" value="id" class="checkbox" [checked]="idDisplay()"
                    (change)="toggleId()">
-            Interactor ID
+            Component ID
           </li>
         </ul>
       </li>

@@ -1,3 +1,5 @@
+import {XRef} from './interactor.model';
+
 export interface ComplexComponent {
   identifier: string;
   identifierLink: string;
@@ -6,4 +8,5 @@ export interface ComplexComponent {
   stochiometry: string;
   interactorType: string;
   organismName: string;
+  xrefs: XRef[];
 }

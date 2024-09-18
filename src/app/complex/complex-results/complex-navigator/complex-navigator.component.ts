@@ -1,6 +1,7 @@
 import {Component, output, input } from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
+import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator-utils';
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -15,7 +16,8 @@ export class ComplexNavigatorComponent {
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
-  interactorsSorting = 'Occurrence';
+  componentsSorting = NavigatorComponentSorting.DEFAULT;
+  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
   organismIconDisplay = true;
   interactorTypeDisplay = true;
   idDisplay = true;

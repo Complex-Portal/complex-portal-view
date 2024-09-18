@@ -1,7 +1,17 @@
-import {Complex} from '../../../../shared/model/complex-results/complex.model';
-import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {EnrichedInteractor} from './table-interactor-column.component';
+import {INavigatorComponent} from './table-structure/model/navigator-component.model';
+import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
+import {Complex} from '../../shared/model/complex-results/complex.model';
 
+export enum NavigatorComponentSorting {
+  DEFAULT = 'Default',
+  TYPE = 'Type',
+  ORGANISM = 'Organism'
+}
+
+export enum NavigatorComponentGrouping {
+  DEFAULT = 'Default',
+  ORTHOLOGY = 'Orthology'
+}
 
 export class ComponentWithStoichiometry {
   identifier: string;
@@ -10,17 +20,17 @@ export class ComponentWithStoichiometry {
   stochiometryValueFormatted?: string;
 }
 
-export function findInteractorInComplex(complex: Complex,
-                                        interactorId: string,
-                                        enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+export function findComponentInComplex(complex: Complex,
+                                       componentIds: string[],
+                                       navigatorComponents: INavigatorComponent[]): ComponentWithStoichiometry {
 
-  const interactor = findInteractorInComplexComponents(complex.interactors, interactorId, enrichedInteractors);
-  if (!!interactor) {
+  const component = findComponentInComplexComponents(complex.interactors, componentIds, navigatorComponents);
+  if (!!component) {
     return {
-      identifier: interactor.identifier,
-      stochiometryValue: interactor.stochiometryValue,
-      stochiometryText: getStoichiometryText(interactor.stochiometryValue),
-      stochiometryValueFormatted: formatStoichiometryValues(interactor.stochiometryValue)
+      identifier: component.identifier,
+      stochiometryValue: component.stochiometryValue,
+      stochiometryText: getStoichiometryText(component.stochiometryValue),
+      stochiometryValueFormatted: formatStoichiometryValues(component.stochiometryValue)
     };
   }
   return null;
@@ -28,34 +38,36 @@ export function findInteractorInComplex(complex: Complex,
 
 // Private functions
 
-function findInteractorInComplexComponents(complexComponents: ComplexComponent[],
-                                           interactorId: string,
-                                           enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+function findComponentInComplexComponents(complexComponents: ComplexComponent[],
+                                          componentIds: string[],
+                                          navigatorComponents: INavigatorComponent[]): ComponentWithStoichiometry {
 
   // We look for the interactor in the complex, as one of the components, or as part of any subcomplex of the complex, recursively.
   // Even if we find a match for the interactor as one of the complex components, we keep looking at other components, as the interactor
   // could also be part of a subcomplex, so the stoichiometry would need to be added for all matches.
 
-  let interactorFound = false;
+  let componentFound = false;
+  let componentId: string = '';
   let stoichiometry: [number, number] = null;
 
   // We iterate through all the components of the complex to find matches
   for (const complexComponent of complexComponents) {
-    const interactorMatch = findInteractorInComplexComponent(complexComponent, interactorId, enrichedInteractors);
-    if (!!interactorMatch) {
+    const componentMatch = findComponentInComplexComponent(complexComponent, componentIds, navigatorComponents);
+    if (!!componentMatch) {
       // We found a match for the interactor, on this component, or on a subcomponent of it in the case of a subcomplex
-      interactorFound = true;
+      componentFound = true;
+      componentId = componentMatch.identifier;
       // If we have any stoichiometry for the component, we add it to the total stoichiometry
-      if (!!interactorMatch.stochiometryValue) {
+      if (!!componentMatch.stochiometryValue) {
         if (!!stoichiometry) {
           stoichiometry = [
-            stoichiometry[0] + interactorMatch.stochiometryValue[0],
-            stoichiometry[1] + interactorMatch.stochiometryValue[1]
+            stoichiometry[0] + componentMatch.stochiometryValue[0],
+            stoichiometry[1] + componentMatch.stochiometryValue[1]
           ];
         } else {
           stoichiometry = [
-            interactorMatch.stochiometryValue[0],
-            interactorMatch.stochiometryValue[1]
+            componentMatch.stochiometryValue[0],
+            componentMatch.stochiometryValue[1]
           ];
         }
       }
@@ -63,9 +75,9 @@ function findInteractorInComplexComponents(complexComponents: ComplexComponent[]
   }
 
   // If we have found the interactor as part of one of the complex components, or part of a subcomplex, we return it
-  if (interactorFound) {
+  if (componentFound) {
     return {
-      identifier: interactorId,
+      identifier: componentId,
       stochiometryValue: stoichiometry
     };
   }
@@ -73,28 +85,28 @@ function findInteractorInComplexComponents(complexComponents: ComplexComponent[]
   return null;
 }
 
-function findInteractorInComplexComponent(complexComponent: ComplexComponent,
-                                          interactorId: string,
-                                          enrichedInteractors: EnrichedInteractor[]): ComponentWithStoichiometry {
+function findComponentInComplexComponent(complexComponent: ComplexComponent,
+                                         componentIds: string[],
+                                         navigatorComponents: INavigatorComponent[]): ComponentWithStoichiometry {
 
   const componentStoichiometry = parseStoichiometryValues(complexComponent.stochiometry);
 
-  if (complexComponent.identifier === interactorId) {
+  if (componentIds.some(componentId => complexComponent.identifier === componentId)) {
     // The interactor is the complex component we are currently checking
     return {
-      identifier: interactorId,
+      identifier: complexComponent.identifier,
       stochiometryValue: componentStoichiometry
     };
   }
 
   if (complexComponent.interactorType === 'stable complex') {
     // If the id does not match, and the component is a subcomplex, then we can look for the interactor in the subcomplex components
-    const complexComponentInteractor = enrichedInteractors.find(interactor =>
-      interactor.interactor.identifier === complexComponent.identifier);
+    const complexComponentInteractor = navigatorComponents.find(interactor =>
+      interactor.identifier === complexComponent.identifier);
 
-    if (!!complexComponentInteractor && !!complexComponentInteractor.subComponents) {
-      const subComponentsMatch = findInteractorInComplexComponents(
-        complexComponentInteractor.subComponents, interactorId, enrichedInteractors);
+    if (!!complexComponentInteractor && complexComponentInteractor.hasSubComponents) {
+      const subComponentsMatch = findComponentInComplexComponents(
+        complexComponentInteractor.complexComponents, componentIds, navigatorComponents);
 
       if (!!subComponentsMatch) {
         // We have found the interactor in the subcomplex
@@ -102,7 +114,7 @@ function findInteractorInComplexComponent(complexComponent: ComplexComponent,
           if (!!componentStoichiometry) {
             // If we have stoichiometry for both the component and the subcomponent, we add both
             return {
-              identifier: interactorId,
+              identifier: subComponentsMatch.identifier,
               stochiometryValue: [
                 componentStoichiometry[0] * subComponentsMatch.stochiometryValue[0],
                 componentStoichiometry[1] * subComponentsMatch.stochiometryValue[1]
@@ -111,14 +123,14 @@ function findInteractorInComplexComponent(complexComponent: ComplexComponent,
           } else {
             // If we only have stoichiometry for the subcomponent, we use that stoichiometry
             return {
-              identifier: interactorId,
+              identifier: subComponentsMatch.identifier,
               stochiometryValue: subComponentsMatch.stochiometryValue
             };
           }
         } else {
           // If we only have stoichiometry for the component, we use that stoichiometry
           return {
-            identifier: interactorId,
+            identifier: subComponentsMatch.identifier,
             stochiometryValue: componentStoichiometry
           };
         }

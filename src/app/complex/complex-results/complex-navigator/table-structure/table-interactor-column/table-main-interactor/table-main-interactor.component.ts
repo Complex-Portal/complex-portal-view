@@ -1,6 +1,7 @@
 import {Component, computed, input} from '@angular/core';
-import {EnrichedComplex, EnrichedInteractor} from '../table-interactor-column.component';
-import {findInteractorInComplex} from '../complex-navigator-utils';
+import {findComponentInComplex} from '../../../complex-navigator-utils';
+import {NavigatorComplex} from '../../model/navigator-complex.model';
+import {INavigatorComponent} from '../../model/navigator-component.model';
 
 @Component({
   selector: 'cp-table-main-interactor',
@@ -8,54 +9,59 @@ import {findInteractorInComplex} from '../complex-navigator-utils';
   styleUrls: ['./table-main-interactor.component.css']
 })
 export class TableMainInteractorComponent {
-  complex = input<EnrichedComplex>();
+  complex = input<NavigatorComplex>();
   i = input<number>();
-  enrichedInteractors = input<EnrichedInteractor[]>();
+  navigatorComponents = input<INavigatorComponent[]>();
 
-  interactorComponent = computed(() =>
-    findInteractorInComplex(this.complex().complex, this.interactor.interactor.identifier, this.enrichedInteractors()));
-  topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.i()));
-  bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.i()));
+  navigatorComponent = computed(() =>
+    findComponentInComplex(this.complex().complex, this.component.componentIds(), this.navigatorComponents()));
+  topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.navigatorComponents(), this.i()));
+  bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.navigatorComponents(), this.i()));
 
-  get interactor(): EnrichedInteractor {
-    return this.enrichedInteractors()[this.i()];
+  get component(): INavigatorComponent {
+    return this.navigatorComponents()[this.i()];
   }
 
-  public displayTopLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
+  public displayTopLineClass(complex: NavigatorComplex, navigatorComponents: INavigatorComponent[], componentIndex: number): string {
+    if (this.doesLineCrossComponentCell(complex, navigatorComponents, componentIndex)) {
       return 'verticalLine';
     }
-    if (this.doesLineEndOnInteractorCell(complex, interactorIndex) && !this.doesLineStartOnInteractorCell(complex, interactorIndex)) {
+    if (this.doesLineEndOnComponentCell(complex, navigatorComponents, componentIndex) &&
+      !this.doesLineStartOnComponentCell(complex, navigatorComponents, componentIndex)) {
       return 'verticalLine';
     }
 
     return 'transparentVerticalLine';
   }
 
-  public displayBottomLineClass(complex: EnrichedComplex, interactorIndex: number): string {
-    if (this.doesLineCrossInteractorCell(complex, interactorIndex)) {
+  public displayBottomLineClass(complex: NavigatorComplex, navigatorComponents: INavigatorComponent[], componentIndex: number): string {
+    if (this.doesLineCrossComponentCell(complex, navigatorComponents, componentIndex)) {
       return 'verticalLine';
     }
-    if (this.doesLineStartOnInteractorCell(complex, interactorIndex) && !this.doesLineEndOnInteractorCell(complex, interactorIndex)) {
+    if (this.doesLineStartOnComponentCell(complex, navigatorComponents, componentIndex) &&
+      !this.doesLineEndOnComponentCell(complex, navigatorComponents, componentIndex)) {
       return 'verticalLine';
     }
 
     return 'transparentVerticalLine';
   }
 
-  private doesLineCrossInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
-    if (complex.startInteractorIndex != null && complex.endInteractorIndex != null) {
+  private doesLineCrossComponentCell(complex: NavigatorComplex,
+                                     navigatorComponents: INavigatorComponent[],
+                                     componentIndex: number): boolean {
 
-      // The line starts before this interactor and ends after, so it crosses through the interactor
-      if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex > interactorIndex) {
+    if (complex.startComponentIndex != null && complex.endComponentIndex != null) {
+
+      // The line starts before this component and ends after, so it crosses through the component
+      if (complex.startComponentIndex < componentIndex && complex.endComponentIndex > componentIndex) {
         return true;
       }
 
-      // The line starts before this interactor and end at this interactor or on any of its subcomponents
-      if (complex.startInteractorIndex < interactorIndex && complex.endInteractorIndex === interactorIndex) {
-        // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-        // the line does not end in this interactor, and it must cross through the interactor cell to the subcomponents
-        if (this.enrichedInteractors()[interactorIndex].isSubComplex && this.enrichedInteractors()[interactorIndex].expanded) {
+      // The line starts before this component and end at this component or on any of its subcomponents
+      if (complex.startComponentIndex < componentIndex && complex.endComponentIndex === componentIndex) {
+        // If the component is expanded, and there is any line between the subcomponents, then
+        // the line does not end in this component, and it must cross through the component cell to the subcomponents
+        if (navigatorComponents[componentIndex].expanded) {
           if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
             return true;
           }
@@ -66,19 +72,22 @@ export class TableMainInteractorComponent {
     return false;
   }
 
-  private doesLineStartOnInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
-    // The line starts at this interactor or on any of its subcomponents
-    if (complex.startInteractorIndex != null && complex.startInteractorIndex === interactorIndex) {
+  doesLineStartOnComponentCell(complex: NavigatorComplex,
+                               navigatorComponents: INavigatorComponent[],
+                               componentIndex: number): boolean {
 
-      if (!this.enrichedInteractors()[interactorIndex].isSubComplex) {
-        // If the interactor is not a subcomplex, then the interactor has no subcomponents and the line starts in it
+    // The line starts at this component or on any of its subcomponents
+    if (complex.startComponentIndex != null && complex.startComponentIndex === componentIndex) {
+
+      if (!navigatorComponents[componentIndex].hasSubComponents) {
+        // If the component does not have subcomponents, then the line starts in it
         return true;
       }
-      // If the interactor is a subcomplex.
-      // If the interactor is actually part of the complex, the line starts in this interactor
-      // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the interactor itself, as it is
+      // If the component is expanded.
+      // If the component is actually part of the complex, the line starts in this component
+      // Otherwise, the line actually starts on one of the subcomponents of the complex, but not on the component itself, as it is
       // not part of the complex.
-      if (complex.startInteractorIncludedWhenExpanded) {
+      if (complex.startSubComponentIndex === -1) {
         return true;
       }
     }
@@ -86,13 +95,16 @@ export class TableMainInteractorComponent {
     return false;
   }
 
-  private doesLineEndOnInteractorCell(complex: EnrichedComplex, interactorIndex: number): boolean {
-    // The line ends at this interactor or on any of its subcomponents
-    if (complex.endInteractorIndex != null && complex.endInteractorIndex === interactorIndex) {
+  private doesLineEndOnComponentCell(complex: NavigatorComplex,
+                                     navigatorComponents: INavigatorComponent[],
+                                     componentIndex: number): boolean {
 
-      // If the interactor is an expanded subcomplex, and there is any line between the subcomponents, then
-      // the line does not end in this interactor, and it must cross through to the subcomponents
-      if (this.enrichedInteractors()[interactorIndex].isSubComplex && this.enrichedInteractors()[interactorIndex].expanded) {
+    // The line ends at this component or on any of its subcomponents
+    if (complex.endComponentIndex != null && complex.endComponentIndex === componentIndex) {
+
+      // If the component is expanded, and there is any line between the subcomponents, then
+      // the line does not end in this component, and it must cross through to the subcomponents
+      if (navigatorComponents[componentIndex].expanded) {
         if (complex.startSubComponentIndex != null && complex.endSubComponentIndex != null) {
           return false;
         }

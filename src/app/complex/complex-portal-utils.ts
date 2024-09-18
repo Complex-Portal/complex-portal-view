@@ -61,6 +61,7 @@ export function organismIcon(organism: string): string {
     case 'Vibrio cholerae':
       return 'assets/images/EMBL_Species_Vibrio_cholerae.svg';
     case 'Crotalus durissus':
+    case 'Crotalus durissus terrificus':
       return 'assets/images/EMBL_Species_RattleSnake.svg';
     case 'Sus scrofa':
       return 'icon icon-species icon-pig';

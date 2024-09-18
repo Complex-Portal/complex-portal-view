@@ -1,33 +1,12 @@
-import {Component, input, OnChanges, SimpleChanges} from '@angular/core';
-import {Interactor} from '../../../../shared/model/complex-results/interactor.model';
-import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {Observable, of} from 'rxjs';
-import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
-import {findInteractorInComplex} from './complex-navigator-utils';
+import {Component, effect, input} from '@angular/core';
 import {Complex} from '../../../../shared/model/complex-results/complex.model';
-import {map} from 'rxjs/operators';
-import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
-
-
-export class EnrichedInteractor {
-  interactor: Interactor;
-  hidden: boolean;
-  isSubComplex: boolean;
-  expanded: boolean;
-  subComponents: ComplexComponent[];
-  partOfComplex: number[];
-  timesAppearing: number;
-  indexAppearing: number;
-}
-
-export class EnrichedComplex {
-  complex: Complex;
-  startInteractorIndex: number;
-  endInteractorIndex: number;
-  startSubComponentIndex: number;
-  endSubComponentIndex: number;
-  startInteractorIncludedWhenExpanded: boolean;
-}
+import {NavigatorComplex} from '../model/navigator-complex.model';
+import {INavigatorComponent} from '../model/navigator-component.model';
+import {
+  findComponentInComplex,
+  NavigatorComponentGrouping,
+  NavigatorComponentSorting
+} from '../../complex-navigator-utils';
 
 interface Range {
   value: string;
@@ -40,123 +19,98 @@ interface Range {
   templateUrl: './table-interactor-column.component.html',
   styleUrls: ['./table-interactor-column.component.css']
 })
-export class TableInteractorColumnComponent implements OnChanges {
+export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
-  interactorsSorting = input<string>();
-  interactors = input<Interactor[]>([]);
+  componentsSorting = input<NavigatorComponentSorting>();
+  componentsGrouping = input<NavigatorComponentGrouping>();
+  navigatorComponents = input<INavigatorComponent[]>();
   organismIconDisplay = input<boolean>(true);
   interactorTypeDisplay = input<boolean>(true);
   idDisplay = input<boolean>(true);
 
-  // TODO rework bellow to compute when needed from the inputs
-  enrichedInteractors: EnrichedInteractor[];
-  enrichedComplexes: EnrichedComplex[];
+  navigatorComplexes: NavigatorComplex[];
   ranges: Range[] = [];
 
-  timesAppearingBy: { [k in keyof Interactor]?: Map<string, number> } = {
-    interactorType: new Map<string, number>(),
-    organismName: new Map<string, number>()
+  timesAppearingBy: { [k: string]: Map<string, number> } = {
+    [NavigatorComponentSorting.TYPE]: new Map<string, number>(),
+    [NavigatorComponentSorting.ORGANISM]: new Map<string, number>()
   };
 
-  constructor(private complexPortalService: ComplexPortalService, private species: SpeciesPipe) {
+  protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
+
+  constructor() {
+    effect(() => this.calculateTimesAppearing(this.complexes(), this.navigatorComponents()));
+    effect(() => this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.componentsSorting()));
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes['interactors']) {
-      this.enrichInteractors();
-      this.calculateTimesAppearing();
+  private sortNavigatorComponents(navigatorComponents: INavigatorComponent[],
+                                  complexes: Complex[],
+                                  componentsSorting: NavigatorComponentSorting): void {
+    if (!!navigatorComponents && !!complexes) {
+      // When we sort, we update the local variable in the component instead of just sorting inside the navigatorInteractors object.
+      // This way we enforce an update on the objects used in the HTML and angular needs to re-run the signals to draw the table.
+      this.classifyComponents(componentsSorting);
+      this.navigatorComplexes = this.createNavigatorComplexes(complexes);
     }
-    this.classifyInteractors();
-    this.calculateAllStartAndEndIndexes();
   }
 
-  private classifyInteractors(): void {
-    if (!!this.interactorsSorting() && !!this.enrichedInteractors && this.enrichedInteractors.length > 0) {
-      if (this.interactorsSorting() === 'Type') {
-        this.classifyBy('interactorType');
-      } else if (this.interactorsSorting() === 'Organism') {
-        this.classifyBy('organismName');
+  private classifyComponents(componentsSorting: NavigatorComponentSorting): void {
+    if (!!componentsSorting && !!this.navigatorComponents() && this.navigatorComponents().length > 0) {
+      if (componentsSorting === NavigatorComponentSorting.TYPE || componentsSorting === NavigatorComponentSorting.ORGANISM) {
+        this.classifyBy(componentsSorting);
       } else {
-        this.classifyInteractorsByOccurrence();
+        this.classifyComponentsByOccurrence();
       }
-    }
-  }
-
-  private enrichInteractors() {
-    this.enrichedInteractors = [];
-    for (const interactor of this.interactors()) {
-      const isSubComplex = interactor.interactorType === 'stable complex';
-      const newEnrichedInteractor: EnrichedInteractor = {
-        interactor,
-        hidden: false,
-        isSubComplex,
-        expanded: false,
-        subComponents: null,
-        partOfComplex: [],
-        timesAppearing: 0,
-        indexAppearing: this.complexes().findIndex(complex => complex.componentAcs?.has(interactor.identifier)) || 0
-      };
-      if (isSubComplex) {
-        this.loadSubInteractors(newEnrichedInteractor).subscribe(subComponents => newEnrichedInteractor.subComponents = subComponents);
-      }
-      this.enrichedInteractors.push(newEnrichedInteractor);
     }
   }
 
   toggleSubcomplexExpandable(i: number): void {
-    this.enrichedInteractors[i].expanded = !this.enrichedInteractors[i].expanded;
+    this.navigatorComponents()[i].expanded = !this.navigatorComponents()[i].expanded;
 
-    if (this.enrichedInteractors[i].expanded) {
-      // EnrichedInteractor has been expanded, we need to:
-
-      // 1. Collapse the other ones, in case there is any other expanded
-      for (let j = 0; j < this.enrichedInteractors.length; j++) {
-        if (i !== j) {
-          this.enrichedInteractors[j].expanded = false;
-        }
-      }
-
-      // 2. Hide any interactor now displayed in the expanded section
-      if (!!this.enrichedInteractors[i].subComponents) {
-        const subInteractorIds: string[] = this.enrichedInteractors[i].subComponents.map(component => component.identifier);
-        for (let j = 0; j < this.enrichedInteractors.length; j++) {
-          if (i !== j) {
-            this.enrichedInteractors[j].hidden = !!subInteractorIds.includes(this.enrichedInteractors[j].interactor.identifier);
-          }
-        }
-      }
+    if (this.navigatorComponents()[i].expanded) {
+      this.collapseAllButOne(i);
+      this.hideRowsDisplayedAsSubcomponents(i);
     } else {
-      // EnrichedInteractor has been collapsed, we need to:
-      // 1. Display any interactor previously hidden
-      for (let j = 0; j < this.enrichedInteractors.length; j++) {
-        this.enrichedInteractors[j].hidden = false;
-      }
+      this.displayAllRows();
     }
 
-    // Something has been expanded or collapsed, we need to recalculate the start and end indexes for the lines
-    this.classifyInteractors();
-    this.calculateAllStartAndEndIndexes();
-
+    // Something has been expanded or collapsed, we need to sort and recalculate the start and end indexes for the lines
+    this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.componentsSorting());
   }
 
-  private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
-    // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Complex = this.complexes().find(complex => complex.complexAC === interactor.interactor.identifier);
-    if (!!foundComplex) {
-      return of(foundComplex.interactors);
-    } else {
-      // Actually call the back-end to fetch these
-      return this.complexPortalService.getSimplifiedComplex(interactor.interactor.identifier)
-        .pipe(map(complex => complex?.interactors));
+  private collapseAllButOne(rowIndex: number): void {
+    for (let i = 0; i < this.navigatorComponents().length; i++) {
+      if (rowIndex !== i) {
+        this.navigatorComponents()[i].expanded = false;
+      }
     }
   }
 
-  private calculateAllStartAndEndIndexes(): void {
-    this.enrichedComplexes = [];
-
-    for (const complex of this.complexes()) {
-      this.enrichedComplexes.push(this.calculateStartAndEndIndexes(complex));
+  private hideRowsDisplayedAsSubcomponents(rowIndex: number): void {
+    if (!!this.navigatorComponents()[rowIndex].subComponents) {
+      const subInteractorIds: string[] =
+        this.navigatorComponents()[rowIndex].subComponents.map(component => component.identifier);
+      for (let i = 0; i < this.navigatorComponents().length; i++) {
+        if (rowIndex !== i) {
+          this.navigatorComponents()[i].hidden =
+            !!subInteractorIds.includes(this.navigatorComponents()[i].identifier);
+        }
+      }
     }
+  }
+
+  private displayAllRows(): void {
+    for (let i = 0; i < this.navigatorComponents().length; i++) {
+      this.navigatorComponents()[i].hidden = false;
+    }
+  }
+
+  private createNavigatorComplexes(complexes: Complex[]): NavigatorComplex[] {
+    const navigatorComplexes: NavigatorComplex[] = [];
+    for (const complex of complexes) {
+      navigatorComplexes.push(this.calculateStartAndEndIndexes(complex));
+    }
+    return navigatorComplexes;
   }
 
   private getMinValue(valueA: number, valueB: number) {
@@ -179,105 +133,119 @@ export class TableInteractorColumnComponent implements OnChanges {
     return Math.max(valueA, valueB);
   }
 
-  private calculateStartAndEndIndexes(complex: Complex): EnrichedComplex {
-    const enrichedComplex: EnrichedComplex = {
+  private calculateStartAndEndIndexes(complex: Complex): NavigatorComplex {
+    const navigatorComplex: NavigatorComplex = {
       complex,
-      startInteractorIndex: null,
-      endInteractorIndex: null,
+      startComponentIndex: null,
+      endComponentIndex: null,
       startSubComponentIndex: null,
-      endSubComponentIndex: null,
-      startInteractorIncludedWhenExpanded: true,
+      endSubComponentIndex: null
     };
 
-    // We iterate through the interactors to find the first and last one part of the complex
-    // We do this to be able to draw a line connecting all interactors in the complex
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      if (!this.enrichedInteractors[i].hidden) {
-
-        if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].interactor.identifier, this.enrichedInteractors)) {
-          // The interactor is part of the complex, we update the start and end indices for the interactors
-          // line as it may start in this interactor
-          enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
-          if (enrichedComplex.startInteractorIndex === i) {
-            // The line starts in this interactor, so the line always starts in this interactor, even when expanded
-            enrichedComplex.startInteractorIncludedWhenExpanded = true;
-          }
-          enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
-
-          // The interactor is a subcomplex
-          if (this.enrichedInteractors[i].isSubComplex && !!this.enrichedInteractors[i].subComponents) {
-            if (this.enrichedInteractors[i].expanded) {
-              // If the subcomplex is expanded, as the subcomplex is part of the complex, all its subcomponents are also part
-              // of it. That means we need a line connecting all the subcomponents.
-              // That line must also connect to the subcomplex, so we start it at -1 to make sure it starts at the interactor cell
-              // and not at the first subcomponent
-              enrichedComplex.startSubComponentIndex = -1;
-              enrichedComplex.endSubComponentIndex = this.enrichedInteractors[i].subComponents.length - 1;
-            }
-          }
-        } else if (this.enrichedInteractors[i].isSubComplex &&
-          !!this.enrichedInteractors[i].subComponents &&
-          this.enrichedInteractors[i].expanded) {
-          // The interactor is not part of the complex, but it is a subcomplex, and it is expanded.
-          // This means the subcomponents of the subcomplex are visible, and any of them could be part of the complex.
+    // We iterate through the components to find the first and last one part of the complex
+    // We do this to be able to draw a line connecting all components in the complex
+    for (let i = 0; i < this.navigatorComponents().length; i++) {
+      if (!this.navigatorComponents()[i].hidden) {
+        if (!!findComponentInComplex(complex, this.navigatorComponents()[i].componentIds(), this.navigatorComponents())) {
+          this.updateComponentIndexes(navigatorComplex, i);
+        } else if (this.navigatorComponents()[i].expanded) {
+          // The component is not part of the complex, but it has subcomponents and it is expanded.
+          // This means the subcomponents are visible, and any of them could be part of the complex.
           // In that case, the line could start or end on any of those subcomponents
-          for (let k = 0; k < this.enrichedInteractors[i].subComponents.length; k++) {
-            if (!!findInteractorInComplex(complex, this.enrichedInteractors[i].subComponents[k].identifier, this.enrichedInteractors)) {
-              // The subcomponent of this interactor is part of the complex, we update the start and end indices for the interactors
-              // line as it may start in this interactor
-              enrichedComplex.startInteractorIndex = this.getMinValue(enrichedComplex.startInteractorIndex, i);
-              if (enrichedComplex.startInteractorIndex === i) {
-                // The line starts in a subcomponent of the interactor, but not on the interactor itself,
-                // so the line does not start in the interactor when expanded
-                enrichedComplex.startInteractorIncludedWhenExpanded = false;
-              }
-              enrichedComplex.endInteractorIndex = this.getMaxValue(enrichedComplex.endInteractorIndex, i);
-              // The subcomponent of this interactor is part of the complex, we update the start and end indices for the subcomponents
-              // line as it may start in this subcomponent
-              enrichedComplex.startSubComponentIndex = this.getMinValue(enrichedComplex.startSubComponentIndex, k);
-              enrichedComplex.endSubComponentIndex = this.getMaxValue(enrichedComplex.endSubComponentIndex, k);
+          for (let j = 0; j < this.navigatorComponents()[i].subComponents.length; j++) {
+            if (!!findComponentInComplex(
+              complex, [this.navigatorComponents()[i].subComponents[j].identifier], this.navigatorComponents())) {
+
+              this.updateSubcomponentIndexes(navigatorComplex, i, j);
             }
           }
         }
       }
     }
-    return enrichedComplex;
+
+    return navigatorComplex;
   }
 
-  private compareFn(a: EnrichedInteractor, b: EnrichedInteractor) {
+  private updateComponentIndexes(navigatorComplex: NavigatorComplex,
+                                 componentIndex: number): void {
+
+    // The component is part of the complex, we update the start and end indices for the component
+    // line as it may start in this component
+    navigatorComplex.startComponentIndex = this.getMinValue(navigatorComplex.startComponentIndex, componentIndex);
+    navigatorComplex.endComponentIndex = this.getMaxValue(navigatorComplex.endComponentIndex, componentIndex);
+
+    // If the component has subcomponents, as the component is part of the complex, the line started at the component or before,
+    // so it must connect from the component to the subcomponents, so we start it at -1 to make sure it starts at the component cell
+    // and not at the first subcomponent
+    navigatorComplex.startSubComponentIndex = -1;
+
+    const navigatorComponent: INavigatorComponent = this.navigatorComponents()[componentIndex];
+    if (navigatorComponent.expanded) {
+      if (navigatorComponent.interactorType === 'stable complex') {
+        // If the expanded component is a subcomplex, as the subcomplex is part of the complex, all its subcomponents are also part
+        // of it. That means the line will connect to all the subcomponents
+        navigatorComplex.endSubComponentIndex = navigatorComponent.subComponents.length - 1;
+      } else {
+        // The component is not a subcomplex, so we need to find the subcomponents that are part of the complex
+        // to know where the line ends
+        for (let j = 0; j < navigatorComponent.subComponents.length; j++) {
+          if (!!findComponentInComplex(
+            navigatorComplex.complex, [navigatorComponent.subComponents[j].identifier], this.navigatorComponents())) {
+            this.updateSubcomponentIndexes(navigatorComplex, componentIndex, j);
+          }
+        }
+      }
+    }
+  }
+
+  private updateSubcomponentIndexes(navigatorComplex: NavigatorComplex, componentIndex: number, subcomponentIndex: number): void {
+    // The subcomponent of this component is part of the complex, we update the start and end indices for the components
+    // line as it may start in this component
+    navigatorComplex.startComponentIndex = this.getMinValue(navigatorComplex.startComponentIndex, componentIndex);
+    navigatorComplex.endComponentIndex = this.getMaxValue(navigatorComplex.endComponentIndex, componentIndex);
+    // The subcomponent of this component is part of the complex, we update the start and end indices for the subcomponents
+    // line as it may start in this subcomponent
+    navigatorComplex.startSubComponentIndex = this.getMinValue(navigatorComplex.startSubComponentIndex, subcomponentIndex);
+    navigatorComplex.endSubComponentIndex = this.getMaxValue(navigatorComplex.endSubComponentIndex, subcomponentIndex);
+  }
+
+  private compareFn(a: INavigatorComponent, b: INavigatorComponent) {
     return -(b.indexAppearing - a.indexAppearing) || // First by order of appearance (staircase effect)
       -(b.timesAppearing - a.timesAppearing); // Then by reversed occurrence, in order to minimize edge length
   }
 
-
-  public classifyInteractorsByOccurrence() {
-    this.enrichedInteractors.sort(this.compareFn.bind(this));
+  private classifyComponentsByOccurrence() {
+    this.navigatorComponents().sort(this.compareFn.bind(this));
     this.ranges = [];
   }
 
-  public classifyBy(key: keyof Interactor) {
-    this.enrichedInteractors.sort((a, b) =>
-      this.timesAppearingBy[key].get(b.interactor[key]) - this.timesAppearingBy[key].get(a.interactor[key]) ||
-      b.interactor[key].localeCompare(a.interactor[key]) ||
-      this.compareFn(a, b));
-    this.calculateRangesBy(key);
+  public classifyBy(componentsSorting: NavigatorComponentSorting) {
+    const key = componentsSorting.valueOf();
+    this.navigatorComponents().sort((a, b) => {
+      const aValue = this.getValueOfSortingField(a, componentsSorting);
+      const bValue = this.getValueOfSortingField(b, componentsSorting);
+      return this.timesAppearingBy[key].get(bValue) - this.timesAppearingBy[key].get(aValue) ||
+        bValue.localeCompare(aValue) ||
+        this.compareFn(a, b);
+    });
+    this.calculateRangesBy(componentsSorting);
   }
 
-  public calculateRangesBy(key: keyof Interactor) {
-    const ranges: Range[] = [];  // [type of interactor, first occurrence, last occurrence, length of the occurrence]
+  private calculateRangesBy(componentsSorting: NavigatorComponentSorting) {
+    const ranges: Range[] = [];
     let length = 0;
     let start = null;
-    for (let i = 0; i < this.enrichedInteractors.length; i++) {
-      if (!this.enrichedInteractors[i].hidden) {
+    for (let i = 0; i < this.navigatorComponents().length; i++) {
+      if (!this.navigatorComponents()[i].hidden) {
         length += 1;
         if (start === null) {
           start = i;
         }
       }
-      const value = this.enrichedInteractors[i].interactor[key];
-      if (!this.enrichedInteractors[i + 1]
-        || (this.enrichedInteractors[i].isSubComplex && this.enrichedInteractors[i].expanded)
-        || value !== this.enrichedInteractors[i + 1].interactor[key]) {
+      const value = this.getValueOfSortingField(this.navigatorComponents()[i], componentsSorting);
+      if (!this.navigatorComponents()[i + 1]
+        || (this.navigatorComponents()[i].expanded)
+        || value !== this.getValueOfSortingField(this.navigatorComponents()[i + 1], componentsSorting)) {
         if (start !== null) {
           ranges.push({value, start, length});
           start = null;
@@ -288,8 +256,8 @@ export class TableInteractorColumnComponent implements OnChanges {
     this.ranges = ranges;
   }
 
-  isInteractorSortingSet() {
-    return this.interactorsSorting() === 'Type' || this.interactorsSorting() === 'Organism';
+  isComponentsSortingSet() {
+    return this.componentsSorting() === 'Type' || this.componentsSorting() === 'Organism';
   }
 
   getExpandedRowClass(i: number, length: number): string {
@@ -305,23 +273,24 @@ export class TableInteractorColumnComponent implements OnChanges {
     return null;
   }
 
-  private calculateTimesAppearing() {
+  private calculateTimesAppearing(complexes: Complex[], navigatorComponents: INavigatorComponent[]) {
+    // Initialise times appearing by type or organism
     for (const map of Object.values(this.timesAppearingBy)) {
       map.clear();
     }
 
-    for (const oneInteractor of this.enrichedInteractors) {
+    for (const component of navigatorComponents) {
       // Initialise times appearing for each interactor
-      oneInteractor.timesAppearing = 0;
-      for (const complex of this.complexes()) {
-        const match = findInteractorInComplex(complex, oneInteractor.interactor.identifier, this.enrichedInteractors);
+      component.timesAppearing = 0;
+      for (const complex of complexes) {
+        const match = findComponentInComplex(complex, component.componentIds(), navigatorComponents);
         if (!!match) {
           // Update times appearing for the interactor
-          oneInteractor.timesAppearing += 1;
+          component.timesAppearing = component.timesAppearing + 1;
           // Update times appearing for the different properties
           for (const key of Object.keys(this.timesAppearingBy)) {
             const map = this.timesAppearingBy[key];
-            const value = oneInteractor.interactor[key];
+            const value = this.getValueOfSortingField(component, key);
             map.set(value, (map.get(value) || 0) + 1);
           }
         }
@@ -329,4 +298,12 @@ export class TableInteractorColumnComponent implements OnChanges {
     }
   }
 
+  private getValueOfSortingField(component: INavigatorComponent, componentsSorting: string): string {
+    if (componentsSorting === NavigatorComponentSorting.TYPE) {
+      return component.interactorType;
+    } else if (componentsSorting === NavigatorComponentSorting.ORGANISM) {
+      return component.organismName;
+    }
+    return null;
+  }
 }

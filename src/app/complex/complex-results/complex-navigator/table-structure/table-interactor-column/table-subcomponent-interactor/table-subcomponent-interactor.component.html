@@ -1,8 +1,8 @@
 <div [ngClass]="displayTopLineClass()"></div>
-@if (!!interactorComponent()) {
+@if (!!navigatorComponent()) {
   <cp-table-interactor-stoichiometry
-    [stoichiometryText]="interactorComponent().stochiometryText"
-    [stoichiometryValue]="interactorComponent().stochiometryValueFormatted"
+    [stoichiometryText]="navigatorComponent().stochiometryText"
+    [stoichiometryValue]="navigatorComponent().stochiometryValueFormatted"
   ></cp-table-interactor-stoichiometry>
 }
 <div [ngClass]="displayBottomLineClass()"></div>

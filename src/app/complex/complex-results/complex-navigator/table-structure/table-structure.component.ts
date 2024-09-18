@@ -5,6 +5,17 @@ import {Complex} from '../../../shared/model/complex-results/complex.model';
 import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
+import {
+  findComponentInComplex,
+  NavigatorComponentGrouping,
+  NavigatorComponentSorting
+} from '../complex-navigator-utils';
+import {INavigatorComponent} from './model/navigator-component.model';
+import {NavigatorSimpleComponent} from './model/navigator-simple-component.model';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {ComplexPortalService} from '../../../shared/service/complex-portal.service';
+import {NavigatorOrthologGroup} from './model/navigator-ortholog-group.model';
 
 @Component({
   selector: 'cp-table-structure',
@@ -14,7 +25,8 @@ import {groupByPropertyToArray} from '../../../complex-portal-utils';
 export class TableStructureComponent {
   complexSearch = input<ComplexSearchResult>();
   interactors = input<Interactor[]>();
-  interactorsSorting = input<string>();
+  componentsSorting = input<NavigatorComponentSorting>();
+  componentsGrouping = input<NavigatorComponentGrouping>();
   organismIconDisplay = input<boolean>();
   interactorTypeDisplay = input<boolean>();
   idDisplay = input<boolean>();
@@ -22,67 +34,136 @@ export class TableStructureComponent {
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
-  sortedComplexes = computed(() => this.sortComplexBySimilarityClustering(this.complexSearch().elements));
+  navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
+  navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
+  navigatorComponents = computed(() => this.componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY
+    ? this.navigatorComponentsGroupedByOrthologs()
+    : this.navigatorComponentsWithoutGrouping());
 
-  private getComponentAsComplex(component: ComplexComponent): Complex | undefined {
-    return this.complexSearch().elements.find(interactor => interactor.complexAC === component.identifier);
+  sortedComplexes = computed(() =>
+    this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
+
+  constructor(private complexPortalService: ComplexPortalService) {
   }
 
-  private calculateSimilarity(complex1: Complex, complex2: Complex) {
+  private createNavigatorComplexes(complexes: Complex[], interactors: Interactor[]): INavigatorComponent[] {
+    const newNavigatorComponents: INavigatorComponent[] = [];
+    for (const interactor of interactors) {
+      const isSubComplex = interactor.interactorType === 'stable complex';
+      const newNavigatorComponent = new NavigatorSimpleComponent(
+        interactor,
+        isSubComplex);
+      if (isSubComplex) {
+        this.loadSubComponents(newNavigatorComponent, complexes)
+          .subscribe(subComponents => newNavigatorComponent.subComponents = subComponents);
+      }
+      newNavigatorComponents.push(newNavigatorComponent);
+    }
+    return newNavigatorComponents;
+  }
+
+  private createOrthologGroups(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
+    const sortedForOrthology = this.classifyInteractorsByOrthology(navigatorComponents);
+    const interactorsWithGroup = sortedForOrthology.filter(interactor => !!interactor.orthologsGroup);
+    const interactorsWithoutGroup = sortedForOrthology.filter(interactor => !interactor.orthologsGroup);
+
+    const groupedByOrthology = interactorsWithGroup.reduce((groups, interactor) => {
+      const group = interactor.orthologsGroup;
+      if (!groups[group.identifier]) {
+        groups[group.identifier] = [];
+      }
+      groups[group.identifier].push(interactor);
+      return groups;
+    }, {} as { [key: string]: INavigatorComponent[] });
+
+    const newNavigatorComponents: INavigatorComponent[] = [];
+    for (const [_, proteins] of Object.entries(groupedByOrthology)) {
+      const group = proteins[0].orthologsGroup;
+      const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
+      newNavigatorComponents.push(orthologsGroup);
+    }
+    newNavigatorComponents.push(...interactorsWithoutGroup);
+    return newNavigatorComponents;
+  }
+
+  private loadSubComponents(component: INavigatorComponent, complexes: Complex[]): Observable<ComplexComponent[]> {
+    // this function returns the list of subcomponents of an interactor of type stable complex
+    const foundComplex: Complex = complexes.find(complex => complex.complexAC === component.identifier);
+    if (!!foundComplex) {
+      return of(foundComplex.interactors);
+    } else {
+      // Actually call the back-end to fetch these
+      return this.complexPortalService.getSimplifiedComplex(component.identifier)
+        .pipe(map(complex => complex?.interactors));
+    }
+  }
+
+  private classifyInteractorsByOrthology(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
+    return navigatorComponents.sort((a, b) => {
+      if (a.orthologsGroup?.identifier < b.orthologsGroup?.identifier) {
+        return -1;
+      }
+      if (a.orthologsGroup?.identifier > b.orthologsGroup?.identifier) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
     if (complex1 === complex2) {
       return 1;
     }
 
-    const [components1, components2] = [complex1, complex2].map(this.getComponents.bind(this));
+    const components1 = this.getComponents(complex1, navigatorComponents);
+    const components2 = this.getComponents(complex2, navigatorComponents);
+
     // @ts-ignore
     return components1.intersection(components2).size / components1.union(components2).size;
   }
 
-  private getComponents(complex: Complex): Set<string> {
+  private getComponents(complex: Complex, navigatorComponents: INavigatorComponent[]): Set<string> {
     if (!complex.componentAcs) {
-      complex.componentAcs = new Set<string>(this.getAllComponents(complex, [], true).map(component => component.identifier));
+      complex.componentAcs = new Set<string>(
+        navigatorComponents
+          .filter(component => findComponentInComplex(complex, component.componentIds(), navigatorComponents))
+          .map(component => component.identifier));
     }
     return complex.componentAcs;
   }
 
-  private getAllComponents(complex?: Complex, components: ComplexComponent[] = [], includeComplexes = false): ComplexComponent[] {
-    for (const component of complex.interactors) {
-      if (component.interactorType === 'stable complex') {
-        const subComplex = this.getComponentAsComplex(component);
-        if (subComplex) {
-          components.push(...this.getAllComponents(subComplex));
-          if (includeComplexes) {
-            components.push(component);
+  sortComplexBySimilarityClustering(complexesList: Complex[], navigatorComponents: INavigatorComponent[]): Complex[] {
+    let sortedComplexesList = complexesList;
+
+    if (!!navigatorComponents && !!navigatorComponents && navigatorComponents.length > 0) {
+      // Group by predicted to cluster only inside the different groups, and place predicted after curated
+      const groups = groupByPropertyToArray(
+        complexesList,
+        'predictedComplex',
+        (a, b) => (a as unknown as number) - (b as unknown as number) // Makes false go before true
+      );
+
+      sortedComplexesList = groups.flatMap(group => {
+        // Calculate Similarity Matrix
+        const sm: number[][] = new Array(group.length).fill(null).map(_ => new Array(group.length).fill(null));
+        group.forEach((complex, i) => group.forEach((comparedComplex, j) => {
+          if (i >= j) { // Avoid useless calculations
+            sm[i][j] = this.calculateSimilarity(complex, comparedComplex, navigatorComponents);
+            sm[j][i] = sm[i][j]; // Matrix is symmetric
           }
-        } else {
-          components.push(component);
-        }
-      } else {
-        components.push(component);
-      }
+        }));
+        return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
+      });
     }
-    return components;
-  }
 
-  sortComplexBySimilarityClustering(complexesList: Complex[]) {
-    // Group by predicted to cluster only inside the different groups, and place predicted after curated
-    const groups = groupByPropertyToArray(
-      complexesList,
-      'predictedComplex',
-      (a, b) => (a as unknown as number) - (b as unknown as number) // Makes false go before true
-    );
-
-    return groups.flatMap(group => {
-      // Calculate Similarity Matrix
-      const sm: number[][] = new Array(group.length).fill(null).map(r => new Array(group.length).fill(null));
-      group.forEach((complex, i) => group.forEach((comparedComplex, j) => {
-        if (i >= j) { // Avoid useless calculations
-          sm[i][j] = this.calculateSimilarity(complex, comparedComplex);
-          sm[j][i] = sm[i][j]; // Matrix is symmetric
-        }
-      }));
-      return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
+    // After the complexes have been sorted, we then set the index appearing for all components
+    // so they are properly sorted later
+    navigatorComponents.forEach(component => {
+      component.indexAppearing = sortedComplexesList.findIndex(complex =>
+        component.componentIds().some(componentId => complex.componentAcs?.has(componentId))) || 0;
     });
+
+    return sortedComplexesList;
   }
 
   /**

@@ -4,7 +4,7 @@
     @if (complexes().length<=6) {
       <thead class="tableHead">
         <tr>
-          @if (isInteractorSortingSet()) {
+          @if (isComponentsSortingSet()) {
             <th class="spaceHolderSorting"></th>
           }
           <th class="interactorsHeader horizontal">
@@ -38,12 +38,12 @@
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
       <thead class="tableHeadOverflow"
-        [ngClass]="isInteractorSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
+        [ngClass]="isComponentsSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
         <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
+          [style.--intHeader]="isComponentsSortingSet() ? '156px':''"
           [style.--sizeSpaceHolder]="'185px'">
           <th class="spaceHolderHeaderOverflow"
-            [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+            [style]="isComponentsSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
           </th>
           @for (complex of complexes(); track complex.complexAC) {
             <th class="rotate"
@@ -67,10 +67,10 @@
         </tr>
         <!-- icons row -->
         <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isInteractorSortingSet() ? '156px':''"
+          [style.--intHeader]="isComponentsSortingSet() ? '156px':''"
           [style.--sizeSpaceHolder]="'185px'">
           <th class="interactorsHeader overflow"
-            [style]="isInteractorSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
+            [style]="isComponentsSortingSet() ? 'min-width: 156px; max-width: 156px;':''">
             Components
           </th>
           @for ( complex of complexes(); track  complex.complexAC) {
