@@ -8,6 +8,7 @@ html {
   --primary-2: oklch(from var(--primary) calc(l - 0.2) c h);
   --background-colour: #eaeaea;
   --on-primary: #ffffff;
+  --svg-colour-invert: invert(100%);
 }
 
 a {
@@ -282,6 +283,7 @@ a:visited {
   --primary: #cce4e6;
   --background-colour: #f8f8f8;
   --on-primary: #007c83;
+  --svg-colour-invert: invert(0%);
   font-family: "Roboto Flex", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;

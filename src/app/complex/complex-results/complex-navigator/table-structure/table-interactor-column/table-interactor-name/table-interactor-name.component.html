@@ -1,9 +1,15 @@
 <div class="container">
   <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
     @if (organismIconDisplay()) {
-      <i
-        class="{{interactorOrganismIcon()}}"
-      [matTooltip]="interactorOrganism() | species"></i>
+      @if (interactorOrganismIcon().startsWith('icon')) {
+        <i
+          class="{{interactorOrganismIcon()}}"
+          [matTooltip]="interactorOrganism() | species"></i>
+      } @else {
+        <div class="organism-image"
+             [style]="maskStyle">
+        </div>
+      }
     }
 
     @if (interactorTypeDisplay()) {
