@@ -29,12 +29,12 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
     for (let i = 0; i < this._subComponents.length; i++) {
       if (this._subComponents[i].organismName.includes('Homo sapiens')) {
         mainGeneName = this._subComponents[i].name;
-        return 'Ortholog Gene: ' + mainGeneName;
-      } else if (this._subComponents[i].timesAppearing > biggestTimeAppearing) {
+        return mainGeneName;
+      } else if (this._subComponents[i].timesAppearing >= biggestTimeAppearing) {
         mainGeneName = this._subComponents[i].name;
       }
     }
-    return 'Ortholog Gene: ' + mainGeneName;
+    return mainGeneName;
   }
 
   get interactorType(): string {

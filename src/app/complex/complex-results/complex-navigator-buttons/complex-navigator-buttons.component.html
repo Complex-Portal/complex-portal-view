@@ -5,7 +5,10 @@
       <input type="button" name="occurrenceClassification" value="No Grouping" class="button"
              (click)="componentsGroupingChanges(NavigatorComponentGrouping.DEFAULT)">
       <input type="button" name="typeClassification" value="Orthology" class="button"
-             (click)="componentsGroupingChanges(NavigatorComponentGrouping.ORTHOLOGY)">
+             (click)="componentsGroupingChanges(NavigatorComponentGrouping.ORTHOLOGY)"
+             [disabled]="!orthologButtonAvailable()"
+             [matTooltip]="'No orthologs groups available'"
+             [matTooltipDisabled]="orthologButtonAvailable()">
     </div>
   </div>
 

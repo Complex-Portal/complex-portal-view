@@ -1,15 +1,21 @@
 <div class="container">
-  <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
+  <div class="nameAndIcons"
+       [ngClass]="{inlineDisplay: interactorType()==='stable complex', evenlySpaced: interactorId().includes('PTHR')}">
+    @if (interactorId().includes('PTHR')) {
+      <div class="orthologGroup">
+        Ortholog group
+      </div>
+    }
     @if (organismIconDisplay()) {
       <i
         class="{{interactorOrganismIcon()}}"
-      [matTooltip]="interactorOrganism() | species"></i>
+        [matTooltip]="interactorOrganism() | species"></i>
     }
 
     @if (interactorTypeDisplay()) {
       <i
         class="{{interactorTypeIcon()}}"
-      [matTooltip]="interactorType()"></i>
+        [matTooltip]="interactorType()"></i>
     }
 
     @if (idDisplay()) {
@@ -23,7 +29,7 @@
         [queryParams]="{query: interactorId(), page: 1}"
         target="_blank">
         <i class="icon icon-functional small" data-icon="1"
-        [matTooltip]="'More complexes containing ' + interactorName() "></i>
+           [matTooltip]="'More complexes containing ' + interactorName() "></i>
       </a>
     }
 
@@ -39,10 +45,10 @@
           </div>
         }
         <a [routerLink]="['/complex/search']"
-          [queryParams]="{query: interactorId(), page: 1}"
-          target="_blank">
+           [queryParams]="{query: interactorId(), page: 1}"
+           target="_blank">
           <i class="icon icon-functional small" data-icon="1"
-          [matTooltip]="'More complexes containing ' + interactorName() "></i>
+             [matTooltip]="'More complexes containing ' + interactorName() "></i>
         </a>
       </div>
     }

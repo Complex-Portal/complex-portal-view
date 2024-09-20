@@ -1,8 +1,10 @@
-import {Component, model, OnInit} from '@angular/core';
+import {Component, computed, input, model, OnInit} from '@angular/core';
 import {
   NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../complex-navigator/complex-navigator-utils';
+import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
+import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
@@ -15,6 +17,9 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   organismIconDisplay = model<boolean>();
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
+  complexSearch = input<ComplexSearchResult>();
+
+  orthologButtonAvailable = computed(() => this.checkIfPantherGroups());
 
   typeOfDisplay: 'compact' | 'detailed';
 
@@ -86,5 +91,28 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
     } else {
       this.typeOfDisplay = 'compact';
     }
+  }
+
+  checkIfPantherGroups() {
+    const pantherXrefs = new Set<string>();
+    const parsedInteractors = new Set<ComplexComponent>();
+
+    for (const complex of this.complexSearch().elements) {
+      for (const complexComponent of complex.interactors) {
+        parsedInteractors.add(complexComponent);
+      }
+    }
+
+    for (const complexComponent of parsedInteractors) {
+      for (const xref of complexComponent.xrefs) {
+        if (xref.database === 'panther' && xref.qualifier === 'orthology-group') {
+          if (pantherXrefs.has(xref.identifier)) {
+            return true;
+          }
+          pantherXrefs.add(xref.identifier);
+        }
+      }
+    }
+    return false;
   }
 }

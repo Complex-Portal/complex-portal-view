@@ -35,3 +35,12 @@ i:not(.small) {
   display: inline-flex;
   width: -webkit-fill-available;
 }
+
+.evenlySpaced {
+  justify-content: space-around;
+}
+
+.orthologGroup {
+  width: 50%;
+  text-align: left
+}

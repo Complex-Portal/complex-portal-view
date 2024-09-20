@@ -173,7 +173,6 @@ export class TableStructureComponent {
     navigatorComponents.forEach(component => {
       component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
     });
-
     return sortedComplexesList;
   }
 
