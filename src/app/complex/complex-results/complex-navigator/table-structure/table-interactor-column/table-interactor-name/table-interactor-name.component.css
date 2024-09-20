@@ -19,7 +19,7 @@ i:not(.small) {
 
 .inlineDisplay {
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .name {
