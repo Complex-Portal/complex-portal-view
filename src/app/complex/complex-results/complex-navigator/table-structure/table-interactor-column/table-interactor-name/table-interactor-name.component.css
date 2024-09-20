@@ -18,8 +18,8 @@ i:not(.small) {
 }
 
 .inlineDisplay {
-  display: flex;
-  justify-content: flex-end;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .name {
@@ -37,15 +37,13 @@ i:not(.small) {
 }
 
 .evenlySpaced {
-  justify-content: space-around;
+  max-width: 90%;
+  display: inline-flex;
+  justify-content: flex-end;
+  text-overflow: ellipsis;
 }
 
 .orthologGroup {
-  width: 50%;
+  width: 47%;
   text-align: left
 }
-
-/*.nameAndIcon {*/
-/*  display: inline-flex;*/
-/*  justify-content: flex-end;*/
-/*}*/

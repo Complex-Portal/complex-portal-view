@@ -84,7 +84,7 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   }
 
   get expandLabel(): string {
-    return 'Ortholog group members';
+    return 'Group members';
   }
 
   get timesAppearing(): number {

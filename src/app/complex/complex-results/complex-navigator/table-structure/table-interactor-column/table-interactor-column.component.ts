@@ -4,7 +4,6 @@ import {NavigatorComplex} from '../model/navigator-complex.model';
 import {INavigatorComponent} from '../model/navigator-component.model';
 import {
   findComponentInComplex,
-  NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../../complex-navigator-utils';
 

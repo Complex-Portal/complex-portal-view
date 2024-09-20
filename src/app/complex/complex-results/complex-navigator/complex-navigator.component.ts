@@ -88,7 +88,6 @@ export class ComplexNavigatorComponent {
     }
     newNavigatorComponents.push(...interactorsWithoutGroup);
     return newNavigatorComponents;
-    // return {newComponents: newNavigatorComponents, anyOrthologGroupCreated};
   }
 
   private loadSubComponents(component: INavigatorComponent, complexes: Complex[]): Observable<ComplexComponent[]> {
