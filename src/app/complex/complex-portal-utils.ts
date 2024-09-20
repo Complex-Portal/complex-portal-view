@@ -32,6 +32,7 @@ export function organismIcon(organism: string): string {
     case 'Mus musculus':
       return 'icon icon-species icon-mouse';
     case 'Schizosaccharomyces pombe':
+      return 'assets/images/EMBL_Saccharomyces-pombe.svg';
     case 'Saccharomyces cerevisiae':
       return 'icon icon-species icon-yeast';
     case 'Escherichia coli':

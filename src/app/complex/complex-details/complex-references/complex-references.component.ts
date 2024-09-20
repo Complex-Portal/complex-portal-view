@@ -20,6 +20,12 @@ export class ComplexReferencesComponent implements OnInit {
     this.findXRefs();
   }
 
+  get hasXrefsOrSynonymsOrSystematicName(): boolean {
+    return (this.pubmedXRefs && this.pubmedXRefs.length > 0) ||
+      (this.synonyms && this.synonyms.length > 0) ||
+      (!!this.systematicName && this.systematicName.length > 0);
+  }
+
   private findXRefs() {
     for (let i = 0; i < this._crossReferences.length; i++) {
       const crossRef = this._crossReferences[i];

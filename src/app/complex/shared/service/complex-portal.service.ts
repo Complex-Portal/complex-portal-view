@@ -8,7 +8,7 @@ import {Observable, throwError} from 'rxjs';
 
 import {ComplexDetails} from '../model/complex-details/complex-details.model';
 import {ComplexSearchResult} from '../model/complex-results/complex-search.model';
-import {Element} from '../model/complex-results/element.model';
+import {Complex} from '../model/complex-results/complex.model';
 import {Facet} from '../model/complex-results/facet.model';
 
 const baseURL = environment.complex_ws_base_url;
@@ -81,7 +81,7 @@ export class ComplexPortalService {
                        currentPageIndex = 1,
                        pageSize = 10,
                        format = 'json'): Observable<ComplexSearchResult> {
-    return this.findComplex(query, [], [], [], [], [], currentPageIndex, pageSize, format);
+    return this.findComplex(query, [], [], [], [], 1, currentPageIndex, pageSize, format);
   }
 
   /**
@@ -102,7 +102,7 @@ export class ComplexPortalService {
               bioRoleFilter: string[] = [],
               interactorTypeFilter: string[] = [],
               predictedFilter: string[] = [],
-              confidenceScoreFilter: string[] = [],
+              confidenceScoreFilter = 1,
               currentPageIndex = 1,
               pageSize = 10,
               format = 'json'): Observable<ComplexSearchResult> {
@@ -120,8 +120,8 @@ export class ComplexPortalService {
     if (predictedFilter.length !== 0) {
       filters += this.buildFilterParam(ComplexPortalService.PREDICTED_FACET_FIELD, predictedFilter);
     }
-    if (confidenceScoreFilter.length !== 0) {
-      filters += this.buildFilterParam(ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD, confidenceScoreFilter);
+    if (!isNaN(confidenceScoreFilter) && confidenceScoreFilter !== 1) {
+      filters += this.buildFilterParam(ComplexPortalService.CONFIDENCE_SCORE_FACET_FIELD, [confidenceScoreFilter.toString()]);
     }
 
     /** HttpParams is immutable. Its set() method returns a new HttpParams, without mutating the original one **/
@@ -148,8 +148,31 @@ export class ComplexPortalService {
     }
   }
 
-  getSimplifiedComplex(complexAc: string): Observable<Element> {
+  getSimplifiedComplex(complexAc: string): Observable<Complex> {
     return this.http.get(`${baseURL}/complex-simplified/${complexAc}`).pipe(catchError(this.handleError));
   }
 
+}
+
+function range(start: number, stop?: number, step = 1): number[] {
+  const result: number[] = [];
+
+  // If only one argument is provided, treat it as the stop value and set start to 0
+  if (stop === undefined) {
+    stop = start;
+    start = 0;
+  }
+
+  // Ensure the loop terminates correctly based on positive/negative step values
+  if (step > 0) {
+    for (let i = start; i < stop; i += step) {
+      result.push(i);
+    }
+  } else if (step < 0) {
+    for (let i = start; i > stop; i += step) {
+      result.push(i);
+    }
+  }
+
+  return result;
 }

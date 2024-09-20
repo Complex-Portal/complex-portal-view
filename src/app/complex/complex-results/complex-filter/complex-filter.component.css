@@ -24,25 +24,15 @@ label {
   margin-left: 6px;
 }
 
-.predicted .count {
-  border: 1px solid black;
-}
-
-input:checked ~ .count {
+input:checked ~ .count,
+.count.checked {
   background: var(--primary);
   color: var(--on-primary);
   font-weight: bold;
   border: 1px solid var(--primary);
 }
 
-.stars {
-  /*display: flex;*/
-  gap: 4px;
-}
 
-.stars .icon {
-  font-size: 12pt;
-}
 .empty {
   color: lightgray;
 }
@@ -52,3 +42,54 @@ input:checked ~ .count {
   -webkit-text-stroke: 1px var(--on-primary);
   text-shadow: 0 0 4px var(--primary);
 }
+
+.confidence-container {
+  display: flex;
+  margin-left: -14px;
+  margin-bottom: 5px;
+
+  .slider-container {
+    width: 35px;
+    height: 100%;
+
+    mat-slider {
+      transform: rotate(90deg) translate(10px, -75%);
+      transform-origin: 0 0;
+    }
+  }
+
+  .stars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1px;
+    align-items: flex-start;
+
+    .star-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer ;
+
+      .block {
+        background-color: var(--primary);
+        height: 23px;
+        border-radius: 0 4px 4px 0;
+
+        &.null {
+          visibility: hidden;
+        }
+      }
+
+      .icon {
+        font-size: 12pt;
+        aspect-ratio: 1 / 1;
+        text-align: center;
+        height: 100%;
+        margin: 0;
+      }
+    }
+  }
+
+}
+

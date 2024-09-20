@@ -183,3 +183,7 @@ a {
 .basketButton {
   text-align: center;
 }
+
+.iconOrganismImg {
+  filter: var(--svg-colour-invert);
+}

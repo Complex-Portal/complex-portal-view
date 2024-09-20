@@ -1,5 +1,5 @@
 import {Component, output, input } from '@angular/core';
-import {Element} from '../../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {organismIcon} from '../../../../complex-portal-utils';
 import {BasketService} from '../../../../../shared/basket/service/basket.service';
 
@@ -10,11 +10,15 @@ import {BasketService} from '../../../../../shared/basket/service/basket.service
 })
 
 export class TableHeaderComponent {
-  complexes = input<Element[]>();
+  complexes = input<Complex[]>();
   interactorsSorting = input<string>();
   onComplexRemovedFromBasket = output<string>();
 
   constructor(private basketService: BasketService) {
+  }
+
+  anyPredictedComplex(): boolean {
+    return this.complexes().some(c => c.predictedComplex);
   }
 
   isInteractorSortingSet() {
@@ -25,7 +29,7 @@ export class TableHeaderComponent {
     return organismIcon(organismName);
   }
 
-  toggleBasket(complex: Element) {
+  toggleBasket(complex: Complex) {
     if (this.isInBasket(complex.complexAC)) {
       this.removeComplex(complex.complexAC);
     } else {
@@ -33,7 +37,7 @@ export class TableHeaderComponent {
     }
   }
 
-  saveComplex(complex: Element) {
+  saveComplex(complex: Complex) {
     this.basketService.saveInBasket(complex);
   }
 

@@ -178,7 +178,7 @@ export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
           case 'Schizosaccharomyces pombe (strain 972 / ATCC 24843)':
             organisms[i].scientificName = 'Schizosaccharomyces pombe';
             organisms[i].nameDetails = 'strain 972 / ATCC 24843';
-            organisms[i].symbol = 'Y';
+            organisms[i].symbol = 'assets/images/EMBL_Saccharomyces-pombe.svg';
             organisms[i].type = 'animal';
             organisms[i].psi25 = 'Schizosaccharomyces_pombe';
             organisms[i].psi30 = 'schpo';

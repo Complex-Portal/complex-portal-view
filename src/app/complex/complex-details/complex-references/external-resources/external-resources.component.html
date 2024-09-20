@@ -1,4 +1,4 @@
-@if (crossReferences) {
+@if (crossReferences && crossReferences.length > 0) {
   <div class="row">
     <div class="columns medium-12 margin-top-medium no-pad-left">
       <h3>External Resources</h3>
@@ -14,8 +14,11 @@
                   <a href="{{crossReference.searchURL}}" target="_blank">
                     {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
                   </a>
-                }
-                @if (!crossReference.searchURL) {
+                } @else if (crossReference.database.toLowerCase() === 'humap') {
+                  <a href="{{humapUrl(crossReference)}}" target="_blank">
+                    {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
+                  </a>
+                } @else {
                   <span>{{crossReference.identifier}}</span>
                 }
               </td>

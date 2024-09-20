@@ -4,7 +4,7 @@ import {ComplexComponent} from '../../../../shared/model/complex-results/complex
 import {Observable, of} from 'rxjs';
 import {ComplexPortalService} from '../../../../shared/service/complex-portal.service';
 import {findInteractorInComplex} from './complex-navigator-utils';
-import {Element} from '../../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {map} from 'rxjs/operators';
 import {SpeciesPipe} from '../../../../shared/pipe/species.pipe';
 
@@ -21,7 +21,7 @@ export class EnrichedInteractor {
 }
 
 export class EnrichedComplex {
-  complex: Element;
+  complex: Complex;
   startInteractorIndex: number;
   endInteractorIndex: number;
   startSubComponentIndex: number;
@@ -41,7 +41,7 @@ interface Range {
   styleUrls: ['./table-interactor-column.component.css']
 })
 export class TableInteractorColumnComponent implements OnChanges {
-  complexes = input<Element[]>([]);
+  complexes = input<Complex[]>([]);
   interactorsSorting = input<string>();
   interactors = input<Interactor[]>([]);
   organismIconDisplay = input<boolean>(true);
@@ -141,7 +141,7 @@ export class TableInteractorColumnComponent implements OnChanges {
 
   private loadSubInteractors(interactor: EnrichedInteractor): Observable<ComplexComponent[]> {
     // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Element = this.complexes().find(complex => complex.complexAC === interactor.interactor.identifier);
+    const foundComplex: Complex = this.complexes().find(complex => complex.complexAC === interactor.interactor.identifier);
     if (!!foundComplex) {
       return of(foundComplex.interactors);
     } else {
@@ -179,7 +179,7 @@ export class TableInteractorColumnComponent implements OnChanges {
     return Math.max(valueA, valueB);
   }
 
-  private calculateStartAndEndIndexes(complex: Element): EnrichedComplex {
+  private calculateStartAndEndIndexes(complex: Complex): EnrichedComplex {
     const enrichedComplex: EnrichedComplex = {
       complex,
       startInteractorIndex: null,

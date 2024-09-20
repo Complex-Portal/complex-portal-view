@@ -1,7 +1,7 @@
 import {Component, computed, input, output} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../../shared/model/complex-results/interactor.model';
-import {Element} from '../../../shared/model/complex-results/element.model';
+import {Complex} from '../../../shared/model/complex-results/complex.model';
 import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
@@ -24,11 +24,11 @@ export class TableStructureComponent {
 
   sortedComplexes = computed(() => this.sortComplexBySimilarityClustering(this.complexSearch().elements));
 
-  private getComponentAsComplex(component: ComplexComponent): Element | undefined {
+  private getComponentAsComplex(component: ComplexComponent): Complex | undefined {
     return this.complexSearch().elements.find(interactor => interactor.complexAC === component.identifier);
   }
 
-  private calculateSimilarity(complex1: Element, complex2: Element) {
+  private calculateSimilarity(complex1: Complex, complex2: Complex) {
     if (complex1 === complex2) {
       return 1;
     }
@@ -38,19 +38,22 @@ export class TableStructureComponent {
     return components1.intersection(components2).size / components1.union(components2).size;
   }
 
-  private getComponents(complex: Element): Set<string> {
+  private getComponents(complex: Complex): Set<string> {
     if (!complex.componentAcs) {
-      complex.componentAcs = new Set<string>(this.getAllComponents(complex).map(component => component.identifier));
+      complex.componentAcs = new Set<string>(this.getAllComponents(complex, [], true).map(component => component.identifier));
     }
     return complex.componentAcs;
   }
 
-  private getAllComponents(complex?: Element, components: ComplexComponent[] = []): ComplexComponent[] {
+  private getAllComponents(complex?: Complex, components: ComplexComponent[] = [], includeComplexes = false): ComplexComponent[] {
     for (const component of complex.interactors) {
       if (component.interactorType === 'stable complex') {
         const subComplex = this.getComponentAsComplex(component);
         if (subComplex) {
           components.push(...this.getAllComponents(subComplex));
+          if (includeComplexes) {
+            components.push(component);
+          }
         } else {
           components.push(component);
         }
@@ -61,7 +64,7 @@ export class TableStructureComponent {
     return components;
   }
 
-  sortComplexBySimilarityClustering(complexesList: Element[]) {
+  sortComplexBySimilarityClustering(complexesList: Complex[]) {
     // Group by predicted to cluster only inside the different groups, and place predicted after curated
     const groups = groupByPropertyToArray(
       complexesList,
@@ -94,6 +97,7 @@ export class TableStructureComponent {
     let currentIdx = tf.argMax(sm.sum(0)).arraySync() as number;  // Start with complex with most similarities
     idx.push(currentIdx);
 
+    const currentCluster: Set<number> = new Set<number>();
     for (let i = 1; i < sm.shape[0]; i++) {
       // Mask already selected indices
       const buffer = sm.bufferSync();
@@ -105,13 +109,23 @@ export class TableStructureComponent {
       // Find the closest complex to last selected
       const sm_i = sm.gather([currentIdx]).arraySync()[0] as number[];
       currentIdx = tf.argMax(sm_i).arraySync() as number;
-
+      sm_i.forEach((similarity, i) => {
+          if (similarity > 0) {
+            currentCluster.add(i);
+          }
+        }
+      );
       // If no similar entities (cluster ends), take the next complex with most similarities
       if (sm_i[currentIdx] === 0) {
-        currentIdx = tf.argMax(sm.sum(0)).arraySync() as number;
+        if (currentCluster.size !== 0) {
+          currentIdx = currentCluster.values().next().value; // Pick another one from the cluster
+        } else {
+          currentIdx = tf.argMax(sm.sum(0)).arraySync() as number; // If cluster is empty, take the next biggest cluster seed
+        }
       }
 
       idx.push(currentIdx);
+      currentCluster.delete(currentIdx);
     }
     return idx;
   }
