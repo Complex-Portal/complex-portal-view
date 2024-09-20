@@ -44,3 +44,8 @@ i:not(.small) {
   width: 50%;
   text-align: left
 }
+
+/*.nameAndIcon {*/
+/*  display: inline-flex;*/
+/*  justify-content: flex-end;*/
+/*}*/

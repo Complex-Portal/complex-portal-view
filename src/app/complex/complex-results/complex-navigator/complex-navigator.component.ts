@@ -1,4 +1,4 @@
-import {Component, output, input } from '@angular/core';
+import {Component, output, input} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator-utils';
@@ -15,6 +15,7 @@ export class ComplexNavigatorComponent {
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
+  orthologGroupsAvailable = true;
 
   componentsSorting = NavigatorComponentSorting.DEFAULT;
   componentsGrouping = NavigatorComponentGrouping.DEFAULT;

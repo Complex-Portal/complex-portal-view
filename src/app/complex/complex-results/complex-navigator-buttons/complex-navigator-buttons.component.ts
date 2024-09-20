@@ -18,8 +18,9 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
   complexSearch = input<ComplexSearchResult>();
+  orthologButtonAvailable = input<boolean>();
 
-  orthologButtonAvailable = computed(() => this.checkIfPantherGroups());
+  // orthologButtonAvailable = computed(() => this.checkIfPantherGroups());
 
   typeOfDisplay: 'compact' | 'detailed';
 
@@ -93,26 +94,26 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
     }
   }
 
-  checkIfPantherGroups() {
-    const pantherXrefs = new Set<string>();
-    const parsedInteractors = new Set<ComplexComponent>();
-
-    for (const complex of this.complexSearch().elements) {
-      for (const complexComponent of complex.interactors) {
-        parsedInteractors.add(complexComponent);
-      }
-    }
-
-    for (const complexComponent of parsedInteractors) {
-      for (const xref of complexComponent.xrefs) {
-        if (xref.database === 'panther' && xref.qualifier === 'orthology-group') {
-          if (pantherXrefs.has(xref.identifier)) {
-            return true;
-          }
-          pantherXrefs.add(xref.identifier);
-        }
-      }
-    }
-    return false;
-  }
+  // checkIfPantherGroups() {
+  //   const pantherXrefs = new Set<string>();
+  //   const parsedInteractors = new Set<ComplexComponent>();
+  //
+  //   for (const complex of this.complexSearch().elements) {
+  //     for (const complexComponent of complex.interactors) {
+  //       parsedInteractors.add(complexComponent);
+  //     }
+  //   }
+  //
+  //   for (const complexComponent of parsedInteractors) {
+  //     for (const xref of complexComponent.xrefs) {
+  //       if (xref.database === 'panther' && xref.qualifier === 'orthology-group') {
+  //         if (pantherXrefs.has(xref.identifier)) {
+  //           return true;
+  //         }
+  //         pantherXrefs.add(xref.identifier);
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // }
 }

@@ -6,7 +6,9 @@
       [(organismIconDisplay)]="organismIconDisplay"
       [(interactorTypeDisplay)]="interactorTypeDisplay"
       [(idDisplay)]="idDisplay"
-      [complexSearch]="complexSearch()">
+      [complexSearch]="complexSearch()"
+      [orthologButtonAvailable]="orthologGroupsAvailable">
+
     </cp-complex-navigator-buttons>
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"
@@ -18,6 +20,7 @@
                       [idDisplay]="idDisplay"
                       [canAddComplexesToBasket]="canAddComplexesToBasket()"
                       [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket()"
+                      [(orthologGroupsAvailable)]="orthologGroupsAvailable"
                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
   </cp-table-structure>
 </div>
