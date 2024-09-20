@@ -1,4 +1,4 @@
-import {Component, computed, input, model, OnInit} from '@angular/core';
+import {Component, computed, input, model, OnInit, output} from '@angular/core';
 import {
   NavigatorComponentGrouping,
   NavigatorComponentSorting
@@ -13,14 +13,12 @@ import {ComplexComponent} from '../../shared/model/complex-results/complex-compo
 })
 export class ComplexNavigatorButtonsComponent implements OnInit {
   componentsSorting = model<NavigatorComponentSorting>();
-  componentsGrouping = model<NavigatorComponentGrouping>();
   organismIconDisplay = model<boolean>();
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
   complexSearch = input<ComplexSearchResult>();
   orthologButtonAvailable = input<boolean>();
-
-  // orthologButtonAvailable = computed(() => this.checkIfPantherGroups());
+  onGroupingChanged = output<NavigatorComponentGrouping>();
 
   typeOfDisplay: 'compact' | 'detailed';
 
@@ -29,10 +27,11 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
 
   ngOnInit() {
     this.updateDisplay();
+    this.onGroupingChanged.emit(NavigatorComponentGrouping.DEFAULT);
   }
 
   componentsGroupingChanges(typeOfGrouping: NavigatorComponentGrouping) {
-    this.componentsGrouping.set(typeOfGrouping);
+    this.onGroupingChanged.emit(typeOfGrouping);
   }
 
   componentsSortingChanges(typeOfSorting: NavigatorComponentSorting) {
@@ -93,27 +92,4 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
       this.typeOfDisplay = 'compact';
     }
   }
-
-  // checkIfPantherGroups() {
-  //   const pantherXrefs = new Set<string>();
-  //   const parsedInteractors = new Set<ComplexComponent>();
-  //
-  //   for (const complex of this.complexSearch().elements) {
-  //     for (const complexComponent of complex.interactors) {
-  //       parsedInteractors.add(complexComponent);
-  //     }
-  //   }
-  //
-  //   for (const complexComponent of parsedInteractors) {
-  //     for (const xref of complexComponent.xrefs) {
-  //       if (xref.database === 'panther' && xref.qualifier === 'orthology-group') {
-  //         if (pantherXrefs.has(xref.identifier)) {
-  //           return true;
-  //         }
-  //         pantherXrefs.add(xref.identifier);
-  //       }
-  //     }
-  //   }
-  //   return false;
-  // }
 }

@@ -1,21 +1,13 @@
-import {Component, computed, effect, input, model, output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
-import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {Complex} from '../../../shared/model/complex-results/complex.model';
-import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {
   findComponentInComplex,
-  NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
-import {NavigatorSimpleComponent} from './model/navigator-simple-component.model';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {ComplexPortalService} from '../../../shared/service/complex-portal.service';
-import {NavigatorOrthologGroup} from './model/navigator-ortholog-group.model';
 
 @Component({
   selector: 'cp-table-structure',
@@ -24,110 +16,17 @@ import {NavigatorOrthologGroup} from './model/navigator-ortholog-group.model';
 })
 export class TableStructureComponent {
   complexSearch = input<ComplexSearchResult>();
-  interactors = input<Interactor[]>();
+  navigatorComponents = input<INavigatorComponent[]>();
   componentsSorting = input<NavigatorComponentSorting>();
-  componentsGrouping = input<NavigatorComponentGrouping>();
   organismIconDisplay = input<boolean>();
   interactorTypeDisplay = input<boolean>();
   idDisplay = input<boolean>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
-  orthologGroupsAvailable = model<boolean>();
-
-  navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
-  // navigatorComponentsGroupedByOrthologs = computed(() => {
-  //   const {newComponents, anyOrthologGroupCreated} = this.createOrthologGroups(this.navigatorComponentsWithoutGrouping());
-  //   return newComponents; // Just return the new components here
-  // });
-  navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
-
-
-  navigatorComponents = computed(() => this.componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY
-    ? this.navigatorComponentsGroupedByOrthologs()
-    : this.navigatorComponentsWithoutGrouping());
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
-
-  constructor(private complexPortalService: ComplexPortalService) {
-    // this.updateOrthologGroupsAvailability();
-  }
-
-  private createNavigatorComplexes(complexes: Complex[], interactors: Interactor[]): INavigatorComponent[] {
-    const newNavigatorComponents: INavigatorComponent[] = [];
-    for (const interactor of interactors) {
-      const isSubComplex = interactor.interactorType === 'stable complex';
-      const newNavigatorComponent = new NavigatorSimpleComponent(
-        interactor,
-        isSubComplex);
-      if (isSubComplex) {
-        this.loadSubComponents(newNavigatorComponent, complexes)
-          .subscribe(subComponents => newNavigatorComponent.subComponents = subComponents);
-      }
-      newNavigatorComponents.push(newNavigatorComponent);
-    }
-    return newNavigatorComponents;
-  }
-
-  private createOrthologGroups(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
-    // { newComponents: INavigatorComponent[]; anyOrthologGroupCreated: boolean } {
-    const sortedForOrthology = this.classifyInteractorsByOrthology(navigatorComponents);
-    const interactorsWithGroup = sortedForOrthology.filter(interactor => !!interactor.orthologsGroup);
-    const interactorsWithoutGroup = sortedForOrthology.filter(interactor => !interactor.orthologsGroup);
-
-    const groupedByOrthology = interactorsWithGroup.reduce((groups, interactor) => {
-      const group = interactor.orthologsGroup;
-      if (!groups[group.identifier]) {
-        groups[group.identifier] = [];
-      }
-      groups[group.identifier].push(interactor);
-      return groups;
-    }, {} as { [key: string]: INavigatorComponent[] });
-
-    let anyOrthologGroupCreated = false;
-    const newNavigatorComponents: INavigatorComponent[] = [];
-    for (const [_, proteins] of Object.entries(groupedByOrthology)) {
-      if (proteins.length > 1) {
-        // Multiple proteins in the ortholog group
-        const group = proteins[0].orthologsGroup;
-        const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
-        newNavigatorComponents.push(orthologsGroup);
-        anyOrthologGroupCreated = true;
-      } else if (proteins.length === 1) {
-        // Single proteins in the ortholog group, there's no need to create the group, we just use the protein component
-        newNavigatorComponents.push(proteins[0]);
-      }
-    }
-    this.orthologGroupsAvailable.set(anyOrthologGroupCreated);
-    newNavigatorComponents.push(...interactorsWithoutGroup);
-    return newNavigatorComponents;
-    // return {newComponents: newNavigatorComponents, anyOrthologGroupCreated};
-  }
-
-  private loadSubComponents(component: INavigatorComponent, complexes: Complex[]): Observable<ComplexComponent[]> {
-    // this function returns the list of subcomponents of an interactor of type stable complex
-    const foundComplex: Complex = complexes.find(complex => complex.complexAC === component.identifier);
-    if (!!foundComplex) {
-      return of(foundComplex.interactors);
-    } else {
-      // Actually call the back-end to fetch these
-      return this.complexPortalService.getSimplifiedComplex(component.identifier)
-        .pipe(map(complex => complex?.interactors));
-    }
-  }
-
-  private classifyInteractorsByOrthology(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
-    return navigatorComponents.sort((a, b) => {
-      if (a.orthologsGroup?.identifier < b.orthologsGroup?.identifier) {
-        return -1;
-      }
-      if (a.orthologsGroup?.identifier > b.orthologsGroup?.identifier) {
-        return 1;
-      }
-      return 0;
-    });
-  }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
     if (complex1 === complex2) {
@@ -233,12 +132,4 @@ export class TableStructureComponent {
     }
     return idx;
   }
-
-  // updateOrthologGroupsAvailability() {
-  //   if (!!this.navigatorComponentsGroupedByOrthologs()) {
-  //   const anyOrthologGroupCreated = this.navigatorComponentsGroupedByOrthologs()
-  //   .some(component => component.identifier.includes('PTHR'));
-  //   this.orthologGroupsAvailable.set(anyOrthologGroupCreated);
-  //   }
-  // }
 }

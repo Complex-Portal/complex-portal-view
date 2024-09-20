@@ -22,7 +22,6 @@ interface Range {
 export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
   componentsSorting = input<NavigatorComponentSorting>();
-  componentsGrouping = input<NavigatorComponentGrouping>();
   navigatorComponents = input<INavigatorComponent[]>();
   organismIconDisplay = input<boolean>(true);
   interactorTypeDisplay = input<boolean>(true);
