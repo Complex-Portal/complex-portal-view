@@ -1,4 +1,4 @@
-import {Component, output, input, computed} from '@angular/core';
+import {Component, output, input, computed, effect} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator-utils';
@@ -25,6 +25,7 @@ export class ComplexNavigatorComponent {
   onComplexRemovedFromBasket = output<string>();
 
   componentsSorting = NavigatorComponentSorting.DEFAULT;
+  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
   organismIconDisplay = true;
   interactorTypeDisplay = true;
   idDisplay = true;
@@ -35,12 +36,19 @@ export class ComplexNavigatorComponent {
   navigatorComponents: INavigatorComponent[] = [];
 
   constructor(private complexPortalService: ComplexPortalService) {
+    effect(() => this.setNavigatorComponents(this.navigatorComponentsWithoutGrouping(), this.navigatorComponentsWithoutGrouping()));
   }
 
   onGroupingChanged(componentsGrouping: NavigatorComponentGrouping) {
-    this.navigatorComponents = componentsGrouping === NavigatorComponentGrouping.ORTHOLOGY
-      ? this.navigatorComponentsGroupedByOrthologs()
-      : this.navigatorComponentsWithoutGrouping();
+    this.componentsGrouping = componentsGrouping;
+  }
+
+  private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
+                                 navigatorComponentsWithoutGrouping: INavigatorComponent[]): void {
+
+    this.navigatorComponents = this.componentsGrouping === NavigatorComponentGrouping.ORTHOLOGY
+      ? navigatorComponentsGroupedByOrthologs
+      : navigatorComponentsWithoutGrouping;
   }
 
   private createNavigatorComplexes(complexes: Complex[], interactors: Interactor[]): INavigatorComponent[] {

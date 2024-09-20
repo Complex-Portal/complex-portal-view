@@ -1,10 +1,9 @@
-import {Component, computed, input, model, OnInit, output} from '@angular/core';
+import {Component, input, model, OnInit, output} from '@angular/core';
 import {
   NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../complex-navigator/complex-navigator-utils';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
-import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-complex-navigator-buttons',
@@ -27,7 +26,6 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
 
   ngOnInit() {
     this.updateDisplay();
-    this.onGroupingChanged.emit(NavigatorComponentGrouping.DEFAULT);
   }
 
   componentsGroupingChanges(typeOfGrouping: NavigatorComponentGrouping) {
