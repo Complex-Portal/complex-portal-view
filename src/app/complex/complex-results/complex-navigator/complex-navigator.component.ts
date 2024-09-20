@@ -36,11 +36,12 @@ export class ComplexNavigatorComponent {
   navigatorComponents: INavigatorComponent[] = [];
 
   constructor(private complexPortalService: ComplexPortalService) {
-    effect(() => this.setNavigatorComponents(this.navigatorComponentsWithoutGrouping(), this.navigatorComponentsWithoutGrouping()));
+    effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
   }
 
   onGroupingChanged(componentsGrouping: NavigatorComponentGrouping) {
     this.componentsGrouping = componentsGrouping;
+    this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
