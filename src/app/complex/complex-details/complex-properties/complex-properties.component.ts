@@ -18,6 +18,12 @@ export class ComplexPropertiesComponent implements OnInit {
   constructor() {
   }
 
+  get hasPropertiesDescriptionsOrXrefs(): boolean {
+    return (this.propertiesDescription && this.propertiesDescription.length > 0) ||
+      (this.pdbXRefs && this.pdbXRefs.length > 0) ||
+      (this.emdbXRefs && this.emdbXRefs.length > 0);
+  }
+
   ngOnInit() {
     this.checkFreeTextContent();
     this.findXRefs();

@@ -1,9 +1,9 @@
 <div class="row">
-  @if ((diseaseDescriptions.length !== 0) || efoXRefs || chemblXRefs) {
+  @if (hasDiseaseDescriptionsOrXrefs) {
     <div class="columns medium-12 no-pad-left">
       <h2 class="float-left">Diseases and Pathologies</h2>
       <cp-go-to class="float-right" [sectionName]="'Diseases and Pathologies'"></cp-go-to>
-      @if (diseaseDescriptions) {
+      @if (diseaseDescriptions && diseaseDescriptions.length > 0) {
         <div id="description" class="columns medium-12 no-pad-left">
           @for (diseaseDescription of diseaseDescriptions; track diseaseDescription) {
             <ul class="no-bullet">
@@ -13,12 +13,12 @@
         </div>
       }
       <div class="columns medium-12 no-pad-left">
-        @if (efoXRefs) {
+        @if (efoXRefs && efoXRefs.length > 0) {
           <div id="efoXRefs" class="columns medium-6 no-pad-left">
             <cp-efo-crossreferences [crossReferences]="efoXRefs"></cp-efo-crossreferences>
           </div>
         }
-        @if (chemblXRefs) {
+        @if (chemblXRefs && chemblXRefs.length > 0) {
           <div id="chemblXRefs" class="columns medium-6 no-pad-left">
             <cp-chembl-crossreference [crossReferences]="chemblXRefs"></cp-chembl-crossreference>
           </div>
