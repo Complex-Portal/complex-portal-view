@@ -18,6 +18,7 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   complexSearch = input<ComplexSearchResult>();
   orthologButtonAvailable = input<boolean>();
   onGroupingChanged = output<NavigatorComponentGrouping>();
+  onSortingChanged = output<NavigatorComponentSorting>();
 
   typeOfDisplay: 'compact' | 'detailed';
 
@@ -44,6 +45,7 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
       }
       this.updateDisplay();
     }
+    this.onSortingChanged.emit(typeOfSorting);
   }
 
   toggleOrganism() {

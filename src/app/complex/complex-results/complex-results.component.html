@@ -29,9 +29,9 @@
               <cp-complex-list-display-buttons [(displayType)]="displayType">
               </cp-complex-list-display-buttons>
               <cp-complex-paginator class="paginator"
-                [currentPageIndex]="currentPageIndex"
-                [lastPageIndex]="lastPageIndex"
-                (onPageChange)="onPageChange($event)">
+                                    [currentPageIndex]="currentPageIndex"
+                                    [lastPageIndex]="lastPageIndex"
+                                    (onPageChange)="onPageChange($event)">
               </cp-complex-paginator>
             </div>
             <div class="listOfResults">
@@ -43,19 +43,23 @@
             </div>
             @if (isDisplayComplexNavigatorView()) {
               <div class="ComplexNavigator"
-                [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
+                   [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
                 <cp-complex-navigator class="Complex-navigator"
-                  [complexSearch]="complexSearch"
-                  [interactors]="allInteractorsInComplexSearch"
-                  [canAddComplexesToBasket]="true"
-                  [canRemoveComplexesFromBasket]="false">
+                                      [complexSearch]="complexSearch"
+                                      [interactors]="allInteractorsInComplexSearch"
+                                      [canAddComplexesToBasket]="true"
+                                      [canRemoveComplexesFromBasket]="false"
+                                      [(componentsGrouping)]="componentsGrouping"
+                                      [(componentsSorting)]="componentsSorting"
+                                      (onGroupingChange)=onComplexNavigatorGroupingChange(componentsGrouping)
+                                      (onSortingChange)=onComplexNavigatorSortingChange(componentsSorting)>
                 </cp-complex-navigator>
               </div>
             }
             <cp-complex-paginator class="paginator"
-              [currentPageIndex]="currentPageIndex"
-              [lastPageIndex]="lastPageIndex"
-            (onPageChange)="onPageChange($event)"></cp-complex-paginator>
+                                  [currentPageIndex]="currentPageIndex"
+                                  [lastPageIndex]="lastPageIndex"
+                                  (onPageChange)="onPageChange($event)"></cp-complex-paginator>
           </div>
         </div>
       </div>

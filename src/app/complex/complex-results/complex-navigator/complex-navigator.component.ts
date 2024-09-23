@@ -1,4 +1,4 @@
-import {Component, output, input, computed, effect} from '@angular/core';
+import {Component, output, input, computed, effect, model, OutputRef} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator-utils';
@@ -10,6 +10,7 @@ import {Observable, of} from 'rxjs';
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {map} from 'rxjs/operators';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
+import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -24,30 +25,52 @@ export class ComplexNavigatorComponent {
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
-  componentsSorting = NavigatorComponentSorting.DEFAULT;
-  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
+  // componentsSorting = NavigatorComponentSorting.DEFAULT;
+  // componentsGrouping = NavigatorComponentGrouping.DEFAULT;
+
+  componentsSorting = model<NavigatorComponentSorting>();
+  componentsGrouping = model<NavigatorComponentGrouping>();
+  onGroupingChange = output<NavigatorComponentGrouping>();
+  onSortingChange = output<NavigatorComponentSorting>();
+
   organismIconDisplay = true;
   interactorTypeDisplay = true;
   idDisplay = true;
+
+  _allChanges: OutputRef<any>[] = [
+    this.componentsSorting,
+    this.componentsGrouping
+  ];
+
+  anyChange = output<void>();
 
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
   navigatorComponents: INavigatorComponent[] = [];
 
-  constructor(private complexPortalService: ComplexPortalService) {
+  constructor(private complexPortalService: ComplexPortalService, private googleAnalyticsService: AnalyticsService) {
     effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
+    this._allChanges.forEach(change => change.subscribe(() => setTimeout(() => this.anyChange.emit())));
   }
 
   onGroupingChanged(componentsGrouping: NavigatorComponentGrouping) {
-    this.componentsGrouping = componentsGrouping;
+    this.componentsGrouping.set(componentsGrouping);
     this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
+    this.onGroupingChange.emit(componentsGrouping);
+
+  }
+
+  onSortingChanged(componentsSorting: NavigatorComponentSorting) {
+    this.componentsSorting.set(componentsSorting);
+    this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
+    this.onSortingChange.emit(componentsSorting);
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
                                  navigatorComponentsWithoutGrouping: INavigatorComponent[]): void {
 
-    this.navigatorComponents = this.componentsGrouping === NavigatorComponentGrouping.ORTHOLOGY
+    this.navigatorComponents = this.componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY
       ? navigatorComponentsGroupedByOrthologs
       : navigatorComponentsWithoutGrouping;
   }

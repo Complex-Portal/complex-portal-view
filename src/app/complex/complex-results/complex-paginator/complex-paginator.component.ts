@@ -17,15 +17,15 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.updatePaginatior();
+    this.updatePaginator();
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.updatePaginatior();
+    this.updatePaginator();
   }
 
-  public updatePaginatior(): void {
+  public updatePaginator(): void {
     let start: number;
     let end: number;
     this.pagination = [];

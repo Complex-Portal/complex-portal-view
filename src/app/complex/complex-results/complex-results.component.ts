@@ -9,6 +9,7 @@ import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {switchMap, tap} from 'rxjs/operators';
+import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator/complex-navigator-utils';
 
 @Component({
   selector: 'cp-complex-results',
@@ -30,6 +31,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   };
 
   confidenceFilter = 1;
+  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
+  componentsSorting = NavigatorComponentSorting.DEFAULT;
 
   private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
@@ -60,6 +63,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
       this.confidenceFilter = queryParams['minConfidence'] ? Number(queryParams['minConfidence']) : 1;
+      this.componentsGrouping = queryParams['componentsGrouping'] ? queryParams['componentsGrouping'] : NavigatorComponentGrouping.DEFAULT;
+      this.componentsSorting = queryParams['componentsSorting'] ? queryParams['componentsSorting'] : NavigatorComponentSorting.DEFAULT;
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -101,6 +106,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
     queryParams['minConfidence'] = this.confidenceFilter;
+    queryParams['componentsGrouping'] = this.componentsGrouping;
+    queryParams['componentsSorting'] = this.componentsSorting;
 
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
 
@@ -133,6 +140,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   public onAnyChange() {
     this.currentPageIndex = 1;
+    this.reloadPage();
+  }
+
+  public onComplexNavigatorGroupingChange(grouping: NavigatorComponentGrouping) {
+    this.componentsGrouping = grouping;
+    this.reloadPage();
+  }
+
+  public onComplexNavigatorSortingChange(sorting: NavigatorComponentSorting) {
+    this.componentsSorting = sorting;
     this.reloadPage();
   }
 

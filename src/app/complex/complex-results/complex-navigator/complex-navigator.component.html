@@ -7,14 +7,14 @@
       [(idDisplay)]="idDisplay"
       [complexSearch]="complexSearch()"
       [orthologButtonAvailable]="orthologGroupsAvailable()"
-      (onGroupingChanged)="onGroupingChanged($event)">
-
+      (onGroupingChanged)="onGroupingChanged($event)"
+      (onSortingChanged)="onSortingChanged($event)">
     </cp-complex-navigator-buttons>
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"
                       [navigatorComponents]="navigatorComponents"
-                      [componentsSorting]="componentsSorting"
-                      [componentGrouping]="componentsGrouping"
+                      [componentsSorting]="componentsSorting()"
+                      [componentGrouping]="componentsGrouping()"
                       [organismIconDisplay]="organismIconDisplay"
                       [interactorTypeDisplay]="interactorTypeDisplay"
                       [idDisplay]="idDisplay"
