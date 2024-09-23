@@ -4,7 +4,7 @@ import {Complex} from '../../../shared/model/complex-results/complex.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {
-  findComponentInComplex,
+  findComponentInComplex, NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
@@ -24,6 +24,7 @@ export class TableStructureComponent {
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
+  componentGrouping = input<NavigatorComponentGrouping>();
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));

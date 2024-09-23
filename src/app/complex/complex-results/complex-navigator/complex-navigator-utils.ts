@@ -47,7 +47,7 @@ function findComponentInComplexComponents(complexComponents: ComplexComponent[],
   // could also be part of a subcomplex, so the stoichiometry would need to be added for all matches.
 
   let componentFound = false;
-  let componentId: string = '';
+  let componentId = '';
   let stoichiometry: [number, number] = null;
 
   // We iterate through all the components of the complex to find matches

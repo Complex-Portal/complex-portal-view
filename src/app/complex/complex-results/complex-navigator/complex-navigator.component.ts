@@ -69,19 +69,18 @@ export class ComplexNavigatorComponent {
   }
 
   private createOrthologGroups(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
-    // { newComponents: INavigatorComponent[]; anyOrthologGroupCreated: boolean } {
     const sortedForOrthology = this.classifyInteractorsByOrthology(navigatorComponents);
     const interactorsWithGroup = sortedForOrthology.filter(interactor => !!interactor.orthologsGroup);
     const interactorsWithoutGroup = sortedForOrthology.filter(interactor => !interactor.orthologsGroup);
 
-    const groupedByOrthology = interactorsWithGroup.reduce((groups, interactor) => {
+    const groupedByOrthology: { [key: string]: INavigatorComponent[] } = interactorsWithGroup.reduce((groups, interactor) => {
       const group = interactor.orthologsGroup;
       if (!groups[group.identifier]) {
         groups[group.identifier] = [];
       }
       groups[group.identifier].push(interactor);
       return groups;
-    }, {} as { [key: string]: INavigatorComponent[] });
+    }, {});
 
     const newNavigatorComponents: INavigatorComponent[] = [];
     for (const [_, proteins] of Object.entries(groupedByOrthology)) {

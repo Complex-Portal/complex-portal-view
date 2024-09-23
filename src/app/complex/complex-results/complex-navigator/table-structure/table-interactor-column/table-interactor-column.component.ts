@@ -3,7 +3,7 @@ import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {NavigatorComplex} from '../model/navigator-complex.model';
 import {INavigatorComponent} from '../model/navigator-component.model';
 import {
-  findComponentInComplex,
+  findComponentInComplex, NavigatorComponentGrouping,
   NavigatorComponentSorting
 } from '../../complex-navigator-utils';
 
@@ -25,6 +25,7 @@ export class TableInteractorColumnComponent {
   organismIconDisplay = input<boolean>(true);
   interactorTypeDisplay = input<boolean>(true);
   idDisplay = input<boolean>(true);
+  componentsGrouping = input<NavigatorComponentGrouping>();
 
   navigatorComplexes: NavigatorComplex[];
   ranges: Range[] = [];
@@ -304,4 +305,6 @@ export class TableInteractorColumnComponent {
     }
     return null;
   }
+
+  protected readonly NavigatorComponentGrouping = NavigatorComponentGrouping;
 }

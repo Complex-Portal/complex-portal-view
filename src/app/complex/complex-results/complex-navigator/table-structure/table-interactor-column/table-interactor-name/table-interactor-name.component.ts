@@ -20,6 +20,7 @@ export class TableInteractorNameComponent {
   interactorTypeIcon = computed(() => interactorTypeIcon(this.interactorType()));
   interactorOrganismIcon = computed(() => organismIcon(this.interactorOrganism()));
   externalLinkVisible: boolean;
+  isOrtholog = input<boolean>();
 
   externalLinkVisibleHandler(isVisible: boolean): void {
     this.externalLinkVisible = isVisible;

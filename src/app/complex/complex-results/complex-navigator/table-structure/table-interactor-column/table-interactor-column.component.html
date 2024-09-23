@@ -4,7 +4,8 @@
          [style.--cols]="complexes().length">
     @for (interactor of navigatorComponents(); track i; let i = $index) {
       @if (!interactor.hidden) {
-        <tr>
+        <tr
+          [class.ortholog]="!!interactor.isOrthologGroup && componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY">
           @for (range of ranges; track range.value) {
             @if (range.start === i) {
               <td [attr.rowspan]="range.length" class="interactorSeparation"
@@ -31,7 +32,8 @@
               [organismIconDisplay]="organismIconDisplay()"
               [interactorTypeDisplay]="interactorTypeDisplay()"
               [idDisplay]="idDisplay()"
-            ></cp-table-interactor-name>
+              [isOrtholog]="interactor.isOrthologGroup && componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY">
+            </cp-table-interactor-name>
             <!-- Icon for the expandable -->
             @if (interactor.hasSubComponents) {
               <div class="container">
