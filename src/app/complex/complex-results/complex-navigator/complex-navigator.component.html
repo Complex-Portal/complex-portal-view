@@ -7,7 +7,9 @@
       [complexSearch]="complexSearch()"
       [orthologButtonAvailable]="orthologGroupsAvailable()"
       (onGroupingChanged)="onGroupingChanged($event)"
-      (onSortingChanged)="onSortingChanged($event)">
+      (onSortingChanged)="onSortingChanged($event)"
+      (onDisplayTypeChanged)="onDisplayTypeChanged($event)"
+      [typeOfDisplay]="displayType()">
     </cp-complex-navigator-buttons>
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"

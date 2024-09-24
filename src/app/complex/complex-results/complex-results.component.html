@@ -51,8 +51,10 @@
                                       [canRemoveComplexesFromBasket]="false"
                                       [(componentsGrouping)]="componentsGrouping"
                                       [(componentsSorting)]="componentsSorting"
+                                      [(displayType)]="typeOfDisplay"
                                       (onGroupingChange)=onComplexNavigatorGroupingChange(componentsGrouping)
-                                      (onSortingChange)=onComplexNavigatorSortingChange(componentsSorting)>
+                                      (onSortingChange)=onComplexNavigatorSortingChange(componentsSorting)
+                                      (onDisplayTypeChange)="onComplexNavigatorDisplayChange(typeOfDisplay)">
                 </cp-complex-navigator>
               </div>
             }

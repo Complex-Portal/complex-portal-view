@@ -30,14 +30,14 @@
       <li>
         <label>
           <input type="radio" name="displayType" value="Compact" class="checkbox compact"
-                 (click)="setDisplayType('compact')" [checked]="typeOfDisplay === 'compact'">
+                 (click)="setDisplayType('compact')" [checked]="typeOfDisplay() === NavigatorDisplayType.COMPACT">
           Compact display
         </label>
       </li>
       <li class="detailedDisplay">
         <label>
           <input type="radio" name="displayType" value="Detailed" class="checkbox detailed"
-                 (click)="setDisplayType('detailed')" [checked]="typeOfDisplay === 'detailed'">
+                 (click)="setDisplayType('detailed')" [checked]="typeOfDisplay() === NavigatorDisplayType.DETAILED">
           Detailed display
         </label>
         <ul class="detailedDisplayOptions">

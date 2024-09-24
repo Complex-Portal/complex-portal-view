@@ -1,7 +1,7 @@
-import {Component, output, input, computed, effect, model, OutputRef} from '@angular/core';
+import {Component, computed, effect, input, model, output, OutputRef} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
-import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator-utils';
+import {NavigatorComponentGrouping, NavigatorComponentSorting, NavigatorDisplayType} from './complex-navigator-utils';
 import {Complex} from '../../shared/model/complex-results/complex.model';
 import {INavigatorComponent} from './table-structure/model/navigator-component.model';
 import {NavigatorSimpleComponent} from './table-structure/model/navigator-simple-component.model';
@@ -10,7 +10,6 @@ import {Observable, of} from 'rxjs';
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {map} from 'rxjs/operators';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
-import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -25,13 +24,12 @@ export class ComplexNavigatorComponent {
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
-  // componentsSorting = NavigatorComponentSorting.DEFAULT;
-  // componentsGrouping = NavigatorComponentGrouping.DEFAULT;
-
   componentsSorting = model<NavigatorComponentSorting>();
   componentsGrouping = model<NavigatorComponentGrouping>();
+  displayType = model<NavigatorDisplayType>();
   onGroupingChange = output<NavigatorComponentGrouping>();
   onSortingChange = output<NavigatorComponentSorting>();
+  onDisplayTypeChange = output<NavigatorDisplayType>();
 
   organismIconDisplay = true;
   interactorTypeDisplay = true;
@@ -39,7 +37,8 @@ export class ComplexNavigatorComponent {
 
   _allChanges: OutputRef<any>[] = [
     this.componentsSorting,
-    this.componentsGrouping
+    this.componentsGrouping,
+    this.displayType
   ];
 
   anyChange = output<void>();
@@ -49,8 +48,11 @@ export class ComplexNavigatorComponent {
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
   navigatorComponents: INavigatorComponent[] = [];
 
-  constructor(private complexPortalService: ComplexPortalService, private googleAnalyticsService: AnalyticsService) {
-    effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
+  constructor(private complexPortalService: ComplexPortalService) {
+    effect(() => {
+      this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
+      this.setIconsDisplay();
+    });
     this._allChanges.forEach(change => change.subscribe(() => setTimeout(() => this.anyChange.emit())));
   }
 
@@ -58,13 +60,18 @@ export class ComplexNavigatorComponent {
     this.componentsGrouping.set(componentsGrouping);
     this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
     this.onGroupingChange.emit(componentsGrouping);
-
   }
 
   onSortingChanged(componentsSorting: NavigatorComponentSorting) {
     this.componentsSorting.set(componentsSorting);
     this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
     this.onSortingChange.emit(componentsSorting);
+  }
+
+  onDisplayTypeChanged(display: NavigatorDisplayType) {
+    this.displayType.set(display);
+    this.setIconsDisplay();
+    this.onDisplayTypeChange.emit(display);
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
@@ -143,5 +150,13 @@ export class ComplexNavigatorComponent {
       }
       return 0;
     });
+  }
+
+  private setIconsDisplay() {
+    if (this.displayType() === NavigatorDisplayType.COMPACT) {
+      this.idDisplay = false;
+      this.organismIconDisplay = false;
+      this.organismIconDisplay = false;
+    }
   }
 }

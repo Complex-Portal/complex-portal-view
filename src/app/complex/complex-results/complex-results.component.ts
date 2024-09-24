@@ -8,8 +8,7 @@ import {AnalyticsService} from '../../shared/google-analytics/service/analytics.
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
-import {switchMap, tap} from 'rxjs/operators';
-import {NavigatorComponentGrouping, NavigatorComponentSorting} from './complex-navigator/complex-navigator-utils';
+import {NavigatorComponentGrouping, NavigatorComponentSorting, NavigatorDisplayType} from './complex-navigator/complex-navigator-utils';
 
 @Component({
   selector: 'cp-complex-results',
@@ -33,14 +32,15 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   confidenceFilter = 1;
   componentsGrouping = NavigatorComponentGrouping.DEFAULT;
   componentsSorting = NavigatorComponentSorting.DEFAULT;
+  typeOfDisplay = NavigatorDisplayType.DETAILED;
 
   private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
   private _navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
   private _listCurrentPage: number;
   private _navigatorCurrentPage: number;
-  private _listLastPageIndex;
-  private _navigatorLastPageIndex;
+  private _listLastPageIndex: number;
+  private _navigatorLastPageIndex: number;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -50,21 +50,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this.allInteractorsInComplexSearch = [];
-    this.route.fragment.pipe(
-      tap(f => {
-        if (f === SearchDisplay.navigator) {
-          this._displayType = SearchDisplay.navigator;
-        } else if (f === SearchDisplay.list) {
-          this._displayType = SearchDisplay.list;
-        }
-      }),
-      switchMap(_ => this.route.queryParams)
-    ).subscribe(queryParams => {
+    this.route.queryParams.pipe().subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
       this.confidenceFilter = queryParams['minConfidence'] ? Number(queryParams['minConfidence']) : 1;
       this.componentsGrouping = queryParams['componentsGrouping'] ? queryParams['componentsGrouping'] : NavigatorComponentGrouping.DEFAULT;
       this.componentsSorting = queryParams['componentsSorting'] ? queryParams['componentsSorting'] : NavigatorComponentSorting.DEFAULT;
+      this.typeOfDisplay = queryParams['typeOfDisplay'] ? queryParams['typeOfDisplay'] : NavigatorDisplayType.DETAILED;
+      this._displayType = queryParams['displayMode'] ? queryParams['displayMode'] : queryParams['mode'];
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -108,12 +101,13 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     queryParams['minConfidence'] = this.confidenceFilter;
     queryParams['componentsGrouping'] = this.componentsGrouping;
     queryParams['componentsSorting'] = this.componentsSorting;
+    queryParams['typeOfDisplay'] = this.typeOfDisplay;
+    queryParams['displayMode'] = this._displayType;
 
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
 
     this.router.navigate([], {
-      queryParams,
-      fragment: this.displayType
+      queryParams
     });
     ProgressBarComponent.hide();
     // This is a test case event for GA, to monitor if users ever use more then one filter.
@@ -150,6 +144,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   public onComplexNavigatorSortingChange(sorting: NavigatorComponentSorting) {
     this.componentsSorting = sorting;
+    this.reloadPage();
+  }
+
+  public onComplexNavigatorDisplayChange(display: NavigatorDisplayType) {
+    this.typeOfDisplay = display;
     this.reloadPage();
   }
 
@@ -262,5 +261,4 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
 }

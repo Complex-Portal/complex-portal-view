@@ -1,7 +1,7 @@
-import {Component, input, model, OnInit, output} from '@angular/core';
+import {Component, input, model, output} from '@angular/core';
 import {
   NavigatorComponentGrouping,
-  NavigatorComponentSorting
+  NavigatorComponentSorting, NavigatorDisplayType
 } from '../complex-navigator/complex-navigator-utils';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 
@@ -10,23 +10,22 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
   templateUrl: './complex-navigator-buttons.component.html',
   styleUrls: ['./complex-navigator-buttons.component.css']
 })
-export class ComplexNavigatorButtonsComponent implements OnInit {
-  // componentsSorting = model<NavigatorComponentSorting>();
+export class ComplexNavigatorButtonsComponent {
   organismIconDisplay = model<boolean>();
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
   complexSearch = input<ComplexSearchResult>();
   orthologButtonAvailable = input<boolean>();
+  typeOfDisplay = input<NavigatorDisplayType>();
   onGroupingChanged = output<NavigatorComponentGrouping>();
   onSortingChanged = output<NavigatorComponentSorting>();
-
-  typeOfDisplay: 'compact' | 'detailed';
-
+  onDisplayTypeChanged = output<NavigatorDisplayType>();
   protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
   protected readonly NavigatorComponentGrouping = NavigatorComponentGrouping;
+  protected readonly NavigatorDisplayType = NavigatorDisplayType;
 
-  ngOnInit() {
-    this.updateDisplay();
+  onDisplayTypeChange(displayType: NavigatorDisplayType) {
+    this.onDisplayTypeChanged.emit(displayType);
   }
 
   componentsGroupingChanges(typeOfGrouping: NavigatorComponentGrouping) {
@@ -34,8 +33,7 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   }
 
   componentsSortingChanges(typeOfSorting: NavigatorComponentSorting) {
-    // this.componentsSorting.set(typeOfSorting);
-    if (this.typeOfDisplay === 'detailed') {
+    if (this.typeOfDisplay() === NavigatorDisplayType.DETAILED) {
       if (typeOfSorting === 'Type') {
         this.interactorTypeDisplay.set(false);
         this.organismIconDisplay.set(true);
@@ -75,21 +73,21 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
     this.organismIconDisplay.set(false);
     this.interactorTypeDisplay.set(false);
     this.idDisplay.set(false);
-    this.typeOfDisplay = 'compact';
+    this.onDisplayTypeChange(NavigatorDisplayType.COMPACT);
   }
 
   detailedDisplay() {
     this.organismIconDisplay.set(true);
     this.interactorTypeDisplay.set(true);
     this.idDisplay.set(true);
-    this.typeOfDisplay = 'detailed';
+    this.onDisplayTypeChange(NavigatorDisplayType.DETAILED);
   }
 
   updateDisplay() {
     if (this.organismIconDisplay() || this.interactorTypeDisplay() || this.idDisplay()) {
-      this.typeOfDisplay = 'detailed';
+      this.onDisplayTypeChange(NavigatorDisplayType.DETAILED);
     } else {
-      this.typeOfDisplay = 'compact';
+      this.onDisplayTypeChange(NavigatorDisplayType.COMPACT);
     }
   }
 }

@@ -13,6 +13,11 @@ export enum NavigatorComponentGrouping {
   ORTHOLOGY = 'Orthology'
 }
 
+export enum NavigatorDisplayType {
+  COMPACT = 'compact',
+  DETAILED = 'detailed',
+}
+
 export class ComponentWithStoichiometry {
   identifier: string;
   stochiometryValue: [number, number];

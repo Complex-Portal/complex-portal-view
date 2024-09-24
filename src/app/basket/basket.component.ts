@@ -11,7 +11,11 @@ import {
   SearchDisplay
 } from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
-import {NavigatorComponentGrouping, NavigatorComponentSorting} from '../complex/complex-results/complex-navigator/complex-navigator-utils';
+import {
+  NavigatorComponentGrouping,
+  NavigatorComponentSorting,
+  NavigatorDisplayType
+} from '../complex/complex-results/complex-navigator/complex-navigator-utils';
 
 @Component({
   selector: 'cp-basket',
@@ -139,4 +143,5 @@ export class BasketComponent implements OnInit, AfterViewInit {
     Object.values(this._complexBasket).map((v: BasketItem) => this.deleteComplexFromBasket(v.id));
   }
 
+  protected readonly NavigatorDisplayType = NavigatorDisplayType;
 }
