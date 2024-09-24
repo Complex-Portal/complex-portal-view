@@ -10,7 +10,6 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   private _subComponents: ComplexComponent[];
   private _timesAppearing: number;
   private _indexAppearing: number;
-  private _isOrthologGroup: boolean;
 
   constructor(interactor: Interactor, isSubComplex: boolean) {
     this._interactor = interactor;
@@ -20,7 +19,6 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
     this._timesAppearing = 0;
     this._indexAppearing = 0;
     this._subComponents = null;
-    this._isOrthologGroup = false;
   }
 
   get isOrthologGroup(): boolean {

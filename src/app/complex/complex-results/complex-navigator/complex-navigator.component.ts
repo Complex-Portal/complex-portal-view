@@ -22,26 +22,18 @@ export class ComplexNavigatorComponent {
   interactors = input<Interactor[]>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
-  onComplexRemovedFromBasket = output<string>();
-
   componentsSorting = model<NavigatorComponentSorting>();
   componentsGrouping = model<NavigatorComponentGrouping>();
   displayType = model<NavigatorDisplayType>();
+  onComplexRemovedFromBasket = output<string>();
   onGroupingChange = output<NavigatorComponentGrouping>();
   onSortingChange = output<NavigatorComponentSorting>();
   onDisplayTypeChange = output<NavigatorDisplayType>();
+  anyChange = output<void>();
 
   organismIconDisplay = true;
   interactorTypeDisplay = true;
   idDisplay = true;
-
-  _allChanges: OutputRef<any>[] = [
-    this.componentsSorting,
-    this.componentsGrouping,
-    this.displayType
-  ];
-
-  anyChange = output<void>();
 
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
@@ -53,25 +45,24 @@ export class ComplexNavigatorComponent {
       this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
       this.setIconsDisplay();
     });
-    this._allChanges.forEach(change => change.subscribe(() => setTimeout(() => this.anyChange.emit())));
   }
 
   onGroupingChanged(componentsGrouping: NavigatorComponentGrouping) {
     this.componentsGrouping.set(componentsGrouping);
     this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    this.onGroupingChange.emit(componentsGrouping);
+    this.anyChange.emit();
   }
 
   onSortingChanged(componentsSorting: NavigatorComponentSorting) {
     this.componentsSorting.set(componentsSorting);
     this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    this.onSortingChange.emit(componentsSorting);
+    this.anyChange.emit();
   }
 
   onDisplayTypeChanged(display: NavigatorDisplayType) {
     this.displayType.set(display);
     this.setIconsDisplay();
-    this.onDisplayTypeChange.emit(display);
+    this.anyChange.emit();
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],

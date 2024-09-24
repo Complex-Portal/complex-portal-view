@@ -57,7 +57,10 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.componentsGrouping = queryParams['componentsGrouping'] ? queryParams['componentsGrouping'] : NavigatorComponentGrouping.DEFAULT;
       this.componentsSorting = queryParams['componentsSorting'] ? queryParams['componentsSorting'] : NavigatorComponentSorting.DEFAULT;
       this.typeOfDisplay = queryParams['typeOfDisplay'] ? queryParams['typeOfDisplay'] : NavigatorDisplayType.DETAILED;
-      this._displayType = queryParams['displayMode'] ? queryParams['displayMode'] : queryParams['mode'];
+      // Only set the mode if in the params, otherwise rely on the default behaviour
+      if (!!queryParams['displayMode']) {
+        this._displayType = queryParams['displayMode'];
+      }
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -94,7 +97,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   /**
    * Prepare query params to build new URL after filter or pagination has changed
    */
-  private reloadPage(): void {
+  reloadPage(): void {
     const queryParams: NavigationExtras = {};
     queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
@@ -134,21 +137,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   public onAnyChange() {
     this.currentPageIndex = 1;
-    this.reloadPage();
-  }
-
-  public onComplexNavigatorGroupingChange(grouping: NavigatorComponentGrouping) {
-    this.componentsGrouping = grouping;
-    this.reloadPage();
-  }
-
-  public onComplexNavigatorSortingChange(sorting: NavigatorComponentSorting) {
-    this.componentsSorting = sorting;
-    this.reloadPage();
-  }
-
-  public onComplexNavigatorDisplayChange(display: NavigatorDisplayType) {
-    this.typeOfDisplay = display;
     this.reloadPage();
   }
 

@@ -61,10 +61,10 @@ export class ComplexNavigatorButtonsComponent {
     this.updateDisplay();
   }
 
-  setDisplayType(type: 'compact' | 'detailed') {
-    if (type === 'compact') {
+  setDisplayType(type: NavigatorDisplayType) {
+    if (type === NavigatorDisplayType.COMPACT) {
       this.compactDisplay();
-    } else if (type === 'detailed') {
+    } else if (type === NavigatorDisplayType.DETAILED) {
       this.detailedDisplay();
     }
   }

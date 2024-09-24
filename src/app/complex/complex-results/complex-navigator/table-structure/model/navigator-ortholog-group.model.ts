@@ -9,7 +9,6 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   private _subComponents: INavigatorComponent[];
   private _timesAppearing: number;
   private _indexAppearing: number;
-  private _isOrthologGroup: boolean;
 
   constructor(orthologXref: XRef, subComponents: INavigatorComponent[]) {
     this._orthologXref = orthologXref;
@@ -18,7 +17,6 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
     this._expanded = false;
     this._timesAppearing = 0;
     this._indexAppearing = 0;
-    this._isOrthologGroup = true;
   }
 
   get isOrthologGroup(): boolean {
