@@ -18,7 +18,13 @@
                   <div>
                     <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName" class="horizontal-label">
                       <div class="line"></div>
-                      <i class="{{iconOrganism(complex.organismName)}}"></i>
+                      @if (iconOrganism(complex.organismName).startsWith('icon')) {
+                        <i [ngClass]="iconOrganism(complex.organismName)"></i>
+                      } @else {
+                        <img [src]="iconOrganism(complex.organismName)"
+                             class="iconOrganismImg"
+                             width="15px" height="15px"/>
+                      }
                       <i class="icon icon-generic small" data-icon="x"></i>
                       {{ complex.complexName }}
                     </span>
@@ -87,7 +93,14 @@
                 }
               </div>
               <div>
-                <i class="{{iconOrganism(complex.organismName)}}" [matTooltip]="complex.organismName | species"></i>
+                @if (iconOrganism(complex.organismName).startsWith('icon')) {
+                  <i [ngClass]="iconOrganism(complex.organismName)" [matTooltip]="complex.organismName | species"></i>
+                } @else {
+                  <img [src]="iconOrganism(complex.organismName)"
+                       [matTooltip]="complex.organismName | species"
+                       class="iconOrganismImg"
+                       width="16px" height="16px"/>
+                }
               </div>
             </th>
           }

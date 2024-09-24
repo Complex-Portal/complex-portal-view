@@ -45,6 +45,12 @@ export class ComplexDiseaseComponent implements OnInit {
     }
   }
 
+  get hasDiseaseDescriptionsOrXrefs(): boolean {
+    return (this.diseaseDescriptions && this.diseaseDescriptions.length > 0) ||
+      (this.efoXRefs && this.efoXRefs.length > 0) ||
+      (this.chemblXRefs && this.chemblXRefs.length > 0);
+  }
+
   get diseaseDescriptions(): string[] {
     return this._diseaseDescriptions;
   }

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="columns medium-12 no-pad-left">
     <h3>Catalytic Activity</h3>
-    @if (intenzCrossReferences && intenzCrossReferences.length !== 0) {
+    @if (intenzCrossReferences && intenzCrossReferences.length > 0) {
       <div>
         <h4>EC Numbers ({{intenzCrossReferences.length}})</h4>
         <table class="hover">
@@ -32,7 +32,7 @@
         </table>
       </div>
     }
-    @if (rheaCrossReferences && rheaCrossReferences.length !== 0) {
+    @if (rheaCrossReferences && rheaCrossReferences.length > 0) {
       <div>
         <h4>Rhea Cross References ({{rheaCrossReferences.length}})</h4>
         <table class="hover">
