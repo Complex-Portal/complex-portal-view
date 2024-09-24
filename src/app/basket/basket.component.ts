@@ -29,6 +29,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   displayType: SearchDisplay;
   componentsGrouping = NavigatorComponentGrouping.DEFAULT;
   componentsSorting = NavigatorComponentSorting.DEFAULT;
+  typeOfDisplay = NavigatorDisplayType.DETAILED;
 
   constructor(private _basketService: BasketService,
               private titleService: Title,
