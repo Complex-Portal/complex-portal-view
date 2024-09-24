@@ -1,5 +1,5 @@
 <div class="row">
-  @if ((gxa && gxaParamsQueries) || goCellularXRefs) {
+  @if ((gxa && gxaParamsQueries) || (goCellularXRefs && goCellularXRefs.length > 0)) {
     <div class="columns medium-12 no-pad-left">
       <h2 class="float-left">Expression and Cellular Location</h2>
       <cp-go-to class="float-right" [sectionName]="'Expression and Cellular Location'"></cp-go-to>
@@ -10,7 +10,7 @@
         }
       </div>
       <div class="columns medium-12 no-pad-left">
-        @if (goCellularXRefs) {
+        @if (goCellularXRefs && goCellularXRefs.length > 0) {
           <cp-go-celluar-crossreference
           [crossReferences]="goCellularXRefs"></cp-go-celluar-crossreference>
         }

@@ -1,12 +1,12 @@
 <div class="container">
-  @if (complex().evidenceType || intactXRefs) {
+  @if (complex().evidenceType || (intactXRefs && intactXRefs.length > 0)) {
     <div>
       Evidence by
       <a href="{{complex().evidenceType.searchURL}}" target="_blank">
         {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
         <i class="icon icon-generic small" data-icon="x"></i>
       </a>
-      @if (intactXRefs) {
+      @if (intactXRefs && intactXRefs.length > 0) {
         in IntAct
         @for (crossReference of intactXRefs; track crossReference.identifier; let isLast = $last) {
           <a href="{{crossReference.searchURL}}" target="_blank"> {{ crossReference.identifier }} <i

@@ -1,5 +1,6 @@
-import {Component, computed, input} from '@angular/core';
+import {Component, computed, Inject, input} from '@angular/core';
 import {interactorTypeIcon, organismIcon} from '../../../../../complex-portal-utils';
+import {APP_BASE_HREF} from '@angular/common';
 
 @Component({
   selector: 'cp-table-interactor-name',
@@ -21,7 +22,14 @@ export class TableInteractorNameComponent {
   interactorOrganismIcon = computed(() => organismIcon(this.interactorOrganism()));
   externalLinkVisible: boolean;
 
+  constructor(@Inject(APP_BASE_HREF) private _baseHref: string) {
+  }
+
   externalLinkVisibleHandler(isVisible: boolean): void {
     this.externalLinkVisible = isVisible;
+  }
+
+  get maskStyle(): string {
+    return `mask: url(${this._baseHref}${this.interactorOrganismIcon()}) no-repeat center; -webkit-mask: url(${this._baseHref}${this.interactorOrganismIcon()}) no-repeat center`;
   }
 }

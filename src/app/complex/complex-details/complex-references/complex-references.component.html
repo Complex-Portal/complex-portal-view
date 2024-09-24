@@ -1,25 +1,25 @@
 <div class="row">
-  @if (pubmedXRefs || synonyms || systematicName) {
+  @if (hasXrefsOrSynonymsOrSystematicName) {
     <div class="columns medium-12 no-pad-left">
       <h2 class="float-left">Additional Information</h2>
       <cp-go-to class="float-right" [sectionName]="'Additional Information'"></cp-go-to>
-      @if (externalResources) {
+      @if (externalResources && externalResources.length > 0) {
         <div id="externalResources" class="columns medium-12 no-pad-left">
           <cp-external-resources [crossReferences]="externalResources"></cp-external-resources>
         </div>
       }
-      @if (pubmedXRefs) {
+      @if (pubmedXRefs && pubmedXRefs.length > 0) {
         <div id="pubmedXRefs" class="columns medium-12 no-pad-left">
           <cp-euro-pmc-crossreferences [crossReferences]="pubmedXRefs"></cp-euro-pmc-crossreferences>
         </div>
       }
       <div class="columns medium-12 no-pad-left">
-        @if (synonyms) {
+        @if (synonyms && synonyms.length > 0) {
           <div id="synonyms" class="columns medium-6 no-pad-left no-pad-right">
             <cp-synonyms [synonyms]="synonyms"></cp-synonyms>
           </div>
         }
-        @if (systematicName) {
+        @if (!!systematicName) {
           <div id="systematicName" class="columns medium-6 no-pad-left no-pad-right">
             <cp-systematic-name [systematicName]="systematicName"></cp-systematic-name>
           </div>
