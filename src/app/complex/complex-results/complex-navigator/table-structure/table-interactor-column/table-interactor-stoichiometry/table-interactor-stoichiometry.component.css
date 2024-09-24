@@ -19,7 +19,6 @@
 }
 
 ::ng-deep.ortholog .stoichNum {
-  /*box-shadow: none;*/
   box-shadow: -1px 1px var(--on-primary), -2px 4px var(--primary);
   margin-left: 3px;
 }

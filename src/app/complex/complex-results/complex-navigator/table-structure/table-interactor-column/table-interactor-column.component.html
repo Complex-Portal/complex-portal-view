@@ -97,7 +97,8 @@
                 </div>
               </td>
               @for (complex of navigatorComplexes; track complex.complex.complexAC) {
-                <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}">
+                <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}"
+                    [class.predicted]="complex.complex.predictedComplex">
                   <cp-table-subcomponent-interactor
                     [complex]="complex"
                     [i]="i"

@@ -11,7 +11,7 @@ import {ComplexSearchResult} from '../../shared/model/complex-results/complex-se
   styleUrls: ['./complex-navigator-buttons.component.css']
 })
 export class ComplexNavigatorButtonsComponent implements OnInit {
-  componentsSorting = model<NavigatorComponentSorting>();
+  // componentsSorting = model<NavigatorComponentSorting>();
   organismIconDisplay = model<boolean>();
   interactorTypeDisplay = model<boolean>();
   idDisplay = model<boolean>();
@@ -34,7 +34,7 @@ export class ComplexNavigatorButtonsComponent implements OnInit {
   }
 
   componentsSortingChanges(typeOfSorting: NavigatorComponentSorting) {
-    this.componentsSorting.set(typeOfSorting);
+    // this.componentsSorting.set(typeOfSorting);
     if (this.typeOfDisplay === 'detailed') {
       if (typeOfSorting === 'Type') {
         this.interactorTypeDisplay.set(false);

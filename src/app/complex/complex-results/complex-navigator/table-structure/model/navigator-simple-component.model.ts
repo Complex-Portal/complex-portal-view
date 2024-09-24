@@ -24,7 +24,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   }
 
   get isOrthologGroup(): boolean {
-    return this._isOrthologGroup;
+    return false;
   }
 
   get identifier(): string {

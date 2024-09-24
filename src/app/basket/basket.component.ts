@@ -11,6 +11,7 @@ import {
   SearchDisplay
 } from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
+import {NavigatorComponentGrouping, NavigatorComponentSorting} from '../complex/complex-results/complex-navigator/complex-navigator-utils';
 
 @Component({
   selector: 'cp-basket',
@@ -22,6 +23,8 @@ export class BasketComponent implements OnInit, AfterViewInit {
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
   displayType: SearchDisplay;
+  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
+  componentsSorting = NavigatorComponentSorting.DEFAULT;
 
   constructor(private _basketService: BasketService,
               private titleService: Title,

@@ -22,7 +22,7 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   }
 
   get isOrthologGroup(): boolean {
-    return this._isOrthologGroup;
+    return true;
   }
 
   get identifier(): string {

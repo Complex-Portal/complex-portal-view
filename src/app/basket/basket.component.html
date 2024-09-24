@@ -54,6 +54,8 @@
                 [interactors]="allInteractorsInComplexSearchBasket"
                 [canAddComplexesToBasket]="false"
                 [canRemoveComplexesFromBasket]="true"
+                [(componentsSorting)]="componentsSorting"
+                [(componentsGrouping)]="componentsGrouping"
                 (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
               </cp-complex-navigator>
             </div>
