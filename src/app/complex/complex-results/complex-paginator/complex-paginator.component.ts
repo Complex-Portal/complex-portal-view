@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, output} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-paginator',
@@ -21,7 +21,7 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.updatePaginator();
   }
 

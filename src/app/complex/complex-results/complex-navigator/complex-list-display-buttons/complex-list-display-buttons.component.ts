@@ -1,5 +1,4 @@
-import {Component, output, input, model} from '@angular/core';
-
+import {Component, model} from '@angular/core';
 
 export enum SearchDisplay {
   list = 'view_list',

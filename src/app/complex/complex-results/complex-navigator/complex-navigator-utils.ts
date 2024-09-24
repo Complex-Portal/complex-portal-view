@@ -20,9 +20,9 @@ export enum NavigatorDisplayType {
 
 export class ComponentWithStoichiometry {
   identifier: string;
-  stochiometryValue: [number, number];
-  stochiometryText?: string;
-  stochiometryValueFormatted?: string;
+  stoichiometryValue: [number, number];
+  stoichiometryText?: string;
+  stoichiometryValueFormatted?: string;
 }
 
 export function findComponentInComplex(complex: Complex,
@@ -33,9 +33,9 @@ export function findComponentInComplex(complex: Complex,
   if (!!component) {
     return {
       identifier: component.identifier,
-      stochiometryValue: component.stochiometryValue,
-      stochiometryText: getStoichiometryText(component.stochiometryValue),
-      stochiometryValueFormatted: formatStoichiometryValues(component.stochiometryValue)
+      stoichiometryValue: component.stoichiometryValue,
+      stoichiometryText: getStoichiometryText(component.stoichiometryValue),
+      stoichiometryValueFormatted: formatStoichiometryValues(component.stoichiometryValue)
     };
   }
   return null;
@@ -63,16 +63,16 @@ function findComponentInComplexComponents(complexComponents: ComplexComponent[],
       componentFound = true;
       componentId = componentMatch.identifier;
       // If we have any stoichiometry for the component, we add it to the total stoichiometry
-      if (!!componentMatch.stochiometryValue) {
+      if (!!componentMatch.stoichiometryValue) {
         if (!!stoichiometry) {
           stoichiometry = [
-            stoichiometry[0] + componentMatch.stochiometryValue[0],
-            stoichiometry[1] + componentMatch.stochiometryValue[1]
+            stoichiometry[0] + componentMatch.stoichiometryValue[0],
+            stoichiometry[1] + componentMatch.stoichiometryValue[1]
           ];
         } else {
           stoichiometry = [
-            componentMatch.stochiometryValue[0],
-            componentMatch.stochiometryValue[1]
+            componentMatch.stoichiometryValue[0],
+            componentMatch.stoichiometryValue[1]
           ];
         }
       }
@@ -83,7 +83,7 @@ function findComponentInComplexComponents(complexComponents: ComplexComponent[],
   if (componentFound) {
     return {
       identifier: componentId,
-      stochiometryValue: stoichiometry
+      stoichiometryValue: stoichiometry
     };
   }
 
@@ -100,7 +100,7 @@ function findComponentInComplexComponent(complexComponent: ComplexComponent,
     // The interactor is the complex component we are currently checking
     return {
       identifier: complexComponent.identifier,
-      stochiometryValue: componentStoichiometry
+      stoichiometryValue: componentStoichiometry
     };
   }
 
@@ -115,28 +115,28 @@ function findComponentInComplexComponent(complexComponent: ComplexComponent,
 
       if (!!subComponentsMatch) {
         // We have found the interactor in the subcomplex
-        if (!!subComponentsMatch.stochiometryValue) {
+        if (!!subComponentsMatch.stoichiometryValue) {
           if (!!componentStoichiometry) {
             // If we have stoichiometry for both the component and the subcomponent, we add both
             return {
               identifier: subComponentsMatch.identifier,
-              stochiometryValue: [
-                componentStoichiometry[0] * subComponentsMatch.stochiometryValue[0],
-                componentStoichiometry[1] * subComponentsMatch.stochiometryValue[1]
+              stoichiometryValue: [
+                componentStoichiometry[0] * subComponentsMatch.stoichiometryValue[0],
+                componentStoichiometry[1] * subComponentsMatch.stoichiometryValue[1]
               ]
             };
           } else {
             // If we only have stoichiometry for the subcomponent, we use that stoichiometry
             return {
               identifier: subComponentsMatch.identifier,
-              stochiometryValue: subComponentsMatch.stochiometryValue
+              stoichiometryValue: subComponentsMatch.stoichiometryValue
             };
           }
         } else {
           // If we only have stoichiometry for the component, we use that stoichiometry
           return {
             identifier: subComponentsMatch.identifier,
-            stochiometryValue: componentStoichiometry
+            stoichiometryValue: componentStoichiometry
           };
         }
       }
