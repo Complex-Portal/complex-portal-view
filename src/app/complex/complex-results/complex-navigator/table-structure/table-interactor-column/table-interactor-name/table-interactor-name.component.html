@@ -1,8 +1,5 @@
 <div class="container">
   <div class="nameAndIcons" [ngClass]="{inlineDisplay: isOrtholog()}">
-
-    <!--   <div class="nameAndIcons"-->
-    <!--         [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">-->
     @if (isOrtholog()) {
       <div class="orthologGroup">
         Ortholog group
@@ -29,9 +26,6 @@
 
       @if (idDisplay()) {
         <div class="name" [matTooltip]="interactorName()">
-          <!--                    @if (isOrtholog()) {-->
-          <!--                        Orthologs of-->
-          <!--                    }-->
           {{ interactorName() }}
         </div>
       }
