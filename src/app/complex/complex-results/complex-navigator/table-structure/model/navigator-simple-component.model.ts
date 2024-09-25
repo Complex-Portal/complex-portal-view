@@ -113,4 +113,8 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
     }
     return null;
   }
+
+  get componentQuery(): string {
+    return this.identifier;
+  }
 }

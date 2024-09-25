@@ -55,4 +55,6 @@ export interface INavigatorComponent {
   componentIds(): string[];
 
   get orthologsGroup(): XRef;
+
+  get componentQuery(): string;
 }

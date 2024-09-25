@@ -26,9 +26,6 @@ export class ComplexNavigatorComponent {
   componentsGrouping = model<NavigatorComponentGrouping>();
   displayType = model<NavigatorDisplayType>();
   onComplexRemovedFromBasket = output<string>();
-  onGroupingChange = output<NavigatorComponentGrouping>();
-  onSortingChange = output<NavigatorComponentSorting>();
-  onDisplayTypeChange = output<NavigatorDisplayType>();
   anyChange = output<void>();
 
   organismIconDisplay = true;

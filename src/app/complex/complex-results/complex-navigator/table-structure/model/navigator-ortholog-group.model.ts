@@ -122,4 +122,8 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   get orthologsGroup(): XRef {
     return this._orthologXref;
   }
+
+  get componentQuery(): string {
+    return 'pxref:("' + this.identifier + '")';
+  }
 }

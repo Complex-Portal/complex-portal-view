@@ -22,6 +22,7 @@ export class TableInteractorNameComponent {
   interactorOrganismIcon = computed(() => organismIcon(this.interactorOrganism()));
   externalLinkVisible: boolean;
   isOrtholog = input<boolean>();
+  interactorQuery = input<string>();
 
   constructor(@Inject(APP_BASE_HREF) private _baseHref: string) {
   }
