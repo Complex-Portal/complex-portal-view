@@ -20,7 +20,7 @@ import {
 import {
   TableSubcomponentInteractorComponent
 } from './table-structure/table-interactor-column/table-subcomponent-interactor/table-subcomponent-interactor.component';
-import {ComplexNavigatorButtonsComponent} from '../complex-navigator-buttons/complex-navigator-buttons.component';
+import {ComplexNavigatorButtonsComponent} from './complex-navigator-buttons/complex-navigator-buttons.component';
 import {RouterModule} from '@angular/router';
 import {ComplexListDisplayButtonsComponent} from './complex-list-display-buttons/complex-list-display-buttons.component';
 import {MatTooltipModule} from '@angular/material/tooltip';

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation, input } from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewEncapsulation, input} from '@angular/core';
 import {Participant} from '../../shared/model/complex-details/participant.model';
 import {Category} from '../../../shared/google-analytics/types/category.enum';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
@@ -12,7 +12,7 @@ export class ComplexParticipant {
   identifierLink: string;
   name: string;
   description: string;
-  stochiometry: string;
+  stoichiometry: string;
   bioRole: string;
   interactorType: string;
   participants: ComplexParticipant[];
@@ -104,7 +104,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
       identifierLink: participant.identifierLink,
       name: participant.name,
       description: participant.description,
-      stochiometry: participant.stochiometry,
+      stoichiometry: participant.stoichiometry,
       bioRole: participant.bioRole,
       interactorType: participant.interactorType,
       participants: [],
@@ -278,7 +278,7 @@ export class ComplexParticipantsComponent implements OnInit, AfterViewInit {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(a.href); // clear up url reference to blob so it can be g.c.'ed
+    window.URL.revokeObjectURL(a.href); // clear up state reference to blob so it can be g.c.'ed
 
     blob = null;
   }

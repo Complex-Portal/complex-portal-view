@@ -1,6 +1,8 @@
-import {Component, computed, Inject, input} from '@angular/core';
+import {Component, computed, effect, Inject, input} from '@angular/core';
 import {interactorTypeIcon, organismIcon} from '../../../../../complex-portal-utils';
 import {APP_BASE_HREF} from '@angular/common';
+import {INavigatorComponent, INavigatorSubComponent} from '../../model/navigator-component.model';
+import {NavigatorStateService} from '../../../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-interactor-name',

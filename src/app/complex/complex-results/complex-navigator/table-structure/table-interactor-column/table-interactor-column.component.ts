@@ -1,11 +1,12 @@
-import {Component, effect, input} from '@angular/core';
+import {Component, computed, effect, input} from '@angular/core';
 import {Complex} from '../../../../shared/model/complex-results/complex.model';
 import {NavigatorComplex} from '../model/navigator-complex.model';
 import {INavigatorComponent} from '../model/navigator-component.model';
+import {findComponentInComplex} from '../../complex-navigator-utils';
 import {
-  findComponentInComplex, NavigatorComponentGrouping,
-  NavigatorComponentSorting
-} from '../../complex-navigator-utils';
+  NavigatorComponentSorting,
+  NavigatorStateService
+} from '../../service/state/complex-navigator-display.service';
 
 interface Range {
   value: string;
@@ -255,9 +256,9 @@ export class TableInteractorColumnComponent {
     this.ranges = ranges;
   }
 
-  isComponentsSortingSet() {
-    return this.componentsSorting() === 'Type' || this.componentsSorting() === 'Organism';
-  }
+  // isComponentsSortingSet() {
+  //   return this.state.componentsSorting() === 'Type' || this.state.componentsSorting() === 'Organism';
+  // }
 
   getExpandedRowClass(i: number, length: number): string {
     if (i === 0) {
@@ -305,6 +306,4 @@ export class TableInteractorColumnComponent {
     }
     return null;
   }
-
-  protected readonly NavigatorComponentGrouping = NavigatorComponentGrouping;
 }

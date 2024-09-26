@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, input } from '@angular/core';
+import {Component, ViewEncapsulation, input} from '@angular/core';
 import {NodeShape} from '../../shared/visualisation/node-diagram/node-diagram.component';
 import {ComplexParticipant} from '../complex-participants.component';
 
@@ -77,8 +77,8 @@ export class ComplexParticipantLegendComponent {
     return color;
   }
 
-  public getConvertedStochiometry(stochiometry: string): string {
-    // TODO: WS should send Stochiometry in right format already - GH issue #173
-    return stochiometry.split(',')[0].split(':')[1].trim();
+  public getConvertedstoichiometry(stoichiometry: string): string {
+    // TODO: WS should send stoichiometry in right format already - GH issue #173
+    return stoichiometry.split(',')[0].split(':')[1].trim();
   }
 }

@@ -1,11 +1,15 @@
 .star {
   font-size: 1.5em;
   cursor: pointer;
-  color: white;
+  color: var(--primary);
+  -webkit-text-stroke: 1px var(--on-primary);
+  text-shadow: 0 0 4px var(--on-primary);
 }
 
 .star.selected {
-  color: gold;
+  color: #CCE4E6FF;
+  -webkit-text-stroke: 1px var(--primary);
+  text-shadow: 0 0 4px var(--on-primary);
 }
 
 .ratingComponent {
@@ -19,7 +23,8 @@
   right: -350px;
   border: 1px solid white;
   visibility: hidden;
-  animation: ratingComponentMove 1s forwards 7s;
+  animation: ratingComponentMove 1s forwards 1s;
+  border-radius: 7px;
 }
 
 

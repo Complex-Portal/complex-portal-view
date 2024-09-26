@@ -5,7 +5,6 @@ table {
 }
 
 .inheritedWidth {
-  /*width: inherit;*/
   width: calc(200px + var(--cols) * 70px + 183px);
 }
 

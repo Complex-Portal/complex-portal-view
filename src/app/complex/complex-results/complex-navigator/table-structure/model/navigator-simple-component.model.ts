@@ -106,14 +106,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   }
 
   get orthologsGroup(): XRef {
-    if (!!this._interactor.xrefs) {
-      for (const xref of this._interactor.xrefs) {
-        if (!!xref && xref.database === 'panther') {
-          return xref;
-        }
-      }
-    }
-    return null;
+    return this._interactor.xrefs?.find(xref => xref.qualifier === 'orthology-group');
   }
 
   get componentQuery(): string {

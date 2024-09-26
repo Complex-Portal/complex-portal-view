@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, effect, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -7,8 +7,8 @@ import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
-import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
-import {NavigatorComponentGrouping, NavigatorComponentSorting, NavigatorDisplayType} from './complex-navigator/complex-navigator-utils';
+import {NavigatorStateService, SearchDisplay} from './complex-navigator/service/state/complex-navigator-display.service';
+import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
 
 @Component({
   selector: 'cp-complex-results',
@@ -18,7 +18,6 @@ import {NavigatorComponentGrouping, NavigatorComponentSorting, NavigatorDisplayT
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
   complexSearch: ComplexSearchResult;
-
   allInteractorsInComplexSearch: Interactor[] = [];
   _displayType: SearchDisplay;
 
@@ -30,9 +29,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   };
 
   confidenceFilter = 1;
-  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
-  componentsSorting = NavigatorComponentSorting.DEFAULT;
-  typeOfDisplay = NavigatorDisplayType.DETAILED;
 
   private _toast;
   private _listPageSize = 15; // This is where we set the size of the pages for list view
@@ -54,9 +50,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
       this.confidenceFilter = queryParams['minConfidence'] ? Number(queryParams['minConfidence']) : 1;
-      this.componentsGrouping = queryParams['componentsGrouping'] ? queryParams['componentsGrouping'] : NavigatorComponentGrouping.DEFAULT;
-      this.componentsSorting = queryParams['componentsSorting'] ? queryParams['componentsSorting'] : NavigatorComponentSorting.DEFAULT;
-      this.typeOfDisplay = queryParams['typeOfDisplay'] ? queryParams['typeOfDisplay'] : NavigatorDisplayType.DETAILED;
       // Only set the mode if in the params, otherwise rely on the default behaviour
       if (!!queryParams['displayMode']) {
         this._displayType = queryParams['displayMode'];
@@ -98,13 +91,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
    * Prepare query params to build new URL after filter or pagination has changed
    */
   reloadPage(): void {
-    const queryParams: NavigationExtras = {};
+    const queryParams = {...this.state.params()};
+    console.log(queryParams);
     queryParams['query'] = this.query;
     queryParams['page'] = this.currentPageIndex;
     queryParams['minConfidence'] = this.confidenceFilter;
-    queryParams['componentsGrouping'] = this.componentsGrouping;
-    queryParams['componentsSorting'] = this.componentsSorting;
-    queryParams['typeOfDisplay'] = this.typeOfDisplay;
     queryParams['displayMode'] = this._displayType;
 
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));

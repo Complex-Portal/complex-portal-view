@@ -2,35 +2,35 @@
   <td class="centered-vertical" style="{{'width: 16%; ' + getBackgroundStyle()}}">
     <div class="columns medium-12 centered-vertical">
       <cp-node-diagram [shape]="getLegendShape(participant().interactorType)"
-        [color]="getLegendColor(participant())"
-        [height]="participant().interactorType === 'stable complex' ? '35pt' : '30pt'"
-        [borderColor]="participant().interactorType === 'stable complex' ? '#ffffff' : '#000000'"
-        [borderWidth]="participant().interactorType === 'stable complex' ? 8 : 3"
+                       [color]="getLegendColor(participant())"
+                       [height]="participant().interactorType === 'stable complex' ? '35pt' : '30pt'"
+                       [borderColor]="participant().interactorType === 'stable complex' ? '#ffffff' : '#000000'"
+                       [borderWidth]="participant().interactorType === 'stable complex' ? 8 : 3"
       ></cp-node-diagram>
     </div>
   </td>
   <td style="width: 64%">
     <div class="columns medium-12 no-pad-right no-pad-left"><b>{{ participant().interactorType }} -
-    {{ participant().name }} ({{ participant().bioRole }})</b>
-  </div>
-  <div class="columns medium-12 no-pad-right no-pad-left">
-    @if (participant().identifierLink) {
-      <a href="{{participant().identifierLink}}"
-        target="_blank">{{ participant().identifier }}
-        <i class="icon icon-generic small" data-icon="x"></i>
-      </a>
-    }
-  </div>
-  <div class="columns medium-12 no-pad-right no-pad-left">{{ participant().description }}</div>
-</td>
-<td style="width: 20%">
-  <div class="columns medium-12 centered-vertical">
-    @if (participant().stochiometry) {
-      <p class="badge">
-      {{ getConvertedStochiometry(participant().stochiometry) }}</p>
-    }
-  </div>
-</td>
+      {{ participant().name }} ({{ participant().bioRole }})</b>
+    </div>
+    <div class="columns medium-12 no-pad-right no-pad-left">
+      @if (participant().identifierLink) {
+        <a href="{{participant().identifierLink}}"
+           target="_blank">{{ participant().identifier }}
+          <i class="icon icon-generic small" data-icon="x"></i>
+        </a>
+      }
+    </div>
+    <div class="columns medium-12 no-pad-right no-pad-left">{{ participant().description }}</div>
+  </td>
+  <td style="width: 20%">
+    <div class="columns medium-12 centered-vertical">
+      @if (participant().stoichiometry) {
+        <p class="badge">
+          {{ getConvertedstoichiometry(participant().stoichiometry) }}</p>
+      }
+    </div>
+  </td>
 </tr>
 @if (participant().participants.length > 0) {
   <tr></tr>

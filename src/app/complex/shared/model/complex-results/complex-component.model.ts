@@ -5,7 +5,7 @@ export interface ComplexComponent {
   identifierLink: string;
   name: string;
   description: string;
-  stochiometry: string;
+  stoichiometry: string;
   interactorType: string;
   organismName: string;
   xrefs: XRef[];

@@ -11,7 +11,7 @@ import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-sp
   ]),
     CommonModule,
     ComplexNavigatorModule,
-    ProgressSpinnerComponent
+    ProgressSpinnerComponent, MatTabGroup, MatTab
   ],
   declarations: [BasketComponent]
 })

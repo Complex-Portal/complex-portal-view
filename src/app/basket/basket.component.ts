@@ -12,10 +12,10 @@ import {
 } from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
 import {
-  NavigatorComponentGrouping,
-  NavigatorComponentSorting,
-  NavigatorDisplayType
-} from '../complex/complex-results/complex-navigator/complex-navigator-utils';
+  NavigatorStateService,
+  SearchDisplay
+} from '../complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
+
 
 @Component({
   selector: 'cp-basket',
@@ -27,15 +27,12 @@ export class BasketComponent implements OnInit, AfterViewInit {
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
   displayType: SearchDisplay;
-  componentsGrouping = NavigatorComponentGrouping.DEFAULT;
-  componentsSorting = NavigatorComponentSorting.DEFAULT;
-  typeOfDisplay = NavigatorDisplayType.DETAILED;
 
   constructor(private _basketService: BasketService,
               private titleService: Title,
               private complexPortalService: ComplexPortalService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router, private state: NavigatorStateService) {
     this._complexBasket = this._basketService.complexBasket;
   }
 
@@ -144,5 +141,5 @@ export class BasketComponent implements OnInit, AfterViewInit {
     Object.values(this._complexBasket).map((v: BasketItem) => this.deleteComplexFromBasket(v.id));
   }
 
-  protected readonly NavigatorDisplayType = NavigatorDisplayType;
+  protected readonly SearchDisplay = SearchDisplay;
 }

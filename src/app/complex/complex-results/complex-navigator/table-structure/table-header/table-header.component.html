@@ -1,22 +1,21 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
     <!-- When table is not overflowing -->
-    @if (complexes().length<=6) {
+    @if (complexes().length <= 6) {
       <thead class="tableHead">
-        <tr>
-          @if (isComponentsSortingSet()) {
-            <th class="spaceHolderSorting"></th>
-          }
-          <th class="interactorsHeader horizontal">
-            Components
-          </th>
-          @for (complex of complexes(); track complex.complexAC) {
-            <th class="horizontal" [class.predicted]="complex.predictedComplex">
-              <div>
-                <a [routerLink]="['/complex', complex.complexAC]"
-                  target="_blank">
-                  <div>
-                    <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName" class="horizontal-label">
+      <tr>
+        @if (isSorted()) {
+          <th class="spaceHolderSorting"></th>
+        }
+        <th class="interactorsHeader horizontal">Components</th>
+        @for (complex of complexes(); track complex.complexAC) {
+          <th class="horizontal" [class.predicted]="complex.predictedComplex">
+            <div>
+              <a [routerLink]="['/complex', complex.complexAC]"
+                 target="_blank">
+                <div>
+                    <span [matTooltip]="complex.complexName+ ' - '+ complex.complexAC + ' - ' + complex.organismName"
+                          class="horizontal-label">
                       <div class="line"></div>
                       @if (iconOrganism(complex.organismName).startsWith('icon')) {
                         <i [ngClass]="iconOrganism(complex.organismName)"></i>
@@ -28,84 +27,84 @@
                       <i class="icon icon-generic small" data-icon="x"></i>
                       {{ complex.complexName }}
                     </span>
-                  </div>
-                </a>
-              </div>
-              <div class="basketButton">
-                <a class="button" (click)="toggleBasket(complex)">
-                  <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
-                </a>
-              </div>
-            </th>
-          }
-        </tr>
+                </div>
+              </a>
+            </div>
+            <div class="basketButton">
+              <a class="button" (click)="toggleBasket(complex)">
+                <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
+              </a>
+            </div>
+          </th>
+        }
+      </tr>
       </thead>
     }
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
       <thead class="tableHeadOverflow"
-        [ngClass]="isComponentsSortingSet() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
-        <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isComponentsSortingSet() ? '256px':''"
+             [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
+      <tr [style.--cols]="complexes().length"
+          [style.--intHeader]="isSorted() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
-          <th class="spaceHolderHeaderOverflow"
-            [style]="isComponentsSortingSet() ? 'min-width: 256px; max-width: 256px;':''">
-          </th>
-          @for (complex of complexes(); track complex.complexAC) {
-            <th class="rotate"
+        <th class="spaceHolderHeaderOverflow"
+            [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+        </th>
+        @for (complex of complexes(); track complex.complexAC) {
+          <th class="rotate"
               [class.predicted]="complex.predictedComplex"
               [style.--cols]="complexes().length">
-              <a [routerLink]="['/complex', complex.complexAC]"
-                [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
-                target="_blank">
-                <div>
+            <a [routerLink]="['/complex', complex.complexAC]"
+               [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
+               target="_blank">
+              <div>
                   <span>
                     <div class="tilted-label">
                       <i class="icon icon-generic small" data-icon="x"></i>
                       {{ complex.complexName }}
                     </div>
                   </span>
-                </div>
-              </a>
-            </th>
-          }
-          <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
-        </tr>
-        <!-- icons row -->
-        <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isComponentsSortingSet() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-          <th class="interactorsHeader overflow"
-            [style]="isComponentsSortingSet() ? 'min-width: 256px; max-width: 256px;':''">
-            Components
+              </div>
+            </a>
           </th>
-          @for ( complex of complexes(); track  complex.complexAC) {
-            <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
-              <div>
-                @if (isInBasket(complex.complexAC)) {
-                  <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Remove from basket'">
-                    <i class="icon icon-common" data-icon=""></i>
-                  </a>
-                } @else {
-                  <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Add to basket'">
-                    <i class="icon icon-common" data-icon=""></i>
-                  </a>
-                }
-              </div>
-              <div>
-                @if (iconOrganism(complex.organismName).startsWith('icon')) {
-                  <i [ngClass]="iconOrganism(complex.organismName)" [matTooltip]="complex.organismName | species"></i>
-                } @else {
-                  <img [src]="iconOrganism(complex.organismName)"
-                       [matTooltip]="complex.organismName | species"
-                       class="iconOrganismImg"
-                       width="16px" height="16px"/>
-                }
-              </div>
-            </th>
-          }
-          <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
-        </tr>
+        }
+        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+      </tr>
+      <!-- icons row -->
+      <tr [style.--cols]="complexes().length"
+          [style.--intHeader]="isSorted() ? '256px':''"
+          [style.--sizeSpaceHolder]="'185px'">
+        <th class="interactorsHeader overflow"
+            [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
+          Components
+        </th>
+        @for (complex of complexes(); track complex.complexAC) {
+          <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
+            <div>
+              @if (isInBasket(complex.complexAC)) {
+                <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Remove from basket'">
+                  <i class="icon icon-common" data-icon=""></i>
+                </a>
+              } @else {
+                <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Add to basket'">
+                  <i class="icon icon-common" data-icon=""></i>
+                </a>
+              }
+            </div>
+            <div>
+              @if (iconOrganism(complex.organismName).startsWith('icon')) {
+                <i [ngClass]="iconOrganism(complex.organismName)" [matTooltip]="complex.organismName | species"></i>
+              } @else {
+                <img [src]="iconOrganism(complex.organismName)"
+                     [matTooltip]="complex.organismName | species"
+                     class="iconOrganismImg"
+                     width="16px" height="16px"/>
+              }
+            </div>
+          </th>
+        }
+        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+      </tr>
       </thead>
     }
   </table>

@@ -1,7 +1,6 @@
 <div class="complexNavigatorTable">
   <div class="header"
        (scroll)="body.scrollLeft = header.scrollLeft" #header>
-
     <cp-table-header [complexes]="sortedComplexes()"
                      [componentsSorting]="componentsSorting()"
                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">

@@ -1,7 +1,6 @@
-import {Component, computed, effect, input, model, output, OutputRef} from '@angular/core';
+import {Component, computed, effect, input, output} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
-import {NavigatorComponentGrouping, NavigatorComponentSorting, NavigatorDisplayType} from './complex-navigator-utils';
 import {Complex} from '../../shared/model/complex-results/complex.model';
 import {INavigatorComponent} from './table-structure/model/navigator-component.model';
 import {NavigatorSimpleComponent} from './table-structure/model/navigator-simple-component.model';
@@ -10,6 +9,7 @@ import {Observable, of} from 'rxjs';
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {map} from 'rxjs/operators';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
+import {NavigatorStateService} from './service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -22,9 +22,6 @@ export class ComplexNavigatorComponent {
   interactors = input<Interactor[]>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
-  componentsSorting = model<NavigatorComponentSorting>();
-  componentsGrouping = model<NavigatorComponentGrouping>();
-  displayType = model<NavigatorDisplayType>();
   onComplexRemovedFromBasket = output<string>();
   anyChange = output<void>();
 
@@ -37,29 +34,11 @@ export class ComplexNavigatorComponent {
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
   navigatorComponents: INavigatorComponent[] = [];
 
-  constructor(private complexPortalService: ComplexPortalService) {
+  constructor(private complexPortalService: ComplexPortalService, private state: NavigatorStateService) {
     effect(() => {
       this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
       this.setIconsDisplay();
     });
-  }
-
-  onGroupingChanged(componentsGrouping: NavigatorComponentGrouping) {
-    this.componentsGrouping.set(componentsGrouping);
-    this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    this.anyChange.emit();
-  }
-
-  onSortingChanged(componentsSorting: NavigatorComponentSorting) {
-    this.componentsSorting.set(componentsSorting);
-    this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    this.anyChange.emit();
-  }
-
-  onDisplayTypeChanged(display: NavigatorDisplayType) {
-    this.displayType.set(display);
-    this.setIconsDisplay();
-    this.anyChange.emit();
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],

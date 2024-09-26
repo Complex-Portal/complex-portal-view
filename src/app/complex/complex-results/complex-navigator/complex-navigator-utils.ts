@@ -94,7 +94,7 @@ function findComponentInComplexComponent(complexComponent: ComplexComponent,
                                          componentIds: string[],
                                          navigatorComponents: INavigatorComponent[]): ComponentWithStoichiometry {
 
-  const componentStoichiometry = parseStoichiometryValues(complexComponent.stochiometry);
+  const componentStoichiometry = parseStoichiometryValues(complexComponent.stoichiometry);
 
   if (componentIds.some(componentId => complexComponent.identifier === componentId)) {
     // The interactor is the complex component we are currently checking
