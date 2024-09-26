@@ -11,18 +11,11 @@ export interface INavigatorSubComponent {
   get interactorType(): string;
 
   get organismName(): string;
+
+  get orthologsGroup(): XRef;
 }
 
-export interface INavigatorComponent {
-  get identifier(): string;
-
-  get identifierLink(): string;
-
-  get name(): string;
-
-  get interactorType(): string;
-
-  get organismName(): string;
+export interface INavigatorComponent extends INavigatorSubComponent {
 
   get subComponents(): INavigatorSubComponent[];
 
@@ -53,8 +46,6 @@ export interface INavigatorComponent {
   set indexAppearing(value: number);
 
   componentIds(): string[];
-
-  get orthologsGroup(): XRef;
 
   get componentQuery(): string;
 }

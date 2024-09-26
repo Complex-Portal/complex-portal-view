@@ -21,12 +21,9 @@ interface Range {
 })
 export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
-  componentsSorting = input<NavigatorComponentSorting>();
   navigatorComponents = input<INavigatorComponent[]>();
-  organismIconDisplay = input<boolean>(true);
-  interactorTypeDisplay = input<boolean>(true);
-  idDisplay = input<boolean>(true);
-  componentsGrouping = input<NavigatorComponentGrouping>();
+  isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
+  fixedWidth = computed(() => this.complexes().length > 6);
 
   navigatorComplexes: NavigatorComplex[];
   ranges: Range[] = [];
@@ -38,9 +35,9 @@ export class TableInteractorColumnComponent {
 
   protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
 
-  constructor() {
+  constructor(public state: NavigatorStateService) {
     effect(() => this.calculateTimesAppearing(this.complexes(), this.navigatorComponents()));
-    effect(() => this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.componentsSorting()));
+    effect(() => this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.state.componentsSorting()));
   }
 
   private sortNavigatorComponents(navigatorComponents: INavigatorComponent[],
@@ -75,7 +72,7 @@ export class TableInteractorColumnComponent {
     }
 
     // Something has been expanded or collapsed, we need to sort and recalculate the start and end indexes for the lines
-    this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.componentsSorting());
+    this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.state.componentsSorting());
   }
 
   private collapseAllButOne(rowIndex: number): void {

@@ -1,6 +1,7 @@
 import {XRef} from './interactor.model';
+import {INavigatorSubComponent} from '../../../complex-results/complex-navigator/table-structure/model/navigator-component.model';
 
-export interface ComplexComponent {
+export interface ComplexComponent extends INavigatorSubComponent {
   identifier: string;
   identifierLink: string;
   name: string;

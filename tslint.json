@@ -6,8 +6,7 @@
     "callable-types": true,
     "class-name": true,
     "comment-format": [
-      true,
-      "check-space"
+      false
     ],
     "curly": false,
     "eofline": true,
@@ -15,7 +14,9 @@
     "deprecation": {
       "severity": "warning"
     },
-    "import-blacklist": [true],
+    "import-blacklist": [
+      true
+    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -93,9 +94,18 @@
       "check-separator",
       "check-type"
     ],
-
-    "directive-selector": [true, "attribute", "cp", "camelCase"],
-    "component-selector": [true, "element", "cp", "kebab-case"],
+    "directive-selector": [
+      true,
+      "attribute",
+      "cp",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "cp",
+      "kebab-case"
+    ],
     "no-input-rename": true,
     "no-output-rename": true,
     "use-lifecycle-interface": true,

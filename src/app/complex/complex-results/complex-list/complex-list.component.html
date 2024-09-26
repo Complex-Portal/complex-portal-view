@@ -3,7 +3,7 @@
     <li [class.predicted]="complex.predictedComplex">
       <div class="container">
         <div class="basketButtonContainer"
-          [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
+             [matTooltip]="isInBasket(complex) ? 'Remove from basket' : 'Add to basket'">
           <a class="button" (click)="toggleBasket(complex)">
             <i class="icon icon-common" [attr.data-icon]="isInBasket(complex) ? '':''"></i>
           </a>
@@ -12,14 +12,14 @@
           <h3><a [routerLink]="['/complex', complex.complexAC]">{{ complex.complexName | truncate:114 }}</a></h3>
           <div class="description" style="background-color: white">
             <b>Complex AC:</b> {{ complex.complexAC }} · <b>Organism:</b> {{ complex.organismName | species }}
-            · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted'}} complex</b>
+            · <b class="tag">{{ !complex.predictedComplex ? 'Curated' : 'Predicted' }} complex</b>
             <br>
-              @if (complex.description) {
-                <b>Description:</b> {{ complex.description | truncate:250}}
-              }
-            </div>
+            @if (complex.description) {
+              <b>Description:</b> {{ complex.description | truncate:500 }}
+            }
           </div>
         </div>
-      </li>
-    }
-  </ul>
+      </div>
+    </li>
+  }
+</ul>

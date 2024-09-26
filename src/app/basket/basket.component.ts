@@ -7,9 +7,6 @@ import {ComplexPortalService} from '../complex/shared/service/complex-portal.ser
 import {ComplexSearchResult} from '../complex/shared/model/complex-results/complex-search.model';
 import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-  SearchDisplay
-} from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
 import {
   NavigatorStateService,

@@ -43,7 +43,10 @@ export class ComplexFilterComponent implements OnInit {
 
   onResetAllFilters = output<boolean>();
 
-  confidenceGap = input<number>(2);
+  /**
+   * Minimum 5, otherwise breaks slider UI
+   */
+  confidenceGap = input<number>(5);
   confidences = computed(() => {
       const confidences: Confidence[] = new Array(5).fill(0).map((e, i) => ({
         value: i + 1,

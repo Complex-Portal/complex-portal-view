@@ -4,11 +4,6 @@
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"
                       [navigatorComponents]="navigatorComponents"
-                      [componentsSorting]="componentsSorting()"
-                      [componentGrouping]="componentsGrouping()"
-                      [organismIconDisplay]="organismIconDisplay"
-                      [interactorTypeDisplay]="interactorTypeDisplay"
-                      [idDisplay]="idDisplay"
                       [canAddComplexesToBasket]="canAddComplexesToBasket()"
                       [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket()"
                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">

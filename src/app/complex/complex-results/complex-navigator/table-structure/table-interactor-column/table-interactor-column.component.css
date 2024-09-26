@@ -23,9 +23,6 @@ table {
   background: inherit;
 }
 
-.interactorsColumnFixedWidth {
-  width: 230px;
-}
 
 .interactorsColumn a {
   font-weight: normal;
@@ -40,7 +37,7 @@ table {
   z-index: 1;
 }
 
-.intStoichFixedWidth {
+.intStoich.fixedWidth {
   width: 70px;
 }
 
@@ -64,7 +61,7 @@ a, a:visited {
   width: 183px;
 }
 
-.spaceHolderWithSorting {
+.spaceHolder.sorting {
   width: calc(183px - 3ch);
 }
 
@@ -153,6 +150,10 @@ a, a:visited {
 .horizontalHeader {
   min-width: 114px;
   max-width: 114px;
+}
+
+.horizontalHeader.fixedWidth {
+  width: 230px;
 }
 
 /*/* NEEDED FOR SAFARI BROWSER*/

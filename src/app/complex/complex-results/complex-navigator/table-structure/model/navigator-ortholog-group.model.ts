@@ -30,12 +30,12 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   get name(): string {
     let mainGeneName: string;
     const biggestTimeAppearing = 0;
-    for (let i = 0; i < this._subComponents.length; i++) {
-      if (this._subComponents[i].organismName.includes('Homo sapiens')) {
-        mainGeneName = this._subComponents[i].name;
+    for (const subComponent of this._subComponents) {
+      if (subComponent.organismName.includes('Homo sapiens')) {
+        mainGeneName = subComponent.name;
         return mainGeneName;
-      } else if (this._subComponents[i].timesAppearing >= biggestTimeAppearing) {
-        mainGeneName = this._subComponents[i].name;
+      } else if (subComponent.timesAppearing >= biggestTimeAppearing) {
+        mainGeneName = subComponent.name;
       }
     }
     return mainGeneName;

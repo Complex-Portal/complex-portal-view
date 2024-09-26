@@ -11,22 +11,16 @@ import {NavigatorStateService} from '../../../service/state/complex-navigator-di
 })
 export class TableInteractorNameComponent {
 
-  interactorName = input<string>();
-  interactorType = input<string>();
-  interactorId = input<string>();
-  interactorOrganism = input<string>();
-  identifierLink = input<string>();
-  organismIconDisplay = input<boolean>();
-  interactorTypeDisplay = input<boolean>();
-  idDisplay = input<boolean>();
-  isMainInteractor = input<boolean>();
-  interactorTypeIcon = computed(() => interactorTypeIcon(this.interactorType()));
-  interactorOrganismIcon = computed(() => organismIcon(this.interactorOrganism()));
+  interactor = input.required<INavigatorSubComponent>();
+  convertedInteractor = computed(() => this.interactor() as INavigatorComponent);
+  interactorTypeIcon = computed(() => interactorTypeIcon(this.interactor().interactorType));
+  interactorOrganismIcon = computed(() => organismIcon(this.interactor().organismName));
   externalLinkVisible: boolean;
-  isOrtholog = input<boolean>();
+  isOrthologGroup = computed(() => this.state.mergeOrthologs() &&
+    this.interactor().orthologsGroup?.identifier === this.interactor()?.identifier);
   interactorQuery = input<string>();
 
-  constructor(@Inject(APP_BASE_HREF) private _baseHref: string) {
+  constructor(@Inject(APP_BASE_HREF) private _baseHref: string, public state: NavigatorStateService) {
   }
 
   externalLinkVisibleHandler(isVisible: boolean): void {

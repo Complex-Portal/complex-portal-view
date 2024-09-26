@@ -4,10 +4,10 @@ import {Complex} from '../../../shared/model/complex-results/complex.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {
-  findComponentInComplex, NavigatorComponentGrouping,
-  NavigatorComponentSorting
+  findComponentInComplex
 } from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
+import {NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
@@ -17,17 +17,15 @@ import {INavigatorComponent} from './model/navigator-component.model';
 export class TableStructureComponent {
   complexSearch = input<ComplexSearchResult>();
   navigatorComponents = input<INavigatorComponent[]>();
-  componentsSorting = input<NavigatorComponentSorting>();
-  organismIconDisplay = input<boolean>();
-  interactorTypeDisplay = input<boolean>();
-  idDisplay = input<boolean>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
-  componentGrouping = input<NavigatorComponentGrouping>();
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
+
+  constructor() {
+  }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
     if (complex1 === complex2) {

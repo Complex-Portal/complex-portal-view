@@ -25,10 +25,6 @@ export class ComplexNavigatorComponent {
   onComplexRemovedFromBasket = output<string>();
   anyChange = output<void>();
 
-  organismIconDisplay = true;
-  interactorTypeDisplay = true;
-  idDisplay = true;
-
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
@@ -37,14 +33,13 @@ export class ComplexNavigatorComponent {
   constructor(private complexPortalService: ComplexPortalService, private state: NavigatorStateService) {
     effect(() => {
       this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-      this.setIconsDisplay();
     });
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
                                  navigatorComponentsWithoutGrouping: INavigatorComponent[]): void {
 
-    this.navigatorComponents = this.componentsGrouping() === NavigatorComponentGrouping.ORTHOLOGY
+    this.navigatorComponents = this.state.mergeOrthologs()
       ? navigatorComponentsGroupedByOrthologs
       : navigatorComponentsWithoutGrouping;
   }
@@ -117,13 +112,5 @@ export class ComplexNavigatorComponent {
       }
       return 0;
     });
-  }
-
-  private setIconsDisplay() {
-    if (this.displayType() === NavigatorDisplayType.COMPACT) {
-      this.idDisplay = false;
-      this.organismIconDisplay = false;
-      this.organismIconDisplay = false;
-    }
   }
 }

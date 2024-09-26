@@ -2,22 +2,6 @@ import {INavigatorComponent} from './table-structure/model/navigator-component.m
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {Complex} from '../../shared/model/complex-results/complex.model';
 
-export enum NavigatorComponentSorting {
-  DEFAULT = 'Default',
-  TYPE = 'Type',
-  ORGANISM = 'Organism'
-}
-
-export enum NavigatorComponentGrouping {
-  DEFAULT = 'Default',
-  ORTHOLOGY = 'Orthology'
-}
-
-export enum NavigatorDisplayType {
-  COMPACT = 'compact',
-  DETAILED = 'detailed',
-}
-
 export class ComponentWithStoichiometry {
   identifier: string;
   stoichiometryValue: [number, number];

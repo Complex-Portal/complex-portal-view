@@ -2,7 +2,6 @@
   <div class="header"
        (scroll)="body.scrollLeft = header.scrollLeft" #header>
     <cp-table-header [complexes]="sortedComplexes()"
-                     [componentsSorting]="componentsSorting()"
                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
     </cp-table-header>
   </div>
@@ -10,12 +9,7 @@
        (scroll)="header.scrollLeft = body.scrollLeft" #body>
     <cp-table-interactor-column
       [complexes]="sortedComplexes()"
-      [navigatorComponents]="navigatorComponents()"
-      [componentsSorting]="componentsSorting()"
-      [componentsGrouping]="componentGrouping()"
-      [organismIconDisplay]="organismIconDisplay()"
-      [interactorTypeDisplay]="interactorTypeDisplay()"
-      [idDisplay]="idDisplay()">
+      [navigatorComponents]="navigatorComponents()">
     </cp-table-interactor-column>
   </div>
   <div class="spaceHolder"></div>

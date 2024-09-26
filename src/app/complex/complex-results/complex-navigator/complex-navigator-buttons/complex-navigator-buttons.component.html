@@ -1,0 +1,40 @@
+<div class="filters">
+
+  <button mat-stroked-button [matMenuTriggerFor]="group">Sorting component
+  </button>
+  <mat-menu #group="matMenu">
+    <mat-radio-group [(ngModel)]="state.componentsSorting">
+      @for (option of (NavigatorComponentSorting | keyvalue); track option.key) {
+        <div mat-menu-item>
+          <mat-radio-button [value]="option.value">{{ option.value }}</mat-radio-button>
+        </div>
+      }
+    </mat-radio-group>
+  </mat-menu>
+
+
+  <button mat-stroked-button [matMenuTriggerFor]="display">Display option
+  </button>
+  <mat-menu #display="matMenu">
+    <div (click)="$event.stopPropagation()">
+      <div mat-menu-item>
+        <mat-checkbox [checked]="allSelected()" [indeterminate]="partiallySelected()"
+                      (click)="selectAll(!allSelected())">
+          Select all
+        </mat-checkbox>
+      </div>
+      <ul>
+        @for (option of state.displayOptions; track option.name) {
+          <li mat-menu-item>
+            <mat-checkbox [(ngModel)]="option.value">{{ option.name }}</mat-checkbox>
+          </li>
+        }
+      </ul>
+    </div>
+  </mat-menu>
+
+  <mat-slide-toggle [(ngModel)]="state.mergeOrthologs" [disabled]="!orthologsGroupsAvailable()"
+                    [matTooltip]="'No orthologs groups available'" [matTooltipDisabled]="orthologsGroupsAvailable()">
+    Merge orthologs
+  </mat-slide-toggle>
+</div>

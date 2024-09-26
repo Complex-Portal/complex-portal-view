@@ -72,6 +72,7 @@ import {NavigatorStateService} from './complex/complex-results/complex-navigator
     SpeciesPipe,
     AnalyticsService,
     SearchService,
+    NavigatorStateService,
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

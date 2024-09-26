@@ -8,6 +8,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   private _isSubComplex: boolean;
   private _expanded: boolean;
   private _subComponents: ComplexComponent[];
+
   private _timesAppearing: number;
   private _indexAppearing: number;
 
