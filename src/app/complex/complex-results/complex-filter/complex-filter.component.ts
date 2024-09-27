@@ -44,7 +44,8 @@ export class ComplexFilterComponent implements OnInit {
   onResetAllFilters = output<boolean>();
 
   /**
-   * Minimum 5, otherwise breaks slider UI
+   * Represent the gap between stars in px.
+   * Minimum 5px, otherwise breaks slider alignment with stars as it has an incompressible minimum length.
    */
   confidenceGap = input<number>(5);
   confidences = computed(() => {
