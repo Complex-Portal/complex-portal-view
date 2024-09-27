@@ -31,7 +31,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   confidenceFilter = 1;
 
   private _toast;
-  private pageSize = 20; // This is where we set the size of the pages for navigator view
+  pageSize = 20;
   currentPageIndex: number;
   lastPageIndex: number;
 
