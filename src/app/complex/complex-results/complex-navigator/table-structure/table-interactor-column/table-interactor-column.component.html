@@ -36,7 +36,7 @@
                 </a>
               </div>
             }
-            <div class="shadow right"></div>
+            <div class="shadow right" [class.visible]="shadowVisible()"></div>
           </td>
           <!-- Interactors' stoichiometry -->
           @for (complex of navigatorComplexes; track complex.complex.complexAC) {

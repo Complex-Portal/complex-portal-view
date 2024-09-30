@@ -14,6 +14,8 @@ export class TableHeaderComponent {
   complexes = input<Complex[]>();
   onComplexRemovedFromBasket = output<string>();
 
+  shadowVisible = input<boolean>(false);
+
   constructor(private basketService: BasketService, private state: NavigatorStateService) {
   }
 

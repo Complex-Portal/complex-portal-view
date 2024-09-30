@@ -24,7 +24,9 @@ export class TableStructureComponent implements AfterViewInit {
   scrollStart = input<number>(39);
 
   @ViewChild('header') headerDiv: ElementRef<HTMLDivElement>;
-  isScrolling = false;
+  shadowTopVisible = false;
+  shadowRightVisible = true;
+  shadowLeftVisible = false;
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
@@ -35,7 +37,7 @@ export class TableStructureComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const header = this.headerDiv.nativeElement;
     window.addEventListener('scroll', (s) => {
-      this.isScrolling = header.getBoundingClientRect().top === this.scrollStart();
+      this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart();
     });
   }
 
@@ -143,4 +145,20 @@ export class TableStructureComponent implements AfterViewInit {
     }
     return idx;
   }
+
+  private readonly scrollDetectionMargin = 5;
+
+  syncScroll(source: Scrollable, target: Scrollable) {
+    if (target.scrolling) {
+      target.scrolling = false;
+      return;
+    }
+    source.scrolling = true;
+    target.scrollTo({left: source.scrollLeft, behavior: 'instant'});
+
+    this.shadowRightVisible = source.scrollLeft + source.offsetWidth + this.scrollDetectionMargin <= source.scrollWidth;
+    this.shadowLeftVisible = source.scrollLeft >= this.scrollDetectionMargin;
+  }
 }
+
+type Scrollable = HTMLDivElement & { scrolling?: boolean };

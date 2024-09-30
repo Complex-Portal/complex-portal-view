@@ -22,6 +22,8 @@ interface Range {
 export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
   navigatorComponents = input<INavigatorComponent[]>();
+  shadowVisible = input<boolean>(false);
+
   isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
   fixedWidth = computed(() => this.complexes().length > 6);
 
