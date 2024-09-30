@@ -14,13 +14,18 @@ table {
   left: 0;
   z-index: 5;
   height: 45px;
-  min-width: 230px;
-  max-width: 230px;
+  min-width: 114px;
+  max-width: 114px;
   padding: 5px;
   text-align: end;
   color: #0e6f76;
   font-weight: bold;
   background: inherit;
+}
+
+.interactorsColumn.fixedWidth {
+  min-width: 230px;
+  max-width: 230px;
 }
 
 
