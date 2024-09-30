@@ -87,7 +87,7 @@
 }
 
 .shadow.top {
-  top: calc(-1 * var(--width));
+  top: -6px;
   left: 0;
   right: 0;
   height: var(--width);

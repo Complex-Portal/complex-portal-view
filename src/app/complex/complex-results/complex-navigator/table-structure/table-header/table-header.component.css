@@ -56,7 +56,7 @@ thead {
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
-  overflow: hidden;
+  overflow: clip;
 }
 
 .CN-table .tableHeadOverflowWithSorting tr {
@@ -171,4 +171,8 @@ a {
 
 .iconOrganismImg {
   filter: var(--svg-colour-invert);
+}
+
+.Complex-navigator {
+  overflow: scroll;
 }
