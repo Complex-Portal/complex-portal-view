@@ -262,12 +262,12 @@ export class TableInteractorColumnComponent {
   getExpandedRowClass(i: number, length: number): string {
     if (i === 0) {
       if (length === 1) {
-        return 'singleExpandedRow';
+        return 'single-expanded-row';
       } else {
-        return 'firstExpandedRow';
+        return 'first-expanded-row';
       }
     } else if (i === length - 1) {
-      return 'lastExpandedRow';
+      return 'last-expanded-row';
     }
     return null;
   }

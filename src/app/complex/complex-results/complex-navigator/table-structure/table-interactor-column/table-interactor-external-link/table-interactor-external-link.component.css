@@ -10,7 +10,7 @@ i:not(.small) {
   font-size: large;
 }
 
-.externalLinkContainer {
+.external-link-container {
   justify-content: end;
   grid-gap: 5px;
   font-size: 14px;

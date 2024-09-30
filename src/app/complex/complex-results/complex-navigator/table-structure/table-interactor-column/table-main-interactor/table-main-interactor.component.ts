@@ -24,26 +24,26 @@ export class TableMainInteractorComponent {
 
   public displayTopLineClass(complex: NavigatorComplex, navigatorComponents: INavigatorComponent[], componentIndex: number): string {
     if (this.doesLineCrossComponentCell(complex, navigatorComponents, componentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
     if (this.doesLineEndOnComponentCell(complex, navigatorComponents, componentIndex) &&
       !this.doesLineStartOnComponentCell(complex, navigatorComponents, componentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
 
-    return 'transparentVerticalLine';
+    return 'transparent-vertical-line';
   }
 
   public displayBottomLineClass(complex: NavigatorComplex, navigatorComponents: INavigatorComponent[], componentIndex: number): string {
     if (this.doesLineCrossComponentCell(complex, navigatorComponents, componentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
     if (this.doesLineStartOnComponentCell(complex, navigatorComponents, componentIndex) &&
       !this.doesLineEndOnComponentCell(complex, navigatorComponents, componentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
 
-    return 'transparentVerticalLine';
+    return 'transparent-vertical-line';
   }
 
   private doesLineCrossComponentCell(complex: NavigatorComplex,

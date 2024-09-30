@@ -1,14 +1,14 @@
 <div class="Complex-navigator">
-  <table class="table CN-table">
+  <table class="table header-container">
 
     <!-- When table is not overflowing -->
     @if (complexes().length <= 6) {
       <thead class="tableHead">
       <tr>
         @if (isSorted()) {
-          <th class="spaceHolderSorting"></th>
+          <th class="space-holder-sorting-activated"></th>
         }
-        <th class="interactorsHeader horizontal">
+        <th class="components-header horizontal">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
@@ -25,7 +25,7 @@
                         <i [ngClass]="iconOrganism(complex.organismName)"></i>
                       } @else {
                         <img [src]="iconOrganism(complex.organismName)"
-                             class="iconOrganismImg"
+                             class="organism-icon-img"
                              width="15px" height="15px"/>
                       }
                       <i class="icon icon-generic small" data-icon="x"></i>
@@ -34,7 +34,7 @@
                 </div>
               </a>
             </div>
-            <div class="basketButton">
+            <div class="basket-button-container">
               <a class="button" (click)="toggleBasket(complex)">
                 <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
               </a>
@@ -46,13 +46,15 @@
     }
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
-      <thead class="tableHeadOverflow"
-             [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
+      <thead class="complexes-row-overflow"
+             [class.sorted]="isSorted()">
+      <!--             [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">-->
       <tr [style.--cols]="complexes().length"
           [style.--intHeader]="isSorted() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
-        <th class="spaceHolderHeaderOverflow" [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
-            <div class="shadow right" [class.visible]="shadowVisible()"></div>
+        <th class="space-holder-components-header-overflow"
+            [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+          <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
@@ -72,19 +74,19 @@
             </a>
           </th>
         }
-        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+        <div class="space-holder" [class.predicted]="anyPredictedComplex()"></div>
       </tr>
       <!-- icons row -->
       <tr [style.--cols]="complexes().length"
           [style.--intHeader]="isSorted() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
-        <th class="interactorsHeader overflow"
+        <th class="components-header overflow"
             [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
-          <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
+          <th class="organism-icon" [class.predicted]="complex.predictedComplex">
             <div>
               @if (isInBasket(complex.complexAC)) {
                 <a class="button" (click)="toggleBasket(complex)" [matTooltip]="'Remove from basket'">
@@ -102,13 +104,13 @@
               } @else {
                 <img [src]="iconOrganism(complex.organismName)"
                      [matTooltip]="complex.organismName | species"
-                     class="iconOrganismImg"
+                     class="organism-icon-img"
                      width="16px" height="16px"/>
               }
             </div>
           </th>
         }
-        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+        <div class="space-holder" [class.predicted]="anyPredictedComplex()"></div>
       </tr>
       </thead>
     }

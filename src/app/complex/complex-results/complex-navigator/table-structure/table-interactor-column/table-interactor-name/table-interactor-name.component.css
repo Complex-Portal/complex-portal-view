@@ -10,14 +10,14 @@ i:not(.small) {
   font-size: medium;
 }
 
-.nameAndIcons {
+.name-and-icons-container {
   font-size: 14px;
   display: flex;
   width: inherit;
   justify-content: flex-end;
 }
 
-.inlineDisplay {
+.inline-display {
   width: 100%;
   justify-content: space-between;
 }
@@ -31,23 +31,22 @@ i:not(.small) {
   padding-right: 5px;
 }
 
-.nameCompact {
+.name-compact {
   display: inline-flex;
   width: -webkit-fill-available;
 }
 
-.evenlySpaced {
+.evenly-spaced {
   max-width: 90%;
   display: inline-flex;
   justify-content: flex-end;
   text-overflow: ellipsis;
 }
 
-.orthologGroup {
+.ortholog-group {
   width: 47%;
   text-align: left
 }
-
 
 .organism-image {
   width: 16px;

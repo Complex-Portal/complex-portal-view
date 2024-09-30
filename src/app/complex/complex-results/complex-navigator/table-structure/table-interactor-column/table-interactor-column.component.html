@@ -7,9 +7,9 @@
         <tr [class.ortholog]="!!interactor.isOrthologGroup && state.mergeOrthologs">
           @for (range of ranges; track range.value) {
             @if (range.start === i) {
-              <td [attr.rowspan]="range.length" class="interactorSeparation"
+              <td [attr.rowspan]="range.length" class="sorting-side-panel"
                   [matTooltip]="state.componentsSorting() === NavigatorComponentSorting.ORGANISM ? (range.value | species) : range.value">
-                <div class="interactorNameContainer" [style.--rowspanSize]="range.length">
+                <div class="sorting-side-panel-name" [style.--rowspanSize]="range.length">
                   @if (state.componentsSorting() === NavigatorComponentSorting.ORGANISM) {
                     {{ range.value | species:true }}
                   } @else {
@@ -19,8 +19,8 @@
               </td>
             }
           }
-          <td class="interactorsColumn horizontalHeader"
-              [class.fixedWidth]="fixedWidth()"
+          <td class="components-column horizontal-header"
+              [class.fixed-width]="fixedWidth()"
               [style]="ranges.length!=0 ? 'left:3ch':''">
             <cp-table-interactor-name [interactor]="interactor">
             </cp-table-interactor-name>
@@ -40,8 +40,8 @@
           </td>
           <!-- Interactors' stoichiometry -->
           @for (complex of navigatorComplexes; track complex.complex.complexAC) {
-            <td class="intStoich"
-                [class.fixedWidth]="fixedWidth()"
+            <td class="stoichiometry-cell"
+                [class.fixed-width]="fixedWidth()"
                 [class.predicted]="complex.complex.predictedComplex">
               <cp-table-main-interactor
                 [complex]="complex"
@@ -60,19 +60,19 @@
         @if (!!interactor.subComponents) {
           @for (subComponent of interactor.subComponents; track subComponent; let j = $index) {
             <tr
-              class="expandedRows"
+              class="expanded-row"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
               @if (j === 0 && isSorting()) {
-                <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
+                <td [attr.rowspan]="interactor.subComponents.length" class="sorting-side-panel"
                     [matTooltip]="interactor.expandTooltip"
                 >
-                  <div class="interactorSeparationName"
+                  <div class="sorting-side-panel-name"
                        [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.expandTooltip }}
                   </div>
                 </td>
               }
-              <td class="subComponentColumn horizontalHeader"
-                  [class.fixedWidth]="fixedWidth()"
+              <td class="subcomponent-column horizontal-header"
+                  [class.fixed-width]="fixedWidth()"
                   [style]="ranges.length!=0 ? 'left:3ch':''">
                 <div>
                   <cp-table-interactor-name
@@ -81,8 +81,8 @@
                 </div>
               </td>
               @for (complex of navigatorComplexes; track complex.complex.complexAC) {
-                <td class="intStoich"
-                    [class.fixedWidth]="fixedWidth()"
+                <td class="stoichiometry-cell"
+                    [class.fixed-width]="fixedWidth()"
                     [class.predicted]="complex.complex.predictedComplex">
                   <cp-table-subcomponent-interactor
                     [complex]="complex"

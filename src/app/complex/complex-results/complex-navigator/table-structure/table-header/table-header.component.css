@@ -1,7 +1,12 @@
-.CN-table {
+.header-container {
   transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
   clip-path: fill-box;
   margin-bottom: 0;
+  --cols: 1;
+  --intHeader: 230px;
+  --parentWidth: 100%;
+  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+  --template: var(--intHeader) repeat(auto-fit, 70px);
 }
 
 thead {
@@ -10,25 +15,26 @@ thead {
   border-right: 0 solid white;
 }
 
-.spaceHolderSorting {
+.space-holder-sorting-activated {
   width: 3ch;
 }
 
 /* Rotated complexes names */
 
-.spaceHolderHeaderOverflow {
-  min-width: 230px;
-  max-width: 230px;
+.components-header.overflow, .space-holder-components-header-overflow {
+  min-width: var(--intHeader);
+  max-width: var(--intHeader);
   position: sticky;
   left: 0;
   z-index: 4;
-  color: var(--primary);
-  background-color: var(--on-primary);
-  padding-top: 173px;
-  text-align: right;
 }
 
-.iconOrganism {
+.space-holder-components-header-overflow {
+  background-color: white;
+  padding-top: 173px;
+}
+
+.organism-icon {
   position: sticky;
   text-align: center;
   background-color: var(--primary);
@@ -45,29 +51,18 @@ thead {
   overflow: hidden;
 }
 
-.CN-table .tableHeadOverflow tr {
-  --cols: 1;
-  --intHeader: 230px;
-  --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
+.header-container .complexes-row-overflow tr {
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
   overflow: clip;
 }
 
-.CN-table .tableHeadOverflowWithSorting tr {
-  --cols: 1;
-  --intHeader: 230px;
-  --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
-  display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
+.sorted {
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder) - 3ch);
-  overflow: visible;
 }
 
-.CN-table .tableHeadOverflow th.rotate {
+.header-container .complexes-row-overflow th.rotate {
   position: relative;
   width: 350px;
   height: 51px !important;
@@ -79,13 +74,12 @@ thead {
   left: -52px;
   display: flex;
   align-items: center;
-  align-content: center;
   padding: 0;
   transform: rotate(-45deg);
   border-collapse: collapse;
 }
 
-.CN-table .tableHeadOverflow th.rotate a {
+.header-container .complexes-row-overflow th.rotate a {
   width: 100%;
   height: 100%;
   align-content: center;
@@ -94,19 +88,14 @@ thead {
   border: none;
 }
 
-.spaceHolder {
+.space-holder {
   width: 183px;
   background-color: var(--primary);
   border-left: 1px solid white;
 }
 
-.interactorsHeader.overflow {
-  min-width: 230px;
-  max-width: 230px;
-  width: 230px;
-  position: sticky;
-  left: 0;
-  z-index: 4;
+.components-header.overflow {
+  width: var(--intHeader);
   background-color: var(--on-primary);
   height: 60px;
   line-height: 70px;
@@ -116,7 +105,7 @@ thead {
 
 /* Horizontal complexes name */
 
-.CN-table th.horizontal.interactorsHeader {
+.header-container th.horizontal.components-header {
   padding: 5px;
   min-width: 130px;
   max-width: 130px;
@@ -137,8 +126,7 @@ thead {
   display: block;
 }
 
-.CN-table th.horizontal {
-  color: white;
+.header-container th.horizontal {
   background-color: var(--primary);
   border-left: 1px solid white;
   min-width: 80px;
@@ -147,11 +135,8 @@ thead {
   font-size: 15px;
 }
 
+a,
 a:visited {
-  color: var(--on-primary);
-}
-
-a {
   color: var(--on-primary);
 }
 
@@ -160,10 +145,10 @@ a {
   margin: 0;
 }
 
-.basketButton {
+.basket-button-container {
   text-align: center;
 }
 
-.iconOrganismImg {
+.organism-icon-img {
   filter: var(--svg-colour-invert);
 }

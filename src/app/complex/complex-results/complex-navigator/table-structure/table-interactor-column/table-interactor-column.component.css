@@ -5,12 +5,11 @@ table {
   margin-bottom: 0;
 }
 
-.inheritedWidth {
+.inherited-width {
   width: calc(200px + var(--cols) * 70px + 183px);
 }
 
-/* interactors column */
-.interactorsColumn {
+.components-column {
   position: sticky;
   left: 0;
   z-index: 5;
@@ -24,16 +23,16 @@ table {
   background: inherit;
 }
 
-.interactorsColumn.fixedWidth {
+.components-column.fixed-width {
   min-width: 230px;
   max-width: 230px;
 }
 
-.interactorsColumn a {
+.components-column a {
   font-weight: normal;
 }
 
-.intStoich {
+.stoichiometry-cell {
   height: 100%;
   max-width: 70px;
   min-width: 70px;
@@ -42,7 +41,7 @@ table {
   z-index: 1;
 }
 
-.intStoich.fixedWidth {
+.stoichiometry-cell.fixed-width {
   width: 70px;
 }
 
@@ -62,15 +61,15 @@ a, a:visited {
   color: #0e6f76;
 }
 
-.spaceHolder {
+.space-holder {
   width: 183px;
 }
 
-.spaceHolder.sorting {
+.space-holder.sorting {
   width: calc(183px - 3ch);
 }
 
-.subComponentColumn {
+.subcomponent-column {
   left: 0;
   z-index: 30;
   height: 45px;
@@ -84,41 +83,37 @@ a, a:visited {
   position: sticky
 }
 
-.expandedRows {
+.expanded-row {
   color: #0e6f76;
   position: relative;
+  pointer-events: none;
 }
 
-.firstExpandedRow:after {
+.first-expanded-row:after,
+.last-expanded-row:after,
+.single-expanded-row:after {
   z-index: 40;
   content: '';
   position: absolute;
   inset: -2px -1px -2px -1px;
   pointer-events: none;
+}
+
+.first-expanded-row:after {
   background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px);
 }
 
-.lastExpandedRow:after {
-  z-index: 40;
-  content: '';
-  position: absolute;
-  inset: -2px -1px -2px -1px;
-  pointer-events: none;
+.last-expanded-row:after {
   background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
 }
 
-.singleExpandedRow:after {
-  z-index: 40;
-  content: '';
-  position: absolute;
-  inset: -2px -1px -2px -1px;
-  pointer-events: none;
+.single-expanded-row:after {
   background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px), linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
 }
 
 /* Interactors sorting label*/
 
-.interactorSeparation {
+.sorting-side-panel {
   max-width: 3ch;
   min-width: 3ch;
   background-color: #0e6f76;
@@ -131,8 +126,7 @@ a, a:visited {
   left: 0;
 }
 
-.interactorNameContainer,
-.interactorSeparationName {
+.sorting-side-panel-name {
   --rowspanSize: 1;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
@@ -140,24 +134,22 @@ a, a:visited {
   color: white;
   line-height: 0.8;
   text-align: center;
-
   text-overflow: ellipsis;
   height: calc(var(--rowspanSize) * 48px);
   white-space: nowrap;
   overflow: hidden;
-
 }
 
 .container {
   font-size: 14px;
 }
 
-.horizontalHeader {
+.horizontal-header {
   min-width: 114px;
   max-width: 114px;
 }
 
-.horizontalHeader.fixedWidth {
+.horizontal-header.fixed-width {
   width: 230px;
   min-width: 230px;
   max-width: 230px;
@@ -165,11 +157,11 @@ a, a:visited {
 
 /*/* NEEDED FOR SAFARI BROWSER*/
 @supports (-webkit-hyphens:none) {
-  .interactorsColumn {
+  .components-column {
     height: 45px !important;
   }
 
-  .intStoich {
+  .stoichiometry-cell {
     height: 45px;
     overflow-y: visible;
   }

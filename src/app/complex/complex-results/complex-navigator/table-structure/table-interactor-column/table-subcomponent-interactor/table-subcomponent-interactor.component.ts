@@ -32,14 +32,14 @@ export class TableSubcomponentInteractorComponent {
                                      subComponentIndex: number): string {
 
     if (this.doesLineCrossSubcomponentCell(complex, componentIndex, subComponentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
     if (this.doesLineEndOnSubcomponentCell(complex, componentIndex, subComponentIndex) &&
       !this.doesLineStartOnSubcomponentCell(complex, navigatorComponents, componentIndex, subComponentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
 
-    return 'transparentVerticalLine';
+    return 'transparent-vertical-line';
   }
 
   public displayBottomLineClassExpanded(complex: NavigatorComplex,
@@ -48,14 +48,14 @@ export class TableSubcomponentInteractorComponent {
                                         subComponentIndex: number): string {
 
     if (this.doesLineCrossSubcomponentCell(complex, componentIndex, subComponentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
     if (this.doesLineStartOnSubcomponentCell(complex, navigatorComponents, componentIndex, subComponentIndex) &&
       !this.doesLineEndOnSubcomponentCell(complex, componentIndex, subComponentIndex)) {
-      return 'verticalLine';
+      return 'vertical-line';
     }
 
-    return 'transparentVerticalLine';
+    return 'transparent-vertical-line';
   }
 
   private doesLineCrossSubcomponentCell(complex: NavigatorComplex, componentIndex: number, subComponentIndex: number): boolean {

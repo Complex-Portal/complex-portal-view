@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="nameAndIcons" [ngClass]="{inlineDisplay: isOrthologGroup()}">
+  <div class="name-and-icons-container" [class.inline-display]="isOrthologGroup()">
     @if (isOrthologGroup()) {
-      <div class="orthologGroup">
+      <div class="ortholog-group">
         Ortholog group
       </div>
     }
-    <div class="evenlySpaced">
+    <div class="evenly-spaced">
       @if (state.organismIconDisplay()) {
         @if (interactorOrganismIcon().startsWith('icon')) {
           <i
@@ -40,11 +40,11 @@
       }
 
       @if (!state.idDisplay()) {
-        <div class="nameCompact">
+        <div class="name-compact">
           @if (!state.idDisplay()) {
             <div class="name" [matTooltip]="'More information about ' + interactor().name">
               @if (!!interactor().identifierLink) {
-                <a [href]="interactor().identifierLink" target="_blank" class="externalLinkContainer">
+                <a [href]="interactor().identifierLink" target="_blank" class="external-link-container">
                   {{ interactor().name }}
                 </a>
               }

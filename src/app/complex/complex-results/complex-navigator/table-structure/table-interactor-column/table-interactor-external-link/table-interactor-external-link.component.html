@@ -1,6 +1,6 @@
-<div class="externalLinkContainer" [matTooltip]="'More information about ' + interactor().identifier">
+<div class="external-link-container" [matTooltip]="'More information about ' + interactor().identifier">
   @if (externalLinkVisible) {
-    <a href="{{ interactor().identifierLink}}" target="_blank" class="externalLinkContainer">
+    <a href="{{ interactor().identifierLink}}" target="_blank" class="external-link-container">
       {{ interactor().identifier }}
       <i class="icon icon-generic small" data-icon="x" title="More information about {{ interactor().identifier }}"></i>
     </a>
