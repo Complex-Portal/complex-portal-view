@@ -2,7 +2,7 @@
 
   <button mat-stroked-button [matMenuTriggerFor]="group">Sorting component
   </button>
-  <mat-menu #group="matMenu">
+  <mat-menu #group="matMenu" yPosition="below">
     <mat-radio-group [(ngModel)]="state.componentsSorting">
       @for (option of (NavigatorComponentSorting | keyvalue); track option.key) {
         <div mat-menu-item>
@@ -17,7 +17,7 @@
 
   <button mat-stroked-button [matMenuTriggerFor]="display">Display option
   </button>
-  <mat-menu #display="matMenu">
+  <mat-menu #display="matMenu" yPosition="below">
     <div (click)="$event.stopPropagation()">
       <div mat-menu-item>
         <mat-checkbox [checked]="allSelected()" [indeterminate]="partiallySelected()"
@@ -40,6 +40,6 @@
   <mat-slide-toggle [(ngModel)]="state.mergeOrthologs" [disabled]="!orthologsGroupsAvailable()"
                     [matTooltip]="'No orthologs groups available'" [matTooltipDisabled]="orthologsGroupsAvailable()"
                     (change)="onButtonClicked(Action.UseOrthologyButton)">
-    Merge orthologs
+    Group by orthologs
   </mat-slide-toggle>
 </div>
