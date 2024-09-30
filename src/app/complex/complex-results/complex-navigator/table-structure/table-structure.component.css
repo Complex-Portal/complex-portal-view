@@ -7,9 +7,11 @@
 .header {
   position: sticky;
   z-index: 2;
-  /*overflow-x: auto;*/
-  /*overflow-y: hidden;*/
   transform: rotateX(180deg);
+}
+
+.scroller {
+  overflow: scroll;
 }
 
 .interactors {

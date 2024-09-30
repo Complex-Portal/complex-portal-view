@@ -1,10 +1,11 @@
 <div class="complexNavigatorTable">
-  <div class="header" [style.top.px]="scrollStart()"
-       (scroll)="syncScroll(header, body)" #header>
-    <cp-table-header [complexes]="sortedComplexes()" [shadowVisible]="shadowLeftVisible"
-                     (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
-    </cp-table-header>
-    <div class="shadow bottom" [class.visible]="shadowTopVisible"  style="z-index: 3"></div>
+  <div class="header" [style.top.px]="scrollStart()">
+    <div class="scroller" (scroll)="syncScroll(header, body)" #header>
+      <cp-table-header [complexes]="sortedComplexes()" [shadowVisible]="shadowLeftVisible"
+                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
+      </cp-table-header>
+    </div>
+    <div class="shadow top" style="z-index: 3; top: calc(-1 * var(--width))" [class.visible]="shadowTopVisible"></div>
   </div>
   <!--  <div class="shadow top" style="z-index: 3; position: sticky; top: 282px"></div>-->
   <div class="interactors"
@@ -16,7 +17,7 @@
     >
     </cp-table-interactor-column>
   </div>
-  <div class="shadow left" [class.visible]="shadowRightVisible"></div>
+  <div class="shadow left" [class.visible]="shadowRightVisible" style="z-index: 3"></div>
   <div class="spaceHolder"></div>
 </div>
 

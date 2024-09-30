@@ -54,12 +54,15 @@
 
 .shadow {
   --width: 6px;
+  --color: #0000007d;
+  //--color: white;
   z-index: 1;
   position: absolute;
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s;
 
   &.visible {
-    visibility: visible;
+    opacity: 1;
   }
 
   &.right {
@@ -67,7 +70,7 @@
     bottom: 0;
     width: var(--width);
     right: calc(-1 * var(--width));
-    background: linear-gradient(to right, #0000007d, transparent);
+    background: linear-gradient(to right, var(--color), transparent);
   }
 
   &.left {
@@ -75,23 +78,23 @@
     bottom: 0;
     right: 0;
     width: var(--width);
-    background: linear-gradient(to left, #0000007d, transparent);
+    background: linear-gradient(to left, var(--color), transparent);
   }
 
   &.bottom {
-    bottom: 0;
+    bottom: calc(-1 * var(--width));;
     left: 0;
     right: 0;
     height: var(--width);
-    background: linear-gradient(to bottom, #0000007d, transparent);
+    background: linear-gradient(to bottom, var(--color), transparent);
   }
 
   &.top {
-    top: calc(-1 * var(--width));
+    top: 0;
     left: 0;
     right: 0;
     height: var(--width);
-    background: linear-gradient(to top, #0000007d, transparent);
+    background: linear-gradient(to top, var(--color), transparent);
   }
 }
 
