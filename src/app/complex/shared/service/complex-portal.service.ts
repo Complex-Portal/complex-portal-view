@@ -155,7 +155,7 @@ export class ComplexPortalService {
 
 }
 
-function range(start: number, stop?: number, step = 1): number[] {
+export function range(start: number, stop?: number, step = 1): number[] {
   const result: number[] = [];
 
   // If only one argument is provided, treat it as the stop value and set start to 0

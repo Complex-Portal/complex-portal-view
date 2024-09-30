@@ -58,7 +58,7 @@ input:checked ~ .count,
     }
   }
 
-  .stars {
+  .stars-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -69,7 +69,7 @@ input:checked ~ .count,
       display: flex;
       flex-direction: row;
       align-items: center;
-      cursor: pointer ;
+      cursor: pointer;
 
       .block {
         background-color: var(--primary);

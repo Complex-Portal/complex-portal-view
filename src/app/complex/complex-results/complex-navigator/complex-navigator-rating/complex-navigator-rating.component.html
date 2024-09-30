@@ -1,23 +1,17 @@
 @if (!hidden) {
-  <div class="ratingComponent">
-    <div class="buttonContainer">
+  <div class="rating-component">
+    <div class="button-container">
       <button class="close" id="closePopup" (click)="hidden = true">&times;</button>
     </div>
     <div class="text">
       <p>Tell us about your experience with the Complex Navigator!</p>
     </div>
-    <div class="ratingComponentStars">
-      <span class="star" [ngClass]="{'selected': selectedRating >= 1}" (click)="selectRating(1)">
-        <i _ngcontent-ng-c108643426="" class="icon icon-common icon-star ng-star-inserted"
-        ></i> </span>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 2}" (click)="selectRating(2)">
-        <i _ngcontent-ng-c108643426="" class="icon icon-common icon-star ng-star-inserted"></i></span>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 3}" (click)="selectRating(3)">
-        <i _ngcontent-ng-c108643426="" class="icon icon-common icon-star ng-star-inserted"></i> </span>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 4}" (click)="selectRating(4)">
-        <i _ngcontent-ng-c108643426="" class="icon icon-common icon-star ng-star-inserted"></i> </span>
-      <span class="star" [ngClass]="{'selected': selectedRating >= 5}" (click)="selectRating(5)">
-        <i _ngcontent-ng-c108643426="" class="icon icon-common icon-star ng-star-inserted"></i> </span>
+    <div class="stars-container">
+      @for (star of stars; track star) {
+        <span class="star" [class.selected]=" selectedRating >= star" (click)="selectRating(star)">
+          <i class="icon icon-common icon-star"></i>
+        </span>
+      }
     </div>
   </div>
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AnalyticsService} from '../../../../shared/google-analytics/service/analytics.service';
+import {range} from '../../../shared/service/complex-portal.service';
 
 const COMPLEX_NAVIGATOR_RATING = 'already_rated';
 
@@ -11,6 +12,7 @@ const COMPLEX_NAVIGATOR_RATING = 'already_rated';
 export class ComplexNavigatorRatingComponent implements OnInit {
   selectedRating: number;
   hidden = false;
+  stars: number[] = range(1, 6);
 
   constructor(private analyticsService: AnalyticsService) {
   }

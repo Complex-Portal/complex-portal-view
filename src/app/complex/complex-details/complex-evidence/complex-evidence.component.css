@@ -24,14 +24,15 @@ h3 {
   align-items: center;
 }
 
-.stars {
+.stars-container {
   display: flex;
   gap: 4px;
 }
 
-.stars .icon {
+.stars-container .icon {
   font-size: 16pt;
 }
+
 .empty {
   color: lightgray;
 }
