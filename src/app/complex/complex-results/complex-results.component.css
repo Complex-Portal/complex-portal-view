@@ -3,3 +3,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+:host ::ng-deep .mat-mdc-tab-body-wrapper,
+:host ::ng-deep .mat-mdc-tab-body,
+:host ::ng-deep .mat-mdc-tab-body-content {
+  overflow-y: clip !important;
+  overflow-x: visible !important;
+  max-width: 100%;
+}

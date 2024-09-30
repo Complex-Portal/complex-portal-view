@@ -1,17 +1,14 @@
 .CN-table {
   transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
+  clip-path: fill-box;
+  overflow: scroll;
+  margin-bottom: 0;
 }
 
 thead {
   border: 0;
   background-color: white;
   border-right: 0 solid white;
-  overflow: scroll;
-
-}
-
-.CN-table {
-  clip-path: fill-box;
   overflow: scroll;
 }
 

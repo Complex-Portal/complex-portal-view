@@ -16,7 +16,6 @@
 }
 
 .filters {
-  padding-top: 20px;
   display: flex;
   justify-content: center;
   grid-gap: 10px;
