@@ -51,9 +51,8 @@
       <tr [style.--cols]="complexes().length"
           [style.--intHeader]="isSorted() ? '256px':''"
           [style.--sizeSpaceHolder]="'185px'">
-        <th class="spaceHolderHeaderOverflow"
-            [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
-          <div class="shadow right" [class.visible]="shadowVisible()"></div>
+        <th class="spaceHolderHeaderOverflow" [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+            <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
