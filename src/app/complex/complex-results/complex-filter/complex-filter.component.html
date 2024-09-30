@@ -40,7 +40,7 @@
           <div class="stars" [style.gap.px]="confidenceGap()">
             @for (confidence of reversedConfidence(); track confidence.value) {
               <div class="star-container" [class.predicted]="confidence.value <= 2" [matTooltip]="confidence.label"
-                   [style.gap.px]="confidenceGap()" (click)="minConfidence.set(confidence.value)">
+                   (click)="minConfidence.set(confidence.value)">
                 @for (star of confidence.stars; track $index) {
                   <i class="icon icon-common icon-star" [ngClass]="star"></i>
                 }

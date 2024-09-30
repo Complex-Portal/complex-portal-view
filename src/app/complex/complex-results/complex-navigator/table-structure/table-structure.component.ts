@@ -1,30 +1,42 @@
-import {Component, computed, input, output} from '@angular/core';
+import {AfterViewInit, Component, computed, ElementRef, input, output, ViewChild} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Complex} from '../../../shared/model/complex-results/complex.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
-import {
-  findComponentInComplex
-} from '../complex-navigator-utils';
+import {findComponentInComplex} from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
-import {NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
   templateUrl: './table-structure.component.html',
   styleUrls: ['./table-structure.component.css']
 })
-export class TableStructureComponent {
+export class TableStructureComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
   navigatorComponents = input<INavigatorComponent[]>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
+  /**
+   * Define start position for header to become sticky, in px
+   */
+  scrollStart = input<number>(39);
+
+  @ViewChild('header') headerDiv: ElementRef<HTMLDivElement>;
+  isScrolling = false;
+
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
 
   constructor() {
+  }
+
+  ngAfterViewInit(): void {
+    const header = this.headerDiv.nativeElement;
+    window.addEventListener('scroll', (s) => {
+      this.isScrolling = header.getBoundingClientRect().top === this.scrollStart();
+    });
   }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {

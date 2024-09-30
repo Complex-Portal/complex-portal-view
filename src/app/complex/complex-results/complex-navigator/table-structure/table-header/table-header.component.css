@@ -67,7 +67,7 @@ thead {
   display: grid;
   grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
   width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder) - 3ch);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .CN-table .tableHeadOverflow th.rotate {

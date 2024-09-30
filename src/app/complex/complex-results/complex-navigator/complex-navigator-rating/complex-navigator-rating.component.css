@@ -1,13 +1,11 @@
 .star {
   font-size: 1.5em;
   cursor: pointer;
-  color: var(--primary);
-  -webkit-text-stroke: 1px var(--on-primary);
-  text-shadow: 0 0 4px var(--on-primary);
+  color: white;
 }
 
 .star.selected {
-  color: #CCE4E6FF;
+  color: yellow;
   -webkit-text-stroke: 1px var(--primary);
   text-shadow: 0 0 4px var(--on-primary);
 }

@@ -1,5 +1,6 @@
 <div class="Complex-navigator">
   <table class="table CN-table">
+
     <!-- When table is not overflowing -->
     @if (complexes().length <= 6) {
       <thead class="tableHead">
@@ -7,7 +8,10 @@
         @if (isSorted()) {
           <th class="spaceHolderSorting"></th>
         }
-        <th class="interactorsHeader horizontal">Components</th>
+        <th class="interactorsHeader horizontal">
+          Components
+          <div class="shadow right"></div>
+        </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="horizontal" [class.predicted]="complex.predictedComplex">
             <div>
@@ -49,6 +53,7 @@
           [style.--sizeSpaceHolder]="'185px'">
         <th class="spaceHolderHeaderOverflow"
             [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+          <div class="shadow right"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
@@ -77,6 +82,7 @@
         <th class="interactorsHeader overflow"
             [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
           Components
+          <div class="shadow right"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
@@ -109,5 +115,6 @@
     }
   </table>
 </div>
+
 
 

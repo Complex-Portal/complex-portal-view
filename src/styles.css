@@ -51,3 +51,45 @@
   right: 10px;
   top: 225px;
 }
+
+.shadow {
+  --width: 6px;
+  z-index: 1;
+  position: absolute;
+}
+
+*:has(> .shadow) {
+  position: relative;
+}
+
+.shadow.right {
+  top: 0;
+  bottom: 0;
+  width: var(--width);
+  right: calc(-1 * var(--width));
+  background: linear-gradient(to right, #0000007d, transparent);
+}
+
+.shadow.left {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--width);
+  background: linear-gradient(to left, #0000007d, transparent);
+}
+
+.shadow.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--width);
+  background: linear-gradient(to bottom, #0000007d, transparent);
+}
+
+.shadow.top {
+  top: calc(-1 * var(--width));
+  left: 0;
+  right: 0;
+  height: var(--width);
+  background: linear-gradient(to top, #0000007d, transparent);
+}

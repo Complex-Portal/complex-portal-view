@@ -1,10 +1,12 @@
 <div class="complexNavigatorTable">
-  <div class="header"
+  <div class="header" [class.scrolling]="isScrolling" [style.top.px]="scrollStart()"
        (scroll)="body.scrollLeft = header.scrollLeft" #header>
     <cp-table-header [complexes]="sortedComplexes()"
                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
     </cp-table-header>
+    <div class="shadow top" style="z-index: 3"></div>
   </div>
+
   <div class="interactors"
        (scroll)="header.scrollLeft = body.scrollLeft" #body>
     <cp-table-interactor-column
@@ -12,6 +14,7 @@
       [navigatorComponents]="navigatorComponents()">
     </cp-table-interactor-column>
   </div>
+  <div class="shadow left"></div>
   <div class="spaceHolder"></div>
 </div>
 

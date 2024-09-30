@@ -1,11 +1,11 @@
 .complexNavigatorTable {
   border-collapse: separate;
   height: 100%;
+  position: relative;
 }
 
 .header {
   position: sticky;
-  top: 39px;
   z-index: 2;
   overflow-x: auto;
   overflow-y: hidden;
