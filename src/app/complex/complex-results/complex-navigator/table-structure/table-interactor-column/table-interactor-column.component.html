@@ -19,8 +19,8 @@
               </td>
             }
           }
-          <td class="interactorsColumn"
-              [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
+          <td class="interactorsColumn horizontalHeader"
+              [class.fixedWidth]="fixedWidth()"
               [style]="ranges.length!=0 ? 'left:3ch':''">
             <cp-table-interactor-name [interactor]="interactor">
             </cp-table-interactor-name>
@@ -92,7 +92,7 @@
                 </td>
               }
               @if (navigatorComplexes.length > 6) {
-                <div class="spaceHolder"></div>
+                <div [class.sorting]="isSorting()" class="spaceHolder"></div>
               }
             </tr>
           }

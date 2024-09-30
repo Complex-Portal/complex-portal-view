@@ -6,7 +6,9 @@
     <mat-radio-group [(ngModel)]="state.componentsSorting">
       @for (option of (NavigatorComponentSorting | keyvalue); track option.key) {
         <div mat-menu-item>
-          <mat-radio-button [value]="option.value">{{ option.value }}</mat-radio-button>
+          <mat-radio-button [value]="option.value"
+                            (change)="onButtonClicked(Action.UseSortingButton)">{{ option.value }}
+          </mat-radio-button>
         </div>
       }
     </mat-radio-group>
@@ -26,7 +28,9 @@
       <ul>
         @for (option of state.displayOptions; track option.name) {
           <li mat-menu-item>
-            <mat-checkbox [(ngModel)]="option.value">{{ option.name }}</mat-checkbox>
+            <mat-checkbox [(ngModel)]="option.value"
+                          (change)="onButtonClicked(Action.UseGroupingButton)">{{ option.name }}
+            </mat-checkbox>
           </li>
         }
       </ul>
@@ -34,7 +38,8 @@
   </mat-menu>
 
   <mat-slide-toggle [(ngModel)]="state.mergeOrthologs" [disabled]="!orthologsGroupsAvailable()"
-                    [matTooltip]="'No orthologs groups available'" [matTooltipDisabled]="orthologsGroupsAvailable()">
+                    [matTooltip]="'No orthologs groups available'" [matTooltipDisabled]="orthologsGroupsAvailable()"
+                    (change)="onButtonClicked(Action.UseOrthologyButton)">
     Merge orthologs
   </mat-slide-toggle>
 </div>

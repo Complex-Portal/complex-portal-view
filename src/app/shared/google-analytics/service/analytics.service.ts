@@ -70,4 +70,12 @@ export class AnalyticsService {
   public rateComplexNavigator(rating: number) {
     this.analytics.event(Action[Action.RatingComplexNavigator], Category[Category.complexNavigator], 'rating', rating);
   }
+
+  public useOrthologyButton(action: Action) {
+    this.analytics.event(
+      Action[action],
+      Category[Category.complexNavigator],
+      'ButtonClicked'
+    );
+  }
 }

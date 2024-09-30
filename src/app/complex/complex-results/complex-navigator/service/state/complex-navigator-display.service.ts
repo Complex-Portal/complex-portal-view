@@ -26,6 +26,7 @@ export class NavigatorStateService {
     {name: 'Type', value: this.typeIconDisplay}
   ];
 
+
   params = computed(() => ({
     mergeOrthologs: this.mergeOrthologs(),
     componentsSorting: this.componentsSorting(),
@@ -38,29 +39,57 @@ export class NavigatorStateService {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(queryParams => {
-      for (const param of Object.keys(this.params())) {
-        if (!queryParams[param]) {
-          continue;
-        }
+      const paramKeys = Object.keys(this.params());
+      for (const param of paramKeys) {
+        let value: any;
 
-        let newValue: any;
-        switch (typeof this[param]()) {
-          case 'boolean':
-            newValue = queryParams[param] === 'true';
-            break;
-          default:
-            newValue = queryParams[param];
+        // 1. Check URL params first
+        if (queryParams[param] !== undefined) {
+          switch (typeof this[param]()) {
+            case 'boolean':
+              value = queryParams[param] === 'true';
+              break;
+            default:
+              value = queryParams[param];
+          }
+          // 2. Then heck local storage
+        } else if (localStorage.getItem(param) !== null) {
+          switch (typeof this[param]()) {
+            case 'boolean':
+              value = localStorage.getItem(param) === 'true';
+              break;
+            default:
+              value = localStorage.getItem(param);
+          }
+        } else {
+          value = this[param]();
         }
-        if (newValue !== this[param]()) {
-          this[param].set(newValue);
+        if (value !== this[param]()) {
+          this[param].set(value);
         }
       }
     });
+
     effect(() => {
       if (this.ignore) {
         return;
       }
       this.router.navigate([], {queryParams: this.params(), queryParamsHandling: 'merge'});
     }, {allowSignalWrites: true});
+
+
+    effect(() => {
+      this.updateLocalStorage();
+    });
+  }
+
+  updateLocalStorage(): void {
+    for (const param of Object.keys(this.params())) {
+      const value = this.params()[param];
+      // Only update localStorage if the value is different or not yet set
+      if (!localStorage.getItem(param) || localStorage.getItem(param) !== String(value)) {
+        localStorage.setItem(param, String(value));
+      }
+    }
   }
 }
