@@ -1,5 +1,4 @@
 <div class="complexNavigatorTable"
-     [class.sorting]="isSorting()"
      [style.--cols]="sortedComplexes().length">
   <div class="header" [style.top.px]="scrollStart()">
     <div class="scroller" (scroll)="syncScroll(header, body)" #header>
