@@ -5,15 +5,12 @@
     @if (complexes().length <= 6) {
       <thead class="tableHead">
       <tr>
-        @if (isSorted()) {
-          <th class="spaceHolderSorting"></th>
-        }
-        <th class="interactorsHeader horizontal">
+        <th class="interactorsHeader">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
-          <th class="horizontal" [class.predicted]="complex.predictedComplex">
+          <th [class.predicted]="complex.predictedComplex" class="horizontal">
             <div>
               <a [routerLink]="['/complex', complex.complexAC]"
                  target="_blank">
@@ -46,18 +43,14 @@
     }
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
-      <thead class="tableHeadOverflow"
-             [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-        <th class="spaceHolderHeaderOverflow" [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+      <thead class="tableHeadOverflow">
+      <tr>
+        <th class="spaceHolderHeaderOverflow">
             <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
-              [class.predicted]="complex.predictedComplex"
-              [style.--cols]="complexes().length">
+              [class.predicted]="complex.predictedComplex">
             <a [routerLink]="['/complex', complex.complexAC]"
                [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
                target="_blank">
@@ -75,11 +68,8 @@
         <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
       </tr>
       <!-- icons row -->
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-        <th class="interactorsHeader overflow"
-            [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
+      <tr>
+        <th class="interactorsHeader overflow">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>

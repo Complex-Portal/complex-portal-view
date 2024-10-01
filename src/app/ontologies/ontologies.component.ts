@@ -6,7 +6,7 @@ import {Title} from '@angular/platform-browser';
 @Component({
   selector: 'cp-ontologies',
   templateUrl: './ontologies.component.html',
-  styleUrls: ['./ontologies.component.css']
+  styleUrls: ['./ontologies.component.scss']
 })
 export class OntologiesComponent implements OnInit {
 

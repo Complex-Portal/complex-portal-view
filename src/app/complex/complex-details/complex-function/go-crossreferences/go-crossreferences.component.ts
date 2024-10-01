@@ -4,7 +4,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 @Component({
   selector: 'cp-go-crossreferences',
   templateUrl: './go-crossreferences.component.html',
-  styleUrls: ['./go-crossreferences.component.css']
+  styleUrls: ['./go-crossreferences.component.scss']
 })
 export class GoCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];

@@ -10,7 +10,7 @@ import {NavigatorComponentSorting, NavigatorStateService} from '../service/state
 @Component({
   selector: 'cp-table-structure',
   templateUrl: './table-structure.component.html',
-  styleUrls: ['./table-structure.component.css']
+  styleUrls: ['./table-structure.component.scss']
 })
 export class TableStructureComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
@@ -25,13 +25,12 @@ export class TableStructureComponent implements AfterViewInit {
   scrollStart = input<number>(39);
 
   @ViewChild('header') headerDiv: ElementRef<HTMLDivElement>;
-  shadowTopVisible = true;
+  shadowTopVisible = false;
   shadowRightVisible = true;
   shadowLeftVisible = false;
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
-  isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
 
   constructor(public state: NavigatorStateService) {
   }
@@ -39,6 +38,7 @@ export class TableStructureComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const header = this.headerDiv.nativeElement;
     this.setHorizontalShadowVisibility(header);
+    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart());
   }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {

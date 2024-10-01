@@ -5,7 +5,7 @@ import {humapUrl} from '../../../complex-portal-utils';
 @Component({
   selector: 'cp-external-resources',
   templateUrl: './external-resources.component.html',
-  styleUrls: ['./external-resources.component.css']
+  styleUrls: ['./external-resources.component.scss']
 })
 export class ExternalResourcesComponent implements OnInit {
   private _crossReferences: CrossReference[];

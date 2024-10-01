@@ -12,7 +12,7 @@ import {forkJoin} from 'rxjs';
 @Component({
   selector: 'cp-reactome-cross-references',
   templateUrl: './reactome-cross-references.component.html',
-  styleUrls: ['./reactome-cross-references.component.css']
+  styleUrls: ['./reactome-cross-references.component.scss']
 })
 
 export class ReactomeCrossReferencesComponent implements OnInit {

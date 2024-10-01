@@ -4,7 +4,7 @@ import {CrossReference} from '../../../../shared/model/complex-details/cross-ref
 @Component({
   selector: 'cp-go-biological-process',
   templateUrl: 'go-biological-process.component.html',
-  styleUrls: ['go-biological-process.component.css']
+  styleUrls: ['go-biological-process.component.scss']
 })
 export class GoBiologicalProcessComponent implements OnInit {
   private _crossReferences: CrossReference[];

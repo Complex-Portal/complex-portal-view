@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cp-systematic-name',
   templateUrl: 'systematic-name.component.html',
-  styleUrls: ['systematic-name.component.css']
+  styleUrls: ['systematic-name.component.scss']
 })
 export class SystematicNameComponent implements OnInit {
   private _systematicName: string;

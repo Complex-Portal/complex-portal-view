@@ -6,7 +6,7 @@ import {INavigatorComponent, INavigatorSubComponent} from '../../model/navigator
 @Component({
   selector: 'cp-table-subcomponent-interactor',
   templateUrl: './table-subcomponent-interactor.component.html',
-  styleUrls: ['./table-subcomponent-interactor.component.css']
+  styleUrls: ['./table-subcomponent-interactor.component.scss']
 })
 
 export class TableSubcomponentInteractorComponent {

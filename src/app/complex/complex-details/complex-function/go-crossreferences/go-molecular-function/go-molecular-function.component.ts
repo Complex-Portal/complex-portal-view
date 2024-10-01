@@ -4,7 +4,7 @@ import {CrossReference} from '../../../../shared/model/complex-details/cross-ref
 @Component({
   selector: 'cp-go-molecular-function',
   templateUrl: 'go-molecular-function.component.html',
-  styleUrls: ['go-molecular-function.component.css']
+  styleUrls: ['go-molecular-function.component.scss']
 })
 export class GoMolecularFunctionComponent implements OnInit {
   private _crossReferences: CrossReference[];

@@ -10,7 +10,7 @@ declare global {
 @Component({
   selector: 'cp-twitter-display',
   templateUrl: './twitter-display.component.html',
-  styleUrls: ['./twitter-display.component.css']
+  styleUrls: ['./twitter-display.component.scss']
 })
 export class TwitterDisplayComponent implements OnInit {
 

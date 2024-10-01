@@ -7,7 +7,7 @@ import {NavigatorStateService} from '../../../service/state/complex-navigator-di
 @Component({
   selector: 'cp-table-interactor-name',
   templateUrl: './table-interactor-name.component.html',
-  styleUrls: ['./table-interactor-name.component.css']
+  styleUrls: ['./table-interactor-name.component.scss']
 })
 export class TableInteractorNameComponent {
 

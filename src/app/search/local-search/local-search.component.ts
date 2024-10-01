@@ -8,7 +8,7 @@ import {SearchService} from '../service/search.service';
 @Component({
   selector: 'cp-local-search',
   templateUrl: './local-search.component.html',
-  styleUrls: ['./local-search.component.css']
+  styleUrls: ['./local-search.component.scss']
 })
 export class LocalSearchComponent implements OnInit {
   private _display: boolean;

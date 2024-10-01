@@ -1,0 +1,26 @@
+/*noinspection CssUnknownTarget*/
+@import "//cdn-images.mailchimp.com/embedcode/slim-10_7.scss";
+
+h3 {
+  border-bottom:solid;
+  border-color: #5ca23561;
+}
+
+#mc_embed_signup {
+  background: #fff;
+  clear: left;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
+#mc_embed_signup form {
+  padding: 0;
+}
+
+input#mce-EMAIL.email {
+  width: 100% !important;
+}
+
+input#mc-embedded-subscribe.button {
+  width: 100% !important;
+  background-color: var(--primary)
+}

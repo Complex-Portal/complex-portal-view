@@ -6,7 +6,7 @@ import {humapUrl} from '../../complex-portal-utils';
 @Component({
   selector: 'cp-complex-evidence',
   templateUrl: './complex-evidence.component.html',
-  styleUrls: ['./complex-evidence.component.css']
+  styleUrls: ['./complex-evidence.component.scss']
 })
 export class ComplexEvidenceComponent implements OnInit {
 

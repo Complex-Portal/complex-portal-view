@@ -8,7 +8,7 @@ const baseURL = environment.reactome_base_url;
 @Component({
   selector: 'cp-reactome-diagram',
   templateUrl: 'reactome-diagram.component.html',
-  styleUrls: ['reactome-diagram.component.css']
+  styleUrls: ['reactome-diagram.component.scss']
 })
 export class ReactomeDiagramComponent implements OnInit, OnChanges {
   private diagramContext: any;

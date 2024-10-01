@@ -9,12 +9,12 @@ import {Observable, of} from 'rxjs';
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {map} from 'rxjs/operators';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
-import {NavigatorStateService} from './service/state/complex-navigator-display.service';
+import {NavigatorComponentSorting, NavigatorStateService} from './service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-complex-navigator',
   templateUrl: './complex-navigator.component.html',
-  styleUrls: ['./complex-navigator.component.css']
+  styleUrls: ['./complex-navigator.component.scss']
 })
 
 export class ComplexNavigatorComponent {
@@ -28,6 +28,7 @@ export class ComplexNavigatorComponent {
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
+  isSorted = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
   navigatorComponents: INavigatorComponent[] = [];
 
   constructor(private complexPortalService: ComplexPortalService, private state: NavigatorStateService) {

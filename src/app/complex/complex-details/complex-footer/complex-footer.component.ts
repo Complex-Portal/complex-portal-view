@@ -3,7 +3,7 @@ import {Component, OnInit, input } from '@angular/core';
 @Component({
   selector: 'cp-complex-footer',
   templateUrl: './complex-footer.component.html',
-  styleUrls: ['./complex-footer.component.css']
+  styleUrls: ['./complex-footer.component.scss']
 })
 export class ComplexFooterComponent implements OnInit {
   institute = input<string>();

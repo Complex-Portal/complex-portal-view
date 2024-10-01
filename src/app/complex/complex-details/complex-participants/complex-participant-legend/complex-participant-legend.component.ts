@@ -5,7 +5,7 @@ import {ComplexParticipant} from '../complex-participants.component';
 @Component({
   selector: 'cp-complex-participant-legend',
   templateUrl: './complex-participant-legend.component.html',
-  styleUrls: ['./complex-participant-legend.component.css'],
+  styleUrls: ['./complex-participant-legend.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ComplexParticipantLegendComponent {

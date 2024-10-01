@@ -17,7 +17,7 @@ interface Range {
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
-  styleUrls: ['./table-interactor-column.component.css']
+  styleUrls: ['./table-interactor-column.component.scss']
 })
 export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
@@ -25,7 +25,7 @@ export class TableInteractorColumnComponent {
   shadowVisible = input<boolean>(false);
 
   isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
-  fixedWidth = computed(() => this.complexes().length > 6);
+  isOrganismSorting = computed(() => this.state.componentsSorting() === NavigatorComponentSorting.ORGANISM);
 
   navigatorComplexes: NavigatorComplex[];
   ranges: Range[] = [];

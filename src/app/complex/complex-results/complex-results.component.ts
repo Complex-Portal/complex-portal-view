@@ -13,7 +13,7 @@ import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
-  styleUrls: ['./complex-results.component.css'],
+  styleUrls: ['./complex-results.component.scss'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
@@ -88,13 +88,13 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
    * Prepare query params to build new URL after filter or pagination has changed
    */
   reloadPage(): void {
-    const queryParams = {...this.state.params()};
-    console.log(queryParams);
-    queryParams['query'] = this.query;
-    queryParams['page'] = this.currentPageIndex;
-    queryParams['minConfidence'] = this.confidenceFilter;
-    queryParams['displayMode'] = this._displayType;
-
+    const queryParams = {
+      query: this.query,
+      page: this.currentPageIndex,
+      minConfidence: this.confidenceFilter,
+      displayMode: this._displayType,
+      ...this.state.params()
+    };
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
     console.log('navigate from results');
     this.router.navigate([], {queryParams});

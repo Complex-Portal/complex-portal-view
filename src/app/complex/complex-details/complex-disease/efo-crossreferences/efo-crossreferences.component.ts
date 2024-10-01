@@ -8,7 +8,7 @@ import {Category} from '../../../../shared/google-analytics/types/category.enum'
 @Component({
   selector: 'cp-efo-crossreferences',
   templateUrl: './efo-crossreferences.component.html',
-  styleUrls: ['./efo-crossreferences.component.css']
+  styleUrls: ['./efo-crossreferences.component.scss']
 })
 export class EfoCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];

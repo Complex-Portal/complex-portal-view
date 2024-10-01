@@ -1,5 +1,8 @@
-<div class="ComplexNavigator">
-  <div class="Buttons" [ngClass]="complexSearch().totalNumberOfResults <=6 ? 'smallCNButtons' : ''">
+<div class="ComplexNavigator"
+     [style.--cols]="complexSearch().elements.length"
+     [class.horizontal]="complexSearch().elements.length <= 6"
+     [class.sorted]="isSorted()">
+  <div class="buttons">
     <cp-complex-navigator-buttons [orthologsGroupsAvailable]="orthologGroupsAvailable()"/>
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"

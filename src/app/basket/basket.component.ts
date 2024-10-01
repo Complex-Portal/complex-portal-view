@@ -17,7 +17,7 @@ import {
 @Component({
   selector: 'cp-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.css']
+  styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };

@@ -4,7 +4,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 @Component({
   selector: 'cp-go-celluar-crossreference',
   templateUrl: './go-celluar-crossreference.component.html',
-  styleUrls: ['./go-celluar-crossreference.component.css']
+  styleUrls: ['./go-celluar-crossreference.component.scss']
 })
 export class GoCelluarCrossreferenceComponent implements OnInit {
   private _crossReferences: CrossReference[];

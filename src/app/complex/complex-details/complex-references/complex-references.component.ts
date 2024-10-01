@@ -4,7 +4,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 @Component({
   selector: 'cp-complex-references',
   templateUrl: './complex-references.component.html',
-  styleUrls: ['./complex-references.component.css']
+  styleUrls: ['./complex-references.component.scss']
 })
 export class ComplexReferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];

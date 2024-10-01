@@ -6,7 +6,7 @@ import {INavigatorComponent} from '../../model/navigator-component.model';
 @Component({
   selector: 'cp-table-main-interactor',
   templateUrl: './table-main-interactor.component.html',
-  styleUrls: ['./table-main-interactor.component.css']
+  styleUrls: ['./table-main-interactor.component.scss']
 })
 export class TableMainInteractorComponent {
   complex = input<NavigatorComplex>();

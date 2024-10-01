@@ -4,7 +4,7 @@ import {INavigatorComponent} from '../../model/navigator-component.model';
 @Component({
   selector: 'cp-table-interactor-external-link',
   templateUrl: './table-interactor-external-link.component.html',
-  styleUrls: ['./table-interactor-external-link.component.css']
+  styleUrls: ['./table-interactor-external-link.component.scss']
 })
 export class TableInteractorExternalLinkComponent implements OnInit {
   interactor = input.required<INavigatorComponent>();

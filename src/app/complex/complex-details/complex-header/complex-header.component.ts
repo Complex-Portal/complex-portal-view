@@ -8,7 +8,7 @@ import {ComplexDetails} from '../../shared/model/complex-details/complex-details
 @Component({
   selector: 'cp-complex-header',
   templateUrl: './complex-header.component.html',
-  styleUrls: ['./complex-header.component.css']
+  styleUrls: ['./complex-header.component.scss']
 })
 export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
