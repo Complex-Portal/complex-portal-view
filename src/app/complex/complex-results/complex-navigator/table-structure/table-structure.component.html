@@ -5,9 +5,12 @@
                        (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
       </cp-table-header>
     </div>
-    <div class="shadow top" style="z-index: 3; top: calc(-1 * var(--width))" [class.visible]="shadowTopVisible"></div>
+    <div class="shadow top shadowTopWidth"
+         style="z-index: 3; top: calc(-1 * var(--width))"
+         [class.sorting]="isSorting()"
+         [class.visible]="shadowTopVisible"
+         [style.--cols]="sortedComplexes().length"></div>
   </div>
-  <!--  <div class="shadow top" style="z-index: 3; position: sticky; top: 282px"></div>-->
   <div class="interactors"
        (scroll)="syncScroll(body, header)" #body>
     <cp-table-interactor-column

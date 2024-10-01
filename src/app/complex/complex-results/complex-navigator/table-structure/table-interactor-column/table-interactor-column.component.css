@@ -6,7 +6,7 @@ table {
 }
 
 .inheritedWidth {
-  width: calc(200px + var(--cols) * 70px + 183px);
+  width: calc(230px + var(--cols) * 70px + 183px);
 }
 
 /* interactors column */
@@ -64,10 +64,6 @@ a, a:visited {
 
 .spaceHolder {
   width: 183px;
-}
-
-.spaceHolder.sorting {
-  width: calc(183px - 3ch);
 }
 
 .subComponentColumn {

@@ -20,3 +20,11 @@
   position: relative;
   overflow-y: hidden;
 }
+
+.shadowTopWidth {
+  width: calc(230px + var(--cols) * 70px + 183px);
+}
+
+.shadowTopWidth.sorting {
+  width: calc(230px + var(--cols) * 70px + 183px + 3ch);
+}

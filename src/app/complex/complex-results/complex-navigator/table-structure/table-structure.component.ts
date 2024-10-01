@@ -5,6 +5,7 @@ import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {findComponentInComplex} from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
+import {NavigatorComponentSorting, NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
@@ -24,19 +25,19 @@ export class TableStructureComponent implements AfterViewInit {
   scrollStart = input<number>(39);
 
   @ViewChild('header') headerDiv: ElementRef<HTMLDivElement>;
-  shadowTopVisible = false;
+  shadowTopVisible = true;
   shadowRightVisible = true;
   shadowLeftVisible = false;
 
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
+  isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
 
-  constructor() {
+  constructor(public state: NavigatorStateService) {
   }
 
   ngAfterViewInit(): void {
     const header = this.headerDiv.nativeElement;
-    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart());
     this.setHorizontalShadowVisibility(header);
   }
 
@@ -56,7 +57,7 @@ export class TableStructureComponent implements AfterViewInit {
     if (!complex.componentAcs || complex.componentAcs.size === 0) {
       complex.componentAcs = new Set<string>(
         navigatorComponents
-          .filter(component => findComponentInComplex(complex, component.componentIds(), navigatorComponents))
+          .filter(component => findComponentInComplex(complex, component.componentIds, navigatorComponents))
           .map(component => component.identifier));
     }
     return complex.componentAcs;
