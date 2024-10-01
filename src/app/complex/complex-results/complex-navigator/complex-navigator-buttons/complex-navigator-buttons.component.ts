@@ -32,7 +32,7 @@ export class ComplexNavigatorButtonsComponent {
   }
 
   public onButtonClicked(action: Action): void {
-    this.googleAnalytics.useOrthologyButton(action);
+    this.googleAnalytics.useComplexNavigatorButton(action);
   }
 
   protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
