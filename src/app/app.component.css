@@ -34,7 +34,7 @@
   top: 0;
   background: var(--primary);
   padding: 0 calc(-1 * var(--global-margin));
-  width: 100vw;
+  width: 100%;
   z-index: 4;
   border-bottom: 1px solid white;
 }
