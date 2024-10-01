@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
+import {humapUrl} from '../../../complex-portal-utils';
 
 @Component({
   selector: 'cp-external-resources',
@@ -9,6 +10,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 export class ExternalResourcesComponent implements OnInit {
   private _crossReferences: CrossReference[];
 
+  protected readonly humapUrl = humapUrl;
 
   constructor() {
   }
@@ -23,9 +25,5 @@ export class ExternalResourcesComponent implements OnInit {
   @Input()
   set crossReferences(value: CrossReference[]) {
     this._crossReferences = value;
-  }
-
-  humapUrl(xref: CrossReference): string {
-    return 'https://humap3.proteincomplexes.org/displayComplexes?complex_key=' + xref.identifier;
   }
 }
