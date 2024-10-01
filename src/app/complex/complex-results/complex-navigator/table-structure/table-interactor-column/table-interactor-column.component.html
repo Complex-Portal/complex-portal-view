@@ -1,6 +1,7 @@
 <div class="Complex-navigator">
   <table class="interactors-table"
          [ngClass]="{'inheritedWidth': complexes().length > 6}"
+         [class.sorting]="isSorting()"
          [style.--cols]="complexes().length">
     @for (interactor of navigatorComponents(); track i; let i = $index) {
       @if (!interactor.hidden) {

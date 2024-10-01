@@ -48,9 +48,7 @@
     @if (complexes().length > 6) {
       <thead class="tableHeadOverflow"
              [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
+      <tr [style.--cols]="complexes().length">
         <th class="spaceHolderHeaderOverflow" [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
             <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
@@ -75,11 +73,8 @@
         <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
       </tr>
       <!-- icons row -->
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-        <th class="interactorsHeader overflow"
-            [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
+      <tr [style.--cols]="complexes().length">
+        <th class="interactorsHeader overflow" [class.sorting]="isSorted()">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>

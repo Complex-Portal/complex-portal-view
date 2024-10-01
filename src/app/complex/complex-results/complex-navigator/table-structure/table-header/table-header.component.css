@@ -28,6 +28,11 @@ thead {
   text-align: right;
 }
 
+.spaceHolderHeaderOverflow.sorting {
+  min-width: calc(230px + 3ch);
+  max-width: calc(230px + 3ch);
+}
+
 .iconOrganism {
   position: sticky;
   text-align: center;
@@ -47,24 +52,18 @@ thead {
 
 .CN-table .tableHeadOverflow tr {
   --cols: 1;
-  --intHeader: 230px;
-  --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
   display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
+  grid-template-columns: 230px repeat(auto-fit, 70px);
+  width: calc(230px + 70px * var(--cols) + 185px);
   overflow: clip;
 }
 
 .CN-table .tableHeadOverflowWithSorting tr {
   --cols: 1;
-  --intHeader: 230px;
-  --parentWidth: 100%;
-  --sizeSpaceHolder: calc(var(--parentWidth) - 70px * var(--cols) - var(--intHeader));
   display: grid;
-  grid-template-columns: var(--intHeader) repeat(auto-fit, 70px);
-  width: calc(var(--intHeader) + 70px * var(--cols) + var(--sizeSpaceHolder));
-  overflow: visible;
+  grid-template-columns: calc(230px + 3ch) repeat(auto-fit, 70px);
+  width: calc(230px + 3ch + 70px * var(--cols) + 185px);
+  overflow: clip;
 }
 
 .CN-table .tableHeadOverflow th.rotate {
@@ -112,6 +111,12 @@ thead {
   line-height: 70px;
   text-align: right;
   color: var(--primary);
+}
+
+.interactorsHeader.sorting {
+  min-width: calc(230px + 3ch);
+  max-width: calc(230px + 3ch);
+  width: calc(230px + 3ch);
 }
 
 /* Horizontal complexes name */
