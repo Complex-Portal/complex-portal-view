@@ -11,7 +11,8 @@
 }
 
 .scroller {
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .interactors {
