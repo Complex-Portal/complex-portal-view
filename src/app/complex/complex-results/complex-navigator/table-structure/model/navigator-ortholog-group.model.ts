@@ -115,7 +115,7 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
     this._indexAppearing = value;
   }
 
-  componentIds(): string[] {
+  get componentIds(): string[] {
     return this.subComponents.map(subComponent => subComponent.identifier);
   }
 
