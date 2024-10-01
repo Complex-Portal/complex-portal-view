@@ -45,22 +45,10 @@ export class NavigatorStateService {
 
         // 1. Check URL params first
         if (queryParams[param] !== undefined) {
-          switch (typeof this[param]()) {
-            case 'boolean':
-              value = queryParams[param] === 'true';
-              break;
-            default:
-              value = queryParams[param];
-          }
-          // 2. Then heck local storage
+          value = this.parseParam(param, queryParams[param]);
+          // 2. Then check local storage
         } else if (localStorage.getItem(param) !== null) {
-          switch (typeof this[param]()) {
-            case 'boolean':
-              value = localStorage.getItem(param) === 'true';
-              break;
-            default:
-              value = localStorage.getItem(param);
-          }
+          value = this.parseParam(param, localStorage.getItem(param));
         } else {
           value = this[param]();
         }
@@ -90,6 +78,15 @@ export class NavigatorStateService {
       if (!localStorage.getItem(param) || localStorage.getItem(param) !== String(value)) {
         localStorage.setItem(param, String(value));
       }
+    }
+  }
+
+  private parseParam(paramName: string, paramValue: any): any {
+    switch (typeof this[paramName]()) {
+      case 'boolean':
+        return paramValue === 'true';
+      default:
+        return paramValue;
     }
   }
 }
