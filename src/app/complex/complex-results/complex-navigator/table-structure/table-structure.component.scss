@@ -2,12 +2,7 @@
   border-collapse: separate;
   height: 100%;
   position: relative;
-  max-width: calc(230px + var(--cols) * 70px + 185px);
 }
-
-.complexNavigatorTable.sorting {
-  max-width: calc(230px + 3ch + var(--cols) * 70px + 185px);
- }
 
 .header {
   position: sticky;

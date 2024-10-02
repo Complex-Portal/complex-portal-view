@@ -68,8 +68,8 @@ a, a:visited {
   left: 0;
   z-index: 30;
   height: 45px;
-  min-width: var(--intHeader);
-  max-width: var(--intHeader);
+  min-width: var(--componentSize);
+  max-width: var(--componentSize);
   padding: 5px;
   text-align: end;
   color: #0e6f76;
