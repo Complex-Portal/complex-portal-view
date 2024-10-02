@@ -1,0 +1,43 @@
+.typeOfSorting {
+  display: none;
+}
+
+.sortingInteractors:hover .typeOfSorting {
+  display: flex;
+  margin-top: -15px;
+  flex-direction: row;
+  position: absolute;
+  z-index: 5;
+}
+
+.typeOfSorting .button {
+  border-right: 1px solid white;
+  font-size: 14px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  grid-gap: 10px;
+  height: 67px;
+  z-index: 5;
+  text-align: center;
+  align-items: center;
+}
+
+label {
+  color: var(--on-primary);
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+.mat-mdc-slide-toggle {
+  /*--mat-switch-with-icon-handle-size: 30px;*/
+  /*--mat-switch-pressed-handle-size: 30px;*/
+  /*--mat-switch-selected-handle-size: 30px;*/
+  /*--mdc-switch-track-height: 40px;*/
+  /*--mdc-switch-track-width: 59px;*/
+}

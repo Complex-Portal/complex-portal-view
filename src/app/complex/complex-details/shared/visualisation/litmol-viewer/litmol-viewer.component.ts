@@ -9,7 +9,7 @@ const baseURL = environment.pdb_base_url;
 @Component({
   selector: 'cp-litmol-viewer',
   templateUrl: 'litmol-viewer.component.html',
-  styleUrls: ['litmol-viewer.component.css']
+  styleUrls: ['litmol-viewer.component.scss']
 })
 export class LitmolViewerComponent implements OnInit, OnChanges {
   private _plugin: any;

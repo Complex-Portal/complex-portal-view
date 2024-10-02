@@ -1,0 +1,147 @@
+.CN-table {
+  transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
+  clip-path: fill-box;
+  margin: 0 !important;
+}
+
+thead {
+  border: 0;
+  background-color: white;
+  border-right: 0 solid white;
+}
+
+/* Rotated complexes names */
+
+.spaceHolderHeaderOverflow {
+  min-width: var(--intHeader);
+  max-width: var(--intHeader);
+  width: var(--intHeader);
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  color: var(--primary);
+  background-color: var(--on-primary);
+  padding-top: 173px;
+  text-align: right;
+}
+
+.iconOrganism {
+  position: sticky;
+  text-align: center;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-left: 1px solid white;
+  font-size: medium;
+  height: 60px;
+}
+
+.tilted-label {
+  text-overflow: ellipsis;
+  width: 28ch;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.CN-table .tableHeadOverflow {
+  tr {
+    --parentWidth: 100%;
+    display: grid;
+    grid-template-columns: var(--intHeader) repeat(auto-fit, var(--colSize));
+    width: var(--totalWidth);
+  }
+
+  th.rotate {
+    position: relative;
+    width: 338px;
+    height: 51px !important;
+    color: var(--on-primary);
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid white;
+    top: 76px;
+    left: -52px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding: 0;
+    transform: rotate(-45deg);
+    border-collapse: collapse;
+
+    a {
+      width: 100%;
+      height: 100%;
+      align-content: center;
+      background-color: var(--primary);
+      padding: 0 0 0 var(--colSize);
+      border: none;
+    }
+  }
+}
+
+.spaceHolder {
+  width: var(--sizeSpaceHolder);
+  background-color: var(--primary);
+  border-left: 1px solid white;
+}
+
+.interactorsHeader {
+  min-width: var(--intHeader);
+  max-width: var(--intHeader);
+  width: var(--intHeader);
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background-color: var(--on-primary);
+  height: 60px;
+  line-height: var(--colSize);
+  text-align: right;
+  color: var(--primary);
+  padding: 5px;
+
+  font-size: medium;
+  border-left: none;
+}
+
+.horizontal-label {
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: auto;
+  display: block;
+}
+
+.CN-table th.horizontal {
+  color: white;
+  background-color: var(--primary);
+  border-left: 1px solid white;
+  min-width: 80px;
+  max-width: 80px;
+  height: 35px;
+  font-size: 15px;
+}
+
+a:visited {
+  color: var(--on-primary);
+}
+
+a {
+  color: var(--on-primary);
+}
+
+.button {
+  padding: 0;
+  margin: 0;
+}
+
+.basketButton {
+  text-align: center;
+}
+
+.iconOrganismImg {
+  filter: var(--svg-colour-invert);
+}
+
+

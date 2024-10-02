@@ -6,7 +6,7 @@ import {MIJson} from 'complexviewer';
 @Component({
   selector: 'cp-complex-expression',
   templateUrl: './complex-expression.component.html',
-  styleUrls: ['./complex-expression.component.css']
+  styleUrls: ['./complex-expression.component.scss']
 })
 export class ComplexExpressionComponent implements OnInit {
   private _gxa = null;

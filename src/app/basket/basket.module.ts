@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {BasketComponent} from './basket.component';
 import {ComplexNavigatorModule} from '../complex/complex-results/complex-navigator/complex-navigator.module';
 import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -11,7 +12,7 @@ import {ProgressSpinnerComponent} from '../shared/loading-indicators/progress-sp
   ]),
     CommonModule,
     ComplexNavigatorModule,
-    ProgressSpinnerComponent
+    ProgressSpinnerComponent, MatTabGroup, MatTab
   ],
   declarations: [BasketComponent]
 })

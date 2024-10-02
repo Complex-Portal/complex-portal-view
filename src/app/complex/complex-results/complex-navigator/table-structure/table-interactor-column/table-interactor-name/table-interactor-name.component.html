@@ -1,65 +1,68 @@
 <div class="container">
-  <div class="nameAndIcons" [ngClass]="{inlineDisplay: interactorType()==='stable complex'}">
-    @if (organismIconDisplay()) {
-      @if (interactorOrganismIcon().startsWith('icon')) {
-        <i
-          class="{{interactorOrganismIcon()}}"
-          [matTooltip]="interactorOrganism() | species"></i>
-      } @else {
-        <div class="organism-image"
-             [style]="maskStyle">
-        </div>
-      }
-    }
-
-    @if (interactorTypeDisplay()) {
-      <i
-        class="{{interactorTypeIcon()}}"
-      [matTooltip]="interactorType()"></i>
-    }
-
-    @if (idDisplay()) {
-      <div class="name" [matTooltip]="interactorName()">
-        {{ interactorName() }}
+  <div class="nameAndIcons" [ngClass]="{inlineDisplay: isOrthologGroup()}">
+    @if (isOrthologGroup()) {
+      <div class="orthologGroup">
+        Ortholog group
       </div>
     }
-    @if (idDisplay()) {
-      <a
-        [routerLink]="['/complex/search']"
-        [queryParams]="{query: interactorId(), page: 1}"
-        target="_blank">
-        <i class="icon icon-functional small" data-icon="1"
-        [matTooltip]="'More complexes containing ' + interactorName() "></i>
-      </a>
-    }
-
-    @if (!idDisplay()) {
-      <div class="nameCompact">
-        @if (!idDisplay()) {
-          <div class="name" [matTooltip]="'More information about ' + interactorName()">
-            @if (!!identifierLink()) {
-              <a [href]="identifierLink()" target="_blank" class="externalLinkContainer">
-                {{ interactorName() }}
-              </a>
-            }
+    <div class="evenlySpaced">
+      @if (state.organismIconDisplay()) {
+        @if (interactorOrganismIcon().startsWith('icon')) {
+          <i
+            class="{{interactorOrganismIcon()}}"
+            [matTooltip]="interactor().organismName | species"></i>
+        } @else {
+          <div class="organism-image"
+               [style]="maskStyle">
           </div>
         }
-        <a [routerLink]="['/complex/search']"
-          [queryParams]="{query: interactorId(), page: 1}"
+      }
+
+      @if (state.typeIconDisplay()) {
+        <i
+          class="{{interactorTypeIcon()}}"
+          [matTooltip]="interactor().interactorType"></i>
+      }
+
+      @if (state.idDisplay()) {
+        <div class="name" [matTooltip]="interactor().name">
+          {{ interactor().name }}
+        </div>
+      }
+      @if (state.idDisplay()) {
+        <a
+          [routerLink]="['/complex/search']"
+          [queryParams]="{query: interactorQuery(), page: 1}"
           target="_blank">
           <i class="icon icon-functional small" data-icon="1"
-          [matTooltip]="'More complexes containing ' + interactorName() "></i>
+             [matTooltip]="'More complexes containing ' + interactor().name "></i>
         </a>
-      </div>
-    }
+      }
+
+      @if (!state.idDisplay()) {
+        <div class="nameCompact">
+          @if (!state.idDisplay()) {
+            <div class="name" [matTooltip]="'More information about ' + interactor().name">
+              @if (!!interactor().identifierLink) {
+                <a [href]="interactor().identifierLink" target="_blank" class="externalLinkContainer">
+                  {{ interactor().name }}
+                </a>
+              }
+            </div>
+          }
+          <a [routerLink]="['/complex/search']"
+             [queryParams]="{query: interactorQuery(), page: 1}"
+             target="_blank">
+            <i class="icon icon-functional small" data-icon="1"
+               [matTooltip]="'More complexes containing ' + interactor().name "></i>
+          </a>
+        </div>
+      }
+    </div>
   </div>
-  @if (idDisplay()) {
+  @if (state.idDisplay()) {
     <cp-table-interactor-external-link
-      [interactorId]="interactorId()"
-      [identifierLink]="identifierLink()"
-      [interactorType]="interactorType()"
-      [isMainInteractor]="isMainInteractor()"
-      [idDisplay]="idDisplay()"
+      [interactor]="convertedInteractor()"
       (externalLinkVisible)="externalLinkVisibleHandler($event)">
     </cp-table-interactor-external-link>
   }

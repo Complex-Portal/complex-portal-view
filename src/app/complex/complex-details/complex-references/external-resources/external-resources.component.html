@@ -15,7 +15,7 @@
                     {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
                   </a>
                 } @else if (crossReference.database.toLowerCase() === 'humap') {
-                  <a href="{{humapUrl(crossReference)}}" target="_blank">
+                  <a href="{{humapUrl(crossReference.identifier)}}" target="_blank">
                     {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
                   </a>
                 } @else {

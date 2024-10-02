@@ -4,7 +4,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 @Component({
   selector: 'cp-chembl-crossreference',
   templateUrl: './chembl-crossreference.component.html',
-  styleUrls: ['./chembl-crossreference.component.css']
+  styleUrls: ['./chembl-crossreference.component.scss']
 })
 export class ChemblCrossreferenceComponent implements OnInit {
   private _crossReferences: CrossReference[];

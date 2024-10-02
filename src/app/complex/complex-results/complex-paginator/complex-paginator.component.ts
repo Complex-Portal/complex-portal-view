@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, output, input} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, output} from '@angular/core';
 
 @Component({
   selector: 'cp-complex-paginator',
   templateUrl: './complex-paginator.component.html',
-  styleUrls: ['./complex-paginator.component.css']
+  styleUrls: ['./complex-paginator.component.scss']
 })
 export class ComplexPaginatorComponent implements OnInit, OnChanges {
   private _lastPageIndex: number;
@@ -17,15 +17,15 @@ export class ComplexPaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.updatePaginatior();
+    this.updatePaginator();
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.updatePaginatior();
+  ngOnChanges(): void {
+    this.updatePaginator();
   }
 
-  public updatePaginatior(): void {
+  public updatePaginator(): void {
     let start: number;
     let end: number;
     this.pagination = [];

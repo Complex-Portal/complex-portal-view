@@ -7,7 +7,7 @@ import '../../../../../../node_modules/@swissprot/rhea-reaction-visualizer';
 @Component({
   selector: 'cp-catalytic-activity',
   templateUrl: './catalytic-activity.component.html',
-  styleUrls: ['./catalytic-activity.component.css']
+  styleUrls: ['./catalytic-activity.component.scss']
 })
 export class CatalyticActivityComponent implements OnInit {
   private _intenzCrossReferences: IntEnzCrossReference[];

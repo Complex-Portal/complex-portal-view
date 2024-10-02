@@ -9,7 +9,7 @@ import {APP_BASE_HREF} from '@angular/common';
 @Component({
   selector: 'cp-complex-organism',
   templateUrl: './complex-organism.component.html',
-  styleUrls: ['./complex-organism.component.css']
+  styleUrls: ['./complex-organism.component.scss']
 })
 export class ComplexOrganismComponent implements OnInit {
   private _organism: ComplexOrganisms;

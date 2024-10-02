@@ -14,7 +14,7 @@ interface Confidence {
 @Component({
   selector: 'cp-complex-filter',
   templateUrl: './complex-filter.component.html',
-  styleUrls: ['./complex-filter.component.css']
+  styleUrls: ['./complex-filter.component.scss']
 })
 export class ComplexFilterComponent implements OnInit {
 
@@ -43,7 +43,11 @@ export class ComplexFilterComponent implements OnInit {
 
   onResetAllFilters = output<boolean>();
 
-  confidenceGap = input<number>(2);
+  /**
+   * Represent the gap between stars in px.
+   * Minimum 5px, otherwise breaks slider alignment with stars as it has an incompressible minimum length.
+   */
+  confidenceGap = input<number>(5);
   confidences = computed(() => {
       const confidences: Confidence[] = new Array(5).fill(0).map((e, i) => ({
         value: i + 1,

@@ -1,0 +1,45 @@
+<div class="filters">
+
+  <button mat-stroked-button [matMenuTriggerFor]="group">Sorting component
+  </button>
+  <mat-menu #group="matMenu" yPosition="below">
+    <mat-radio-group [(ngModel)]="state.componentsSorting">
+      @for (option of (NavigatorComponentSorting | keyvalue); track option.key) {
+        <div mat-menu-item>
+          <mat-radio-button [value]="option.value"
+                            (change)="onButtonClicked(Action.UseSortingButton)">{{ option.value }}
+          </mat-radio-button>
+        </div>
+      }
+    </mat-radio-group>
+  </mat-menu>
+
+
+  <button mat-stroked-button [matMenuTriggerFor]="display">Display option
+  </button>
+  <mat-menu #display="matMenu" yPosition="below">
+    <div (click)="$event.stopPropagation()">
+      <div mat-menu-item>
+        <mat-checkbox [checked]="allSelected()" [indeterminate]="partiallySelected()"
+                      (click)="selectAll(!allSelected())">
+          Select all
+        </mat-checkbox>
+      </div>
+      <ul>
+        @for (option of state.displayOptions; track option.name) {
+          <li mat-menu-item>
+            <mat-checkbox [(ngModel)]="option.value"
+                          (change)="onButtonClicked(Action.UseGroupingButton)">{{ option.name }}
+            </mat-checkbox>
+          </li>
+        }
+      </ul>
+    </div>
+  </mat-menu>
+
+  <mat-slide-toggle [(ngModel)]="state.mergeOrthologs" [disabled]="!orthologsGroupsAvailable()"
+                    [matTooltip]="'No orthologs groups available'" [matTooltipDisabled]="orthologsGroupsAvailable()"
+                    (change)="onButtonClicked(Action.UseOrthologyButton)">
+    Group by orthologs
+  </mat-slide-toggle>
+</div>

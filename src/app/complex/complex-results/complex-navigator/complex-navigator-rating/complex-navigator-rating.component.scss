@@ -1,0 +1,67 @@
+.star {
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+}
+
+.star.selected {
+  color: yellow;
+  -webkit-text-stroke: 1px var(--primary);
+  text-shadow: 0 0 4px var(--on-primary);
+}
+
+.ratingComponent {
+  background-color: var(--primary);
+  padding: 5px;
+  width: 350px;
+  text-align: center;
+  position: fixed;
+  z-index: 5;
+  top: 54vh;
+  right: -350px;
+  border: 1px solid white;
+  visibility: hidden;
+  animation: ratingComponentMove 1s forwards 1s;
+  border-radius: 7px;
+}
+
+
+.ratingComponent input {
+  background-color: white;
+  color: var(--primary);
+}
+
+.text {
+  display: -webkit-box;
+  color: white;
+  width: 96%;
+  text-align: -webkit-center;
+  padding-left: 10px;
+  margin-bottom: -15px;
+}
+
+@keyframes ratingComponentMove {
+  from {
+    right: -10vw;
+    visibility: visible;
+  }
+  to {
+    right: 4vw;
+    visibility: visible;
+  }
+}
+
+.buttonContainer {
+  width: 100%;
+  height: 1ch;
+  text-align: end;
+  padding-right: 5px;
+}
+
+.close {
+  color: white;
+}
+
+.ratingComponentStars {
+  padding-bottom: 5px;
+}

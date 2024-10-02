@@ -4,7 +4,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 @Component({
   selector: 'cp-pdb-crossreferences',
   templateUrl: './pdb-crossreferences.component.html',
-  styleUrls: ['./pdb-crossreferences.component.css']
+  styleUrls: ['./pdb-crossreferences.component.scss']
 })
 export class PdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];

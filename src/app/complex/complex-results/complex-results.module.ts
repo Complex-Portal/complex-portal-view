@@ -15,6 +15,7 @@ import {TruncatePipe} from '../../shared/truncate/truncate.pipe';
 import {SpeciesPipe} from '../shared/pipe/species.pipe';
 import {MatSlider, MatSliderRangeThumb, MatSliderThumb} from '@angular/material/slider';
 import {FormsModule} from '@angular/forms';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {FormsModule} from '@angular/forms';
     ProgressSpinnerComponent, MarkdownModule,
     ComplexNavigatorModule, MatTooltipModule, ComplexModule,
     TruncatePipe, SpeciesPipe, MatSlider, MatSliderThumb,
-    FormsModule, MatSliderRangeThumb
+    FormsModule, MatSliderRangeThumb, MatTabGroup, MatTab
   ],
   exports: [],
   declarations: [ComplexResultsComponent,

@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+@import "litemol/dist/css/LiteMol-plugin-light.min.css";
+
+.mat-mdc-tooltip {
+  background-color: #353535 !important;
+  font-size: 10pt !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+/*based on https://github.com/ebiwd/EBI-Pattern-library/issues/25#issuecomment-287742227*/
+.button.ebi-background:hover {
+  background: var(--primary);
+}
+
+.button.services-background:hover {
+  background: #389198;
+}
+
+.button.research-background:hover {
+  background: #6dab49;
+}
+
+.button.training-background:hover {
+  background: #e9b400;
+}
+
+.button.industry-background:hover {
+  background: #0086b4;
+}
+
+.button.elixir-background:hover {
+  background: #fb6a2a;
+}
+
+.button.white-background:hover {
+  background: white;
+}
+
+.button.secondary-background:hover {
+  background: #666;
+}
+
+.button.medium-gray-background:hover {
+  background: #999;
+}
+
+.toast-right-under-header {
+  right: 10px;
+  top: 225px;
+}
+
+.shadow {
+  --width: 6px;
+  --color: #0000007d;
+  //--color: white;
+  z-index: 1;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.25s;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &.right {
+    top: 0;
+    bottom: 0;
+    width: var(--width);
+    right: calc(-1 * var(--width));
+    background: linear-gradient(to right, var(--color), transparent);
+  }
+
+  &.left {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: var(--width);
+    background: linear-gradient(to left, var(--color), transparent);
+  }
+
+  &.bottom {
+    bottom: calc(-1 * var(--width));;
+    left: 0;
+    right: 0;
+    height: var(--width);
+    background: linear-gradient(to bottom, var(--color), transparent);
+  }
+
+  &.top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--width);
+    background: linear-gradient(to top, var(--color), transparent);
+  }
+}
+
+*:has(> .shadow) {
+  position: relative;
+}
+
+
+

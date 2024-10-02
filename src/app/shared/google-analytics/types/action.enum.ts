@@ -14,5 +14,8 @@ export enum Action {
   search,
   AddToBasket,
   GoToMenu,
-  RatingComplexNavigator
+  RatingComplexNavigator,
+  UseOrthologyButton,
+  UseSortingButton,
+  UseGroupingButton,
 }

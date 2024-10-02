@@ -7,15 +7,17 @@ import {ComplexPortalService} from '../complex/shared/service/complex-portal.ser
 import {ComplexSearchResult} from '../complex/shared/model/complex-results/complex-search.model';
 import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-  SearchDisplay
-} from '../complex/complex-results/complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
 import {take} from 'rxjs/operators';
+import {
+  NavigatorStateService,
+  SearchDisplay
+} from '../complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
+
 
 @Component({
   selector: 'cp-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.css']
+  styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
@@ -27,7 +29,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
               private titleService: Title,
               private complexPortalService: ComplexPortalService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router, private state: NavigatorStateService) {
     this._complexBasket = this._basketService.complexBasket;
   }
 
@@ -136,4 +138,5 @@ export class BasketComponent implements OnInit, AfterViewInit {
     Object.values(this._complexBasket).map((v: BasketItem) => this.deleteComplexFromBasket(v.id));
   }
 
+  protected readonly SearchDisplay = SearchDisplay;
 }

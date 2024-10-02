@@ -1,18 +1,24 @@
 import {Component, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
+import {humapUrl} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-evidence',
   templateUrl: './complex-evidence.component.html',
-  styleUrls: ['./complex-evidence.component.css']
+  styleUrls: ['./complex-evidence.component.scss']
 })
 export class ComplexEvidenceComponent implements OnInit {
 
+  private static HUMAP_DB_MI = 'MI:2424';
+  private static IDENTITY_MI = 'MI:0356';
+
   intactXRefs: CrossReference[];
+  humapXrefs: CrossReference[];
   complex = input<ComplexDetails>();
   stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
 
+  protected readonly humapUrl = humapUrl;
 
   constructor() {
   }
@@ -35,12 +41,19 @@ export class ComplexEvidenceComponent implements OnInit {
     for (let i = 0; i < this.complex().crossReferences.length; i++) {
       const crossRef = this.complex().crossReferences[i];
       const database = this.complex().crossReferences[i].database;
+      const databaseMi = this.complex().crossReferences[i].dbMI;
+      const qualifierMi = this.complex().crossReferences[i].qualifierMI;
 
       if (database === 'intact') {
         if (this.intactXRefs === undefined) {
           this.intactXRefs = [];
         }
         this.intactXRefs.push(crossRef);
+      } else if (databaseMi === ComplexEvidenceComponent.HUMAP_DB_MI && qualifierMi === ComplexEvidenceComponent.IDENTITY_MI) {
+        if (this.humapXrefs === undefined) {
+          this.humapXrefs = [];
+        }
+        this.humapXrefs.push(crossRef);
       }
     }
   }

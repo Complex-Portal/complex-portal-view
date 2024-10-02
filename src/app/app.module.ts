@@ -32,6 +32,7 @@ import {environment} from '../environments/environment';
 import {FooterComponent} from './footer/footer.component';
 import {SpeciesPipe} from './complex/shared/pipe/species.pipe';
 import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {NavigatorStateService} from './complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {ProgressSpinnerComponent} from './shared/loading-indicators/progress-spi
     SpeciesPipe,
     AnalyticsService,
     SearchService,
+    NavigatorStateService,
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

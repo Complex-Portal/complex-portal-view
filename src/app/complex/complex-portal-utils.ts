@@ -1,3 +1,16 @@
+
+// TODO: remove this function when the huMAP search url is added to OLS
+export function humapUrl(identifier: string): string {
+  return 'https://humap3.proteincomplexes.org/displayComplexes?complex_key=' + identifier;
+}
+
+// TODO: remove this function when the Panther search url is added to OLS
+export function pantherUrl(identifier: string): string {
+  return 'https://www.pantherdb.org/genes/geneList.do?searchType=basic&fieldName=all&listType=1&fieldValue=' +
+    identifier +
+    '&organism=all';
+}
+
 export function interactorTypeIcon(type: string): string {
   switch (type) {
     case 'small molecule':
@@ -62,6 +75,7 @@ export function organismIcon(organism: string): string {
     case 'Vibrio cholerae':
       return 'assets/images/EMBL_Species_Vibrio_cholerae.svg';
     case 'Crotalus durissus':
+    case 'Crotalus durissus terrificus':
       return 'assets/images/EMBL_Species_RattleSnake.svg';
     case 'Sus scrofa':
       return 'icon icon-species icon-pig';

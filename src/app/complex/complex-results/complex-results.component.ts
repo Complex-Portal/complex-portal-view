@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, effect, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -7,18 +7,17 @@ import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
 import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
-import {SearchDisplay} from './complex-navigator/complex-list-display-buttons/complex-list-display-buttons.component';
-import {switchMap, tap} from 'rxjs/operators';
+import {NavigatorStateService, SearchDisplay} from './complex-navigator/service/state/complex-navigator-display.service';
+import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
 
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
-  styleUrls: ['./complex-results.component.css'],
+  styleUrls: ['./complex-results.component.scss'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
   complexSearch: ComplexSearchResult;
-
   allInteractorsInComplexSearch: Interactor[] = [];
   _displayType: SearchDisplay;
 
@@ -32,14 +31,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   confidenceFilter = 1;
 
   private _toast;
-  private _listPageSize = 15; // This is where we set the size of the pages for list view
-  private _navigatorPageSize = 20; // This is where we set the size of the pages for navigator view
-  private _listCurrentPage: number;
-  private _navigatorCurrentPage: number;
-  private _listLastPageIndex;
-  private _navigatorLastPageIndex;
+  pageSize = 20;
+  currentPageIndex: number;
+  lastPageIndex: number;
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute, private router: Router, private state: NavigatorStateService,
               private complexPortalService: ComplexPortalService, private titleService: Title,
               private googleAnalyticsService: AnalyticsService, private notificationService: NotificationService) {
   }
@@ -47,19 +43,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
     this.allInteractorsInComplexSearch = [];
-    this.route.fragment.pipe(
-      tap(f => {
-        if (f === SearchDisplay.navigator) {
-          this._displayType = SearchDisplay.navigator;
-        } else if (f === SearchDisplay.list) {
-          this._displayType = SearchDisplay.list;
-        }
-      }),
-      switchMap(_ => this.route.queryParams)
-    ).subscribe(queryParams => {
+    this.route.queryParams.pipe().subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
       this.confidenceFilter = queryParams['minConfidence'] ? Number(queryParams['minConfidence']) : 1;
+      // Only set the mode if in the params, otherwise rely on the default behaviour
+      if (!!queryParams['displayMode']) {
+        this._displayType = queryParams['displayMode'];
+      }
       this.currentPageIndex = queryParams['page'] ? Number(queryParams['page']) : 1;
       // TODO This is out for now, but CP-84 (JIRA )should fix that!!
       // this.pageSize = queryParams['size'] ? Number(queryParams['size']) : 10;
@@ -96,18 +87,16 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   /**
    * Prepare query params to build new URL after filter or pagination has changed
    */
-  private reloadPage(): void {
-    const queryParams: NavigationExtras = {};
-    queryParams['query'] = this.query;
-    queryParams['page'] = this.currentPageIndex;
-    queryParams['minConfidence'] = this.confidenceFilter;
-
+  reloadPage(): void {
+    const queryParams = {
+      query: this.query,
+      page: this.currentPageIndex,
+      minConfidence: this.confidenceFilter,
+      displayMode: this._displayType,
+      ...this.state.params()
+    };
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
-
-    this.router.navigate([], {
-      queryParams,
-      fragment: this.displayType
-    });
+    this.router.navigate([], {queryParams});
     ProgressBarComponent.hide();
     // This is a test case event for GA, to monitor if users ever use more then one filter.
     const filterCount = this.getFilterCount();
@@ -152,69 +141,28 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.reloadPage();
   }
 
-  get currentPageIndex(): number {
-    if (this._displayType === SearchDisplay.navigator) {
-      return this._navigatorCurrentPage;
-    } else {
-      return this._listCurrentPage;
-    }
-  }
-
-  set currentPageIndex(value: number) {
-    if (this._displayType === SearchDisplay.navigator) {
-      this._navigatorCurrentPage = value;
-    } else {
-      this._listCurrentPage = value;
-    }
-  }
-
-  get lastPageIndex(): number {
-    if (this._displayType === SearchDisplay.navigator) {
-      return this._navigatorLastPageIndex;
-    } else {
-      return this._listLastPageIndex;
-    }
-  }
-
-  set lastPageIndex(value: number) {
-    if (this._displayType === SearchDisplay.navigator) {
-      this._navigatorLastPageIndex = value;
-    } else {
-      this._listLastPageIndex = value;
-    }
-  }
-
-  get pageSize(): number {
-    if (this._displayType === SearchDisplay.navigator) {
-      return this._navigatorPageSize;
-    } else {
-      return this._listPageSize;
-    }
-  }
-
-  set displayType(displayType: SearchDisplay) {
-    if (this._displayType !== displayType) {
-      this._displayType = displayType;
-      if (displayType === SearchDisplay.list) {
-        this.setListView();
-      } else if (displayType === SearchDisplay.navigator) {
-        this.setComplexNavigatorView();
-      }
-    }
-  }
 
   get displayType(): SearchDisplay {
     return this._displayType;
   }
 
+
   isDisplayComplexNavigatorView(): boolean {
     return this._displayType === SearchDisplay.navigator;
+  }
+
+  onTabChange(event: MatTabChangeEvent, list: MatTab, navigator: MatTab) {
+    if (event.tab === list) {
+      this.setListView();
+    }
+    if (event.tab === navigator) {
+      this.setComplexNavigatorView();
+    }
   }
 
   private setListView() {
     this._toast = this.notificationService.complexNavigatorAnnouncement();
     this._displayType = SearchDisplay.list;
-    this.reloadPage();
   }
 
   private setComplexNavigatorView() {
@@ -223,7 +171,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this._toast = null;
     }
     this._displayType = SearchDisplay.navigator;
-    this.reloadPage();
   }
 
   processSearchResults(): void {
@@ -238,12 +185,11 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     } else if (!this._displayType) {
       // Currently the list view is the default, as we are just launching the navigator view
       // Later on we can change the default view to be the list or navigator view based on number of results
-      if (this.complexSearch.totalNumberOfResults <= this._navigatorPageSize) {
+      if (this.complexSearch.totalNumberOfResults <= this.pageSize) {
         this.setComplexNavigatorView();
       } else {
         this.setListView();
       }
     }
   }
-
 }

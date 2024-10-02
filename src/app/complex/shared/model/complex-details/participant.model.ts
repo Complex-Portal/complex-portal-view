@@ -7,7 +7,7 @@ export interface Participant {
   identifierLink: string;
   name: string;
   description: string;
-  stochiometry: string;
+  stoichiometry: string;
   bioRole: string;
   bioRoleMI: string;
   bioRoleDefinition: string;

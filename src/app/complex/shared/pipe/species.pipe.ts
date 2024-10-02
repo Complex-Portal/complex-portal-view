@@ -7,6 +7,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SpeciesPipe implements PipeTransform {
   exceptions = new Map<string, string>([
+    ['Multiple Organisms', 'Multiple Organisms'],
     ['chemical synthesis; -2', 'Chemical Synthesis'],
     ['Severe acute respiratory syndrome coronavirus', 'SARS-CoV'],
     ['Severe acute respiratory syndrome coronavirus 2', 'SARS-CoV-2'],
@@ -14,6 +15,7 @@ export class SpeciesPipe implements PipeTransform {
   ]);
 
   transform(value: string, short = false): string {
+    if (!value) return value;
     const words = value.replace(';', '').split(' ');
     return this.exceptions.get(value) || (
       short ?

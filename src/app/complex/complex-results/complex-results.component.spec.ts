@@ -1,5 +1,4 @@
-/* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ComplexResultsComponent} from './complex-results.component';
 
@@ -7,12 +6,12 @@ describe('ComplexResultsComponent', () => {
   let component: ComplexResultsComponent;
   let fixture: ComponentFixture<ComplexResultsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ComplexResultsComponent]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComplexResultsComponent);

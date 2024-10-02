@@ -8,7 +8,7 @@ import {Facet} from '../shared/model/complex-results/facet.model';
 @Component({
   selector: 'cp-complex-organisms',
   templateUrl: './complex-organisms.component.html',
-  styleUrls: ['./complex-organisms.component.css']
+  styleUrls: ['./complex-organisms.component.scss']
 })
 export class ComplexOrganismsComponent implements OnInit, AfterViewInit {
   private _organisms: ComplexOrganisms[];

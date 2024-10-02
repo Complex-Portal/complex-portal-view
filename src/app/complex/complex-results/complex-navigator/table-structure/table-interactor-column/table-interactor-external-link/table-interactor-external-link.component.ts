@@ -1,17 +1,13 @@
 import {Component, input, OnInit, output} from '@angular/core';
+import {INavigatorComponent} from '../../model/navigator-component.model';
 
 @Component({
   selector: 'cp-table-interactor-external-link',
   templateUrl: './table-interactor-external-link.component.html',
-  styleUrls: ['./table-interactor-external-link.component.css']
+  styleUrls: ['./table-interactor-external-link.component.scss']
 })
 export class TableInteractorExternalLinkComponent implements OnInit {
-
-  interactorId = input<string>();
-  identifierLink = input<string>();
-  interactorType = input<string>();
-  isMainInteractor = input<boolean>();
-  idDisplay = input<boolean>();
+  interactor = input.required<INavigatorComponent>();
 
   externalLinkVisible = output<boolean>();
 
@@ -20,11 +16,11 @@ export class TableInteractorExternalLinkComponent implements OnInit {
   }
 
   showExternalLink(): boolean {
-    if (this.isMainInteractor() && this.interactorType() === 'stable complex') {
+    if (this.interactor().hasSubComponents && this.interactor().interactorType === 'stable complex') {
       this.externalLinkVisible.emit(false);
       return false;
     }
-    this.externalLinkVisible.emit(!!this.identifierLink());
-    return !!this.identifierLink();
+    this.externalLinkVisible.emit(!!this.interactor().identifierLink);
+    return !!this.interactor().identifierLink;
   }
 }

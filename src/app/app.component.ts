@@ -11,7 +11,7 @@ const environmentName: string = environment.evn;
 @Component({
   selector: 'cp-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
   private _version: string;

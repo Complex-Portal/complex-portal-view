@@ -1,4 +1,4 @@
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
@@ -133,6 +133,7 @@ export class ComplexPortalService {
       .set('filters', filters);
 
     return this.http.get<ComplexSearchResult>(baseURL + '/search/' + query, {params: params}).pipe(
+      tap(r => r.elements.forEach(c => c.interactors.forEach( i => i.stoichiometry = (i as any).stochiometry || i.stoichiometry))),
       catchError(this.handleError));
   }
 

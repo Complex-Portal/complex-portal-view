@@ -15,7 +15,7 @@ interface Format {
 @Component({
   selector: 'cp-download-modal',
   templateUrl: './download-modal.component.html',
-  styleUrls: ['./download-modal.component.css']
+  styleUrls: ['./download-modal.component.scss']
 })
 export class DownloadModalComponent implements OnInit {
   complexAC = input.required<string>();

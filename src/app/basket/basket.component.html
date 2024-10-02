@@ -9,59 +9,59 @@
         </a>
       </h2>
       <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
-      <div class="row">
-        <cp-complex-list-display-buttons
-          [displayType]="displayType"
-          (displayTypeChange)="onDisplayTypeChange($event)">
-        </cp-complex-list-display-buttons>
-      </div>
-      @if (!this.isDisplayComplexNavigatorView()) {
-        <table class="hover">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>ID</th>
-            <th>Organism</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-            @for (pair of complexBasket | keyvalue; track pair.key) {
-              <tr [class.predicted]="pair.value.predicted">
-                <td>
-                  <a [routerLink]="['/complex', pair.value.id]">{{ pair.value.name }}</a>
-                  · <b class="tag">{{ !pair.value.predicted ? 'Curated' : 'Predicted' }} complex</b>
-                </td>
-                <td>{{ pair.value.id }}</td>
-                <td>{{ pair.value.organism }}</td>
-                <td>
-                  <a class="button primary columns medium-12" (click)="deleteFromBasket(pair.key)">
-                    <i class="icon icon-common" data-icon=""></i>
-                  </a>
-                </td>
+      <div class="row expanded">
+        <mat-tab-group [tabIndex]="displayType === SearchDisplay.list ? 0 : 1"
+                       (selectedTabChange)="onDisplayTypeChange($event.index === 0 ? SearchDisplay.list : SearchDisplay.navigator)"
+                       class="columns medium-centered small-12 medium-10 large-8">
+          <mat-tab label="List view">
+            <table class="hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Organism</th>
+                <th></th>
               </tr>
-            }
-          </tbody>
-        </table>
-      }
-      @if (isDisplayComplexNavigatorView()) {
-        <div class="columns medium-12">
-          @if (complexSearchBasket) {
-            <div class="ComplexNavigator"
-                 [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
-              <cp-complex-navigator
-                [complexSearch]="complexSearchBasket"
-                [interactors]="allInteractorsInComplexSearchBasket"
-                [canAddComplexesToBasket]="false"
-                [canRemoveComplexesFromBasket]="true"
-                (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
-              </cp-complex-navigator>
+              </thead>
+              <tbody>
+                @for (pair of complexBasket | keyvalue; track pair.key) {
+                  <tr [class.predicted]="pair.value.predicted">
+                    <td>
+                      <a [routerLink]="['/complex', pair.value.id]">{{ pair.value.name }}</a>
+                      · <b class="tag">{{ !pair.value.predicted ? 'Curated' : 'Predicted' }} complex</b>
+                    </td>
+                    <td>{{ pair.value.id }}</td>
+                    <td>{{ pair.value.organism }}</td>
+                    <td>
+                      <a class="button primary columns medium-12" (click)="deleteFromBasket(pair.key)">
+                        <i class="icon icon-common" data-icon=""></i>
+                      </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </mat-tab>
+          <mat-tab label="Navigator view">
+            <div class="columns medium-12">
+              @if (complexSearchBasket) {
+                <div class="ComplexNavigator"
+                     [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
+                  <cp-complex-navigator
+                    [complexSearch]="complexSearchBasket"
+                    [interactors]="allInteractorsInComplexSearchBasket"
+                    [canAddComplexesToBasket]="false"
+                    [canRemoveComplexesFromBasket]="true"
+                    (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+                  </cp-complex-navigator>
+                </div>
+              } @else {
+                <cp-progress-spinner></cp-progress-spinner>
+              }
             </div>
-          } @else {
-            <cp-progress-spinner></cp-progress-spinner>
-          }
-        </div>
-      }
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
   }
   @if (isComplexBasketEmpty()) {

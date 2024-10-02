@@ -1,0 +1,57 @@
+a {
+  font-weight: bold;
+}
+
+a, a:visited {
+  color: #0e6f76;
+}
+
+i:not(.small) {
+  font-size: medium;
+}
+
+.nameAndIcons {
+  font-size: 14px;
+  display: flex;
+  width: inherit;
+  justify-content: flex-end;
+}
+
+.inlineDisplay {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.name {
+  width: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-align: end;
+  padding-right: 5px;
+}
+
+.nameCompact {
+  display: inline-flex;
+  width: -webkit-fill-available;
+}
+
+.evenlySpaced {
+  max-width: 90%;
+  display: inline-flex;
+  justify-content: flex-end;
+  text-overflow: ellipsis;
+}
+
+.orthologGroup {
+  width: 47%;
+  text-align: left
+}
+
+
+.organism-image {
+  width: 16px;
+  height: 24px;
+  color: var(--primary);
+  background-color: var(--primary);
+}

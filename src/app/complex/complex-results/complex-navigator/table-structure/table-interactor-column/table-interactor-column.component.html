@@ -1,16 +1,15 @@
 <div class="Complex-navigator">
   <table class="interactors-table"
-         [ngClass]="{'inheritedWidth': complexes().length > 6}"
-         [style.--cols]="complexes().length">
-    @for (interactor of enrichedInteractors; track i; let i = $index) {
+         [ngClass]="{'inheritedWidth': complexes().length > 6}">
+    @for (interactor of navigatorComponents(); track i; let i = $index) {
       @if (!interactor.hidden) {
-        <tr>
+        <tr [class.ortholog]="!!interactor.isOrthologGroup && state.mergeOrthologs">
           @for (range of ranges; track range.value) {
             @if (range.start === i) {
               <td [attr.rowspan]="range.length" class="interactorSeparation"
-                  [matTooltip]="interactorsSorting() === 'Organism' ? (range.value | species) : range.value">
+                  [matTooltip]="isOrganismSorting() ? (range.value | species) : range.value">
                 <div class="interactorNameContainer" [style.--rowspanSize]="range.length">
-                  @if (interactorsSorting() === 'Organism') {
+                  @if (isOrganismSorting()) {
                     {{ range.value | species:true }}
                   } @else {
                     {{ range.value }}
@@ -19,93 +18,71 @@
               </td>
             }
           }
-          <td class="interactorsColumn"
-              [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
-              [style]="ranges.length!=0 ? 'left:3ch':''">
-            <cp-table-interactor-name
-              [interactorName]="interactor.interactor.name"
-              [interactorType]="interactor.interactor.interactorType"
-              [interactorId]="interactor.interactor.identifier"
-              [interactorOrganism]="interactor.interactor.organismName"
-              [identifierLink]="interactor.interactor.identifierLink"
-              [organismIconDisplay]="organismIconDisplay()"
-              [interactorTypeDisplay]="interactorTypeDisplay()"
-              [idDisplay]="idDisplay()"
-            ></cp-table-interactor-name>
+          <td class="interactorsColumn">
+            <cp-table-interactor-name [interactor]="interactor"/>
             <!-- Icon for the expandable -->
-            @if (interactor.isSubComplex) {
+            @if (interactor.hasSubComponents) {
               <div class="container">
                 <a (click)="toggleSubcomplexExpandable(i)"
-                   [matTooltip]="interactor.interactor.name + ' components'">
-                  Components
+                   [matTooltip]="interactor.expandTooltip">
+                  {{ interactor.expandLabel }}
                   <i class="icon icon-common" data-icon="&#xf078;"
                      style="font-size:small;
                 "></i>
                 </a>
               </div>
             }
+            <div class="shadow right" [class.visible]="shadowVisible()"></div>
           </td>
           <!-- Interactors' stoichiometry -->
-          @for (complex of enrichedComplexes; track complex.complex.complexAC) {
-            <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}"
+          @for (complex of navigatorComplexes; track complex.complex.complexAC) {
+            <td class="intStoich"
                 [class.predicted]="complex.complex.predictedComplex">
               <cp-table-main-interactor
                 [complex]="complex"
                 [i]="i"
-                [enrichedInteractors]="enrichedInteractors"
+                [navigatorComponents]="navigatorComponents()"
               ></cp-table-main-interactor>
             </td>
           }
           @if (complexes().length > 6) {
-            <div
-              [ngClass]="isInteractorSortingSet() ? 'spaceHolderWithSorting' : 'spaceHolder'"></div>
+            <div class="spaceHolder"></div>
           }
         </tr>
       }
       <!-- Expandable menu for subcomplexes -->
       @if (interactor.expanded) {
         @if (!!interactor.subComponents) {
-          @for (el of interactor.subComponents; track el; let j = $index) {
+          @for (subComponent of interactor.subComponents; track subComponent; let j = $index) {
             <tr
               class="expandedRows"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
-              @if (j === 0 && (interactorsSorting() === 'Type' || interactorsSorting() === 'Organism')) {
+              @if (j === 0 && isSorting()) {
                 <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
-                    [matTooltip]="interactor.interactor.name + ' components'"
+                    [matTooltip]="interactor.expandTooltip"
                 >
                   <div class="interactorSeparationName"
-                       [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.interactor.name }}
-                    components
+                       [style.--rowspanSize]="interactor.subComponents.length"> {{ interactor.expandTooltip }}
                   </div>
                 </td>
               }
               <td class="subComponentColumn"
-                  [ngClass]="complexes().length<=6 ? 'horizontalHeader' : 'interactorsColumnFixedWidth'"
                   [style]="ranges.length!=0 ? 'left:3ch':''">
                 <div>
-                  <cp-table-interactor-name
-                    [interactorName]="el.name"
-                    [interactorType]="el.interactorType"
-                    [interactorId]="el.identifier"
-                    [interactorOrganism]="interactor.interactor.organismName"
-                    [identifierLink]="el.identifierLink"
-                    [organismIconDisplay]="organismIconDisplay()"
-                    [interactorTypeDisplay]="interactorTypeDisplay()"
-                    [idDisplay]="idDisplay()"
-                  ></cp-table-interactor-name>
+                  <cp-table-interactor-name [interactor]="subComponent"/>
                 </div>
               </td>
-              @for (complex of enrichedComplexes; track complex.complex.complexAC) {
-                <td class="intStoich" [ngClass]="{'intStoichFixedWidth': complexes().length > 6}">
+              @for (complex of navigatorComplexes; track complex.complex.complexAC) {
+                <td class="intStoich"
+                    [class.predicted]="complex.complex.predictedComplex">
                   <cp-table-subcomponent-interactor
                     [complex]="complex"
                     [i]="i"
                     [j]="j"
-                    [enrichedInteractors]="enrichedInteractors"
-                  ></cp-table-subcomponent-interactor>
+                    [navigatorComponents]="navigatorComponents()"/>
                 </td>
               }
-              @if (enrichedComplexes.length > 6) {
+              @if (navigatorComplexes.length > 6) {
                 <div class="spaceHolder"></div>
               }
             </tr>

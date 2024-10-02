@@ -15,7 +15,7 @@ declare const expressionAtlasHeatmapHighcharts: any;
 @Component({
   selector: 'cp-complex-details',
   templateUrl: './complex-details.component.html',
-  styleUrls: ['./complex-details.component.css']
+  styleUrls: ['./complex-details.component.scss']
 })
 export class ComplexDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 

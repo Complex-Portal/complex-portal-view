@@ -1,88 +1,104 @@
-import {Component, computed, input, output} from '@angular/core';
+import {AfterViewInit, Component, computed, ElementRef, input, output, ViewChild} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
-import {Interactor} from '../../../shared/model/complex-results/interactor.model';
 import {Complex} from '../../../shared/model/complex-results/complex.model';
-import {ComplexComponent} from '../../../shared/model/complex-results/complex-component.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
+import {findComponentInComplex} from '../complex-navigator-utils';
+import {INavigatorComponent} from './model/navigator-component.model';
+import {NavigatorComponentSorting, NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
   templateUrl: './table-structure.component.html',
-  styleUrls: ['./table-structure.component.css']
+  styleUrls: ['./table-structure.component.scss']
 })
-export class TableStructureComponent {
+export class TableStructureComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
-  interactors = input<Interactor[]>();
-  interactorsSorting = input<string>();
-  organismIconDisplay = input<boolean>();
-  interactorTypeDisplay = input<boolean>();
-  idDisplay = input<boolean>();
+  navigatorComponents = input<INavigatorComponent[]>();
   canAddComplexesToBasket = input<boolean>();
   canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
-  sortedComplexes = computed(() => this.sortComplexBySimilarityClustering(this.complexSearch().elements));
+  /**
+   * Define start position for header to become sticky, in px
+   */
+  scrollStart = input<number>(39);
 
-  private getComponentAsComplex(component: ComplexComponent): Complex | undefined {
-    return this.complexSearch().elements.find(interactor => interactor.complexAC === component.identifier);
+  @ViewChild('header') headerDiv: ElementRef<HTMLDivElement>;
+  shadowTopVisible = false;
+  shadowRightVisible = true;
+  shadowLeftVisible = false;
+
+  sortedComplexes = computed(() =>
+    this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
+
+  constructor(public state: NavigatorStateService) {
   }
 
-  private calculateSimilarity(complex1: Complex, complex2: Complex) {
+  ngAfterViewInit(): void {
+    const header = this.headerDiv.nativeElement;
+    this.setHorizontalShadowVisibility(header);
+    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart());
+  }
+
+  private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
     if (complex1 === complex2) {
       return 1;
     }
 
-    const [components1, components2] = [complex1, complex2].map(this.getComponents.bind(this));
+    const components1 = this.getComponents(complex1, navigatorComponents);
+    const components2 = this.getComponents(complex2, navigatorComponents);
+
     // @ts-ignore
     return components1.intersection(components2).size / components1.union(components2).size;
   }
 
-  private getComponents(complex: Complex): Set<string> {
-    if (!complex.componentAcs) {
-      complex.componentAcs = new Set<string>(this.getAllComponents(complex, [], true).map(component => component.identifier));
+  private getComponents(complex: Complex, navigatorComponents: INavigatorComponent[]): Set<string> {
+    if (!complex.componentAcs || complex.componentAcs.size === 0) {
+      complex.componentAcs = new Set<string>(
+        navigatorComponents
+          .filter(component => findComponentInComplex(complex, component.componentIds, navigatorComponents))
+          .map(component => component.identifier));
     }
     return complex.componentAcs;
   }
 
-  private getAllComponents(complex?: Complex, components: ComplexComponent[] = [], includeComplexes = false): ComplexComponent[] {
-    for (const component of complex.interactors) {
-      if (component.interactorType === 'stable complex') {
-        const subComplex = this.getComponentAsComplex(component);
-        if (subComplex) {
-          components.push(...this.getAllComponents(subComplex));
-          if (includeComplexes) {
-            components.push(component);
-          }
-        } else {
-          components.push(component);
-        }
-      } else {
-        components.push(component);
+  sortComplexBySimilarityClustering(complexesList: Complex[], navigatorComponents: INavigatorComponent[]): Complex[] {
+    let sortedComplexesList = complexesList;
+
+    sortedComplexesList.forEach(complex => {
+      if (!!complex.componentAcs) {
+        complex.componentAcs.clear();
       }
-    }
-    return components;
-  }
-
-  sortComplexBySimilarityClustering(complexesList: Complex[]) {
-    // Group by predicted to cluster only inside the different groups, and place predicted after curated
-    const groups = groupByPropertyToArray(
-      complexesList,
-      'predictedComplex',
-      (a, b) => (a as unknown as number) - (b as unknown as number) // Makes false go before true
-    );
-
-    return groups.flatMap(group => {
-      // Calculate Similarity Matrix
-      const sm: number[][] = new Array(group.length).fill(null).map(r => new Array(group.length).fill(null));
-      group.forEach((complex, i) => group.forEach((comparedComplex, j) => {
-        if (i >= j) { // Avoid useless calculations
-          sm[i][j] = this.calculateSimilarity(complex, comparedComplex);
-          sm[j][i] = sm[i][j]; // Matrix is symmetric
-        }
-      }));
-      return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
     });
+
+    if (!!navigatorComponents && !!navigatorComponents && navigatorComponents.length > 0) {
+      // Group by predicted to cluster only inside the different groups, and place predicted after curated
+      const groups = groupByPropertyToArray(
+        complexesList,
+        'predictedComplex',
+        (a, b) => (a as unknown as number) - (b as unknown as number) // Makes false go before true
+      );
+
+      sortedComplexesList = groups.flatMap(group => {
+        // Calculate Similarity Matrix
+        const sm: number[][] = new Array(group.length).fill(null).map(_ => new Array(group.length).fill(null));
+        group.forEach((complex, i) => group.forEach((comparedComplex, j) => {
+          if (i >= j) { // Avoid useless calculations
+            sm[i][j] = this.calculateSimilarity(complex, comparedComplex, navigatorComponents);
+            sm[j][i] = sm[i][j]; // Matrix is symmetric
+          }
+        }));
+        return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
+      });
+    }
+
+    // After the complexes have been sorted, we then set the index appearing for all components
+    // so they are properly sorted later
+    navigatorComponents.forEach(component => {
+      component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
+    });
+    return sortedComplexesList;
   }
 
   /**
@@ -129,4 +145,24 @@ export class TableStructureComponent {
     }
     return idx;
   }
+
+  private readonly scrollDetectionMargin = 5;
+
+  syncScroll(source: Scrollable, target: Scrollable) {
+    if (target.scrolling) {
+      target.scrolling = false;
+      return;
+    }
+    source.scrolling = true;
+    target.scrollTo({left: source.scrollLeft, behavior: 'instant'});
+
+    this.setHorizontalShadowVisibility(source);
+  }
+
+  private setHorizontalShadowVisibility(source: HTMLDivElement) {
+    this.shadowRightVisible = source.scrollLeft + source.offsetWidth + this.scrollDetectionMargin <= source.scrollWidth;
+    this.shadowLeftVisible = source.scrollLeft >= this.scrollDetectionMargin;
+  }
 }
+
+type Scrollable = HTMLDivElement & { scrolling?: boolean };

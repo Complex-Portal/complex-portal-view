@@ -6,7 +6,7 @@ import {IntEnzCrossReference} from '../../shared/model/complex-details/intenz-cr
 @Component({
   selector: 'cp-complex-function',
   templateUrl: './complex-function.component.html',
-  styleUrls: ['./complex-function.component.css']
+  styleUrls: ['./complex-function.component.scss']
 })
 export class ComplexFunctionComponent implements OnInit, AfterViewInit {
   private _crossReferences: CrossReference[];

@@ -1,0 +1,20 @@
+.basket-icons {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.deleteAllButton {
+  width: 225px;
+}
+
+h2 {
+  line-height: 1;
+}
+
+:host ::ng-deep .mat-mdc-tab-body-wrapper,
+:host ::ng-deep .mat-mdc-tab-body,
+:host ::ng-deep .mat-mdc-tab-body-content {
+  overflow-y: clip !important;
+  overflow-x: visible !important;
+  max-width: 100%;
+}

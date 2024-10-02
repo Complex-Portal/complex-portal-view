@@ -1,23 +1,24 @@
 <div class="complexNavigatorTable">
-  <div class="header"
-       (scroll)="body.scrollLeft = header.scrollLeft" #header>
-
-    <cp-table-header [complexes]="sortedComplexes()"
-                     [interactorsSorting]="interactorsSorting()"
-                     (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
-    </cp-table-header>
+  <div class="header" [style.top.px]="scrollStart()">
+    <div class="scroller" (scroll)="syncScroll(header, body)" #header>
+      <cp-table-header [complexes]="sortedComplexes()" [shadowVisible]="shadowLeftVisible"
+                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
+      </cp-table-header>
+    </div>
+    <div class="shadow top"
+         style="z-index: 3; top: calc(-1 * var(--width))"
+         [class.visible]="shadowTopVisible"></div>
   </div>
   <div class="interactors"
-       (scroll)="header.scrollLeft = body.scrollLeft" #body>
+       (scroll)="syncScroll(body, header)" #body>
     <cp-table-interactor-column
       [complexes]="sortedComplexes()"
-      [interactors]="interactors()"
-      [interactorsSorting]="interactorsSorting()"
-      [organismIconDisplay]="organismIconDisplay()"
-      [interactorTypeDisplay]="interactorTypeDisplay()"
-      [idDisplay]="idDisplay()">
+      [navigatorComponents]="navigatorComponents()"
+      [shadowVisible]="shadowLeftVisible"
+    >
     </cp-table-interactor-column>
   </div>
+  <div class="shadow left" [class.visible]="shadowRightVisible" style="z-index: 3"></div>
   <div class="spaceHolder"></div>
 </div>
 
