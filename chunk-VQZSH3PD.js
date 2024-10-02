@@ -1,4 +1,4 @@
-import{b as O}from"./chunk-NY6W22E7.js";import{M as R,a as b,b as C,c,g as N,h as k}from"./chunk-6Y53KJL3.js";import{Ja as p,Jb as v,La as f,Nb as S,Ob as D,Pa as x,Y as y,h as m,tb as _,zb as h}from"./chunk-3FSLCVCX.js";var P=`@if (organism.symbol) {
+import{b as O}from"./chunk-2VQOGPPB.js";import{M as R,a as b,b as C,c,g as N,h as k}from"./chunk-UTZTMAPQ.js";import{Ja as p,Jb as v,La as f,Nb as S,Ob as D,Pa as x,Y as y,h as m,tb as _,zb as h}from"./chunk-3HN62C7F.js";var P=`@if (organism.symbol) {
   <div class="card">
     <div class="medium-12">
       <b>{{organism.scientificName}}</b><br>
