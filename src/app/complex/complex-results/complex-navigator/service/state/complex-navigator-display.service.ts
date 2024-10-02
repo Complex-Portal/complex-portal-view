@@ -62,18 +62,14 @@ export class NavigatorStateService {
       if (this.ignore) {
         return;
       }
+      this.updateLocalStorage(this.params());
       this.router.navigate([], {queryParams: this.params(), queryParamsHandling: 'merge'});
     }, {allowSignalWrites: true});
-
-
-    effect(() => {
-      this.updateLocalStorage();
-    });
   }
 
-  updateLocalStorage(): void {
-    for (const param of Object.keys(this.params())) {
-      const value = this.params()[param];
+  private updateLocalStorage(params: any): void {
+    for (const param of Object.keys(params)) {
+      const value = params[param];
       // Only update localStorage if the value is different or not yet set
       if (!localStorage.getItem(param) || localStorage.getItem(param) !== String(value)) {
         localStorage.setItem(param, String(value));

@@ -32,7 +32,7 @@
                                     (onPageChange)="onPageChange($event)">
               </cp-complex-paginator>
 
-              <mat-tab-group [selectedIndex]="displayType === 'view_list' ? 0 : 1"
+              <mat-tab-group [selectedIndex]="isDisplayComplexNavigatorView() ? 1 : 0"
                              (selectedTabChange)="onTabChange($event, list, navigator)">
                 <mat-tab label="List view" #list>
                   <cp-complex-list [complexSearch]="complexSearch"/>

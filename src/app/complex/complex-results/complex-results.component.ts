@@ -96,7 +96,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       ...this.state.params()
     };
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
-    console.log('navigate from results');
     this.router.navigate([], {queryParams});
     ProgressBarComponent.hide();
     // This is a test case event for GA, to monitor if users ever use more then one filter.
