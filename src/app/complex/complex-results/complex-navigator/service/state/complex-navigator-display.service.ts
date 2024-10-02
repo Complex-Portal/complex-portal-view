@@ -1,4 +1,4 @@
-import {computed, effect, Injectable, model, ModelSignal} from '@angular/core';
+import {computed, effect, Injectable, input, model, ModelSignal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export enum NavigatorComponentSorting {
@@ -36,6 +36,30 @@ export class NavigatorStateService {
   }));
 
   ignore = false;
+
+  /**
+   * Angle of headers when more than 6 columns, in deg
+   */
+  angle = model<number>(45);
+  /**
+   * Width of a single column of complex when more than 6 columns, in px
+   */
+  columnWidth = model<number>(70);
+  /**
+   * Height of the displayed part of the tilted headers after rotation, in px
+   */
+  displayedHeight = model<number>(200);
+
+
+  _angleRad = computed(() => this.angle() * Math.PI / 180);
+  transform = computed(() => `rotate(${this.angle()}deg) translateX(1px)`);
+  /**
+   * Explanations on https://www.geogebra.org/calculator/jtx3rcs4
+   */
+  opposite = computed(() => this.columnWidth() * Math.sin(this._angleRad()));
+  adjacent = computed(() => this.columnWidth() * Math.cos(this._angleRad()));
+  contentHeight = computed(() => this.displayedHeight() / Math.cos(this._angleRad()) + this.opposite());
+  spaceHolderWidth = computed(() => this.displayedHeight() * Math.tan(this._angleRad()));
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(queryParams => {

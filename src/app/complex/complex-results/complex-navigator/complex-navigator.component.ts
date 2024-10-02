@@ -31,7 +31,7 @@ export class ComplexNavigatorComponent {
   isSorted = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
   navigatorComponents: INavigatorComponent[] = [];
 
-  constructor(private complexPortalService: ComplexPortalService, private state: NavigatorStateService) {
+  constructor(private complexPortalService: ComplexPortalService, public state: NavigatorStateService) {
     effect(() => {
       this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
     });

@@ -38,7 +38,7 @@ export class TableStructureComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const header = this.headerDiv.nativeElement;
     this.setHorizontalShadowVisibility(header);
-    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart());
+    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top <= this.scrollStart());
   }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {

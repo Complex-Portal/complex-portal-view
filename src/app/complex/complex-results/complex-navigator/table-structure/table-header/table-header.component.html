@@ -44,16 +44,22 @@
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
       <thead class="tableHeadOverflow">
-      <tr>
+      <tr class="rotate">
         <th class="spaceHolderHeaderOverflow">
-            <div class="shadow right" [class.visible]="shadowVisible()"></div>
+          <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
+              [style.transform]="state.transform()"
+              [style.height.px]="state.displayedHeight()"
+              [style.width.px]="state.adjacent()"
               [class.predicted]="complex.predictedComplex">
-            <a [routerLink]="['/complex', complex.complexAC]"
-               [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
-               target="_blank">
+            <a [style.height.px]="state.contentHeight()"
+               [style.padding-top.px]="state.opposite() / 2"
+               [style.padding-bottom.px]="state.opposite() / 2"
+              [routerLink]="['/complex', complex.complexAC]"
+              [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
+              target="_blank">
               <div>
                   <span>
                     <div class="tilted-label">
@@ -65,7 +71,11 @@
             </a>
           </th>
         }
-        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+        <th class="spaceHolder" [style.width.px]="state.spaceHolderWidth()" [style.height.px]="state.displayedHeight()" [class.predicted]="anyPredictedComplex()">
+          <svg style="width: 100%; height: 100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polygon points="0,100 100,100 100,0" fill="blue" style="fill: var(--primary)" />
+          </svg>
+        </th>
       </tr>
       <!-- icons row -->
       <tr>
@@ -98,7 +108,7 @@
             </div>
           </th>
         }
-        <div class="spaceHolder" [class.predicted]="anyPredictedComplex()"></div>
+        <div class="spaceHolder primary" [class.predicted]="anyPredictedComplex()"></div>
       </tr>
       </thead>
     }

@@ -1,7 +1,11 @@
 <div class="ComplexNavigator"
      [style.--cols]="complexSearch().elements.length"
      [class.horizontal]="complexSearch().elements.length <= 6"
-     [class.sorted]="isSorted()">
+     [class.sorted]="isSorted()"
+     [style.--colSize.px]="state.columnWidth()"
+     [style.--sizeSpaceHolder.px]="state.spaceHolderWidth()"
+>
+
   <div class="buttons">
     <cp-complex-navigator-buttons [orthologsGroupsAvailable]="orthologGroupsAvailable()"/>
   </div>
