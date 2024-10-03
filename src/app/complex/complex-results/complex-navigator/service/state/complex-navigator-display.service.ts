@@ -37,30 +37,6 @@ export class NavigatorStateService {
 
   ignore = false;
 
-  /**
-   * Angle of headers when more than 6 columns, in deg
-   */
-  angle = model<number>(45);
-  /**
-   * Width of a single column of complex when more than 6 columns, in px
-   */
-  columnWidth = model<number>(70);
-  /**
-   * Height of the displayed part of the tilted headers after rotation, in px
-   */
-  displayedHeight = model<number>(200);
-
-
-  _angleRad = computed(() => this.angle() * Math.PI / 180);
-  transform = computed(() => `rotate(${this.angle()}deg) translateX(1px)`);
-  /**
-   * Explanations on https://www.geogebra.org/calculator/jtx3rcs4
-   */
-  opposite = computed(() => this.columnWidth() * Math.sin(this._angleRad()));
-  adjacent = computed(() => this.columnWidth() * Math.cos(this._angleRad()));
-  contentHeight = computed(() => this.displayedHeight() / Math.cos(this._angleRad()) + this.opposite());
-  spaceHolderWidth = computed(() => this.displayedHeight() * Math.tan(this._angleRad()));
-
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(queryParams => {
       const paramKeys = Object.keys(this.params());
@@ -109,4 +85,54 @@ export class NavigatorStateService {
         return paramValue;
     }
   }
+
+  /* TILTED HEADER STATS
+   * Explanations on https://www.geogebra.org/calculator/jtx3rcs4
+   */
+
+  /**
+   * Angle of headers when more than 6 columns, in deg
+   */
+  angle = model<number>(45);
+  /**
+   * Width of a single column of complex when more than 6 columns, in px
+   */
+  columnWidth = model<number>(70);
+  /**
+   * Height of the displayed part of the tilted headers after rotation, in px
+   */
+  displayedHeight = model<number>(200);
+
+  /**
+   * JS trigo function are working in rad, so we need to convert them into rad
+   */
+  _angleRad = computed(() => this.angle() * Math.PI / 180);
+  /**
+   * For some reason the upper header is shifted by one pixel left to the rest of the table.
+   * This translateX fix that.
+   * The rotate is the real important bit
+   */
+  transform = computed(() => `translateX(1px) rotate(${this.angle()}deg)`);
+  /**
+   * Length of the right side of the hidden triangle after rotation.<br>
+   * Used to know the real height of the inner element, and to place padding.<br>
+   * Illustration at https://www.geogebra.org/calculator/jtx3rcs4
+   */
+  opposite = computed(() => this.columnWidth() * Math.sin(this._angleRad()));
+  /**
+   * Length of the left side of the hidden triangle after rotation.<br>
+   * Used to know the width of the inner element<br>
+   * Illustration at https://www.geogebra.org/calculator/jtx3rcs4
+   */
+  adjacent = computed(() => this.columnWidth() * Math.cos(this._angleRad()));
+  /**
+   * Real height of the inner element.<br>
+   * Illustration at https://www.geogebra.org/calculator/jtx3rcs4
+   */
+  contentHeight = computed(() => this.displayedHeight() / Math.cos(this._angleRad()) + this.opposite());
+  /**
+   * Width of the slope, used for the terminal placeholder.<br>
+   * Illustration at https://www.geogebra.org/calculator/jtx3rcs4
+   */
+  spaceHolderWidth = computed(() => this.displayedHeight() * Math.tan(this._angleRad()));
 }
