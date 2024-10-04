@@ -12,7 +12,7 @@ import{a as C,b as _,c as I}from"./chunk-W3HFTECF.js";import{f as c}from"./chunk
       <div class="row expanded">
         <mat-tab-group [tabIndex]="displayType === SearchDisplay.list ? 0 : 1"
                        (selectedTabChange)="onDisplayTypeChange($event.index === 0 ? SearchDisplay.list : SearchDisplay.navigator)"
-                       class="columns medium-centered small-12 medium-10 large-8">
+                       class="columns medium-centered small-12 medium-10 large-10">
           <mat-tab label="List view">
             <table class="hover">
               <thead>
