@@ -5,16 +5,11 @@
   --colSize: 70px;
   --intHeader: calc(var(--componentSize) + var(--sortingGroupSize));
   --totalWidth: calc(var(--intHeader) + var(--cols) * var(--colSize) + var(--sizeSpaceHolder));
-  max-width: var(--totalWidth);
 
   margin: auto;
 
   &.horizontal {
     max-width: none;
-  }
-
-  &.sorted {
-    --sortingGroupSize: 3ch;
   }
 
 }

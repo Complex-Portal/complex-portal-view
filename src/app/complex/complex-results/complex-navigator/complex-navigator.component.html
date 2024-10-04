@@ -1,9 +1,11 @@
-<div class="ComplexNavigator"
+<div class="ComplexNavigator" #parent
      [class.horizontal]="complexSearch().elements.length <= 6"
      [class.sorted]="isSorted()"
-     [style.--cols]="state.numberOfColumns()"
+     [style.--cols]="numberOfColumns()"
      [style.--colSize.px]="state.columnWidth()"
      [style.--sizeSpaceHolder.px]="state.spaceHolderWidth()"
+     [style.--intHeader.px]="interactorWidth()"
+     [style.--sortingGroupSize.px]="sortingWidth()"
 >
 
   <div class="buttons">

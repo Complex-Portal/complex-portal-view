@@ -33,14 +33,14 @@
               </cp-complex-paginator>
 
               <mat-tab-group [selectedIndex]="isDisplayComplexNavigatorView() ? 1 : 0"
-                             (selectedTabChange)="onTabChange($event, list, navigator)">
+                             (selectedTabChange)="onTabChange($event, list, navigatorTab)">
                 <mat-tab label="List view" #list>
                   <cp-complex-list [complexSearch]="complexSearch"/>
                 </mat-tab>
-                <mat-tab label="Navigator view" #navigator>
+                <mat-tab label="Navigator view" #navigatorTab>
                   <div class="ComplexNavigator"
                        [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
-                    <cp-complex-navigator class="Complex-navigator"
+                    <cp-complex-navigator class="Complex-navigator" #navigator
                                           [complexSearch]="complexSearch"
                                           [interactors]="allInteractorsInComplexSearch"
                                           (anyChange)="reloadPage()">

@@ -10,7 +10,7 @@
       </h2>
       <h4>{{ getKeys(complexBasket).length }} complexes in your basket</h4>
       <div class="row expanded">
-        <mat-tab-group [tabIndex]="displayType === SearchDisplay.list ? 0 : 1"
+        <mat-tab-group [tabIndex]="displayType === SearchDisplay.list ? 0 : 1" #tabs
                        (selectedTabChange)="onDisplayTypeChange($event.index === 0 ? SearchDisplay.list : SearchDisplay.navigator)"
                        class="columns medium-centered small-12 medium-10 large-8">
           <mat-tab label="List view">
