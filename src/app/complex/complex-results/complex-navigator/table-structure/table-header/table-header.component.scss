@@ -45,7 +45,7 @@ thead {
   tr {
     --parentWidth: 100%;
     display: grid;
-    grid-template-columns: var(--intHeader) repeat(auto-fit, var(--colSize));
+    grid-template-columns: var(--intHeader) repeat(var(--cols), var(--colSize)) var(--sizeSpaceHolder);
     width: var(--totalWidth);
 
     &.rotate {
@@ -107,8 +107,7 @@ thead {
   left: 0;
   z-index: 4;
   background-color: var(--on-primary);
-  height: 60px;
-  line-height: var(--colSize);
+  align-content: end;
   text-align: right;
   color: var(--primary);
   padding: 5px;
