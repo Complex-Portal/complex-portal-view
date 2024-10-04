@@ -163,6 +163,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   private setListView() {
     this._toast = this.notificationService.complexNavigatorAnnouncement();
     this._displayType = SearchDisplay.list;
+    this.reloadPage();
   }
 
   private setComplexNavigatorView() {
@@ -171,6 +172,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this._toast = null;
     }
     this._displayType = SearchDisplay.navigator;
+    this.reloadPage();
   }
 
   processSearchResults(): void {
