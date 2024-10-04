@@ -1,24 +1,32 @@
 <div class="container">
-  @if (complex().evidenceType || (intactXRefs && intactXRefs.length > 0)) {
+  @if (complex().evidenceType || (intactXRefs && intactXRefs.length > 0) || (humapXrefs && humapXrefs.length > 0)) {
+    <div class="columns evidence">
     <div>
-      Evidence by
+      Evidence:
       <a href="{{complex().evidenceType.searchURL}}" target="_blank">
         {{ complex().evidenceType.description ? complex().evidenceType.description : complex().evidenceType.identifier }}
         <i class="icon icon-generic small" data-icon="x"></i>
       </a>
-      @if (intactXRefs && intactXRefs.length > 0) {
-        in IntAct
-        @for (crossReference of intactXRefs; track crossReference.identifier; let isLast = $last) {
-          <a href="{{crossReference.searchURL}}" target="_blank"> {{ crossReference.identifier }} <i
-          class="icon icon-generic small" data-icon="x"></i></a>{{ isLast ? '' : ', ' }}
-        }
-      }
-      @if (humapXrefs && humapXrefs.length > 0) {
-        in hu.MAP
-        @for (crossReference of humapXrefs; track crossReference.identifier; let isLast = $last) {
-          <a href="{{humapUrl(crossReference.identifier)}}" target="_blank"> {{ crossReference.identifier }} <i
-            class="icon icon-generic small" data-icon="x"></i></a>{{ isLast ? '' : ', ' }}
-        }
+    </div>
+      @if ((intactXRefs && intactXRefs.length > 0) || (humapXrefs && humapXrefs.length > 0)) {
+        <ul class="no-bottom-margin">
+          @if (intactXRefs && intactXRefs.length > 0) {
+            @for (crossReference of intactXRefs; track crossReference.identifier) {
+              <li>
+                IntAct: <a href="{{crossReference.searchURL}}" target="_blank"> {{ crossReference.identifier }} <i
+                class="icon icon-generic small" data-icon="x"></i></a>
+              </li>
+            }
+          }
+          @if (humapXrefs && humapXrefs.length > 0) {
+            @for (crossReference of humapXrefs; track crossReference.identifier) {
+              <li>
+                <a href="{{humapSearchUrl(crossReference.identifier)}}" target="_blank"> {{ crossReference.identifier }} <i
+                  class="icon icon-generic small" data-icon="x"></i></a>
+              </li>
+            }
+          }
+        </ul>
       }
     </div>
   }
