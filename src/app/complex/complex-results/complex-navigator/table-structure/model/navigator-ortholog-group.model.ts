@@ -1,7 +1,7 @@
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {INavigatorComponent, INavigatorSubComponent} from './navigator-component.model';
 import {XRef} from '../../../../shared/model/complex-results/interactor.model';
-import {pantherUrl} from '../../../../complex-portal-utils';
+import {pantherSearchUrl} from '../../../../complex-portal-utils';
 
 export class NavigatorOrthologGroup implements INavigatorComponent {
   private _orthologXref: XRef;
@@ -59,7 +59,7 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
   }
 
   get identifierLink(): string {
-    return pantherUrl(this._orthologXref.identifier);
+    return pantherSearchUrl(this._orthologXref.identifier);
   }
 
   get subComponents(): INavigatorSubComponent[] {
