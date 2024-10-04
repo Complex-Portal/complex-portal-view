@@ -1,11 +1,12 @@
 <div class="ComplexNavigator" #parent
      [class.horizontal]="complexSearch().elements.length <= 6"
-     [class.sorted]="isSorted()"
+     [class.sorted]="state.isSorted()"
      [style.--cols]="numberOfColumns()"
      [style.--colSize.px]="state.columnWidth()"
      [style.--sizeSpaceHolder.px]="state.spaceHolderWidth()"
-     [style.--intHeader.px]="interactorWidth()"
-     [style.--sortingGroupSize.px]="sortingWidth()"
+     [style.--sortingGroupSize.px]="state.sortingWidth()"
+     [style.--componentSize.px]="state.interactorWidth()"
+     [style.--intHeader.px]="state.interactorHeaderWidth()"
 >
 
   <div class="buttons">

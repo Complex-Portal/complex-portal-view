@@ -28,16 +28,12 @@ export class ComplexNavigatorComponent implements AfterViewInit {
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
-  isSorted = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
-
-  sortingWidth = computed(() => this.isSorted() ? 20 : 0);
-  interactorWidth = computed(() => 230 + this.sortingWidth());
 
   @ViewChild('parent') parent: ElementRef<HTMLDivElement>;
   navigatorComponents: INavigatorComponent[] = [];
 
   constructor(private complexPortalService: ComplexPortalService, public state: NavigatorStateService) {
-    effect(() => this.numberOfColumns() && this.adjustColWidth(), {allowSignalWrites: true});
+    effect(() => this.adjustColWidth(), {allowSignalWrites: true});
     effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
   }
 
@@ -47,15 +43,7 @@ export class ComplexNavigatorComponent implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   adjustColWidth() {
-    setTimeout(() => {
-      const total = this.parent.nativeElement.clientWidth;
-      this.state.columnWidth.set(
-        Math.max(
-          (total - this.interactorWidth() - this.state.spaceHolderWidth()) / this.numberOfColumns(),
-          70
-        )
-      );
-    });
+    this.state.adjustColumnWidth(this.parent.nativeElement.clientWidth, this.numberOfColumns());
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],

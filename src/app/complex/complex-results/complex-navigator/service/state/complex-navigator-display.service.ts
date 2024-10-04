@@ -86,6 +86,20 @@ export class NavigatorStateService {
     }
   }
 
+  interactorWidth = model<number>(230);
+  isSorted = computed(() => this.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
+  sortingWidth = computed(() => this.isSorted() ? 20 : 0);
+  interactorHeaderWidth = computed(() => this.interactorWidth() + this.sortingWidth());
+
+  adjustColumnWidth(totalComponentWidth: number, numberOfColumns: number) {
+    this.columnWidth.set(
+      Math.max(
+        (totalComponentWidth - this.interactorHeaderWidth() - this.spaceHolderWidth()) / numberOfColumns,
+        70
+      )
+    );
+  }
+
   /* TILTED HEADER STATS
    * Explanations on https://www.geogebra.org/calculator/jtx3rcs4
    */
