@@ -15,8 +15,6 @@ import {NavigatorComponentSorting, NavigatorStateService} from '../service/state
 export class TableStructureComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
   navigatorComponents = input<INavigatorComponent[]>();
-  canAddComplexesToBasket = input<boolean>();
-  canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
   /**
