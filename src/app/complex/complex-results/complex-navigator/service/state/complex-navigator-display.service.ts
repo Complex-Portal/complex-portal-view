@@ -91,13 +91,33 @@ export class NavigatorStateService {
    */
 
   /**
+   * Number of columns in the complex navigator.
+   */
+  numberOfColumns = model<number>(20);
+  /**
    * Angle of headers when more than 6 columns, in deg
    */
   angle = model<number>(45);
   /**
-   * Width of a single column of complex when more than 6 columns, in px
+   * Minimum width to use for the columns, in px.
+   * This is to make that with a large number of columns, columns are still wise enough to be readable.
    */
-  columnWidth = model<number>(70);
+  minColumnWidth = model<number>(70);
+  /**
+   * Used to calculate the total width, assuming a maximum number of columns of 20.
+   * This is true on the search results, but not on the basket.
+   */
+  maxNumberOfColumns = model<number>(20);
+  /**
+   * The total width of all columns, meaning the width of the complex navigator excluding the header column.
+   * We calculate this for 20 columns (max number of columns), each with 70px width (min width).
+   */
+  totalColumnWidth = computed(() => this.minColumnWidth() * this.maxNumberOfColumns());
+  /**
+   * Width of a single column of complex when more than 6 columns, in px.
+   * This is calculated based on the total width and the number of columns.
+   */
+  columnWidth = computed(() => Math.max(this.totalColumnWidth() / this.numberOfColumns(), this.minColumnWidth()));
   /**
    * Height of the displayed part of the tilted headers after rotation, in px
    */

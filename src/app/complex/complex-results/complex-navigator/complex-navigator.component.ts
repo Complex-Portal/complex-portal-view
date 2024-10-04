@@ -30,9 +30,8 @@ export class ComplexNavigatorComponent {
   navigatorComponents: INavigatorComponent[] = [];
 
   constructor(private complexPortalService: ComplexPortalService, public state: NavigatorStateService) {
-    effect(() => {
-      this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    });
+    effect(() => this.state.numberOfColumns.set(this.complexSearch().elements.length), {allowSignalWrites: true});
+    effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
