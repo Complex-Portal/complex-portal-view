@@ -40,7 +40,7 @@
                 <mat-tab label="Navigator view" #navigatorTab>
                   <div class="ComplexNavigator"
                        [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
-                    <cp-complex-navigator class="Complex-navigator" #navigator
+                    <cp-complex-navigator class="Complex-navigator"
                                           [complexSearch]="complexSearch"
                                           [interactors]="allInteractorsInComplexSearch"
                                           (anyChange)="reloadPage()">
