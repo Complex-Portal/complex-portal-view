@@ -50,9 +50,7 @@
                   <cp-complex-navigator
                     [complexSearch]="complexSearchBasket"
                     [interactors]="allInteractorsInComplexSearchBasket"
-                    [canAddComplexesToBasket]="false"
-                    [canRemoveComplexesFromBasket]="true"
-                    (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+                    (onComplexRemovedFromBasket)="deleteFromBasket($event)">
                   </cp-complex-navigator>
                 </div>
               } @else {
