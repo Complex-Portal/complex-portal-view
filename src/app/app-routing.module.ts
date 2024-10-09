@@ -4,6 +4,7 @@ import {OntologiesComponent} from './ontologies/ontologies.component';
 import {AboutComponent} from './navigation/about/about.component';
 import {DownloadComponent} from './download/download.component';
 import {DocumentationComponent} from './navigation/documentation/documentation.component';
+import {RedirectComponent} from './shared/redirect/redirect.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    component: RedirectComponent
   }
 ];
 
