@@ -2,7 +2,6 @@
   margin-top: -5px;
 }
 
-
 h2 {
   overflow-wrap: break-word;
   display: -webkit-box;
@@ -18,5 +17,10 @@ h2 {
 
 .right-align {
   text-align: right;
+}
+
+.bottom-with-padding {
+  position: absolute;
+  bottom: 16px;
 }
 

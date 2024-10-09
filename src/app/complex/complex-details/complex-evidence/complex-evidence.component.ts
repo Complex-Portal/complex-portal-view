@@ -1,7 +1,7 @@
 import {Component, OnInit, input } from '@angular/core';
 import {CrossReference} from '../../shared/model/complex-details/cross-reference.model';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
-import {humapUrl} from '../../complex-portal-utils';
+import {humapSearchUrl} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-evidence',
@@ -18,7 +18,7 @@ export class ComplexEvidenceComponent implements OnInit {
   complex = input<ComplexDetails>();
   stars: ('empty' | 'full')[] = ['empty', 'empty', 'empty', 'empty', 'empty'];
 
-  protected readonly humapUrl = humapUrl;
+  protected readonly humapSearchUrl = humapSearchUrl;
 
   constructor() {
   }

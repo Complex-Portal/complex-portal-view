@@ -18,7 +18,6 @@ export class TableInteractorNameComponent {
   externalLinkVisible: boolean;
   isOrthologGroup = computed(() => this.state.mergeOrthologs() &&
     this.interactor().orthologsGroup?.identifier === this.interactor()?.identifier);
-  interactorQuery = input<string>();
 
   constructor(@Inject(APP_BASE_HREF) private _baseHref: string, public state: NavigatorStateService) {
   }

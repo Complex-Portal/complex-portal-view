@@ -7,8 +7,6 @@
   </div>
   <cp-table-structure [complexSearch]="complexSearch()"
                       [navigatorComponents]="navigatorComponents"
-                      [canAddComplexesToBasket]="canAddComplexesToBasket()"
-                      [canRemoveComplexesFromBasket]="canRemoveComplexesFromBasket()"
                       (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
   </cp-table-structure>
 </div>

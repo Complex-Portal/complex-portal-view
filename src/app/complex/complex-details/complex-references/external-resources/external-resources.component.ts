@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrossReference} from '../../../shared/model/complex-details/cross-reference.model';
-import {humapUrl} from '../../../complex-portal-utils';
+import {humapSearchUrl} from '../../../complex-portal-utils';
 
 @Component({
   selector: 'cp-external-resources',
@@ -10,7 +10,7 @@ import {humapUrl} from '../../../complex-portal-utils';
 export class ExternalResourcesComponent implements OnInit {
   private _crossReferences: CrossReference[];
 
-  protected readonly humapUrl = humapUrl;
+  protected readonly humapSearchUrl = humapSearchUrl;
 
   constructor() {
   }

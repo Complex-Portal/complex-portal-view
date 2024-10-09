@@ -20,8 +20,6 @@ import {NavigatorComponentSorting, NavigatorStateService} from './service/state/
 export class ComplexNavigatorComponent {
   complexSearch = input<ComplexSearchResult>();
   interactors = input<Interactor[]>();
-  canAddComplexesToBasket = input<boolean>();
-  canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
   anyChange = output<void>();
 
