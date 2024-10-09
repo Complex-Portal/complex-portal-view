@@ -1,4 +1,4 @@
-import {Component, computed, effect, input, output} from '@angular/core';
+import {AfterViewInit, Component, computed, effect, ElementRef, HostListener, input, output, ViewChild} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
 import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {Complex} from '../../shared/model/complex-results/complex.model';
@@ -17,22 +17,33 @@ import {NavigatorComponentSorting, NavigatorStateService} from './service/state/
   styleUrls: ['./complex-navigator.component.scss']
 })
 
-export class ComplexNavigatorComponent {
+export class ComplexNavigatorComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
   interactors = input<Interactor[]>();
   onComplexRemovedFromBasket = output<string>();
+
   anyChange = output<void>();
 
+  numberOfColumns = computed(() => this.complexSearch().elements.length);
   navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
-  isSorted = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
+
+  @ViewChild('parent') parent: ElementRef<HTMLDivElement>;
   navigatorComponents: INavigatorComponent[] = [];
 
-  constructor(private complexPortalService: ComplexPortalService, private state: NavigatorStateService) {
-    effect(() => {
-      this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping());
-    });
+  constructor(private complexPortalService: ComplexPortalService, public state: NavigatorStateService) {
+    effect(() => this.adjustColWidth(), {allowSignalWrites: true});
+    effect(() => this.setNavigatorComponents(this.navigatorComponentsGroupedByOrthologs(), this.navigatorComponentsWithoutGrouping()));
+  }
+
+  ngAfterViewInit(): void {
+    this.adjustColWidth();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  adjustColWidth() {
+    this.state.adjustColumnWidth(this.parent.nativeElement.clientWidth, this.numberOfColumns());
   }
 
   private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],

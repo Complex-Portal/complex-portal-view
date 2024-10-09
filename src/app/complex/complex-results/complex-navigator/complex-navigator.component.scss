@@ -3,19 +3,13 @@
   --componentSize: 230px;
   --sortingGroupSize: 0px;
   --colSize: 70px;
-  --sizeSpaceHolder: 185px;
   --intHeader: calc(var(--componentSize) + var(--sortingGroupSize));
   --totalWidth: calc(var(--intHeader) + var(--cols) * var(--colSize) + var(--sizeSpaceHolder));
-  max-width: var(--totalWidth);
 
   margin: auto;
 
   &.horizontal {
     max-width: none;
-  }
-
-  &.sorted {
-    --sortingGroupSize: 3ch;
   }
 
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BasketService} from '../shared/basket/service/basket.service';
 import {BasketItem} from '../shared/basket/model/basketItem';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
@@ -11,6 +11,7 @@ import {take} from 'rxjs/operators';
 import {
   SearchDisplay
 } from '../complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
+import {ComplexNavigatorComponent} from '../complex/complex-results/complex-navigator/complex-navigator.component';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class BasketComponent implements OnInit, AfterViewInit {
   complexSearchBasket: ComplexSearchResult = null;
   allInteractorsInComplexSearchBasket: Interactor[] = [];
   displayType: SearchDisplay;
+
+  @ViewChild(ComplexNavigatorComponent) navigator: ComplexNavigatorComponent;
 
   constructor(private _basketService: BasketService,
               private titleService: Title,
@@ -48,6 +51,9 @@ export class BasketComponent implements OnInit, AfterViewInit {
     if (this.displayType !== displayType) {
       this.displayType = displayType;
       this.router.navigate([], {fragment: this.displayType});
+    }
+    if (displayType === SearchDisplay.navigator) {
+      this.navigator?.adjustColWidth();
     }
   }
 

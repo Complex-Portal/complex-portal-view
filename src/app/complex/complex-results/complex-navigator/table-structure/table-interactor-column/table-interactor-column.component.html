@@ -3,7 +3,7 @@
          [ngClass]="{'inheritedWidth': complexes().length > 6}">
     @for (interactor of navigatorComponents(); track i; let i = $index) {
       @if (!interactor.hidden) {
-        <tr [class.ortholog]="!!interactor.isOrthologGroup && state.mergeOrthologs">
+        <tr [class.ortholog]="!!interactor.isOrthologGroup && state.mergeOrthologs()">
           @for (range of ranges; track range.value) {
             @if (range.start === i) {
               <td [attr.rowspan]="range.length" class="interactorSeparation"
@@ -57,7 +57,7 @@
             <tr
               class="expandedRows"
               [ngClass]="getExpandedRowClass(j, interactor.subComponents.length)">
-              @if (j === 0 && isSorting()) {
+              @if (j === 0 && state.isSorted()) {
                 <td [attr.rowspan]="interactor.subComponents.length" class="interactorSeparation"
                     [matTooltip]="interactor.expandTooltip"
                 >
@@ -66,8 +66,7 @@
                   </div>
                 </td>
               }
-              <td class="subComponentColumn"
-                  [style]="ranges.length!=0 ? 'left:3ch':''">
+              <td class="subComponentColumn" [style.left.px]="state.sortingWidth()">
                 <div>
                   <cp-table-interactor-name [interactor]="subComponent"/>
                 </div>

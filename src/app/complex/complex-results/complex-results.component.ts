@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, OnInit} from '@angular/core';
+import {AfterViewInit, Component, effect, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -9,6 +9,7 @@ import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {NavigatorStateService, SearchDisplay} from './complex-navigator/service/state/complex-navigator-display.service';
 import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
+import {ComplexNavigatorComponent} from './complex-navigator/complex-navigator.component';
 
 @Component({
   selector: 'cp-complex-results',
@@ -34,6 +35,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   pageSize = 20;
   currentPageIndex: number;
   lastPageIndex: number;
+
+  @ViewChild(ComplexNavigatorComponent) navigator: ComplexNavigatorComponent;
 
   constructor(private route: ActivatedRoute, private router: Router, private state: NavigatorStateService,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -157,6 +160,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
     if (event.tab === navigator) {
       this.setComplexNavigatorView();
+      this.navigator.adjustColWidth();
     }
   }
 

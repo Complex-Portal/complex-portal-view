@@ -21,7 +21,6 @@ thead {
   z-index: 4;
   color: var(--primary);
   background-color: var(--on-primary);
-  padding-top: 173px;
   text-align: right;
 }
 
@@ -37,7 +36,6 @@ thead {
 
 .tilted-label {
   text-overflow: ellipsis;
-  width: 28ch;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -47,42 +45,58 @@ thead {
   tr {
     --parentWidth: 100%;
     display: grid;
-    grid-template-columns: var(--intHeader) repeat(auto-fit, var(--colSize));
+    grid-template-columns: var(--intHeader) repeat(var(--cols), var(--colSize)) var(--sizeSpaceHolder);
     width: var(--totalWidth);
-  }
 
-  th.rotate {
-    position: relative;
-    width: 338px;
-    height: 51px !important;
-    color: var(--on-primary);
-    font-size: 14px;
-    text-align: left;
-    border: 1px solid white;
-    top: 76px;
-    left: -52px;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    padding: 0;
-    transform: rotate(-45deg);
-    border-collapse: collapse;
+    &.rotate {
+      overflow: clip;
 
-    a {
-      width: 100%;
-      height: 100%;
-      align-content: center;
-      background-color: var(--primary);
-      padding: 0 0 0 var(--colSize);
-      border: none;
+
+      th.rotate {
+        position: relative;
+        color: var(--on-primary);
+        font-size: 14px;
+        text-align: left;
+        border-right: 1px solid white;
+        display: flex;
+        align-items: flex-end;
+        align-content: flex-end;
+        justify-content: center;
+        padding: 0;
+        transform-origin: 0 100%;
+        border-collapse: collapse;
+
+        > * {
+          align-content: center;
+          background-color: var(--primary);
+          width: 100%;
+          border: none;
+          writing-mode: vertical-rl;
+          transform: rotate(180deg); // Make label bottom to top
+
+          > * {
+            transform: translate(5px, 2px); // Make label icon aligned to other icons
+          }
+        }
+      }
+
     }
   }
 }
 
 .spaceHolder {
   width: var(--sizeSpaceHolder);
-  background-color: var(--primary);
+  //background-color: var(--primary);
   border-left: 1px solid white;
+  padding: 0;
+  pointer-events: none;
+  &.primary {
+    background: var(--primary)
+  }
+
+  svg {
+    transform: translateY(1px);
+  }
 }
 
 .interactorsHeader {
@@ -93,8 +107,7 @@ thead {
   left: 0;
   z-index: 4;
   background-color: var(--on-primary);
-  height: 60px;
-  line-height: var(--colSize);
+  align-content: end;
   text-align: right;
   color: var(--primary);
   padding: 5px;

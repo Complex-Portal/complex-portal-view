@@ -24,7 +24,6 @@ export class TableInteractorColumnComponent {
   navigatorComponents = input<INavigatorComponent[]>();
   shadowVisible = input<boolean>(false);
 
-  isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
   isOrganismSorting = computed(() => this.state.componentsSorting() === NavigatorComponentSorting.ORGANISM);
 
   navigatorComplexes: NavigatorComplex[];
