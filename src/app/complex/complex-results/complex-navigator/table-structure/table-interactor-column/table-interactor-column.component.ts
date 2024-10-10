@@ -68,9 +68,10 @@ export class TableInteractorColumnComponent {
     if (this.navigatorComponents()[i].expanded) {
       this.collapseAllButOne(i);
       this.hideRowsDisplayedAsSubcomponents(i);
-    } else {
-      this.displayAllRows();
     }
+    // else {
+    //   // this.displayAllRows();
+    // }
 
     // Something has been expanded or collapsed, we need to sort and recalculate the start and end indexes for the lines
     this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.state.componentsSorting());
