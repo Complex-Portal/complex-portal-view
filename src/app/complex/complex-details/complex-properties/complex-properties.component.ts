@@ -4,7 +4,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 @Component({
   selector: 'cp-complex-properties',
   templateUrl: './complex-properties.component.html',
-  styleUrls: ['./complex-properties.component.css']
+  styleUrls: ['./complex-properties.component.scss']
 })
 export class ComplexPropertiesComponent implements OnInit {
   private _propertiesDescription: string[];

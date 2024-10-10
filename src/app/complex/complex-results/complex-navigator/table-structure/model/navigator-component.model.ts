@@ -45,7 +45,7 @@ export interface INavigatorComponent extends INavigatorSubComponent {
 
   set indexAppearing(value: number);
 
-  componentIds(): string[];
+  get componentIds(): string[];
 
   get componentQuery(): string;
 }

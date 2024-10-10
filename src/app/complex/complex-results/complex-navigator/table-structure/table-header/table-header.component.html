@@ -5,15 +5,12 @@
     @if (complexes().length <= 6) {
       <thead class="tableHead">
       <tr>
-        @if (isSorted()) {
-          <th class="space-holder-sorting-activated"></th>
-        }
-        <th class="components-header horizontal">
+        <th class="components-header">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
-          <th class="horizontal" [class.predicted]="complex.predictedComplex">
+          <th [class.predicted]="complex.predictedComplex" class="horizontal">
             <div>
               <a [routerLink]="['/complex', complex.complexAC]"
                  target="_blank">
@@ -46,23 +43,23 @@
     }
     <!-- When table is overflowing -->
     @if (complexes().length > 6) {
-      <thead class="complexes-row-overflow"
-             [class.sorted]="isSorted()">
-      <!--             [ngClass]="isSorted() ? 'tableHeadOverflowWithSorting' : 'tableHeadOverflow'">-->
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-        <th class="space-holder-components-header-overflow"
-            [style]="isSorted()? 'min-width: 256px; max-width: 256px;':''">
+      <thead class="complexes-row-overflow">
+      <tr class="rotate">
+        <th class="space-holder-components-header-overflow">
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
-              [class.predicted]="complex.predictedComplex"
-              [style.--cols]="complexes().length">
-            <a [routerLink]="['/complex', complex.complexAC]"
-               [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
-               target="_blank">
+              [style.transform]="state.transform()"
+              [style.height.px]="state.displayedHeight()"
+              [style.width.px]="state.adjacent()"
+              [class.predicted]="complex.predictedComplex">
+            <a [style.height.px]="state.contentHeight()"
+               [style.padding-top.px]="state.opposite() / 2"
+               [style.padding-bottom.px]="state.opposite() / 2"
+              [routerLink]="['/complex', complex.complexAC]"
+              [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
+              target="_blank">
               <div>
                   <span>
                     <div class="tilted-label">
@@ -74,14 +71,15 @@
             </a>
           </th>
         }
-        <div class="space-holder" [class.predicted]="anyPredictedComplex()"></div>
+        <th class="space-holder" [style.width.px]="state.spaceHolderWidth()" [style.height.px]="state.displayedHeight()" [class.predicted]="anyPredictedComplex()">
+          <svg style="width: 100%; height: 100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polygon points="0,100 100,100 100,0" fill="blue" style="fill: var(--primary)" />
+          </svg>
+        </th>
       </tr>
       <!-- icons row -->
-      <tr [style.--cols]="complexes().length"
-          [style.--intHeader]="isSorted() ? '256px':''"
-          [style.--sizeSpaceHolder]="'185px'">
-        <th class="components-header overflow"
-            [style]="isSorted() ? 'min-width: 256px; max-width: 256px;':''">
+      <tr>
+        <th class="components-header overflow">
           Components
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
@@ -110,7 +108,7 @@
             </div>
           </th>
         }
-        <div class="space-holder" [class.predicted]="anyPredictedComplex()"></div>
+        <th class="space-holder primary" [class.predicted]="anyPredictedComplex()"></th>
       </tr>
       </thead>
     }

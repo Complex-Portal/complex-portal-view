@@ -14,7 +14,7 @@ interface Confidence {
 @Component({
   selector: 'cp-complex-filter',
   templateUrl: './complex-filter.component.html',
-  styleUrls: ['./complex-filter.component.css']
+  styleUrls: ['./complex-filter.component.scss']
 })
 export class ComplexFilterComponent implements OnInit {
 

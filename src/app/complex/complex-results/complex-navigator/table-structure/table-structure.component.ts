@@ -5,17 +5,16 @@ import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {findComponentInComplex} from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
+import {NavigatorComponentSorting, NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
   templateUrl: './table-structure.component.html',
-  styleUrls: ['./table-structure.component.css']
+  styleUrls: ['./table-structure.component.scss']
 })
 export class TableStructureComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
   navigatorComponents = input<INavigatorComponent[]>();
-  canAddComplexesToBasket = input<boolean>();
-  canRemoveComplexesFromBasket = input<boolean>();
   onComplexRemovedFromBasket = output<string>();
 
   /**
@@ -31,13 +30,13 @@ export class TableStructureComponent implements AfterViewInit {
   sortedComplexes = computed(() =>
     this.sortComplexBySimilarityClustering(this.complexSearch().elements, this.navigatorComponents()));
 
-  constructor() {
+  constructor(public state: NavigatorStateService) {
   }
 
   ngAfterViewInit(): void {
     const header = this.headerDiv.nativeElement;
-    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top === this.scrollStart());
     this.setHorizontalShadowVisibility(header);
+    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top <= this.scrollStart());
   }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
@@ -56,7 +55,7 @@ export class TableStructureComponent implements AfterViewInit {
     if (!complex.componentAcs || complex.componentAcs.size === 0) {
       complex.componentAcs = new Set<string>(
         navigatorComponents
-          .filter(component => findComponentInComplex(complex, component.componentIds(), navigatorComponents))
+          .filter(component => findComponentInComplex(complex, component.componentIds, navigatorComponents))
           .map(component => component.identifier));
     }
     return complex.componentAcs;

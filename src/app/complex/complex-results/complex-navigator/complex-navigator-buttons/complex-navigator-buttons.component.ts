@@ -9,7 +9,7 @@ import {Action} from '../../../../shared/google-analytics/types/action.enum';
 @Component({
   selector: 'cp-complex-navigator-buttons',
   templateUrl: './complex-navigator-buttons.component.html',
-  styleUrls: ['./complex-navigator-buttons.component.css']
+  styleUrls: ['./complex-navigator-buttons.component.scss']
 })
 export class ComplexNavigatorButtonsComponent {
 
@@ -32,7 +32,7 @@ export class ComplexNavigatorButtonsComponent {
   }
 
   public onButtonClicked(action: Action): void {
-    this.googleAnalytics.useOrthologyButton(action);
+    this.googleAnalytics.useComplexNavigatorButton(action);
   }
 
   protected readonly NavigatorComponentSorting = NavigatorComponentSorting;

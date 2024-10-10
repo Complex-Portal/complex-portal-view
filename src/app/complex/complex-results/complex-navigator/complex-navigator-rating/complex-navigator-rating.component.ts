@@ -7,7 +7,7 @@ const COMPLEX_NAVIGATOR_RATING = 'already_rated';
 @Component({
   selector: 'cp-complex-navigator-rating',
   templateUrl: './complex-navigator-rating.component.html',
-  styleUrls: ['./complex-navigator-rating.component.css']
+  styleUrls: ['./complex-navigator-rating.component.scss']
 })
 export class ComplexNavigatorRatingComponent implements OnInit {
   selectedRating: number;

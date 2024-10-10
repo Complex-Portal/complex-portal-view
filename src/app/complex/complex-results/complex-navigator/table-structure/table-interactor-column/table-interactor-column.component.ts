@@ -17,15 +17,14 @@ interface Range {
 @Component({
   selector: 'cp-table-interactor-column',
   templateUrl: './table-interactor-column.component.html',
-  styleUrls: ['./table-interactor-column.component.css']
+  styleUrls: ['./table-interactor-column.component.scss']
 })
 export class TableInteractorColumnComponent {
   complexes = input<Complex[]>([]);
   navigatorComponents = input<INavigatorComponent[]>();
   shadowVisible = input<boolean>(false);
 
-  isSorting = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
-  fixedWidth = computed(() => this.complexes().length > 6);
+  isOrganismSorting = computed(() => this.state.componentsSorting() === NavigatorComponentSorting.ORGANISM);
 
   navigatorComplexes: NavigatorComplex[];
   ranges: Range[] = [];
@@ -145,7 +144,7 @@ export class TableInteractorColumnComponent {
     // We do this to be able to draw a line connecting all components in the complex
     for (let i = 0; i < this.navigatorComponents().length; i++) {
       if (!this.navigatorComponents()[i].hidden) {
-        if (!!findComponentInComplex(complex, this.navigatorComponents()[i].componentIds(), this.navigatorComponents())) {
+        if (!!findComponentInComplex(complex, this.navigatorComponents()[i].componentIds, this.navigatorComponents())) {
           this.updateComponentIndexes(navigatorComplex, i);
         } else if (this.navigatorComponents()[i].expanded) {
           // The component is not part of the complex, but it has subcomponents and it is expanded.
@@ -282,7 +281,7 @@ export class TableInteractorColumnComponent {
       // Initialise times appearing for each interactor
       component.timesAppearing = 0;
       for (const complex of complexes) {
-        const match = findComponentInComplex(complex, component.componentIds(), navigatorComponents);
+        const match = findComponentInComplex(complex, component.componentIds, navigatorComponents);
         if (!!match) {
           // Update times appearing for the interactor
           component.timesAppearing = component.timesAppearing + 1;

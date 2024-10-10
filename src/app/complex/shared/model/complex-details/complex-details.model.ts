@@ -8,6 +8,7 @@ export interface ComplexDetails {
   systematicName: string;
   species: string;
   institution: string;
+  institutionURL: string;
   synonyms: string[];
   functions: string[];
   properties: string[];

@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cp-assemblies',
   templateUrl: './assemblies.component.html',
-  styleUrls: ['./assemblies.component.css']
+  styleUrls: ['./assemblies.component.scss']
 })
 export class AssembliesComponent implements OnInit {
   private _assemblies: string[];

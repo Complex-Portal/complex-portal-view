@@ -1,18 +1,25 @@
-import {AfterViewInit, Component, OnInit, input } from '@angular/core';
+import {AfterViewInit, Component, OnInit, input, computed} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {BasketService} from '../../../shared/basket/service/basket.service';
 import {NotificationService} from '../../../shared/notification/service/notification.service';
 import {AnalyticsService} from '../../../shared/google-analytics/service/analytics.service';
 import {ComplexDetails} from '../../shared/model/complex-details/complex-details.model';
+import {humapSearchUrl, humapUrl} from '../../complex-portal-utils';
 
 @Component({
   selector: 'cp-complex-header',
   templateUrl: './complex-header.component.html',
-  styleUrls: ['./complex-header.component.css']
+  styleUrls: ['./complex-header.component.scss']
 })
 export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
   complex = input<ComplexDetails>();
+  institutionUrl = computed(() => {
+    if (this.complex().institution.toLowerCase() === 'humap') {
+      return humapUrl();
+    }
+    return this.complex().institutionURL;
+  });
   private _jsonURL: string;
 
   constructor(private basketService: BasketService, private ga: AnalyticsService, private notificationService: NotificationService) {
@@ -26,21 +33,12 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
 
   }
 
-
   ngAfterViewInit(): void {
     $('cp-complex-header').foundation();
   }
 
   saveComplex() {
     this.basketService.saveInBasket(this.complex());
-  }
-
-  get jsonURL(): string {
-    return this._jsonURL;
-  }
-
-  set jsonURL(value: string) {
-    this._jsonURL = value;
   }
 
   isInBasket(): boolean {
@@ -58,4 +56,6 @@ export class ComplexHeaderComponent implements OnInit, AfterViewInit {
       this.saveComplex();
     }
   }
+
+  protected readonly humapSearchUrl = humapSearchUrl;
 }

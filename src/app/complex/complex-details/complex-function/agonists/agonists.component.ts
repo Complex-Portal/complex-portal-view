@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cp-agonists',
   templateUrl: './agonists.component.html',
-  styleUrls: ['./agonists.component.css']
+  styleUrls: ['./agonists.component.scss']
 })
 export class AgonistsComponent implements OnInit {
   private _agonists: string[];

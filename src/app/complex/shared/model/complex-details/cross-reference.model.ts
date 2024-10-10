@@ -12,6 +12,7 @@ export interface CrossReference {
   qualifierMI: string;
   dbdefinition: string;
   qualifierDefinition: string;
+  qualifierUrl: string;
   linkedFeatures: Features[];
   otherFeatures: Features[];
 }

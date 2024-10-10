@@ -4,7 +4,7 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
 @Component({
   selector: 'cp-emdb-crossreferences',
   templateUrl: './emdb-crossreferences.component.html',
-  styleUrls: ['./emdb-crossreferences.component.css']
+  styleUrls: ['./emdb-crossreferences.component.scss']
 })
 export class EmdbCrossreferencesComponent implements OnInit {
   private _crossReferences: CrossReference[];

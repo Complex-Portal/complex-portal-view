@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cp-ligands',
   templateUrl: './ligands.component.html',
-  styleUrls: ['./ligands.component.css']
+  styleUrls: ['./ligands.component.scss']
 })
 export class LigandsComponent implements OnInit {
   private _ligands: string[];

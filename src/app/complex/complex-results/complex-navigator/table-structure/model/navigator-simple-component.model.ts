@@ -102,7 +102,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
     this._indexAppearing = value;
   }
 
-  componentIds(): string[] {
+  get componentIds(): string[] {
     return [this.identifier];
   }
 

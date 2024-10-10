@@ -7,7 +7,7 @@ import {PageScrollService} from 'ngx-page-scroll-core';
 @Component({
   selector: 'cp-go-to',
   templateUrl: './go-to.component.html',
-  styleUrls: ['./go-to.component.css'],
+  styleUrls: ['./go-to.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoToComponent implements OnInit, AfterViewInit {

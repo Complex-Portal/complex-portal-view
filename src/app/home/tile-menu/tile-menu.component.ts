@@ -7,7 +7,7 @@ import {AnalyticsService} from '../../shared/google-analytics/service/analytics.
 @ Component({
   selector: 'cp-tile-menu',
   templateUrl: './tile-menu.component.html',
-  styleUrls: ['./tile-menu.component.css']
+  styleUrls: ['./tile-menu.component.scss']
 })
 export class TileMenuComponent implements AfterViewInit {
 

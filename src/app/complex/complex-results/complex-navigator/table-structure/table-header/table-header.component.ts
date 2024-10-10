@@ -7,19 +7,18 @@ import {NavigatorComponentSorting, NavigatorStateService} from '../../service/st
 @Component({
   selector: 'cp-table-header',
   templateUrl: './table-header.component.html',
-  styleUrls: ['./table-header.component.css'],
+  styleUrls: ['./table-header.component.scss'],
 })
 
 export class TableHeaderComponent {
-  complexes = input<Complex[]>();
+  complexes = input.required<Complex[]>();
   onComplexRemovedFromBasket = output<string>();
 
   shadowVisible = input<boolean>(false);
 
-  constructor(private basketService: BasketService, private state: NavigatorStateService) {
+  constructor(private basketService: BasketService, public state: NavigatorStateService) {
   }
 
-  isSorted = computed(() => this.state.componentsSorting() !== NavigatorComponentSorting.DEFAULT);
 
   anyPredictedComplex(): boolean {
     return this.complexes().some(c => c.predictedComplex);

@@ -5,7 +5,9 @@
                        (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
       </cp-table-header>
     </div>
-    <div class="shadow top" style="z-index: 3; top: calc(-1 * var(--width))" [class.visible]="shadowTopVisible"></div>
+    <div class="shadow top"
+         style="z-index: 3; top: calc(-1 * var(--width))"
+         [class.visible]="shadowTopVisible"></div>
   </div>
   <div class="interactors"
        (scroll)="syncScroll(body, header)" #body>

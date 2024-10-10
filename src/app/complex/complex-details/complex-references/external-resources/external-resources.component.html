@@ -5,6 +5,7 @@
       <table class="hover">
         <thead>
           <th>Identifier</th>
+          <th>Qualifier</th>
         </thead>
         <tbody>
           @for (crossReference of crossReferences; track crossReference.identifier) {
@@ -15,12 +16,17 @@
                     {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
                   </a>
                 } @else if (crossReference.database.toLowerCase() === 'humap') {
-                  <a href="{{humapUrl(crossReference)}}" target="_blank">
+                  <a href="{{humapSearchUrl(crossReference.identifier)}}" target="_blank">
                     {{crossReference.identifier}} <i class="icon icon-generic small" data-icon="x"></i>
                   </a>
                 } @else {
                   <span>{{crossReference.identifier}}</span>
                 }
+              </td>
+              <td>
+                <a href="{{crossReference.qualifierUrl}}" target="_blank">
+                  {{crossReference.qualifier}} ({{crossReference.qualifierMI}})
+                </a> <i class="icon icon-generic small" data-icon="x"></i>
               </td>
             </tr>
           }

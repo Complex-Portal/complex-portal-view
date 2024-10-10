@@ -7,7 +7,7 @@ import {NavigatorStateService} from '../../../service/state/complex-navigator-di
 @Component({
   selector: 'cp-table-interactor-name',
   templateUrl: './table-interactor-name.component.html',
-  styleUrls: ['./table-interactor-name.component.css']
+  styleUrls: ['./table-interactor-name.component.scss']
 })
 export class TableInteractorNameComponent {
 
@@ -18,7 +18,6 @@ export class TableInteractorNameComponent {
   externalLinkVisible: boolean;
   isOrthologGroup = computed(() => this.state.mergeOrthologs() &&
     this.interactor().orthologsGroup?.identifier === this.interactor()?.identifier);
-  interactorQuery = input<string>();
 
   constructor(@Inject(APP_BASE_HREF) private _baseHref: string, public state: NavigatorStateService) {
   }

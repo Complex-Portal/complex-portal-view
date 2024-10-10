@@ -3,7 +3,7 @@ import {AfterViewInit, Component, ElementRef, input, OnChanges, SimpleChanges, V
 @Component({
   selector: 'cp-node-diagram',
   templateUrl: './node-diagram.component.html',
-  styleUrls: ['./node-diagram.component.css']
+  styleUrls: ['./node-diagram.component.scss']
 })
 export class NodeDiagramComponent implements AfterViewInit, OnChanges {
   shape = input<NodeShape>(NodeShape.ELLIPSE);

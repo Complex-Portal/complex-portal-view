@@ -1,0 +1,26 @@
+.basket-icons {
+  margin-top: -5px;
+}
+
+h2 {
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-background {
+  background: var(--background-colour);
+}
+
+.right-align {
+  text-align: right;
+}
+
+.bottom-with-padding {
+  position: absolute;
+  bottom: 16px;
+}
+

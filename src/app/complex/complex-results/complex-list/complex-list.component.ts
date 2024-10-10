@@ -6,7 +6,7 @@ import {Complex} from '../../shared/model/complex-results/complex.model';
 @Component({
   selector: 'cp-complex-list',
   templateUrl: './complex-list.component.html',
-  styleUrls: ['./complex-list.component.css']
+  styleUrls: ['./complex-list.component.scss']
 })
 export class ComplexListComponent implements OnInit {
   complexSearch = input<ComplexSearchResult>();

@@ -1,0 +1,160 @@
+.CN-table {
+  transform: rotateX(180deg); /* rotate the header's content to make it it the right sense (when removes, it is upside down) */
+  clip-path: fill-box;
+  margin: 0 !important;
+}
+
+thead {
+  border: 0;
+  background-color: white;
+  border-right: 0 solid white;
+}
+
+/* Rotated complexes names */
+
+.spaceHolderHeaderOverflow {
+  min-width: var(--intHeader);
+  max-width: var(--intHeader);
+  width: var(--intHeader);
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  color: var(--primary);
+  background-color: var(--on-primary);
+  text-align: right;
+}
+
+.iconOrganism {
+  position: sticky;
+  text-align: center;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-left: 1px solid white;
+  font-size: medium;
+  height: 60px;
+}
+
+.tilted-label {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.CN-table .tableHeadOverflow {
+  tr {
+    --parentWidth: 100%;
+    display: grid;
+    grid-template-columns: var(--intHeader) repeat(var(--cols), var(--colSize)) var(--sizeSpaceHolder);
+    width: var(--totalWidth);
+
+    &.rotate {
+      overflow: clip;
+
+
+      th.rotate {
+        position: relative;
+        color: var(--on-primary);
+        font-size: 14px;
+        text-align: left;
+        border-right: 1px solid white;
+        display: flex;
+        align-items: flex-end;
+        align-content: flex-end;
+        justify-content: center;
+        padding: 0;
+        transform-origin: 0 100%;
+        border-collapse: collapse;
+
+        > * {
+          align-content: center;
+          background-color: var(--primary);
+          width: 100%;
+          border: none;
+          writing-mode: vertical-rl;
+          transform: rotate(180deg); // Make label bottom to top
+
+          > * {
+            transform: translate(5px, 2px); // Make label icon aligned to other icons
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.spaceHolder {
+  width: var(--sizeSpaceHolder);
+  //background-color: var(--primary);
+  border-left: 1px solid white;
+  padding: 0;
+  pointer-events: none;
+  &.primary {
+    background: var(--primary)
+  }
+
+  svg {
+    transform: translateY(1px);
+  }
+}
+
+.interactorsHeader {
+  min-width: var(--intHeader);
+  max-width: var(--intHeader);
+  width: var(--intHeader);
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background-color: var(--on-primary);
+  align-content: end;
+  text-align: right;
+  color: var(--primary);
+  padding: 5px;
+
+  font-size: medium;
+  border-left: none;
+}
+
+.horizontal-label {
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: auto;
+  display: block;
+}
+
+.CN-table th.horizontal {
+  color: white;
+  background-color: var(--primary);
+  border-left: 1px solid white;
+  min-width: 80px;
+  max-width: 80px;
+  height: 35px;
+  font-size: 15px;
+}
+
+a:visited {
+  color: var(--on-primary);
+}
+
+a {
+  color: var(--on-primary);
+}
+
+.button {
+  padding: 0;
+  margin: 0;
+}
+
+.basketButton {
+  text-align: center;
+}
+
+.iconOrganismImg {
+  filter: var(--svg-colour-invert);
+}
+
+

@@ -32,19 +32,17 @@
                                     (onPageChange)="onPageChange($event)">
               </cp-complex-paginator>
 
-              <mat-tab-group [selectedIndex]="displayType === 'view_list' ? 0 : 1"
-                             (selectedTabChange)="onTabChange($event, list, navigator)">
-                <mat-tab label="List view" #list>
+              <mat-tab-group [selectedIndex]="isDisplayComplexNavigatorView() ? 1 : 0"
+                             (selectedTabChange)="onTabChange($event, listTab, navigatorTab)">
+                <mat-tab label="List view" #listTab>
                   <cp-complex-list [complexSearch]="complexSearch"/>
                 </mat-tab>
-                <mat-tab label="Navigator view" #navigator>
+                <mat-tab label="Navigator view" #navigatorTab>
                   <div class="ComplexNavigator"
                        [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
                     <cp-complex-navigator class="Complex-navigator"
                                           [complexSearch]="complexSearch"
                                           [interactors]="allInteractorsInComplexSearch"
-                                          [canAddComplexesToBasket]="true"
-                                          [canRemoveComplexesFromBasket]="false"
                                           (anyChange)="reloadPage()">
                     </cp-complex-navigator>
                   </div>

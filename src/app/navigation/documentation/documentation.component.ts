@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'cp-documentation',
   templateUrl: './documentation.component.html',
-  styleUrls: ['./documentation.component.css']
+  styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
 

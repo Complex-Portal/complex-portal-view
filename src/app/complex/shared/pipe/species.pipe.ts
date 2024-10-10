@@ -15,6 +15,7 @@ export class SpeciesPipe implements PipeTransform {
   ]);
 
   transform(value: string, short = false): string {
+    if (!value) return value;
     const words = value.replace(';', '').split(' ');
     return this.exceptions.get(value) || (
       short ?

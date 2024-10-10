@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'cp-synonyms',
   templateUrl: 'synonyms.component.html',
-  styleUrls: ['synonyms.component.css']
+  styleUrls: ['synonyms.component.scss']
 })
 export class SynonymsComponent implements OnInit {
   private _synonyms: string[];

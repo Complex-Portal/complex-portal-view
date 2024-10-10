@@ -1,3 +1,21 @@
+
+// TODO: remove this function when the huMAP search url is added to OLS
+export function humapSearchUrl(identifier: string): string {
+  return 'https://humap3.proteincomplexes.org/displayComplexes?complex_key=' + identifier;
+}
+
+// TODO: remove this function when the huMAP url is added to OLS and the institution in the editor
+export function humapUrl(): string {
+  return 'https://humap3.proteincomplexes.org';
+}
+
+// TODO: remove this function when the Panther search url is added to OLS
+export function pantherSearchUrl(identifier: string): string {
+  return 'https://www.pantherdb.org/genes/geneList.do?searchType=basic&fieldName=all&listType=1&fieldValue=' +
+    identifier +
+    '&organism=all';
+}
+
 export function interactorTypeIcon(type: string): string {
   switch (type) {
     case 'small molecule':

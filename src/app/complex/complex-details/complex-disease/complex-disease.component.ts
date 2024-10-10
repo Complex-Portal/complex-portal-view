@@ -5,7 +5,7 @@ import {CrossReference} from '../../shared/model/complex-details/cross-reference
 @Component({
   selector: 'cp-complex-disease',
   templateUrl: './complex-disease.component.html',
-  styleUrls: ['./complex-disease.component.css']
+  styleUrls: ['./complex-disease.component.scss']
 })
 
 export class ComplexDiseaseComponent implements OnInit {

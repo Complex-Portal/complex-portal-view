@@ -3,7 +3,7 @@ import {Component, Input, OnChanges, OnInit, output} from '@angular/core';
 @Component({
   selector: 'cp-complex-paginator',
   templateUrl: './complex-paginator.component.html',
-  styleUrls: ['./complex-paginator.component.css']
+  styleUrls: ['./complex-paginator.component.scss']
 })
 export class ComplexPaginatorComponent implements OnInit, OnChanges {
   private _lastPageIndex: number;

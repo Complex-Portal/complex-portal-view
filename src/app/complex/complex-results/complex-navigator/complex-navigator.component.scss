@@ -1,0 +1,16 @@
+.ComplexNavigator {
+  --cols: 1;
+  --componentSize: 230px;
+  --sortingGroupSize: 0px;
+  --colSize: 70px;
+  --intHeader: calc(var(--componentSize) + var(--sortingGroupSize));
+  --totalWidth: calc(var(--intHeader) + var(--cols) * var(--colSize) + var(--sizeSpaceHolder));
+
+  margin: auto;
+
+  &.horizontal {
+    max-width: none;
+  }
+
+}
+

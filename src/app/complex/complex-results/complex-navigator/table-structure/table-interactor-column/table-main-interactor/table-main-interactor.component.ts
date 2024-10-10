@@ -6,7 +6,7 @@ import {INavigatorComponent} from '../../model/navigator-component.model';
 @Component({
   selector: 'cp-table-main-interactor',
   templateUrl: './table-main-interactor.component.html',
-  styleUrls: ['./table-main-interactor.component.css']
+  styleUrls: ['./table-main-interactor.component.scss']
 })
 export class TableMainInteractorComponent {
   complex = input<NavigatorComplex>();
@@ -14,7 +14,7 @@ export class TableMainInteractorComponent {
   navigatorComponents = input<INavigatorComponent[]>();
 
   navigatorComponent = computed(() =>
-    findComponentInComplex(this.complex().complex, this.component.componentIds(), this.navigatorComponents()));
+    findComponentInComplex(this.complex().complex, this.component.componentIds, this.navigatorComponents()));
   topLineClass = computed(() => this.displayTopLineClass(this.complex(), this.navigatorComponents(), this.i()));
   bottomLineClass = computed(() => this.displayBottomLineClass(this.complex(), this.navigatorComponents(), this.i()));
 

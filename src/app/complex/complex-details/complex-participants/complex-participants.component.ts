@@ -22,7 +22,7 @@ export class ComplexParticipant {
 @Component({
   selector: 'cp-complex-participants',
   templateUrl: './complex-participants.component.html',
-  styleUrls: ['./complex-participants.component.css'],
+  styleUrls: ['./complex-participants.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ComplexParticipantsComponent implements OnInit, AfterViewInit {

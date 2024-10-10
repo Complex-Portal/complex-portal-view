@@ -17,7 +17,7 @@ interface Publication {
 @Component({
   selector: 'cp-euro-pmc-crossreferences',
   templateUrl: 'euro-pmc-crossreferences.component.html',
-  styleUrls: ['euro-pmc-crossreferences.component.css']
+  styleUrls: ['euro-pmc-crossreferences.component.scss']
 })
 
 export class EuroPmcCrossreferencesComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, OnInit} from '@angular/core';
+import {AfterViewInit, Component, effect, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
@@ -9,11 +9,12 @@ import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {NavigatorStateService, SearchDisplay} from './complex-navigator/service/state/complex-navigator-display.service';
 import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
+import {ComplexNavigatorComponent} from './complex-navigator/complex-navigator.component';
 
 @Component({
   selector: 'cp-complex-results',
   templateUrl: './complex-results.component.html',
-  styleUrls: ['./complex-results.component.css'],
+  styleUrls: ['./complex-results.component.scss'],
 })
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
@@ -34,6 +35,8 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   pageSize = 20;
   currentPageIndex: number;
   lastPageIndex: number;
+
+  @ViewChild(ComplexNavigatorComponent) navigator: ComplexNavigatorComponent;
 
   constructor(private route: ActivatedRoute, private router: Router, private state: NavigatorStateService,
               private complexPortalService: ComplexPortalService, private titleService: Title,
@@ -88,15 +91,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
    * Prepare query params to build new URL after filter or pagination has changed
    */
   reloadPage(): void {
-    const queryParams = {...this.state.params()};
-    console.log(queryParams);
-    queryParams['query'] = this.query;
-    queryParams['page'] = this.currentPageIndex;
-    queryParams['minConfidence'] = this.confidenceFilter;
-    queryParams['displayMode'] = this._displayType;
-
+    const queryParams = {
+      query: this.query,
+      page: this.currentPageIndex,
+      minConfidence: this.confidenceFilter,
+      displayMode: this._displayType,
+      ...this.state.params()
+    };
     Object.keys(this.filters).forEach(filter => this.encodeURL(this.filters[filter], filter, queryParams));
-    console.log('navigate from results');
     this.router.navigate([], {queryParams});
     ProgressBarComponent.hide();
     // This is a test case event for GA, to monitor if users ever use more then one filter.
@@ -158,12 +160,14 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     }
     if (event.tab === navigator) {
       this.setComplexNavigatorView();
+      this.navigator.adjustColWidth();
     }
   }
 
   private setListView() {
     this._toast = this.notificationService.complexNavigatorAnnouncement();
     this._displayType = SearchDisplay.list;
+    this.reloadPage();
   }
 
   private setComplexNavigatorView() {
@@ -172,6 +176,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
       this._toast = null;
     }
     this._displayType = SearchDisplay.navigator;
+    this.reloadPage();
   }
 
   processSearchResults(): void {

@@ -12,7 +12,7 @@
       <div class="row expanded">
         <mat-tab-group [tabIndex]="displayType === SearchDisplay.list ? 0 : 1"
                        (selectedTabChange)="onDisplayTypeChange($event.index === 0 ? SearchDisplay.list : SearchDisplay.navigator)"
-                       class="columns medium-centered small-12 medium-10 large-8">
+                       class="columns medium-centered small-12 medium-10 large-10">
           <mat-tab label="List view">
             <table class="hover">
               <thead>
@@ -43,22 +43,18 @@
             </table>
           </mat-tab>
           <mat-tab label="Navigator view">
-            <div class="columns medium-12">
               @if (complexSearchBasket) {
                 <div class="ComplexNavigator"
                      [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
                   <cp-complex-navigator
                     [complexSearch]="complexSearchBasket"
                     [interactors]="allInteractorsInComplexSearchBasket"
-                    [canAddComplexesToBasket]="false"
-                    [canRemoveComplexesFromBasket]="true"
-                    (onComplexRemovedFromBasket)="deleteComplexFromBasket($event)">
+                    (onComplexRemovedFromBasket)="deleteFromBasket($event)">
                   </cp-complex-navigator>
                 </div>
               } @else {
                 <cp-progress-spinner></cp-progress-spinner>
               }
-            </div>
           </mat-tab>
         </mat-tab-group>
       </div>

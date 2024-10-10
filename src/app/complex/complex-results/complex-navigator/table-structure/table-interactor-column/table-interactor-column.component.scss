@@ -1,0 +1,169 @@
+table {
+  height: 1px;
+  overflow: scroll;
+  margin-bottom: 0;
+}
+
+.inherited-width {
+  width: var(--totalWidth)
+}
+
+.components-column {
+  position: sticky;
+  left: var(--sortingGroupSize);
+  z-index: 5;
+  height: 45px;
+  padding: 5px;
+  text-align: end;
+  color: #0e6f76;
+  font-weight: bold;
+  background: inherit;
+
+  width: var(--componentSize);
+  min-width: var(--componentSize);
+  max-width: var(--componentSize);
+}
+
+
+.components-column a {
+  font-weight: normal;
+}
+
+.stoichiometry-cell {
+  height: 100%;
+  width: var(--colSize);
+  min-width: var(--colSize);
+  max-width: var(--colSize);
+  font-size: medium;
+  text-align: end;
+  z-index: 1;
+}
+
+
+
+
+
+i:not(.small) {
+  font-size: large;
+}
+
+tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+a, a:visited {
+  color: #0e6f76;
+}
+
+.space-holder {
+  width: var(--sizeSpaceHolder);
+}
+
+.subcomponent-column {
+  left: 0;
+  z-index: 30;
+  height: 45px;
+  min-width: var(--componentSize);
+  max-width: var(--componentSize);
+  padding: 5px;
+  text-align: end;
+  color: #0e6f76;
+  font-weight: bold;
+  background: inherit;
+  position: sticky
+}
+
+.expanded-row {
+  color: #0e6f76;
+  position: relative;
+  pointer-events: none;
+}
+
+.first-expanded-row:after,
+.last-expanded-row:after,
+.single-expanded-row:after {
+  z-index: 40;
+  content: '';
+  position: absolute;
+  inset: -2px -1px -2px -1px;
+  pointer-events: none;
+}
+
+.first-expanded-row:after {
+  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px);
+}
+
+.last-expanded-row:after {
+  background: linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
+}
+
+.single-expanded-row:after {
+  background: linear-gradient(180deg, #0e6f7696 0px, transparent 10px), linear-gradient(0deg, #0e6f7696 0px, transparent 10px);
+}
+
+/* Interactors sorting label*/
+
+.sorting-side-panel {
+  max-width: var(--sortingGroupSize);
+  min-width: var(--sortingGroupSize);
+  width: var(--sortingGroupSize);
+  background-color: #0e6f76;
+  border: 1px solid white;
+  overflow: hidden;
+
+  text-align: -webkit-center;
+  position: sticky;
+  z-index: 31;
+  left: 0;
+}
+
+.sorting-side-panel-name {
+  --rowspanSize: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  font-size: small;
+  color: white;
+  line-height: 0.8;
+  text-align: center;
+  text-overflow: ellipsis;
+  height: calc(var(--rowspanSize) * 48px);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+
+  .sticky-span {
+    position: sticky;
+    top: 50%
+  }
+
+}
+
+
+.container {
+  font-size: 14px;
+}
+
+
+::ng-deep.horizontal {
+
+  .intStoich {
+    width: auto;
+    max-width: none;
+  }
+}
+
+/*/* NEEDED FOR SAFARI BROWSER*/
+@supports (-webkit-hyphens:none) {
+  .components-column {
+    height: 45px !important;
+  }
+
+  .stoichiometry-cell {
+    height: 45px;
+    overflow-y: visible;
+  }
+}

@@ -71,7 +71,7 @@ export class AnalyticsService {
     this.analytics.event(Action[Action.RatingComplexNavigator], Category[Category.complexNavigator], 'rating', rating);
   }
 
-  public useOrthologyButton(action: Action) {
+  public useComplexNavigatorButton(action: Action) {
     this.analytics.event(
       Action[action],
       Category[Category.complexNavigator],

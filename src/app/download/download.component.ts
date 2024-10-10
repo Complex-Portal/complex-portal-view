@@ -8,7 +8,7 @@ import {Title} from '@angular/platform-browser';
 @Component({
   selector: 'cp-download',
   templateUrl: './download.component.html',
-  styleUrls: ['./download.component.css']
+  styleUrls: ['./download.component.scss']
 })
 export class DownloadComponent implements OnInit, AfterViewInit {
 

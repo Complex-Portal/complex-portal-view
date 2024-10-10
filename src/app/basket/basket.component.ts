@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BasketService} from '../shared/basket/service/basket.service';
 import {BasketItem} from '../shared/basket/model/basketItem';
 import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/progress-bar.component';
@@ -9,15 +9,15 @@ import {Interactor} from '../complex/shared/model/complex-results/interactor.mod
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {
-  NavigatorStateService,
   SearchDisplay
 } from '../complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
+import {ComplexNavigatorComponent} from '../complex/complex-results/complex-navigator/complex-navigator.component';
 
 
 @Component({
   selector: 'cp-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.css']
+  styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
@@ -25,11 +25,13 @@ export class BasketComponent implements OnInit, AfterViewInit {
   allInteractorsInComplexSearchBasket: Interactor[] = [];
   displayType: SearchDisplay;
 
+  @ViewChild(ComplexNavigatorComponent) navigator: ComplexNavigatorComponent;
+
   constructor(private _basketService: BasketService,
               private titleService: Title,
               private complexPortalService: ComplexPortalService,
               private route: ActivatedRoute,
-              private router: Router, private state: NavigatorStateService) {
+              private router: Router) {
     this._complexBasket = this._basketService.complexBasket;
   }
 
@@ -50,27 +52,17 @@ export class BasketComponent implements OnInit, AfterViewInit {
       this.displayType = displayType;
       this.router.navigate([], {fragment: this.displayType});
     }
-  }
-
-  isDisplayComplexNavigatorView(): boolean {
-    return this.displayType === SearchDisplay.navigator;
+    if (displayType === SearchDisplay.navigator) {
+      this.navigator?.adjustColWidth();
+    }
   }
 
   ngAfterViewInit(): void {
     ProgressBarComponent.hide();
   }
 
-  deleteFromBasket(key: string): void {
-    this._basketService.deleteFromBasket(key);
-    this.removeComplexFromSearchResult(this.complexBasket[key].id);
-  }
-
-  deleteComplexFromBasket(complexAc: string): void {
-    for (const key of this.getKeys(this.complexBasket)) {
-      if (this.complexBasket[key].id === complexAc) {
-        this._basketService.deleteFromBasket(key);
-      }
-    }
+  deleteFromBasket(complexAc: string): void {
+    this._basketService.deleteFromBasket(complexAc);
     this.removeComplexFromSearchResult(complexAc);
   }
 
@@ -78,13 +70,8 @@ export class BasketComponent implements OnInit, AfterViewInit {
     return this._complexBasket;
   }
 
-  set complexBasket(value: { [name: string]: BasketItem }) {
-    this._complexBasket = value;
-  }
-
   public isComplexBasketEmpty(): boolean {
     return this.getKeys(this._complexBasket).length === 0;
-
   }
 
   // Candidate for Util
@@ -135,7 +122,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   deleteAllComplexes() {
-    Object.values(this._complexBasket).map((v: BasketItem) => this.deleteComplexFromBasket(v.id));
+    Object.values(this._complexBasket).map((v: BasketItem) => this.deleteFromBasket(v.id));
   }
 
   protected readonly SearchDisplay = SearchDisplay;
