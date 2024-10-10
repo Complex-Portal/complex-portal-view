@@ -114,6 +114,6 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   }
 
   get componentQuery(): string {
-    return this.identifier;
+    return this.identifier || this.name;
   }
 }

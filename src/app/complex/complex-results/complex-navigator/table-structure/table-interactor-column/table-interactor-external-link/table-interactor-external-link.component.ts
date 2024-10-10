@@ -15,6 +15,15 @@ export class TableInteractorExternalLinkComponent implements OnInit {
     this.showExternalLink();
   }
 
+  isAnExternalIdentifier(): boolean {
+    // On cases, the component does not have an external identifier (like some molecule sets).
+    // Currently, these components have a null identifier.
+    // This is a bug as all components should have some identifier to be able to group, compare, etc.).
+    // When this bug is fixed, for components with no identifier, the back-end will return their AC as identifier,
+    // but we do not want to show it or link from it, we just use it as the id of the object.
+    return !!this.interactor().identifier && !this.interactor().identifier.startsWith('EBI-');
+  }
+
   showExternalLink(): boolean {
     if (this.interactor().hasSubComponents && this.interactor().interactorType === 'stable complex') {
       this.externalLinkVisible.emit(false);
