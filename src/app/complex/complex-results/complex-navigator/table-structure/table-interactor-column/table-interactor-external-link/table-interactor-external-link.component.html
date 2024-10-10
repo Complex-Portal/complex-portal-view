@@ -1,4 +1,4 @@
-@if (isAnExternalIdentifier()) {
+@if (interactor().isAValidExternalIdentifier) {
   <div class="externalLinkContainer"
        [matTooltip]="'More information about ' + interactor().identifier">
     @if (externalLinkVisible) {

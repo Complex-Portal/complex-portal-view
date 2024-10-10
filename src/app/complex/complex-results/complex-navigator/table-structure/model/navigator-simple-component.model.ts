@@ -1,6 +1,6 @@
 import {XRef} from '../../../../shared/model/complex-results/xref.model';
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {INavigatorComponent, INavigatorSubComponent} from './navigator-component.model';
+import {INavigatorComponent} from './navigator-component.model';
 
 export class NavigatorSimpleComponent implements INavigatorComponent {
   private _interactor: ComplexComponent;
@@ -8,7 +8,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   private _isSubComplex: boolean;
   private _expanded: boolean;
   private _complexComponents: ComplexComponent[];
-  private _subComponents: INavigatorSubComponent[];
+  private _subComponents: INavigatorComponent[];
 
   private _timesAppearing: number;
   private _indexAppearing: number;
@@ -29,7 +29,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   }
 
   get identifier(): string {
-    return this._interactor.identifier;
+    return this._interactor.identifier || this._interactor.ac;
   }
 
   get name(): string {
@@ -48,7 +48,7 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
     return this._interactor.identifierLink;
   }
 
-  get subComponents(): INavigatorSubComponent[] {
+  get subComponents(): INavigatorComponent[] {
     return this._subComponents;
   }
 
@@ -114,6 +114,14 @@ export class NavigatorSimpleComponent implements INavigatorComponent {
   }
 
   get componentQuery(): string {
-    return this.identifier || this.name;
+    if (this.isAValidExternalIdentifier) {
+      return this.identifier;
+    } else {
+      return this.name;
+    }
+  }
+
+  get isAValidExternalIdentifier(): boolean {
+    return !!this._interactor.identifier;
   }
 }

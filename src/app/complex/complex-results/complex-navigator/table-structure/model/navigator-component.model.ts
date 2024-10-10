@@ -1,7 +1,7 @@
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {XRef} from '../../../../shared/model/complex-results/xref.model';
 
-export interface INavigatorSubComponent {
+export interface INavigatorComponent {
   get identifier(): string;
 
   get identifierLink(): string;
@@ -13,11 +13,8 @@ export interface INavigatorSubComponent {
   get organismName(): string;
 
   get orthologsGroup(): XRef;
-}
 
-export interface INavigatorComponent extends INavigatorSubComponent {
-
-  get subComponents(): INavigatorSubComponent[];
+  get subComponents(): INavigatorComponent[];
 
   get complexComponents(): ComplexComponent[];
 
@@ -48,4 +45,6 @@ export interface INavigatorComponent extends INavigatorSubComponent {
   get componentIds(): string[];
 
   get componentQuery(): string;
+
+  get isAValidExternalIdentifier(): boolean;
 }

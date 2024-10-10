@@ -1,6 +1,7 @@
 import {XRef} from './xref.model';
 
 export interface ComplexComponent {
+  ac: string;
   identifier: string;
   identifierLink: string;
   name: string;

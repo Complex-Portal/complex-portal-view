@@ -32,7 +32,7 @@
       @if (state.idDisplay()) {
         <a
           [routerLink]="['/complex/search']"
-          [queryParams]="{query: convertedInteractor().componentQuery, page: 1}"
+          [queryParams]="{query: interactor().componentQuery, page: 1}"
           target="_blank">
           <i class="icon icon-functional small" data-icon="1"
              [matTooltip]="'More complexes containing ' + interactor().name "></i>
@@ -51,7 +51,7 @@
             </div>
           }
           <a [routerLink]="['/complex/search']"
-             [queryParams]="{query: convertedInteractor().componentQuery, page: 1}"
+             [queryParams]="{query: interactor().componentQuery, page: 1}"
              target="_blank">
             <i class="icon icon-functional small" data-icon="1"
                [matTooltip]="'More complexes containing ' + interactor().name "></i>
@@ -62,7 +62,7 @@
   </div>
   @if (state.idDisplay()) {
     <cp-table-interactor-external-link
-      [interactor]="convertedInteractor()"
+      [interactor]="interactor()"
       (externalLinkVisible)="externalLinkVisibleHandler($event)">
     </cp-table-interactor-external-link>
   }

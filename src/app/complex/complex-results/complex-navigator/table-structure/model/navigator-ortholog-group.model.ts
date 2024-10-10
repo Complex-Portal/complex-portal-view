@@ -1,5 +1,5 @@
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {INavigatorComponent, INavigatorSubComponent} from './navigator-component.model';
+import {INavigatorComponent} from './navigator-component.model';
 import {XRef} from '../../../../shared/model/complex-results/xref.model';
 import {pantherSearchUrl} from '../../../../complex-portal-utils';
 
@@ -62,7 +62,7 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
     return pantherSearchUrl(this._orthologXref.identifier);
   }
 
-  get subComponents(): INavigatorSubComponent[] {
+  get subComponents(): INavigatorComponent[] {
     return this._subComponents;
   }
 
@@ -124,5 +124,9 @@ export class NavigatorOrthologGroup implements INavigatorComponent {
 
   get componentQuery(): string {
     return 'pxref:("' + this.identifier + '")';
+  }
+
+  get isAValidExternalIdentifier(): boolean {
+    return true;
   }
 }
