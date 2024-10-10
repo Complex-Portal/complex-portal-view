@@ -1,4 +1,4 @@
-.stoichNum {
+.stoichiometry-circle {
   width: 4ch;
   height: 4ch;
   border-radius: 4ch;
@@ -17,12 +17,12 @@
   text-overflow: ellipsis;
 }
 
-::ng-deep.ortholog .stoichNum {
+::ng-deep.ortholog .stoichiometry-circle {
   box-shadow: -1px 1px var(--on-primary), -2px 4px var(--primary);
   margin-left: 3px;
 }
 
-::ng-deep.ortholog .predicted .stoichNum {
+::ng-deep.ortholog .predicted .stoichiometry-circle {
   box-shadow: -2px 3px var(--primary), -3px 4px var(--on-primary);
   margin-left: 3px;
   border: 1px solid var(--on-primary);

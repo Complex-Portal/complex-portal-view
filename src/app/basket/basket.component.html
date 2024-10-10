@@ -43,18 +43,18 @@
             </table>
           </mat-tab>
           <mat-tab label="Navigator view">
-              @if (complexSearchBasket) {
-                <div class="ComplexNavigator"
-                     [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
-                  <cp-complex-navigator
-                    [complexSearch]="complexSearchBasket"
-                    [interactors]="allInteractorsInComplexSearchBasket"
-                    (onComplexRemovedFromBasket)="deleteFromBasket($event)">
-                  </cp-complex-navigator>
-                </div>
-              } @else {
-                <cp-progress-spinner></cp-progress-spinner>
-              }
+            @if (complexSearchBasket) {
+              <div class="complex-navigator"
+                   [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
+                <cp-complex-navigator
+                  [complexSearch]="complexSearchBasket"
+                  [interactors]="allInteractorsInComplexSearchBasket"
+                  (onComplexRemovedFromBasket)="deleteFromBasket($event)">
+                </cp-complex-navigator>
+              </div>
+            } @else {
+              <cp-progress-spinner></cp-progress-spinner>
+            }
           </mat-tab>
         </mat-tab-group>
       </div>

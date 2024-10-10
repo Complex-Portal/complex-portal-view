@@ -1,9 +1,9 @@
-<div class="Complex-navigator">
-  <table class="table header-container">
+<div class="complex-navigator">
+  <table class="table header-table">
 
     <!-- When table is not overflowing -->
     @if (complexes().length <= 6) {
-      <thead class="tableHead">
+      <thead class="table-header">
       <tr>
         <th class="components-header">
           Components
@@ -31,7 +31,7 @@
                 </div>
               </a>
             </div>
-            <div class="basket-button-container">
+            <div class="basket-button">
               <a class="button" (click)="toggleBasket(complex)">
                 <i class="icon icon-common" [attr.data-icon]="isInBasket(complex.complexAC) ? '':''"></i>
               </a>
@@ -45,7 +45,7 @@
     @if (complexes().length > 6) {
       <thead class="complexes-row-overflow">
       <tr class="rotate">
-        <th class="space-holder-components-header-overflow">
+        <th class="space-holder-overflow">
           <div class="shadow right" [class.visible]="shadowVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
@@ -57,9 +57,9 @@
             <a [style.height.px]="state.contentHeight()"
                [style.padding-top.px]="state.opposite() / 2"
                [style.padding-bottom.px]="state.opposite() / 2"
-              [routerLink]="['/complex', complex.complexAC]"
-              [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
-              target="_blank">
+               [routerLink]="['/complex', complex.complexAC]"
+               [matTooltip]="complex.complexName+ ' - '+ complex.complexAC"
+               target="_blank">
               <div>
                   <span>
                     <div class="tilted-label">
@@ -71,9 +71,10 @@
             </a>
           </th>
         }
-        <th class="space-holder" [style.width.px]="state.spaceHolderWidth()" [style.height.px]="state.displayedHeight()" [class.predicted]="anyPredictedComplex()">
+        <th class="space-holder" [style.width.px]="state.spaceHolderWidth()" [style.height.px]="state.displayedHeight()"
+            [class.predicted]="anyPredictedComplex()">
           <svg style="width: 100%; height: 100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <polygon points="0,100 100,100 100,0" fill="blue" style="fill: var(--primary)" />
+            <polygon points="0,100 100,100 100,0" fill="blue" style="fill: var(--primary)"/>
           </svg>
         </th>
       </tr>
@@ -114,6 +115,3 @@
     }
   </table>
 </div>
-
-
-
