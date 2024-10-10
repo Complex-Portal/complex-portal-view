@@ -48,7 +48,7 @@
                      [ngClass]="complexSearchBasket.totalNumberOfResults <=6 ? 'smallCN' : ''">
                   <cp-complex-navigator
                     [complexSearch]="complexSearchBasket"
-                    [interactors]="allInteractorsInComplexSearchBasket"
+                    [components]="allComponentsInComplexSearchBasket"
                     (onComplexRemovedFromBasket)="deleteFromBasket($event)">
                   </cp-complex-navigator>
                 </div>

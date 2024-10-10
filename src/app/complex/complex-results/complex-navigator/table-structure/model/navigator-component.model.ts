@@ -1,5 +1,5 @@
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
-import {XRef} from '../../../../shared/model/complex-results/interactor.model';
+import {XRef} from '../../../../shared/model/complex-results/xref.model';
 
 export interface INavigatorSubComponent {
   get identifier(): string;

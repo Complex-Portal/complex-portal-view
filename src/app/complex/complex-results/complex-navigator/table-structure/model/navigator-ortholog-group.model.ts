@@ -1,6 +1,6 @@
 import {ComplexComponent} from '../../../../shared/model/complex-results/complex-component.model';
 import {INavigatorComponent, INavigatorSubComponent} from './navigator-component.model';
-import {XRef} from '../../../../shared/model/complex-results/interactor.model';
+import {XRef} from '../../../../shared/model/complex-results/xref.model';
 import {pantherSearchUrl} from '../../../../complex-portal-utils';
 
 export class NavigatorOrthologGroup implements INavigatorComponent {

@@ -42,7 +42,7 @@
                        [ngClass]="complexSearch.totalNumberOfResults <=6 ? 'smallCN' : 'largeCN'">
                     <cp-complex-navigator class="Complex-navigator"
                                           [complexSearch]="complexSearch"
-                                          [interactors]="allInteractorsInComplexSearch"
+                                          [components]="allComponentsInComplexSearch"
                                           (anyChange)="reloadPage()">
                     </cp-complex-navigator>
                   </div>

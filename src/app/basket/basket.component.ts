@@ -5,14 +5,13 @@ import {ProgressBarComponent} from '../shared/loading-indicators/progress-bar/pr
 import {Title} from '@angular/platform-browser';
 import {ComplexPortalService} from '../complex/shared/service/complex-portal.service';
 import {ComplexSearchResult} from '../complex/shared/model/complex-results/complex-search.model';
-import {Interactor} from '../complex/shared/model/complex-results/interactor.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {
   SearchDisplay
 } from '../complex/complex-results/complex-navigator/service/state/complex-navigator-display.service';
 import {ComplexNavigatorComponent} from '../complex/complex-results/complex-navigator/complex-navigator.component';
-
+import {ComplexComponent} from '../complex/shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-basket',
@@ -22,7 +21,7 @@ import {ComplexNavigatorComponent} from '../complex/complex-results/complex-navi
 export class BasketComponent implements OnInit, AfterViewInit {
   private _complexBasket: { [name: string]: BasketItem };
   complexSearchBasket: ComplexSearchResult = null;
-  allInteractorsInComplexSearchBasket: Interactor[] = [];
+  allComponentsInComplexSearchBasket: ComplexComponent[] = [];
   displayType: SearchDisplay;
 
   @ViewChild(ComplexNavigatorComponent) navigator: ComplexNavigatorComponent;
@@ -93,12 +92,12 @@ export class BasketComponent implements OnInit, AfterViewInit {
   }
 
   private setAllInteractorsFromComplexSearch(): void {
-    this.allInteractorsInComplexSearchBasket = [];
+    this.allComponentsInComplexSearchBasket = [];
     if (this.complexSearchBasket.totalNumberOfResults !== 0) {
       for (let i = 0; i < this.complexSearchBasket.elements.length; i++) {
         for (const component of this.complexSearchBasket.elements[i].interactors) {
-          if (!this.allInteractorsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
-            this.allInteractorsInComplexSearchBasket.push(component);
+          if (!this.allComponentsInComplexSearchBasket.some(interactor => interactor.identifier === component.identifier)) {
+            this.allComponentsInComplexSearchBasket.push(component);
           }
         }
       }
@@ -107,7 +106,7 @@ export class BasketComponent implements OnInit, AfterViewInit {
 
   complexNavigatorLoading() {
     this.complexSearchBasket = null;
-    this.allInteractorsInComplexSearchBasket = [];
+    this.allComponentsInComplexSearchBasket = [];
     this.requestComplexesForNavigator();
   }
 

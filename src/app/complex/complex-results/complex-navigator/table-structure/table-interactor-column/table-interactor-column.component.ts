@@ -34,8 +34,6 @@ export class TableInteractorColumnComponent {
     [NavigatorComponentSorting.ORGANISM]: new Map<string, number>()
   };
 
-  protected readonly NavigatorComponentSorting = NavigatorComponentSorting;
-
   constructor(public state: NavigatorStateService) {
     effect(() => this.calculateTimesAppearing(this.complexes(), this.navigatorComponents()));
     effect(() => this.sortNavigatorComponents(this.navigatorComponents(), this.complexes(), this.state.componentsSorting()));
