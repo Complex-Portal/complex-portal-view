@@ -46,6 +46,7 @@ import {ComplexModule} from '../complex.module';
 import {ComplexParticipantLegendComponent} from './complex-participants/complex-participant-legend/complex-participant-legend.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress-spinner/progress-spinner.component';
+import {CrossreferencesQualifierComponent} from './complex-references/reference-qualifier/crossreferences-qualifier.component';
 
 @NgModule({
   imports: [
@@ -93,6 +94,7 @@ import {ProgressSpinnerComponent} from '../../shared/loading-indicators/progress
     ExternalResourcesComponent,
     DownloadModalComponent,
     NodeDiagramComponent,
+    CrossreferencesQualifierComponent,
   ],
   providers: [ComplexPortalService, NotificationService, ReactomeService, EuroPmcService, OlsService, Md5, SectionService],
 

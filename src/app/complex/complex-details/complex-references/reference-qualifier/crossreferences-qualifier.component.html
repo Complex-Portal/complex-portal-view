@@ -1,0 +1,13 @@
+@if (!!crossReference().qualifierUrl) {
+  <a href="{{crossReference().qualifierUrl}}" target="_blank">
+    @if (!!crossReference().qualifierMI) {
+      {{crossReference().qualifier}} ({{crossReference().qualifierMI}})
+    } @else {
+      {{crossReference().qualifier}}
+    }
+  </a> <i class="icon icon-generic small" data-icon="x"></i>
+} @else if (!!crossReference().qualifierMI) {
+  {{crossReference().qualifier}} ({{crossReference().qualifierMI}})
+} @else {
+  {{crossReference().qualifier}}
+}
