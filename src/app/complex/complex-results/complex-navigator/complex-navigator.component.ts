@@ -25,7 +25,11 @@ export class ComplexNavigatorComponent implements AfterViewInit {
   anyChange = output<void>();
 
   numberOfColumns = computed(() => this.complexSearch().elements.length);
-  navigatorComponentsWithoutGrouping = computed(() => this.createNavigatorComplexes(this.complexSearch().elements, this.interactors()));
+  navigatorComponentsWithoutGrouping = computed(() => {
+    // We set navigatorComponents as an empty list here to show the loading spinner while creating the components and ortholog groups
+    this.navigatorComponents = [];
+    this.createNavigatorComplexes(this.complexSearch().elements, this.interactors());
+  });
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
   orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
 
