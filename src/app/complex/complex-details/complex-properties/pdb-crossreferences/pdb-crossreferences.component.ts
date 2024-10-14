@@ -7,6 +7,9 @@ import {CrossReference} from '../../../shared/model/complex-details/cross-refere
   styleUrls: ['./pdb-crossreferences.component.scss']
 })
 export class PdbCrossreferencesComponent implements OnInit {
+
+  private static IDENTITY_MI = 'MI:0356';
+
   private _crossReferences: CrossReference[];
   private _selectedXRef: string;
   private _isDataLoaded = false;
@@ -16,6 +19,18 @@ export class PdbCrossreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Xrefs with identity qualifier should be displayed first
+    this._crossReferences.sort((xrefA, xrefB) => {
+      if (xrefA.qualifierMI === xrefB.qualifierMI) {
+        return 0;
+      } else if (xrefA.qualifierMI === PdbCrossreferencesComponent.IDENTITY_MI) {
+        return -1;
+      } else if (xrefB.qualifierMI === PdbCrossreferencesComponent.IDENTITY_MI) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
     this.selectFirstXref();
   }
 
