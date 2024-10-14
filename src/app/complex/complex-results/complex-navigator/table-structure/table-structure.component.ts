@@ -89,13 +89,14 @@ export class TableStructureComponent implements AfterViewInit {
         }));
         return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
       });
+
+      // After the complexes have been sorted, we then set the index appearing for all components
+      // so they are properly sorted later
+      navigatorComponents.forEach(component => {
+        component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
+      });
     }
 
-    // After the complexes have been sorted, we then set the index appearing for all components
-    // so they are properly sorted later
-    navigatorComponents.forEach(component => {
-      component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
-    });
     return sortedComplexesList;
   }
 
