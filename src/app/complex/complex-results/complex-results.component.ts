@@ -1,15 +1,15 @@
-import {AfterViewInit, Component, effect, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Params, Router} from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ComplexSearchResult} from '../shared/model/complex-results/complex-search.model';
 import {ComplexPortalService} from '../shared/service/complex-portal.service';
 import {ProgressBarComponent} from '../../shared/loading-indicators/progress-bar/progress-bar.component';
 import {Title} from '@angular/platform-browser';
 import {AnalyticsService} from '../../shared/google-analytics/service/analytics.service';
-import {Interactor} from '../shared/model/complex-results/interactor.model';
 import {NotificationService} from '../../shared/notification/service/notification.service';
 import {NavigatorStateService, SearchDisplay} from './complex-navigator/service/state/complex-navigator-display.service';
 import {MatTab, MatTabChangeEvent} from '@angular/material/tabs';
 import {ComplexNavigatorComponent} from './complex-navigator/complex-navigator.component';
+import {ComplexComponent} from '../shared/model/complex-results/complex-component.model';
 
 @Component({
   selector: 'cp-complex-results',
@@ -19,7 +19,7 @@ import {ComplexNavigatorComponent} from './complex-navigator/complex-navigator.c
 export class ComplexResultsComponent implements OnInit, AfterViewInit {
   query: string;
   complexSearch: ComplexSearchResult;
-  allInteractorsInComplexSearch: Interactor[] = [];
+  allComponentsInComplexSearch: ComplexComponent[] = [];
   _displayType: SearchDisplay;
 
   filters = {
@@ -45,7 +45,7 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Complex Portal - Results');
-    this.allInteractorsInComplexSearch = [];
+    this.allComponentsInComplexSearch = [];
     this.route.queryParams.pipe().subscribe(queryParams => {
       this.query = queryParams['query'];
       Object.keys(this.filters).forEach(filter => this.filters[filter] = this.decodeURL(filter, queryParams));
@@ -65,20 +65,19 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-
   private requestComplexResults() {
     this.complexPortalService.findComplex(this.query, this.filters.species, this.filters.bioRole,
       this.filters.interactorType, this.filters.predicted, this.confidenceFilter,
       this.currentPageIndex, this.pageSize).subscribe(complexSearch => {
       this.complexSearch = complexSearch;
       this.processSearchResults();
-      this.allInteractorsInComplexSearch = [];
+      this.allComponentsInComplexSearch = [];
       if (this.complexSearch.totalNumberOfResults !== 0) {
         this.lastPageIndex = Math.ceil(complexSearch.totalNumberOfResults / this.pageSize);
         for (let i = 0; i < complexSearch.elements.length; i++) {
           for (const component of complexSearch.elements[i].interactors) {
-            if (!this.allInteractorsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
-              this.allInteractorsInComplexSearch.push(component);
+            if (!this.allComponentsInComplexSearch.some(interactor => interactor.identifier === component.identifier)) {
+              this.allComponentsInComplexSearch.push(component);
             }
           }
         }
@@ -143,12 +142,6 @@ export class ComplexResultsComponent implements OnInit, AfterViewInit {
     this.currentPageIndex = 1;
     this.reloadPage();
   }
-
-
-  get displayType(): SearchDisplay {
-    return this._displayType;
-  }
-
 
   isDisplayComplexNavigatorView(): boolean {
     return this._displayType === SearchDisplay.navigator;
