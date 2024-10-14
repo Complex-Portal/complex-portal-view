@@ -10,15 +10,23 @@
       <div class="columns medium-4">
         <h4>Curated structures ({{crossReferences.length}}):</h4>
         <table class="hover">
+          <thead>
+            <th>Identifier</th>
+            <th></th>
+            <th>Qualifier</th>
+          </thead>
           <tbody style="height: 400px; overflow-y: scroll;">
             @for (crossReference of crossReferences | slice:0:displayedElements; track crossReference.identifier) {
               <tr>
                 <td>
                   <a (click)="selectXRef(crossReference.identifier)">{{crossReference.identifier}}</a>
                 </td>
-                <td>
+                <td style="width: 65px">
                   <a href="{{crossReference.searchURL}}" target="_blank"><img src="assets/images/pdbe_min_logo.png"> <i
-                  class="icon icon-generic small" data-icon="x"></i></a>
+                    class="icon icon-generic small" data-icon="x"></i></a>
+                </td>
+                <td>
+                  <cp-crossreferences-qualifier [crossReference]="crossReference"></cp-crossreferences-qualifier>
                 </td>
               </tr>
             }

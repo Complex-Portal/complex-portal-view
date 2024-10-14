@@ -1,7 +1,7 @@
-import {Component, computed, effect, Inject, input} from '@angular/core';
+import {Component, computed, Inject, input} from '@angular/core';
 import {interactorTypeIcon, organismIcon} from '../../../../../complex-portal-utils';
 import {APP_BASE_HREF} from '@angular/common';
-import {INavigatorComponent, INavigatorSubComponent} from '../../model/navigator-component.model';
+import {INavigatorComponent} from '../../model/navigator-component.model';
 import {NavigatorStateService} from '../../../service/state/complex-navigator-display.service';
 
 @Component({
@@ -11,8 +11,7 @@ import {NavigatorStateService} from '../../../service/state/complex-navigator-di
 })
 export class TableInteractorNameComponent {
 
-  interactor = input.required<INavigatorSubComponent>();
-  convertedInteractor = computed(() => this.interactor() as INavigatorComponent);
+  interactor = input.required<INavigatorComponent>();
   interactorTypeIcon = computed(() => interactorTypeIcon(this.interactor().interactorType));
   interactorOrganismIcon = computed(() => organismIcon(this.interactor().organismName));
   externalLinkVisible: boolean;

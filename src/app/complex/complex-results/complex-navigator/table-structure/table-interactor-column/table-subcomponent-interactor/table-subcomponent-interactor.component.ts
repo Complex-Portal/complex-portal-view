@@ -1,7 +1,7 @@
 import {Component, input, computed} from '@angular/core';
 import {findComponentInComplex} from '../../../complex-navigator-utils';
 import {NavigatorComplex} from '../../model/navigator-complex.model';
-import {INavigatorComponent, INavigatorSubComponent} from '../../model/navigator-component.model';
+import {INavigatorComponent} from '../../model/navigator-component.model';
 
 @Component({
   selector: 'cp-table-subcomponent-interactor',
@@ -22,7 +22,7 @@ export class TableSubcomponentInteractorComponent {
   displayBottomLineClass = computed(() =>
     this.displayBottomLineClassExpanded(this.complex(), this.navigatorComponents(), this.i(), this.j()));
 
-  get subcomponent(): INavigatorSubComponent {
+  get subcomponent(): INavigatorComponent {
     return this.navigatorComponents()[this.i()].subComponents[this.j()];
   }
 

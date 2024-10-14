@@ -1,15 +1,14 @@
 import {AfterViewInit, Component, computed, effect, ElementRef, HostListener, input, output, ViewChild} from '@angular/core';
 import {ComplexSearchResult} from '../../shared/model/complex-results/complex-search.model';
-import {Interactor} from '../../shared/model/complex-results/interactor.model';
 import {Complex} from '../../shared/model/complex-results/complex.model';
 import {INavigatorComponent} from './table-structure/model/navigator-component.model';
 import {NavigatorSimpleComponent} from './table-structure/model/navigator-simple-component.model';
 import {NavigatorOrthologGroup} from './table-structure/model/navigator-ortholog-group.model';
-import {Observable, of} from 'rxjs';
+import {forkJoin, Observable, of} from 'rxjs';
 import {ComplexComponent} from '../../shared/model/complex-results/complex-component.model';
 import {map} from 'rxjs/operators';
 import {ComplexPortalService} from '../../shared/service/complex-portal.service';
-import {NavigatorComponentSorting, NavigatorStateService} from './service/state/complex-navigator-display.service';
+import {NavigatorStateService} from './service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-complex-navigator',
@@ -19,7 +18,7 @@ import {NavigatorComponentSorting, NavigatorStateService} from './service/state/
 
 export class ComplexNavigatorComponent implements AfterViewInit {
   complexSearch = input<ComplexSearchResult>();
-  interactors = input<Interactor[]>();
+  components = input<ComplexComponent[]>();
   onComplexRemovedFromBasket = output<string>();
 
   anyChange = output<void>();
@@ -28,13 +27,13 @@ export class ComplexNavigatorComponent implements AfterViewInit {
   navigatorComponentsWithoutGrouping = computed(() => {
     // We set navigatorComponents as an empty list here to show the loading spinner while creating the components and ortholog groups
     this.navigatorComponents = [];
-    return this.createNavigatorComplexes(this.complexSearch().elements, this.interactors());
+    return this.createNavigatorComplexes(this.complexSearch().elements, this.components());
   });
   navigatorComponentsGroupedByOrthologs = computed(() => this.createOrthologGroups(this.navigatorComponentsWithoutGrouping()));
-  orthologGroupsAvailable = computed(() => this.navigatorComponentsGroupedByOrthologs().some(c => c instanceof NavigatorOrthologGroup));
 
   @ViewChild('parent') parent: ElementRef<HTMLDivElement>;
   navigatorComponents: INavigatorComponent[] = [];
+  orthologGroupsAvailable = false;
 
   constructor(private complexPortalService: ComplexPortalService, public state: NavigatorStateService) {
     effect(() => this.adjustColWidth(), {allowSignalWrites: true});
@@ -50,58 +49,68 @@ export class ComplexNavigatorComponent implements AfterViewInit {
     this.state.adjustColumnWidth(this.parent.nativeElement.clientWidth, this.numberOfColumns());
   }
 
-  private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: INavigatorComponent[],
-                                 navigatorComponentsWithoutGrouping: INavigatorComponent[]): void {
+  private setNavigatorComponents(navigatorComponentsGroupedByOrthologs: Observable<INavigatorComponent[]>,
+                                 navigatorComponentsWithoutGrouping: Observable<INavigatorComponent[]>): void {
 
-    this.navigatorComponents = this.state.mergeOrthologs()
-      ? navigatorComponentsGroupedByOrthologs
-      : navigatorComponentsWithoutGrouping;
+    forkJoin({navigatorComponentsGroupedByOrthologs, navigatorComponentsWithoutGrouping}).subscribe(response => {
+      this.navigatorComponents = this.state.mergeOrthologs()
+        ? response.navigatorComponentsGroupedByOrthologs
+        : response.navigatorComponentsWithoutGrouping;
+    });
   }
 
-  private createNavigatorComplexes(complexes: Complex[], interactors: Interactor[]): INavigatorComponent[] {
-    const newNavigatorComponents: INavigatorComponent[] = [];
-    for (const interactor of interactors) {
-      const isSubComplex = interactor.interactorType === 'stable complex';
+  private createNavigatorComplexes(complexes: Complex[], components: ComplexComponent[]): Observable<INavigatorComponent[]> {
+    const newNavigatorComponents: Observable<INavigatorComponent>[] = [];
+    for (const component of components) {
+      const isSubComplex = component.interactorType === 'stable complex';
       const newNavigatorComponent = new NavigatorSimpleComponent(
-        interactor,
+        component,
         isSubComplex);
       if (isSubComplex) {
-        this.loadSubComponents(newNavigatorComponent, complexes)
-          .subscribe(subComponents => newNavigatorComponent.subComponents = subComponents);
+        newNavigatorComponents.push(this.loadSubComponents(newNavigatorComponent, complexes)
+          .pipe(map(subComponents => {
+            newNavigatorComponent.complexComponents = subComponents;
+            return newNavigatorComponent;
+          })));
+      } else {
+        newNavigatorComponents.push(of(newNavigatorComponent));
       }
-      newNavigatorComponents.push(newNavigatorComponent);
     }
-    return newNavigatorComponents;
+    return forkJoin(newNavigatorComponents);
   }
 
-  private createOrthologGroups(navigatorComponents: INavigatorComponent[]): INavigatorComponent[] {
-    const sortedForOrthology = this.classifyInteractorsByOrthology(navigatorComponents);
-    const interactorsWithGroup = sortedForOrthology.filter(interactor => !!interactor.orthologsGroup);
-    const interactorsWithoutGroup = sortedForOrthology.filter(interactor => !interactor.orthologsGroup);
+  private createOrthologGroups(navigatorComponentsObservable: Observable<INavigatorComponent[]>): Observable<INavigatorComponent[]> {
+    return navigatorComponentsObservable.pipe(map(navigatorComponents => {
+      const sortedForOrthology = this.classifyInteractorsByOrthology(navigatorComponents);
+      const interactorsWithGroup = sortedForOrthology.filter(interactor => !!interactor.orthologsGroup);
+      const interactorsWithoutGroup = sortedForOrthology.filter(interactor => !interactor.orthologsGroup);
 
-    const groupedByOrthology: { [key: string]: INavigatorComponent[] } = interactorsWithGroup.reduce((groups, interactor) => {
-      const group = interactor.orthologsGroup;
-      if (!groups[group.identifier]) {
-        groups[group.identifier] = [];
-      }
-      groups[group.identifier].push(interactor);
-      return groups;
-    }, {});
+      const groupedByOrthology: { [key: string]: INavigatorComponent[] } = interactorsWithGroup.reduce((groups, interactor) => {
+        const group = interactor.orthologsGroup;
+        if (!groups[group.identifier]) {
+          groups[group.identifier] = [];
+        }
+        groups[group.identifier].push(interactor);
+        return groups;
+      }, {});
 
-    const newNavigatorComponents: INavigatorComponent[] = [];
-    for (const [_, proteins] of Object.entries(groupedByOrthology)) {
-      if (proteins.length > 1) {
-        // Multiple proteins in the ortholog group
-        const group = proteins[0].orthologsGroup;
-        const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
-        newNavigatorComponents.push(orthologsGroup);
-      } else if (proteins.length === 1) {
-        // Single proteins in the ortholog group, there's no need to create the group, we just use the protein component
-        newNavigatorComponents.push(proteins[0]);
+      const newNavigatorComponents: INavigatorComponent[] = [];
+      for (const [_, proteins] of Object.entries(groupedByOrthology)) {
+        if (proteins.length > 1) {
+          // Multiple proteins in the ortholog group
+          const group = proteins[0].orthologsGroup;
+          const orthologsGroup = new NavigatorOrthologGroup(group, proteins);
+          newNavigatorComponents.push(orthologsGroup);
+          // There is at least 1 ortholog group
+          this.orthologGroupsAvailable = true;
+        } else if (proteins.length === 1) {
+          // Single proteins in the ortholog group, there's no need to create the group, we just use the protein component
+          newNavigatorComponents.push(proteins[0]);
+        }
       }
-    }
-    newNavigatorComponents.push(...interactorsWithoutGroup);
-    return newNavigatorComponents;
+      newNavigatorComponents.push(...interactorsWithoutGroup);
+      return newNavigatorComponents;
+    }));
   }
 
   private loadSubComponents(component: INavigatorComponent, complexes: Complex[]): Observable<ComplexComponent[]> {

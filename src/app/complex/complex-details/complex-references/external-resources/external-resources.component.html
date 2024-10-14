@@ -24,9 +24,7 @@
                 }
               </td>
               <td>
-                <a href="{{crossReference.qualifierUrl}}" target="_blank">
-                  {{crossReference.qualifier}} ({{crossReference.qualifierMI}})
-                </a> <i class="icon icon-generic small" data-icon="x"></i>
+                <cp-crossreferences-qualifier [crossReference]="crossReference"></cp-crossreferences-qualifier>
               </td>
             </tr>
           }
