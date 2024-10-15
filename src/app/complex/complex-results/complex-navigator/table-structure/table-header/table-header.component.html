@@ -9,7 +9,7 @@
           Components
           <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
-        @for (complex of complexes(); track complex.complexAC) {
+        @for (complex of complexes(); track $index) {
           <th [class.predicted]="complex.predictedComplex" class="horizontal">
             <div>
               <a [routerLink]="['/complex', complex.complexAC]"
@@ -48,7 +48,7 @@
         <th class="spaceHolderHeaderOverflow">
           <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
-        @for (complex of complexes(); track complex.complexAC) {
+        @for (complex of complexes(); track $index) {
           <th class="rotate"
               [style.transform]="state.transform()"
               [style.height.px]="state.displayedHeight()"
@@ -83,7 +83,7 @@
           Components
           <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
-        @for (complex of complexes(); track complex.complexAC) {
+        @for (complex of complexes(); track $index) {
           <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
             <div>
               @if (isInBasket(complex.complexAC)) {
