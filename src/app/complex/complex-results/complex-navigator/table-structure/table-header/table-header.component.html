@@ -7,7 +7,7 @@
       <tr>
         <th class="interactorsHeader">
           Components
-          <div class="shadow right" [class.visible]="shadowVisible()"></div>
+          <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th [class.predicted]="complex.predictedComplex" class="horizontal">
@@ -46,7 +46,7 @@
       <thead class="tableHeadOverflow">
       <tr class="rotate">
         <th class="spaceHolderHeaderOverflow">
-          <div class="shadow right" [class.visible]="shadowVisible()"></div>
+          <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="rotate"
@@ -81,7 +81,7 @@
       <tr>
         <th class="interactorsHeader overflow">
           Components
-          <div class="shadow right" [class.visible]="shadowVisible()"></div>
+          <div class="shadow right" [class.visible]="shadowLeftVisible()"></div>
         </th>
         @for (complex of complexes(); track complex.complexAC) {
           <th class="iconOrganism" [class.predicted]="complex.predictedComplex">
