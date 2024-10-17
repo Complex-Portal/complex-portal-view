@@ -12,8 +12,12 @@
   <div class="buttons">
     <cp-complex-navigator-buttons [orthologsGroupsAvailable]="orthologGroupsAvailable"/>
   </div>
-  <cp-table-structure [complexSearch]="complexSearch()"
-                      [navigatorComponents]="navigatorComponents"
-                      (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
-  </cp-table-structure>
+    @if (!!navigatorComponents && navigatorComponents.length > 0) {
+      <cp-table-structure [complexSearch]="complexSearch()"
+                          [navigatorComponents]="navigatorComponents"
+                          (onComplexRemovedFromBasket)="onComplexRemovedFromBasket.emit($event)">
+      </cp-table-structure>
+    } @else {
+      <cp-progress-spinner></cp-progress-spinner>
+    }
 </div>

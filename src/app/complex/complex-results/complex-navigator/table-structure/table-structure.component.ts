@@ -1,11 +1,20 @@
-import {AfterViewInit, Component, computed, ElementRef, input, output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  ElementRef,
+  HostListener,
+  input,
+  output,
+  ViewChild
+} from '@angular/core';
 import {ComplexSearchResult} from '../../../shared/model/complex-results/complex-search.model';
 import {Complex} from '../../../shared/model/complex-results/complex.model';
 import * as tf from '@tensorflow/tfjs';
 import {groupByPropertyToArray} from '../../../complex-portal-utils';
 import {findComponentInComplex} from '../complex-navigator-utils';
 import {INavigatorComponent} from './model/navigator-component.model';
-import {NavigatorComponentSorting, NavigatorStateService} from '../service/state/complex-navigator-display.service';
+import {NavigatorStateService} from '../service/state/complex-navigator-display.service';
 
 @Component({
   selector: 'cp-table-structure',
@@ -34,9 +43,10 @@ export class TableStructureComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const header = this.headerDiv.nativeElement;
-    this.setHorizontalShadowVisibility(header);
-    window.addEventListener('scroll', () => this.shadowTopVisible = header.getBoundingClientRect().top <= this.scrollStart());
+    if (!!this.headerDiv) {
+      setTimeout(() => this.setHorizontalShadowVisibility());
+      window.addEventListener('scroll', () => this.setVerticalShadowVisibility());
+    }
   }
 
   private calculateSimilarity(complex1: Complex, complex2: Complex, navigatorComponents: INavigatorComponent[]) {
@@ -89,13 +99,14 @@ export class TableStructureComponent implements AfterViewInit {
         }));
         return this.getSortedIndexFromChainedSimilarity(tf.tensor2d(sm)).map(i => group[i]);
       });
+
+      // After the complexes have been sorted, we then set the index appearing for all components
+      // so they are properly sorted later
+      navigatorComponents.forEach(component => {
+        component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
+      });
     }
 
-    // After the complexes have been sorted, we then set the index appearing for all components
-    // so they are properly sorted later
-    navigatorComponents.forEach(component => {
-      component.indexAppearing = sortedComplexesList.findIndex(complex => complex.componentAcs?.has(component.identifier)) || 0;
-    });
     return sortedComplexesList;
   }
 
@@ -154,12 +165,30 @@ export class TableStructureComponent implements AfterViewInit {
     source.scrolling = true;
     target.scrollTo({left: source.scrollLeft, behavior: 'instant'});
 
-    this.setHorizontalShadowVisibility(source);
+    this.setHorizontalShadowVisibility();
   }
 
-  private setHorizontalShadowVisibility(source: HTMLDivElement) {
-    this.shadowRightVisible = source.scrollLeft + source.offsetWidth + this.scrollDetectionMargin <= source.scrollWidth;
-    this.shadowLeftVisible = source.scrollLeft >= this.scrollDetectionMargin;
+  @HostListener('window:resize', ['$event'])
+  setHorizontalShadowVisibility() {
+    this.shadowRightVisible = this.isShadowRightVisible();
+    this.shadowLeftVisible = this.isShadowLeftVisible();
+  }
+
+  private setVerticalShadowVisibility() {
+    this.shadowTopVisible = this.isShadowTopVisible();
+  }
+
+  private isShadowRightVisible(): boolean {
+    const header = this.headerDiv.nativeElement;
+    return header.scrollLeft + header.offsetWidth + this.scrollDetectionMargin <= header.scrollWidth;
+  }
+
+  private isShadowLeftVisible(): boolean {
+    return this.headerDiv.nativeElement.scrollLeft >= this.scrollDetectionMargin;
+  }
+
+  private isShadowTopVisible(): boolean {
+    return this.headerDiv.nativeElement.getBoundingClientRect().top <= this.scrollStart();
   }
 }
 

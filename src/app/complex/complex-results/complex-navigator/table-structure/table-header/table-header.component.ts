@@ -14,11 +14,10 @@ export class TableHeaderComponent {
   complexes = input.required<Complex[]>();
   onComplexRemovedFromBasket = output<string>();
 
-  shadowVisible = input<boolean>(false);
+  shadowLeftVisible = input<boolean>(false);
 
   constructor(private basketService: BasketService, public state: NavigatorStateService) {
   }
-
 
   anyPredictedComplex(): boolean {
     return this.complexes().some(c => c.predictedComplex);

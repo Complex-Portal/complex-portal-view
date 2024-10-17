@@ -35,7 +35,7 @@
             <div class="shadow right" [class.visible]="shadowVisible()"></div>
           </td>
           <!-- Interactors' stoichiometry -->
-          @for (complex of navigatorComplexes; track complex.complex.complexAC) {
+          @for (complex of navigatorComplexes; track $index) {
             <td class="intStoich"
                 [class.predicted]="complex.complex.predictedComplex">
               <cp-table-main-interactor
